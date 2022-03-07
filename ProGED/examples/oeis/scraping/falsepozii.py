@@ -34,6 +34,7 @@ def test_by_hand(seq, an, start=0, end=10**10):
 
 
 import numpy as np
+from download import bfile2list, variable2file
 
 a161 = [1,1,1,0,1,1,0,0,1,1,1,0,0,1,0,0,1,1,1,0,1,0,0,0,
  0,2,1,0,0,1,0,0,1,0,1,0,1,1,0,0,1,1,0,0,0,1,0,0,0,
@@ -47,6 +48,20 @@ a4018 = [1,4,4,0,4,8,0,0,4,4,8,0,0,8,0,0,4,8,4,0,8,0,0,0,
  4,8,8,0,0,0,0,0,8,4,8,0,0,16,0,0,0,8,8,0,0,0,0,0,
  0,8,4,0,12,8]
 
+max_read = 10**7
+# fibo  = bfile2list("A000045", max_read)
+# a161  = bfile2list("A000161", max_read)
+# a4018 = bfile2list("A004018", max_read)
+# variable2file(a161, 'a161', 'a161.py')
+# variable2file(a4018, 'a4018', 'a4018.py')
+# # # from a161 import a161, a4018
+from a161 import a161
+from a4018 import a4018
+
+print([len(i) for i in (a161, a4018)])
+
+
+
 leneq = min(len(a161), len(a4018))
 
 booli = np.array([ np.ceil(i/10) for i in a4018 ])[:leneq] == np.array(a161)[:leneq]
@@ -55,12 +70,16 @@ print(booli)
 ceiled =  np.array([ np.ceil(i/10) for i in a4018 ])
 print(ceiled[:leneq])
 print(a161[:leneq])
+print(max(a161), max(a4018))
+print(min(a161), min(a4018))
+# 1/0
 
 for i in range(leneq):
     print('ceiled a4018 vs a161: ', int(ceiled[i]), a161[i])
 
 if booli.all:
     print(f'amazing!! I have discovered new relation (on at least {leneq} terms)!')
+    print('I would conntact number or group theorist, algebraist.')
 
 print('eomw')
 
