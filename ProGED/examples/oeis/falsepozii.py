@@ -30,7 +30,39 @@ def test_by_hand(seq, an, start=0, end=10**10):
 
     print("Equation seems right for this part of sequence... all good :)")
     return
-test_by_hand(fib, an, start=15, end=20)
+# test_by_hand(fib, an, start=15, end=20)
+
+
+import numpy as np
+
+a161 = [1,1,1,0,1,1,0,0,1,1,1,0,0,1,0,0,1,1,1,0,1,0,0,0,
+ 0,2,1,0,0,1,0,0,1,0,1,0,1,1,0,0,1,1,0,0,0,1,0,0,0,
+ 1,2,0,1,1,0,0,0,0,1,0,0,1,0,0,1,2,0,0,1,0,0,0,1,1,
+ 1,0,0,0,0,0,1,1,1,0,0,2,0,0,0,1,1,0,0,0,0,0,0,1,1,
+ 0,2,1,0,0,1,0,1,0]
+
+a4018 = [1,4,4,0,4,8,0,0,4,4,8,0,0,8,0,0,4,8,4,0,8,0,0,0,
+ 0,12,8,0,0,8,0,0,4,0,8,0,4,8,0,0,8,8,0,0,0,8,0,0,
+ 0,4,12,0,8,8,0,0,0,0,8,0,0,8,0,0,4,16,0,0,8,0,0,0,
+ 4,8,8,0,0,0,0,0,8,4,8,0,0,16,0,0,0,8,8,0,0,0,0,0,
+ 0,8,4,0,12,8]
+
+leneq = min(len(a161), len(a4018))
+
+booli = np.array([ np.ceil(i/10) for i in a4018 ])[:leneq] == np.array(a161)[:leneq]
+
+print(booli)
+ceiled =  np.array([ np.ceil(i/10) for i in a4018 ])
+print(ceiled[:leneq])
+print(a161[:leneq])
+
+for i in range(leneq):
+    print('ceiled a4018 vs a161: ', int(ceiled[i]), a161[i])
+
+if booli.all:
+    print(f'amazing!! I have discovered new relation (on at least {leneq} terms)!')
+
+print('eomw')
 
 
 from sympy import Matrix
