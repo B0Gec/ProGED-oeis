@@ -1,0 +1,33 @@
+Look at this line:
+
+A, b: Matrix([[0], [0], [0], [0], [0], [0], [0]]) Matrix([[0], [1 - E], [2 - E], [3 - exp(2)], [5 - exp(3)], [8 - exp(5)], [13 - exp(8)]])
+WHY IS THERE    [1 - E], [2 - E]
+
+
+Estimating model exp(an_1)
+
+
+
+
+
+
+estimation_settings {'task_type': 'algebraic', 'verbosity': 3, 'timeout': inf, 'lower_upper_bounds': (-4, 4), 'optimizer': 'oeis_exact', 'default_error': 1000000000, 'oeis_nof_eqs': None, 'oeis_sanity_nof_eqs': 7, 'objective_function': <function model_error at 0x7f0d17c06f70>}
+estimation_settings[optimizer] oeis_exact
+nof_eqs None
+sanity_nof_eqs 7
+-->> inside model2data begin
+model.expr, model.get_full_expr, model.sym_params exp(an_1) exp(an_1) ()
+[n, an_1, an_2, an_3, an_4, an_5, an_6, an_7, an_8, an_9, an_10, an_11, an_12, an_13, an_14, an_15, an_16, an_17, an_18, an_19, an_20, an_21, an_22, an_23, an_24] exp(an_1) <class 'list'>
+model, model.expr, remove_rows, has_vars, nonrecursive_variables,  recursion_order exp(an_1) exp(an_1) 0 [2] 1 1
+sanity check for sanity :) before final setting of nof_eqs:nof_eqs, sanity_nof_eqs, recursion_order None 7 1
+chosen final nof_eqs: 7
+X an Y shapes: (7, 25) (7, 1)
+--<< inside model2data end
+X, Y: Matrix([[1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [3, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [4, 2, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [5, 3, 2, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [6, 5, 3, 2, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [7, 8, 5, 3, 2, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]) Matrix([[1], [1], [2], [3], [5], [8], [13]])
+Y vs. eq(X)
+->-> inside model2diophant() --- 
+-<-< exiting model2diophant() --- 
+A, b: Matrix([[0], [0], [0], [0], [0], [0], [0]]) Matrix([[0], [1 - E], [2 - E], [3 - exp(2)], [5 - exp(3)], [8 - exp(5)], [13 - exp(8)]])
+x []
+model: exp(an_1)                                                             ; p: 0.04822900763360136    ; error: 111
+
