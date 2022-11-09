@@ -17,6 +17,10 @@ from scipy.optimize import differential_evolution, minimize
 from scipy.interpolate import interp1d
 from scipy.integrate import solve_ivp, odeint
 
+# for persistent homology:
+import ripser
+import persim
+
 # from sklearn import ensemble #, tree  # Left for gitch_doctor metamodel
 from _io import TextIOWrapper as stdout_type
 import ProGED.mute_so as mt
@@ -32,6 +36,7 @@ from ProGED.task import TASK_TYPES
 # import ProGED.glitch_doctor.model.Model
 
 import warnings
+
 warnings.filterwarnings("ignore", message="divide by zero encountered in divide")
 warnings.filterwarnings("ignore", message="divide by zero encountered in true_divide")
 warnings.filterwarnings("ignore", message="invalid value encountered in power")
@@ -491,7 +496,59 @@ def model_error_general(params, model, X, Y, T, **estimation_settings):
                 f"\"{task_type}\", while list of possible values: "
                 f"\"{types_string}\".")
 
+def ph_error(trajectory, ):
+    """Calculates persistent holology metric between given trajectory and
+    ground truth trajectory based on topological properties of both.
+    See ph_test.py in  examples/DS2022/persistent_homology.
+    """
+    diagrams1, P1 = traj2diag(lorenz)
+    downs += [P1]
+    diags += [diagrams1]
 
+
+    for i in range(len(diags)):
+        for j in range(i + 1, len(diags)):
+            distance_bottleneck, matching = persim.bottleneck(diags[i][1], diags[j][1], matching=True)
+            dists += [(i, j, distance_bottleneck)]
+            print(f'distance lorenz {i} vs lorenz {j} = {distance_bottleneck}')
+            print(f'diagram of bottlenek distance lorenz {i} vs lorenz {j}:')
+            mse = np.mean((lorenzs[i] - lorenzs[j]) ** 2)
+            persim.visuals.bottleneck_matching(diags[i][1], diags[j][1], matching=matching,
+                                               labels=[f'{traj_names[i]} {distance_bottleneck}',
+                                                       f'{traj_names[j]} {mse}'])
+            results = 'ph_dists/'
+            # results = place + 'ph_dists/'
+            plt.savefig(f'{results}ph_dist_{traj_names[i]}-vs-{traj_names[j]}-{round(distance_bottleneck, 2)} .png',
+                        dpi=300)
+            # plt.show()
+            plt.close()
+
+    return 0
+
+def ph_diag(trajectory, size=200):
+    """Returns persistent diagram of given trajectory. See ph_test.py in examples.
+
+    Inputs:
+        - trajectory: of shape (many, few), i.e. many time points of few dimensions.
+        - size: Number of point clouds taken into the account when calculating
+        persistent diagram. I.e. trajectory is downsampled by averaging to get to
+        desired number of time points. Rule of thumb of time complexity:
+        200 points ~ 0.02 seconds
+        -
+    """
+
+    def downsample(lorenz):
+        m = int(lorenz.shape[0] / size)
+        lorenz = lorenz[:(m * size), :]
+        def aggregate(array):
+            return array.reshape(-1, m).mean(axis=1)
+        lor = np.apply_along_axis(aggregate, 0, lorenz)
+        return lor
+
+    if size < trajectory.shape[0]:
+        P1 = downsample(trajectory)
+    diagrams1 = ripser.ripser(P1)['dgms']
+    return diagrams1
 
 def min_fit (model, X, Y):
     """Calls scipy.optimize.minimize. Exists to make passing arguments to the objective function easier."""
