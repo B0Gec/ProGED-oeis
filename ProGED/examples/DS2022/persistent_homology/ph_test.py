@@ -36,7 +36,8 @@ for name in traj_names:
 
     print(name+"ful kul")
     # place = "ProGED-ode/"
-    place = "ProGED/examples/DS2022/special-issue/TDA-Python-Workshop-JMM21-main/data/"
+    # place = "ProGED/examples/DS2022/special-issue/TDA-Python-Workshop-JMM21-main/data/"
+    place = "ProGED/examples/DS2022/persistent_homology/data/"
     place = "data/"
     lorenz_pd = pd.read_csv(place + name + '_data.csv')
     lorenz = lorenz_pd.to_numpy()[:, 1:]
