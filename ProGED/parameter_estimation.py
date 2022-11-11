@@ -66,18 +66,18 @@ class ParameterEstimator:
         # setup of the mask for the data columns
         var_mask = np.ones(data.shape[-1], bool)
 
-        # # case of disabled persistent homology
-        # self.persistent_diagram = None
+        # case of disabled persistent homology
+        self.persistent_diagram = None
 
         ## a. set parameter estimation for differential equations
         if task_type == "differential":
 
-            # # take care of persistent homology case, i.e. if using topological distance
-            # if estimation_settings["persistent_homology"] == True:
-            #     size = estimation_settings["persistent_homology_size"]
-            #     # for debug (temporary):
-            #     print(self.X.shape, self.Y.shape)
-            #     self.persistent_diagram = ph_diagram(np.vstack((self.X, self.Y)), size=size)
+            # take care of persistent homology case, i.e. if using topological distance
+            if estimation_settings["persistent_homology"] == True:
+                size = estimation_settings["persistent_homology_size"]
+                # for debug (temporary):
+                print(self.X.shape, self.Y.shape)
+                self.persistent_diagram = ph_diagram(np.vstack((self.X, self.Y)), size=size)
 
             # check if all required variables are defined
             if time_index is None:
@@ -152,8 +152,8 @@ class ParameterEstimator:
                 # (info) include all parameters, including potential initial values in the partially observed scenarios.
                 model_params = model.get_all_params()
                 t1 = time.time()
-                # res = optimizer(model, self.X, self.Y, self.T, p0=model_params, ph_diagram=self.persistent_diagram, **self.estimation_settings)
-                res = optimizer(model, self.X, self.Y, self.T, p0=model_params, **self.estimation_settings)
+                res = optimizer(model, self.X, self.Y, self.T, p0=model_params, ph_diagram=self.persistent_diagram, **self.estimation_settings)
+                # res = optimizer(model, self.X, self.Y, self.T, p0=model_params, **self.estimation_settings)
                 t2 = time.time()
                 res["time"] = t2-t1
                 model.set_estimated(res)
@@ -244,9 +244,9 @@ def fit_models(models, data, task_type="algebraic", pool_map=map, estimation_set
         "timeout": np.inf,
         "verbosity": 1,
         "iter": 0,
-        # "persistent_homology": False,
-        # "persistent_homology_size": 200,
-        # "persistent_homology_weights": (0.5,0.5),
+        "persistent_homology": False,
+        "persistent_homology_size": 200,
+        "persistent_homology_weights": (0.5,0.5),
         }
 
     estimation_settings_preset.update(estimation_settings)
