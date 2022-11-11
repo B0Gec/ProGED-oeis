@@ -18,8 +18,8 @@ from scipy.interpolate import interp1d
 from scipy.integrate import solve_ivp, odeint
 
 # # for persistent homology:
-# import ripser
-# import persim
+import ripser
+import persim
 
 # from sklearn import ensemble #, tree  # Left for gitch_doctor metamodel
 from _io import TextIOWrapper as stdout_type
@@ -72,13 +72,6 @@ class ParameterEstimator:
         ## a. set parameter estimation for differential equations
         if task_type == "differential":
 
-            # take care of persistent homology case, i.e. if using topological distance
-            if estimation_settings["persistent_homology"] == True:
-                size = estimation_settings["persistent_homology_size"]
-                # for debug (temporary):
-                print(self.X.shape, self.Y.shape)
-                self.persistent_diagram = ph_diagram(np.vstack((self.X, self.Y)), size=size)
-
             # check if all required variables are defined
             if time_index is None:
                 raise ValueError("\nVariable time_index has to be defined when task_type = differential.\n")
@@ -94,6 +87,16 @@ class ParameterEstimator:
                 self.Y = data[:, estimation_settings["target_variable_index"]]
             else:
                 self.Y = None
+
+            # take care of persistent homology case, i.e. if using topological distance
+            if estimation_settings["persistent_homology"] == True:
+                size = estimation_settings["persistent_homology_size"]
+                trajectory = np.vstack(np.vstack((self.X, self.Y))) if self.Y is not None else self.X
+                # for debug (temporary):
+                print(trajectory.shape)
+                # if self.Y is None:
+                #     print('self.Y.shape is None')
+                self.persistent_diagram = ph_diagram(trajectory, size=size)
 
 
 
@@ -144,7 +147,7 @@ class ParameterEstimator:
                 pass
             elif len(model.params) < 1:
                 model.set_estimated({"x":[], "fun": model_error_general(
-                    [], model, self.X, self.Y, self.T, **self.estimation_settings)})
+                    [], model, self.X, self.Y, self.T, self.persistent_diagram, **self.estimation_settings)})
 
             ## b. estimate parameters
             else:
@@ -356,13 +359,15 @@ def model_ode_error(params, model, X, Y, T, ph_diagram, estimation_settings):
         if estimation_settings["persistent_homology"] and ph_diagram is not None:
             w1, w2 = estimation_settings["persistent_homology_weights"]
             if estimation_settings["objective_settings"]["simulate_separately"]:
-                res = np.mean((Y - simX.reshape(-1))**2)
-                persistent_homology_error = ph_error(np.vstack((X, simX)), ph_diagram)
-                res = (res * w1) + (persistent_homology_error * w2)
+                trajectory = np.vstack((X, simX))
+                # res = np.mean((Y - simX.reshape(-1))**2)
+                # persistent_homology_error = ph_error(np.vstack((X, simX)), ph_diagram)
+                # res = (res * w1) + (persistent_homology_error * w2)
             else:
-                res = np.mean((X - simX)**2)
-                persistent_homology_error = ph_error(X, ph_diagram)
-                res = (res * w1) + (persistent_homology_error * w2)
+                trajectory = X
+                # res = np.mean((X - simX)**2)
+            persistent_homology_error = ph_error(trajectory, ph_diagram[1])
+            res = (res * w1) + (persistent_homology_error * w2)
 
         if np.isnan(res) or np.isinf(res) or not np.isreal(res):
                 if estimation_settings["verbosity"] > 1:
@@ -502,7 +507,7 @@ def model_error(params, model, X, Y, _T=None, _ph_metric=None, estimation_settin
         return estimation_settings['default_error']
 
 
-def model_error_general(params, model, X, Y, T, **estimation_settings):
+def model_error_general(params, model, X, Y, T, ph_diagram, **estimation_settings):
     """Calculate error of model with given parameters in general with type of error given.
         Input = TODO:
     - X are columns without features that are derived.
@@ -516,7 +521,7 @@ def model_error_general(params, model, X, Y, T, **estimation_settings):
         return model_error(params, model, X, Y, _T=None,
                             estimation_settings=estimation_settings)
     elif task_type == "differential":
-        return model_ode_error(params, model, X, Y, T, estimation_settings)
+        return model_ode_error(params, model, X, Y, T, ph_diagram, estimation_settings)
     else:
         types_string = "\", \"".join(TASK_TYPES)
         raise ValueError("Variable task_type has unsupported value "
@@ -530,7 +535,7 @@ def model_error_general(params, model, X, Y, T, **estimation_settings):
 
 
 def ph_error(trajectory: np.ndarray, diagram_truth):
-    """Calculates persistent holology metric between given trajectory
+    """Calculates persistent homology metric between given trajectory
     and ground truth trajectory based on topological properties of both.
     See ph_test.py in  examples/DS2022/persistent_homology.
 
@@ -548,17 +553,8 @@ def ph_error(trajectory: np.ndarray, diagram_truth):
 
     size = diagram_truth[0].shape[0]
     diagram = ph_diagram(trajectory, size)
-
-    distance_bottleneck = persim.bottleneck(diagram[1], diagram_truth[1], matching=True)[0]
+    distance_bottleneck = persim.bottleneck(diagram[1], diagram_truth[1])[0]
     return distance_bottleneck
-
-ph_diag_doc = """
-        - trajectory: of shape (many, few), i.e. many time points of few dimensions.
-        - size: Number of point clouds taken into the account when
-        calculating persistent diagram. I.e. trajectory is
-        down-sampled by averaging to get to desired number of time
-        points. Rule of thumb of time complexity: 200 points ~ 0.02 seconds
-"""
 
 def ph_diagram(trajectory, size):
     """Returns persistent diagram of given trajectory. See ph_test.py in examples.
@@ -569,6 +565,9 @@ def ph_diagram(trajectory, size):
         calculating persistent diagram. I.e. trajectory is
         down-sampled by averaging to get to desired number of time
         points. Rule of thumb of time complexity: 200 points ~ 0.02 seconds
+    Output:
+        - diagram [list of length 2]: as output of
+        ripser.ripser(*trajectory*)['dgms']
     """
 
     def downsample(lorenz):
@@ -579,8 +578,7 @@ def ph_diagram(trajectory, size):
         lor = np.apply_along_axis(aggregate, 0, lorenz)
         return lor
 
-    if size < trajectory.shape[0]:
-        P1 = downsample(trajectory)
+    P1 = downsample(trajectory) if size < trajectory.shape[0] else trajectory
     diagrams1 = ripser.ripser(P1)['dgms']
     return diagrams1
 

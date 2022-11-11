@@ -12,7 +12,7 @@ from ProGED.model_box import ModelBox
 from ProGED.parameter_estimation import fit_models
 from utils.generate_data_ODE_systems import generate_ODE_data
 
-def test_grammar_general():
+def atest_grammar_general():
     np.random.seed(0)
     
     txtgram = "S -> S '+' F [0.2] | F [0.8] \n"
@@ -27,7 +27,7 @@ def test_grammar_general():
     
     assert "".join(grammar.code_to_expression('0101')[0]) == "x+y"
     
-def test_grammar_templates():
+def atest_grammar_templates():
     np.random.seed(0)
    
     templates_to_test = ["polynomial", "trigonometric", "polytrig", "simplerational", "rational", "universal"]
@@ -39,7 +39,7 @@ def test_grammar_templates():
     for i in range(len(grammars)):
         assert grammars[i].generate_one()[2] == codes[i]
         
-def test_generate_models():
+def atest_generate_models():
     np.random.seed(0)
     generator = grammar_from_template("polynomial", {"variables":["'x'", "'y'"], "p_vars":[0.3,0.7]})
     symbols = {"x":['x', 'y'], "start":"S", "const":"C"}
@@ -50,7 +50,7 @@ def test_generate_models():
     for i in range(len(models)):
         assert str(models[i]) == samples[i]
         
-def test_model():
+def atest_model():
     grammar_str = "S -> 'c' '*' 'x' [1.0]"
     grammar = PCFG.fromstring(grammar_str)
     parse_tree_code = "0"
@@ -81,7 +81,7 @@ def test_model():
     assert isinstance(y, type(np.array([0])))
     assert sum((y - np.array([0, 6.0]))**2) < 1e-15
     
-def test_model_box():
+def atest_model_box():
     expr1_str = "x"
     expr2_str = "c*x"
     symbols = {"x":['x'], "const":"c", "start":"S"}
@@ -95,7 +95,7 @@ def test_model_box():
     assert str(models[1]) == "c0*x"
     assert models[1].p == 0.5
         
-def test_parameter_estimation():
+def atest_parameter_estimation():
     np.random.seed(1)
     def f(x):
         return 2.0 * (x[:, 0] + 0.3)
@@ -118,7 +118,7 @@ def test_parameter_estimation():
     assert np.abs(models[0].get_error() - 0.36) < 1e-6
     assert np.abs(models[1].get_error() - 1.4736842) < 1e-6
 
-def test_parameter_estimation_2D():
+def atest_parameter_estimation_2D():
     np.random.seed(0)
     def f(x):
         return 2.0 * (x[:, 0]*x[:, 1] + 0.3)
@@ -144,7 +144,7 @@ def test_parameter_estimation_2D():
     assert np.abs(models[1].get_error() - 1.5945679) < 1e-6
 
 
-def test_parameter_estimation_ODE():
+def atest_parameter_estimation_ODE():
     B = -2.56; a = 0.4; ts = np.linspace(0.45, 0.87, 5)
     ys = (ts+B)*np.exp(a*ts); xs = np.exp(a*ts)
     data = np.hstack((ts.reshape(-1, 1), xs.reshape(-1, 1), ys.reshape(-1, 1)))
@@ -177,7 +177,7 @@ def test_parameter_estimation_ODE():
             print(f"model: {str(m.get_full_expr()):<30}; error: {m.get_error():<15}")
     """
 
-def test_parameter_estimation_ODE_system():
+def atest_parameter_estimation_ODE_system():
     generation_settings = {"simulation_time": 0.25}
     data = generate_ODE_data(system='VDP', inits=[-0.2, -0.8], **generation_settings)
 
@@ -195,7 +195,7 @@ def test_parameter_estimation_ODE_system():
     # true params: [[1.], [-0.5., -1., 0.5]]
 
 
-def test_parameter_estimation_ODE_system_partial_observability():
+def atest_parameter_estimation_ODE_system_partial_observability():
     generation_settings = {"simulation_time": 0.25}
     data = generate_ODE_data(system='VDP', inits=[-0.2, -0.8], **generation_settings)
     data = data[:, (0, 1)]  # y, 2nd column, is not observed
@@ -213,7 +213,7 @@ def test_parameter_estimation_ODE_system_partial_observability():
     assert system_out[0].get_error() < 1e-5
     # true params: [[1.], [-0.5., -1., 0.5]]
 
-def test_equation_discoverer():
+def atest_equation_discoverer():
     np.random.seed(0)
     def f(x):
         return 2.0 * (x[:, 0] + 0.3)
@@ -233,7 +233,7 @@ def test_equation_discoverer():
     assert np.abs(ED.models[0].get_error() - 0.72842105) < 1e-6
     assert np.abs(ED.models[1].get_error() - 0.59163899) < 1e-6
     
-def test_equation_discoverer_ODE():
+def atest_equation_discoverer_ODE():
     B = -2.56; a = 0.4; ts = np.linspace(0.45, 0.87, 5)
     ys = (ts+B)*np.exp(a*ts); xs = np.exp(a*ts)
     data = np.hstack((ts.reshape(-1, 1), xs.reshape(-1, 1), ys.reshape(-1, 1)))
@@ -256,7 +256,45 @@ def test_equation_discoverer_ODE():
     assert_line(ED.models, 0, "y", 12.70440146224583)
     assert_line(ED.models, 1, "0.400266188520229*x + y", 4.773528915588122, n=6)
     return
+def atest_persistent_homology_system_partial_observability():
+    generation_settings = {"simulation_time": 0.25}
+    data = generate_ODE_data(system='VDP', inits=[-0.2, -0.8], **generation_settings)
+    data = data[:, (0, 1)]  # y, 2nd column, is not observed
 
+    system = ModelBox(observed=["x"])
+    system.add_system(["C*y", "C*y - C*x*x*y - C*x"], symbols={"x": ["x", "y"], "const": "C"})
+    estimation_settings = {"target_variable_index": None,
+                           "time_index": 0,
+                           "max_iter": 1,
+                           "pop_size": 1,
+                           "objective_settings": {"use_jacobian": False},
+                           "verbosity": 0,
+                           "persistent_homology": True,
+                           }
+
+    system_out = fit_models(system, data, task_type='differential', estimation_settings=estimation_settings)
+    assert system_out[0].get_error() < 1e-5
+    # true params: [[1.], [-0.5., -1., 0.5]]
+
+def test_persistent_homology_ODE_system():
+    generation_settings = {"simulation_time": 0.25}
+    data = generate_ODE_data(system='VDP', inits=[-0.2, -0.8], **generation_settings)
+
+    system = ModelBox(observed=["x", "y"])
+    system.add_system(["C*y", "C*y - C*x*x*y - C*x"], symbols={"x": ["x", "y"], "const": "C"})
+    estimation_settings = {"target_variable_index": None,
+                           "time_index": 0,
+                           "max_iter": 1,
+                           "pop_size": 1,
+                           "objective_settings": {"use_jacobian": False},
+                           "verbosity": 0,
+                           "persistent_homology": True,
+                           }
+
+    np.random.seed(0)
+    system_out = fit_models(system, data, task_type='differential', estimation_settings=estimation_settings)
+    assert system_out[0].get_error() < 1e-6
+    # true params: [[1.], [-0.5., -1., 0.5]]
 
 if __name__ == "__main__":
 
@@ -268,7 +306,9 @@ if __name__ == "__main__":
     # test_parameter_estimation()
     # test_parameter_estimation_2D()
     # test_equation_discoverer()
-    test_parameter_estimation_ODE()
+    # test_parameter_estimation_ODE()
     # test_equation_discoverer_ODE()
     # test_parameter_estimation_ODE_system()
     # test_parameter_estimation_ODE_system_partial_observability()
+    # test_persistent_homology_system_partial_observability()
+    test_persistent_homology_ODE_system()
