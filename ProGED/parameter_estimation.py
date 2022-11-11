@@ -364,10 +364,10 @@ def model_ode_error(params, model, X, Y, T, ph_diagram, estimation_settings):
                 persistent_homology_error = ph_error(X, ph_diagram)
                 res = (res * w1) + (persistent_homology_error * w2)
 
-            if np.isnan(res) or np.isinf(res) or not np.isreal(res):
-                        if estimation_settings["verbosity"] > 1:
-                            print("Objective error is nan, inf or unreal. Returning default error.")
-                        return estimation_settings['default_error']
+        if np.isnan(res) or np.isinf(res) or not np.isreal(res):
+                if estimation_settings["verbosity"] > 1:
+                    print("Objective error is nan, inf or unreal. Returning default error.")
+                return estimation_settings['default_error']
 
     except Exception as error:
         print("\nError within model_ode_error().\n", error)
@@ -478,7 +478,7 @@ def ode(model, params, T, X, Y, **objective_settings):
     return sim
 
 
-def model_error(params, model, X, Y, _T=None, estimation_settings=None):
+def model_error(params, model, X, Y, _T=None, _ph_metric=None, estimation_settings=None):
     """Defines mean squared error as the error metric."""
 
     try:
