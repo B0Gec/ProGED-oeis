@@ -70,7 +70,10 @@ for name in traj_names:
     diags += [diagrams1]
 
 
-# 3d scatter untested:
+# 3d scatter tested:
+# debug oneliner:
+# P1 = trajectory; import matplotlib.pyplot as plt; fig = plt.figure(); ax = fig.add_subplot(projection='3d').scatter(P1[:, 0], P1[:, 1], P1[:, 2], s=1); plt.show()
+
 for P1 in lorenzs[:1]:
     fig = plt.figure()
     ax = fig.add_subplot(projection='3d')

@@ -10,6 +10,7 @@ Methods:
 import os
 import sys
 import time
+import math
 import numpy as np
 import sympy as sp
 
@@ -96,7 +97,7 @@ class ParameterEstimator:
                 print(trajectory.shape)
                 # if self.Y is None:
                 #     print('self.Y.shape is None')
-                self.persistent_diagram = ph_diagram(trajectory, size=size)
+                self.persistent_diagram = ph_diag(trajectory, size=size)
 
 
 
@@ -319,7 +320,7 @@ def model_ode_error(params, model, X, Y, T, ph_diagram, estimation_settings):
         estimation_settings["iter"] += 1
         print('Iter ' + str(estimation_settings["iter"]))
         print(params)
-    res = "having fun"
+    # res = "having fun"
     try:
         # simulate
         # Next few lines strongly suppress any warnning messages
@@ -368,11 +369,12 @@ def model_ode_error(params, model, X, Y, T, ph_diagram, estimation_settings):
                 # persistent_homology_error = ph_error(np.vstack((X, simX)), ph_diagram)
                 # res = (res * w1) + (persistent_homology_error * w2)
             else:
-                trajectory = X
+                trajectory = simX
                 # res = np.mean((X - simX)**2)
             try:
                 persistent_homology_error = ph_error(trajectory, ph_diagram)
-                res = (res * w1) + (persistent_homology_error * w2)
+                # res = (res * w1) + (persistent_homology_error * w2)
+                res = math.tan(math.atan(res) * w1 + persistent_homology_error * w2)
             except Exception as error:
                 print("\nError from Persistent Homology metric when calculating"
                       " bottleneck distance.\n", error)
@@ -561,13 +563,13 @@ def ph_error(trajectory: np.ndarray, diagram_truth):
     """
 
     size = diagram_truth[0].shape[0]
-    diagram = ph_diagram(trajectory, size)
+    diagram = ph_diag(trajectory, size)
     # persim.plot_diagrams(diagram_truth)
     # persim.plot_diagrams(diagram)
-    distance_bottleneck = persim.bottleneck(diagram[1], diagram_truth[1])[0]
+    distance_bottleneck = persim.bottleneck(diagram[1], diagram_truth[1])
     return distance_bottleneck
 
-def ph_diagram(trajectory, size):
+def ph_diag(trajectory, size):
     """Returns persistent diagram of given trajectory. See ph_test.py in examples.
 
     Inputs:

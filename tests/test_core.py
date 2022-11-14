@@ -193,10 +193,11 @@ def test_parameter_estimation_ODE_system():
     np.random.seed(0)
     system_out = fit_models(system, data, task_type='differential', estimation_settings=estimation_settings)
     assert abs(system_out[0].get_error() - 0.048558706149751905) < 1e-6
+    # assert np.abs(system_out[0].get_error() - 1.8584233983525058e-08) < 1e-14  # main
     # true params: [[1.], [-0.5., -1., 0.5]]
 
 
-def test_parameter_estimation_ODE_system_partial_observability():
+def atest_parameter_estimation_ODE_system_partial_observability():
     np.random.seed(0)
     generation_settings = {"simulation_time": 0.25}
     data = generate_ODE_data(system='VDP', inits=[-0.2, -0.8], **generation_settings)
@@ -259,7 +260,7 @@ def atest_equation_discoverer_ODE():
     assert_line(ED.models, 1, "0.400266188520229*x + y", 4.773528915588122, n=6)
     return
 
-def test_persistent_homology_system_partial_observability():
+def atest_persistent_homology_system_partial_observability():
     np.random.seed(0)
     generation_settings = {"simulation_time": 0.25}
     data = generate_ODE_data(system='VDP', inits=[-0.2, -0.8], **generation_settings)
@@ -304,15 +305,15 @@ def test_persistent_homology_ODE_system():
     # x[0] * x[1] - beta * x[2],
     # system.add_system(["C*(x-y)", "x*(C-z) - y", "x*y - C*z"], symbols={"x": ["x", "y", "z"], "const": "C"})
     system.add_system(["C*x-y", "x*C-z - y", "x*y - C*z"], symbols={"x": ["x", "y", "z"], "const": "C"})
-    # size = 3
+    size = 1
     estimation_settings = {"target_variable_index": None,
                            "time_index": 0,
-                           "optimizer_settings": {"max_iter": 1,
-                                                  "pop_size": 1},
+                           "optimizer_settings": {"max_iter": size*10,
+                                                  "pop_size": size},
                            # "timeout": 10,
                            "objective_settings": {"use_jacobian": False},
                            "verbosity": 0,
-                           # "persistent_homology": True,
+                           "persistent_homology": True,
                            }
 
     np.random.seed(0)
@@ -332,7 +333,7 @@ if __name__ == "__main__":
     # test_equation_discoverer()
     # test_parameter_estimation_ODE()
     # test_equation_discoverer_ODE()
-    test_parameter_estimation_ODE_system()
-    test_parameter_estimation_ODE_system_partial_observability()
+    # test_parameter_estimation_ODE_system()
+    # test_parameter_estimation_ODE_system_partial_observability()
     # test_persistent_homology_system_partial_observability()
-    # test_persistent_homology_ODE_system()
+    test_persistent_homology_ODE_system()
