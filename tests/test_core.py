@@ -2,6 +2,7 @@
 
 import numpy as np
 from nltk import Nonterminal, PCFG
+import matplotlib.pyplot as plt
 
 from ProGED.equation_discoverer import EqDisco
 from ProGED.generators.grammar import GeneratorGrammar
@@ -177,7 +178,7 @@ def atest_parameter_estimation_ODE():
             print(f"model: {str(m.get_full_expr()):<30}; error: {m.get_error():<15}")
     """
 
-def atest_parameter_estimation_ODE_system():
+def test_parameter_estimation_ODE_system():
     generation_settings = {"simulation_time": 0.25}
     data = generate_ODE_data(system='VDP', inits=[-0.2, -0.8], **generation_settings)
 
@@ -185,17 +186,18 @@ def atest_parameter_estimation_ODE_system():
     system.add_system(["C*y", "C*y - C*x*x*y - C*x"], symbols={"x": ["x", "y"], "const": "C"})
     estimation_settings = {"target_variable_index": None,
                            "time_index": 0,
-                           "max_iter": 1,
-                           "pop_size": 1,
                            "objective_settings": {"use_jacobian": False},
+                           "optimizer_settings": {"max_iter": 1,
+                                                  "pop_size": 1},
                            "verbosity": 0}
     np.random.seed(0)
     system_out = fit_models(system, data, task_type='differential', estimation_settings=estimation_settings)
-    assert system_out[0].get_error() < 1e-6
+    assert abs(system_out[0].get_error() - 0.048558706149751905) < 1e-6
     # true params: [[1.], [-0.5., -1., 0.5]]
 
 
-def atest_parameter_estimation_ODE_system_partial_observability():
+def test_parameter_estimation_ODE_system_partial_observability():
+    np.random.seed(0)
     generation_settings = {"simulation_time": 0.25}
     data = generate_ODE_data(system='VDP', inits=[-0.2, -0.8], **generation_settings)
     data = data[:, (0, 1)]  # y, 2nd column, is not observed
@@ -204,24 +206,24 @@ def atest_parameter_estimation_ODE_system_partial_observability():
     system.add_system(["C*y", "C*y - C*x*x*y - C*x"], symbols={"x": ["x", "y"], "const": "C"})
     estimation_settings = {"target_variable_index": None,
                            "time_index": 0,
-                           "max_iter": 1,
-                           "pop_size": 1,
                            "objective_settings": {"use_jacobian": False},
+                           "optimizer_settings": {"max_iter": 1,
+                                                  "pop_size": 1},
                            "verbosity": 0}
 
     system_out = fit_models(system, data, task_type='differential', estimation_settings=estimation_settings)
-    assert system_out[0].get_error() < 1e-5
+    assert abs(system_out[0].get_error() - 0.022306517926562873) < 1e-4
     # true params: [[1.], [-0.5., -1., 0.5]]
 
 def atest_equation_discoverer():
     np.random.seed(0)
     def f(x):
         return 2.0 * (x[:, 0] + 0.3)
-	
+
     X = np.linspace(-1, 1, 20).reshape(-1,1)
     Y = f(X).reshape(-1, 1)
     data = np.hstack((X, Y))
-        
+
     ED = EqDisco(data=data,
                  task=None,
                  target_variable_index = -1,
@@ -256,7 +258,9 @@ def atest_equation_discoverer_ODE():
     assert_line(ED.models, 0, "y", 12.70440146224583)
     assert_line(ED.models, 1, "0.400266188520229*x + y", 4.773528915588122, n=6)
     return
-def atest_persistent_homology_system_partial_observability():
+
+def test_persistent_homology_system_partial_observability():
+    np.random.seed(0)
     generation_settings = {"simulation_time": 0.25}
     data = generate_ODE_data(system='VDP', inits=[-0.2, -0.8], **generation_settings)
     data = data[:, (0, 1)]  # y, 2nd column, is not observed
@@ -265,35 +269,55 @@ def atest_persistent_homology_system_partial_observability():
     system.add_system(["C*y", "C*y - C*x*x*y - C*x"], symbols={"x": ["x", "y"], "const": "C"})
     estimation_settings = {"target_variable_index": None,
                            "time_index": 0,
-                           "max_iter": 1,
-                           "pop_size": 1,
                            "objective_settings": {"use_jacobian": False},
+                           "optimizer_settings": {"max_iter": 1,
+                                                  "pop_size": 1},
                            "verbosity": 0,
                            "persistent_homology": True,
                            }
 
     system_out = fit_models(system, data, task_type='differential', estimation_settings=estimation_settings)
-    assert system_out[0].get_error() < 1e-5
+    assert abs(system_out[0].get_error() - 0.09794124785533272) < 1e-6
     # true params: [[1.], [-0.5., -1., 0.5]]
 
 def test_persistent_homology_ODE_system():
-    generation_settings = {"simulation_time": 0.25}
-    data = generate_ODE_data(system='VDP', inits=[-0.2, -0.8], **generation_settings)
+    # generation_settings = {"simulation_time": 0.25}
+    # generation_settings = {"simulation_time": 10.05}
+    data = generate_ODE_data(system='lorenz', inits=[0.2, 0.8, 0.5])
+    # data = generate_ODE_data(system='lorenz_stable', inits=[0.2, 0.8, 0.5])
 
-    system = ModelBox(observed=["x", "y"])
-    system.add_system(["C*y", "C*y - C*x*x*y - C*x"], symbols={"x": ["x", "y"], "const": "C"})
+    P1 = data[:,1:]
+    fig = plt.figure()
+    plt.title('lorenz')
+    ax = fig.add_subplot(projection='3d')
+    ax.scatter(P1[:, 0], P1[:, 1], P1[:, 2], s=1)
+    # plt.show()
+
+    # ax = plt.axes(projection='3d')
+    # ax.plot3D(data[:, 1], data[:, 2], data[:, 3])
+    # plt.show()
+    # # plt.close('all')
+
+    system = ModelBox(observed=["x", "y", "z"])
+    # sigma * (x[1] - x[0]),
+    # x[0] * (rho - x[2]) - x[1],
+    # x[0] * x[1] - beta * x[2],
+    # system.add_system(["C*(x-y)", "x*(C-z) - y", "x*y - C*z"], symbols={"x": ["x", "y", "z"], "const": "C"})
+    system.add_system(["C*x-y", "x*C-z - y", "x*y - C*z"], symbols={"x": ["x", "y", "z"], "const": "C"})
+    # size = 3
     estimation_settings = {"target_variable_index": None,
                            "time_index": 0,
-                           "max_iter": 1,
-                           "pop_size": 1,
+                           "optimizer_settings": {"max_iter": 1,
+                                                  "pop_size": 1},
+                           # "timeout": 10,
                            "objective_settings": {"use_jacobian": False},
                            "verbosity": 0,
-                           "persistent_homology": True,
+                           # "persistent_homology": True,
                            }
 
     np.random.seed(0)
     system_out = fit_models(system, data, task_type='differential', estimation_settings=estimation_settings)
-    assert system_out[0].get_error() < 1e-6
+    assert abs(system_out[0].get_error() - 266.667354661213) < 1e-6
     # true params: [[1.], [-0.5., -1., 0.5]]
 
 if __name__ == "__main__":
@@ -308,7 +332,7 @@ if __name__ == "__main__":
     # test_equation_discoverer()
     # test_parameter_estimation_ODE()
     # test_equation_discoverer_ODE()
-    # test_parameter_estimation_ODE_system()
-    # test_parameter_estimation_ODE_system_partial_observability()
+    test_parameter_estimation_ODE_system()
+    test_parameter_estimation_ODE_system_partial_observability()
     # test_persistent_homology_system_partial_observability()
-    test_persistent_homology_ODE_system()
+    # test_persistent_homology_ODE_system()

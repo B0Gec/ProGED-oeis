@@ -147,7 +147,8 @@ class ParameterEstimator:
                 pass
             elif len(model.params) < 1:
                 model.set_estimated({"x":[], "fun": model_error_general(
-                    [], model, self.X, self.Y, self.T, self.persistent_diagram, **self.estimation_settings)})
+                    [], model, self.X, self.Y, self.T, self.persistent_diagram,
+                    **self.estimation_settings)})
 
             ## b. estimate parameters
             else:
@@ -155,7 +156,9 @@ class ParameterEstimator:
                 # (info) include all parameters, including potential initial values in the partially observed scenarios.
                 model_params = model.get_all_params()
                 t1 = time.time()
-                res = optimizer(model, self.X, self.Y, self.T, p0=model_params, ph_diagram=self.persistent_diagram, **self.estimation_settings)
+                res = optimizer(model, self.X, self.Y, self.T, p0=model_params,
+                                ph_diagram=self.persistent_diagram,
+                                **self.estimation_settings)
                 # res = optimizer(model, self.X, self.Y, self.T, p0=model_params, **self.estimation_settings)
                 t2 = time.time()
                 res["time"] = t2-t1
@@ -290,6 +293,7 @@ def DE_fit (model, X, Y, T, p0, ph_diagram, **estimation_settings):
     return differential_evolution(func=estimation_settings["objective_function"],
                                   bounds=bounds,
                                   callback=diff_evol_timeout,
+                                  polish=False,
                                   args=[model, X, Y, T, ph_diagram, estimation_settings],
                                   maxiter=estimation_settings["optimizer_settings"]["max_iter"],
                                   strategy=estimation_settings["optimizer_settings"]["strategy"],
@@ -315,7 +319,7 @@ def model_ode_error(params, model, X, Y, T, ph_diagram, estimation_settings):
         estimation_settings["iter"] += 1
         print('Iter ' + str(estimation_settings["iter"]))
         print(params)
-
+    res = "having fun"
     try:
         # simulate
         # Next few lines strongly suppress any warnning messages
@@ -366,8 +370,12 @@ def model_ode_error(params, model, X, Y, T, ph_diagram, estimation_settings):
             else:
                 trajectory = X
                 # res = np.mean((X - simX)**2)
-            persistent_homology_error = ph_error(trajectory, ph_diagram[1])
-            res = (res * w1) + (persistent_homology_error * w2)
+            try:
+                persistent_homology_error = ph_error(trajectory, ph_diagram)
+                res = (res * w1) + (persistent_homology_error * w2)
+            except Exception as error:
+                print("\nError from Persistent Homology metric when calculating"
+                      " bottleneck distance.\n", error)
 
         if np.isnan(res) or np.isinf(res) or not np.isreal(res):
                 if estimation_settings["verbosity"] > 1:
@@ -521,7 +529,8 @@ def model_error_general(params, model, X, Y, T, ph_diagram, **estimation_setting
         return model_error(params, model, X, Y, _T=None,
                             estimation_settings=estimation_settings)
     elif task_type == "differential":
-        return model_ode_error(params, model, X, Y, T, ph_diagram, estimation_settings)
+        return model_ode_error(params, model, X, Y, T, ph_diagram,
+                               estimation_settings)
     else:
         types_string = "\", \"".join(TASK_TYPES)
         raise ValueError("Variable task_type has unsupported value "
@@ -553,6 +562,8 @@ def ph_error(trajectory: np.ndarray, diagram_truth):
 
     size = diagram_truth[0].shape[0]
     diagram = ph_diagram(trajectory, size)
+    # persim.plot_diagrams(diagram_truth)
+    # persim.plot_diagrams(diagram)
     distance_bottleneck = persim.bottleneck(diagram[1], diagram_truth[1])[0]
     return distance_bottleneck
 

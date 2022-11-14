@@ -37,8 +37,8 @@ for name in traj_names:
     print(name+"ful kul")
     # place = "ProGED-ode/"
     # place = "ProGED/examples/DS2022/special-issue/TDA-Python-Workshop-JMM21-main/data/"
-    place = "ProGED/examples/DS2022/persistent_homology/data/"
-    place = "data/"
+    place = "~/ProGED/ProGED/examples/DS2022/persistent_homology/data/"
+    # place = "data/"
     lorenz_pd = pd.read_csv(place + name + '_data.csv')
     lorenz = lorenz_pd.to_numpy()[:, 1:]
     lorenzs += [lorenz]
@@ -68,6 +68,17 @@ for name in traj_names:
     diagrams1, P1 = traj2diag(lorenz)
     downs += [P1]
     diags += [diagrams1]
+
+
+# 3d scatter untested:
+for P1 in lorenzs[:1]:
+    fig = plt.figure()
+    ax = fig.add_subplot(projection='3d')
+    # ax = plt.axes(projection='3d')
+    # ax.scatter(P1[:, 0], P1[:, 1], P1[:, 2], marker=".")
+    ax.scatter(P1[:, 0], P1[:, 1], P1[:, 2], s=1)
+    plt.show()
+    plt.close()
 
 
 # plot original input trajectories dim=2:
