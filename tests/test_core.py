@@ -331,7 +331,7 @@ def test_persistent_homology_ODE_system():
                                                   "lower_upper_bounds": (-28, 28),
                                                   },
                            "objective_settings": {"use_jacobian": False},
-                           "verbosity": 0,
+                           "verbosity": 1,
                            "persistent_homology": ph,
                            "persistent_homology_weights": weights,
                            }
@@ -362,6 +362,7 @@ def test_persistent_homology_ODE_system():
     # assert abs(system_out[0].get_error() - 7.109693380523827) < 1e-6
     print(2)
     assert 1==1
+
     # [-9.33465268723235 * x + 9.33465268723235 * y, x * (6.26027961658288 - z) - y, x * y - 2.57148765076742 * z]
     # assert abs(system_out[0].get_error() - 0) < 1e-6
     # [-0.17912909  4.39808796 - 1.71474011]

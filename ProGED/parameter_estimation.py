@@ -13,12 +13,13 @@ import time
 import math
 import numpy as np
 import sympy as sp
+from typing import List, Tuple
 
 from scipy.optimize import differential_evolution, minimize
 from scipy.interpolate import interp1d
 from scipy.integrate import solve_ivp, odeint
 
-# # for persistent homology:
+# for persistent homology:  # pip scikit-tda
 import ripser
 import persim
 
@@ -93,12 +94,7 @@ class ParameterEstimator:
             if estimation_settings["persistent_homology"] == True:
                 size = estimation_settings["persistent_homology_size"]
                 trajectory = np.vstack(np.vstack((self.X, self.Y))) if self.Y is not None else self.X
-                # for debug (temporary):
-                # print(trajectory.shape)
-                # if self.Y is None:
-                #     print('self.Y.shape is None')
                 self.persistent_diagram = ph_diag(trajectory, size=size)
-
 
 
         ## b. set parameter estimation for algebraic and integer-algebraic equations
@@ -160,7 +156,6 @@ class ParameterEstimator:
                 res = optimizer(model, self.X, self.Y, self.T, p0=model_params,
                                 ph_diagram=self.persistent_diagram,
                                 **self.estimation_settings)
-                # res = optimizer(model, self.X, self.Y, self.T, p0=model_params, **self.estimation_settings)
                 t2 = time.time()
                 res["time"] = t2-t1
                 model.set_estimated(res)
@@ -321,7 +316,6 @@ def model_ode_error(params, model, X, Y, T, ph_diagram, estimation_settings):
         estimation_settings["iter"] += 1
         print('Iter ' + str(estimation_settings["iter"]))
         print(params)
-    # res = "having fun"
     try:
         # simulate
         # Next few lines strongly suppress any warnning messages
@@ -361,20 +355,15 @@ def model_ode_error(params, model, X, Y, T, ph_diagram, estimation_settings):
         else:
             res = np.mean((X - simX)**2)
 
-        # b.1 calculate the persistent_diagram of simulated trajectory
+        # c. calculate the persistent_diagram of simulated trajectory
         if estimation_settings["persistent_homology"] and ph_diagram is not None:
             w1, w2 = estimation_settings["persistent_homology_weights"]
             if estimation_settings["objective_settings"]["simulate_separately"]:
                 trajectory = np.vstack((X, simX))
-                # res = np.mean((Y - simX.reshape(-1))**2)
-                # persistent_homology_error = ph_error(np.vstack((X, simX)), ph_diagram)
-                # res = (res * w1) + (persistent_homology_error * w2)
             else:
                 trajectory = simX
-                # res = np.mean((X - simX)**2)
             try:
                 persistent_homology_error = ph_error(trajectory, ph_diagram)
-                # res = (res * w1) + (persistent_homology_error * w2)
                 res = math.tan(math.atan(res) * w1 + math.atan(persistent_homology_error) * w2)
             except Exception as error:
                 print("\nError from Persistent Homology metric when calculating"
@@ -540,23 +529,13 @@ def model_error_general(params, model, X, Y, T, ph_diagram, **estimation_setting
                 f"\"{task_type}\", while list of possible values: "
                 f"\"{types_string}\".")
 
-
-# DIAGRAM_TRUTH = []
-# def ph_error(trajectory: np.ndarray, size=500, diagram_truth=DIAGRAM_TRUTH) -> np.float64:
-
-
-
-def ph_error(trajectory: np.ndarray, diagram_truth):
+def ph_error(trajectory: np.ndarray, diagram_truth: list[np.ndarray]) -> float:
     """Calculates persistent homology metric between given trajectory
     and ground truth trajectory based on topological properties of both.
     See ph_test.py in  examples/DS2022/persistent_homology.
 
     Inputs:
         - trajectory: of shape (many, few), i.e. many time points of few dimensions.
-        - size: Number of point clouds taken into the account when
-        calculating persistent diagram. I.e. trajectory is
-        down-sampled by averaging to get to desired number of time
-        points. Rule of thumb of time complexity: 200 points ~ 0.02 seconds
         - diagram_truth: persistence diagram of ED dataset, i.e. ground
         truth trajectory. To speed up costly computation of persistent
         diagram, we can calculate it once at the beginning of ED and
@@ -565,12 +544,10 @@ def ph_error(trajectory: np.ndarray, diagram_truth):
 
     size = diagram_truth[0].shape[0]
     diagram = ph_diag(trajectory, size)
-    # persim.plot_diagrams(diagram_truth)
-    # persim.plot_diagrams(diagram)
     distance_bottleneck = persim.bottleneck(diagram[1], diagram_truth[1])
     return distance_bottleneck
 
-def ph_diag(trajectory, size):
+def ph_diag(trajectory: np.ndarray, size: int) -> list[np.ndarray]:
     """Returns persistent diagram of given trajectory. See ph_test.py in examples.
 
     Inputs:
@@ -584,10 +561,10 @@ def ph_diag(trajectory, size):
         ripser.ripser(*trajectory*)['dgms']
     """
 
-    def downsample(lorenz):
+    def downsample(lorenz: np.ndarray) -> np.ndarray:
         m = int(lorenz.shape[0] / size)
         lorenz = lorenz[:(m * size), :]
-        def aggregate(array):
+        def aggregate(array: np.ndarray) -> np.ndarray:
             return array.reshape(-1, m).mean(axis=1)
         lor = np.apply_along_axis(aggregate, 0, lorenz)
         return lor
