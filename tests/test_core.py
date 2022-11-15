@@ -14,7 +14,7 @@ from ProGED.model_box import ModelBox
 from ProGED.parameter_estimation import fit_models
 from utils.generate_data_ODE_systems import generate_ODE_data
 
-def atest_grammar_general():
+def test_grammar_general():
     np.random.seed(0)
     
     txtgram = "S -> S '+' F [0.2] | F [0.8] \n"
@@ -29,7 +29,7 @@ def atest_grammar_general():
     
     assert "".join(grammar.code_to_expression('0101')[0]) == "x+y"
     
-def atest_grammar_templates():
+def test_grammar_templates():
     np.random.seed(0)
    
     templates_to_test = ["polynomial", "trigonometric", "polytrig", "simplerational", "rational", "universal"]
@@ -41,7 +41,7 @@ def atest_grammar_templates():
     for i in range(len(grammars)):
         assert grammars[i].generate_one()[2] == codes[i]
         
-def atest_generate_models():
+def test_generate_models():
     np.random.seed(0)
     generator = grammar_from_template("polynomial", {"variables":["'x'", "'y'"], "p_vars":[0.3,0.7]})
     symbols = {"x":['x', 'y'], "start":"S", "const":"C"}
@@ -52,7 +52,7 @@ def atest_generate_models():
     for i in range(len(models)):
         assert str(models[i]) == samples[i]
         
-def atest_model():
+def test_model():
     grammar_str = "S -> 'c' '*' 'x' [1.0]"
     grammar = PCFG.fromstring(grammar_str)
     parse_tree_code = "0"
@@ -83,7 +83,7 @@ def atest_model():
     assert isinstance(y, type(np.array([0])))
     assert sum((y - np.array([0, 6.0]))**2) < 1e-15
     
-def atest_model_box():
+def test_model_box():
     expr1_str = "x"
     expr2_str = "c*x"
     symbols = {"x":['x'], "const":"c", "start":"S"}
@@ -97,7 +97,7 @@ def atest_model_box():
     assert str(models[1]) == "c0*x"
     assert models[1].p == 0.5
         
-def atest_parameter_estimation():
+def test_parameter_estimation():
     np.random.seed(1)
     def f(x):
         return 2.0 * (x[:, 0] + 0.3)
@@ -120,7 +120,7 @@ def atest_parameter_estimation():
     assert np.abs(models[0].get_error() - 0.36) < 1e-6
     assert np.abs(models[1].get_error() - 1.4736842) < 1e-6
 
-def atest_parameter_estimation_2D():
+def test_parameter_estimation_2D():
     np.random.seed(0)
     def f(x):
         return 2.0 * (x[:, 0]*x[:, 1] + 0.3)
@@ -146,7 +146,7 @@ def atest_parameter_estimation_2D():
     assert np.abs(models[1].get_error() - 1.5945679) < 1e-6
 
 
-def atest_parameter_estimation_ODE():
+def test_parameter_estimation_ODE():
     B = -2.56; a = 0.4; ts = np.linspace(0.45, 0.87, 5)
     ys = (ts+B)*np.exp(a*ts); xs = np.exp(a*ts)
     data = np.hstack((ts.reshape(-1, 1), xs.reshape(-1, 1), ys.reshape(-1, 1)))
@@ -169,7 +169,7 @@ def atest_parameter_estimation_ODE():
     def assert_line(models, i, expr, error, tol=1e-9, n=100):
         #assert str(models[i].get_full_expr())[:n] == expr[:n]
         assert abs(models[i].get_error() - error) < tol
-    assert_line(models, 0, "4.65716206980249*y", 4.60039764161529)
+    assert_line(models, 0, "4.65716206980249*y", 4.600397641615483)
     assert_line(models, 1, "-10.0*x", 8.256188274283515)
     assert_line(models, 2, "y", 10.044322790817118, n=8)
 
@@ -193,12 +193,14 @@ def test_parameter_estimation_ODE_system():
                            "verbosity": 0}
     np.random.seed(0)
     system_out = fit_models(system, data, task_type='differential', estimation_settings=estimation_settings)
-    assert abs(system_out[0].get_error() - 0.048558706149751905) < 1e-6
+    # assert abs(system_out[0].get_error() - 0.048558706149751905) < 1e-6
+    # assert abs(system_out[0].get_error() - 0.026264116519994288) < 1e-6  # 15.11.2022
+    assert abs(system_out[0].get_error() - 7.141695877290627e-06) < 1e-12  # 15.11.2022
     # assert np.abs(system_out[0].get_error() - 1.8584233983525058e-08) < 1e-14  # main
     # true params: [[1.], [-0.5., -1., 0.5]]
 
 
-def atest_parameter_estimation_ODE_system_partial_observability():
+def test_parameter_estimation_ODE_system_partial_observability():
     np.random.seed(0)
     generation_settings = {"simulation_time": 0.25}
     data = generate_ODE_data(system='VDP', inits=[-0.2, -0.8], **generation_settings)
@@ -214,10 +216,12 @@ def atest_parameter_estimation_ODE_system_partial_observability():
                            "verbosity": 0}
 
     system_out = fit_models(system, data, task_type='differential', estimation_settings=estimation_settings)
-    assert abs(system_out[0].get_error() - 0.022306517926562873) < 1e-4
+    # assert abs(system_out[0].get_error() - 0.022306517926562873) < 1e-4  # 14.11.2022
+    assert abs(system_out[0].get_error() - 1.624031121298028e-09) < 1e-15  # 15.11.2022
+    # assert abs(system_out[0].get_error() - 0) < 1e-4  # find out new
     # true params: [[1.], [-0.5., -1., 0.5]]
 
-def atest_equation_discoverer():
+def test_equation_discoverer():
     np.random.seed(0)
     def f(x):
         return 2.0 * (x[:, 0] + 0.3)
@@ -237,7 +241,7 @@ def atest_equation_discoverer():
     assert np.abs(ED.models[0].get_error() - 0.72842105) < 1e-6
     assert np.abs(ED.models[1].get_error() - 0.59163899) < 1e-6
     
-def atest_equation_discoverer_ODE():
+def test_equation_discoverer_ODE():
     B = -2.56; a = 0.4; ts = np.linspace(0.45, 0.87, 5)
     ys = (ts+B)*np.exp(a*ts); xs = np.exp(a*ts)
     data = np.hstack((ts.reshape(-1, 1), xs.reshape(-1, 1), ys.reshape(-1, 1)))
@@ -261,7 +265,7 @@ def atest_equation_discoverer_ODE():
     assert_line(ED.models, 1, "0.400266188520229*x + y", 4.773528915588122, n=6)
     return
 
-def atest_persistent_homology_system_partial_observability():
+def test_persistent_homology_partial_observability():
     np.random.seed(0)
     generation_settings = {"simulation_time": 0.25}
     data = generate_ODE_data(system='VDP', inits=[-0.2, -0.8], **generation_settings)
@@ -277,128 +281,48 @@ def atest_persistent_homology_system_partial_observability():
                            "verbosity": 0,
                            "persistent_homology": True,
                            }
-
     system_out = fit_models(system, data, task_type='differential', estimation_settings=estimation_settings)
-    assert abs(system_out[0].get_error() - 0.09794124785533272) < 1e-6
+    assert abs(system_out[0].get_error() - 1.624031121298028e-09) < 1e-15  # 15.11.2022
+    # assert abs(system_out[0].get_error() - 0) < 1e-6  # DIY
     # true params: [[1.], [-0.5., -1., 0.5]]
 
 def test_persistent_homology_ODE_system():
-    # generation_settings = {"simulation_time": 0.25}
-    generation_settings = {
-        "initial_time": 0,  # initial time
-        "simulation_step": 0.01,  # simulation step /s
-        "simulation_time": 40,  # simulation time (final time) /s
-    }
-    inits = [1.0, 1.0, 1.0]
-    data = generate_ODE_data(system='lorenz', inits=inits,
-                             generation_settings=generation_settings)
-    # data = generate_ODE_data(system='lorenz_stable', inits=[0.2, 0.8, 0.5])
-
-    # P1 = data[:,1:]
-    # fig = plt.figure()
-    # plt.title('lorenz')
-    # ax = fig.add_subplot(projection='3d')
-    # ax.scatter(P1[:, 0], P1[:, 1], P1[:, 2], s=1)
-    # plt.show()
-
-    # ax = plt.axes(projection='3d')
-    # ax.plot3D(data[:, 1], data[:, 2], data[:, 3])
-    # plt.show()
-    # # plt.close('all')
+    data = generate_ODE_data(system='lorenz', inits=[0.2, 0.8, 0.5])
 
     system = ModelBox(observed=["x", "y", "z"])
-    # sigma * (x[1] - x[0]),
-    # x[0] * (rho - x[2]) - x[1],
-    # x[0] * x[1] - beta * x[2],
     system.add_system(["C*(y-x)", "x*(C-z) - y", "x*y - C*z"], symbols={"x": ["x", "y", "z"], "const": "C"})
-    # system.add_system(["C*x-y", "x*C-z - y", "x*y - C*z"], symbols={"x": ["x", "y", "z"], "const": "C"})
-    # size = 1
-    # size = 5
-    # size = 6
-
-    ph, size = True, 20
-    solo_ph = False
-    weights = (0.01, 0.99) if solo_ph else (0.5, 0.5)
-    memo = f"ph: {ph}, ph solo: {solo_ph}, size: {size}"
-    print(memo)
-    systems = []
-    #  sigma=10, rho=28, beta=2.66667):
-    # [ sigma * (x[1] - x[0]), x[0] * (rho - x[2]) - x[1], x[0] * x[1] - beta * x[2], ]
     estimation_settings = {"target_variable_index": None,
                            "time_index": 0,
-                           "optimizer_settings": {"max_iter": size*50,
-                                                  "pop_size": size,
+                           "optimizer_settings": {"max_iter": 1,
+                                                  "pop_size": 1,
                                                   "lower_upper_bounds": (-28, 28),
                                                   },
                            "objective_settings": {"use_jacobian": False},
-                           "verbosity": 1,
-                           "persistent_homology": ph,
-                           "persistent_homology_weights": weights,
+                           "verbosity": 0,
+                           "persistent_homology": True,
                            }
 
     np.random.seed(0)
-    start = time.perf_counter()
-    try:
-        system_out = fit_models(system, data, task_type='differential', estimation_settings=estimation_settings)
-    except Exception as error:
-        print(error)
-    ctime = time.perf_counter() - start
-    print(f"consumed time: {round(ctime, 2)} secs or {round(ctime/60, 2)} mins, ")
-    print(memo, f"\n inits:{inits}")
-    systems += [system_out]
-    for system_out in systems:
-    # true params: [[-0.5., -1., 0.5]]
-    # assert abs(system_out[0].get_error() - 266.667354661213) < 1e-6
-        expr = system_out[0].full_expr()
-        error = system_out[0].estimated["fun"]
-    # print(system_out[0].full_expr())
-        print(f"full found expr: {expr}")
-        print(f"found error: {error}")
-    expr_consts = ["sigma 10", "rho 28", "beta 2.666"]
-    expr_truth = "[ 10 * (x[1] - x[0]), x[0] * (rho - x[2]) - x[1], x[0] * x[1] - beta * x[2], ]"
-    print("exprs of ground truth:")
-    print(expr_consts)
-    print(expr_truth)
-    # assert abs(system_out[0].get_error() - 7.109693380523827) < 1e-6
-    print(2)
-    assert 1==1
+    system_out = fit_models(system, data, task_type='differential', estimation_settings=estimation_settings)
+    # output expr: [0.699023233857843 * x - 0.699023233857843 * y, x * (14.4673204265258 - z) - y, x * y - 21.2490501879976 * z]
+    # true system: [sigma * (x[1] - x[0]), x[0] * (rho - x[2]) - x[1], x[0] * x[1] - beta * x[2],]
+    # true params: ["sigma 10", "rho 28", "beta 2.666"]
+    assert abs(system_out[0].get_error() - 7.109684194930149) < 1e-6
 
-    # [-9.33465268723235 * x + 9.33465268723235 * y, x * (6.26027961658288 - z) - y, x * y - 2.57148765076742 * z]
-    # assert abs(system_out[0].get_error() - 0) < 1e-6
-    # [-0.17912909  4.39808796 - 1.71474011]
-    #  sigma=10, rho=28, beta=2.66667):
-    # [ sigma * (x[1] - x[0]), x[0] * (rho - x[2]) - x[1], x[0] * x[1] - beta * x[2], ]
-    # with size (=popsize, maxiter=5*10) = 5:
-    # [-9.39057203121008 * x + 9.39057203121008 * y, x * (25.4218661828293 - z) - y, x * y - 2.30400661222897 * z]
-    # with size (=popsize, maxiter=5*10) = 20:
-    # [-10.6675198563835 * x + 10.6675198563835 * y, x * (26.2693899626468 - z) - y, x * y - 3.89296267553082 * z]
-    # consumed time: 26.61 secs or 0.44 mins,
-    # ph: True, size: 1
-    # full found expr:
-    # [-10.6547799773229 * x + 10.6547799773229 * y, x * (19.2306504396799 - z) - y, x * y - 2.37730311870262 * z]
-    # found error: 6.829248589726909
-    # consumed time: 119.11 secs or 1.99 mins,
-    # ph: True, size: 2
-    # full found expr: [10.4537978384329*x - 10.4537978384329*y, x*(8.57406622606231 - z) - y, x*y - 13.8156702577722*z]
-    # found error: 5.711466204268346
-    # exprs of ground truth:
-    # ['sigma 10', 'rho 28', 'beta 2.666']
-    # [ 10 * (x[1] - x[0]), x[0] * (rho - x[2]) - x[1], x[0] * x[1] - beta * x[2], ]
-    #
 
 if __name__ == "__main__":
 
-    # test_grammar_general()
-    # test_grammar_templates()
-    # test_generate_models()
-    # test_model()
-    # test_model_box()
-    # test_parameter_estimation()
-    # test_parameter_estimation_2D()
-    # test_equation_discoverer()
-    # test_parameter_estimation_ODE()
-    # test_equation_discoverer_ODE()
-    # test_parameter_estimation_ODE_system()
-    # test_parameter_estimation_ODE_system_partial_observability()
-    # test_persistent_homology_system_partial_observability()
+    test_grammar_general()
+    test_grammar_templates()
+    test_generate_models()
+    test_model()
+    test_model_box()
+    test_parameter_estimation()
+    test_parameter_estimation_2D()
+    test_equation_discoverer()
+    test_parameter_estimation_ODE()
+    test_equation_discoverer_ODE()
+    test_parameter_estimation_ODE_system()
+    test_parameter_estimation_ODE_system_partial_observability()
+    test_persistent_homology_partial_observability()
     test_persistent_homology_ODE_system()

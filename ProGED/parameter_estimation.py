@@ -13,7 +13,6 @@ import time
 import math
 import numpy as np
 import sympy as sp
-from typing import List, Tuple
 
 from scipy.optimize import differential_evolution, minimize
 from scipy.interpolate import interp1d
@@ -95,7 +94,6 @@ class ParameterEstimator:
                 size = estimation_settings["persistent_homology_size"]
                 trajectory = np.vstack(np.vstack((self.X, self.Y))) if self.Y is not None else self.X
                 self.persistent_diagram = ph_diag(trajectory, size=size)
-
 
         ## b. set parameter estimation for algebraic and integer-algebraic equations
         elif task_type == "algebraic" or task_type == "integer-algebraic":
@@ -290,7 +288,6 @@ def DE_fit (model, X, Y, T, p0, ph_diagram, **estimation_settings):
     return differential_evolution(func=estimation_settings["objective_function"],
                                   bounds=bounds,
                                   callback=diff_evol_timeout,
-                                  polish=False,
                                   args=[model, X, Y, T, ph_diagram, estimation_settings],
                                   maxiter=estimation_settings["optimizer_settings"]["max_iter"],
                                   strategy=estimation_settings["optimizer_settings"]["strategy"],
@@ -370,9 +367,9 @@ def model_ode_error(params, model, X, Y, T, ph_diagram, estimation_settings):
                       " bottleneck distance.\n", error)
 
         if np.isnan(res) or np.isinf(res) or not np.isreal(res):
-                if estimation_settings["verbosity"] > 1:
-                    print("Objective error is nan, inf or unreal. Returning default error.")
-                return estimation_settings['default_error']
+            if estimation_settings["verbosity"] > 1:
+                print("Objective error is nan, inf or unreal. Returning default error.")
+            return estimation_settings['default_error']
 
     except Exception as error:
         print("\nError within model_ode_error().\n", error)
@@ -540,6 +537,8 @@ def ph_error(trajectory: np.ndarray, diagram_truth: list[np.ndarray]) -> float:
         truth trajectory. To speed up costly computation of persistent
         diagram, we can calculate it once at the beginning of ED and
         then always reuse the already calculated one.
+    Output:
+        - float: bottleneck distance between the two diagrams
     """
 
     size = diagram_truth[0].shape[0]
