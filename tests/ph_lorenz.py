@@ -3,7 +3,6 @@
 import numpy as np
 from nltk import Nonterminal, PCFG
 import matplotlib.pyplot as plt
-import time
 
 from ProGED.equation_discoverer import EqDisco
 from ProGED.generators.grammar import GeneratorGrammar
@@ -306,39 +305,28 @@ def test_persistent_homology_ODE_system():
     # x[0] * x[1] - beta * x[2],
     system.add_system(["C*(y-x)", "x*(C-z) - y", "x*y - C*z"], symbols={"x": ["x", "y", "z"], "const": "C"})
     # system.add_system(["C*x-y", "x*C-z - y", "x*y - C*z"], symbols={"x": ["x", "y", "z"], "const": "C"})
-    # size = 1
-    # size = 5
-    # size = 6
-    ph, size = True, 1
-    print(f"ph: {ph}, size: {size}")
-    systems = []
+    size = 1
     #  sigma=10, rho=28, beta=2.66667):
     # [ sigma * (x[1] - x[0]), x[0] * (rho - x[2]) - x[1], x[0] * x[1] - beta * x[2], ]
     estimation_settings = {"target_variable_index": None,
                            "time_index": 0,
-                           "optimizer_settings": {"max_iter": size*5,
+                           "optimizer_settings": {"max_iter": size*10,
                                                   "pop_size": size,
-                                                  "lower_upper_bounds": (-28, 28),
+                                                   "lower_upper_bounds": (-28, 28),
                                                   },
                            "objective_settings": {"use_jacobian": False},
                            "verbosity": 0,
-                           "persistent_homology": ph,
+                           "persistent_homology": True,
                            }
 
     np.random.seed(0)
-    start = time.perf_counter()
     system_out = fit_models(system, data, task_type='differential', estimation_settings=estimation_settings)
-    ctime = time.perf_counter() - start
-    print(f"consumed time: {ctime}")
-    systems += [system_out]
-    for system_out in systems:
     # true params: [[-0.5., -1., 0.5]]
     # assert abs(system_out[0].get_error() - 266.667354661213) < 1e-6
-        expr = system_out[0].full_expr()
-        error = system_out[0].estimated["fun"]
-    # print(system_out[0].full_expr())
-        print(f"full found expr: {expr}")
-        print(f"found error: {error}")
+    print("full found expr:")
+    expr = system_out[0].full_expr()
+    print(system_out[0].full_expr())
+    print(expr)
     expr_consts = ["sigma 10", "rho 28", "beta 2.666"]
     expr_truth = "[ 10 * (x[1] - x[0]), x[0] * (rho - x[2]) - x[1], x[0] * x[1] - beta * x[2], ]"
     print("exprs of ground truth:")
@@ -353,8 +341,6 @@ def test_persistent_homology_ODE_system():
     # [ sigma * (x[1] - x[0]), x[0] * (rho - x[2]) - x[1], x[0] * x[1] - beta * x[2], ]
     # with size (=popsize, maxiter=5*10) = 5:
     # [-9.39057203121008 * x + 9.39057203121008 * y, x * (25.4218661828293 - z) - y, x * y - 2.30400661222897 * z]
-    # with size (=popsize, maxiter=5*10) = 20:
-    # [-10.6675198563835 * x + 10.6675198563835 * y, x * (26.2693899626468 - z) - y, x * y - 3.89296267553082 * z]
 
 if __name__ == "__main__":
 

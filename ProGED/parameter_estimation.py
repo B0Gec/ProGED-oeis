@@ -94,7 +94,7 @@ class ParameterEstimator:
                 size = estimation_settings["persistent_homology_size"]
                 trajectory = np.vstack(np.vstack((self.X, self.Y))) if self.Y is not None else self.X
                 # for debug (temporary):
-                print(trajectory.shape)
+                # print(trajectory.shape)
                 # if self.Y is None:
                 #     print('self.Y.shape is None')
                 self.persistent_diagram = ph_diag(trajectory, size=size)
@@ -224,19 +224,20 @@ def fit_models(models, data, task_type="algebraic", pool_map=map, estimation_set
         "max_step": 10 ** 3,
         "use_jacobian": False,
         "teacher_forcing": False,
-        "simulate_separately": False}
+        "simulate_separately": False,
+    }
 
     optimizer_settings_preset = {
         "lower_upper_bounds": (-10, 10),
         "default_error": 10 ** 9,
-        "strategy": 'rand1bin',
-        "f": 0.45,
-        "cr": 0.88,
-        "max_iter": 500,
-        "pop_size": 50,
-        "atol": 0.01,
-        "tol": 0.01,
-        "hyperopt_seed": None
+        "strategy": 'best1bin',
+        "f": (0.5, 1),
+        "cr": 0.7,
+        "max_iter": 1000,
+        "pop_size": 20,
+        "atol": 0,
+        "tol": 0.001,
+        "hyperopt_seed": None,
     }
 
     estimation_settings_preset = {
@@ -374,7 +375,7 @@ def model_ode_error(params, model, X, Y, T, ph_diagram, estimation_settings):
             try:
                 persistent_homology_error = ph_error(trajectory, ph_diagram)
                 # res = (res * w1) + (persistent_homology_error * w2)
-                res = math.tan(math.atan(res) * w1 + persistent_homology_error * w2)
+                res = math.tan(math.atan(res) * w1 + math.atan(persistent_homology_error) * w2)
             except Exception as error:
                 print("\nError from Persistent Homology metric when calculating"
                       " bottleneck distance.\n", error)
