@@ -1,3 +1,20 @@
+Summary:
+max_iter = 1000, 20 popsize default diff_evol settings:
+
+no ph:
+consumed time: 3467.74 secs or 57.8 mins,
+full found expr: [-4.22950670538346*x + 4.22950670538346*y, x*(26.5218765150121 - z) - y, x*y - 0.463579644733843*z]
+
+ph solo:
+consumed time: 47.56 secs or 0.79 mins,
+full found expr: [-27.3193629776497*x + 27.3193629776497*y, x*(24.1829535041217 - z) - y, x*y - 6.28646011001688*z]
+
+ph 50-50 (balanced 50% ph, 50% mse):
+consumed time: 11330.32 secs or 188.84 mins,
+full found expr: [-8.16873686682862*x + 8.16873686682862*y, x*(27.3532357968686 - z) - y, x*y - 2.29508884478781*z]
+
+full ground expr:[-10.0000000000000*x + 10.0000000000000*y, x*(28.0000000000000 - z) - y, x*y - 2.66666666666666*z]
+
 - -  - [NO ph] - - -
 
 consumed time: 3467.74 secs or 57.8 mins,
@@ -136,7 +153,27 @@ exprs of ground truth:
 [ 10 * (x[1] - x[0]), x[0] * (rho - x[2]) - x[1], x[0] * x[1] - beta * x[2], ]
 2
 
+consumed time: 11276.25 secs or 187.94 mins,
+ph: True, ph solo: False, size: 20
+ inits:[1.0, 1.0, 1.0]
+full found expr: [-11.5169973129929*x + 11.5169973129929*y, x*(27.7522008860117 - z) - y, x*y - 2.6709795952421*z]
+found error: 1.623879536504639
+exprs of ground truth:
+['sigma 10', 'rho 28', 'beta 2.666']
+[ 10 * (x[1] - x[0]), x[0] * (rho - x[2]) - x[1], x[0] * x[1] - beta * x[2], ]
+2
+
+consumed time: 11330.32 secs or 188.84 mins,
+ph: True, ph solo: False, size: 20
+ inits:[1.0, 1.0, 1.0]
+full found expr: [-8.16873686682862*x + 8.16873686682862*y, x*(27.3532357968686 - z) - y, x*y - 2.29508884478781*z]
+found error: 1.8429978716107591
+exprs of ground truth:
+['sigma 10', 'rho 28', 'beta 2.666']
+[ 10 * (x[1] - x[0]), x[0] * (rho - x[2]) - x[1], x[0] * x[1] - beta * x[2], ]
+2
 
 
 ph: True, ph solo: True, size: 20
 Killed
+(( I think reason for killing was CTRL+Shift+C for copying previous results. ))
