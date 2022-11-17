@@ -193,11 +193,16 @@ def test_parameter_estimation_ODE_system():
                            "verbosity": 0}
     np.random.seed(0)
     system_out = fit_models(system, data, task_type='differential', estimation_settings=estimation_settings)
+<<<<<<< HEAD
     # assert abs(system_out[0].get_error() - 0.048558706149751905) < 1e-6
     # assert abs(system_out[0].get_error() - 0.026264116519994288) < 1e-6  # 15.11.2022
     assert abs(system_out[0].get_error() - 7.141695877290627e-06) < 1e-12  # 15.11.2022
     # assert np.abs(system_out[0].get_error() - 1.8584233983525058e-08) < 1e-14  # main
+=======
+    assert abs(system_out[0].get_error() - 1.3418382524870218e-08) < 1e-12
+>>>>>>> main
     # true params: [[1.], [-0.5., -1., 0.5]]
+    # output: error 1.3418382524870218e-08, params [0.99965284  1.86499312 - 2.11898971  0.69400483]. is this possible?!
 
 
 def test_parameter_estimation_ODE_system_partial_observability():
@@ -216,10 +221,15 @@ def test_parameter_estimation_ODE_system_partial_observability():
                            "verbosity": 0}
 
     system_out = fit_models(system, data, task_type='differential', estimation_settings=estimation_settings)
+<<<<<<< HEAD
     # assert abs(system_out[0].get_error() - 0.022306517926562873) < 1e-4  # 14.11.2022
     assert abs(system_out[0].get_error() - 1.624031121298028e-09) < 1e-15  # 15.11.2022
     # assert abs(system_out[0].get_error() - 0) < 1e-4  # find out new
+=======
+    assert np.abs(system_out[0].get_error() - 1.8584233983525058e-08) < 1e-14
+>>>>>>> main
     # true params: [[1.], [-0.5., -1., 0.5]]
+    #returns params [[-0.15319651], [-7.99031067, 0.86863875, 0.82523763]], error 1.8584233983525058e-08 (is this possible?!!)
 
 def test_equation_discoverer():
     np.random.seed(0)
@@ -240,7 +250,7 @@ def test_equation_discoverer():
     ED.fit_models()
     assert np.abs(ED.models[0].get_error() - 0.72842105) < 1e-6
     assert np.abs(ED.models[1].get_error() - 0.59163899) < 1e-6
-    
+
 def test_equation_discoverer_ODE():
     B = -2.56; a = 0.4; ts = np.linspace(0.45, 0.87, 5)
     ys = (ts+B)*np.exp(a*ts); xs = np.exp(a*ts)
