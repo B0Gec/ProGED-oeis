@@ -297,7 +297,6 @@ def test_persistent_homology_ODE_system():
     system_out = fit_models(system, data, task_type='differential', estimation_settings=estimation_settings)
     assert abs(system_out[0].get_error() - 7.109684194930149) < 1e-6
 
-
 if __name__ == "__main__":
 
     test_grammar_general()

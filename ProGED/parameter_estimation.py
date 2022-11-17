@@ -542,6 +542,9 @@ def ph_error(trajectory: np.ndarray, diagram_truth: list[np.ndarray]) -> float:
         - float: bottleneck distance between the two diagrams
     """
 
+    # for persistent homology:  # pip scikit-tda
+    import persim
+
     size = diagram_truth[0].shape[0]
     diagram = ph_diag(trajectory, size)
     distance_bottleneck = persim.bottleneck(diagram[1], diagram_truth[1])
@@ -560,6 +563,9 @@ def ph_diag(trajectory: np.ndarray, size: int) -> list[np.ndarray]:
         - diagram [list of length 2]: as output of
         ripser.ripser(*trajectory*)['dgms']
     """
+
+    # for persistent homology:  # pip scikit-tda
+    import ripser
 
     def downsample(lorenz: np.ndarray) -> np.ndarray:
         m = int(lorenz.shape[0] / size)
