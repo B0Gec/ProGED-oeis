@@ -18,10 +18,6 @@ from scipy.optimize import differential_evolution, minimize
 from scipy.interpolate import interp1d
 from scipy.integrate import solve_ivp, odeint
 
-# for persistent homology:  # pip scikit-tda
-import ripser
-import persim
-
 # from sklearn import ensemble #, tree  # Left for gitch_doctor metamodel
 from _io import TextIOWrapper as stdout_type
 import ProGED.mute_so as mt
