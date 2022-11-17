@@ -1,0 +1,506 @@
+ph: True, ph solo: True, size: 20
+Estimating model: [C0*(-x + y), x*(C1 - z) - y, C2*z + x*y]
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').
+
+Error from Persistent Homology metric when calculating bottleneck distance.
+ Input contains NaN, infinity or a value too large for dtype('float64').

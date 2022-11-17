@@ -6,6 +6,9 @@ consumed time: 3467.74 secs or 57.8 mins,
 full found expr: [-4.22950670538346*x + 4.22950670538346*y, x*(26.5218765150121 - z) - y, x*y - 0.463579644733843*z]
 
 ph solo:
+consumed time: 10255.71 secs or 170.93 mins, tj. 3h
+full found expr: [-10.7512348995363*x + 10.7512348995363*y, x*(26.5849457857708 - z) - y, x*y - 2.66718974674819*z]
+old results (questionable):
 consumed time: 47.56 secs or 0.79 mins,
 full found expr: [-27.3193629776497*x + 27.3193629776497*y, x*(24.1829535041217 - z) - y, x*y - 6.28646011001688*z]
 
@@ -64,6 +67,25 @@ exprs of ground truth:
 
 ph: True, ph solo: True, size: 40
 Killed
+
+
+solo --size=20
+ph: True, ph solo: True, size: 20
+Estimating model: [C0*(-x + y), x*(C1 - z) - y, C2*z + x*y]
+...
+ Input contains NaN, infinity or a value too large for dtype('float64').
+model: [-10.7512348995363*x + 10.7512348995363*y, x*(26.5849457857708 - z) - y, x*y - 2.66718974674819*z]; p: 1.0                    ; error: 0.7066436727886631
+consumed time: 10255.71 secs or 170.93 mins, tj. 3h
+ph: True, ph solo: True, size: 20
+ inits:[1.0, 1.0, 1.0]
+full found expr: [-10.7512348995363*x + 10.7512348995363*y, x*(26.5849457857708 - z) - y, x*y - 2.66718974674819*z]
+found error: 0.7066436727886631
+exprs of ground truth:
+['sigma 10', 'rho 28', 'beta 2.666']
+[ 10 * (x[1] - x[0]), x[0] * (rho - x[2]) - x[1], x[0] * x[1] - beta * x[2], ]
+iteracij nit=1000
+evalvacij nfev=60104
+
 
 consumed time: 47.56 secs or 0.79 mins,
 ph: True, ph solo: True, size: 20
