@@ -33,7 +33,6 @@ from ProGED.task import TASK_TYPES
 # import ProGED.glitch_doctor.model.Model
 
 import warnings
-
 warnings.filterwarnings("ignore", message="divide by zero encountered in divide")
 warnings.filterwarnings("ignore", message="divide by zero encountered in true_divide")
 warnings.filterwarnings("ignore", message="invalid value encountered in power")
@@ -280,7 +279,6 @@ def DE_fit (model, X, Y, T, p0, ph_diagram, **estimation_settings):
         else:
             return False
 
-
     return differential_evolution(func=estimation_settings["objective_function"],
                                   bounds=bounds,
                                   callback=diff_evol_timeout,
@@ -340,7 +338,6 @@ def model_ode_error(params, model, X, Y, T, ph_diagram, estimation_settings):
             simX = run_ode()
         if change_std2tee:
             sys.stdout = tee_object  # Change it back to fake stdout (tee).
-
 
         # b. calculate the objective (MSE of the fit)
         if estimation_settings["objective_settings"]["simulate_separately"]:
