@@ -2,8 +2,6 @@
 
 import numpy as np
 from nltk import Nonterminal, PCFG
-import matplotlib.pyplot as plt
-import time
 
 from ProGED.equation_discoverer import EqDisco
 from ProGED.generators.grammar import GeneratorGrammar
@@ -193,17 +191,8 @@ def test_parameter_estimation_ODE_system():
                            "verbosity": 0}
     np.random.seed(0)
     system_out = fit_models(system, data, task_type='differential', estimation_settings=estimation_settings)
-<<<<<<< HEAD
-    # assert abs(system_out[0].get_error() - 0.048558706149751905) < 1e-6
-    # assert abs(system_out[0].get_error() - 0.026264116519994288) < 1e-6  # 15.11.2022
     assert abs(system_out[0].get_error() - 7.141695877290627e-06) < 1e-12  # 15.11.2022
-    # assert np.abs(system_out[0].get_error() - 1.8584233983525058e-08) < 1e-14  # main
-=======
-    assert abs(system_out[0].get_error() - 1.3418382524870218e-08) < 1e-12
->>>>>>> main
     # true params: [[1.], [-0.5., -1., 0.5]]
-    # output: error 1.3418382524870218e-08, params [0.99965284  1.86499312 - 2.11898971  0.69400483]. is this possible?!
-
 
 def test_parameter_estimation_ODE_system_partial_observability():
     np.random.seed(0)
@@ -221,15 +210,8 @@ def test_parameter_estimation_ODE_system_partial_observability():
                            "verbosity": 0}
 
     system_out = fit_models(system, data, task_type='differential', estimation_settings=estimation_settings)
-<<<<<<< HEAD
-    # assert abs(system_out[0].get_error() - 0.022306517926562873) < 1e-4  # 14.11.2022
     assert abs(system_out[0].get_error() - 1.624031121298028e-09) < 1e-15  # 15.11.2022
-    # assert abs(system_out[0].get_error() - 0) < 1e-4  # find out new
-=======
-    assert np.abs(system_out[0].get_error() - 1.8584233983525058e-08) < 1e-14
->>>>>>> main
     # true params: [[1.], [-0.5., -1., 0.5]]
-    #returns params [[-0.15319651], [-7.99031067, 0.86863875, 0.82523763]], error 1.8584233983525058e-08 (is this possible?!!)
 
 def test_equation_discoverer():
     np.random.seed(0)
@@ -293,7 +275,6 @@ def test_persistent_homology_partial_observability():
                            }
     system_out = fit_models(system, data, task_type='differential', estimation_settings=estimation_settings)
     assert abs(system_out[0].get_error() - 1.624031121298028e-09) < 1e-15  # 15.11.2022
-    # assert abs(system_out[0].get_error() - 0) < 1e-6  # DIY
     # true params: [[1.], [-0.5., -1., 0.5]]
 
 def test_persistent_homology_ODE_system():
@@ -314,9 +295,6 @@ def test_persistent_homology_ODE_system():
 
     np.random.seed(0)
     system_out = fit_models(system, data, task_type='differential', estimation_settings=estimation_settings)
-    # output expr: [0.699023233857843 * x - 0.699023233857843 * y, x * (14.4673204265258 - z) - y, x * y - 21.2490501879976 * z]
-    # true system: [sigma * (x[1] - x[0]), x[0] * (rho - x[2]) - x[1], x[0] * x[1] - beta * x[2],]
-    # true params: ["sigma 10", "rho 28", "beta 2.666"]
     assert abs(system_out[0].get_error() - 7.109684194930149) < 1e-6
 
 
