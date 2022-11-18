@@ -75,7 +75,7 @@ if (is_tee and is_tee_flag) or ("--do-log" in double_flags) or ("--is_tee" in do
 
 np.random.seed(0)
 has_titles = 1
-csv = pd.read_csv('oeis_selection.csv')[has_titles:]
+csv = pd.read_csv('../oeis_selection.csv')[has_titles:]
 # csv = csv.astype('int64')
 # print("csv", csv)
 # csv = csv.astype('float')

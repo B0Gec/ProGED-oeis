@@ -1,6 +1,4 @@
 import matplotlib.pyplot as plt
-from matplotlib.ticker import AutoMinorLocator, MultipleLocator
-import re
 
 import saved_core
 # import saved_core110up as saved_core

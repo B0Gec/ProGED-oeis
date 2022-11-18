@@ -8,7 +8,6 @@ import pandas as pd
 # bseqs = new_fetch(do_write=False, max_seq_length=50)  # = default length
 # # bseqs = new_fetch(0, 3, do_write=False, max_seq_length=50)  # = default length
 # # or equivalently load already downloaded:
-from save_new_bfiles import bseqs
 from saved_new_bfile10000 import bseqs
 # # 2.) remove Mersene seq:
 # bseqs.pop('A000043')

@@ -133,7 +133,7 @@ def fetch_old(start=0, end=1e10, do_write=False):
         seqs_flatten += ten_seq
     print("all seqs:", len(seqs_flatten))
     if do_write:
-        file = open("saved_core.py", "w")
+        file = open("../selection-process/saved_core.py", "w")
         file.write("core_list = " + repr(seqs_flatten) + "\n"
                 + "core_unflatten = " + repr(seqs) + "\n")
         file.close()
@@ -184,7 +184,7 @@ def fetch_bfiles_old(start=0, end=180, do_write=True, max_seq_length=100):
 
     print("all bfiled seqs:", len(new_seqs), "all original seqs:", len(dict_seqs))
     if do_write:
-        file = open("saved_bfiled.py", "w")
+        file = open("../selection-process/saved_bfiled.py", "w")
         file.write("core_bfiled_dict = " + repr(new_seqs) + "\n")
         file.close()
         print("Sequences \"as are\" are written into the output file.")

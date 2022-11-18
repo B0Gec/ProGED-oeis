@@ -21,9 +21,9 @@ def header(id_):
 # print(header("A000001"))
 
 
-titles_filename = "titles.csv"
+titles_filename = "../selection-process/titles.csv"
 def download_headers(titles_filename=titles_filename, first_columns=-1):
-    ids = pd.read_csv("oeis_selection.csv").columns[:first_columns]
+    ids = pd.read_csv("../selection-process/oeis_selection.csv").columns[:first_columns]
     titles = {id_: header(id_) for id_ in ids}
     for id_, title in titles.items():
         print(id_, title)

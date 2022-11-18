@@ -6,7 +6,7 @@ from ProGED.equation_discoverer import EqDisco
 # nrows = 94
 # nrows = 90
 nrows = 50
-data = pd.read_csv('oeis_selection.csv', nrows=nrows)
+data = pd.read_csv('../oeis_selection.csv', nrows=nrows)
 fibonacci_no = 45
 fibonacci_id = f"A{fibonacci_no:0>6}"
 # if nrows=50, dtype=int64:

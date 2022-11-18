@@ -6,7 +6,7 @@ from selection import basic_info
 ## -- Check scrap against gzipped oeis database -- ##
 def check_scrap(seqs_dict: dict, is_bfile=False):
     # seqs = seqs_flat
-    file2 = open("stripped_oeis_database.txt", "r")
+    file2 = open("../selection-process/stripped_oeis_database.txt", "r")
     original = file2.read()
     file2.close()
     counter = 1
