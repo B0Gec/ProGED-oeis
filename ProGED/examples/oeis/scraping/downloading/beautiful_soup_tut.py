@@ -11,17 +11,39 @@ f = requests.get(url, headers = headers)
 movies_lst = []
 soup = BeautifulSoup(f.content, 'lxml')
 soup = BeautifulSoup(f.content, 'html.parser')
+print(soup.prettify())
+print(soup)
+
 # soup.find_all('link')
 tag = soup.find_all('p')
 prices = soup.find_all(text='$')
 parent = prices[0].parent
+name = parent.name
 strong = parent.find('strong')
+
+specific_parent = prices[0].find_parent(class_='item-container')
 
 tag['color'] = "blue"
 print(tag.attrs)
 print(tag.attrs)
-print(soup.prettify())
-print(soup)
+for tag in tags:
+    print(tag.strip())  # '\n    $1233    ' -> '$123'
+
+# Search in all tags inside of the list:
+tags = soup.find_all(['option', 'div', 'li'], text='Undergraduate', value="undergraduate")
+tags = soup.find_all(class_='btn-value')
+tags = soup.find_all(text=re.compile("\$.*"))
+
+tbody = soup.tbody  # <tbody>
+trs = tbody.contents
+trs[0].next_sibling
+trs[0].previous_sibling
+trs[0].next_siblings
+trs[0].contents
+trs[0].descendents
+
+
+
 1/0
 movies = soup.find('table', {
 movies = soup.find('table', {
