@@ -97,11 +97,11 @@ doublets =  [(k, i) for k, i in counter.items() if i>1]
 
 # id_.previous
 
-linseqs = dict()
-
 # id_ = ids[1]
 print(len(ids))
-for id_ in ids[:10204]:
+
+linseqs = dict()
+for id_ in ids[:30204]:
     parent = id_.parent
     if parent.previous_sibling is None:
         previous = parent.parent.previous_sibling.previous_sibling
@@ -111,10 +111,14 @@ for id_ in ids[:10204]:
             order = re.findall(r'(\d+)', title)[0]
     # if order not in linseqs:
             linseqs[order] = [id_.text]
-        elif previous.name not in linseqs:
-            linseqs[previous.name] = [previous]
         else:
-            linseqs[previous.name] += [previous]
+            linseqs[order] += [id_.text]
+            if previous.name not in linseqs:
+                pass
+                linseqs[previous.name] = [previous]
+            else:
+                pass
+                linseqs[previous.name] += [previous]
     else:
         linseqs[order] += [id_.text]
 
