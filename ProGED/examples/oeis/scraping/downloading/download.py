@@ -12,13 +12,13 @@ from urllib import request
 import re
 import time
 
-import header as header_module
 
 def bfile2list(id_: str, max_seq_length: int) -> list:
     """Fetch b-file and return list."""
 
     # max_read_url = (2+3+16+2) * max_seq_length
-    max_read_url = (2+3+28+2) * max_seq_length
+    max_read_url = 10 * (2+3+28+2) * max_seq_length
+    # print(f'max_read_url: {max_read_url}')
     baddress = id_ + '/b' + id_[1:] +'.txt'
     print(baddress)
     # Make sure to read only *max_read_url* characters from URL.
@@ -53,6 +53,7 @@ def new_fetch (start=0, end=1e10, do_write=False, max_seq_length=100, output_fil
         'https://oeis.org/search?q=keyword%3acore'
         + '%20keyword%3anice%20-keyword%3amore&start=10&fmt=data')
     header_length = 5000  # number of characters in header.
+    import header as header_module
     header = search.read(header_length).decode()
     # print(header)
     total = int(re.findall(

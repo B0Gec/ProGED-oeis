@@ -1,7 +1,6 @@
 import re
 import pandas as pd
 # from save_new_bfiles import bseqs  # before csv
-from selection import basic_info
 
 ## -- Check scrap against gzipped oeis database -- ##
 def check_scrap(seqs_dict: dict, is_bfile=False):
@@ -55,6 +54,7 @@ def check_scrap(seqs_dict: dict, is_bfile=False):
 # print("end")
 
 def check_out(is_bfile=False, has_titles=1, csv_filename: str ='oeis_selection.csv'):
+
     df = pd.read_csv(csv_filename)[has_titles:]
     # danger! in next line we should convert string terms to integers.
     bseqs = {id_: [int(term) for term in seq] for id_, seq in df.items()}
@@ -64,6 +64,7 @@ def check_out(is_bfile=False, has_titles=1, csv_filename: str ='oeis_selection.c
     #     [seq for _, seq in seqs.items()][0])  # preview
     # print(len(set(seqs)))
 
+    from selection import basic_info
     basic_info(bseqs)
     check_scrap(bseqs, is_bfile=True)
     return
