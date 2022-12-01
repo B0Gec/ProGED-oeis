@@ -70,3 +70,4 @@ def check_out(is_bfile=False, has_titles=1, csv_filename: str ='oeis_selection.c
     return
 
 # check_out(csv_filename='oeis_dmkd.csv')
+# check_out(csv_filename='../../linear_database.csv')

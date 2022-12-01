@@ -10,8 +10,9 @@ for id in list:
     seq = blist[id]
 
 """
+import os
 
-import requests, re
+import requests, re, time
 import pandas as pd
 import lxml
 from bs4 import BeautifulSoup
@@ -23,6 +24,7 @@ headers = {
                   'like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
 }
 f = requests.get(url, headers = headers)
+# f = requests.get(url)
 # print(f.content)
 # 1/0
 movies_lst = []
@@ -70,7 +72,7 @@ soup = BeautifulSoup(f.content, 'html.parser')
 
 
 
-ids = soup.find_all('a', text=re.compile(r'A\w{6}'))
+ids = soup.find_all('a', text=re.compile(r'A\d{6}'))
 # ids = soup.find_all(text=r'A\w{6}')
 # ids_txt = [i.text for i in ids]
 ids_txt = ids
@@ -111,12 +113,29 @@ csv_filename = "oeis_dmkd.csv"
 # df_sorted.to_csv(csv_filename, index=False)
 """
 
+
+# start = 100
+start = 13800
 linseqs = dict()
 scale_tree = 10
-scale_tree = 10**5
-scale_tree = 40000
-# scale = 1000000
-for id_ in ids[:scale_tree]:
+# scale_tree = 1000
+# scale_tree = 30000
+# scale_tree = 10**5
+# scale_tree = 40000
+# scale_tree = 25000
+scale_tree = 1000000
+# print(scale_tree)
+# linseqs['7'] = [None]
+# scale_tree = 13900
+
+# linseqs['131071'] = [None]
+start = 0
+# scale_tree = 10**6
+
+# order = '8'
+# linseqs['8'] = [None]
+
+for id_ in ids[start:scale_tree]:
     parent = id_.parent
     if parent.previous_sibling is None:
         previous = parent.parent.previous_sibling.previous_sibling
@@ -142,20 +161,58 @@ print(len(linseqs))
 print([(seqs, len(linseqs[seqs])) for seqs in linseqs])
 print(sum(len(linseqs[seqs]) for seqs in linseqs))
 
-for order, seqs in linseqs.items():
-    print(f'order: {order}')
-    for seq in seqs:
-        # print(int(order) * "  " + f'\\_ {seq}   order: {order}')
-        print("  " + f'\\_ {seq}   order: {order}')
+ids_list = []
+for _, seqs in linseqs.items():
+    ids_list += seqs
+print(ids_list, len(ids_list))
+
+
+reconst = []
+for seqs in linseqs.values():
+    reconst += seqs
+print(len(reconst))
+ids_raw = {id_.text for id_ in ids[start:scale_tree]}
+reconsts = set(reconst)
+print(set(ids_raw).difference(reconsts))
+# print(ids_raw)
+# print(reconst[:14])
+
+
+
+verbosity = False
+# verbosity = True
+if verbosity:
+    for order, seqs in linseqs.items():
+        print(f'order: {order}')
+        for seq in seqs:
+            # print(int(order) * "  " + f'\\_ {seq}   order: {order}')
+            print("  " + f'\\_ {seq}   order: {order}')
+
+
 
 # before.parent.previous_sibling.previous_sibling
 
 # linseqs
 
 
+now = time.perf_counter()
+def timer(now, text=f"\nScraping all (chosen) OEIS sequences"):
+    before, now = now, time.perf_counter()
+    consumed = now - before
+    print(text +
+          f" took:\n {round(consumed, 1)} secconds,"
+          f" i.e. {round(consumed / 60, 2)} minutes"
+          f" or {round(consumed / 3600, 3)} hours.")
+    return now
+
+
 # create csv
-from ProGED.examples.oeis.scraping.downloading.download import bfile2list
-sa009 = bfile2list('A009117', 200)
+if os.getcwd()[-11:] == 'ProGED_oeis':
+    from ProGED.examples.oeis.scraping.downloading.download import bfile2list
+else:
+    from scraping.downloading.download import bfile2list
+
+# sa009 = bfile2list('A009117', 200)
 
 
 csv_filename = "linear_database.csv"
@@ -163,17 +220,59 @@ csv_filename = "linear_database.csv"
 
 # seqs_dict = dict()
 to_concat = []
-scale_csv = 1
-# scale_csv = 10
-MAX_SEQ_LENGTH = 100
+scale_per_ord = 1000000
+scale_per_ord = 100
+SCALE_COUNT = 10
+SCALE_COUNT = 5000
+counter = 0
+escape = False
+PERIOD = 100
+# PERIOD = 5
+
+print(f'scale_per_ord:{scale_per_ord}')
+print(f'SCALE_COUNT:{SCALE_COUNT}')
+print(f'PERIOD:{PERIOD}')
+# scale_per_ord = 10
+MAX_SEQ_LENGTH = 200
 # MAX_SEQ_LENGTH = 6
 # MAX_SEQ_LENGTH = 15
-for order, ids in linseqs.items():
-    print(order)
-    print(ids[:scale_csv])
-    for id_ in ids[:scale_csv]:
-        # print([type(i) for i in [idii, idsii, orderii]])
-        to_concat += [pd.DataFrame({id_:  [int(an) for an in bfile2list(id_, max_seq_length=MAX_SEQ_LENGTH)]})]
+
+PARALLELIZE = True
+PARALLELIZE = False
+PARALEL_BATCH = 500
+INDEX = 500
+if PARALLELIZE:
+    sorted_ids = sorted(ids_list)
+    for id in sorted_ids:
+        to_concat += [pd.DataFrame({id_: [int(an) for an in bfile2list(id_, max_seq_length=MAX_SEQ_LENGTH)]})]
+    counter += 1
+    if counter % PERIOD == 0:
+        timer(now, f"Scraping one of the parallel batches of {counter} sequences ")
+        print(f"counter: {counter}")
+        df = pd.concat(to_concat, axis=1)
+        df.sort_index(axis=1).to_csv(csv_filename, index=False)
+        print(f"{counter} sequences written to csv")
+        print("check file: number of ids, file size?")
+else:
+    for order, ids in linseqs.items():
+        if verbosity >= 2:
+            print(order)
+            print(ids[:scale_per_ord])
+        for id_ in ids[:scale_per_ord]:
+            # print([type(i) for i in [idii, idsii, orderii]])
+
+            if counter <= SCALE_COUNT:
+                to_concat += [pd.DataFrame({id_:  [int(an) for an in bfile2list(id_, max_seq_length=MAX_SEQ_LENGTH)]})]
+                counter += 1
+                if counter % PERIOD == 0:
+                    timer(now, f"Scraping {counter} sequences ")
+                    print(f"counter: {counter}")
+                    df = pd.concat(to_concat, axis=1)
+                    df.sort_index(axis=1).to_csv(csv_filename, index=False)
+                    print(f"{counter} sequences written to csv")
+                    print("check file: number of ids, file size?")
+
+
         # seqs_dict[idi] = bfile2list(idii, max_seq_length=100)
 # pd.DataFrame(seqs_dict).sort_index(axis=1).to_csv(csv_filename, index=False)
 df = pd.concat(to_concat, axis=1)
@@ -185,12 +284,28 @@ df.sort_index(axis=1).to_csv(csv_filename, index=False)
 #     print(i)
 # for i in types:
 #     print(i)
+
 # # after download:
+csv_filename = "linear_database.csv"
+if os.getcwd()[-11:] == 'ProGED_oeis':
+    csv_filename = "ProGED/examples/oeis/" + csv_filename
 check = pd.read_csv(csv_filename)
+
 print("Read file from csv:")
 print(check)
 
 # linseqs
+
+
+
+timer(now)
+# old_time, cpu_time = cpu_time, time.perf_counter()
+# consumed = cpu_time - old_time
+# print(f"\nScraping all (chosen) OEIS sequences"
+#       f" took:\n {round(consumed, 1)} secconds,"
+#       f" i.e. {round(consumed / 60, 2)} minutes"
+#       f" or {round(consumed / 3600, 3)} hours.")
+#
 
 
 # to_conc = [{key: seq} for key, seq in linseqs.items()]
