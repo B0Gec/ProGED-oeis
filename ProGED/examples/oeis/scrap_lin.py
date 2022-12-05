@@ -11,13 +11,10 @@ for id in list:
 
 """
 import os
-
 import requests, re, time
 import pandas as pd
-import lxml
 from bs4 import BeautifulSoup
 
-# url = "https://www.rottentomatoes.com/top/bestofrt/"
 url = "http://oeis.org/wiki/Index_to_OEIS:_Section_Rec"
 headers = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, '
@@ -27,63 +24,25 @@ f = requests.get(url, headers = headers)
 # f = requests.get(url)
 # print(f.content)
 # 1/0
-movies_lst = []
-# soup = BeautifulSoup(f.content, 'lxml')
 soup = BeautifulSoup(f.content, 'html.parser')
 # print(soup.prettify())
 # print(soup)
 
 
-# subsects = soup.find_all(class_='mw-headline')
-# # print(subsect)
-#
-# # seqs = dict()
-# orders = []
-# sects_dict = dict()
-# c = -1
-# for subsect in subsects:
-#     title = subsect.text
-#     # order = re.findall(r'(\d+)', title)[0] if len(re.findall(r'(\d+)', title))> 0 else None
-#     order_set = re.findall(r'(\d+)', title)
-#     if len(order_set) == 0:
-#         pass
-#         # sects_dict[str(c)] = subsect
-#         # c -= 1
-#     else:
-#         sects_dict[order_set[0]] = subsect
-#     # sects_dict[str(order)] = subsect
-#     # orders += [order]
-#     # seqs[order]
-#     # print(order)
-# # print(len(orders))
-#
-# degen = [(k, v) for k, v in sects_dict.items() if int(k) < 0]
-# print(len(degen))
-# for k, v in degen:
-#     print(k, v)
-#
-# for k, v in sects_dict.items():
-#     print(k, v)
-#
-#
-# # idea:
-# # if previous_sibling == h4:
-# #     separate here
-
-
-
+# a. find all oeis ids
 ids = soup.find_all('a', text=re.compile(r'A\d{6}'))
 # ids = soup.find_all(text=r'A\w{6}')
 # ids_txt = [i.text for i in ids]
 ids_txt = ids
-print(len(ids_txt))
+print(len(ids_txt))  # 2022.12.02: 34384
 print(len(ids))
-print(len(set(ids_txt)))
-# found = re.findall(r'A\w{6}', 'dsadsa dsadsa2323sats A232423 dsa sd0a dsa')
-# print(found)
+print(len(set(ids_txt)))  # 2022.12.02: 34371  (all good, i.e. doublets)
+# Current total success (33787/34371, i.e. 584 lost scrapped into csv 2022.12.02).
+# linseqs:  34384 or 34371  (100%)
 
 
-
+# # Check for doublets:
+# #   - (list vs set: 34384 vs. 34371) checked out: some sequences have e.g. order 3 and 4. So all good.
 # counter = dict()
 # for id_ in ids_txt:
 #     # if ids_txt[id_] += 1
@@ -93,24 +52,17 @@ print(len(set(ids_txt)))
 #     else:
 #         counter[id_] += 1
 # doublets =  [(k, i) for k, i in counter.items() if i>1]
-# # print(len())
-# id_.previous
-# id_ = ids[1]
-print(len(ids))
+# print(doublets)
+# print(len(ids))
 
+
+# b. get webpage tree or dictionary of key: [list of sequences]
 """
 linseqs = dictionary of orders as keys and values as lists of seqs of linear recursive order.
 idea: 
   linseqs -> seqsd = dict( id: seq) -> pd.Dataframe(seqsd).sorted.to_csv() 
  
 for seq in seqs: bfile2list
-
-df = pd.DataFrame(seqs)
-df_sorted = df.sort_index(axis=1)
-print(df_sorted.head())
-# csv_filename = "oeis_selection.csv"  # Masters
-csv_filename = "oeis_dmkd.csv"
-# df_sorted.to_csv(csv_filename, index=False)
 """
 
 
@@ -135,16 +87,18 @@ start = 0
 # order = '8'
 # linseqs['8'] = [None]
 
+
 for id_ in ids[start:scale_tree]:
     parent = id_.parent
     if parent.previous_sibling is None:
         previous = parent.parent.previous_sibling.previous_sibling
         if previous.name == 'h4':
-        # title = id_.parent.parent.previous_sibling.previous_sibling.text
             title = previous.text
             order = re.findall(r'(\d+)', title)[0]
-    # if order not in linseqs:
-            linseqs[order] = [id_.text]
+            if order not in linseqs:
+                linseqs[order] = [id_.text]
+            else:
+                linseqs[order] += [id_.text]
         else:
             linseqs[order] += [id_.text]
             if previous.name not in linseqs:
@@ -157,26 +111,27 @@ for id_ in ids[start:scale_tree]:
         linseqs[order] += [id_.text]
 
 
+#  b.1 check linseqs
 print(len(linseqs))
-print([(seqs, len(linseqs[seqs])) for seqs in linseqs])
+# print([(seqs, len(linseqs[seqs])) for seqs in linseqs])
 print(sum(len(linseqs[seqs]) for seqs in linseqs))
 
 ids_list = []
 for _, seqs in linseqs.items():
     ids_list += seqs
-print(ids_list, len(ids_list))
+# print(ids_list, len(ids_list))
 
 
 reconst = []
 for seqs in linseqs.values():
     reconst += seqs
-print(len(reconst))
+print(f'reconstructed: {len(reconst)}')
 ids_raw = {id_.text for id_ in ids[start:scale_tree]}
+print(f'wanna reconstruct: {len(ids_raw)}')
 reconsts = set(reconst)
 print(set(ids_raw).difference(reconsts))
-# print(ids_raw)
 # print(reconst[:14])
-
+# print(prob in reconsts)
 
 
 verbosity = False
@@ -190,30 +145,22 @@ if verbosity:
 
 
 
-# before.parent.previous_sibling.previous_sibling
-
-# linseqs
-
+# c.  downloading 4realz
 
 now = time.perf_counter()
 def timer(now, text=f"\nScraping all (chosen) OEIS sequences"):
     before, now = now, time.perf_counter()
     consumed = now - before
     print(text +
-          f" took:\n {round(consumed, 1)} secconds,"
+          f" took:\n {round(consumed, 1)} seconds,"
           f" i.e. {round(consumed / 60, 2)} minutes"
           f" or {round(consumed / 3600, 3)} hours.")
     return now
 
-
-# create csv
 if os.getcwd()[-11:] == 'ProGED_oeis':
     from ProGED.examples.oeis.scraping.downloading.download import bfile2list
 else:
     from scraping.downloading.download import bfile2list
-
-# sa009 = bfile2list('A009117', 200)
-
 
 csv_filename = "linear_database.csv"
 
@@ -223,10 +170,11 @@ to_concat = []
 scale_per_ord = 1000000
 scale_per_ord = 100
 SCALE_COUNT = 10
-SCALE_COUNT = 5000
+SCALE_COUNT = 15000
+# SCALE_COUNT = 20
 counter = 0
 escape = False
-PERIOD = 100
+PERIOD = 200
 # PERIOD = 5
 
 print(f'scale_per_ord:{scale_per_ord}')
@@ -238,21 +186,32 @@ MAX_SEQ_LENGTH = 200
 # MAX_SEQ_LENGTH = 15
 
 PARALLELIZE = True
-PARALLELIZE = False
-PARALEL_BATCH = 500
-INDEX = 500
+# PARALLELIZE = False
+PARALLEL_BATCH = 5000
+PARALLEL_BATCH = 20
+INDEX = 0
+print(f'INDEX:{INDEX}, PARALLEL_BATCH:{PARALLEL_BATCH}')
+
 if PARALLELIZE:
-    sorted_ids = sorted(ids_list)
+    sorted_ids = sorted(ids_list)[(INDEX*PARALLEL_BATCH):((INDEX+1)*PARALLEL_BATCH)]
     for id in sorted_ids:
-        to_concat += [pd.DataFrame({id_: [int(an) for an in bfile2list(id_, max_seq_length=MAX_SEQ_LENGTH)]})]
-    counter += 1
-    if counter % PERIOD == 0:
-        timer(now, f"Scraping one of the parallel batches of {counter} sequences ")
-        print(f"counter: {counter}")
-        df = pd.concat(to_concat, axis=1)
-        df.sort_index(axis=1).to_csv(csv_filename, index=False)
-        print(f"{counter} sequences written to csv")
-        print("check file: number of ids, file size?")
+        # print(id)
+        if id == 'A001076':
+            print(id)
+        if id == 'A001076.1':
+            print(id)
+        to_concat += [pd.DataFrame({id: [int(an) for an in bfile2list(id, max_seq_length=MAX_SEQ_LENGTH)]})]
+        counter += 1
+
+        if counter % PERIOD == 0:
+            timer(now, f"Scraping one of the parallel batches of {counter} sequences ")
+            print(f"counter: {counter}")
+            df = pd.concat(to_concat, axis=1)
+            # df.sort_index(axis=1).to_csv(csv_filename, index=False)
+            df.sort_index(axis=1).to_csv(csv_filename[:-4] + str(INDEX) + csv_filename[-4:], index=False)
+            print(f"{counter} sequences written to csv")
+            print("check file: number of ids, file size?")
+            # to_concat = []
 else:
     for order, ids in linseqs.items():
         if verbosity >= 2:
@@ -271,12 +230,30 @@ else:
                     df.sort_index(axis=1).to_csv(csv_filename, index=False)
                     print(f"{counter} sequences written to csv")
                     print("check file: number of ids, file size?")
+                    # to_concat = []
 
 
         # seqs_dict[idi] = bfile2list(idii, max_seq_length=100)
 # pd.DataFrame(seqs_dict).sort_index(axis=1).to_csv(csv_filename, index=False)
-df = pd.concat(to_concat, axis=1)
+
+if to_concat != []:
+    df = pd.concat(to_concat, axis=1)
 df.sort_index(axis=1).to_csv(csv_filename, index=False)
+
+def fix_cols(df: pd.DataFrame) -> list:
+    # check weird columns names:
+    errors = []
+    for id in df.columns:
+        weird_id = re.findall(r'A\d{6}\.\d+', id)
+        if weird_id != [] or len(id)>7 or id[0] != 'A' or int(id[1]) not in (0, 1, 2, 3):
+            df = df.drop(id, axis=1)
+            print('weird_id:', weird_id)
+            errors += [weird_id]
+    return df, errors
+
+df = fix_cols(df)[0]
+df.sort_index(axis=1).to_csv(csv_filename, index=False)
+# ef.sort_index(axis=1).to_csv(csv_filename, index=False)
 # # side effect are floats in csv, but maybe its unavoidable \_-.-_/
 # magnitude = [f'{min(df[col]):e}  ' + f'{max(df[col]):e}' for col in df.columns]
 # types = [type(df[col][0]) for col in df.columns]
@@ -285,28 +262,43 @@ df.sort_index(axis=1).to_csv(csv_filename, index=False)
 # for i in types:
 #     print(i)
 
+
+# # Concatenate parallelized df-s
+# csv_filename = "linear_database.csv"
+# if os.getcwd()[-11:] == 'ProGED_oeis':
+#     csv_filename = "ProGED/examples/oeis/" + csv_filename
+# parallels = []
+# for index in range(7):
+#     df = pd.read_csv(csv_filename[:-4] + str(index) + csv_filename[-4:], low_memory=False)
+#     print(f'read csv w/ index:{index}')
+#     parallels += [df]
+# df = pd.concat(parallels, axis=1)
+# df.sort_index(axis=1).to_csv('linear_database.csv', index=False)
+#
+
+
+
 # # after download:
-csv_filename = "linear_database.csv"
-if os.getcwd()[-11:] == 'ProGED_oeis':
-    csv_filename = "ProGED/examples/oeis/" + csv_filename
-check = pd.read_csv(csv_filename)
+# csv_filename = "linear_database.csv"
+# csv_filename = "linear_database.csv10"
+# if os.getcwd()[-11:] == 'ProGED_oeis':
+#     csv_filename = "ProGED/examples/oeis/" + csv_filename
+
+check = pd.read_csv(csv_filename, low_memory=False)
+
 
 print("Read file from csv:")
 print(check)
+print(check.head())
+print(check.info)
 
-# linseqs
+print(len(list(set(check.columns))))
 
+
+print('Checking for weird col names returned list:', fix_cols(check)[1])
 
 
 timer(now)
-# old_time, cpu_time = cpu_time, time.perf_counter()
-# consumed = cpu_time - old_time
-# print(f"\nScraping all (chosen) OEIS sequences"
-#       f" took:\n {round(consumed, 1)} secconds,"
-#       f" i.e. {round(consumed / 60, 2)} minutes"
-#       f" or {round(consumed / 3600, 3)} hours.")
-#
-
 
 # to_conc = [{key: seq} for key, seq in linseqs.items()]
 # cutoff = min(len(seq) for _, seq in seqs_dict.items())
@@ -317,68 +309,3 @@ timer(now)
 #     for idii in idsii[:scale]:
 #         seqs_dict[idii] = seqs_dict[idii][:cutoff]
 #
-
-# seqs_dict
-# seqs_dict['A110164']
-# seqs_dict['A350384']
-# type(seqs_dict['A350384'])
-
-
-
-# pd.DataFrame(seqs_dict)
-
-
-#
-# 1/0
-#
-#
-# # soup.find_all('link')
-# tag = soup.find_all('p')
-# prices = soup.find_all(text='$')
-# parent = prices[0].parent
-# name = parent.name
-# strong = parent.find('strong')
-#
-# specific_parent = prices[0].find_parent(class_='item-container')
-#
-# tag['color'] = "blue"
-# print(tag.attrs)
-# print(tag.attrs)
-# for tag in tags:
-#     print(tag.strip())  # '\n    $1233    ' -> '$123'
-#
-# # Search in all tags inside of the list:
-# tags = soup.find_all(['option', 'div', 'li'], text='Undergraduate', value="undergraduate")
-# tags = soup.find_all(class_='btn-value')
-# tags = soup.find_all(text=re.compile("\$.*"))
-#
-# tbody = soup.tbody  # <tbody>
-# trs = tbody.contents
-# trs[0].next_sibling
-# trs[0].previous_sibling
-# trs[0].next_siblings
-# trs[0].contents
-# trs[0].descendents
-#
-#
-# #
-# # 1/0
-# # movies = soup.find('table', {
-# #     movies = soup.find('table', {
-# #     'class': 'table'
-# # }).find_all('a')
-# # num = 0
-# # for anchor in movies:
-# #     urls = 'https://www.rottentomatoes.com' + anchor['href']
-# # movies_lst.append(urls)
-# # num += 1
-# # movie_url = urls
-# # movie_f = requests.get(movie_url, headers = headers)
-# # movie_soup = BeautifulSoup(movie_f.content, 'lxml')
-# # movie_content = movie_soup.find('div', {
-# #     'class': 'movie_synopsis clamp clamp-6 js-clamp'
-# # })
-# # print(num, urls, '\n', 'Movie:' + anchor.string.strip())
-# # print('Movie info:' + movie_content.string.strip())
-# #
-# #
