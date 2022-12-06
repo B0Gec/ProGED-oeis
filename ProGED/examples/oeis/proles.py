@@ -1,14 +1,18 @@
 """Run equation discovery on OEIS sequences to discover direct, recursive or even direct-recursive equations.
 """
 
-# import numpy as np
-import sympy as sp
-import pandas as pd
-import time
-# import sys
+import os, sys, time
 # import re
 
-from exact_ed import exact_ed, timer
+# import numpy as np  # not really since diophantine
+import sympy as sp
+import pandas as pd
+
+if os.getcwd()[-11:] == 'ProGED_oeis':
+    from ProGED.examples.oeis.scraping.downloading.download import bfile2list
+    from ProGED.examples.oeis.exact_ed import exact_ed, timer
+else:
+    from exact_ed import exact_ed, timer
 
 # print("IDEA: max ORDER for GRAMMAR = floor(DATASET ROWS (LEN(SEQ)))/2)-1")
 
@@ -17,25 +21,36 @@ from exact_ed import exact_ed, timer
 #  --seq_only=A000045 --sample_size=3 # (Fibonacci with 3 models fited)  
 # search for flags with: flags_dict
 ###############
-
-timestamp = time.strftime("%Y-%m-%d_%H-%M-%S", time.localtime())
+n_of_terms = 100
+n_of_terms = 60
+n_of_terms = 30
 
 SCALE = 1000
 SCALE = 10
 # SCALE = 100
 
+
+flags_dict = {argument.split("=")[0]: argument.split("=")[1]
+              for argument in sys.argv[1:] if len(argument.split("=")) > 1}
+n_of_terms = int(flags_dict.get("--noft", n_of_terms))
+SCALE = int(flags_dict.get("--scale", n_of_terms))
+
+timestamp = time.strftime("%Y-%m-%d_%H-%M-%S", time.localtime())
+
+
+
 # from proged times:
 has_titles = 1
-csv = pd.read_csv('oeis_selection.csv')[has_titles:]
+# csv = pd.read_csv('oeis_selection.csv')[has_titles:]
 #
 # # for linear database:
 # # mabye slow:
 now = time.perf_counter()
 # # a bit faster maybe:
-csv = pd.read_csv('linear_database_full.csv', low_memory=False, usecols=[i for i in range(SCALE)])
+csv = pd.read_csv('linear_database_full.csv', low_memory=False, usecols=[i for i in range(SCALE)])[:n_of_terms]
 csv.head()
-print(csv.shape)
-1/0
+# print(csv.shape)
+# 1/0
 # now = timer(now, 'loading csv')
 # # print(csv.)
 # #
@@ -100,37 +115,39 @@ now = start
 #
 # # start_id = "A000041"
 # # end_id = "A000041"
-
-CATALAN = "A000108"
+# CATALAN = "A000108"
 
 # pickle.dump(eq_discos, open( "exact_models.p", "wb" ) )
 
-
-selection = (
-        "A000009",
-        "A000040",
-        "A000045",
-        "A000124",
-        # "A000108",
-        "A000219",
-        "A000292",
-        "A000720",
-        "A001045",
-        "A001097",
-        "A001481",
-        "A001615",
-        "A002572",
-        "A005230",
-        "A027642",
-        )
-
-selection2 = (
-        "A000045",
-        "A000124",
-        # "A000292",
-        # "A001045",
-        )
-selection = selection2
+#
+# selection = (
+#         "A000009",
+#         "A000040",
+#         "A000045",
+#         "A000124",
+#         # "A000108",
+#         "A000219",
+#         "A000292",
+#         "A000720",
+#         "A001045",
+#         "A001097",
+#         "A001481",
+#         "A001615",
+#         "A002572",
+#         "A005230",
+#         "A027642",
+#         )
+#
+# selection2 = (
+#         "A000045",
+#         "A000124",
+#         # "A000292",
+#         # "A001045",
+#         )
+# selection = selection2
+selection = list(csv.columns)
+# print(selection)
+# 1/0
 
 
 print("Running equation discovery for all oeis sequences, "

@@ -68,7 +68,6 @@ for seq in seqs: bfile2list
 
 # start = 100
 start = 13800
-linseqs = dict()
 scale_tree = 10
 # scale_tree = 1000
 # scale_tree = 30000
@@ -88,19 +87,37 @@ start = 0
 # linseqs['8'] = [None]
 
 
-for id_ in ids[start:scale_tree]:
-    parent = id_.parent
+verbosity = False
+# verbosity = True
+
+linseqs = dict()
+for id in ids[start:scale_tree]:
+    parent = id.parent
+    consts = re.findall(r'\([-\d, \{\}\.\"\']*\)', parent.text)
+    if consts == []:
+        if verbosity:
+            print('first empty:', parent.text)
+        consts = re.findall(r'\(-*\d[-, \{\}\w\'\"\.\d\(\)]*\):', parent.text)
+    # if consts == []:
+    #     print(parent.text)
+    #     consts = re.findall(r'\((-*\d[, \{\}\w\'\"\.\d\(\)]*).+\):', parent.text)
+    #     print(consts)
+    if consts == []:
+        print(parent.text)
+        consts = [consts]
+    consts = consts[0]
+
     if parent.previous_sibling is None:
         previous = parent.parent.previous_sibling.previous_sibling
         if previous.name == 'h4':
             title = previous.text
             order = re.findall(r'(\d+)', title)[0]
             if order not in linseqs:
-                linseqs[order] = [id_.text]
+                linseqs[order] = [(consts, id.text)]
             else:
-                linseqs[order] += [id_.text]
+                linseqs[order] += [(consts, id.text)]
         else:
-            linseqs[order] += [id_.text]
+            linseqs[order] += [(consts, id.text)]
             if previous.name not in linseqs:
                 pass
                 # linseqs[previous.name] = [previous]
@@ -108,7 +125,14 @@ for id_ in ids[start:scale_tree]:
                 pass
                 # linseqs[previous.name] += [previous]
     else:
-        linseqs[order] += [id_.text]
+        linseqs[order] += [(consts, id.text)]
+
+b = '(-34,45,1,-35,8)'
+consts = re.findall(r'\([-,\d]+\)', a.parent.text)
+consts = re.findall(r'\([-,\d]+\)', b)
+print(consts)
+consts
+consts[0][1:-1].split(',')
 
 
 #  b.1 check linseqs
@@ -126,7 +150,7 @@ reconst = []
 for seqs in linseqs.values():
     reconst += seqs
 print(f'reconstructed: {len(reconst)}')
-ids_raw = {id_.text for id_ in ids[start:scale_tree]}
+ids_raw = {id.text for id in ids[start:scale_tree]}
 print(f'wanna reconstruct: {len(ids_raw)}')
 reconsts = set(reconst)
 print(set(ids_raw).difference(reconsts))
@@ -134,14 +158,13 @@ print(set(ids_raw).difference(reconsts))
 # print(prob in reconsts)
 
 
-verbosity = False
-# verbosity = True
 if verbosity:
-    for order, seqs in linseqs.items():
+    for order, seqs in list(linseqs.items()):
         print(f'order: {order}')
-        for seq in seqs:
+        for consts, seq in seqs:
             # print(int(order) * "  " + f'\\_ {seq}   order: {order}')
-            print("  " + f'\\_ {seq}   order: {order}')
+            print("  " + f'\\_ {consts}: {seq}   order: {order}')
+
 
 
 
@@ -217,11 +240,11 @@ else:
         if verbosity >= 2:
             print(order)
             print(ids[:scale_per_ord])
-        for id_ in ids[:scale_per_ord]:
+        for id in ids[:scale_per_ord]:
             # print([type(i) for i in [idii, idsii, orderii]])
 
             if counter <= SCALE_COUNT:
-                to_concat += [pd.DataFrame({id_:  [int(an) for an in bfile2list(id_, max_seq_length=MAX_SEQ_LENGTH)]})]
+                to_concat += [pd.DataFrame({id:  [int(an) for an in bfile2list(id, max_seq_length=MAX_SEQ_LENGTH)]})]
                 counter += 1
                 if counter % PERIOD == 0:
                     timer(now, f"Scraping {counter} sequences ")

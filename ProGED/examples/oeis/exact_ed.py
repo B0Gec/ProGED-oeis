@@ -109,6 +109,13 @@ def exact_ed(seq_id, csv, verbosity=VERBOSITY):
     # max_order = 25
     max_order = None
     seq = sp.Matrix(csv[seq_id])
+    truth = '(-34,45,1,-35,8)'
+    # consts[0][1:-1].split(',')
+    # consts = re.findall(r'\([-,\d]+\)', a.parent.text)
+    # consts = re.findall(r'\([-,\d]+\)', b)
+    # print(consts)
+    # consts
+
     max_order = sp.floor(seq.rows/2)-1 if max_order is None else max_order
     data = grid_sympy(seq, max_order)
 
@@ -155,7 +162,7 @@ def exact_ed(seq_id, csv, verbosity=VERBOSITY):
         if verbosity >= 1:
             print('eq: ', eq)
         x = eq
-    return x
+    return x, truth
 
 
 if __name__ == '__main__':
