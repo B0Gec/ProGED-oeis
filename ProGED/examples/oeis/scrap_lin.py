@@ -10,7 +10,7 @@ for id in list:
     seq = blist[id]
 
 """
-import os
+import os, sys
 import requests, re, time
 import pandas as pd
 from bs4 import BeautifulSoup
@@ -39,6 +39,7 @@ print(len(ids))
 print(len(set(ids_txt)))  # 2022.12.02: 34371  (all good, i.e. doublets)
 # Current total success (33787/34371, i.e. 584 lost scrapped into csv 2022.12.02).
 # linseqs:  34384 or 34371  (100%)
+# csv:  34384 or 34371  (100%)
 
 
 # # Check for doublets:
@@ -93,19 +94,19 @@ verbosity = False
 linseqs = dict()
 for id in ids[start:scale_tree]:
     parent = id.parent
-    consts = re.findall(r'\([-\d, \{\}\.\"\']*\)', parent.text)
-    if consts == []:
+    truth = re.findall(r'\([-\d, \{\}\.\"\']*\)', parent.text)
+    if truth == []:
         if verbosity:
             print('first empty:', parent.text)
-        consts = re.findall(r'\(-*\d[-, \{\}\w\'\"\.\d\(\)]*\):', parent.text)
-    # if consts == []:
+        truth = re.findall(r'\(-*\d[-, \{\}\w\'\"\.\d\(\)]*\):', parent.text)
+    # if truth == []:
     #     print(parent.text)
-    #     consts = re.findall(r'\((-*\d[, \{\}\w\'\"\.\d\(\)]*).+\):', parent.text)
-    #     print(consts)
-    if consts == []:
+    #     truth = re.findall(r'\((-*\d[, \{\}\w\'\"\.\d\(\)]*).+\):', parent.text)
+    #     print(truth)
+    if truth == []:
         print(parent.text)
-        consts = [consts]
-    consts = consts[0]
+        truth = [truth]
+    truth = truth[0]
 
     if parent.previous_sibling is None:
         previous = parent.parent.previous_sibling.previous_sibling
@@ -113,11 +114,11 @@ for id in ids[start:scale_tree]:
             title = previous.text
             order = re.findall(r'(\d+)', title)[0]
             if order not in linseqs:
-                linseqs[order] = [(consts, id.text)]
+                linseqs[order] = [(truth, id.text)]
             else:
-                linseqs[order] += [(consts, id.text)]
+                linseqs[order] += [(truth, id.text)]
         else:
-            linseqs[order] += [(consts, id.text)]
+            linseqs[order] += [(truth, id.text)]
             if previous.name not in linseqs:
                 pass
                 # linseqs[previous.name] = [previous]
@@ -125,15 +126,7 @@ for id in ids[start:scale_tree]:
                 pass
                 # linseqs[previous.name] += [previous]
     else:
-        linseqs[order] += [(consts, id.text)]
-
-b = '(-34,45,1,-35,8)'
-consts = re.findall(r'\([-,\d]+\)', a.parent.text)
-consts = re.findall(r'\([-,\d]+\)', b)
-print(consts)
-consts
-consts[0][1:-1].split(',')
-
+        linseqs[order] += [(truth, id.text)]
 
 #  b.1 check linseqs
 print(len(linseqs))
@@ -143,8 +136,7 @@ print(sum(len(linseqs[seqs]) for seqs in linseqs))
 ids_list = []
 for _, seqs in linseqs.items():
     ids_list += seqs
-# print(ids_list, len(ids_list))
-
+print(ids_list, len(ids_list))
 
 reconst = []
 for seqs in linseqs.values():
@@ -158,12 +150,15 @@ print(set(ids_raw).difference(reconsts))
 # print(prob in reconsts)
 
 
+till_order = 10**16
+till_order = 10
 if verbosity:
     for order, seqs in list(linseqs.items()):
-        print(f'order: {order}')
-        for consts, seq in seqs:
-            # print(int(order) * "  " + f'\\_ {seq}   order: {order}')
-            print("  " + f'\\_ {consts}: {seq}   order: {order}')
+        if int(order) < till_order:
+            print(f'order: {order}')
+            for truth, seq in seqs:
+                # print(int(order) * "  " + f'\\_ {seq}   order: {order}')
+                print("  " + f'\\_ {truth}: {seq}   order: {order}')
 
 
 
@@ -211,27 +206,35 @@ MAX_SEQ_LENGTH = 200
 PARALLELIZE = True
 # PARALLELIZE = False
 PARALLEL_BATCH = 5000
-PARALLEL_BATCH = 20
+# PARALLEL_BATCH = 5
 INDEX = 0
-print(f'INDEX:{INDEX}, PARALLEL_BATCH:{PARALLEL_BATCH}')
+
+flags_dict = {argument.split("=")[0]: argument.split("=")[1]
+              for argument in sys.argv[1:] if len(argument.split("=")) > 1}
+INDEX = int(flags_dict.get("--index", INDEX))
+PARALLEL_BATCH = int(flags_dict.get("--batch", PARALLEL_BATCH))
+csv_filename = csv_filename[:-4] + str(INDEX) + csv_filename[-4:]
+print(f'INDEX:{INDEX}, PARALLEL_BATCH:{PARALLEL_BATCH}, csv_filename:{csv_filename}')
 
 if PARALLELIZE:
-    sorted_ids = sorted(ids_list)[(INDEX*PARALLEL_BATCH):((INDEX+1)*PARALLEL_BATCH)]
-    for id in sorted_ids:
+    # sorted_ids = sorted(list(set(ids_list)))[(INDEX*PARALLEL_BATCH):((INDEX+1)*PARALLEL_BATCH)]
+    sorted_ids = sorted(ids_list, key=(lambda pair: pair[1]))
+    csv_ids = sorted_ids[(INDEX * PARALLEL_BATCH): ((INDEX + 1) * PARALLEL_BATCH)]
+    for truth, id in csv_ids:
         # print(id)
         if id == 'A001076':
             print(id)
         if id == 'A001076.1':
             print(id)
-        to_concat += [pd.DataFrame({id: [int(an) for an in bfile2list(id, max_seq_length=MAX_SEQ_LENGTH)]})]
+        to_concat += [pd.DataFrame({id: [truth] + [int(an) for an in bfile2list(id, max_seq_length=MAX_SEQ_LENGTH)]})]
         counter += 1
 
         if counter % PERIOD == 0:
             timer(now, f"Scraping one of the parallel batches of {counter} sequences ")
             print(f"counter: {counter}")
             df = pd.concat(to_concat, axis=1)
-            # df.sort_index(axis=1).to_csv(csv_filename, index=False)
-            df.sort_index(axis=1).to_csv(csv_filename[:-4] + str(INDEX) + csv_filename[-4:], index=False)
+            df.sort_index(axis=1).to_csv(csv_filename, index=False)
+            # df.sort_index(axis=1).to_csv(csv_filename[:-4] + str(INDEX) + csv_filename[-4:], index=False)
             print(f"{counter} sequences written to csv")
             print("check file: number of ids, file size?")
             # to_concat = []
@@ -276,6 +279,7 @@ def fix_cols(df: pd.DataFrame) -> list:
 
 df = fix_cols(df)[0]
 df.sort_index(axis=1).to_csv(csv_filename, index=False)
+csv_filename_real = csv_filename
 # ef.sort_index(axis=1).to_csv(csv_filename, index=False)
 # # side effect are floats in csv, but maybe its unavoidable \_-.-_/
 # magnitude = [f'{min(df[col]):e}  ' + f'{max(df[col]):e}' for col in df.columns]
@@ -286,27 +290,29 @@ df.sort_index(axis=1).to_csv(csv_filename, index=False)
 #     print(i)
 
 
-# # Concatenate parallelized df-s
-# csv_filename = "linear_database.csv"
-# if os.getcwd()[-11:] == 'ProGED_oeis':
-#     csv_filename = "ProGED/examples/oeis/" + csv_filename
-# parallels = []
-# for index in range(7):
-#     df = pd.read_csv(csv_filename[:-4] + str(index) + csv_filename[-4:], low_memory=False)
-#     print(f'read csv w/ index:{index}')
-#     parallels += [df]
-# df = pd.concat(parallels, axis=1)
-# df.sort_index(axis=1).to_csv('linear_database.csv', index=False)
+# Concatenate parallelized df-s
+csv_filename = "linear_database.csv"
+if os.getcwd()[-11:] == 'ProGED_oeis':
+    csv_filename = "ProGED/examples/oeis/" + csv_filename
+parallels = []
+for index in range(7):
+    df = pd.read_csv(csv_filename[:-4] + str(index) + csv_filename[-4:], low_memory=False)
+    print(f'read csv w/ index:{index}')
+    parallels += [df]
+df = pd.concat(parallels, axis=1)
+df.sort_index(axis=1).to_csv('linear_database.csv', index=False)
 #
+df = fix_cols(df)[0]
+fix_cols(df)[1]
 
 
 
-# # after download:
-# csv_filename = "linear_database.csv"
-# csv_filename = "linear_database.csv10"
-# if os.getcwd()[-11:] == 'ProGED_oeis':
-#     csv_filename = "ProGED/examples/oeis/" + csv_filename
+# # # after download:
+# csv_filename = "linear_database0.csv"
+if os.getcwd()[-11:] == 'ProGED_oeis':
+    csv_filename = "ProGED/examples/oeis/" + csv_filename
 
+print(csv_filename)
 check = pd.read_csv(csv_filename, low_memory=False)
 
 
@@ -316,6 +322,8 @@ print(check.head())
 print(check.info)
 
 print(len(list(set(check.columns))))
+
+print(f" - - - -> Created csv: {csv_filename_real} <- - -")
 
 
 print('Checking for weird col names returned list:', fix_cols(check)[1])

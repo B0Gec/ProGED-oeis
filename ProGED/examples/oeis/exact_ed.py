@@ -105,16 +105,19 @@ def grid_sympy(seq: sp.MutableDenseMatrix, max_order: int):  # seq.shape=(N, 1)
 VERBOSITY = 2  # dev scena
 VERBOSITY = 1  # run scenario
 
-def exact_ed(seq_id, csv, verbosity=VERBOSITY):
+def exact_ed(seq_id, csv, verbosity=VERBOSITY, linear=True, n_of_terms=10**16):
     # max_order = 25
     max_order = None
-    seq = sp.Matrix(csv[seq_id])
-    truth = '(-34,45,1,-35,8)'
-    # consts[0][1:-1].split(',')
-    # consts = re.findall(r'\([-,\d]+\)', a.parent.text)
-    # consts = re.findall(r'\([-,\d]+\)', b)
-    # print(consts)
-    # consts
+    header = 1 if linear else 0
+
+
+    # POTENTIAL ERROR!!!!: WHEN NOT CONVERTING 3.0 INTO 3 FOR SOLVING DIOFANTINE
+    seq = sp.Matrix(csv[seq_id][header:n_of_terms])
+    if linear:
+        # truth = '(-34,45,1, -35, 8)'
+        truth = csv[seq_id][0]
+        print(f'truth:{truth}')
+        coeffs = truth[1:-1].split(',')
 
     max_order = sp.floor(seq.rows/2)-1 if max_order is None else max_order
     data = grid_sympy(seq, max_order)
@@ -122,8 +125,6 @@ def exact_ed(seq_id, csv, verbosity=VERBOSITY):
     m_limit = 3003
     b = data[max_order:(max_order + m_limit), 0]
     # b = max_order + m_limit
-    # 1/0
-    # 1/0
     A = data[max_order:(max_order + m_limit), 1:]
     # A = sp.Matrix(
     #     [[3, 0],
@@ -141,14 +142,15 @@ def exact_ed(seq_id, csv, verbosity=VERBOSITY):
         print('x', x)
     verbose_eq = ['a(n)', 'n']
 
-    # print('max_order', max_order)
     for i in range(max_order):
         verbose_eq += [f"a(n-{i+1})"]
     verbose_eq = sp.Matrix([verbose_eq])
-    # xv = np.array(x).astype(np.float64)
-    # veq = verbose_eq[:, 1:]
-    # print('types', type(x), type(veq))
-    # , x.shape, veq.shape)
+
+    if linear:
+        truth = ['a(n) = '] + [f'{coeff}*{verbose_eq[2:][n]} + ' for n, coeff in enumerate(coeffs)]
+        print(f'truth: {truth}')
+        truth = ''.join(truth)[:-2]
+        print(f'truth: {truth}')
 
     if x==[]:
         print('NO EQS FOUND!!!')
@@ -162,12 +164,22 @@ def exact_ed(seq_id, csv, verbosity=VERBOSITY):
         if verbosity >= 1:
             print('eq: ', eq)
         x = eq
-    return x, truth
+
+    if linear:
+        return x, truth
+    else:
+        return x
 
 
 if __name__ == '__main__':
     # from proged times:
-    has_titles = 1
-    csv = pd.read_csv('oeis_selection.csv')[has_titles:]
+    # has_titles = 1
+    # csv = pd.read_csv('oeis_selection.csv')[has_titles:]
 
-    eq = exact_ed("A000045", csv)
+    # csv = pd.read_csv('linear_database.csv', low_memory=False, u)
+    # csv = pd.read_csv('linear_database.csv', low_memory=False)
+    csv = pd.read_csv('linear_database.csv', low_memory=False)
+    # print(csv.columns)
+
+    # eq = exact_ed("A000045", csv)
+    eq = exact_ed("A000004", csv, n_of_terms=30)
