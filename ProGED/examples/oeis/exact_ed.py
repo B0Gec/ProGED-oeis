@@ -1,12 +1,16 @@
 """Discover equation(s) on OEIS sequence to discover direct, recursive or even direct-recursive equation.
 """
 
+import os
 import sympy as sp
 import pandas as pd
 import time
 
+
+# if os.getcwd()[-11:] == 'ProGED_oeis':
+#     from ProGED_oeis.ProGED.diophantine_solver import diophantine_solve
+# else:
 from ProGED.diophantine_solver import diophantine_solve
-# from scrap_lin import timer
 
 # print("IDEA: max ORDER for GRAMMAR = floor(DATASET ROWS (LEN(SEQ)))/2)-1")
 
@@ -112,12 +116,12 @@ def exact_ed(seq_id, csv, verbosity=VERBOSITY, linear=True, n_of_terms=10**16):
 
 
     # POTENTIAL ERROR!!!!: WHEN NOT CONVERTING 3.0 INTO 3 FOR SOLVING DIOFANTINE
-    seq = sp.Matrix(csv[seq_id][header:n_of_terms])
+    seq = sp.Matrix(csv[seq_id][header:(header+n_of_terms)])
     if linear:
         # truth = '(-34,45,1, -35, 8)'
         truth = csv[seq_id][0]
-        print(f'truth:{truth}')
-        coeffs = truth[1:-1].split(',')
+        # print(f'truth:{truth}')
+        coeffs = truth[1:-1].split(',')[:min(n_of_terms, len(seq))]
 
     max_order = sp.floor(seq.rows/2)-1 if max_order is None else max_order
     data = grid_sympy(seq, max_order)
@@ -147,10 +151,12 @@ def exact_ed(seq_id, csv, verbosity=VERBOSITY, linear=True, n_of_terms=10**16):
     verbose_eq = sp.Matrix([verbose_eq])
 
     if linear:
-        truth = ['a(n) = '] + [f'{coeff}*{verbose_eq[2:][n]} + ' for n, coeff in enumerate(coeffs)]
+        truth = ['a(n) = '] + [f'a(n - {n+1}) + ' for n, coeff in enumerate(coeffs)]
+        init_vals = [f'a({n}) = {seq[n]}, ' for n, _ in enumerate(coeffs)]
+        # print(f'truth: {truth}')
+        truth = ''.join(truth)[:-3] + ',  \n' + ''.join(init_vals)[:-2]
         print(f'truth: {truth}')
-        truth = ''.join(truth)[:-2]
-        print(f'truth: {truth}')
+        # print(seq[:len(coeffs)])
 
     if x==[]:
         print('NO EQS FOUND!!!')
@@ -176,9 +182,8 @@ if __name__ == '__main__':
     # has_titles = 1
     # csv = pd.read_csv('oeis_selection.csv')[has_titles:]
 
-    # csv = pd.read_csv('linear_database.csv', low_memory=False, u)
     # csv = pd.read_csv('linear_database.csv', low_memory=False)
-    csv = pd.read_csv('linear_database.csv', low_memory=False)
+    csv = pd.read_csv('linear_database_full.csv', low_memory=False)
     # print(csv.columns)
 
     # eq = exact_ed("A000045", csv)

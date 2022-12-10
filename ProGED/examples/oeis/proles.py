@@ -24,6 +24,7 @@ else:
 n_of_terms = 100
 n_of_terms = 60
 n_of_terms = 30
+n_of_terms = 10
 
 SCALE = 1000
 SCALE = 10
@@ -32,8 +33,9 @@ SCALE = 10
 
 flags_dict = {argument.split("=")[0]: argument.split("=")[1]
               for argument in sys.argv[1:] if len(argument.split("=")) > 1}
-n_of_terms = int(flags_dict.get("--noft", n_of_terms))
+n_of_terms = int(flags_dict.get("--n_of_terms", n_of_terms))
 SCALE = int(flags_dict.get("--scale", n_of_terms))
+# SCALE = min(SCALE, )
 
 timestamp = time.strftime("%Y-%m-%d_%H-%M-%S", time.localtime())
 
@@ -47,7 +49,12 @@ has_titles = 1
 # # mabye slow:
 now = time.perf_counter()
 # # a bit faster maybe:
-csv = pd.read_csv('linear_database_full.csv', low_memory=False, usecols=[i for i in range(SCALE)])[:n_of_terms]
+try:
+    csv = pd.read_csv('linear_database_full.csv', low_memory=False, usecols=[i for i in range(SCALE)])[:n_of_terms]
+except ValueError as error:
+    print(error.__repr__()[:1000], type(error))
+    csv = pd.read_csv('linear_database_full.csv', low_memory=False)[:n_of_terms]
+
 csv.head()
 # print(csv.shape)
 # 1/0
@@ -145,7 +152,7 @@ now = start
 #         # "A001045",
 #         )
 # selection = selection2
-selection = list(csv.columns)
+selection = list(csv.columns)[:SCALE]
 # print(selection)
 # 1/0
 
@@ -155,24 +162,46 @@ print("Running equation discovery for all oeis sequences, "
         f"=>> number of terms in every sequence saved in csv = {terms_count}\n"
         # f"=>> nof_eqs = {nof_eqs}\n"
         f"=>> number of all considered sequences = {len(selection)}\n"
-        f"=>> list of considered sequences = {selection}\n"
+        # f"=>> list of considered sequences = {selection}\n"
         )
 
 VERBOSITY = 2  # dev scena
 VERBOSITY = 1  # run scenario
 
 results = []
-for seq_id in selection:
+for n, seq_id in enumerate(selection):
     print()
-    eq = exact_ed(seq_id, csv, VERBOSITY)
-    results += [(seq_id, eq)]
-    now = timer(now=now, text=f"Exact ED for {seq_id}")
+    try:
+        eq, truth = exact_ed(seq_id, csv, VERBOSITY)
+    except Exception as error:
+        print(type(error), ':', error)
+        eq, truth = 'EXACT_ED ERROR', '\n'*3 + 'EXACT_ED ERROR!!, no output' + '\n'*3
+
+    results += [(seq_id, eq, truth)]
+    now = timer(now=now, text=f"Exact ED for {n}-th sequence in experiment set with id {seq_id}")
     timer(now=start, text=f"While total time consumed by now")
 
+
+DEBUG = True
 # timer(now=start)
+
+print("Running equation discovery for all oeis sequences, "
+      "with these settings:\n"
+      f"=>> number of terms in every sequence saved in csv = {terms_count}\n"
+      # f"=>> nof_eqs = {nof_eqs}\n"
+      f"=>> number of all considered sequences = {len(selection)}\n"
+      # f"=>> list of considered sequences = {selection}\n"
+      )
+
 print("\n\n\n -->> The results are the following:  <<-- \n\n\n")
-for (seq_id, eq) in results:
-    print(seq_id, ': ', eq)
+for (seq_id, eq, truth) in results:
+    if not DEBUG or eq == 'EXACT_ED ERROR':
+        print(seq_id, ': ', eq)
+        print('truth:    ', truth)
+
+ids = [seq_id for seq_id, eq, truth in results if eq == 'EXACT_ED ERROR']
+print('Number of errors in exact ED:', len(ids))
+print('Errors ids:', ids)
 
 
 # print(xv, verbose_eq)
