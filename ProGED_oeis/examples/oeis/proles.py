@@ -8,33 +8,35 @@ import os, sys, time
 import sympy as sp
 import pandas as pd
 
-if os.getcwd()[-11:] == 'ProGED_oeis':
-    from ProGED.examples.oeis.scraping.downloading.download import bfile2list
-    from ProGED.examples.oeis.exact_ed import exact_ed, timer
-else:
-    from exact_ed import exact_ed, timer
+# if os.getcwd()[-11:] == 'ProGED_oeis':
+#     from ProGED.examples.oeis.scraping.downloading.download import bfile2list
+from ProGED_oeis.examples.oeis.exact_ed import exact_ed, timer
+# else:
+#     from exact_ed import exact_ed, timer
 
 # print("IDEA: max ORDER for GRAMMAR = floor(DATASET ROWS (LEN(SEQ)))/2)-1")
 
 ##############################
 # Quick usage is with flags:
-#  --seq_only=A000045 --sample_size=3 # (Fibonacci with 3 models fited)  
+#  --seq_only=A000045 --sample_size=3 # (Fibonacci with 3 models fitted)
 # search for flags with: flags_dict
 ###############
 n_of_terms = 100
 n_of_terms = 60
 n_of_terms = 30
-n_of_terms = 10
+# n_of_terms = 27
+# n_of_terms = 10
 
 SCALE = 1000
 SCALE = 10
-# SCALE = 100
+SCALE = 100
+# SCALE = 40
 
 
 flags_dict = {argument.split("=")[0]: argument.split("=")[1]
               for argument in sys.argv[1:] if len(argument.split("=")) > 1}
 n_of_terms = int(flags_dict.get("--n_of_terms", n_of_terms))
-SCALE = int(flags_dict.get("--scale", n_of_terms))
+SCALE = int(flags_dict.get("--scale", SCALE))
 # SCALE = min(SCALE, )
 
 timestamp = time.strftime("%Y-%m-%d_%H-%M-%S", time.localtime())
@@ -49,11 +51,14 @@ has_titles = 1
 # # mabye slow:
 now = time.perf_counter()
 # # a bit faster maybe:
+csvfilename = 'linear_database_full.csv'
+if os.getcwd()[-11:] == 'ProGED_oeis':
+    csvfilename = 'ProGED_oeis/examples/oeis/' + csvfilename
 try:
-    csv = pd.read_csv('linear_database_full.csv', low_memory=False, usecols=[i for i in range(SCALE)])[:n_of_terms]
+    csv = pd.read_csv(csvfilename, low_memory=False, usecols=[i for i in range(SCALE)])[:n_of_terms]
 except ValueError as error:
     print(error.__repr__()[:1000], type(error))
-    csv = pd.read_csv('linear_database_full.csv', low_memory=False)[:n_of_terms]
+    csv = pd.read_csv(csvfilename, low_memory=False)[:n_of_terms]
 
 csv.head()
 # print(csv.shape)
@@ -145,14 +150,19 @@ now = start
 #         "A027642",
 #         )
 #
+selection = None
+# first seq id:
+# last seq id:
+
 # selection2 = (
-#         "A000045",
-#         "A000124",
+#         # "A000045",
+#         # "A000124",
+#         "A000565",  # Nan at 25 term
 #         # "A000292",
 #         # "A001045",
 #         )
 # selection = selection2
-selection = list(csv.columns)[:SCALE]
+selection = list(csv.columns)[:SCALE] if selection is None else selection
 # print(selection)
 # 1/0
 
@@ -176,6 +186,7 @@ for n, seq_id in enumerate(selection):
     except Exception as error:
         print(type(error), ':', error)
         eq, truth = 'EXACT_ED ERROR', '\n'*3 + 'EXACT_ED ERROR!!, no output' + '\n'*3
+        eq, truth = exact_ed(seq_id, csv, VERBOSITY)
 
     results += [(seq_id, eq, truth)]
     now = timer(now=now, text=f"Exact ED for {n}-th sequence in experiment set with id {seq_id}")

@@ -10,7 +10,7 @@ import time
 # if os.getcwd()[-11:] == 'ProGED_oeis':
 #     from ProGED_oeis.ProGED.diophantine_solver import diophantine_solve
 # else:
-from ProGED.diophantine_solver import diophantine_solve
+from ProGED_oeis.diophantine_solver import diophantine_solve
 
 # print("IDEA: max ORDER for GRAMMAR = floor(DATASET ROWS (LEN(SEQ)))/2)-1")
 
@@ -106,7 +106,7 @@ def grid_sympy(seq: sp.MutableDenseMatrix, max_order: int):  # seq.shape=(N, 1)
 # # print(solve(Ainfty, infty))
 
 
-VERBOSITY = 2  # dev scena
+# VERBOSITY = 2  # dev scena
 VERBOSITY = 1  # run scenario
 
 def exact_ed(seq_id, csv, verbosity=VERBOSITY, linear=True, n_of_terms=10**16):
@@ -122,6 +122,10 @@ def exact_ed(seq_id, csv, verbosity=VERBOSITY, linear=True, n_of_terms=10**16):
         truth = csv[seq_id][0]
         # print(f'truth:{truth}')
         coeffs = truth[1:-1].split(',')[:min(n_of_terms, len(seq))]
+
+    # Handle nans:
+    if seq.has(sp.nan):
+        seq = seq[:list(seq).index(sp.nan), :]
 
     max_order = sp.floor(seq.rows/2)-1 if max_order is None else max_order
     data = grid_sympy(seq, max_order)
@@ -149,6 +153,7 @@ def exact_ed(seq_id, csv, verbosity=VERBOSITY, linear=True, n_of_terms=10**16):
     for i in range(max_order):
         verbose_eq += [f"a(n-{i+1})"]
     verbose_eq = sp.Matrix([verbose_eq])
+    # print('--- csv to linear truth ok:', truth, coeffs)
 
     if linear:
         truth = ['a(n) = '] + [f'a(n - {n+1}) + ' for n, coeff in enumerate(coeffs)]
