@@ -117,15 +117,15 @@ def exact_ed(seq_id, csv, verbosity=VERBOSITY, linear=True, n_of_terms=10**16):
 
     # POTENTIAL ERROR!!!!: WHEN NOT CONVERTING 3.0 INTO 3 FOR SOLVING DIOFANTINE
     seq = sp.Matrix(csv[seq_id][header:(header+n_of_terms)])
+    # Handle nans:
+    if seq.has(sp.nan):
+        seq = seq[:list(seq).index(sp.nan), :]
+
     if linear:
         # truth = '(-34,45,1, -35, 8)'
         truth = csv[seq_id][0]
         # print(f'truth:{truth}')
         coeffs = truth[1:-1].split(',')[:min(n_of_terms, len(seq))]
-
-    # Handle nans:
-    if seq.has(sp.nan):
-        seq = seq[:list(seq).index(sp.nan), :]
 
     max_order = sp.floor(seq.rows/2)-1 if max_order is None else max_order
     data = grid_sympy(seq, max_order)
@@ -181,6 +181,10 @@ def exact_ed(seq_id, csv, verbosity=VERBOSITY, linear=True, n_of_terms=10**16):
     else:
         return x
 
+def check_eq(x, seq_id, n_of_terms):
+    def an
+
+    return 0
 
 if __name__ == '__main__':
     # from proged times:

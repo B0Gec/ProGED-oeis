@@ -29,8 +29,9 @@ n_of_terms = 30
 
 SCALE = 1000
 SCALE = 10
-SCALE = 100
+# SCALE = 100
 # SCALE = 40
+SCALE = 50000
 
 
 flags_dict = {argument.split("=")[0]: argument.split("=")[1]
@@ -151,13 +152,14 @@ now = start
 #         )
 #
 selection = None
-# first seq id:
-# last seq id:
+# first seq id: A000004
+# last  seq id: A357130
 
 # selection2 = (
 #         # "A000045",
 #         # "A000124",
 #         "A000565",  # Nan at 25 term
+#         "A016812",  # index error
 #         # "A000292",
 #         # "A001045",
 #         )
@@ -182,14 +184,16 @@ results = []
 for n, seq_id in enumerate(selection):
     print()
     try:
-        eq, truth = exact_ed(seq_id, csv, VERBOSITY)
+        eq, truth, x = exact_ed(seq_id, csv, VERBOSITY)
     except Exception as error:
         print(type(error), ':', error)
-        eq, truth = 'EXACT_ED ERROR', '\n'*3 + 'EXACT_ED ERROR!!, no output' + '\n'*3
-        eq, truth = exact_ed(seq_id, csv, VERBOSITY)
+        eq, truth, x = 'EXACT_ED ERROR', '\n'*3 + 'EXACT_ED ERROR!!, no output' + '\n'*3
+        eq, truth, x = exact_ed(seq_id, csv, VERBOSITY)
 
     results += [(seq_id, eq, truth)]
-    now = timer(now=now, text=f"Exact ED for {n}-th sequence in experiment set with id {seq_id}")
+    now = timer(now=now, text=f"Exact ED for {n}-th sequence of {SCALE} in "
+                              f"experiment set with id {seq_id} for first "
+                              f"{n_of_terms} terms.")
     timer(now=start, text=f"While total time consumed by now")
 
 
