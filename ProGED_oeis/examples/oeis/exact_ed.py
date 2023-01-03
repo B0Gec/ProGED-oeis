@@ -5,6 +5,7 @@ import os
 import sympy as sp
 import pandas as pd
 import time
+import math
 
 
 # if os.getcwd()[-11:] == 'ProGED_oeis':
@@ -109,11 +110,10 @@ def grid_sympy(seq: sp.MutableDenseMatrix, max_order: int):  # seq.shape=(N, 1)
 # VERBOSITY = 2  # dev scena
 VERBOSITY = 1  # run scenario
 
-def exact_ed(seq_id, csv, verbosity=VERBOSITY, linear=True, n_of_terms=10**16):
+def exact_ed(seq_id, csv, verbosity=VERBOSITY, max_order=None, linear=True, n_of_terms=10**16):
     # max_order = 25
-    max_order = None
+    # max_order = None
     header = 1 if linear else 0
-
 
     # POTENTIAL ERROR!!!!: WHEN NOT CONVERTING 3.0 INTO 3 FOR SOLVING DIOFANTINE
     seq = sp.Matrix(csv[seq_id][header:(header+n_of_terms)])
@@ -156,7 +156,7 @@ def exact_ed(seq_id, csv, verbosity=VERBOSITY, linear=True, n_of_terms=10**16):
     # print('--- csv to linear truth ok:', truth, coeffs)
 
     if linear:
-        truth = ['a(n) = '] + [f'a(n - {n+1}) + ' for n, coeff in enumerate(coeffs)]
+        truth = ['a(n) = '] + [f'{str(coeff)}*a(n - {n+1}) + ' for n, coeff in enumerate(coeffs)]
         init_vals = [f'a({n}) = {seq[n]}, ' for n, _ in enumerate(coeffs)]
         # print(f'truth: {truth}')
         truth = ''.join(truth)[:-3] + ',  \n' + ''.join(init_vals)[:-2]
@@ -165,6 +165,7 @@ def exact_ed(seq_id, csv, verbosity=VERBOSITY, linear=True, n_of_terms=10**16):
 
     if x==[]:
         print('NO EQS FOUND!!!')
+        eq = "a(n) = NOT RECONSTRUCTED :-("
         # 1/0
     else:
         if verbosity >= 1:
@@ -174,17 +175,120 @@ def exact_ed(seq_id, csv, verbosity=VERBOSITY, linear=True, n_of_terms=10**16):
         eq = f"{verbose_eq[0]} = {expr[0]}"
         if verbosity >= 1:
             print('eq: ', eq)
-        x = eq
+        # x = eq
 
     if linear:
-        return x, truth
+        return x, coeffs, eq, truth
     else:
-        return x
+        return x, coeffs, eq, ""
 
-def check_eq(x, seq_id, n_of_terms):
-    def an
+def eed(x):
+    return x>=6
 
-    return 0
+def exp_search(max_order: int = 20):
+    a = 0
+    b = max_order
+    # bool = False
+    for i in [j ** 2 for j in range(int(math.sqrt(max_order)))]:
+        print(i)
+        # if i >= 3:
+        #     bool = True
+
+        bool = eed(i)
+        if bool:
+            b = i
+            print('breaking', i)
+            break
+        a = i
+    return a, b
+
+a, b = exp_search(20)
+print(a, b)
+# 1/0
+
+def bisect(a, b):
+    if a == b:
+        print('Note bene: bisection unnecessary since a == b')
+        return a
+
+    n = 1
+    while n <= 22:
+        if b - a == 1:
+            print(f'winner found: {b}')
+            return b
+        else:
+            c = int((a+b)/2)
+            print(c)
+            if eed(c):
+                b = c
+            else:
+                a = c
+        print(f'eof {n}')
+        n += 1
+    print(f'Bisection unsuccessful!!!')
+    RuntimeError('My implementation unsuccessful!!!')
+    return
+
+print(bisect(a, b))
+1/0
+
+
+def adapted_leed(seq_id, csv, verbosity=VERBOSITY, max_order=None, linear=True, n_of_terms=10**16):
+    """Adapted linear exact ED.
+    I.e. try exact_ed for different orders, since we want as simple
+    equations as possible (e.g. smallest order).
+    """
+
+    x, coeffs, eq, truth = exact_ed(seq_id,
+                                    csv,
+                                    verbosity=verbosity,
+                                    max_order=max_order,
+                                    linear=linear,
+                                    n_of_terms=n_of_terms)
+    if x==[]:
+        return x, coeffs, eq, truth
+    elif not check_eq_man(x, seq_id, csv, n_of_terms=10**8):
+        return x, coeffs, eq, truth
+    else:
+
+        # I think wrong:
+        b = list(x[1:]).index(0) + 1  # b in bisection
+
+        a, b = exp_search(b)
+        a, b = bisect(a, b)
+
+        # for i in [i**2 for i in range(20)]
+
+
+        # seq = seq[:list(seq).index(sp.nan), :]
+
+    print('x:', x, x[1:])
+    ed_coeffs = [str(c) for c in x[1:] if c!=0]
+    print('ed_coeffs:', ed_coeffs)
+    print('coeffs:', coeffs)
+    print(coeffs == ed_coeffs)
+    print('eq:', eq)
+    print('truth:', truth)
+
+    return
+
+
+def check_eq_man(x: sp.Matrix, seq_id: str, csv: pd.DataFrame, n_of_terms: int = 500, header: bool =True) -> (bool, int):
+    "Manually check if exact ED returns correct solution, i.e. recursive equation."
+    if x==[]:
+        return False, "no reconst", "no reconst"
+    n_of_terms = max(n_of_terms, len(x))
+    header = 1 if header else 0
+    seq = sp.Matrix(csv[seq_id][header:])[:n_of_terms, :]
+
+    def an(till_now, x):
+        return (till_now[-len(x):, :].transpose()*x)[0]
+    reconst = seq[:len(x), :]
+
+    for i in range(len(seq) - len(x)):
+        reconst = reconst.col_join(sp.Matrix([an(reconst, x)]))
+
+    return reconst == seq, reconst, seq
 
 if __name__ == '__main__':
     # from proged times:
@@ -192,8 +296,15 @@ if __name__ == '__main__':
     # csv = pd.read_csv('oeis_selection.csv')[has_titles:]
 
     # csv = pd.read_csv('linear_database.csv', low_memory=False)
-    csv = pd.read_csv('linear_database_full.csv', low_memory=False)
+    csvfilename = 'linear_database_full.csv'
+    if os.getcwd()[-11:] == 'ProGED_oeis':
+        csvfilename = 'ProGED_oeis/examples/oeis/linear_database_full.csv'
+
+    # csv = pd.read_csv('linear_database_full.csv', low_memory=False)
+    csv = pd.read_csv(csvfilename, low_memory=False)
     # print(csv.columns)
 
     # eq = exact_ed("A000045", csv)
-    eq = exact_ed("A000004", csv, n_of_terms=30)
+    # x, eq, truth = exact_ed("A000004", csv, n_of_terms=30)
+    adapted_eed("A152185", csv, n_of_terms=30)
+

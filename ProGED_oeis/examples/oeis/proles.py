@@ -10,7 +10,7 @@ import pandas as pd
 
 # if os.getcwd()[-11:] == 'ProGED_oeis':
 #     from ProGED.examples.oeis.scraping.downloading.download import bfile2list
-from ProGED_oeis.examples.oeis.exact_ed import exact_ed, timer
+from ProGED_oeis.examples.oeis.exact_ed import exact_ed, timer, check_eq_man
 # else:
 #     from exact_ed import exact_ed, timer
 
@@ -21,22 +21,25 @@ from ProGED_oeis.examples.oeis.exact_ed import exact_ed, timer
 #  --seq_only=A000045 --sample_size=3 # (Fibonacci with 3 models fitted)
 # search for flags with: flags_dict
 ###############
-n_of_terms = 100
-n_of_terms = 60
-n_of_terms = 30
-# n_of_terms = 27
-# n_of_terms = 10
+n_of_terms_load = 10000
+# n_of_terms_load = 100
+# n_of_terms_load = 60
+# n_of_terms_load = 30
+# n_of_terms_load = 27
+# n_of_terms_load = 10
 
 SCALE = 1000
 SCALE = 10
+# SCALE = 2
 # SCALE = 100
 # SCALE = 40
-SCALE = 50000
+# SCALE = 50000
 
 
 flags_dict = {argument.split("=")[0]: argument.split("=")[1]
               for argument in sys.argv[1:] if len(argument.split("=")) > 1}
-n_of_terms = int(flags_dict.get("--n_of_terms", n_of_terms))
+n_of_terms_ed = 50
+n_of_terms_ed = int(flags_dict.get("--n_of_terms", n_of_terms_ed))
 SCALE = int(flags_dict.get("--scale", SCALE))
 # SCALE = min(SCALE, )
 
@@ -56,10 +59,10 @@ csvfilename = 'linear_database_full.csv'
 if os.getcwd()[-11:] == 'ProGED_oeis':
     csvfilename = 'ProGED_oeis/examples/oeis/' + csvfilename
 try:
-    csv = pd.read_csv(csvfilename, low_memory=False, usecols=[i for i in range(SCALE)])[:n_of_terms]
+    csv = pd.read_csv(csvfilename, low_memory=False, usecols=[i for i in range(SCALE)])[:n_of_terms_load]
 except ValueError as error:
     print(error.__repr__()[:1000], type(error))
-    csv = pd.read_csv(csvfilename, low_memory=False)[:n_of_terms]
+    csv = pd.read_csv(csvfilename, low_memory=False)[:n_of_terms_load]
 
 csv.head()
 # print(csv.shape)
@@ -180,20 +183,31 @@ print("Running equation discovery for all oeis sequences, "
 VERBOSITY = 2  # dev scena
 VERBOSITY = 1  # run scenario
 
+
+MAX_ORDER = 20  # We care only for recursive equations with max 20 terms or order.
+
 results = []
 for n, seq_id in enumerate(selection):
     print()
-    try:
-        eq, truth, x = exact_ed(seq_id, csv, VERBOSITY)
-    except Exception as error:
-        print(type(error), ':', error)
-        eq, truth, x = 'EXACT_ED ERROR', '\n'*3 + 'EXACT_ED ERROR!!, no output' + '\n'*3
-        eq, truth, x = exact_ed(seq_id, csv, VERBOSITY)
+    # try:
+    x, coeffs, eq, truth = exact_ed(seq_id, csv, VERBOSITY, MAX_ORDER, n_of_terms=n_of_terms_ed)
 
-    results += [(seq_id, eq, truth)]
+    ed_coeffs = [str(c) for c in x[1:] if c!=0]
+    print('ed_coeffs:', ed_coeffs)
+    # print('coeffs:', coeffs)
+    is_reconst = coeffs == ed_coeffs
+    is_check = check_eq_man(x, seq_id, csv, n_of_terms=10**5)[0]
+
+    # except Exception as error:
+    #     print(type(error), ':', error)
+    #     eq, truth, x = 'EXACT_ED ERROR', '\n'*3 + 'EXACT_ED ERROR!!, no output' + '\n'*3
+    #     eq, truth, x = exact_ed(seq_id, csv, VERBOSITY)
+
+    results += [(seq_id, eq, truth, x, is_reconst, is_check)]
     now = timer(now=now, text=f"Exact ED for {n}-th sequence of {SCALE} in "
                               f"experiment set with id {seq_id} for first "
-                              f"{n_of_terms} terms.")
+                              f"{n_of_terms_ed} terms with max order {MAX_ORDER} "
+                              f"while checking against first {len(csv[seq_id])-1} terms.")
     timer(now=start, text=f"While total time consumed by now")
 
 
@@ -209,14 +223,33 @@ print("Running equation discovery for all oeis sequences, "
       )
 
 print("\n\n\n -->> The results are the following:  <<-- \n\n\n")
-for (seq_id, eq, truth) in results:
-    if not DEBUG or eq == 'EXACT_ED ERROR':
-        print(seq_id, ': ', eq)
-        print('truth:    ', truth)
+for (seq_id, eq, truth, x, is_reconst, is_check) in results:
+    # if eq == 'EXACT_ED ERROR':
+    #
+    # else:
+    print(seq_id, ': ', eq)
+    print('truth:    ', truth)
+    print('\"Check against website ground truth\":    ', is_reconst)
+    print('\"Manual check if equation is correct\":    ', is_check, '\n')
 
-ids = [seq_id for seq_id, eq, truth in results if eq == 'EXACT_ED ERROR']
-print('Number of errors in exact ED:', len(ids))
-print('Errors ids:', ids)
+# print("\n\n\n -->> The results are the following:  <<-- \n\n\n")
+
+false_positives = [seq_id for seq_id, eq, truth, x, is_reconst, is_check in results if not is_check]
+non_ground_truth = [seq_id for seq_id, eq, truth, x, is_reconst, is_check in results if not is_reconst]
+no_discovery = [seq_id for seq_id, eq, truth, x, is_reconst, is_check in results if x==[]]
+# ids = [seq_id for seq_id, eq, truth in results if eq == 'EXACT_ED ERROR']
+
+
+print('Number of false positives in exact ED:', len(false_positives))
+print('False positives:', false_positives)
+print('Number of different sequences:', len(non_ground_truth))
+print('Different sequences:', non_ground_truth)
+print('Number of sequences without any equation found:', len(no_discovery))
+print('Sequences without any equation found:', no_discovery)
+
+# print('Number of false positives in exact ED:', len(ids))
+# print('False positives:', ids)
+
 
 
 # print(xv, verbose_eq)
@@ -231,3 +264,12 @@ def prt(matrix: sp.Matrix):
 
 
 
+# # ad-hoc loop-check
+# SCALE = 500
+# csv = pd.read_csv(csvfilename, low_memory=False, usecols=[i for i in range(SCALE)])[:n_of_terms]
+# id = "A000027"
+# eq = exact_ed(id, csv)
+# print('\n', id)
+# print(eq)
+# print(check_eq(eq[0], id, csv))
+# print(check_eq(eq[0], id, csv, sp.floor(n_of_terms/2 -1)))

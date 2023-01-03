@@ -6,10 +6,28 @@
 - so, idea: solve for biggest order. If exists: try half order, i.e. order/2
 and repeat until no solution to get with bisection smalllest order solution.
 - find out if diophantine solver gives answer to existence of ambiguous solution.
-- limit the order, since biggest is 131000 
+- limit the order, since biggest is 131000
 
 
 Parsing:
  - e.g. look only if order matches
  - doublecheck: for each seq test if found equation holds for first few terms
 and then also for all on web.
+ - eq found may not generalize to whole sequence, e.g. a000027. In negative case, no ed
+ it should use or download more sequence terms.
+
+
+e.g. a0000027:
+finds 'a(n) = -a(n - 8) + a(n - 7) + a(n - 1)',
+truth 'a(n) = 2*a(n - 1) + -1*a(n - 2),  \na(0) = 1, a(1) = 2')
+found eq holds only for first 14 terms and not for 30.
+
+
+sess 12.21.2022:
+- numba
+- max order .. 20
+- max terms to check 200?
+- look at terms .. 40-100?
+    - 40, if check==False then 80 or 60?
+
+
