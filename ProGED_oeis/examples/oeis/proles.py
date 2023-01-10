@@ -2,7 +2,7 @@
 """
 
 import os, sys, time
-# import re
+import re
 
 # import numpy as np  # not really since diophantine
 import sympy as sp
@@ -21,7 +21,7 @@ from ProGED_oeis.examples.oeis.exact_ed import exact_ed, timer, check_eq_man
 #  --seq_only=A000045 --sample_size=3 # (Fibonacci with 3 models fitted)
 # search for flags with: flags_dict
 ###############
-n_of_terms_load = 10000
+n_of_terms_load = 100000
 # n_of_terms_load = 100
 # n_of_terms_load = 60
 # n_of_terms_load = 30
@@ -29,16 +29,17 @@ n_of_terms_load = 10000
 # n_of_terms_load = 10
 
 SCALE = 1000
-SCALE = 10
+# SCALE = 10
 # SCALE = 2
 # SCALE = 100
 # SCALE = 40
-# SCALE = 50000
+SCALE = 50000
 
 
 flags_dict = {argument.split("=")[0]: argument.split("=")[1]
               for argument in sys.argv[1:] if len(argument.split("=")) > 1}
-n_of_terms_ed = 50
+# n_of_terms_ed = 50
+n_of_terms_ed = 200
 n_of_terms_ed = int(flags_dict.get("--n_of_terms", n_of_terms_ed))
 SCALE = int(flags_dict.get("--scale", SCALE))
 # SCALE = min(SCALE, )
@@ -171,6 +172,15 @@ selection = list(csv.columns)[:SCALE] if selection is None else selection
 # print(selection)
 # 1/0
 
+with open('relevant_seqs.txt', 'r') as file:  # Use.
+    # file.read('Hi there!')
+    text = file.read()
+
+saved_seqs = re.findall(r'A\d{6}', text)
+selection = saved_seqs
+# selection = saved_seqs[:5]
+# print(saved_seqs)
+# print(len(saved_seqs))
 
 print("Running equation discovery for all oeis sequences, "
         "with these settings:\n"
@@ -179,6 +189,47 @@ print("Running equation discovery for all oeis sequences, "
         f"=>> number of all considered sequences = {len(selection)}\n"
         # f"=>> list of considered sequences = {selection}\n"
         )
+
+def print_results(results):
+
+    print("\n\n\n -->> The results are the following:  <<-- \n\n\n")
+    for (seq_id, eq, truth, x, is_reconst, is_check) in results:
+        # if eq == 'EXACT_ED ERROR':
+        #
+        # else:
+        print(seq_id, ': ', eq)
+        print('truth:    ', truth)
+        print('\"Check against website ground truth\":    ', is_reconst)
+        print('\"Manual check if equation is correct\":    ', is_check, '\n')
+
+    print("\n\n\n -->> The summary of the results untill now are the following:  <<-- \n\n\n")
+
+    false_positives = [seq_id for seq_id, eq, truth, x, is_reconst, is_check in results if not is_check]
+    non_ground_truth = [seq_id for seq_id, eq, truth, x, is_reconst, is_check in results if not is_reconst]
+    no_discovery = [seq_id for seq_id, eq, truth, x, is_reconst, is_check in results if x==[]]
+    # ids = [seq_id for seq_id, eq, truth in results if eq == 'EXACT_ED ERROR']
+
+
+    print('Number of false positives in exact ED:', len(false_positives))
+    print('False positives:', false_positives)
+    print('Number of different sequences:', len(non_ground_truth))
+    print('Different sequences:', non_ground_truth)
+    print('Number of sequences without any equation found:', len(no_discovery))
+    print('Sequences without any equation found:', no_discovery)
+
+    # print('Number of false positives in exact ED:', len(ids))
+    # print('False positives:', ids)
+
+    print("Running equation discovery for all oeis sequences, "
+          "with these settings:\n"
+          f"=>> number of terms in every sequence saved in csv = {terms_count}\n"
+          # f"=>> nof_eqs = {nof_eqs}\n"
+          f"=>> number of all considered sequences = {len(selection)}\n"
+          # f"=>> list of considered sequences = {selection}\n"
+          )
+
+SUMMARY_FREQUENCY = 20
+# SUMMARY_FREQUENCY = 5
 
 VERBOSITY = 2  # dev scena
 VERBOSITY = 1  # run scenario
@@ -209,46 +260,12 @@ for n, seq_id in enumerate(selection):
                               f"{n_of_terms_ed} terms with max order {MAX_ORDER} "
                               f"while checking against first {len(csv[seq_id])-1} terms.")
     timer(now=start, text=f"While total time consumed by now")
+    if n % SUMMARY_FREQUENCY == 0:
+        print_results(results)
 
 
 DEBUG = True
 # timer(now=start)
-
-print("Running equation discovery for all oeis sequences, "
-      "with these settings:\n"
-      f"=>> number of terms in every sequence saved in csv = {terms_count}\n"
-      # f"=>> nof_eqs = {nof_eqs}\n"
-      f"=>> number of all considered sequences = {len(selection)}\n"
-      # f"=>> list of considered sequences = {selection}\n"
-      )
-
-print("\n\n\n -->> The results are the following:  <<-- \n\n\n")
-for (seq_id, eq, truth, x, is_reconst, is_check) in results:
-    # if eq == 'EXACT_ED ERROR':
-    #
-    # else:
-    print(seq_id, ': ', eq)
-    print('truth:    ', truth)
-    print('\"Check against website ground truth\":    ', is_reconst)
-    print('\"Manual check if equation is correct\":    ', is_check, '\n')
-
-# print("\n\n\n -->> The results are the following:  <<-- \n\n\n")
-
-false_positives = [seq_id for seq_id, eq, truth, x, is_reconst, is_check in results if not is_check]
-non_ground_truth = [seq_id for seq_id, eq, truth, x, is_reconst, is_check in results if not is_reconst]
-no_discovery = [seq_id for seq_id, eq, truth, x, is_reconst, is_check in results if x==[]]
-# ids = [seq_id for seq_id, eq, truth in results if eq == 'EXACT_ED ERROR']
-
-
-print('Number of false positives in exact ED:', len(false_positives))
-print('False positives:', false_positives)
-print('Number of different sequences:', len(non_ground_truth))
-print('Different sequences:', non_ground_truth)
-print('Number of sequences without any equation found:', len(no_discovery))
-print('Sequences without any equation found:', no_discovery)
-
-# print('Number of false positives in exact ED:', len(ids))
-# print('False positives:', ids)
 
 
 

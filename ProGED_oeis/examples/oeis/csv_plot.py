@@ -154,35 +154,55 @@ print(sum(len(linseqs[seqs]) for seqs in linseqs))
 # sum([len(linseqs[order]) for order in linseqs if int(order)>25])
 
 limit = 2000
-limit = 100
-limit = 20
+# limit = 100
+# limit = 20
+# limit = 21
 
 addage = "for orders < " + str(limit)
-orders = [int(key) for key in linseqs if int(key)<limit]
-per_orders = [len(linseqs[key]) for key in linseqs if int(key)<limit]
+orders = [int(key) for key in linseqs if int(key)<=limit]
+per_orders = [len(linseqs[key]) for key in linseqs if int(key)<=limit]
 
-relevant_seqs = [linseqs[key] for key in linseqs if int(key)<=limit]
-relevant_seqs = [[seq_id for coeffs, seq_id in linseqs[key]] for key in linseqs if int(key)<=limit]
+# relevant_seqs = [linseqs[key] for key in linseqs if int(key)<=limit]
+relevant_seqs_fold = [[seq_id for coeffs, seq_id in linseqs[key]] for key in linseqs if int(key)<=limit]
+relevant_seqs = []
+for order_pack in relevant_seqs_fold:
+    relevant_seqs += order_pack
+
+
 # relevant_seqs = [len(linseqs[key]) for key in linseqs if int(key)<=limit]
 print(relevant_seqs)  # Relevant sequences.
 
 # print([i for i in relevant_seqs if i<2])
-all_seqs = [len(linseqs[key]) for key in linseqs if int(key)<=10**10]
-print('n_of_relevant_seqs', sum(relevant_seqs))
+all_seqs = [len(linseqs[key]) for key in linseqs]
+print('n_of_relevant_seqs', len(relevant_seqs))
 print('n_of_all_seqs', sum(all_seqs))
-print('diff', sum(all_seqs)-sum(relevant_seqs))
+print('diff', sum(all_seqs) - len(relevant_seqs))
 
 print(orders)
 
 
+
+with open('relevant_seqs.txt', 'w') as file:  # Use.
+    file.write(str(relevant_seqs))
+    # file.write('Hi there!')
+
+with open('relevant_seqs.txt', 'r') as file:  # Use.
+    # file.read('Hi there!')
+    text = file.read()
+
+saved_seqs = re.findall(r'A\d{6}', text)
+print(saved_seqs)
+print(len(saved_seqs))
+
+
+
 # Make a random dataset:
-height = [3, 12, 5, 18, 45]
+# height = [3, 12, 5, 18, 45]
 height = per_orders
-bars = ['A', 'B', 'C', 'D', 'Z']
+# bars = ['A', 'B', 'C', 'D', 'Z']
 bars = orders
 y_pos = np.arange(len(bars))
 # plt.ylabel =
-
 
 # Create bars
 # plt.bar(y_pos, height, label='num seq', zorder=0)
@@ -194,12 +214,19 @@ y_pos = np.arange(len(bars))
 # minor_ticks = np.arange(0, 6000, 20)
 # plt.set_yticks(minor_ticks, minor=True)
 plt.grid(visible=True, which='both', axis='both', zorder=3)
+threshold = 100
+sporadity = 2
+# def sparse(l: list): return l[:threshold]+l[threshold::sporadity]
+# height = sparse(height)
+# bars = sparse(bars)
+# y_pos = sparse(y_pos)
+
 
 plt.bar(y_pos, height, label='num seq', zorder=0)
 # a.grid(visible=True, which='both', axis='both', zorder=3)
 
 # Create names on the x-axis
-plt.xticks(y_pos, bars)
+plt.xticks(y_pos, bars, rotation='vertical')
 
 plt.ylabel('number of sequences')
 plt.xlabel('order')
@@ -207,4 +234,4 @@ plt.title('number of sequences per order')
 
 # Show graphic
 plt.show()
-# plt.clf()
+plt.clf()

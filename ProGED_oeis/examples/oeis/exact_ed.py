@@ -185,82 +185,136 @@ def exact_ed(seq_id, csv, verbosity=VERBOSITY, max_order=None, linear=True, n_of
 def eed(x):
     return x>=6
 
-def exp_search(max_order: int = 20):
+
+def exp_search(max_order: int = 20, max_found=True, **eed) -> tuple[tuple]:
+    """Finds interval (a, b) as a warm start-up for bisection.
+
+    With naive intuitive assumption that large max_order requires tremendous
+    computation we try to avoid this by exponentially increasing order and
+    starting at 0 order.
+
+    max_found ... True if we already found equation of order _max_order_
+
+    Output: ((a, b), eq)
+        - (a, b) for bisection
+        - eq ... equation that holds for b
+    """
+
     a = 0
     b = max_order
     # bool = False
-    for i in [j ** 2 for j in range(int(math.sqrt(max_order)))]:
+    last_order = [max_order] if not max_found else []
+
+    # eed_output = None
+    for i in [j ** 2 for j in range(int(math.sqrt(max_order)))] + last_order:
         print(i)
         # if i >= 3:
         #     bool = True
 
-        bool = eed(i)
+
+        # eed['max_order'] = i
+        eed_output = exact_ed(max_order=i, **eed)
+        # eed_output = exact_ed(seq_id, csv, verbosity=VERBOSITY, max_order=i, linear=True, n_of_terms=10 ** 16)
+
+        # if x==[] or
+        #     return x, coeffs, eq, truth
+        bool = not (eed_output[0] == [] or not check_eq_man(eed_output[0], **eed))
+        # bool = not (eed_output[0] == [] or not check_eq_man(eed_output[0], seq_id, csv, n_of_terms=10 ** 8))
+
         if bool:
             b = i
             print('breaking', i)
             break
         a = i
-    return a, b
 
-a, b = exp_search(20)
-print(a, b)
+    return a, b, eed_output
+
+
+# a, b = exp_search(max_order=20, max_found=False, eed_output=None, csv, seq_id) -> tuple[tuple]:
+# print(a, b)
 # 1/0
 
-def bisect(a, b):
+
+# def bisect(a, b, eed_output):
+def bisect(a, b, **eed) -> tuple[tuple]:
+
     if a == b:
         print('Note bene: bisection unnecessary since a == b')
-        return a
+        return a, eed['eed_output']
 
     n = 1
     while n <= 22:
         if b - a == 1:
             print(f'winner found: {b}')
-            return b
+            return b, eed['eed_output']
         else:
             c = int((a+b)/2)
             print(c)
-            if eed(c):
+            eed_output = exact_ed(max_order=c, **eed)
+            if eed_output[0]:
                 b = c
             else:
                 a = c
         print(f'eof {n}')
         n += 1
     print(f'Bisection unsuccessful!!!')
-    RuntimeError('My implementation unsuccessful!!!')
+    RuntimeError('My implementation of bisect() unsuccessful!!!')
     return
 
-print(bisect(a, b))
-1/0
+# print(bisect(a, b, eed_output, csv, seq_id))
+# 1/0
 
 
-def adapted_leed(seq_id, csv, verbosity=VERBOSITY, max_order=None, linear=True, n_of_terms=10**16):
+def adaptive_leed(seq_id, csv, verbosity=VERBOSITY, max_order=20, linear=True, n_of_terms=10**16, max_found=True):
     """Adapted linear exact ED.
     I.e. try exact_ed for different orders, since we want as simple
     equations as possible (e.g. smallest order).
+
+     - max_found ... True if we already found equation of order _max_order_
     """
 
-    x, coeffs, eq, truth = exact_ed(seq_id,
-                                    csv,
-                                    verbosity=verbosity,
-                                    max_order=max_order,
-                                    linear=linear,
-                                    n_of_terms=n_of_terms)
-    if x==[]:
-        return x, coeffs, eq, truth
-    elif not check_eq_man(x, seq_id, csv, n_of_terms=10**8):
-        return x, coeffs, eq, truth
-    else:
-
-        # I think wrong:
-        b = list(x[1:]).index(0) + 1  # b in bisection
-
-        a, b = exp_search(b)
-        a, b = bisect(a, b)
-
-        # for i in [i**2 for i in range(20)]
+    b = None
+    if max_found:
+        x, coeffs, eq, truth = exact_ed(seq_id,
+                                        csv,
+                                        verbosity=verbosity,
+                                        max_order=max_order,
+                                        linear=linear,
+                                        n_of_terms=n_of_terms)
+        if x==[]:
+            return x, coeffs, eq, truth
+        elif not check_eq_man(x, seq_id, csv, n_of_terms=10**8):
+            return x, coeffs, eq, truth
+        else:
+            # I think wrong:
+            b = list(x[1:]).index(0) + 1  # b in bisection
+            eed_output = x, coeffs, ...
 
 
-        # seq = seq[:list(seq).index(sp.nan), :]
+    b = max_order if b is None else b
+
+    eed = {'seq_id': seq_id, 'csv': csv, 'verbosity': VERBOSITY, 'max_order': 20, 'linear': True, 'n_of_terms': 10 ** 16, 'max_found': True}
+    eed.pop('max_order')
+
+    a, b, exp_output = exp_search(max_order=b, **eed)
+    # if exp_output is None and not max_found:  # No equation found.
+    #     return exp_output
+    # elif exp_output is None:
+    #     return
+
+    # eed_output = eed_output if exp_output is None else exp_output
+
+    eed_output = exp_output
+
+    eed_output = bisect(a, b, eed_output=eed_output, **eed)
+
+
+    # for i in [i**2 for i in range(20)]
+
+
+    # seq = seq[:list(seq).index(sp.nan), :]
+
+    x, coeffs, eq, truth = eed_output
 
     print('x:', x, x[1:])
     ed_coeffs = [str(c) for c in x[1:] if c!=0]
@@ -306,5 +360,5 @@ if __name__ == '__main__':
 
     # eq = exact_ed("A000045", csv)
     # x, eq, truth = exact_ed("A000004", csv, n_of_terms=30)
-    adapted_eed("A152185", csv, n_of_terms=30)
+    adaptive_leed("A152185", csv, max_order=20)
 
