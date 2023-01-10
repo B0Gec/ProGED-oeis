@@ -17,6 +17,8 @@ import sympy as sp
 from scipy.optimize import differential_evolution, minimize
 from scipy.interpolate import interp1d
 from scipy.integrate import solve_ivp, odeint
+import persim
+import ripser
 
 # from sklearn import ensemble #, tree  # Left for gitch_doctor metamodel
 from _io import TextIOWrapper as stdout_type
@@ -536,7 +538,6 @@ def ph_error(trajectory: np.ndarray, diagram_truth: list[np.ndarray]) -> float:
     """
 
     # for persistent homology:  # pip scikit-tda
-    import persim
 
     size = diagram_truth[0].shape[0]
     diagram = ph_diag(trajectory, size)
@@ -558,7 +559,6 @@ def ph_diag(trajectory: np.ndarray, size: int) -> list[np.ndarray]:
     """
 
     # for persistent homology:  # pip scikit-tda
-    import ripser
 
     def downsample(lorenz: np.ndarray) -> np.ndarray:
         m = int(lorenz.shape[0] / size)
@@ -569,8 +569,10 @@ def ph_diag(trajectory: np.ndarray, size: int) -> list[np.ndarray]:
         return lor
 
     P1 = downsample(trajectory) if size < trajectory.shape[0] else trajectory
-    diagrams1 = ripser.ripser(P1)['dgms']
-    return diagrams1
+    # optimize?:
+    # diagrams1 = ripser.ripser(P1)['dgms']
+    # return diagrams1
+    return ripser.ripser(P1)['dgms']
 
 def min_fit (model, X, Y):
     """Calls scipy.optimize.minimize. Exists to make passing arguments to the objective function easier."""
@@ -714,7 +716,7 @@ def hyperopt_fit (model, X, Y, T, p0, **estimation_settings):
         trials=trials,
         timeout=timeout,
         max_evals=max_evals,
-        rstate = np.random.default_rng(estimation_settings["optimizer_settings"]["hyperopt_seed"]),
+        rstate=np.random.default_rng(estimation_settings["optimizer_settings"]["hyperopt_seed"]),
         verbose=(verbosity >= 1),
         )
     params = list(best.values())

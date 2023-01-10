@@ -5,7 +5,7 @@ no ph:
 consumed time: 3467.74 secs or 57.8 mins,
 full found expr: [-4.22950670538346*x + 4.22950670538346*y, x*(26.5218765150121 - z) - y, x*y - 0.463579644733843*z]
 
-ph solo:
+ph solo (0.01, 0.99) i think:
 consumed time: 10255.71 secs or 170.93 mins, tj. 3h
 full found expr: [-10.7512348995363*x + 10.7512348995363*y, x*(26.5849457857708 - z) - y, x*y - 2.66718974674819*z]
 old results (questionable):
@@ -18,7 +18,25 @@ full found expr: [-8.16873686682862*x + 8.16873686682862*y, x*(27.3532357968686 
 
 full ground expr:[-10.0000000000000*x + 10.0000000000000*y, x*(28.0000000000000 - z) - y, x*y - 2.66666666666666*z]
 
-- -  - [NO ph] - - -
+
+ === timing summary with max_iter = 500, 10 popsize default diff_evol settings: ===
+
+consumed time: 712.07 secs or 11.87 mins,
+ph: False, ph solo: True, size: 10
+
+consumed time: 18.73 secs or 0.31 mins, or 0.01 hours,
+ph: True, ph solo: True, size: 10, weights: (0, 1)
+
+consumed time: 12.82 secs or 0.21 mins,
+ph: True, ph solo: True, size: 10, weights: 0.01 0.99
+
+ph combo:
+consumed time: 653.65 secs or 10.89 mins,
+ph: True, ph solo: False, size: 10
+
+
+
+- - - [NO ph] - - -
 
 consumed time: 3467.74 secs or 57.8 mins,
 ph: False, ph solo: False, size: 20
@@ -63,7 +81,48 @@ exprs of ground truth:
 
 
 
-=== ==  [ SOLO: ]  ======
+=== ==  [ SOLO 0 1: ]  ======
+
+ph: True, ph solo: True, size: 40, weights: (0, 1)
+consumed time: 2437.17 secs or 40.62 mins, or 0.68 hours,
+ph: True, ph solo: True, size: 40, weights: (0, 1)
+ inits:[1.0, 1.0, 1.0]
+full found expr: [-14.5361978939083*x + 14.5361978939083*y, x*(15.0865466869348 - z) - y, x*y - 0.363529890223872*z]
+found error: 1.146650791168213
+exprs of ground truth:
+['sigma 10', 'rho 28', 'beta 2.666']
+[ 10 * (x[1] - x[0]), x[0] * (rho - x[2]) - x[1], x[0] * x[1] - beta * x[2], ]
+2
+
+ph: True, ph solo: True, size: 20, weights: (0, 1)
+consumed time: 43.42 secs or 0.72 mins, or 0.01 hours,
+ph: True, ph solo: True, size: 20, weights: (0, 1)
+ inits:[1.0, 1.0, 1.0]
+full found expr: [1.96177435895392*x - 1.96177435895392*y, x*(9.23469290409226 - z) - y, x*y - 18.5632982594739*z]
+found error: 2.6556286811828618
+exprs of ground truth:
+['sigma 10', 'rho 28', 'beta 2.666']
+[ 10 * (x[1] - x[0]), x[0] * (rho - x[2]) - x[1], x[0] * x[1] - beta * x[2], ]
+2
+
+
+
+ph: True, ph solo: True, size: 10, weights: (0, 1)
+consumed time: 18.73 secs or 0.31 mins, or 0.01 hours,
+ph: True, ph solo: True, size: 10, weights: (0, 1)
+ inits:[1.0, 1.0, 1.0]
+full found expr: [18.4247504737446*x - 18.4247504737446*y, x*(-z - 0.607276823405521) - y, x*y - 26.9355062225378*z]
+found error: 2.6671597957611093
+exprs of ground truth:
+['sigma 10', 'rho 28', 'beta 2.666']
+[ 10 * (x[1] - x[0]), x[0] * (rho - x[2]) - x[1], x[0] * x[1] - beta * x[2], ]
+
+
+
+
+
+
+=== ==  [ SOLO 0.01: ]  ======
 
 ph: True, ph solo: True, size: 40
 Killed
@@ -85,6 +144,33 @@ exprs of ground truth:
 [ 10 * (x[1] - x[0]), x[0] * (rho - x[2]) - x[1], x[0] * x[1] - beta * x[2], ]
 iteracij nit=1000
 evalvacij nfev=60104
+
+
+[another 15.12.2022:]
+size=20 --weights=0.01,0.99
+ph: True, ph solo: True, size: 20, weights: [0.01, 0.99]
+consumed time: 10173.01 secs or 169.55 mins, or 2.83 hours,
+ph: True, ph solo: True, size: 20, weights: [0.01, 0.99]
+ inits:[1.0, 1.0, 1.0]
+full found expr: [-10.5095975013232*x + 10.5095975013232*y, x*(27.9030074618474 - z) - y, x*y - 2.7691385838066*z]
+found error: 0.6349305687292294
+exprs of ground truth:
+['sigma 10', 'rho 28', 'beta 2.666']
+[ 10 * (x[1] - x[0]), x[0] * (rho - x[2]) - x[1], x[0] * x[1] - beta * x[2], ]
+2
+
+[another 19.12.2022:]
+((pyv ph_lorenz.py --size=20 --weights=0.01,0.99))
+ph: True, ph solo: True, size: 20, weights: [0.01, 0.99]
+consumed time: 12535.82 secs or 208.93 mins, or 3.48 hours,
+ph: True, ph solo: True, size: 20, weights: [0.01, 0.99]
+ inits:[1.0, 1.0, 1.0]
+full found expr: [-10.9318391192971*x + 10.9318391192971*y, x*(25.8335614441051 - z) - y, x*y - 2.53218782576779*z]
+found error: 0.7218717388590157
+exprs of ground truth:
+['sigma 10', 'rho 28', 'beta 2.666']
+[ 10 * (x[1] - x[0]), x[0] * (rho - x[2]) - x[1], x[0] * x[1] - beta * x[2], ]
+2
 
 
 consumed time: 47.56 secs or 0.79 mins,
@@ -199,3 +285,7 @@ exprs of ground truth:
 ph: True, ph solo: True, size: 20
 Killed
 (( I think reason for killing was CTRL+Shift+C for copying previous results. ))
+
+
+My manual cancellation:
+Process finished with exit code 130 (interrupted by signal 2: SIGINT)

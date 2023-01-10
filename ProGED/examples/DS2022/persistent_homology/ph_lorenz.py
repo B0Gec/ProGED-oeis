@@ -53,25 +53,36 @@ def test_persistent_homology_ODE_system():
 
     # # Defaults:
     # ph, size = True, 1
-    # solo_ph = False
+    # solo = False
 
     ph, size = True, 1
-    solo_ph = True
+    ph, size = True, 20
+    solo = False
 
+    dont_pickle = False
+    dont_pickle = True  # deleteme
     double_flags = set(sys.argv[1:])
     if "-ph" in double_flags:
         ph = True
     elif "-noph" in double_flags:
         ph = False
-    elif "-solo" in double_flags:
-        solo_ph = True
-    flags_dict = {argument.split("=")[0]: argument.split("=")[1] for argument in sys.argv[1:] if len(argument.split("=")) > 1}
+    if "-solo" in double_flags:
+        solo = True
+    elif "-nosolo" in double_flags:
+        solo = False
+    if "-dont_pickle" in double_flags:
+        dont_pickle = True
+    flags_dict = {argument.split("=")[0]: argument.split("=")[1]
+                  for argument in sys.argv[1:] if len(argument.split("=")) > 1}
     size = int(flags_dict.get("--size", size))
-    ph = bool(flags_dict.get("--ph", ph))
-    solo_ph = bool(flags_dict.get("--solo_ph", solo_ph))
 
-    weights = (0.01, 0.99) if solo_ph else (0.5, 0.5)
-    memo = f"ph: {ph}, ph solo: {solo_ph}, size: {size}"
+    weights = (0, 1) if solo else (0.5, 0.5)
+    weights = (0.01, 0.99)  # deleteme
+    weights_str = flags_dict.get("--weights", weights)
+    if isinstance(weights_str, str):
+        weights = [float(w) for w in weights_str.split(',')]
+
+    memo = f"ph: {ph}, ph solo: {solo}, size: {size}, weights: {weights}"
     print(memo)
     systems = []
     #  sigma=10, rho=28, beta=2.66667):
@@ -114,7 +125,8 @@ def test_persistent_homology_ODE_system():
                f"{expr} " \
                f"{error} \n" + timestamp
 
-    pickle.dump([systems, preamble], open(f"ph_lorenz_systems{timestamp}.p", "wb"))
+    if not dont_pickle:
+        pickle.dump([systems, preamble], open(f"ph_lorenz_systems{timestamp}.p", "wb"))
     # favorite_color = pickle.load(open("ph_lorenz_system ... .p", "rb"))
     expr_consts = ["sigma 10", "rho 28", "beta 2.666"]
     expr_truth = "[ 10 * (x[1] - x[0]), x[0] * (rho - x[2]) - x[1], x[0] * x[1] - beta * x[2], ]"
