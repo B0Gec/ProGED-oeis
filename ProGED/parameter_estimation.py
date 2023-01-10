@@ -11,6 +11,7 @@ import os
 import sys
 import time
 import math
+from typing import List
 import numpy as np
 import sympy as sp
 
@@ -78,7 +79,11 @@ class ParameterEstimator:
 
             # set parameter estimator values
             estimation_settings["objective_function"] = model_ode_error
-            var_mask[[time_index, target_index]] = False
+            if target_index is not None:
+                var_mask[[time_index, target_index]] = False
+            else:
+                var_mask[time_index] = False
+
             self.X = data[:, var_mask]
             self.T = data[:, time_index]
             if estimation_settings["objective_settings"]["simulate_separately"] or estimation_settings["target_variable_index"]:
@@ -242,6 +247,7 @@ def fit_models(models, data, task_type="algebraic", pool_map=map, estimation_set
         "timeout": np.inf,
         "verbosity": 1,
         "iter": 0,
+        "get_optimization_curve": False,
         "persistent_homology": False,
         "persistent_homology_size": 200,
         "persistent_homology_weights": (0.5,0.5),
@@ -328,11 +334,13 @@ def model_ode_error(params, model, X, Y, T, ph_diagram, estimation_settings):
             return ode(model, params, T, X, Y, **estimation_settings["objective_settings"])
 
         # Next line works only when sys.stdout is real. Thats why above.
-        if isinstance(sys.stdout, stdout_type):
+        if isinstance(sys.stdout, stdout_type) and (estimation_settings["verbosity"] < 2):
             with open(os.devnull, 'w') as f, mt.stdout_redirected(f):
                 try:
                     simX = run_ode()
                 except Exception as error:
+                    # Next error message should be theoretically impossible to witness, since all output is
+                    # forwarded into fake output (black hole).
                     if estimation_settings["verbosity"] >= 1:
                         print("Inside ode(), preventing tee/IO error. Params at error:",
                               params, f"and {type(error)} with message:", error)
@@ -361,6 +369,10 @@ def model_ode_error(params, model, X, Y, T, ph_diagram, estimation_settings):
                 if estimation_settings["verbosity"] > 1:
                     print("\nError from Persistent Homology metric when calculating"
                       " bottleneck distance.\n", error)
+
+        # save errors for optimization curve
+        if estimation_settings["get_optimization_curve"]:
+            model.optimization_curve.append(res)
 
         if np.isnan(res) or np.isinf(res) or not np.isreal(res):
             if estimation_settings["verbosity"] > 1:
@@ -422,7 +434,8 @@ def ode(model, params, T, X, Y, **objective_settings):
 
     # b.3 get model function
     if objective_settings["simulate_separately"]:
-        model_func = model.lambdify(list=True)[0]
+        # model_func = model.lambdify(list=True)[0]
+        model_func = model.lambdify(list=True)
     else:
         model_func = model.lambdify(list=True)
 
@@ -441,7 +454,8 @@ def ode(model, params, T, X, Y, **objective_settings):
         inits = np.array([Y[0]])
 
     # b.5 interpolate data matrix
-        X_interp = interp1d(T, X, axis=0, kind='cubic', fill_value="extrapolate")
+    #     X_interp = interp1d(T, X, axi[s=0, kind='cubic', fill_value="extrapolate")
+        X_interp = interp1d(T, X, axis=0, kind='cubic', fill_value="extrapolate") if X.shape[1] != 0 else ( lambda t: np.array([]))
 
     # b.6 set derivative functions either for or without teacher forcing
     if objective_settings["teacher_forcing"]:
@@ -522,7 +536,7 @@ def model_error_general(params, model, X, Y, T, ph_diagram, **estimation_setting
                 f"\"{task_type}\", while list of possible values: "
                 f"\"{types_string}\".")
 
-def ph_error(trajectory: np.ndarray, diagram_truth: list[np.ndarray]) -> float:
+def ph_error(trajectory: np.ndarray, diagram_truth: List[np.ndarray]) -> float:
     """Calculates persistent homology metric between given trajectory
     and ground truth trajectory based on topological properties of both.
     See ph_test.py in  examples/DS2022/persistent_homology.
@@ -544,7 +558,7 @@ def ph_error(trajectory: np.ndarray, diagram_truth: list[np.ndarray]) -> float:
     distance_bottleneck = persim.bottleneck(diagram[1], diagram_truth[1])
     return distance_bottleneck
 
-def ph_diag(trajectory: np.ndarray, size: int) -> list[np.ndarray]:
+def ph_diag(trajectory: np.ndarray, size: int) -> List[np.ndarray]:
     """Returns persistent diagram of given trajectory. See ph_test.py in examples.
 
     Inputs:
