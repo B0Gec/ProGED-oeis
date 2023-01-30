@@ -35,7 +35,7 @@ if __name__ == "__main__":
     print("bottleneck distance diagram:")
     distance_bottleneck, matching = persim.bottleneck(diagrams1[1], diagrams2[1], matching=True)
     print("bottleneck distance = ", distance_bottleneck)
-    persim.bottleneck_matching(diagrams1[1], diagrams2[1], matching=matching, labels=['traj1', 'second trajectory'])
+    persim.bottleneck_matching(diagrams1[1], diagrams2[1], matching=matching, labels=['traj1', 'second trajectoryt'])
     plt.show()
 
     print('end')
