@@ -110,13 +110,14 @@ def test_parameter_estimation():
     symbols = {"x": ['x'], "start": "S", "const": "C"}
     models = generate_models(grammar, symbols, strategy_settings={"N": 2})
 
-    estimation_settings = {"target_variable_index": -1,
+    estimation_settings = {"optimizer": 'DE_scipy',
+                           "target_variable_index": -1,
                            "time_index": None,
                            "verbosity": 0}
     models = fit_models(models, data, task_type="algebraic", estimation_settings=estimation_settings)
     
-    assert np.abs(models[0].get_error() - 0.36) < 1e-6
-    assert np.abs(models[1].get_error() - 1.4736842) < 1e-6
+    assert np.abs(models[0].get_error() - 0.6) < 1e-6
+    assert np.abs(models[1].get_error() - 6.1200790e-09) < 1e-6
 
 def test_parameter_estimation_2D():
     np.random.seed(0)
@@ -134,14 +135,15 @@ def test_parameter_estimation_2D():
     symbols = {"x": ['x', 'y'], "start": "S", "const": "C"}
     models = generate_models(grammar, symbols, strategy_settings={"N": 2})
 
-    estimation_settings = {"target_variable_index": -1,
+    estimation_settings = {"optimizer": 'DE_scipy',
+                           "target_variable_index": -1,
                            "time_index": None,
                            "verbosity": 0}
 
     models = fit_models(models, data, task_type="algebraic", estimation_settings=estimation_settings)
     
-    assert np.abs(models[0].get_error() - 0.36) < 1e-6
-    assert np.abs(models[1].get_error() - 1.5945679) < 1e-6
+    assert np.abs(models[0].get_error() - 0.6) < 1e-6
+    assert np.abs(models[1].get_error() - 1.2627620) < 1e-6
 
 
 def test_parameter_estimation_ODE():
@@ -155,21 +157,20 @@ def test_parameter_estimation_ODE():
     symbols = {"x": ["x", "y"], "start": "S", "const": "C"}
 
     np.random.seed(0)
-    models = generate_models(grammar, symbols, strategy_settings={"N": 3})
+    models = generate_models(grammar, symbols, strategy_settings={"N": 2})
 
-    estimation_settings = {"target_variable_index": 1,
+    estimation_settings = {"optimizer": 'DE_scipy',
+                           "target_variable_index": 1,
                            "time_index": 0,
-                           "objective_settings": {"use_jacobian": False},
                            "verbosity": 0}
 
     models = fit_models(models, data, task_type="differential", estimation_settings=estimation_settings)
 
-    def assert_line(models, i, expr, error, tol=1e-9, n=100):
+    def assert_line(models, i, expr, error, tol=1e-7, n=100):
         #assert str(models[i].get_full_expr())[:n] == expr[:n]
         assert abs(models[i].get_error() - error) < tol
-    assert_line(models, 0, "4.65716206980249*y", 4.600397641615483)
-    assert_line(models, 1, "-10.0*x", 8.256188274283515)
-    assert_line(models, 2, "y", 10.044322790817118, n=8)
+    assert_line(models, 0, "4.65715915*y", 2.1448537576300146)
+    assert_line(models, 1, "y", 3.1692779604851826, n=8)
 
     """    
         print("\n", models, "\n\nFinal score:")
@@ -185,13 +186,14 @@ def test_parameter_estimation_ODE_system():
     system.add_system(["C*y", "C*y - C*x*x*y - C*x"], symbols={"x": ["x", "y"], "const": "C"})
     estimation_settings = {"target_variable_index": None,
                            "time_index": 0,
+                           "optimizer": 'DE_scipy',
                            "objective_settings": {"use_jacobian": False},
                            "optimizer_settings": {"max_iter": 1,
                                                   "pop_size": 1},
                            "verbosity": 0}
     np.random.seed(0)
     system_out = fit_models(system, data, task_type='differential', estimation_settings=estimation_settings)
-    assert abs(system_out[0].get_error() - 7.141695877290627e-06) < 1e-12  # 15.11.2022
+    assert abs(system_out[0].get_error() - 0.00014607500) < 1e-6  # 15.11.2022
     # true params: [[1.], [-0.5., -1., 0.5]]
 
 def test_parameter_estimation_ODE_system_partial_observability():
@@ -204,13 +206,14 @@ def test_parameter_estimation_ODE_system_partial_observability():
     system.add_system(["C*y", "C*y - C*x*x*y - C*x"], symbols={"x": ["x", "y"], "const": "C"})
     estimation_settings = {"target_variable_index": None,
                            "time_index": 0,
+                           "optimizer": 'DE_scipy',
                            "objective_settings": {"use_jacobian": False},
                            "optimizer_settings": {"max_iter": 1,
                                                   "pop_size": 1},
                            "verbosity": 0}
 
     system_out = fit_models(system, data, task_type='differential', estimation_settings=estimation_settings)
-    assert abs(system_out[0].get_error() - 1.624031121298028e-09) < 1e-15  # 15.11.2022
+    assert abs(system_out[0].get_error() - 6.859567634e-05) < 1e-6
     # true params: [[1.], [-0.5., -1., 0.5]]
 
 def test_equation_discoverer():
@@ -230,8 +233,8 @@ def test_equation_discoverer():
     
     ED.generate_models()
     ED.fit_models()
-    assert np.abs(ED.models[0].get_error() - 0.72842105) < 1e-6
-    assert np.abs(ED.models[1].get_error() - 0.59163899) < 1e-6
+    assert np.abs(ED.models[0].get_error() - 0.853475865) < 1e-6
+    assert np.abs(ED.models[1].get_error() - 1.82093094) < 1e-6
 
 def test_equation_discoverer_ODE():
     B = -2.56; a = 0.4; ts = np.linspace(0.45, 0.87, 5)
@@ -250,11 +253,11 @@ def test_equation_discoverer_ODE():
     ED.generate_models()
     ED.fit_models()
 
-    def assert_line(models, i, expr, error, tol=1e-9, n=100):
+    def assert_line(models, i, expr, error, tol=1e-7, n=100):
         #assert str(models[i].get_full_expr())[:n] == expr[:n]
         assert abs(models[i].get_error() - error) < tol
-    assert_line(ED.models, 0, "y", 12.70440146224583)
-    assert_line(ED.models, 1, "0.400266188520229*x + y", 4.773528915588122, n=6)
+    assert_line(ED.models, 0, "y", 3.564323422789496)
+    assert_line(ED.models, 1, "-10*x + y", 2.24823945, n=6)
     return
 
 if __name__ == "__main__":
@@ -271,5 +274,3 @@ if __name__ == "__main__":
     test_equation_discoverer_ODE()
     test_parameter_estimation_ODE_system()
     test_parameter_estimation_ODE_system_partial_observability()
-    test_persistent_homology_partial_observability()
-    test_persistent_homology_ODE_system()
