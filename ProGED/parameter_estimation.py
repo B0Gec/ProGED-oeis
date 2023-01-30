@@ -22,6 +22,7 @@ import time
 import math
 from typing import List
 import numpy as np
+import persim
 import sympy as sp
 
 from scipy.optimize import differential_evolution, minimize
@@ -194,15 +195,22 @@ class ParameterEstimator:
             # take care of persistent homology case, i.e. if using topological distance
             if estimation_settings["objective_settings"]["persistent_homology"]:
                 weight = estimation_settings["objective_settings"]["persistent_homology_weight"]
-                if (not isinstance(weight, (float, int, np.float))) or weight < 0 or weight > 1:
+                if (not isinstance(weight, (float, int, np.float64))) or weight < 0 or weight > 1:
                     raise TypeError("ERROR: Persistent homology weight should be of type float and in range [0,1]!")
                 size = estimation_settings["objective_settings"]["persistent_homology_size"]
                 trajectory = np.vstack(np.vstack((self.X, self.Y))) if self.Y is not None else self.X
                 try:
-                    self.persistent_diagram = ph_diag(trajectory, size=size)
+                    self.persistent_diagram = ph_diag(trajectory, size, estimation_settings["verbosity"])
                     if (self.persistent_diagram[1].shape == (0, 2)) and estimation_settings["verbosity"] >= 1:
                         print("INFO: persistent diagram of the ground truth is trivial (empty), "
                               "i.e. no interesting 2D-property is present.")
+                    elif (self.persistent_diagram[1].shape != (0, 2)) and estimation_settings["verbosity"] >= 3:
+                        print("verbosity is forcing plotting:")
+                        try:
+                            import matplotlib.pyplot as plt
+                            persim.plot_diagrams(self.persistent_diagram[1], show=True)
+                        except Exception as error:
+                            print(f"Error when PLOTTING of type {type(error)} and message:{error}!")
                 except Exception as error:
                     if estimation_settings["verbosity"] >= 1:
                         print(f"WARNNING: Excepted an error when constructing ph_diagram of the original dataset "
@@ -762,7 +770,7 @@ def ph_error(trajectory: np.ndarray, diagram_truth: List[np.ndarray], size: int,
     import persim
 
     # size = diagram_truth[0].shape[0]
-    diagram = ph_diag(trajectory, size)
+    diagram = ph_diag(trajectory, size, verbosity)
     if diagram[1].shape == (0, 2) and diagram_truth[1].shape == (0, 2):
         if verbosity >= 2:
             print("Both ground truth and candidate trajectory have trivial persistence diagram of dim 1")
@@ -770,11 +778,22 @@ def ph_error(trajectory: np.ndarray, diagram_truth: List[np.ndarray], size: int,
     # try:
     else:
         distance_bottleneck = persim.bottleneck(diagram[1], diagram_truth[1])
+        if verbosity >= 3:
+            try:
+                import matplotlib.pyplot as plt
+                persim.plot_diagrams(diagram, show=True)
+                distance_bottleneck, matching = persim.bottleneck(diagram[1], diagram_truth[1], matching=True)
+                plt.close()
+                persim.bottleneck_matching(diagram[1], diagram_truth[1], matching)
+                plt.show()
+            except Exception as error:
+                print(f"Error when PLOTTING of type {type(error)} and message:{error}!")
+            print("Both ground truth and candidate trajectory have trivial persistence diagram of dim 1")
     # except IndexError(" index -1 is out of bounds for axis 0 with size 0") as error:
     #     distance_bottleneck = 0
     return distance_bottleneck
 
-def ph_diag(trajectory: np.ndarray, size: int) -> List[np.ndarray]:
+def ph_diag(trajectory: np.ndarray, size: int, verbosity: int) -> List[np.ndarray]:
     """Returns persistent diagram of given trajectory. See ph_test.py in examples.
 
     Inputs:
@@ -801,5 +820,10 @@ def ph_diag(trajectory: np.ndarray, size: int) -> List[np.ndarray]:
 
     P1 = downsample(trajectory) if size < trajectory.shape[0] else trajectory
     diagrams = ripser.ripser(P1)['dgms']
+    if verbosity >= 3:
+        try:
+            persim.plot_diagrams(diagrams[1], show=True)
+        except Exception:
+            print("Verbose plotting failed.")
     return diagrams
 

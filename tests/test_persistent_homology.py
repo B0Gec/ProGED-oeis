@@ -18,7 +18,7 @@ def test_persistent_homology_partial_observability():
                                                   },
                            "optimizer_settings": {"max_iter": 1,
                                                   "pop_size": 1},
-                           "verbosity": 1,
+                           "verbosity": 4,
                            }
     np.random.seed(0)
     system_out = fit_models(system, data, task_type='differential', estimation_settings=estimation_settings)
