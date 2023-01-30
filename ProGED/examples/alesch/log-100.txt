@@ -1,0 +1,2382 @@
+=>> Grammar used:
+Grammar with 10 productions (start state = S)
+    S -> S '+' R [0.4]
+    S -> R [0.6]
+    R -> T [0.6]
+    R -> 'C' '*' F '(' T ')' [0.4]
+    T -> T '*' V [0.4]
+    T -> 'C' [0.6]
+    F -> 'sqrt' [0.333333]
+    F -> 'exp' [0.333333]
+    F -> 'log' [0.333333]
+    V -> 'x' [1.0]
+
+C0*x
+C0*x
+C0*x
+C0*x**3
+C0*x**2 + C1
+C0*x**2 + C1
+C0*sqrt(C1*x**5)
+C0*sqrt(C1*x**5)
+C0*x + C1
+C0*x + C1
+C0*x + C1
+C0*x + C1
+C0*x + C1
+C0*x + C1
+C0*x + C1
+C0*x + C1
+C0*log(C1*x)
+C0*log(C1*x)
+C0*log(C1*x)
+C0*log(C1*x)
+C0*log(C1*x)
+C0*x**2
+C0*x**2
+C0*sqrt(C1*x**3) + C2
+C0*x**3 + C1
+C0*x**3 + C1
+C0*x**3 + C1
+C0*sqrt(C1*x) + C2
+C0*sqrt(C1*x) + C2
+C0*sqrt(C1*x) + C2
+C0*sqrt(C1*x) + C2
+C0*sqrt(C1*x) + C2
+C0*sqrt(C1*x) + C2
+C0*sqrt(C1*x) + C2
+C0*sqrt(C1*x) + C2
+C0*sqrt(C1*x) + C2
+C0*sqrt(C1*x) + C2
+C0*sqrt(C1*x) + C2
+C0*sqrt(C1*x) + C2
+C0*log(C1*x**2)
+C0*log(C1*x**2)
+C0*x**4
+C0*x**4
+C0*sqrt(C1*x)
+C0*sqrt(C1*x)
+C0*exp(C1*x) + C2
+C0*exp(C1*x) + C2
+C0*x + C1*log(C2*x)
+C0*x + C1*log(C2*x)
+C0*x + C1*log(C2*x)
+C0*x + C1*log(C2*x)
+C0*x + C1*log(C2*x)
+C0*x**6
+C0*x**6
+C0*x**6
+C0*x**6
+C0*x**6
+C0*x**6
+C0*sqrt(C1*x**2) + C2
+C0*sqrt(C1*x**2) + C2
+C0*exp(C1*x**3)
+C0*exp(C1*x**3)
+C0*exp(C1*x**3)
+C0*exp(C1*x**3)
+C0*exp(C1*x**3)
+C0*exp(C1*x**3)
+C0*exp(C1*x**3)
+C0*exp(C1*x**3)
+C0*exp(C1*x**3)
+C0*exp(C1*x**3)
+C0*exp(C1*x**3)
+C0*exp(C1*x**3)
+C0*exp(C1*x**3)
+C0*exp(C1*x**3)
+C0*exp(C1*x**3)
+C0*exp(C1*x**3)
+C0*exp(C1*x**3)
+C0*x**2 + C1*x
+C0*x**2 + C1*x
+C0*x**2 + C1*x
+C0*x**2 + C1*x
+C0*x**2 + C1*sqrt(C2*x) + C3
+C0*x**2 + C1*sqrt(C2*x) + C3
+C0*x**2 + C1*sqrt(C2*x) + C3
+C0*x**2 + C1*sqrt(C2*x) + C3
+C0*exp(C1*x)
+C0*exp(C1*x)
+C0*exp(C1*x)
+C0*exp(C1*x)
+C0*exp(C1*x**8) + C2*log(C3*x) + C4
+C0*exp(C1*x**8) + C2*log(C3*x) + C4
+C0*exp(C1*x**8) + C2*log(C3*x) + C4
+C0*exp(C1*x**8) + C2*log(C3*x) + C4
+C0*exp(C1*x**8) + C2*log(C3*x) + C4
+C0*sqrt(C1*x**2) + C2*log(C3*x) + C4
+ModelBox: 23 models
+-> C0*x, p = 0.08639999999999999, parse trees = 1, valid = False
+-> C0*x**3, p = 0.013824000000000001, parse trees = 1, valid = False
+-> C0*x**2 + C1, p = 0.01193508864, parse trees = 5, valid = False
+-> C0*sqrt(C1*x**5), p = 0.0004915200000000001, parse trees = 1, valid = False
+-> C0*x + C1, p = 0.03594239999999999, parse trees = 6, valid = False
+-> C0*log(C1*x), p = 0.0192, parse trees = 1, valid = False
+-> C0*x**2, p = 0.03456, parse trees = 1, valid = False
+-> C0*sqrt(C1*x**3) + C2, p = 9.830400000000001e-05, parse trees = 1, valid = False
+-> C0*x**3 + C1, p = 0.002719678464000001, parse trees = 3, valid = False
+-> C0*sqrt(C1*x) + C2, p = 0.0006144000000000001, parse trees = 1, valid = False
+-> C0*log(C1*x**2), p = 0.00768, parse trees = 1, valid = False
+-> C0*x**4, p = 0.0055296, parse trees = 1, valid = False
+-> C0*sqrt(C1*x), p = 0.0192, parse trees = 1, valid = False
+-> C0*exp(C1*x) + C2, p = 0.0055296, parse trees = 2, valid = False
+-> C0*x + C1*log(C2*x), p = 0.0011059199999999998, parse trees = 1, valid = False
+-> C0*x**6, p = 0.0008847360000000002, parse trees = 1, valid = False
+-> C0*sqrt(C1*x**2) + C2, p = 0.00015925248, parse trees = 1, valid = False
+-> C0*exp(C1*x**3), p = 0.003072, parse trees = 1, valid = False
+-> C0*x**2 + C1*x, p = 0.001990656, parse trees = 1, valid = False
+-> C0*x**2 + C1*sqrt(C2*x) + C3, p = 2.9353417113600003e-07, parse trees = 1, valid = False
+-> C0*exp(C1*x), p = 0.0192, parse trees = 1, valid = False
+-> C0*exp(C1*x**8) + C2*log(C3*x) + C4, p = 1.8554258718720008e-09, parse trees = 1, valid = False
+-> C0*sqrt(C1*x**2) + C2*log(C3*x) + C4, p = 2.935341711360001e-07, parse trees = 1, valid = False
+Estimating model: C0*x
+model: C0*x                                                                  ; p: 0.08639999999999999    ; error: 0.0094020746949838
+Estimating model: C0*x**3
+model: C0*x**3                                                               ; p: 0.013824000000000001   ; error: 0.02543251211522073
+Estimating model: C0*x**2 + C1
+model: C0*x**2 + C1                                                          ; p: 0.01193508864          ; error: 0.008087194749131076
+Estimating model: C0*sqrt(C1*x**5)
+model: C0*sqrt(C1*x**5)                                                      ; p: 0.0004915200000000001  ; error: 0.02235890516731742
+Estimating model: C0*x + C1
+model: C0*x + C1                                                             ; p: 0.03594239999999999    ; error: 0.006629411536347515
+Estimating model: C0*log(C1*x)
+<lambdifygenerated-3073>:2: RuntimeWarning: divide by zero encountered in log
+  return -9.83602297158777*log(-0.668408090104476*x)
+<lambdifygenerated-3073>:2: RuntimeWarning: invalid value encountered in log
+  return -9.83602297158777*log(-0.668408090104476*x)
+<lambdifygenerated-3074>:2: RuntimeWarning: divide by zero encountered in log
+  return -2.14021293090974*log(1.39313178090532*x)
+<lambdifygenerated-3075>:2: RuntimeWarning: divide by zero encountered in log
+  return 4.53000616963438*log(-6.80975908072441*x)
+<lambdifygenerated-3075>:2: RuntimeWarning: invalid value encountered in log
+  return 4.53000616963438*log(-6.80975908072441*x)
+<lambdifygenerated-3076>:2: RuntimeWarning: divide by zero encountered in log
+  return -8.94951124160106*log(-2.50010711844851*x)
+<lambdifygenerated-3076>:2: RuntimeWarning: invalid value encountered in log
+  return -8.94951124160106*log(-2.50010711844851*x)
+<lambdifygenerated-3077>:2: RuntimeWarning: divide by zero encountered in log
+  return -1.59847270889082*log(-3.50107418964879*x)
+<lambdifygenerated-3077>:2: RuntimeWarning: invalid value encountered in log
+  return -1.59847270889082*log(-3.50107418964879*x)
+<lambdifygenerated-3078>:2: RuntimeWarning: divide by zero encountered in log
+  return -5.52090489441801*log(6.02961880612878*x)
+<lambdifygenerated-3079>:2: RuntimeWarning: divide by zero encountered in log
+  return -8.39084781976363*log(1.78990344828695*x)
+<lambdifygenerated-3080>:2: RuntimeWarning: divide by zero encountered in log
+  return -0.407103469812785*log(-5.59902121127761*x)
+<lambdifygenerated-3080>:2: RuntimeWarning: invalid value encountered in log
+  return -0.407103469812785*log(-5.59902121127761*x)
+<lambdifygenerated-3081>:2: RuntimeWarning: divide by zero encountered in log
+  return 0.251950683205371*log(-8.0486311131936*x)
+<lambdifygenerated-3081>:2: RuntimeWarning: invalid value encountered in log
+  return 0.251950683205371*log(-8.0486311131936*x)
+<lambdifygenerated-3082>:2: RuntimeWarning: divide by zero encountered in log
+  return -6.26062979920463*log(2.99542239552534*x)
+<lambdifygenerated-3083>:2: RuntimeWarning: divide by zero encountered in log
+  return 4.03021387281386*log(-1.75864519961059*x)
+<lambdifygenerated-3083>:2: RuntimeWarning: invalid value encountered in log
+  return 4.03021387281386*log(-1.75864519961059*x)
+<lambdifygenerated-3084>:2: RuntimeWarning: divide by zero encountered in log
+  return 7.493965864599*log(-1.34533461249251*x)
+<lambdifygenerated-3084>:2: RuntimeWarning: invalid value encountered in log
+  return 7.493965864599*log(-1.34533461249251*x)
+<lambdifygenerated-3085>:2: RuntimeWarning: divide by zero encountered in log
+  return 7.91111196054696*log(8.95253606009233*x)
+<lambdifygenerated-3086>:2: RuntimeWarning: divide by zero encountered in log
+  return 6.31156220243378*log(0.579896543975891*x)
+<lambdifygenerated-3087>:2: RuntimeWarning: divide by zero encountered in log
+  return -1.39264128974302*log(-4.71146622752686*x)
+<lambdifygenerated-3087>:2: RuntimeWarning: invalid value encountered in log
+  return -1.39264128974302*log(-4.71146622752686*x)
+<lambdifygenerated-3088>:2: RuntimeWarning: divide by zero encountered in log
+  return -4.05499993963166*log(-9.00279789947602*x)
+<lambdifygenerated-3088>:2: RuntimeWarning: invalid value encountered in log
+  return -4.05499993963166*log(-9.00279789947602*x)
+<lambdifygenerated-3089>:2: RuntimeWarning: divide by zero encountered in log
+  return 6.91144993513841*log(-8.80851834600228*x)
+<lambdifygenerated-3089>:2: RuntimeWarning: invalid value encountered in log
+  return 6.91144993513841*log(-8.80851834600228*x)
+<lambdifygenerated-3090>:2: RuntimeWarning: divide by zero encountered in log
+  return 2.75892508805661*log(-7.01188908722198*x)
+<lambdifygenerated-3090>:2: RuntimeWarning: invalid value encountered in log
+  return 2.75892508805661*log(-7.01188908722198*x)
+<lambdifygenerated-3091>:2: RuntimeWarning: divide by zero encountered in log
+  return -6.9588756170474*log(4.15330473853706*x)
+<lambdifygenerated-3092>:2: RuntimeWarning: divide by zero encountered in log
+  return -0.858380657667155*log(7.32037308001409*x)
+<lambdifygenerated-3093>:2: RuntimeWarning: divide by zero encountered in log
+  return -7.78428683007079*log(-2.29661292314837*x)
+<lambdifygenerated-3093>:2: RuntimeWarning: invalid value encountered in log
+  return -7.78428683007079*log(-2.29661292314837*x)
+<lambdifygenerated-3094>:2: RuntimeWarning: divide by zero encountered in log
+  return 8.573289978997*log(7.85523624370682*x)
+<lambdifygenerated-3095>:2: RuntimeWarning: divide by zero encountered in log
+  return -9.45023257014929*log(8.46879287940524*x)
+<lambdifygenerated-3096>:2: RuntimeWarning: divide by zero encountered in log
+  return 1.19980260348463*log(5.69680925668287*x)
+<lambdifygenerated-3097>:2: RuntimeWarning: divide by zero encountered in log
+  return 5.50424437956873*log(9.74542269480563*x)
+<lambdifygenerated-3098>:2: RuntimeWarning: divide by zero encountered in log
+  return 0.781927729625524*log(9.49579778696651*x)
+<lambdifygenerated-3099>:2: RuntimeWarning: divide by zero encountered in log
+  return -5.3103900505494*log(6.79316437219591*x)
+<lambdifygenerated-3100>:2: RuntimeWarning: divide by zero encountered in log
+  return -4.94435424791401*log(-3.04183383936976*x)
+<lambdifygenerated-3100>:2: RuntimeWarning: invalid value encountered in log
+  return -4.94435424791401*log(-3.04183383936976*x)
+<lambdifygenerated-3101>:2: RuntimeWarning: divide by zero encountered in log
+  return 8.37788653713888*log(-0.0425135687133027*x)
+<lambdifygenerated-3101>:2: RuntimeWarning: invalid value encountered in log
+  return 8.37788653713888*log(-0.0425135687133027*x)
+<lambdifygenerated-3102>:2: RuntimeWarning: divide by zero encountered in log
+  return -2.84489937036768*log(2.20851226088814*x)
+<lambdifygenerated-3103>:2: RuntimeWarning: divide by zero encountered in log
+  return 9.02711022624743*log(-5.33260660074945*x)
+<lambdifygenerated-3103>:2: RuntimeWarning: invalid value encountered in log
+  return 9.02711022624743*log(-5.33260660074945*x)
+<lambdifygenerated-3104>:2: RuntimeWarning: divide by zero encountered in log
+  return 5.17367518842604*log(-4.10292246219436*x)
+<lambdifygenerated-3104>:2: RuntimeWarning: invalid value encountered in log
+  return 5.17367518842604*log(-4.10292246219436*x)
+<lambdifygenerated-3105>:2: RuntimeWarning: divide by zero encountered in log
+  return -3.75917060275692*log(-7.86523457649531*x)
+<lambdifygenerated-3105>:2: RuntimeWarning: invalid value encountered in log
+  return -3.75917060275692*log(-7.86523457649531*x)
+<lambdifygenerated-3106>:2: RuntimeWarning: divide by zero encountered in log
+  return -3.02865550735202*log(3.48153904104138*x)
+<lambdifygenerated-3107>:2: RuntimeWarning: divide by zero encountered in log
+  return 2.16161345243726*log(-6.35613741634769*x)
+<lambdifygenerated-3107>:2: RuntimeWarning: invalid value encountered in log
+  return 2.16161345243726*log(-6.35613741634769*x)
+<lambdifygenerated-3108>:2: RuntimeWarning: divide by zero encountered in log
+  return -7.17680587452306*log(3.51270387054691*x)
+<lambdifygenerated-3109>:2: RuntimeWarning: divide by zero encountered in log
+  return 9.61787190432803*log(0.160016389109647*x)
+<lambdifygenerated-3110>:2: RuntimeWarning: divide by zero encountered in log
+  return 3.06548124145396*log(4.96825945805117*x)
+<lambdifygenerated-3111>:2: RuntimeWarning: divide by zero encountered in log
+  return 1.8719223845613*log(5.27034339273841*x)
+<lambdifygenerated-3112>:2: RuntimeWarning: divide by zero encountered in log
+  return 3.9270476485719*log(-9.67777355590022*x)
+<lambdifygenerated-3112>:2: RuntimeWarning: invalid value encountered in log
+  return 3.9270476485719*log(-9.67777355590022*x)
+<lambdifygenerated-3113>:2: RuntimeWarning: divide by zero encountered in log
+  return -7.30788795774839*log(-6.90289204880221*x)
+<lambdifygenerated-3113>:2: RuntimeWarning: invalid value encountered in log
+  return -7.30788795774839*log(-6.90289204880221*x)
+<lambdifygenerated-3114>:2: RuntimeWarning: divide by zero encountered in log
+  return -2.14021293090974*log(0.590156715358638*x)
+<lambdifygenerated-3115>:2: RuntimeWarning: divide by zero encountered in log
+  return -2.16039767124451*log(-0.655208130467499*x)
+<lambdifygenerated-3115>:2: RuntimeWarning: invalid value encountered in log
+  return -2.16039767124451*log(-0.655208130467499*x)
+<lambdifygenerated-3116>:2: RuntimeWarning: divide by zero encountered in log
+  return -5.86602518644954*log(-2.92348736635663*x)
+<lambdifygenerated-3116>:2: RuntimeWarning: invalid value encountered in log
+  return -5.86602518644954*log(-2.92348736635663*x)
+<lambdifygenerated-3117>:2: RuntimeWarning: divide by zero encountered in log
+  return -5.4092433095425*log(-6.34988122997705*x)
+<lambdifygenerated-3117>:2: RuntimeWarning: invalid value encountered in log
+  return -5.4092433095425*log(-6.34988122997705*x)
+<lambdifygenerated-3118>:2: RuntimeWarning: divide by zero encountered in log
+  return -8.06433682307902*log(0.287839661442382*x)
+<lambdifygenerated-3119>:2: RuntimeWarning: divide by zero encountered in log
+  return 2.79384410988936*log(-8.706746865495*x)
+<lambdifygenerated-3119>:2: RuntimeWarning: invalid value encountered in log
+  return 2.79384410988936*log(-8.706746865495*x)
+<lambdifygenerated-3120>:2: RuntimeWarning: divide by zero encountered in log
+  return -5.11742381631138*log(-7.21064425943809*x)
+<lambdifygenerated-3120>:2: RuntimeWarning: invalid value encountered in log
+  return -5.11742381631138*log(-7.21064425943809*x)
+<lambdifygenerated-3121>:2: RuntimeWarning: divide by zero encountered in log
+  return -3.16886351211239*log(-5.25445566051164*x)
+<lambdifygenerated-3121>:2: RuntimeWarning: invalid value encountered in log
+  return -3.16886351211239*log(-5.25445566051164*x)
+<lambdifygenerated-3122>:2: RuntimeWarning: divide by zero encountered in log
+  return -4.02026866542355*log(-2.13589498582007*x)
+<lambdifygenerated-3122>:2: RuntimeWarning: invalid value encountered in log
+  return -4.02026866542355*log(-2.13589498582007*x)
+<lambdifygenerated-3123>:2: RuntimeWarning: divide by zero encountered in log
+  return 2.20598949607377*log(-6.0907138858044*x)
+<lambdifygenerated-3123>:2: RuntimeWarning: invalid value encountered in log
+  return 2.20598949607377*log(-6.0907138858044*x)
+<lambdifygenerated-3124>:2: RuntimeWarning: divide by zero encountered in log
+  return 7.493965864599*log(4.52009837126766*x)
+<lambdifygenerated-3125>:2: RuntimeWarning: divide by zero encountered in log
+  return -0.42453236042665*log(2.95798483484519*x)
+<lambdifygenerated-3126>:2: RuntimeWarning: divide by zero encountered in log
+  return -8.84769942713497*log(-7.379698442473*x)
+<lambdifygenerated-3126>:2: RuntimeWarning: invalid value encountered in log
+  return -8.84769942713497*log(-7.379698442473*x)
+<lambdifygenerated-3127>:2: RuntimeWarning: divide by zero encountered in log
+  return -5.55788464820576*log(-4.71146622752686*x)
+<lambdifygenerated-3127>:2: RuntimeWarning: invalid value encountered in log
+  return -5.55788464820576*log(-4.71146622752686*x)
+<lambdifygenerated-3128>:2: RuntimeWarning: divide by zero encountered in log
+  return 9.160419091489*log(-5.33873354938215*x)
+<lambdifygenerated-3128>:2: RuntimeWarning: invalid value encountered in log
+  return 9.160419091489*log(-5.33873354938215*x)
+<lambdifygenerated-3129>:2: RuntimeWarning: divide by zero encountered in log
+  return -7.54075599998709*log(-0.645971926620321*x)
+<lambdifygenerated-3129>:2: RuntimeWarning: invalid value encountered in log
+  return -7.54075599998709*log(-0.645971926620321*x)
+<lambdifygenerated-3130>:2: RuntimeWarning: divide by zero encountered in log
+  return -6.24803118916226*log(-3.33235448020357*x)
+<lambdifygenerated-3130>:2: RuntimeWarning: invalid value encountered in log
+  return -6.24803118916226*log(-3.33235448020357*x)
+<lambdifygenerated-3131>:2: RuntimeWarning: divide by zero encountered in log
+  return -5.71331003196812*log(4.15330473853706*x)
+<lambdifygenerated-3132>:2: RuntimeWarning: divide by zero encountered in log
+  return 2.34638957234185*log(-8.6586135444867*x)
+<lambdifygenerated-3132>:2: RuntimeWarning: invalid value encountered in log
+  return 2.34638957234185*log(-8.6586135444867*x)
+<lambdifygenerated-3133>:2: RuntimeWarning: divide by zero encountered in log
+  return -6.66776267460263*log(-6.38109027790872*x)
+<lambdifygenerated-3133>:2: RuntimeWarning: invalid value encountered in log
+  return -6.66776267460263*log(-6.38109027790872*x)
+<lambdifygenerated-3134>:2: RuntimeWarning: divide by zero encountered in log
+  return -5.61776045930292*log(-3.84393950369416*x)
+<lambdifygenerated-3134>:2: RuntimeWarning: invalid value encountered in log
+  return -5.61776045930292*log(-3.84393950369416*x)
+<lambdifygenerated-3135>:2: RuntimeWarning: divide by zero encountered in log
+  return -6.17965251377624*log(8.46879287940524*x)
+<lambdifygenerated-3136>:2: RuntimeWarning: divide by zero encountered in log
+  return -0.232188056399646*log(1.74251407719193*x)
+<lambdifygenerated-3137>:2: RuntimeWarning: divide by zero encountered in log
+  return -7.93874158768214*log(-4.2621983565922*x)
+<lambdifygenerated-3137>:2: RuntimeWarning: invalid value encountered in log
+  return -7.93874158768214*log(-4.2621983565922*x)
+<lambdifygenerated-3138>:2: RuntimeWarning: divide by zero encountered in log
+  return -8.90246588352867*log(-3.72238739178566*x)
+<lambdifygenerated-3138>:2: RuntimeWarning: invalid value encountered in log
+  return -8.90246588352867*log(-3.72238739178566*x)
+<lambdifygenerated-3139>:2: RuntimeWarning: divide by zero encountered in log
+  return -5.3103900505494*log(0.841589459762082*x)
+<lambdifygenerated-3140>:2: RuntimeWarning: divide by zero encountered in log
+  return -4.94435424791401*log(-2.76136517406338*x)
+<lambdifygenerated-3140>:2: RuntimeWarning: invalid value encountered in log
+  return -4.94435424791401*log(-2.76136517406338*x)
+<lambdifygenerated-3141>:2: RuntimeWarning: divide by zero encountered in log
+  return 8.37788653713888*log(-5.62645525637806*x)
+<lambdifygenerated-3141>:2: RuntimeWarning: invalid value encountered in log
+  return 8.37788653713888*log(-5.62645525637806*x)
+<lambdifygenerated-3142>:2: RuntimeWarning: divide by zero encountered in log
+  return -7.50700450702591*log(-3.65175695227187*x)
+<lambdifygenerated-3142>:2: RuntimeWarning: invalid value encountered in log
+  return -7.50700450702591*log(-3.65175695227187*x)
+<lambdifygenerated-3143>:2: RuntimeWarning: divide by zero encountered in log
+  return -5.13362514222034*log(-1.71824519829134*x)
+<lambdifygenerated-3143>:2: RuntimeWarning: invalid value encountered in log
+  return -5.13362514222034*log(-1.71824519829134*x)
+<lambdifygenerated-3144>:2: RuntimeWarning: divide by zero encountered in log
+  return -5.97407402169712*log(7.20703886085289*x)
+<lambdifygenerated-3145>:2: RuntimeWarning: divide by zero encountered in log
+  return -7.75267423203937*log(-5.26319799874706*x)
+<lambdifygenerated-3145>:2: RuntimeWarning: invalid value encountered in log
+  return -7.75267423203937*log(-5.26319799874706*x)
+<lambdifygenerated-3146>:2: RuntimeWarning: divide by zero encountered in log
+  return -8.38907880131931*log(-7.42152912335093*x)
+<lambdifygenerated-3146>:2: RuntimeWarning: invalid value encountered in log
+  return -8.38907880131931*log(-7.42152912335093*x)
+<lambdifygenerated-3147>:2: RuntimeWarning: divide by zero encountered in log
+  return -3.21364457709535*log(-1.73474229822059*x)
+<lambdifygenerated-3147>:2: RuntimeWarning: invalid value encountered in log
+  return -3.21364457709535*log(-1.73474229822059*x)
+<lambdifygenerated-3148>:2: RuntimeWarning: divide by zero encountered in log
+  return -9.17237521985223*log(-5.62664242926372*x)
+<lambdifygenerated-3148>:2: RuntimeWarning: invalid value encountered in log
+  return -9.17237521985223*log(-5.62664242926372*x)
+<lambdifygenerated-3149>:2: RuntimeWarning: divide by zero encountered in log
+  return 1.31826818103951*log(9.35674163180892*x)
+<lambdifygenerated-3150>:2: RuntimeWarning: divide by zero encountered in log
+  return -3.3236749004174*log(4.96825945805117*x)
+<lambdifygenerated-3151>:2: RuntimeWarning: divide by zero encountered in log
+  return -5.94967876884897*log(-5.99997505326771*x)
+<lambdifygenerated-3151>:2: RuntimeWarning: invalid value encountered in log
+  return -5.94967876884897*log(-5.99997505326771*x)
+<lambdifygenerated-3152>:2: RuntimeWarning: divide by zero encountered in log
+  return 1.07962447940296*log(-4.59957628516273*x)
+<lambdifygenerated-3152>:2: RuntimeWarning: invalid value encountered in log
+  return 1.07962447940296*log(-4.59957628516273*x)
+<lambdifygenerated-3153>:2: RuntimeWarning: divide by zero encountered in log
+  return -7.30788795774839*log(-6.90289204880221*x)
+<lambdifygenerated-3153>:2: RuntimeWarning: invalid value encountered in log
+  return -7.30788795774839*log(-6.90289204880221*x)
+<lambdifygenerated-3154>:2: RuntimeWarning: divide by zero encountered in log
+  return -7.30788794774839*log(-6.90289204880221*x)
+<lambdifygenerated-3154>:2: RuntimeWarning: invalid value encountered in log
+  return -7.30788794774839*log(-6.90289204880221*x)
+<lambdifygenerated-3155>:2: RuntimeWarning: divide by zero encountered in log
+  return -7.30788795774839*log(-6.90289203880221*x)
+<lambdifygenerated-3155>:2: RuntimeWarning: invalid value encountered in log
+  return -7.30788795774839*log(-6.90289203880221*x)
+model: C0*log(C1*x)                                                          ; p: 0.0192                 ; error: 1000000000.0
+Estimating model: C0*x**2
+model: C0*x**2                                                               ; p: 0.03456                ; error: 0.018630759568779673
+Estimating model: C0*sqrt(C1*x**3) + C2
+model: C0*sqrt(C1*x**3) + C2                                                 ; p: 9.830400000000001e-05  ; error: 0.00749237119474579
+Estimating model: C0*x**3 + C1
+model: C0*x**3 + C1                                                          ; p: 0.002719678464000001   ; error: 0.00871499740526498
+Estimating model: C0*sqrt(C1*x) + C2
+model: C0*sqrt(C1*x) + C2                                                    ; p: 0.0006144000000000001  ; error: 0.005542086724694066
+Estimating model: C0*log(C1*x**2)
+<lambdifygenerated-9585>:2: RuntimeWarning: divide by zero encountered in log
+  return -7.44923113293259*log(0.668084433417488*x**2)
+<lambdifygenerated-9586>:2: RuntimeWarning: divide by zero encountered in log
+  return 6.25616353541388*log(-3.2884627377487*x**2)
+<lambdifygenerated-9586>:2: RuntimeWarning: invalid value encountered in log
+  return 6.25616353541388*log(-3.2884627377487*x**2)
+<lambdifygenerated-9587>:2: RuntimeWarning: divide by zero encountered in log
+  return -9.3239159860112*log(1.32360104805076*x**2)
+<lambdifygenerated-9588>:2: RuntimeWarning: divide by zero encountered in log
+  return -4.16910547482759*log(7.98176634354328*x**2)
+<lambdifygenerated-9589>:2: RuntimeWarning: divide by zero encountered in log
+  return -0.790663878455241*log(-4.37477678580638*x**2)
+<lambdifygenerated-9589>:2: RuntimeWarning: invalid value encountered in log
+  return -0.790663878455241*log(-4.37477678580638*x**2)
+<lambdifygenerated-9590>:2: RuntimeWarning: divide by zero encountered in log
+  return -9.51510699501878*log(-0.166357751392997*x**2)
+<lambdifygenerated-9590>:2: RuntimeWarning: invalid value encountered in log
+  return -9.51510699501878*log(-0.166357751392997*x**2)
+<lambdifygenerated-9591>:2: RuntimeWarning: divide by zero encountered in log
+  return -7.88266121703777*log(-7.40556657184192*x**2)
+<lambdifygenerated-9591>:2: RuntimeWarning: invalid value encountered in log
+  return -7.88266121703777*log(-7.40556657184192*x**2)
+<lambdifygenerated-9592>:2: RuntimeWarning: divide by zero encountered in log
+  return 0.617603649232508*log(2.79730751337881*x**2)
+<lambdifygenerated-9593>:2: RuntimeWarning: divide by zero encountered in log
+  return 3.82113171149298*log(3.35519759866829*x**2)
+<lambdifygenerated-9594>:2: RuntimeWarning: divide by zero encountered in log
+  return -6.07099629022784*log(-9.11030505838485*x**2)
+<lambdifygenerated-9594>:2: RuntimeWarning: invalid value encountered in log
+  return -6.07099629022784*log(-9.11030505838485*x**2)
+<lambdifygenerated-9595>:2: RuntimeWarning: divide by zero encountered in log
+  return -2.2372250622917*log(4.45915823574711*x**2)
+<lambdifygenerated-9596>:2: RuntimeWarning: divide by zero encountered in log
+  return 5.5167140071861*log(-7.86842118114489*x**2)
+<lambdifygenerated-9596>:2: RuntimeWarning: invalid value encountered in log
+  return 5.5167140071861*log(-7.86842118114489*x**2)
+<lambdifygenerated-9597>:2: RuntimeWarning: divide by zero encountered in log
+  return 0.0716153039826772*log(6.00913317510294*x**2)
+<lambdifygenerated-9598>:2: RuntimeWarning: divide by zero encountered in log
+  return -0.211514205310306*log(4.86737241496215*x**2)
+<lambdifygenerated-9599>:2: RuntimeWarning: divide by zero encountered in log
+  return 4.5115968175081*log(2.2428855314924*x**2)
+<lambdifygenerated-9600>:2: RuntimeWarning: divide by zero encountered in log
+  return 5.19774923600399*log(6.60688471898393*x**2)
+<lambdifygenerated-9601>:2: RuntimeWarning: divide by zero encountered in log
+  return 2.45950789236881*log(-2.68894009413786*x**2)
+<lambdifygenerated-9601>:2: RuntimeWarning: invalid value encountered in log
+  return 2.45950789236881*log(-2.68894009413786*x**2)
+<lambdifygenerated-9602>:2: RuntimeWarning: divide by zero encountered in log
+  return -4.62860481865596*log(5.10001568480405*x**2)
+<lambdifygenerated-9603>:2: RuntimeWarning: divide by zero encountered in log
+  return 4.42158057148307*log(-8.01590541430977*x**2)
+<lambdifygenerated-9603>:2: RuntimeWarning: invalid value encountered in log
+  return 4.42158057148307*log(-8.01590541430977*x**2)
+<lambdifygenerated-9604>:2: RuntimeWarning: divide by zero encountered in log
+  return -5.12125938385915*log(3.74297914454386*x**2)
+<lambdifygenerated-9605>:2: RuntimeWarning: divide by zero encountered in log
+  return 2.9076127314369*log(-1.95706633132646*x**2)
+<lambdifygenerated-9605>:2: RuntimeWarning: invalid value encountered in log
+  return 2.9076127314369*log(-1.95706633132646*x**2)
+<lambdifygenerated-9606>:2: RuntimeWarning: divide by zero encountered in log
+  return 8.50597461582007*log(-4.91372663303004*x**2)
+<lambdifygenerated-9606>:2: RuntimeWarning: invalid value encountered in log
+  return 8.50597461582007*log(-4.91372663303004*x**2)
+<lambdifygenerated-9607>:2: RuntimeWarning: divide by zero encountered in log
+  return -6.88191675819463*log(-9.90908265913469*x**2)
+<lambdifygenerated-9607>:2: RuntimeWarning: invalid value encountered in log
+  return -6.88191675819463*log(-9.90908265913469*x**2)
+<lambdifygenerated-9608>:2: RuntimeWarning: divide by zero encountered in log
+  return -3.99096927222553*log(-0.627071572005593*x**2)
+<lambdifygenerated-9608>:2: RuntimeWarning: invalid value encountered in log
+  return -3.99096927222553*log(-0.627071572005593*x**2)
+<lambdifygenerated-9609>:2: RuntimeWarning: divide by zero encountered in log
+  return 1.55738952122449*log(-1.28924420099204*x**2)
+<lambdifygenerated-9609>:2: RuntimeWarning: invalid value encountered in log
+  return 1.55738952122449*log(-1.28924420099204*x**2)
+<lambdifygenerated-9610>:2: RuntimeWarning: divide by zero encountered in log
+  return 1.44510977111906*log(8.80487585121506*x**2)
+<lambdifygenerated-9611>:2: RuntimeWarning: divide by zero encountered in log
+  return 3.04695080508361*log(-6.45004660738567*x**2)
+<lambdifygenerated-9611>:2: RuntimeWarning: invalid value encountered in log
+  return 3.04695080508361*log(-6.45004660738567*x**2)
+<lambdifygenerated-9612>:2: RuntimeWarning: divide by zero encountered in log
+  return 9.38048068033581*log(-6.714274531058*x**2)
+<lambdifygenerated-9612>:2: RuntimeWarning: invalid value encountered in log
+  return 9.38048068033581*log(-6.714274531058*x**2)
+<lambdifygenerated-9613>:2: RuntimeWarning: divide by zero encountered in log
+  return 7.34965148523818*log(-5.19470219694837*x**2)
+<lambdifygenerated-9613>:2: RuntimeWarning: invalid value encountered in log
+  return 7.34965148523818*log(-5.19470219694837*x**2)
+<lambdifygenerated-9614>:2: RuntimeWarning: divide by zero encountered in log
+  return 6.89462223273368*log(-3.79114704605049*x**2)
+<lambdifygenerated-9614>:2: RuntimeWarning: invalid value encountered in log
+  return 6.89462223273368*log(-3.79114704605049*x**2)
+<lambdifygenerated-9615>:2: RuntimeWarning: divide by zero encountered in log
+  return -1.14247509736018*log(-2.28601915520694*x**2)
+<lambdifygenerated-9615>:2: RuntimeWarning: invalid value encountered in log
+  return -1.14247509736018*log(-2.28601915520694*x**2)
+<lambdifygenerated-9616>:2: RuntimeWarning: divide by zero encountered in log
+  return -5.64487081126192*log(8.14811283464063*x**2)
+<lambdifygenerated-9617>:2: RuntimeWarning: divide by zero encountered in log
+  return -2.87699406257819*log(0.203235808731419*x**2)
+<lambdifygenerated-9618>:2: RuntimeWarning: divide by zero encountered in log
+  return 9.85647777529241*log(5.5657703835945*x**2)
+<lambdifygenerated-9619>:2: RuntimeWarning: divide by zero encountered in log
+  return 7.98341216435183*log(1.63102692495755*x**2)
+<lambdifygenerated-9620>:2: RuntimeWarning: divide by zero encountered in log
+  return -8.88219075105221*log(9.34332570161235*x**2)
+<lambdifygenerated-9621>:2: RuntimeWarning: divide by zero encountered in log
+  return 8.42736919733285*log(7.32345820463565*x**2)
+<lambdifygenerated-9622>:2: RuntimeWarning: divide by zero encountered in log
+  return -3.35844026641691*log(-8.7010382036284*x**2)
+<lambdifygenerated-9622>:2: RuntimeWarning: invalid value encountered in log
+  return -3.35844026641691*log(-8.7010382036284*x**2)
+<lambdifygenerated-9623>:2: RuntimeWarning: divide by zero encountered in log
+  return -1.79340596905149*log(-5.62277105220459*x**2)
+<lambdifygenerated-9623>:2: RuntimeWarning: invalid value encountered in log
+  return -1.79340596905149*log(-5.62277105220459*x**2)
+<lambdifygenerated-9624>:2: RuntimeWarning: divide by zero encountered in log
+  return -8.1833674956549*log(9.50321214379884*x**2)
+<lambdifygenerated-9625>:2: RuntimeWarning: divide by zero encountered in log
+  return -8.32793767052575*log(7.13411507375457*x**2)
+<lambdifygenerated-9626>:2: RuntimeWarning: divide by zero encountered in log
+  return -7.64266903031712*log(5.80054782590228*x**2)
+<lambdifygenerated-9627>:2: RuntimeWarning: divide by zero encountered in log
+  return -9.3239159860112*log(7.50082115611832*x**2)
+<lambdifygenerated-9628>:2: RuntimeWarning: divide by zero encountered in log
+  return -4.16910547482759*log(0.420851110572193*x**2)
+<lambdifygenerated-9629>:2: RuntimeWarning: divide by zero encountered in log
+  return -9.47063887430135*log(1.40756992223992*x**2)
+<lambdifygenerated-9630>:2: RuntimeWarning: divide by zero encountered in log
+  return -3.23144230765411*log(8.87180309400194*x**2)
+<lambdifygenerated-9631>:2: RuntimeWarning: divide by zero encountered in log
+  return -2.25830967882738*log(-7.40556657184192*x**2)
+<lambdifygenerated-9631>:2: RuntimeWarning: invalid value encountered in log
+  return -2.25830967882738*log(-7.40556657184192*x**2)
+<lambdifygenerated-9632>:2: RuntimeWarning: divide by zero encountered in log
+  return 5.03409280300964*log(-9.89159065457004*x**2)
+<lambdifygenerated-9632>:2: RuntimeWarning: invalid value encountered in log
+  return 5.03409280300964*log(-9.89159065457004*x**2)
+<lambdifygenerated-9633>:2: RuntimeWarning: divide by zero encountered in log
+  return -7.64137562893167*log(3.97321540612259*x**2)
+<lambdifygenerated-9634>:2: RuntimeWarning: divide by zero encountered in log
+  return -6.77257189749468*log(-9.11030505838485*x**2)
+<lambdifygenerated-9634>:2: RuntimeWarning: invalid value encountered in log
+  return -6.77257189749468*log(-9.11030505838485*x**2)
+<lambdifygenerated-9635>:2: RuntimeWarning: divide by zero encountered in log
+  return -1.40719472477689*log(3.7601571827915*x**2)
+<lambdifygenerated-9636>:2: RuntimeWarning: divide by zero encountered in log
+  return 5.5167140071861*log(6.72247101050913*x**2)
+<lambdifygenerated-9637>:2: RuntimeWarning: divide by zero encountered in log
+  return 0.0716153039826772*log(1.91924275383981*x**2)
+<lambdifygenerated-9638>:2: RuntimeWarning: divide by zero encountered in log
+  return -9.89554772701769*log(1.91924275383981*x**2)
+<lambdifygenerated-9639>:2: RuntimeWarning: divide by zero encountered in log
+  return 4.5115968175081*log(-8.06006485370643*x**2)
+<lambdifygenerated-9639>:2: RuntimeWarning: invalid value encountered in log
+  return 4.5115968175081*log(-8.06006485370643*x**2)
+<lambdifygenerated-9640>:2: RuntimeWarning: divide by zero encountered in log
+  return -2.95107122997695*log(6.17727019333329*x**2)
+<lambdifygenerated-9641>:2: RuntimeWarning: divide by zero encountered in log
+  return 0.126998578933157*log(6.63864297263529*x**2)
+<lambdifygenerated-9642>:2: RuntimeWarning: divide by zero encountered in log
+  return 7.68435904699458*log(2.7731129576114*x**2)
+<lambdifygenerated-9643>:2: RuntimeWarning: divide by zero encountered in log
+  return -8.65280215917993*log(9.35876379647684*x**2)
+<lambdifygenerated-9644>:2: RuntimeWarning: divide by zero encountered in log
+  return -6.34338215430216*log(2.95685158118448*x**2)
+<lambdifygenerated-9645>:2: RuntimeWarning: divide by zero encountered in log
+  return -3.3979771333238*log(7.99067456465525*x**2)
+<lambdifygenerated-9646>:2: RuntimeWarning: divide by zero encountered in log
+  return -5.50911420775432*log(7.36045882559713*x**2)
+<lambdifygenerated-9647>:2: RuntimeWarning: divide by zero encountered in log
+  return 9.26428891786572*log(-9.90908265913469*x**2)
+<lambdifygenerated-9647>:2: RuntimeWarning: invalid value encountered in log
+  return 9.26428891786572*log(-9.90908265913469*x**2)
+<lambdifygenerated-9648>:2: RuntimeWarning: divide by zero encountered in log
+  return 1.37720022481296*log(8.57370716058174*x**2)
+<lambdifygenerated-9649>:2: RuntimeWarning: divide by zero encountered in log
+  return 1.55738952122449*log(-3.20909542770127*x**2)
+<lambdifygenerated-9649>:2: RuntimeWarning: invalid value encountered in log
+  return 1.55738952122449*log(-3.20909542770127*x**2)
+<lambdifygenerated-9650>:2: RuntimeWarning: divide by zero encountered in log
+  return 1.44510977111906*log(-4.60179465176821*x**2)
+<lambdifygenerated-9650>:2: RuntimeWarning: invalid value encountered in log
+  return 1.44510977111906*log(-4.60179465176821*x**2)
+<lambdifygenerated-9651>:2: RuntimeWarning: divide by zero encountered in log
+  return 5.23957605807525*log(-6.45004660738567*x**2)
+<lambdifygenerated-9651>:2: RuntimeWarning: invalid value encountered in log
+  return 5.23957605807525*log(-6.45004660738567*x**2)
+<lambdifygenerated-9652>:2: RuntimeWarning: divide by zero encountered in log
+  return -1.08659043703418*log(-4.02269307536371*x**2)
+<lambdifygenerated-9652>:2: RuntimeWarning: invalid value encountered in log
+  return -1.08659043703418*log(-4.02269307536371*x**2)
+<lambdifygenerated-9653>:2: RuntimeWarning: divide by zero encountered in log
+  return 4.4564681230941*log(6.74520684923815*x**2)
+<lambdifygenerated-9654>:2: RuntimeWarning: divide by zero encountered in log
+  return -5.82051449463463*log(7.43180648789975*x**2)
+<lambdifygenerated-9655>:2: RuntimeWarning: divide by zero encountered in log
+  return -6.47784033285447*log(6.03550862907458*x**2)
+<lambdifygenerated-9656>:2: RuntimeWarning: divide by zero encountered in log
+  return -8.07007027234336*log(3.57183949761632*x**2)
+<lambdifygenerated-9657>:2: RuntimeWarning: divide by zero encountered in log
+  return -5.19774409606881*log(4.29858725720031*x**2)
+<lambdifygenerated-9658>:2: RuntimeWarning: divide by zero encountered in log
+  return 8.4272956201544*log(2.82318793424181*x**2)
+<lambdifygenerated-9659>:2: RuntimeWarning: divide by zero encountered in log
+  return -4.93283370545125*log(6.85081308451264*x**2)
+<lambdifygenerated-9660>:2: RuntimeWarning: divide by zero encountered in log
+  return -6.31010656642798*log(5.79237939773873*x**2)
+<lambdifygenerated-9661>:2: RuntimeWarning: divide by zero encountered in log
+  return -4.16979082471721*log(5.10696098463808*x**2)
+<lambdifygenerated-9662>:2: RuntimeWarning: divide by zero encountered in log
+  return -9.06017336812626*log(-8.7010382036284*x**2)
+<lambdifygenerated-9662>:2: RuntimeWarning: invalid value encountered in log
+  return -9.06017336812626*log(-8.7010382036284*x**2)
+<lambdifygenerated-9663>:2: RuntimeWarning: divide by zero encountered in log
+  return 1.72687122785314*log(8.7044022035745*x**2)
+<lambdifygenerated-9664>:2: RuntimeWarning: divide by zero encountered in log
+  return 7.50241645022561*log(6.20326983157338*x**2)
+<lambdifygenerated-9665>:2: RuntimeWarning: divide by zero encountered in log
+  return -8.32793767052575*log(7.13411507375457*x**2)
+<lambdifygenerated-9666>:2: RuntimeWarning: divide by zero encountered in log
+  return -8.32793766052575*log(7.13411507375457*x**2)
+<lambdifygenerated-9667>:2: RuntimeWarning: divide by zero encountered in log
+  return -8.32793767052575*log(7.13411508375457*x**2)
+model: C0*log(C1*x**2)                                                       ; p: 0.00768                ; error: 1000000000.0
+Estimating model: C0*x**4
+model: C0*x**4                                                               ; p: 0.0055296              ; error: 0.030028493281696492
+Estimating model: C0*sqrt(C1*x)
+model: C0*sqrt(C1*x)                                                         ; p: 0.0192                 ; error: 0.0056232432210355475
+Estimating model: C0*exp(C1*x) + C2
+model: C0*exp(C1*x) + C2                                                     ; p: 0.0055296              ; error: 0.006657758795879255
+Estimating model: C0*x + C1*log(C2*x)
+<lambdifygenerated-15007>:2: RuntimeWarning: divide by zero encountered in log
+  return 9.63012168192786*x + 1.27625738455696*log(-7.90346186889902*x)
+<lambdifygenerated-15007>:2: RuntimeWarning: invalid value encountered in log
+  return 9.63012168192786*x + 1.27625738455696*log(-7.90346186889902*x)
+<lambdifygenerated-15008>:2: RuntimeWarning: divide by zero encountered in log
+  return 6.76165211549428*x - 4.74024423147617*log(2.33957619289872*x)
+<lambdifygenerated-15009>:2: RuntimeWarning: divide by zero encountered in log
+  return -1.2358164143227*x + 6.59903189270286*log(-0.776505820990058*x)
+<lambdifygenerated-15009>:2: RuntimeWarning: invalid value encountered in log
+  return -1.2358164143227*x + 6.59903189270286*log(-0.776505820990058*x)
+<lambdifygenerated-15010>:2: RuntimeWarning: divide by zero encountered in log
+  return 4.31957227716631*x - 4.39665572028875*log(-7.27920914231299*x)
+<lambdifygenerated-15010>:2: RuntimeWarning: invalid value encountered in log
+  return 4.31957227716631*x - 4.39665572028875*log(-7.27920914231299*x)
+<lambdifygenerated-15011>:2: RuntimeWarning: divide by zero encountered in log
+  return 4.48365590931882*x + 4.37144192541277*log(0.772936616573825*x)
+<lambdifygenerated-15012>:2: RuntimeWarning: divide by zero encountered in log
+  return 7.63684063557809*x + 6.18211904464571*log(-0.51179544650473*x)
+<lambdifygenerated-15012>:2: RuntimeWarning: invalid value encountered in log
+  return 7.63684063557809*x + 6.18211904464571*log(-0.51179544650473*x)
+<lambdifygenerated-15013>:2: RuntimeWarning: divide by zero encountered in log
+  return 2.66206002037374*x + 9.97688834524111*log(6.83850759127122*x)
+<lambdifygenerated-15014>:2: RuntimeWarning: divide by zero encountered in log
+  return -4.46246731036265*x - 9.01947884345348*log(3.06633267368096*x)
+<lambdifygenerated-15015>:2: RuntimeWarning: divide by zero encountered in log
+  return 9.6791700719891*x - 0.25908787215141*log(-8.70358184053108*x)
+<lambdifygenerated-15015>:2: RuntimeWarning: invalid value encountered in log
+  return 9.6791700719891*x - 0.25908787215141*log(-8.70358184053108*x)
+<lambdifygenerated-15016>:2: RuntimeWarning: divide by zero encountered in log
+  return -0.690445636124231*x + 0.360588081941309*log(-9.22037381637333*x)
+<lambdifygenerated-15016>:2: RuntimeWarning: invalid value encountered in log
+  return -0.690445636124231*x + 0.360588081941309*log(-9.22037381637333*x)
+<lambdifygenerated-15017>:2: RuntimeWarning: divide by zero encountered in log
+  return 8.20876652262139*x + 9.25821591696004*log(4.03818778259554*x)
+<lambdifygenerated-15018>:2: RuntimeWarning: divide by zero encountered in log
+  return -9.3873929531912*x - 0.652363788324118*log(3.86876730742213*x)
+<lambdifygenerated-15019>:2: RuntimeWarning: divide by zero encountered in log
+  return -4.30157899034239*x - 6.38716258584098*log(-4.32528445099102*x)
+<lambdifygenerated-15019>:2: RuntimeWarning: invalid value encountered in log
+  return -4.30157899034239*x - 6.38716258584098*log(-4.32528445099102*x)
+<lambdifygenerated-15020>:2: RuntimeWarning: divide by zero encountered in log
+  return 6.45831921447359*x - 1.65500811155449*log(9.07009963883996*x)
+<lambdifygenerated-15021>:2: RuntimeWarning: divide by zero encountered in log
+  return -2.32400516250497*x - 2.37261083633976*log(-1.06434595958756*x)
+<lambdifygenerated-15021>:2: RuntimeWarning: invalid value encountered in log
+  return -2.32400516250497*x - 2.37261083633976*log(-1.06434595958756*x)
+<lambdifygenerated-15022>:2: RuntimeWarning: divide by zero encountered in log
+  return -6.73580217298159*x - 1.84649090583654*log(-6.48965936700415*x)
+<lambdifygenerated-15022>:2: RuntimeWarning: invalid value encountered in log
+  return -6.73580217298159*x - 1.84649090583654*log(-6.48965936700415*x)
+<lambdifygenerated-15023>:2: RuntimeWarning: divide by zero encountered in log
+  return -8.99190516843889*x - 4.0911332861802*log(-5.70510755098498*x)
+<lambdifygenerated-15023>:2: RuntimeWarning: invalid value encountered in log
+  return -8.99190516843889*x - 4.0911332861802*log(-5.70510755098498*x)
+<lambdifygenerated-15024>:2: RuntimeWarning: divide by zero encountered in log
+  return 0.495306329828908*x - 7.193182722297*log(7.79274744196594*x)
+<lambdifygenerated-15025>:2: RuntimeWarning: divide by zero encountered in log
+  return -7.33468477885816*x - 6.02890596819*log(-1.53287362326048*x)
+<lambdifygenerated-15025>:2: RuntimeWarning: invalid value encountered in log
+  return -7.33468477885816*x - 6.02890596819*log(-1.53287362326048*x)
+<lambdifygenerated-15026>:2: RuntimeWarning: divide by zero encountered in log
+  return 5.94784120951559*x - 5.23308161318866*log(-3.23961820117513*x)
+<lambdifygenerated-15026>:2: RuntimeWarning: invalid value encountered in log
+  return 5.94784120951559*x - 5.23308161318866*log(-3.23961820117513*x)
+<lambdifygenerated-15027>:2: RuntimeWarning: divide by zero encountered in log
+  return -9.97765560813271*x + 7.34963655066176*log(9.79582705469616*x)
+<lambdifygenerated-15028>:2: RuntimeWarning: divide by zero encountered in log
+  return -8.48915338299336*x + 7.32805724202489*log(-4.6185229531185*x)
+<lambdifygenerated-15028>:2: RuntimeWarning: invalid value encountered in log
+  return -8.48915338299336*x + 7.32805724202489*log(-4.6185229531185*x)
+<lambdifygenerated-15029>:2: RuntimeWarning: divide by zero encountered in log
+  return 5.231257120933*x - 5.81038407899799*log(1.93651968348851*x)
+<lambdifygenerated-15030>:2: RuntimeWarning: divide by zero encountered in log
+  return 3.70817056591881*x + 6.83449216820891*log(1.01894373835446*x)
+<lambdifygenerated-15031>:2: RuntimeWarning: divide by zero encountered in log
+  return 1.74264847901944*x + 5.75478485640487*log(0.321234284981582*x)
+<lambdifygenerated-15032>:2: RuntimeWarning: divide by zero encountered in log
+  return -3.01041070232022*x + 1.66064415993941*log(6.27439919849482*x)
+<lambdifygenerated-15033>:2: RuntimeWarning: divide by zero encountered in log
+  return 2.26913663694702*x + 1.76828040319697*log(-5.33523868469465*x)
+<lambdifygenerated-15033>:2: RuntimeWarning: invalid value encountered in log
+  return 2.26913663694702*x + 1.76828040319697*log(-5.33523868469465*x)
+<lambdifygenerated-15034>:2: RuntimeWarning: divide by zero encountered in log
+  return -8.09258463840656*x + 3.5009559943119*log(5.07506765009362*x)
+<lambdifygenerated-15035>:2: RuntimeWarning: divide by zero encountered in log
+  return -6.18050951839198*x - 2.1819376926417*log(-6.71010079617101*x)
+<lambdifygenerated-15035>:2: RuntimeWarning: invalid value encountered in log
+  return -6.18050951839198*x - 2.1819376926417*log(-6.71010079617101*x)
+<lambdifygenerated-15036>:2: RuntimeWarning: divide by zero encountered in log
+  return -5.29767319000062*x + 0.222124619582083*log(8.0851259827688*x)
+<lambdifygenerated-15037>:2: RuntimeWarning: divide by zero encountered in log
+  return -0.59867041520266*x - 3.51256214485525*log(-9.47518119745071*x)
+<lambdifygenerated-15037>:2: RuntimeWarning: invalid value encountered in log
+  return -0.59867041520266*x - 3.51256214485525*log(-9.47518119745071*x)
+<lambdifygenerated-15038>:2: RuntimeWarning: divide by zero encountered in log
+  return -5.76258938309147*x - 9.68844332824085*log(-8.62056194186176*x)
+<lambdifygenerated-15038>:2: RuntimeWarning: invalid value encountered in log
+  return -5.76258938309147*x - 9.68844332824085*log(-8.62056194186176*x)
+<lambdifygenerated-15039>:2: RuntimeWarning: divide by zero encountered in log
+  return -7.1495721587172*x + 2.837921056719*log(-2.10249801107721*x)
+<lambdifygenerated-15039>:2: RuntimeWarning: invalid value encountered in log
+  return -7.1495721587172*x + 2.837921056719*log(-2.10249801107721*x)
+<lambdifygenerated-15040>:2: RuntimeWarning: divide by zero encountered in log
+  return 4.68756339573666*x - 2.90228481953618*log(6.36620852440771*x)
+<lambdifygenerated-15041>:2: RuntimeWarning: divide by zero encountered in log
+  return -5.38182834366459*x - 3.75476861783131*log(-3.8428988087293*x)
+<lambdifygenerated-15041>:2: RuntimeWarning: invalid value encountered in log
+  return -5.38182834366459*x - 3.75476861783131*log(-3.8428988087293*x)
+<lambdifygenerated-15042>:2: RuntimeWarning: divide by zero encountered in log
+  return -2.98017222017968*x + 3.70798845082012*log(7.56444648756008*x)
+<lambdifygenerated-15043>:2: RuntimeWarning: divide by zero encountered in log
+  return 6.20095443083389*x + 8.24205666584002*log(8.72014090556638*x)
+<lambdifygenerated-15044>:2: RuntimeWarning: divide by zero encountered in log
+  return -9.19248549699251*x - 9.45295521816747*log(2.2787757447794*x)
+<lambdifygenerated-15045>:2: RuntimeWarning: divide by zero encountered in log
+  return 3.6173473408372*x - 8.56490329260978*log(-8.09692491228561*x)
+<lambdifygenerated-15045>:2: RuntimeWarning: invalid value encountered in log
+  return 3.6173473408372*x - 8.56490329260978*log(-8.09692491228561*x)
+<lambdifygenerated-15046>:2: RuntimeWarning: divide by zero encountered in log
+  return 1.61178000211311*x - 3.2875136970556*log(1.45156902154052*x)
+<lambdifygenerated-15047>:2: RuntimeWarning: divide by zero encountered in log
+  return 7.27038755773231*x - 8.23077990743134*log(7.01148472054945*x)
+<lambdifygenerated-15048>:2: RuntimeWarning: divide by zero encountered in log
+  return 3.13905325326841*x + 4.82546816702356*log(5.45807107458482*x)
+<lambdifygenerated-15049>:2: RuntimeWarning: divide by zero encountered in log
+  return 2.88253120225419*x + 3.20806058746117*log(-0.0244488418835564*x)
+<lambdifygenerated-15049>:2: RuntimeWarning: invalid value encountered in log
+  return 2.88253120225419*x + 3.20806058746117*log(-0.0244488418835564*x)
+<lambdifygenerated-15050>:2: RuntimeWarning: divide by zero encountered in log
+  return -4.8478190796862*x + 5.61075468844531*log(-1.77075468982375*x)
+<lambdifygenerated-15050>:2: RuntimeWarning: invalid value encountered in log
+  return -4.8478190796862*x + 5.61075468844531*log(-1.77075468982375*x)
+<lambdifygenerated-15051>:2: RuntimeWarning: divide by zero encountered in log
+  return 0.885295447079002*x + 9.5265274604693*log(-4.90504535831828*x)
+<lambdifygenerated-15051>:2: RuntimeWarning: invalid value encountered in log
+  return 0.885295447079002*x + 9.5265274604693*log(-4.90504535831828*x)
+<lambdifygenerated-15052>:2: RuntimeWarning: divide by zero encountered in log
+  return -3.5425661311546*x - 1.01131406235887*log(-6.14186828802224*x)
+<lambdifygenerated-15052>:2: RuntimeWarning: invalid value encountered in log
+  return -3.5425661311546*x - 1.01131406235887*log(-6.14186828802224*x)
+<lambdifygenerated-15053>:2: RuntimeWarning: divide by zero encountered in log
+  return 7.99797087599869*x + 8.72497037216176*log(-7.39093140796894*x)
+<lambdifygenerated-15053>:2: RuntimeWarning: invalid value encountered in log
+  return 7.99797087599869*x + 8.72497037216176*log(-7.39093140796894*x)
+<lambdifygenerated-15054>:2: RuntimeWarning: divide by zero encountered in log
+  return -2.50161569889802*x - 7.50605316628994*log(4.84003608534527*x)
+<lambdifygenerated-15055>:2: RuntimeWarning: divide by zero encountered in log
+  return -1.3751799500338*x + 4.1385666749633*log(5.95434071883805*x)
+<lambdifygenerated-15056>:2: RuntimeWarning: divide by zero encountered in log
+  return -0.139354819771554*x - 7.95457127901665*log(0.335513571178403*x)
+<lambdifygenerated-15057>:2: RuntimeWarning: divide by zero encountered in log
+  return 8.46869713782413*x + 2.4987056414381*log(-3.54908377964376*x)
+<lambdifygenerated-15057>:2: RuntimeWarning: invalid value encountered in log
+  return 8.46869713782413*x + 2.4987056414381*log(-3.54908377964376*x)
+<lambdifygenerated-15058>:2: RuntimeWarning: divide by zero encountered in log
+  return 9.22363898081638*x - 0.835517465812301*log(2.9860530564484*x)
+<lambdifygenerated-15059>:2: RuntimeWarning: divide by zero encountered in log
+  return -6.61566237402141*x + 2.30648723363782*log(4.62406144125667*x)
+<lambdifygenerated-15060>:2: RuntimeWarning: divide by zero encountered in log
+  return 0.237369561380021*x + 8.4100776129787*log(8.63155571610522*x)
+<lambdifygenerated-15061>:2: RuntimeWarning: divide by zero encountered in log
+  return 5.65079315241631*x + 7.75117672166199*log(3.33521737962603*x)
+<lambdifygenerated-15062>:2: RuntimeWarning: divide by zero encountered in log
+  return 8.73585343319355*x + 0.976348293818132*log(-5.29095146087964*x)
+<lambdifygenerated-15062>:2: RuntimeWarning: invalid value encountered in log
+  return 8.73585343319355*x + 0.976348293818132*log(-5.29095146087964*x)
+<lambdifygenerated-15063>:2: RuntimeWarning: divide by zero encountered in log
+  return -3.98270645276594*x - 5.55217549032338*log(-2.59758483430211*x)
+<lambdifygenerated-15063>:2: RuntimeWarning: invalid value encountered in log
+  return -3.98270645276594*x - 5.55217549032338*log(-2.59758483430211*x)
+<lambdifygenerated-15064>:2: RuntimeWarning: divide by zero encountered in log
+  return -1.9642835760032*x + 5.00416461065974*log(-2.74347311687524*x)
+<lambdifygenerated-15064>:2: RuntimeWarning: invalid value encountered in log
+  return -1.9642835760032*x + 5.00416461065974*log(-2.74347311687524*x)
+<lambdifygenerated-15065>:2: RuntimeWarning: divide by zero encountered in log
+  return 1.00742964718633*x - 6.75155919133055*log(-9.88291693456867*x)
+<lambdifygenerated-15065>:2: RuntimeWarning: invalid value encountered in log
+  return 1.00742964718633*x - 6.75155919133055*log(-9.88291693456867*x)
+<lambdifygenerated-15066>:2: RuntimeWarning: divide by zero encountered in log
+  return -7.69671733732586*x - 8.6824523093646*log(9.55154472591224*x)
+<lambdifygenerated-15067>:2: RuntimeWarning: divide by zero encountered in log
+  return 5.17292711331292*x - 3.01004501435464*log(-2.74641026812387*x)
+<lambdifygenerated-15067>:2: RuntimeWarning: invalid value encountered in log
+  return 5.17292711331292*x - 3.01004501435464*log(-2.74641026812387*x)
+<lambdifygenerated-15068>:2: RuntimeWarning: divide by zero encountered in log
+  return 6.76165211549428*x - 4.96678215250645*log(-4.37233705879093*x)
+<lambdifygenerated-15068>:2: RuntimeWarning: invalid value encountered in log
+  return 6.76165211549428*x - 4.96678215250645*log(-4.37233705879093*x)
+<lambdifygenerated-15069>:2: RuntimeWarning: divide by zero encountered in log
+  return 7.80427664619789*x - 0.382754833712909*log(-4.17581765416942*x)
+<lambdifygenerated-15069>:2: RuntimeWarning: invalid value encountered in log
+  return 7.80427664619789*x - 0.382754833712909*log(-4.17581765416942*x)
+<lambdifygenerated-15070>:2: RuntimeWarning: divide by zero encountered in log
+  return 2.82116604946198*x + 2.92942047495089*log(-3.76497287532118*x)
+<lambdifygenerated-15070>:2: RuntimeWarning: invalid value encountered in log
+  return 2.82116604946198*x + 2.92942047495089*log(-3.76497287532118*x)
+<lambdifygenerated-15071>:2: RuntimeWarning: divide by zero encountered in log
+  return 5.70871116887975*x - 4.06515656384955*log(-0.822988059649795*x)
+<lambdifygenerated-15071>:2: RuntimeWarning: invalid value encountered in log
+  return 5.70871116887975*x - 4.06515656384955*log(-0.822988059649795*x)
+<lambdifygenerated-15072>:2: RuntimeWarning: divide by zero encountered in log
+  return 7.63684063557809*x + 6.18211904464571*log(-1.97198335714886*x)
+<lambdifygenerated-15072>:2: RuntimeWarning: invalid value encountered in log
+  return 7.63684063557809*x + 6.18211904464571*log(-1.97198335714886*x)
+<lambdifygenerated-15073>:2: RuntimeWarning: divide by zero encountered in log
+  return 2.66206002037374*x - 9.46027732988551*log(-6.73042833144843*x)
+<lambdifygenerated-15073>:2: RuntimeWarning: invalid value encountered in log
+  return 2.66206002037374*x - 9.46027732988551*log(-6.73042833144843*x)
+<lambdifygenerated-15074>:2: RuntimeWarning: divide by zero encountered in log
+  return 3.27924096245684*x - 1.20413092465715*log(-6.72043520295774*x)
+<lambdifygenerated-15074>:2: RuntimeWarning: invalid value encountered in log
+  return 3.27924096245684*x - 1.20413092465715*log(-6.72043520295774*x)
+<lambdifygenerated-15075>:2: RuntimeWarning: divide by zero encountered in log
+  return -3.55005429647574*x + 6.56843489789475*log(-0.613624621549335*x)
+<lambdifygenerated-15075>:2: RuntimeWarning: invalid value encountered in log
+  return -3.55005429647574*x + 6.56843489789475*log(-0.613624621549335*x)
+<lambdifygenerated-15076>:2: RuntimeWarning: divide by zero encountered in log
+  return -3.42036944376231*x - 3.60578218368462*log(4.21398288160485*x)
+<lambdifygenerated-15077>:2: RuntimeWarning: divide by zero encountered in log
+  return 1.26200205609254*x - 1.468583422668*log(2.78139431001635*x)
+<lambdifygenerated-15078>:2: RuntimeWarning: divide by zero encountered in log
+  return 7.15895098378866*x + 4.29132808322362*log(-5.49716404525188*x)
+<lambdifygenerated-15078>:2: RuntimeWarning: invalid value encountered in log
+  return 7.15895098378866*x + 4.29132808322362*log(-5.49716404525188*x)
+<lambdifygenerated-15079>:2: RuntimeWarning: divide by zero encountered in log
+  return -0.637229661651915*x - 6.38716258584098*log(-4.32528445099102*x)
+<lambdifygenerated-15079>:2: RuntimeWarning: invalid value encountered in log
+  return -0.637229661651915*x - 6.38716258584098*log(-4.32528445099102*x)
+<lambdifygenerated-15080>:2: RuntimeWarning: divide by zero encountered in log
+  return 6.45831921447359*x + 2.99952253860033*log(-4.24378272103662*x)
+<lambdifygenerated-15080>:2: RuntimeWarning: invalid value encountered in log
+  return 6.45831921447359*x + 2.99952253860033*log(-4.24378272103662*x)
+<lambdifygenerated-15081>:2: RuntimeWarning: divide by zero encountered in log
+  return -2.32400516250497*x - 3.25449536238072*log(-6.47467001134068*x)
+<lambdifygenerated-15081>:2: RuntimeWarning: invalid value encountered in log
+  return -2.32400516250497*x - 3.25449536238072*log(-6.47467001134068*x)
+<lambdifygenerated-15082>:2: RuntimeWarning: divide by zero encountered in log
+  return -6.73580217298159*x - 2.39510004849614*log(-1.19257060770287*x)
+<lambdifygenerated-15082>:2: RuntimeWarning: invalid value encountered in log
+  return -6.73580217298159*x - 2.39510004849614*log(-1.19257060770287*x)
+<lambdifygenerated-15083>:2: RuntimeWarning: divide by zero encountered in log
+  return 4.83048010889038*x - 8.53277195458515*log(-5.70510755098498*x)
+<lambdifygenerated-15083>:2: RuntimeWarning: invalid value encountered in log
+  return 4.83048010889038*x - 8.53277195458515*log(-5.70510755098498*x)
+<lambdifygenerated-15084>:2: RuntimeWarning: divide by zero encountered in log
+  return 0.834820919088703*x - 2.47878847454522*log(-2.77611973059304*x)
+<lambdifygenerated-15084>:2: RuntimeWarning: invalid value encountered in log
+  return 0.834820919088703*x - 2.47878847454522*log(-2.77611973059304*x)
+<lambdifygenerated-15085>:2: RuntimeWarning: divide by zero encountered in log
+  return 3.89636297998638*x - 5.68902241239379*log(6.85675231388498*x)
+<lambdifygenerated-15086>:2: RuntimeWarning: divide by zero encountered in log
+  return -3.22878450246565*x - 6.17750513961796*log(-5.59627230173014*x)
+<lambdifygenerated-15086>:2: RuntimeWarning: invalid value encountered in log
+  return -3.22878450246565*x - 6.17750513961796*log(-5.59627230173014*x)
+<lambdifygenerated-15087>:2: RuntimeWarning: divide by zero encountered in log
+  return 4.09117090775002*x - 5.87552817107129*log(9.79582705469616*x)
+<lambdifygenerated-15088>:2: RuntimeWarning: divide by zero encountered in log
+  return 2.55954732414458*x - 8.2867624189083*log(-4.6185229531185*x)
+<lambdifygenerated-15088>:2: RuntimeWarning: invalid value encountered in log
+  return 2.55954732414458*x - 8.2867624189083*log(-4.6185229531185*x)
+<lambdifygenerated-15089>:2: RuntimeWarning: divide by zero encountered in log
+  return 7.22671963225654*x - 5.16358539187248*log(3.71566673338865*x)
+<lambdifygenerated-15090>:2: RuntimeWarning: divide by zero encountered in log
+  return -3.2398786728321*x - 8.40765604912784*log(-1.63666965390464*x)
+<lambdifygenerated-15090>:2: RuntimeWarning: invalid value encountered in log
+  return -3.2398786728321*x - 8.40765604912784*log(-1.63666965390464*x)
+<lambdifygenerated-15091>:2: RuntimeWarning: divide by zero encountered in log
+  return 1.74264847901944*x - 1.80427984281894*log(-3.58181166831387*x)
+<lambdifygenerated-15091>:2: RuntimeWarning: invalid value encountered in log
+  return 1.74264847901944*x - 1.80427984281894*log(-3.58181166831387*x)
+<lambdifygenerated-15092>:2: RuntimeWarning: divide by zero encountered in log
+  return -2.05149708054403*x + 1.66064415993941*log(-9.35919927428317*x)
+<lambdifygenerated-15092>:2: RuntimeWarning: invalid value encountered in log
+  return -2.05149708054403*x + 1.66064415993941*log(-9.35919927428317*x)
+<lambdifygenerated-15093>:2: RuntimeWarning: divide by zero encountered in log
+  return 2.66368018038738*x + 0.793867803699193*log(3.17622313433326*x)
+<lambdifygenerated-15094>:2: RuntimeWarning: divide by zero encountered in log
+  return -1.0220223964807*x + 5.86843174644457*log(-9.29038681020636*x)
+<lambdifygenerated-15094>:2: RuntimeWarning: invalid value encountered in log
+  return -1.0220223964807*x + 5.86843174644457*log(-9.29038681020636*x)
+<lambdifygenerated-15095>:2: RuntimeWarning: divide by zero encountered in log
+  return -2.33164432965586*x - 2.1819376926417*log(-1.8351743766274*x)
+<lambdifygenerated-15095>:2: RuntimeWarning: invalid value encountered in log
+  return -2.33164432965586*x - 2.1819376926417*log(-1.8351743766274*x)
+<lambdifygenerated-15096>:2: RuntimeWarning: divide by zero encountered in log
+  return 5.58691475668566*x - 6.01867151778627*log(6.36165540457514*x)
+<lambdifygenerated-15097>:2: RuntimeWarning: divide by zero encountered in log
+  return 7.47965307282086*x + 1.30607866995678*log(-1.30686878683733*x)
+<lambdifygenerated-15097>:2: RuntimeWarning: invalid value encountered in log
+  return 7.47965307282086*x + 1.30607866995678*log(-1.30686878683733*x)
+<lambdifygenerated-15098>:2: RuntimeWarning: divide by zero encountered in log
+  return 8.72921737914387*x - 9.68844332824085*log(5.01286874360381*x)
+<lambdifygenerated-15099>:2: RuntimeWarning: divide by zero encountered in log
+  return 4.06294155228724*x - 1.19293947138526*log(-4.86121299836791*x)
+<lambdifygenerated-15099>:2: RuntimeWarning: invalid value encountered in log
+  return 4.06294155228724*x - 1.19293947138526*log(-4.86121299836791*x)
+<lambdifygenerated-15100>:2: RuntimeWarning: divide by zero encountered in log
+  return 6.25159136577653*x - 2.90228481953618*log(-2.65646120383036*x)
+<lambdifygenerated-15100>:2: RuntimeWarning: invalid value encountered in log
+  return 6.25159136577653*x - 2.90228481953618*log(-2.65646120383036*x)
+<lambdifygenerated-15101>:2: RuntimeWarning: divide by zero encountered in log
+  return -5.38182834366459*x - 3.75476861783131*log(2.04298540586459*x)
+<lambdifygenerated-15102>:2: RuntimeWarning: divide by zero encountered in log
+  return 8.26826766139781*x + 3.70798845082012*log(-2.09066411130403*x)
+<lambdifygenerated-15102>:2: RuntimeWarning: invalid value encountered in log
+  return 8.26826766139781*x + 3.70798845082012*log(-2.09066411130403*x)
+<lambdifygenerated-15103>:2: RuntimeWarning: divide by zero encountered in log
+  return 6.94272516676136*x + 0.642448505592705*log(-3.61101321631455*x)
+<lambdifygenerated-15103>:2: RuntimeWarning: invalid value encountered in log
+  return 6.94272516676136*x + 0.642448505592705*log(-3.61101321631455*x)
+<lambdifygenerated-15104>:2: RuntimeWarning: divide by zero encountered in log
+  return -4.18336711636261*x - 2.90349370857934*log(5.27539768903269*x)
+<lambdifygenerated-15105>:2: RuntimeWarning: divide by zero encountered in log
+  return -5.3837593302878*x + 5.3833256856649*log(2.26498724283679*x)
+<lambdifygenerated-15106>:2: RuntimeWarning: divide by zero encountered in log
+  return 8.57895806506379*x + 6.69620102644488*log(-0.97101632769347*x)
+<lambdifygenerated-15106>:2: RuntimeWarning: invalid value encountered in log
+  return 8.57895806506379*x + 6.69620102644488*log(-0.97101632769347*x)
+<lambdifygenerated-15107>:2: RuntimeWarning: divide by zero encountered in log
+  return 5.06060501576451*x - 8.23077990743134*log(-1.26799896356545*x)
+<lambdifygenerated-15107>:2: RuntimeWarning: invalid value encountered in log
+  return 5.06060501576451*x - 8.23077990743134*log(-1.26799896356545*x)
+<lambdifygenerated-15108>:2: RuntimeWarning: divide by zero encountered in log
+  return 0.57968154124489*x - 5.49036808772807*log(-1.33820848266991*x)
+<lambdifygenerated-15108>:2: RuntimeWarning: invalid value encountered in log
+  return 0.57968154124489*x - 5.49036808772807*log(-1.33820848266991*x)
+<lambdifygenerated-15109>:2: RuntimeWarning: divide by zero encountered in log
+  return 5.03904183883512*x - 4.62869795618742*log(-1.30567430138564*x)
+<lambdifygenerated-15109>:2: RuntimeWarning: invalid value encountered in log
+  return 5.03904183883512*x - 4.62869795618742*log(-1.30567430138564*x)
+<lambdifygenerated-15110>:2: RuntimeWarning: divide by zero encountered in log
+  return -4.8478190796862*x + 5.79958058187392*log(-8.86378236579752*x)
+<lambdifygenerated-15110>:2: RuntimeWarning: invalid value encountered in log
+  return -4.8478190796862*x + 5.79958058187392*log(-8.86378236579752*x)
+<lambdifygenerated-15111>:2: RuntimeWarning: divide by zero encountered in log
+  return 2.84026394296248*x - 8.03253236569949*log(-4.90504535831828*x)
+<lambdifygenerated-15111>:2: RuntimeWarning: invalid value encountered in log
+  return 2.84026394296248*x - 8.03253236569949*log(-4.90504535831828*x)
+<lambdifygenerated-15112>:2: RuntimeWarning: divide by zero encountered in log
+  return -3.5425661311546*x - 7.18684731547128*log(-0.169160711845677*x)
+<lambdifygenerated-15112>:2: RuntimeWarning: invalid value encountered in log
+  return -3.5425661311546*x - 7.18684731547128*log(-0.169160711845677*x)
+<lambdifygenerated-15113>:2: RuntimeWarning: divide by zero encountered in log
+  return 7.61286026202252*x - 2.96301802892641*log(-3.06761313242114*x)
+<lambdifygenerated-15113>:2: RuntimeWarning: invalid value encountered in log
+  return 7.61286026202252*x - 2.96301802892641*log(-3.06761313242114*x)
+<lambdifygenerated-15114>:2: RuntimeWarning: divide by zero encountered in log
+  return -2.50161569889802*x - 3.31377447100313*log(2.05803017219316*x)
+<lambdifygenerated-15115>:2: RuntimeWarning: divide by zero encountered in log
+  return 9.05716660841533*x + 7.52593558189091*log(-0.734101072858386*x)
+<lambdifygenerated-15115>:2: RuntimeWarning: invalid value encountered in log
+  return 9.05716660841533*x + 7.52593558189091*log(-0.734101072858386*x)
+<lambdifygenerated-15116>:2: RuntimeWarning: divide by zero encountered in log
+  return 0.883946483727418*x - 7.52615819028061*log(-0.12322416006838*x)
+<lambdifygenerated-15116>:2: RuntimeWarning: invalid value encountered in log
+  return 0.883946483727418*x - 7.52615819028061*log(-0.12322416006838*x)
+<lambdifygenerated-15117>:2: RuntimeWarning: divide by zero encountered in log
+  return 0.143715324993683*x - 3.17403109915856*log(-5.24746098602654*x)
+<lambdifygenerated-15117>:2: RuntimeWarning: invalid value encountered in log
+  return 0.143715324993683*x - 3.17403109915856*log(-5.24746098602654*x)
+<lambdifygenerated-15118>:2: RuntimeWarning: divide by zero encountered in log
+  return 9.22363898081638*x - 0.835517465812301*log(-4.31659795697828*x)
+<lambdifygenerated-15118>:2: RuntimeWarning: invalid value encountered in log
+  return 9.22363898081638*x - 0.835517465812301*log(-4.31659795697828*x)
+<lambdifygenerated-15119>:2: RuntimeWarning: divide by zero encountered in log
+  return -6.61566237402141*x - 9.42018892773514*log(-7.38660211569538*x)
+<lambdifygenerated-15119>:2: RuntimeWarning: invalid value encountered in log
+  return -6.61566237402141*x - 9.42018892773514*log(-7.38660211569538*x)
+<lambdifygenerated-15120>:2: RuntimeWarning: divide by zero encountered in log
+  return 4.80874355323394*x - 3.79014120165362*log(-1.51645054446161*x)
+<lambdifygenerated-15120>:2: RuntimeWarning: invalid value encountered in log
+  return 4.80874355323394*x - 3.79014120165362*log(-1.51645054446161*x)
+<lambdifygenerated-15121>:2: RuntimeWarning: divide by zero encountered in log
+  return 5.89860808000017*x - 1.08777585934651*log(3.33521737962603*x)
+<lambdifygenerated-15122>:2: RuntimeWarning: divide by zero encountered in log
+  return 6.19338677881218*x + 0.976348293818132*log(-5.29095146087964*x)
+<lambdifygenerated-15122>:2: RuntimeWarning: invalid value encountered in log
+  return 6.19338677881218*x + 0.976348293818132*log(-5.29095146087964*x)
+<lambdifygenerated-15123>:2: RuntimeWarning: divide by zero encountered in log
+  return 1.3243381076666*x - 5.09658536484009*log(-4.27252376846578*x)
+<lambdifygenerated-15123>:2: RuntimeWarning: invalid value encountered in log
+  return 1.3243381076666*x - 5.09658536484009*log(-4.27252376846578*x)
+<lambdifygenerated-15124>:2: RuntimeWarning: divide by zero encountered in log
+  return 7.79449614378686*x + 0.549590110636091*log(8.99005527261224*x)
+<lambdifygenerated-15125>:2: RuntimeWarning: divide by zero encountered in log
+  return -0.530302543515119*x + 0.0505455086194639*log(-8.10204127534225*x)
+<lambdifygenerated-15125>:2: RuntimeWarning: invalid value encountered in log
+  return -0.530302543515119*x + 0.0505455086194639*log(-8.10204127534225*x)
+<lambdifygenerated-15126>:2: RuntimeWarning: divide by zero encountered in log
+  return 3.53613220804448*x - 3.04159240744603*log(9.55154472591224*x)
+<lambdifygenerated-15127>:2: RuntimeWarning: divide by zero encountered in log
+  return 5.17292711331292*x - 3.01004501435464*log(-2.74641026812387*x)
+<lambdifygenerated-15127>:2: RuntimeWarning: invalid value encountered in log
+  return 5.17292711331292*x - 3.01004501435464*log(-2.74641026812387*x)
+<lambdifygenerated-15128>:2: RuntimeWarning: divide by zero encountered in log
+  return 5.17292712331292*x - 3.01004501435464*log(-2.74641026812387*x)
+<lambdifygenerated-15128>:2: RuntimeWarning: invalid value encountered in log
+  return 5.17292712331292*x - 3.01004501435464*log(-2.74641026812387*x)
+<lambdifygenerated-15129>:2: RuntimeWarning: divide by zero encountered in log
+  return 5.17292711331292*x - 3.01004500435464*log(-2.74641026812387*x)
+<lambdifygenerated-15129>:2: RuntimeWarning: invalid value encountered in log
+  return 5.17292711331292*x - 3.01004500435464*log(-2.74641026812387*x)
+<lambdifygenerated-15130>:2: RuntimeWarning: divide by zero encountered in log
+  return 5.17292711331292*x - 3.01004501435464*log(-2.74641025812387*x)
+<lambdifygenerated-15130>:2: RuntimeWarning: invalid value encountered in log
+  return 5.17292711331292*x - 3.01004501435464*log(-2.74641025812387*x)
+model: C0*x + C1*log(C2*x)                                                   ; p: 0.0011059199999999998  ; error: 1000000000.0
+Estimating model: C0*x**6
+model: C0*x**6                                                               ; p: 0.0008847360000000002  ; error: 0.03540189392451991
+Estimating model: C0*sqrt(C1*x**2) + C2
+model: C0*sqrt(C1*x**2) + C2                                                 ; p: 0.00015925248          ; error: 0.006629423105765227
+Estimating model: C0*exp(C1*x**3)
+model: C0*exp(C1*x**3)                                                       ; p: 0.003072               ; error: 0.008775425724271065
+Estimating model: C0*x**2 + C1*x
+model: C0*x**2 + C1*x                                                        ; p: 0.001990656            ; error: 0.0019082712853190954
+Estimating model: C0*x**2 + C1*sqrt(C2*x) + C3
+model: C0*x**2 + C1*sqrt(C2*x) + C3                                          ; p: 2.9353417113600003e-07 ; error: 0.002613894288146299
+Estimating model: C0*exp(C1*x)
+model: C0*exp(C1*x)                                                          ; p: 0.0192                 ; error: 0.00721521329206391
+Estimating model: C0*exp(C1*x**8) + C2*log(C3*x) + C4
+<lambdifygenerated-27497>:2: RuntimeWarning: divide by zero encountered in log
+  return 6.90336374027345*exp(9.48012161661733*x**8) - 0.272424573218406*log(-5.26943082339477*x) - 2.36871470324009
+<lambdifygenerated-27497>:2: RuntimeWarning: invalid value encountered in log
+  return 6.90336374027345*exp(9.48012161661733*x**8) - 0.272424573218406*log(-5.26943082339477*x) - 2.36871470324009
+<lambdifygenerated-27498>:2: RuntimeWarning: divide by zero encountered in log
+  return -8.79316169907036*exp(9.23991886089428*x**8) + 2.85799749689815*log(-0.103329994353699*x) - 4.51966692165515
+<lambdifygenerated-27498>:2: RuntimeWarning: invalid value encountered in log
+  return -8.79316169907036*exp(9.23991886089428*x**8) + 2.85799749689815*log(-0.103329994353699*x) - 4.51966692165515
+<lambdifygenerated-27499>:2: RuntimeWarning: divide by zero encountered in log
+  return 2.21982079238699*exp(9.79649673380407*x**8) - 1.46721890947982*log(3.19939972480763*x) + 3.52944754668554
+<lambdifygenerated-27500>:2: RuntimeWarning: divide by zero encountered in log
+  return -5.44477032127352*exp(1.33041834638928*x**8) + 9.59761600629842*log(9.50879406539383*x) + 4.85531381659328
+<lambdifygenerated-27501>:2: RuntimeWarning: divide by zero encountered in log
+  return 6.67925895158727*log(5.62569129055826*x) + 9.77692718682384 + 9.6527235097621*exp(-8.26434436876665*x**8)
+<lambdifygenerated-27502>:2: RuntimeWarning: divide by zero encountered in log
+  return -0.145875941336537*log(-8.50057574228712*x) + 4.21219042102053 + 5.08632078234547*exp(-4.96834920418795*x**8)
+<lambdifygenerated-27502>:2: RuntimeWarning: invalid value encountered in log
+  return -0.145875941336537*log(-8.50057574228712*x) + 4.21219042102053 + 5.08632078234547*exp(-4.96834920418795*x**8)
+<lambdifygenerated-27503>:2: RuntimeWarning: divide by zero encountered in log
+  return 8.16304996335467*exp(6.0300085399655*x**8) + 4.98948595604521*log(-3.19366802416303*x) + 3.64529473270881
+<lambdifygenerated-27503>:2: RuntimeWarning: invalid value encountered in log
+  return 8.16304996335467*exp(6.0300085399655*x**8) + 4.98948595604521*log(-3.19366802416303*x) + 3.64529473270881
+<lambdifygenerated-27504>:2: RuntimeWarning: divide by zero encountered in log
+  return 8.91684874116102*log(-2.29882514773035*x) + 8.90242778414415 - 3.40791298458751*exp(-3.32463273604381*x**8)
+<lambdifygenerated-27504>:2: RuntimeWarning: invalid value encountered in log
+  return 8.91684874116102*log(-2.29882514773035*x) + 8.90242778414415 - 3.40791298458751*exp(-3.32463273604381*x**8)
+<lambdifygenerated-27505>:2: RuntimeWarning: divide by zero encountered in log
+  return 8.33866681602762*exp(7.59776780135313*x**8) - 3.03604031315408*log(4.70750671208024*x) + 5.23462362360421
+<lambdifygenerated-27506>:2: RuntimeWarning: divide by zero encountered in log
+  return -1.83476325027653*log(1.85496364929221*x) - 8.03425535977172 + 8.60548645667176*exp(-4.2067250188147*x**8)
+<lambdifygenerated-27507>:2: RuntimeWarning: divide by zero encountered in log
+  return -8.57671320715257*log(-5.51609517756743*x) + 7.84633388940036 + 7.27919072823739*exp(-7.93512703334916*x**8)
+<lambdifygenerated-27507>:2: RuntimeWarning: invalid value encountered in log
+  return -8.57671320715257*log(-5.51609517756743*x) + 7.84633388940036 + 7.27919072823739*exp(-7.93512703334916*x**8)
+<lambdifygenerated-27508>:2: RuntimeWarning: divide by zero encountered in log
+  return -4.86855777952451*exp(3.21879659734267*x**8) - 5.90056863846553*log(9.17451193239521*x) - 2.12162871269501
+<lambdifygenerated-27509>:2: RuntimeWarning: divide by zero encountered in log
+  return -7.31680805330504*exp(6.9507462383476*x**8) - 3.23689409476289*log(3.43945264135374*x) - 4.25737219674574
+<lambdifygenerated-27510>:2: RuntimeWarning: divide by zero encountered in log
+  return -9.01090630275146*log(-0.67222100780181*x) + 6.05660970308489 - 9.65458175603139*exp(-5.98775860019494*x**8)
+<lambdifygenerated-27510>:2: RuntimeWarning: invalid value encountered in log
+  return -9.01090630275146*log(-0.67222100780181*x) + 6.05660970308489 - 9.65458175603139*exp(-5.98775860019494*x**8)
+<lambdifygenerated-27511>:2: RuntimeWarning: divide by zero encountered in log
+  return -5.4148274345093*log(7.16003571290938*x) - 3.84321590446322 + 6.55038617126525*exp(-4.03071499396211*x**8)
+<lambdifygenerated-27512>:2: RuntimeWarning: divide by zero encountered in log
+  return -0.917795106347093*log(-3.87316116081518*x) - 5.47953200958043 + 5.59523854047913*exp(-2.98459563685943*x**8)
+<lambdifygenerated-27512>:2: RuntimeWarning: invalid value encountered in log
+  return -0.917795106347093*log(-3.87316116081518*x) - 5.47953200958043 + 5.59523854047913*exp(-2.98459563685943*x**8)
+<lambdifygenerated-27513>:2: RuntimeWarning: divide by zero encountered in log
+  return 3.45787921470148*exp(2.67813231584441*x**8) + 9.07329688722527*log(6.51411716949677*x) - 8.96908124344785
+<lambdifygenerated-27514>:2: RuntimeWarning: divide by zero encountered in log
+  return -4.54372159575824*log(-8.72797166993007*x) - 1.22616656826492 + 0.426220740039756*exp(-5.61297659608231*x**8)
+<lambdifygenerated-27514>:2: RuntimeWarning: invalid value encountered in log
+  return -4.54372159575824*log(-8.72797166993007*x) - 1.22616656826492 + 0.426220740039756*exp(-5.61297659608231*x**8)
+<lambdifygenerated-27515>:2: RuntimeWarning: divide by zero encountered in log
+  return -8.47295187065638*exp(7.01672794205652*x**8) + 7.4996758316238*log(5.50873722653789*x) + 2.00111028914757
+<lambdifygenerated-27516>:2: RuntimeWarning: divide by zero encountered in log
+  return -1.18457764261654*exp(5.40804827452412*x**8) - 1.34750450390445*log(4.3963012054462*x) + 5.66432835177533
+<lambdifygenerated-27517>:2: RuntimeWarning: divide by zero encountered in log
+  return -2.56146243544794*log(-6.84230554924486*x) - 2.72853897239814 - 3.98382145857124*exp(-8.79347462167295*x**8)
+<lambdifygenerated-27517>:2: RuntimeWarning: invalid value encountered in log
+  return -2.56146243544794*log(-6.84230554924486*x) - 2.72853897239814 - 3.98382145857124*exp(-8.79347462167295*x**8)
+<lambdifygenerated-27518>:2: RuntimeWarning: divide by zero encountered in log
+  return 2.79956922420611*log(-9.4416316927311*x) - 3.65240000158654 - 0.443421281550719*exp(-2.46171247338381*x**8)
+<lambdifygenerated-27518>:2: RuntimeWarning: invalid value encountered in log
+  return 2.79956922420611*log(-9.4416316927311*x) - 3.65240000158654 - 0.443421281550719*exp(-2.46171247338381*x**8)
+<lambdifygenerated-27519>:2: RuntimeWarning: divide by zero encountered in log
+  return 0.734348036772401*log(7.30028904064207*x) + 6.80175956028178 - 1.32755600601577*exp(-0.00367606813878707*x**8)
+<lambdifygenerated-27520>:2: RuntimeWarning: divide by zero encountered in log
+  return -2.14363205543085*log(-0.868145602828088*x) - 9.7735729242697 - 6.4259737935931*exp(-3.10389207303255*x**8)
+<lambdifygenerated-27520>:2: RuntimeWarning: invalid value encountered in log
+  return -2.14363205543085*log(-0.868145602828088*x) - 9.7735729242697 - 6.4259737935931*exp(-3.10389207303255*x**8)
+<lambdifygenerated-27521>:2: RuntimeWarning: divide by zero encountered in log
+  return 0.751250067538225*exp(2.37799196237988*x**8) - 7.04403154459734*log(-4.13984603266868*x) - 6.14032720898057
+<lambdifygenerated-27521>:2: RuntimeWarning: invalid value encountered in log
+  return 0.751250067538225*exp(2.37799196237988*x**8) - 7.04403154459734*log(-4.13984603266868*x) - 6.14032720898057
+<lambdifygenerated-27522>:2: RuntimeWarning: divide by zero encountered in log
+  return -6.02460191535632*exp(0.497832419842765*x**8) + 6.9081212328767*log(-4.63786890127978*x) - 0.424620671174445
+<lambdifygenerated-27522>:2: RuntimeWarning: invalid value encountered in log
+  return -6.02460191535632*exp(0.497832419842765*x**8) + 6.9081212328767*log(-4.63786890127978*x) - 0.424620671174445
+<lambdifygenerated-27523>:2: RuntimeWarning: divide by zero encountered in log
+  return 1.22068637998041*exp(4.71055634835739*x**8) + 8.46021709479393*log(8.70575097359075*x) + 2.69644016503541
+<lambdifygenerated-27524>:2: RuntimeWarning: divide by zero encountered in log
+  return -9.85355340522465*log(6.66400795832583*x) - 1.93117585482909 + 9.53135831310924*exp(-9.93662147003142*x**8)
+<lambdifygenerated-27525>:2: RuntimeWarning: divide by zero encountered in log
+  return 1.18158543364974*log(-7.24370167182333*x) + 2.4409712122481 - 9.44884720767919*exp(-8.96038446700685*x**8)
+<lambdifygenerated-27525>:2: RuntimeWarning: invalid value encountered in log
+  return 1.18158543364974*log(-7.24370167182333*x) + 2.4409712122481 - 9.44884720767919*exp(-8.96038446700685*x**8)
+<lambdifygenerated-27526>:2: RuntimeWarning: divide by zero encountered in log
+  return -6.9895433897839*log(-5.82067193614146*x) + 0.576958155909502 - 7.14315491816034*exp(-7.28281881957228*x**8)
+<lambdifygenerated-27526>:2: RuntimeWarning: invalid value encountered in log
+  return -6.9895433897839*log(-5.82067193614146*x) + 0.576958155909502 - 7.14315491816034*exp(-7.28281881957228*x**8)
+<lambdifygenerated-27527>:2: RuntimeWarning: divide by zero encountered in log
+  return -5.1885223684259*exp(0.311434455466983*x**8) - 4.90906341676402*log(-6.58625470129779*x) - 1.09302830121111
+<lambdifygenerated-27527>:2: RuntimeWarning: invalid value encountered in log
+  return -5.1885223684259*exp(0.311434455466983*x**8) - 4.90906341676402*log(-6.58625470129779*x) - 1.09302830121111
+<lambdifygenerated-27528>:2: RuntimeWarning: divide by zero encountered in log
+  return 5.56028575768025*log(3.29768633343988*x) - 4.08060294085929 + 2.89596691094261*exp(-0.631176983867746*x**8)
+<lambdifygenerated-27529>:2: RuntimeWarning: divide by zero encountered in log
+  return -9.54908112269572*log(-9.98351557386776*x) - 0.18536451943782 + 3.28831176602149*exp(-5.459984139919*x**8)
+<lambdifygenerated-27529>:2: RuntimeWarning: invalid value encountered in log
+  return -9.54908112269572*log(-9.98351557386776*x) - 0.18536451943782 + 3.28831176602149*exp(-5.459984139919*x**8)
+<lambdifygenerated-27530>:2: RuntimeWarning: divide by zero encountered in log
+  return -7.40422270992766*log(2.8426116430664*x) + 6.30318809553501 + 3.1755567414963*exp(-6.75115134979963*x**8)
+<lambdifygenerated-27531>:2: RuntimeWarning: divide by zero encountered in log
+  return -1.00798365914134*log(9.85822687001733*x) + 3.20208439828432 - 2.71767586211018*exp(-5.30453004607522*x**8)
+<lambdifygenerated-27532>:2: RuntimeWarning: divide by zero encountered in log
+  return -2.28863084004503*exp(4.34649143823945*x**8) - 5.25031006593068*log(4.87142429539316*x) - 0.729643349159449
+<lambdifygenerated-27533>:2: RuntimeWarning: divide by zero encountered in log
+  return -9.38937066454603*log(7.52589370499091*x) - 8.65843453936544 + 5.25838682686829*exp(-1.85601914787156*x**8)
+<lambdifygenerated-27534>:2: RuntimeWarning: divide by zero encountered in log
+  return -3.87984497816741*log(-1.1831833177989*x) + 1.17154842014894 - 3.34831657286657*exp(-9.4032491232342*x**8)
+<lambdifygenerated-27534>:2: RuntimeWarning: invalid value encountered in log
+  return -3.87984497816741*log(-1.1831833177989*x) + 1.17154842014894 - 3.34831657286657*exp(-9.4032491232342*x**8)
+<lambdifygenerated-27535>:2: RuntimeWarning: divide by zero encountered in log
+  return -8.28563150138713*exp(5.30249673839669*x**8) + 7.99052832589888*log(-3.33631721032549*x) - 6.62465162584064
+<lambdifygenerated-27535>:2: RuntimeWarning: invalid value encountered in log
+  return -8.28563150138713*exp(5.30249673839669*x**8) + 7.99052832589888*log(-3.33631721032549*x) - 6.62465162584064
+<lambdifygenerated-27536>:2: RuntimeWarning: divide by zero encountered in log
+  return 8.106631275616*log(-3.45525374661746*x) - 5.70479569000224 + 9.24668941493142*exp(-2.12138367848805*x**8)
+<lambdifygenerated-27536>:2: RuntimeWarning: invalid value encountered in log
+  return 8.106631275616*log(-3.45525374661746*x) - 5.70479569000224 + 9.24668941493142*exp(-2.12138367848805*x**8)
+<lambdifygenerated-27537>:2: RuntimeWarning: divide by zero encountered in log
+  return -6.45622846693692*log(-7.88179641032688*x) - 5.80752765136998 - 5.32355246941402*exp(-2.35428393238687*x**8)
+<lambdifygenerated-27537>:2: RuntimeWarning: invalid value encountered in log
+  return -6.45622846693692*log(-7.88179641032688*x) - 5.80752765136998 - 5.32355246941402*exp(-2.35428393238687*x**8)
+<lambdifygenerated-27538>:2: RuntimeWarning: divide by zero encountered in log
+  return -0.0115545566388886*exp(0.942176334684093*x**8) - 2.81654810605202*log(3.77598149540307*x) + 7.03679305936679
+<lambdifygenerated-27539>:2: RuntimeWarning: divide by zero encountered in log
+  return -2.98955985362601*exp(6.40534867804467*x**8) + 6.03687775894372*log(8.4991921459012*x) - 7.92397762081551
+<lambdifygenerated-27540>:2: RuntimeWarning: divide by zero encountered in log
+  return 6.60848745404817*exp(1.945375243159*x**8) - 6.7045321379185*log(8.99129033441233*x) + 0.844215090684683
+<lambdifygenerated-27541>:2: RuntimeWarning: divide by zero encountered in log
+  return -1.68834224613524*log(3.89260905123393*x) + 8.05182095753618 + 2.57931995364322*exp(-7.55607102279791*x**8)
+<lambdifygenerated-27542>:2: RuntimeWarning: divide by zero encountered in log
+  return 8.68340328210556*log(4.00146770386556*x) + 4.04622065330367 + 9.05989362351836*exp(-4.63458109113932*x**8)
+<lambdifygenerated-27543>:2: RuntimeWarning: divide by zero encountered in log
+  return 0.0392342638646026*log(0.287883945792788*x) + 7.28148331865487 + 5.61006264628378*exp(-7.73411594504951*x**8)
+<lambdifygenerated-27544>:2: RuntimeWarning: divide by zero encountered in log
+  return 1.98325775796672*exp(8.8176714127449*x**8) + 3.42372260867643*log(-5.68626284269404*x) - 5.2317375566963
+<lambdifygenerated-27544>:2: RuntimeWarning: invalid value encountered in log
+  return 1.98325775796672*exp(8.8176714127449*x**8) + 3.42372260867643*log(-5.68626284269404*x) - 5.2317375566963
+<lambdifygenerated-27545>:2: RuntimeWarning: divide by zero encountered in log
+  return 4.84792024700097*exp(5.68733188786548*x**8) - 7.63078733900394*log(2.28117906823831*x) - 9.11033813215806
+<lambdifygenerated-27546>:2: RuntimeWarning: divide by zero encountered in log
+  return 1.51014543188888*log(5.09028947109052*x) + 1.99633927901967 - 6.27166044409636*exp(-6.8014121112752*x**8)
+<lambdifygenerated-27547>:2: RuntimeWarning: divide by zero encountered in log
+  return 7.65740807946065*exp(7.30051975387017*x**8) - 5.02630991520552*log(-5.16663608197043*x) + 5.87929420938846
+<lambdifygenerated-27547>:2: RuntimeWarning: invalid value encountered in log
+  return 7.65740807946065*exp(7.30051975387017*x**8) - 5.02630991520552*log(-5.16663608197043*x) + 5.87929420938846
+<lambdifygenerated-27548>:2: RuntimeWarning: divide by zero encountered in log
+  return -3.10671685280681*exp(3.17078861337862*x**8) + 3.68050534746949*log(5.93479664383539*x) + 0.693436183204037
+<lambdifygenerated-27549>:2: RuntimeWarning: divide by zero encountered in log
+  return 7.39716147901536*log(6.02234987460589*x) - 0.376556140073943 + 7.9397878769946*exp(-0.570896693968761*x**8)
+<lambdifygenerated-27550>:2: RuntimeWarning: divide by zero encountered in log
+  return -4.17348928161474*exp(1.74412264421887*x**8) - 3.42605531571832*log(-6.61217828092088*x) + 7.65501230956406
+<lambdifygenerated-27550>:2: RuntimeWarning: invalid value encountered in log
+  return -4.17348928161474*exp(1.74412264421887*x**8) - 3.42605531571832*log(-6.61217828092088*x) + 7.65501230956406
+<lambdifygenerated-27551>:2: RuntimeWarning: divide by zero encountered in log
+  return 5.18902597055939*log(8.18119944032553*x) - 3.51715102210997 + 9.82376063163203*exp(-3.8237725488294*x**8)
+<lambdifygenerated-27552>:2: RuntimeWarning: divide by zero encountered in log
+  return 3.6307581159656*exp(2.42190065491567*x**8) - 8.63957502728632*log(1.23140120596717*x) + 1.47298211902277
+<lambdifygenerated-27553>:2: RuntimeWarning: divide by zero encountered in log
+  return 1.24909058996386*log(-2.15220933494344*x) - 4.61753668947947 + 0.35778504552727*exp(-2.62083286058308*x**8)
+<lambdifygenerated-27553>:2: RuntimeWarning: invalid value encountered in log
+  return 1.24909058996386*log(-2.15220933494344*x) - 4.61753668947947 + 0.35778504552727*exp(-2.62083286058308*x**8)
+<lambdifygenerated-27554>:2: RuntimeWarning: divide by zero encountered in log
+  return -8.91676953221363*exp(3.86565320442063*x**8) + 5.23682831465607*log(-7.18017364292089*x) + 5.03230866710068
+<lambdifygenerated-27554>:2: RuntimeWarning: invalid value encountered in log
+  return -8.91676953221363*exp(3.86565320442063*x**8) + 5.23682831465607*log(-7.18017364292089*x) + 5.03230866710068
+<lambdifygenerated-27555>:2: RuntimeWarning: divide by zero encountered in log
+  return 1.61287377599364*exp(7.71324017299196*x**8) + 1.67156664763506*log(6.98066500233966*x) + 0.315291494019949
+<lambdifygenerated-27556>:2: RuntimeWarning: divide by zero encountered in log
+  return -6.23907188629876*log(4.46266551502183*x) - 7.65772720153885 + 0.141181282615985*exp(-1.18646585882821*x**8)
+<lambdifygenerated-27557>:2: RuntimeWarning: divide by zero encountered in log
+  return -0.965568394070544*exp(3.60267222841954*x**8) - 4.21853945882691*log(9.36401054189121*x) - 3.17269329917254
+<lambdifygenerated-27558>:2: RuntimeWarning: divide by zero encountered in log
+  return -7.36817967208838*log(-1.81449522498128*x) + 2.24944430151681 + 7.58623311900694*exp(-5.14933876153678*x**8)
+<lambdifygenerated-27558>:2: RuntimeWarning: invalid value encountered in log
+  return -7.36817967208838*log(-1.81449522498128*x) + 2.24944430151681 + 7.58623311900694*exp(-5.14933876153678*x**8)
+<lambdifygenerated-27559>:2: RuntimeWarning: divide by zero encountered in log
+  return 9.89191201758332*log(6.20365018799398*x) + 8.40502574139294 - 7.41017309921055*exp(-9.79113286327835*x**8)
+<lambdifygenerated-27560>:2: RuntimeWarning: divide by zero encountered in log
+  return -5.90904111601894*exp(8.10517412625794*x**8) - 4.72168878532567*log(2.06248945844743*x) + 8.31774103119008
+<lambdifygenerated-27561>:2: RuntimeWarning: divide by zero encountered in log
+  return 5.9470776632909*log(1.07310718044094*x) - 4.91633646895977 + 4.40855794432181*exp(-3.6155795746138*x**8)
+<lambdifygenerated-27562>:2: RuntimeWarning: divide by zero encountered in log
+  return 4.47687891836314*log(7.74798285586385*x) + 0.0100465654378024 - 7.60522580872973*exp(-4.52144701194932*x**8)
+<lambdifygenerated-27563>:2: RuntimeWarning: divide by zero encountered in log
+  return -9.87679532986576*exp(1.14892701973918*x**8) + 0.44943487519604*log(-8.92850791873415*x) - 5.1400323051192
+<lambdifygenerated-27563>:2: RuntimeWarning: invalid value encountered in log
+  return -9.87679532986576*exp(1.14892701973918*x**8) + 0.44943487519604*log(-8.92850791873415*x) - 5.1400323051192
+<lambdifygenerated-27564>:2: RuntimeWarning: divide by zero encountered in log
+  return 6.26791111701306*exp(8.33873624364298*x**8) + 2.20719492857746*log(-6.26203771467641*x) - 3.35020522632646
+<lambdifygenerated-27564>:2: RuntimeWarning: invalid value encountered in log
+  return 6.26791111701306*exp(8.33873624364298*x**8) + 2.20719492857746*log(-6.26203771467641*x) - 3.35020522632646
+<lambdifygenerated-27565>:2: RuntimeWarning: divide by zero encountered in log
+  return -2.61085163831071*log(2.74028261328412*x) - 7.5733924360804 + 4.69039461793201*exp(-7.07966723105654*x**8)
+<lambdifygenerated-27566>:2: RuntimeWarning: divide by zero encountered in log
+  return 5.6421662632405*log(-1.38494741783602*x) + 8.72830388371381 - 4.60467615330117*exp(-8.06421919035778*x**8)
+<lambdifygenerated-27566>:2: RuntimeWarning: invalid value encountered in log
+  return 5.6421662632405*log(-1.38494741783602*x) + 8.72830388371381 - 4.60467615330117*exp(-8.06421919035778*x**8)
+<lambdifygenerated-27567>:2: RuntimeWarning: divide by zero encountered in log
+  return -9.03007002017977*exp(7.87928451248386*x**8) + 3.8939658845817*log(-9.72468709836059*x) + 1.77377912692039
+<lambdifygenerated-27567>:2: RuntimeWarning: invalid value encountered in log
+  return -9.03007002017977*exp(7.87928451248386*x**8) + 3.8939658845817*log(-9.72468709836059*x) + 1.77377912692039
+<lambdifygenerated-27568>:2: RuntimeWarning: divide by zero encountered in log
+  return -9.25511225998244*exp(0.637916597364598*x**8) + 4.69349919470167*log(-4.40720320307783*x) + 9.17162574325513
+<lambdifygenerated-27568>:2: RuntimeWarning: invalid value encountered in log
+  return -9.25511225998244*exp(0.637916597364598*x**8) + 4.69349919470167*log(-4.40720320307783*x) + 9.17162574325513
+<lambdifygenerated-27569>:2: RuntimeWarning: divide by zero encountered in log
+  return 2.67539517094362*exp(8.75137234656652*x**8) + 2.44525140982831*log(-4.33461808778194*x) + 1.29841046125655
+<lambdifygenerated-27569>:2: RuntimeWarning: invalid value encountered in log
+  return 2.67539517094362*exp(8.75137234656652*x**8) + 2.44525140982831*log(-4.33461808778194*x) + 1.29841046125655
+<lambdifygenerated-27570>:2: RuntimeWarning: divide by zero encountered in log
+  return -3.77442296600428*exp(2.06452469160068*x**8) - 4.18248309197789*log(0.466130256297381*x) + 6.5598138928566
+<lambdifygenerated-27571>:2: RuntimeWarning: divide by zero encountered in log
+  return -0.222720766716944*exp(4.86208466743578*x**8) + 3.2571163848389*log(-2.8727454845113*x) - 1.57022777200495
+<lambdifygenerated-27571>:2: RuntimeWarning: invalid value encountered in log
+  return -0.222720766716944*exp(4.86208466743578*x**8) + 3.2571163848389*log(-2.8727454845113*x) - 1.57022777200495
+<lambdifygenerated-27572>:2: RuntimeWarning: divide by zero encountered in log
+  return 4.01222022910809*exp(5.03276310973539*x**8) + 6.22152142206094*log(-1.54278513193323*x) - 6.46782990528186
+<lambdifygenerated-27572>:2: RuntimeWarning: invalid value encountered in log
+  return 4.01222022910809*exp(5.03276310973539*x**8) + 6.22152142206094*log(-1.54278513193323*x) - 6.46782990528186
+<lambdifygenerated-27573>:2: RuntimeWarning: divide by zero encountered in log
+  return -0.734471294104323*log(-1.72784174650526*x) - 7.11720225072925 + 8.53357629216603*exp(-9.3449271541185*x**8)
+<lambdifygenerated-27573>:2: RuntimeWarning: invalid value encountered in log
+  return -0.734471294104323*log(-1.72784174650526*x) - 7.11720225072925 + 8.53357629216603*exp(-9.3449271541185*x**8)
+<lambdifygenerated-27574>:2: RuntimeWarning: divide by zero encountered in log
+  return -8.14222952327798*exp(1.45546549368684*x**8) + 6.5052608263676*log(9.68348750257364*x) + 4.70063052579385
+<lambdifygenerated-27575>:2: RuntimeWarning: divide by zero encountered in log
+  return 0.886991404056903*log(-2.57374269623054*x) - 2.56282292919004 - 1.42620469740241*exp(-1.71804765904771*x**8)
+<lambdifygenerated-27575>:2: RuntimeWarning: invalid value encountered in log
+  return 0.886991404056903*log(-2.57374269623054*x) - 2.56282292919004 - 1.42620469740241*exp(-1.71804765904771*x**8)
+<lambdifygenerated-27576>:2: RuntimeWarning: divide by zero encountered in log
+  return -2.26330092075518*log(7.82965897533709*x) + 5.56670443220229 + 5.87094647559285*exp(-0.225605763371022*x**8)
+<lambdifygenerated-27577>:2: RuntimeWarning: divide by zero encountered in log
+  return 8.28317705911629*log(-7.78967580194884*x) - 7.24365101881288 - 2.50496370606654*exp(-6.35612380969333*x**8)
+<lambdifygenerated-27577>:2: RuntimeWarning: invalid value encountered in log
+  return 8.28317705911629*log(-7.78967580194884*x) - 7.24365101881288 - 2.50496370606654*exp(-6.35612380969333*x**8)
+<lambdifygenerated-27578>:2: RuntimeWarning: divide by zero encountered in log
+  return 1.07920375110189*exp(5.87923781613084*x**8) + 1.92098421255142*log(-9.05052476674129*x) + 9.30491283716524
+<lambdifygenerated-27578>:2: RuntimeWarning: invalid value encountered in log
+  return 1.07920375110189*exp(5.87923781613084*x**8) + 1.92098421255142*log(-9.05052476674129*x) + 9.30491283716524
+<lambdifygenerated-27579>:2: RuntimeWarning: divide by zero encountered in log
+  return -0.602596223472833*exp(8.59161263024605*x**8) - 8.80064199229683*log(8.34799797029873*x) - 2.81472842428386
+<lambdifygenerated-27580>:2: RuntimeWarning: divide by zero encountered in log
+  return 1.5991091220312*exp(3.45045485218949*x**8) + 0.312022745111806*log(-8.01402447269259*x) + 3.06288796004728
+<lambdifygenerated-27580>:2: RuntimeWarning: invalid value encountered in log
+  return 1.5991091220312*exp(3.45045485218949*x**8) + 0.312022745111806*log(-8.01402447269259*x) + 3.06288796004728
+<lambdifygenerated-27581>:2: RuntimeWarning: divide by zero encountered in log
+  return -2.13984097433093*exp(6.6591437520469*x**8) - 3.62263746601435*log(-4.81882949072139*x) + 6.64100327860378
+<lambdifygenerated-27581>:2: RuntimeWarning: invalid value encountered in log
+  return -2.13984097433093*exp(6.6591437520469*x**8) - 3.62263746601435*log(-4.81882949072139*x) + 6.64100327860378
+<lambdifygenerated-27582>:2: RuntimeWarning: divide by zero encountered in log
+  return 9.38014191093431*log(0.962194347324725*x) - 0.842764801736493 + 3.80241918588184*exp(-6.46343675097444*x**8)
+<lambdifygenerated-27583>:2: RuntimeWarning: divide by zero encountered in log
+  return -6.91997973828166*exp(4.58933326269791*x**8) - 7.83685473486961*log(-2.79524198487973*x) - 8.43339222444648
+<lambdifygenerated-27583>:2: RuntimeWarning: invalid value encountered in log
+  return -6.91997973828166*exp(4.58933326269791*x**8) - 7.83685473486961*log(-2.79524198487973*x) - 8.43339222444648
+<lambdifygenerated-27584>:2: RuntimeWarning: divide by zero encountered in log
+  return -8.24102666441224*log(1.59274762406707*x) + 2.88481341848956 - 6.71127673211376*exp(-9.03184360145903*x**8)
+<lambdifygenerated-27585>:2: RuntimeWarning: divide by zero encountered in log
+  return -6.18646507774001*log(1.64998724348774*x) + 9.48507280658692 - 4.32741663069696*exp(-6.10918330580367*x**8)
+<lambdifygenerated-27586>:2: RuntimeWarning: divide by zero encountered in log
+  return -1.61172222110627*exp(9.96548960156229*x**8) + 4.39543367857046*log(2.41611828290551*x) - 9.80789721896188
+<lambdifygenerated-27587>:2: RuntimeWarning: divide by zero encountered in log
+  return -8.19513998209838*log(-9.28149755064646*x) - 8.34544438209385 + 2.03356175155021*exp(-8.57125995727752*x**8)
+<lambdifygenerated-27587>:2: RuntimeWarning: invalid value encountered in log
+  return -8.19513998209838*log(-9.28149755064646*x) - 8.34544438209385 + 2.03356175155021*exp(-8.57125995727752*x**8)
+<lambdifygenerated-27588>:2: RuntimeWarning: divide by zero encountered in log
+  return 6.082862822867*exp(0.195606242998025*x**8) + 7.73973877048817*log(-3.77616794331002*x) + 3.84537330009833
+<lambdifygenerated-27588>:2: RuntimeWarning: invalid value encountered in log
+  return 6.082862822867*exp(0.195606242998025*x**8) + 7.73973877048817*log(-3.77616794331002*x) + 3.84537330009833
+<lambdifygenerated-27589>:2: RuntimeWarning: divide by zero encountered in log
+  return 3.16063845357016*log(-6.13258778568899*x) + 7.50869057836437 + 8.86645593709826*exp(-0.857456945649302*x**8)
+<lambdifygenerated-27589>:2: RuntimeWarning: invalid value encountered in log
+  return 3.16063845357016*log(-6.13258778568899*x) + 7.50869057836437 + 8.86645593709826*exp(-0.857456945649302*x**8)
+<lambdifygenerated-27590>:2: RuntimeWarning: divide by zero encountered in log
+  return -0.583681501072313*log(-0.457326006140399*x) - 9.50726757204311 - 7.83178704170731*exp(-1.48570794843179*x**8)
+<lambdifygenerated-27590>:2: RuntimeWarning: invalid value encountered in log
+  return -0.583681501072313*log(-0.457326006140399*x) - 9.50726757204311 - 7.83178704170731*exp(-1.48570794843179*x**8)
+<lambdifygenerated-27591>:2: RuntimeWarning: divide by zero encountered in log
+  return -9.73490921170455*log(-7.51043206191856*x) - 1.60418828534476 + 0.911295874902478*exp(-3.51731434227981*x**8)
+<lambdifygenerated-27591>:2: RuntimeWarning: invalid value encountered in log
+  return -9.73490921170455*log(-7.51043206191856*x) - 1.60418828534476 + 0.911295874902478*exp(-3.51731434227981*x**8)
+<lambdifygenerated-27592>:2: RuntimeWarning: divide by zero encountered in log
+  return -4.57224849925287*exp(6.35827664271394*x**8) + 4.14364511372327*log(5.26036927267094*x) - 9.32683764501254
+<lambdifygenerated-27593>:2: RuntimeWarning: divide by zero encountered in log
+  return -1.9378190812249*exp(2.90094867800252*x**8) + 2.17361386709781*log(0.00776679203664754*x) + 4.57463715887805
+<lambdifygenerated-27594>:2: RuntimeWarning: divide by zero encountered in log
+  return 4.38606325992842*exp(9.02966491516068*x**8) - 5.79217526908614*log(-8.34521674788715*x) - 6.84853423283884
+<lambdifygenerated-27594>:2: RuntimeWarning: invalid value encountered in log
+  return 4.38606325992842*exp(9.02966491516068*x**8) - 5.79217526908614*log(-8.34521674788715*x) - 6.84853423283884
+<lambdifygenerated-27595>:2: RuntimeWarning: divide by zero encountered in log
+  return 7.17243427425353*exp(4.00891230141451*x**8) + 9.78491971541134*log(-0.321001693530619*x) - 6.36374149656709
+<lambdifygenerated-27595>:2: RuntimeWarning: invalid value encountered in log
+  return 7.17243427425353*exp(4.00891230141451*x**8) + 9.78491971541134*log(-0.321001693530619*x) - 6.36374149656709
+<lambdifygenerated-27596>:2: RuntimeWarning: divide by zero encountered in log
+  return 7.04051208140983*log(0.607009508166225*x) + 9.89899862112626 - 5.78839829131831*exp(-1.24221924339343*x**8)
+<lambdifygenerated-27597>:2: RuntimeWarning: divide by zero encountered in log
+  return 9.90053905814711*log(-7.80788053758277*x) - 2.36871470324009 + 6.59138338285306*exp(-1.64081792755232*x**8)
+<lambdifygenerated-27597>:2: RuntimeWarning: invalid value encountered in log
+  return 9.90053905814711*log(-7.80788053758277*x) - 2.36871470324009 + 6.59138338285306*exp(-1.64081792755232*x**8)
+<lambdifygenerated-27598>:2: RuntimeWarning: divide by zero encountered in log
+  return -2.10335601029718*exp(6.9265516664426*x**8) + 3.99776589615995*log(8.39681531153905*x) - 4.51966692165515
+<lambdifygenerated-27599>:2: RuntimeWarning: divide by zero encountered in log
+  return 6.28835148528135*log(2.06604529898749*x) - 3.96214023906631 + 7.24316438307035*exp(-0.41398039106423*x**8)
+<lambdifygenerated-27600>:2: RuntimeWarning: divide by zero encountered in log
+  return -5.44477032127352*exp(4.2826833547046*x**8) + 9.59761600629842*log(9.50879406539383*x) - 4.277994899264
+<lambdifygenerated-27601>:2: RuntimeWarning: divide by zero encountered in log
+  return 2.73216873900479*exp(2.24750059174834*x**8) + 4.45483096543078*log(-4.63485998301512*x) - 2.77645941075638
+<lambdifygenerated-27601>:2: RuntimeWarning: invalid value encountered in log
+  return 2.73216873900479*exp(2.24750059174834*x**8) + 4.45483096543078*log(-4.63485998301512*x) - 2.77645941075638
+<lambdifygenerated-27602>:2: RuntimeWarning: divide by zero encountered in log
+  return -2.76609512185205*exp(0.94235733194179*x**8) - 0.145875941336537*log(-8.50057574228712*x) + 4.21219042102053
+<lambdifygenerated-27602>:2: RuntimeWarning: invalid value encountered in log
+  return -2.76609512185205*exp(0.94235733194179*x**8) - 0.145875941336537*log(-8.50057574228712*x) + 4.21219042102053
+<lambdifygenerated-27603>:2: RuntimeWarning: divide by zero encountered in log
+  return 0.311966064488631*exp(5.61799777104745*x**8) - 8.41900981532374*log(1.10272652188814*x) - 1.21364391524074
+<lambdifygenerated-27604>:2: RuntimeWarning: divide by zero encountered in log
+  return 9.89664469913559*exp(3.6285343922379*x**8) + 8.91684874116102*log(6.56518290580388*x) + 8.90242778414415
+<lambdifygenerated-27605>:2: RuntimeWarning: divide by zero encountered in log
+  return 0.485975633617108*exp(7.59776780135313*x**8) - 3.03604031315408*log(-9.33867806597688*x) + 5.23462362360421
+<lambdifygenerated-27605>:2: RuntimeWarning: invalid value encountered in log
+  return 0.485975633617108*exp(7.59776780135313*x**8) - 3.03604031315408*log(-9.33867806597688*x) + 5.23462362360421
+<lambdifygenerated-27606>:2: RuntimeWarning: divide by zero encountered in log
+  return -1.83476325027653*log(-3.92073269120951*x) + 3.33457839632351 + 3.79892623583425*exp(-4.2067250188147*x**8)
+<lambdifygenerated-27606>:2: RuntimeWarning: invalid value encountered in log
+  return -1.83476325027653*log(-3.92073269120951*x) + 3.33457839632351 + 3.79892623583425*exp(-4.2067250188147*x**8)
+<lambdifygenerated-27607>:2: RuntimeWarning: divide by zero encountered in log
+  return 0.404542585359797*exp(5.03626404967672*x**8) - 6.76106552894302*log(0.372567887578212*x) + 8.28633030627057
+<lambdifygenerated-27608>:2: RuntimeWarning: divide by zero encountered in log
+  return 2.04980582590351*log(-9.18878674238625*x) + 2.80133556450983 - 4.86855777952451*exp(-5.37942562682681*x**8)
+<lambdifygenerated-27608>:2: RuntimeWarning: invalid value encountered in log
+  return 2.04980582590351*log(-9.18878674238625*x) + 2.80133556450983 - 4.86855777952451*exp(-5.37942562682681*x**8)
+<lambdifygenerated-27609>:2: RuntimeWarning: divide by zero encountered in log
+  return 8.6182316276149*exp(6.9507462383476*x**8) + 8.73075047681205*log(3.43945264135374*x) - 8.41769638556731
+<lambdifygenerated-27610>:2: RuntimeWarning: divide by zero encountered in log
+  return 9.39761176118154*log(-2.02089498707121*x) - 5.61713707925153 + 5.42506111051207*exp(-8.2217820868334*x**8)
+<lambdifygenerated-27610>:2: RuntimeWarning: invalid value encountered in log
+  return 9.39761176118154*log(-2.02089498707121*x) - 5.61713707925153 + 5.42506111051207*exp(-8.2217820868334*x**8)
+<lambdifygenerated-27611>:2: RuntimeWarning: divide by zero encountered in log
+  return -5.4148274345093*log(7.16003571290938*x) - 3.84321590446322 + 1.78606879967517*exp(-4.03071499396211*x**8)
+<lambdifygenerated-27612>:2: RuntimeWarning: divide by zero encountered in log
+  return -1.87082522369045*log(-3.87316116081518*x) + 0.619352619921747 + 6.14968850194203*exp(-8.49258297348728*x**8)
+<lambdifygenerated-27612>:2: RuntimeWarning: invalid value encountered in log
+  return -1.87082522369045*log(-3.87316116081518*x) + 0.619352619921747 + 6.14968850194203*exp(-8.49258297348728*x**8)
+<lambdifygenerated-27613>:2: RuntimeWarning: divide by zero encountered in log
+  return 4.20747549769599*log(6.51411716949677*x) + 3.76482151135817 - 1.32713005293286*exp(-1.15615433856824*x**8)
+<lambdifygenerated-27614>:2: RuntimeWarning: divide by zero encountered in log
+  return 0.426220740039756*exp(4.89367244007195*x**8) + 9.04298030480967*log(-1.06437829535451*x) - 1.22616656826492
+<lambdifygenerated-27614>:2: RuntimeWarning: invalid value encountered in log
+  return 0.426220740039756*exp(4.89367244007195*x**8) + 9.04298030480967*log(-1.06437829535451*x) - 1.22616656826492
+<lambdifygenerated-27615>:2: RuntimeWarning: divide by zero encountered in log
+  return -8.47295187065638*exp(7.01672794205652*x**8) + 7.4996758316238*log(1.44363978032957*x) + 2.00111028914757
+<lambdifygenerated-27616>:2: RuntimeWarning: divide by zero encountered in log
+  return -2.63761075277094*exp(9.79034585547177*x**8) - 1.34750450390445*log(-5.00640412737967*x) + 5.66432835177533
+<lambdifygenerated-27616>:2: RuntimeWarning: invalid value encountered in log
+  return -2.63761075277094*exp(9.79034585547177*x**8) - 1.34750450390445*log(-5.00640412737967*x) + 5.66432835177533
+<lambdifygenerated-27617>:2: RuntimeWarning: divide by zero encountered in log
+  return 4.92936455866527*exp(2.44969203157595*x**8) - 1.87203184396709*log(-0.860107844794762*x) + 1.20343037908839
+<lambdifygenerated-27617>:2: RuntimeWarning: invalid value encountered in log
+  return 4.92936455866527*exp(2.44969203157595*x**8) - 1.87203184396709*log(-0.860107844794762*x) + 1.20343037908839
+<lambdifygenerated-27618>:2: RuntimeWarning: divide by zero encountered in log
+  return 5.79846688072831*log(-2.21681936854983*x) + 5.32484562592005 + 0.263339678256913*exp(-4.21138503024685*x**8)
+<lambdifygenerated-27618>:2: RuntimeWarning: invalid value encountered in log
+  return 5.79846688072831*log(-2.21681936854983*x) + 5.32484562592005 + 0.263339678256913*exp(-4.21138503024685*x**8)
+<lambdifygenerated-27619>:2: RuntimeWarning: divide by zero encountered in log
+  return -2.26330580864619*exp(1.35102352025259*x**8) + 1.73334733554463*log(2.37132976517886*x) + 7.50832069490376
+<lambdifygenerated-27620>:2: RuntimeWarning: divide by zero encountered in log
+  return 7.11091444812775*log(-4.25092466192534*x) - 1.71734550583624 - 2.32181873162541*exp(-3.19834520659425*x**8)
+<lambdifygenerated-27620>:2: RuntimeWarning: invalid value encountered in log
+  return 7.11091444812775*log(-4.25092466192534*x) - 1.71734550583624 - 2.32181873162541*exp(-3.19834520659425*x**8)
+<lambdifygenerated-27621>:2: RuntimeWarning: divide by zero encountered in log
+  return 9.65598534039061*log(7.38140645203948*x) + 8.4444938797422 + 0.751250067538225*exp(-3.74234470689774*x**8)
+<lambdifygenerated-27622>:2: RuntimeWarning: divide by zero encountered in log
+  return 7.07548133088081*log(-4.63786890127978*x) - 0.424620671174445 - 4.71222479587409*exp(-6.75523810392035*x**8)
+<lambdifygenerated-27622>:2: RuntimeWarning: invalid value encountered in log
+  return 7.07548133088081*log(-4.63786890127978*x) - 0.424620671174445 - 4.71222479587409*exp(-6.75523810392035*x**8)
+<lambdifygenerated-27623>:2: RuntimeWarning: divide by zero encountered in log
+  return 2.40215375119646*exp(8.41338803249991*x**8) + 3.14599634205774*log(-5.27934535266677*x) + 2.69644016503541
+<lambdifygenerated-27623>:2: RuntimeWarning: invalid value encountered in log
+  return 2.40215375119646*exp(8.41338803249991*x**8) + 3.14599634205774*log(-5.27934535266677*x) + 2.69644016503541
+<lambdifygenerated-27624>:2: RuntimeWarning: divide by zero encountered in log
+  return 8.32479023661537*log(-7.34997865948317*x) - 1.49071561743978 + 2.49367616413569*exp(-1.1586749645785*x**8)
+<lambdifygenerated-27624>:2: RuntimeWarning: invalid value encountered in log
+  return 8.32479023661537*log(-7.34997865948317*x) - 1.49071561743978 + 2.49367616413569*exp(-1.1586749645785*x**8)
+<lambdifygenerated-27625>:2: RuntimeWarning: divide by zero encountered in log
+  return -7.16429999133679*exp(1.48223086154913*x**8) + 9.66745401445475*log(-0.714286711313056*x) + 2.4409712122481
+<lambdifygenerated-27625>:2: RuntimeWarning: invalid value encountered in log
+  return -7.16429999133679*exp(1.48223086154913*x**8) + 9.66745401445475*log(-0.714286711313056*x) + 2.4409712122481
+<lambdifygenerated-27626>:2: RuntimeWarning: divide by zero encountered in log
+  return -1.1181054141378*log(-8.98518425604589*x) - 6.8269956416522 - 0.205930133461871*exp(-3.91354210811349*x**8)
+<lambdifygenerated-27626>:2: RuntimeWarning: invalid value encountered in log
+  return -1.1181054141378*log(-8.98518425604589*x) - 6.8269956416522 - 0.205930133461871*exp(-3.91354210811349*x**8)
+<lambdifygenerated-27627>:2: RuntimeWarning: divide by zero encountered in log
+  return -5.1885223684259*exp(0.884001131363878*x**8) - 4.90906341676402*log(6.30189345085185*x) + 6.60816621670321
+<lambdifygenerated-27628>:2: RuntimeWarning: divide by zero encountered in log
+  return 5.56028575768025*log(3.29768633343988*x) - 4.08060294085929 - 3.75884739985195*exp(-0.631176983867746*x**8)
+<lambdifygenerated-27629>:2: RuntimeWarning: divide by zero encountered in log
+  return -1.14141286716848*log(-7.90939389225492*x) - 0.18536451943782 + 3.36621716441603*exp(-7.03310289442211*x**8)
+<lambdifygenerated-27629>:2: RuntimeWarning: invalid value encountered in log
+  return -1.14141286716848*log(-7.90939389225492*x) - 0.18536451943782 + 3.36621716441603*exp(-7.03310289442211*x**8)
+<lambdifygenerated-27630>:2: RuntimeWarning: divide by zero encountered in log
+  return 9.37167617601744*log(6.18891073415884*x) - 4.17712256322544 + 3.1755567414963*exp(-6.75115134979963*x**8)
+<lambdifygenerated-27631>:2: RuntimeWarning: divide by zero encountered in log
+  return 4.97556760670855*exp(1.99395021949823*x**8) + 6.91991963892269*log(-8.34730713945518*x) - 1.44770290884262
+<lambdifygenerated-27631>:2: RuntimeWarning: invalid value encountered in log
+  return 4.97556760670855*exp(1.99395021949823*x**8) + 6.91991963892269*log(-8.34730713945518*x) - 1.44770290884262
+<lambdifygenerated-27632>:2: RuntimeWarning: divide by zero encountered in log
+  return 0.956305286901222*exp(4.39503949115626*x**8) - 5.25031006593068*log(2.22397687210118*x) - 0.729643349159449
+<lambdifygenerated-27633>:2: RuntimeWarning: divide by zero encountered in log
+  return 0.238381022633354*log(-2.06340307173443*x) - 2.96284167576079 - 2.70088752770471*exp(-2.83419888233453*x**8)
+<lambdifygenerated-27633>:2: RuntimeWarning: invalid value encountered in log
+  return 0.238381022633354*log(-2.06340307173443*x) - 2.96284167576079 - 2.70088752770471*exp(-2.83419888233453*x**8)
+<lambdifygenerated-27634>:2: RuntimeWarning: divide by zero encountered in log
+  return 2.15387946753194*exp(9.3710548301538*x**8) + 7.01292676414629*log(-2.59816025062969*x) + 1.17154842014894
+<lambdifygenerated-27634>:2: RuntimeWarning: invalid value encountered in log
+  return 2.15387946753194*exp(9.3710548301538*x**8) + 7.01292676414629*log(-2.59816025062969*x) + 1.17154842014894
+<lambdifygenerated-27635>:2: RuntimeWarning: divide by zero encountered in log
+  return 7.99052832589888*log(-3.64010537671904*x) + 5.68225834235442 - 3.69553429404441*exp(-0.299880829974406*x**8)
+<lambdifygenerated-27635>:2: RuntimeWarning: invalid value encountered in log
+  return 7.99052832589888*log(-3.64010537671904*x) + 5.68225834235442 - 3.69553429404441*exp(-0.299880829974406*x**8)
+<lambdifygenerated-27636>:2: RuntimeWarning: divide by zero encountered in log
+  return 3.86814531656144*exp(4.93277202492274*x**8) - 0.513730548581726*log(-9.86961611553153*x) - 5.70479569000224
+<lambdifygenerated-27636>:2: RuntimeWarning: invalid value encountered in log
+  return 3.86814531656144*exp(4.93277202492274*x**8) - 0.513730548581726*log(-9.86961611553153*x) - 5.70479569000224
+<lambdifygenerated-27637>:2: RuntimeWarning: divide by zero encountered in log
+  return 4.68181171304664*log(-7.88179641032688*x) - 0.619768489412709 - 5.32355246941402*exp(-9.02708559207034*x**8)
+<lambdifygenerated-27637>:2: RuntimeWarning: invalid value encountered in log
+  return 4.68181171304664*log(-7.88179641032688*x) - 0.619768489412709 - 5.32355246941402*exp(-9.02708559207034*x**8)
+<lambdifygenerated-27638>:2: RuntimeWarning: divide by zero encountered in log
+  return -5.38029163602707*exp(8.47392464726745*x**8) - 2.81654810605202*log(-2.07930791903874*x) + 3.00578947929812
+<lambdifygenerated-27638>:2: RuntimeWarning: invalid value encountered in log
+  return -5.38029163602707*exp(8.47392464726745*x**8) - 2.81654810605202*log(-2.07930791903874*x) + 3.00578947929812
+<lambdifygenerated-27639>:2: RuntimeWarning: divide by zero encountered in log
+  return 4.65810405947365*log(8.4991921459012*x) + 4.50908147495329 + 7.52151730094234*exp(-2.49001201487895*x**8)
+<lambdifygenerated-27640>:2: RuntimeWarning: divide by zero encountered in log
+  return 6.60848745404817*exp(1.945375243159*x**8) - 6.7045321379185*log(-4.91771534478781*x) + 8.55813001019099
+<lambdifygenerated-27640>:2: RuntimeWarning: invalid value encountered in log
+  return 6.60848745404817*exp(1.945375243159*x**8) - 6.7045321379185*log(-4.91771534478781*x) + 8.55813001019099
+<lambdifygenerated-27641>:2: RuntimeWarning: divide by zero encountered in log
+  return 2.08247544984699*log(3.89260905123393*x) + 3.83437730607482 + 9.95202743373859*exp(-7.4562252532753*x**8)
+<lambdifygenerated-27642>:2: RuntimeWarning: divide by zero encountered in log
+  return 8.56074008582524*log(1.19781439762833*x) + 4.04622065330367 + 9.05989362351836*exp(-3.39681482995395*x**8)
+<lambdifygenerated-27643>:2: RuntimeWarning: divide by zero encountered in log
+  return 0.0392342638646026*log(0.287883945792788*x) + 0.578747928368504 + 4.07928713235175*exp(-9.21930217219452*x**8)
+<lambdifygenerated-27644>:2: RuntimeWarning: divide by zero encountered in log
+  return -4.84119082685681*log(-4.00501806207872*x) + 1.47848837629398 + 1.98325775796672*exp(-7.72700497187297*x**8)
+<lambdifygenerated-27644>:2: RuntimeWarning: invalid value encountered in log
+  return -4.84119082685681*log(-4.00501806207872*x) + 1.47848837629398 + 1.98325775796672*exp(-7.72700497187297*x**8)
+<lambdifygenerated-27645>:2: RuntimeWarning: divide by zero encountered in log
+  return 4.52951752547333*exp(5.68733188786548*x**8) + 1.2662141778691*log(-5.41717590427137*x) + 9.37438089976399
+<lambdifygenerated-27645>:2: RuntimeWarning: invalid value encountered in log
+  return 4.52951752547333*exp(5.68733188786548*x**8) + 1.2662141778691*log(-5.41717590427137*x) + 9.37438089976399
+<lambdifygenerated-27646>:2: RuntimeWarning: divide by zero encountered in log
+  return 2.82454083414697*log(-4.04183895579298*x) + 0.431896495250401 - 6.27166044409636*exp(-6.8014121112752*x**8)
+<lambdifygenerated-27646>:2: RuntimeWarning: invalid value encountered in log
+  return 2.82454083414697*log(-4.04183895579298*x) + 0.431896495250401 - 6.27166044409636*exp(-6.8014121112752*x**8)
+<lambdifygenerated-27647>:2: RuntimeWarning: divide by zero encountered in log
+  return 1.44853699079469*log(-8.31025396947322*x) - 5.66114789927787 + 3.01487879578959*exp(-1.22151028915489*x**8)
+<lambdifygenerated-27647>:2: RuntimeWarning: invalid value encountered in log
+  return 1.44853699079469*log(-8.31025396947322*x) - 5.66114789927787 + 3.01487879578959*exp(-1.22151028915489*x**8)
+<lambdifygenerated-27648>:2: RuntimeWarning: divide by zero encountered in log
+  return 3.68050534746949*log(-9.05844150834563*x) + 1.45154233564097 - 3.10671685280681*exp(-2.33937535691543*x**8)
+<lambdifygenerated-27648>:2: RuntimeWarning: invalid value encountered in log
+  return 3.68050534746949*log(-9.05844150834563*x) + 1.45154233564097 - 3.10671685280681*exp(-2.33937535691543*x**8)
+<lambdifygenerated-27649>:2: RuntimeWarning: divide by zero encountered in log
+  return 6.35556734111051*log(-8.3265784265409*x) - 0.376556140073943 + 7.9397878769946*exp(-0.570896693968761*x**8)
+<lambdifygenerated-27649>:2: RuntimeWarning: invalid value encountered in log
+  return 6.35556734111051*log(-8.3265784265409*x) - 0.376556140073943 + 7.9397878769946*exp(-0.570896693968761*x**8)
+<lambdifygenerated-27650>:2: RuntimeWarning: divide by zero encountered in log
+  return -5.95830699378118*log(-7.09539386585223*x) + 7.65501230956406 - 4.17348928161474*exp(-1.28605028623432*x**8)
+<lambdifygenerated-27650>:2: RuntimeWarning: invalid value encountered in log
+  return -5.95830699378118*log(-7.09539386585223*x) + 7.65501230956406 - 4.17348928161474*exp(-1.28605028623432*x**8)
+<lambdifygenerated-27651>:2: RuntimeWarning: divide by zero encountered in log
+  return 5.92678967952866*exp(3.51792754680804*x**8) - 2.56307584290677*log(-7.67262567019493*x) + 3.09066025069997
+<lambdifygenerated-27651>:2: RuntimeWarning: invalid value encountered in log
+  return 5.92678967952866*exp(3.51792754680804*x**8) - 2.56307584290677*log(-7.67262567019493*x) + 3.09066025069997
+<lambdifygenerated-27652>:2: RuntimeWarning: divide by zero encountered in log
+  return 4.08999981880386*log(-7.73552205609245*x) + 4.21705522040913 + 3.45148543196526*exp(-2.0271108675006*x**8)
+<lambdifygenerated-27652>:2: RuntimeWarning: invalid value encountered in log
+  return 4.08999981880386*log(-7.73552205609245*x) + 4.21705522040913 + 3.45148543196526*exp(-2.0271108675006*x**8)
+<lambdifygenerated-27653>:2: RuntimeWarning: divide by zero encountered in log
+  return -5.97138882255842*log(3.11043661645361*x) - 3.67796187771702 + 2.12453561007811*exp(-2.19366769816407*x**8)
+<lambdifygenerated-27654>:2: RuntimeWarning: divide by zero encountered in log
+  return 4.01034565030982*log(-2.16921292491112*x) + 5.03230866710068 - 8.91676953221363*exp(-3.31984487485908*x**8)
+<lambdifygenerated-27654>:2: RuntimeWarning: invalid value encountered in log
+  return 4.01034565030982*log(-2.16921292491112*x) + 5.03230866710068 - 8.91676953221363*exp(-3.31984487485908*x**8)
+<lambdifygenerated-27655>:2: RuntimeWarning: divide by zero encountered in log
+  return 1.67156664763506*log(-3.40109732780777*x) + 5.47015799058333 + 6.41617325467591*exp(-8.59383347525115*x**8)
+<lambdifygenerated-27655>:2: RuntimeWarning: invalid value encountered in log
+  return 1.67156664763506*log(-3.40109732780777*x) + 5.47015799058333 + 6.41617325467591*exp(-8.59383347525115*x**8)
+<lambdifygenerated-27656>:2: RuntimeWarning: divide by zero encountered in log
+  return -6.39048350289712*log(0.47372361214042*x) + 1.26844543856968 + 8.26162745582024*exp(-1.18646585882821*x**8)
+<lambdifygenerated-27657>:2: RuntimeWarning: divide by zero encountered in log
+  return -4.21853945882691*log(9.36401054189121*x) - 3.17269329917254 + 6.86638030335912*exp(-2.16679308981335*x**8)
+<lambdifygenerated-27658>:2: RuntimeWarning: divide by zero encountered in log
+  return 4.90505494566586*exp(3.65223992157857*x**8) + 5.3654320190412*log(-1.81449522498128*x) + 6.034144286133
+<lambdifygenerated-27658>:2: RuntimeWarning: invalid value encountered in log
+  return 4.90505494566586*exp(3.65223992157857*x**8) + 5.3654320190412*log(-1.81449522498128*x) + 6.034144286133
+<lambdifygenerated-27659>:2: RuntimeWarning: divide by zero encountered in log
+  return 1.70094692726868*exp(9.79711344580019*x**8) + 9.63040854644488*log(6.20365018799398*x) - 3.94562483759348
+<lambdifygenerated-27660>:2: RuntimeWarning: divide by zero encountered in log
+  return 5.65052647995704*log(7.47295275510761*x) + 3.38231590576973 + 4.8048817433349*exp(-2.36224511633159*x**8)
+<lambdifygenerated-27661>:2: RuntimeWarning: divide by zero encountered in log
+  return 8.92202287052878*log(6.5596193339218*x) - 4.91633646895977 + 9.91088442808209*exp(-3.6155795746138*x**8)
+<lambdifygenerated-27662>:2: RuntimeWarning: divide by zero encountered in log
+  return 6.46338886440497*log(6.71762883459499*x) - 2.11503513450831 + 7.24001228117522*exp(-4.52144701194932*x**8)
+<lambdifygenerated-27663>:2: RuntimeWarning: divide by zero encountered in log
+  return 7.95748328025274*exp(1.14892701973918*x**8) - 2.06301976968746*log(-8.92850791873415*x) - 5.1400323051192
+<lambdifygenerated-27663>:2: RuntimeWarning: invalid value encountered in log
+  return 7.95748328025274*exp(1.14892701973918*x**8) - 2.06301976968746*log(-8.92850791873415*x) - 5.1400323051192
+<lambdifygenerated-27664>:2: RuntimeWarning: divide by zero encountered in log
+  return 9.50928597132499*log(-8.22361592132591*x) - 1.38668931453269 + 2.86151980041837*exp(-3.78387036663926*x**8)
+<lambdifygenerated-27664>:2: RuntimeWarning: invalid value encountered in log
+  return 9.50928597132499*log(-8.22361592132591*x) - 1.38668931453269 + 2.86151980041837*exp(-3.78387036663926*x**8)
+<lambdifygenerated-27665>:2: RuntimeWarning: divide by zero encountered in log
+  return 1.89070891851731*log(2.51441515483997*x) + 3.85516648962631 + 0.216016208154628*exp(-7.07966723105654*x**8)
+<lambdifygenerated-27666>:2: RuntimeWarning: divide by zero encountered in log
+  return -0.135276171353167*exp(5.49908770507795*x**8) + 0.696870216025554*log(-5.63604729511312*x) + 8.72830388371381
+<lambdifygenerated-27666>:2: RuntimeWarning: invalid value encountered in log
+  return -0.135276171353167*exp(5.49908770507795*x**8) + 0.696870216025554*log(-5.63604729511312*x) + 8.72830388371381
+<lambdifygenerated-27667>:2: RuntimeWarning: divide by zero encountered in log
+  return 7.72946596099566*log(-9.71104194835981*x) - 7.15557434314543 - 9.03007002017977*exp(-2.86746941491562*x**8)
+<lambdifygenerated-27667>:2: RuntimeWarning: invalid value encountered in log
+  return 7.72946596099566*log(-9.71104194835981*x) - 7.15557434314543 - 9.03007002017977*exp(-2.86746941491562*x**8)
+<lambdifygenerated-27668>:2: RuntimeWarning: divide by zero encountered in log
+  return 2.83511475815417*log(-4.40720320307783*x) + 2.45954124659796 - 5.60973606487554*exp(-0.48983336344479*x**8)
+<lambdifygenerated-27668>:2: RuntimeWarning: invalid value encountered in log
+  return 2.83511475815417*log(-4.40720320307783*x) + 2.45954124659796 - 5.60973606487554*exp(-0.48983336344479*x**8)
+<lambdifygenerated-27669>:2: RuntimeWarning: divide by zero encountered in log
+  return -9.58889505731492*log(-0.382673559490694*x) + 1.29841046125655 + 8.67223293081445*exp(-9.05537383180886*x**8)
+<lambdifygenerated-27669>:2: RuntimeWarning: invalid value encountered in log
+  return -9.58889505731492*log(-0.382673559490694*x) + 1.29841046125655 + 8.67223293081445*exp(-9.05537383180886*x**8)
+<lambdifygenerated-27670>:2: RuntimeWarning: divide by zero encountered in log
+  return -3.77442296600428*exp(1.05735671790552*x**8) - 4.18248309197789*log(0.466130256297381*x) + 2.35325579954743
+<lambdifygenerated-27671>:2: RuntimeWarning: divide by zero encountered in log
+  return 8.80789002821324*exp(4.86208466743578*x**8) + 5.42558193961924*log(-3.80342121602477*x) - 0.158854248977699
+<lambdifygenerated-27671>:2: RuntimeWarning: invalid value encountered in log
+  return 8.80789002821324*exp(4.86208466743578*x**8) + 5.42558193961924*log(-3.80342121602477*x) - 0.158854248977699
+<lambdifygenerated-27672>:2: RuntimeWarning: divide by zero encountered in log
+  return 7.05293538601742*log(-3.33502539249787*x) + 0.13341216983493 + 5.62074434046128*exp(-3.93525721789799*x**8)
+<lambdifygenerated-27672>:2: RuntimeWarning: invalid value encountered in log
+  return 7.05293538601742*log(-3.33502539249787*x) + 0.13341216983493 + 5.62074434046128*exp(-3.93525721789799*x**8)
+<lambdifygenerated-27673>:2: RuntimeWarning: divide by zero encountered in log
+  return 8.53357629216603*exp(0.316014054913887*x**8) - 5.65129954661471*log(-8.48959454647939*x) - 7.11720225072925
+<lambdifygenerated-27673>:2: RuntimeWarning: invalid value encountered in log
+  return 8.53357629216603*exp(0.316014054913887*x**8) - 5.65129954661471*log(-8.48959454647939*x) - 7.11720225072925
+<lambdifygenerated-27674>:2: RuntimeWarning: divide by zero encountered in log
+  return -8.14222952327798*exp(1.45546549368684*x**8) + 5.41545283720667*log(-0.644897332219787*x) - 1.12650185014133
+<lambdifygenerated-27674>:2: RuntimeWarning: invalid value encountered in log
+  return -8.14222952327798*exp(1.45546549368684*x**8) + 5.41545283720667*log(-0.644897332219787*x) - 1.12650185014133
+<lambdifygenerated-27675>:2: RuntimeWarning: divide by zero encountered in log
+  return 8.77927325941142*exp(7.37454584495588*x**8) + 8.68579430316062*log(-7.60557312661183*x) - 2.56282292919004
+<lambdifygenerated-27675>:2: RuntimeWarning: invalid value encountered in log
+  return 8.77927325941142*exp(7.37454584495588*x**8) + 8.68579430316062*log(-7.60557312661183*x) - 2.56282292919004
+<lambdifygenerated-27676>:2: RuntimeWarning: divide by zero encountered in log
+  return -2.26330092075518*log(-0.468501236818732*x) - 6.69852866814471 + 2.40371226864188*exp(-1.52870736944138*x**8)
+<lambdifygenerated-27676>:2: RuntimeWarning: invalid value encountered in log
+  return -2.26330092075518*log(-0.468501236818732*x) - 6.69852866814471 + 2.40371226864188*exp(-1.52870736944138*x**8)
+<lambdifygenerated-27677>:2: RuntimeWarning: divide by zero encountered in log
+  return 8.35812207472472*log(-3.2505166438991*x) - 5.57815721426878 + 7.8707411760348*exp(-6.35612380969333*x**8)
+<lambdifygenerated-27677>:2: RuntimeWarning: invalid value encountered in log
+  return 8.35812207472472*log(-3.2505166438991*x) - 5.57815721426878 + 7.8707411760348*exp(-6.35612380969333*x**8)
+<lambdifygenerated-27678>:2: RuntimeWarning: divide by zero encountered in log
+  return 1.56185790968559*exp(5.87923781613084*x**8) + 1.92098421255142*log(9.71294971722626*x) + 3.06657054854792
+<lambdifygenerated-27679>:2: RuntimeWarning: divide by zero encountered in log
+  return -2.49642177132977*log(8.73574670927882*x) - 3.1911114292522 - 1.23873407585268*exp(-9.5096807431389*x**8)
+<lambdifygenerated-27680>:2: RuntimeWarning: divide by zero encountered in log
+  return -5.00715244563296*exp(3.45045485218949*x**8) + 0.312022745111806*log(-9.58949570766545*x) - 4.6056102266061
+<lambdifygenerated-27680>:2: RuntimeWarning: invalid value encountered in log
+  return -5.00715244563296*exp(3.45045485218949*x**8) + 0.312022745111806*log(-9.58949570766545*x) - 4.6056102266061
+<lambdifygenerated-27681>:2: RuntimeWarning: divide by zero encountered in log
+  return -6.58973400569771*log(6.53173903427863*x) + 6.64100327860378 + 1.14886058047306*exp(-1.56376650278034*x**8)
+<lambdifygenerated-27682>:2: RuntimeWarning: divide by zero encountered in log
+  return 9.43946016352784*log(-5.27305067815178*x) + 4.83068321105669 + 3.80241918588184*exp(-6.46343675097444*x**8)
+<lambdifygenerated-27682>:2: RuntimeWarning: invalid value encountered in log
+  return 9.43946016352784*log(-5.27305067815178*x) + 4.83068321105669 + 3.80241918588184*exp(-6.46343675097444*x**8)
+<lambdifygenerated-27683>:2: RuntimeWarning: divide by zero encountered in log
+  return -7.83685473486961*log(-7.4166247236434*x) - 8.43339222444648 - 6.91997973828166*exp(-1.22884923636379*x**8)
+<lambdifygenerated-27683>:2: RuntimeWarning: invalid value encountered in log
+  return -7.83685473486961*log(-7.4166247236434*x) - 8.43339222444648 - 6.91997973828166*exp(-1.22884923636379*x**8)
+<lambdifygenerated-27684>:2: RuntimeWarning: divide by zero encountered in log
+  return 9.42398359935074*log(-6.22605932816009*x) + 5.59641700018935 - 6.71127673211376*exp(-6.38080836795952*x**8)
+<lambdifygenerated-27684>:2: RuntimeWarning: invalid value encountered in log
+  return 9.42398359935074*log(-6.22605932816009*x) + 5.59641700018935 - 6.71127673211376*exp(-6.38080836795952*x**8)
+<lambdifygenerated-27685>:2: RuntimeWarning: divide by zero encountered in log
+  return -0.361053136764147*log(1.64998724348774*x) - 2.81398369142428 + 2.36815820505986*exp(-3.66624613180588*x**8)
+<lambdifygenerated-27686>:2: RuntimeWarning: divide by zero encountered in log
+  return 6.53731632773872*exp(3.86079956162585*x**8) - 0.000696320792219485*log(2.41611828290551*x) - 9.74022941535666
+<lambdifygenerated-27687>:2: RuntimeWarning: divide by zero encountered in log
+  return -4.9209297440246*log(-7.11834416965702*x) - 8.34544438209385 - 1.766452098069*exp(-8.57125995727752*x**8)
+<lambdifygenerated-27687>:2: RuntimeWarning: invalid value encountered in log
+  return -4.9209297440246*log(-7.11834416965702*x) - 8.34544438209385 - 1.766452098069*exp(-8.57125995727752*x**8)
+<lambdifygenerated-27688>:2: RuntimeWarning: divide by zero encountered in log
+  return 7.73973877048817*log(-3.77616794331002*x) + 2.13629445361177 - 1.86190228339113*exp(-8.72465291475551*x**8)
+<lambdifygenerated-27688>:2: RuntimeWarning: invalid value encountered in log
+  return 7.73973877048817*log(-3.77616794331002*x) + 2.13629445361177 - 1.86190228339113*exp(-8.72465291475551*x**8)
+<lambdifygenerated-27689>:2: RuntimeWarning: divide by zero encountered in log
+  return 5.70934988222362*log(9.84052278321011*x) - 3.64830503510978 + 5.11991196570441*exp(-0.857456945649302*x**8)
+<lambdifygenerated-27690>:2: RuntimeWarning: divide by zero encountered in log
+  return 7.65311315111621*exp(9.37169285715948*x**8) + 3.39253203431968*log(-3.61057321533761*x) + 0.00302294609338283
+<lambdifygenerated-27690>:2: RuntimeWarning: invalid value encountered in log
+  return 7.65311315111621*exp(9.37169285715948*x**8) + 3.39253203431968*log(-3.61057321533761*x) + 0.00302294609338283
+<lambdifygenerated-27691>:2: RuntimeWarning: divide by zero encountered in log
+  return 4.24689431079567*exp(0.153048299849621*x**8) + 8.68608343763341*log(-7.51043206191856*x) - 4.36345291661143
+<lambdifygenerated-27691>:2: RuntimeWarning: invalid value encountered in log
+  return 4.24689431079567*exp(0.153048299849621*x**8) + 8.68608343763341*log(-7.51043206191856*x) - 4.36345291661143
+<lambdifygenerated-27692>:2: RuntimeWarning: divide by zero encountered in log
+  return 6.60990635569871*exp(6.35827664271394*x**8) + 4.14364511372327*log(-9.03568408083036*x) + 8.67732729250337
+<lambdifygenerated-27692>:2: RuntimeWarning: invalid value encountered in log
+  return 6.60990635569871*exp(6.35827664271394*x**8) + 4.14364511372327*log(-9.03568408083036*x) + 8.67732729250337
+<lambdifygenerated-27693>:2: RuntimeWarning: divide by zero encountered in log
+  return -4.26415951424618*exp(7.68777327987901*x**8) + 3.87973065502811*log(-5.3949174597991*x) - 2.19584600196414
+<lambdifygenerated-27693>:2: RuntimeWarning: invalid value encountered in log
+  return -4.26415951424618*exp(7.68777327987901*x**8) + 3.87973065502811*log(-5.3949174597991*x) - 2.19584600196414
+<lambdifygenerated-27694>:2: RuntimeWarning: divide by zero encountered in log
+  return 7.18528702007323*exp(1.85678052583186*x**8) + 3.05797987846508*log(-6.01917388889536*x) + 1.77852586577922
+<lambdifygenerated-27694>:2: RuntimeWarning: invalid value encountered in log
+  return 7.18528702007323*exp(1.85678052583186*x**8) + 3.05797987846508*log(-6.01917388889536*x) + 1.77852586577922
+<lambdifygenerated-27695>:2: RuntimeWarning: divide by zero encountered in log
+  return -7.99120189335865*log(2.110563453573*x) - 6.36374149656709 + 7.17243427425353*exp(-1.13640563115768*x**8)
+<lambdifygenerated-27696>:2: RuntimeWarning: divide by zero encountered in log
+  return 7.04051208140983*log(-2.31396319369358*x) - 4.67042678447492 + 9.29207571430619*exp(-1.24221924339343*x**8)
+<lambdifygenerated-27696>:2: RuntimeWarning: invalid value encountered in log
+  return 7.04051208140983*log(-2.31396319369358*x) - 4.67042678447492 + 9.29207571430619*exp(-1.24221924339343*x**8)
+<lambdifygenerated-27697>:2: RuntimeWarning: divide by zero encountered in log
+  return 9.90053905814711*log(-7.80788053758277*x) - 2.36871470324009 + 6.59138338285306*exp(-1.64081792755232*x**8)
+<lambdifygenerated-27697>:2: RuntimeWarning: invalid value encountered in log
+  return 9.90053905814711*log(-7.80788053758277*x) - 2.36871470324009 + 6.59138338285306*exp(-1.64081792755232*x**8)
+<lambdifygenerated-27698>:2: RuntimeWarning: divide by zero encountered in log
+  return 9.90053905814711*log(-7.80788053758277*x) - 2.36871470324009 + 6.59138339285306*exp(-1.64081792755232*x**8)
+<lambdifygenerated-27698>:2: RuntimeWarning: invalid value encountered in log
+  return 9.90053905814711*log(-7.80788053758277*x) - 2.36871470324009 + 6.59138339285306*exp(-1.64081792755232*x**8)
+<lambdifygenerated-27699>:2: RuntimeWarning: divide by zero encountered in log
+  return 9.90053905814711*log(-7.80788053758277*x) - 2.36871470324009 + 6.59138338285306*exp(-1.64081791755232*x**8)
+<lambdifygenerated-27699>:2: RuntimeWarning: invalid value encountered in log
+  return 9.90053905814711*log(-7.80788053758277*x) - 2.36871470324009 + 6.59138338285306*exp(-1.64081791755232*x**8)
+<lambdifygenerated-27700>:2: RuntimeWarning: divide by zero encountered in log
+  return 9.90053906814711*log(-7.80788053758277*x) - 2.36871470324009 + 6.59138338285306*exp(-1.64081792755232*x**8)
+<lambdifygenerated-27700>:2: RuntimeWarning: invalid value encountered in log
+  return 9.90053906814711*log(-7.80788053758277*x) - 2.36871470324009 + 6.59138338285306*exp(-1.64081792755232*x**8)
+<lambdifygenerated-27701>:2: RuntimeWarning: divide by zero encountered in log
+  return 9.90053905814711*log(-7.80788052758277*x) - 2.36871470324009 + 6.59138338285306*exp(-1.64081792755232*x**8)
+<lambdifygenerated-27701>:2: RuntimeWarning: invalid value encountered in log
+  return 9.90053905814711*log(-7.80788052758277*x) - 2.36871470324009 + 6.59138338285306*exp(-1.64081792755232*x**8)
+<lambdifygenerated-27702>:2: RuntimeWarning: divide by zero encountered in log
+  return 9.90053905814711*log(-7.80788053758277*x) - 2.36871469324009 + 6.59138338285306*exp(-1.64081792755232*x**8)
+<lambdifygenerated-27702>:2: RuntimeWarning: invalid value encountered in log
+  return 9.90053905814711*log(-7.80788053758277*x) - 2.36871469324009 + 6.59138338285306*exp(-1.64081792755232*x**8)
+model: C0*exp(C1*x**8) + C2*log(C3*x) + C4                                   ; p: 1.8554258718720008e-09 ; error: 1000000000.0
+Estimating model: C0*sqrt(C1*x**2) + C2*log(C3*x) + C4
+<lambdifygenerated-27703>:2: RuntimeWarning: divide by zero encountered in log
+  return 10.119697286443*sqrt(x**2) + 5.63406532715619*log(-0.0162821129061352*x) + 7.87609582536202
+<lambdifygenerated-27703>:2: RuntimeWarning: invalid value encountered in log
+  return 10.119697286443*sqrt(x**2) + 5.63406532715619*log(-0.0162821129061352*x) + 7.87609582536202
+<lambdifygenerated-27704>:2: RuntimeWarning: divide by zero encountered in log
+  return 15.8248742692848*sqrt(x**2) - 4.03344427540515*log(1.46814224456658*x) + 7.38224529020964
+<lambdifygenerated-27705>:2: RuntimeWarning: divide by zero encountered in log
+  return 7.90670614824742*sqrt(-x**2) + 4.58400210844384*log(6.24992022932098*x) - 2.49300196217724
+<lambdifygenerated-27706>:2: RuntimeWarning: divide by zero encountered in log
+  return -2.28210434004947*sqrt(x**2) - 2.29001938987681*log(3.50639177301758*x) + 1.43670737961114
+<lambdifygenerated-27707>:2: RuntimeWarning: divide by zero encountered in log
+  return -2.93465546480874*sqrt(-x**2) + 0.151479574090603*log(-9.68519767787508*x) - 2.73453360257372
+<lambdifygenerated-27707>:2: RuntimeWarning: invalid value encountered in log
+  return -2.93465546480874*sqrt(-x**2) + 0.151479574090603*log(-9.68519767787508*x) - 2.73453360257372
+<lambdifygenerated-27708>:2: RuntimeWarning: divide by zero encountered in log
+  return 13.2680693580287*sqrt(x**2) + 8.98596447194242*log(-0.31228038283964*x) - 8.43986009421949
+<lambdifygenerated-27708>:2: RuntimeWarning: invalid value encountered in log
+  return 13.2680693580287*sqrt(x**2) + 8.98596447194242*log(-0.31228038283964*x) - 8.43986009421949
+<lambdifygenerated-27709>:2: RuntimeWarning: divide by zero encountered in log
+  return -18.3954613117521*sqrt(-x**2) - 4.63751598602497*log(8.059848702382*x) + 3.9823485047116
+<lambdifygenerated-27710>:2: RuntimeWarning: divide by zero encountered in log
+  return 2.98279671389953*sqrt(x**2) + 8.5390458536276*log(-4.06639422087513*x) - 8.32777344520872
+<lambdifygenerated-27710>:2: RuntimeWarning: invalid value encountered in log
+  return 2.98279671389953*sqrt(x**2) + 8.5390458536276*log(-4.06639422087513*x) - 8.32777344520872
+<lambdifygenerated-27711>:2: RuntimeWarning: divide by zero encountered in log
+  return -11.7085289455788*sqrt(x**2) - 8.98520718844766*log(6.80558873726202*x) + 8.91599514197382
+<lambdifygenerated-27712>:2: RuntimeWarning: divide by zero encountered in log
+  return -7.25109460054915*sqrt(-x**2) - 1.59372901115039*log(5.31475540388545*x) - 7.97692356196996
+<lambdifygenerated-27713>:2: RuntimeWarning: divide by zero encountered in log
+  return -15.1706190807325*sqrt(-x**2) - 6.21692205638376*log(-1.52595633205198*x) + 3.48406233978891
+<lambdifygenerated-27713>:2: RuntimeWarning: invalid value encountered in log
+  return -15.1706190807325*sqrt(-x**2) - 6.21692205638376*log(-1.52595633205198*x) + 3.48406233978891
+<lambdifygenerated-27714>:2: RuntimeWarning: divide by zero encountered in log
+  return 17.898608233242*sqrt(x**2) - 6.927868003331*log(7.43917189773794*x) - 4.38040655467951
+<lambdifygenerated-27715>:2: RuntimeWarning: divide by zero encountered in log
+  return 12.8060138575665*sqrt(x**2) + 2.31612400895143*log(1.86572012713637*x) + 5.70589455045238
+<lambdifygenerated-27716>:2: RuntimeWarning: divide by zero encountered in log
+  return 2.11812074756268*sqrt(x**2) + 6.02589426480257*log(-1.10878111052758*x) - 5.90125016978546
+<lambdifygenerated-27716>:2: RuntimeWarning: invalid value encountered in log
+  return 2.11812074756268*sqrt(x**2) + 6.02589426480257*log(-1.10878111052758*x) - 5.90125016978546
+<lambdifygenerated-27717>:2: RuntimeWarning: divide by zero encountered in log
+  return -1.58345743388739*sqrt(-x**2) - 1.38309311798624*log(7.37776256908402*x) + 0.918037534001086
+<lambdifygenerated-27718>:2: RuntimeWarning: divide by zero encountered in log
+  return -0.568077048091799*sqrt(-x**2) - 9.23231474535029*log(-0.545749155798765*x) - 5.50444480589733
+<lambdifygenerated-27718>:2: RuntimeWarning: invalid value encountered in log
+  return -0.568077048091799*sqrt(-x**2) - 9.23231474535029*log(-0.545749155798765*x) - 5.50444480589733
+<lambdifygenerated-27719>:2: RuntimeWarning: divide by zero encountered in log
+  return -6.58628270731267*sqrt(x**2) + 5.58756606669269*log(-0.955321922107734*x) - 1.97387558061368
+<lambdifygenerated-27719>:2: RuntimeWarning: invalid value encountered in log
+  return -6.58628270731267*sqrt(x**2) + 5.58756606669269*log(-0.955321922107734*x) - 1.97387558061368
+<lambdifygenerated-27720>:2: RuntimeWarning: divide by zero encountered in log
+  return -3.96577533790429*sqrt(x**2) + 8.32254535298842*log(-9.20764800690555*x) + 1.03963738864784
+<lambdifygenerated-27720>:2: RuntimeWarning: invalid value encountered in log
+  return -3.96577533790429*sqrt(x**2) + 8.32254535298842*log(-9.20764800690555*x) + 1.03963738864784
+<lambdifygenerated-27721>:2: RuntimeWarning: divide by zero encountered in log
+  return 3.48435011858049*sqrt(-x**2) + 8.74307063549827*log(-7.68795916225296*x) - 8.90872287021365
+<lambdifygenerated-27721>:2: RuntimeWarning: invalid value encountered in log
+  return 3.48435011858049*sqrt(-x**2) + 8.74307063549827*log(-7.68795916225296*x) - 8.90872287021365
+<lambdifygenerated-27722>:2: RuntimeWarning: divide by zero encountered in log
+  return 2.69785952902268*sqrt(-x**2) + 4.80991997879465*log(-4.37963936189558*x) - 9.82919614140124
+<lambdifygenerated-27722>:2: RuntimeWarning: invalid value encountered in log
+  return 2.69785952902268*sqrt(-x**2) + 4.80991997879465*log(-4.37963936189558*x) - 9.82919614140124
+<lambdifygenerated-27723>:2: RuntimeWarning: divide by zero encountered in log
+  return -17.3753514867731*sqrt(x**2) - 1.72554575196567*log(-5.09380128928978*x) + 3.27594081950754
+<lambdifygenerated-27723>:2: RuntimeWarning: invalid value encountered in log
+  return -17.3753514867731*sqrt(x**2) - 1.72554575196567*log(-5.09380128928978*x) + 3.27594081950754
+<lambdifygenerated-27724>:2: RuntimeWarning: divide by zero encountered in log
+  return -16.9965999719457*sqrt(-x**2) - 4.3544590529436*log(8.77050495056946*x) - 3.76372556129745
+<lambdifygenerated-27725>:2: RuntimeWarning: divide by zero encountered in log
+  return 7.09287754555986*sqrt(x**2) + 9.96490778873097*log(2.61771091451333*x) + 2.46800750506555
+<lambdifygenerated-27726>:2: RuntimeWarning: divide by zero encountered in log
+  return 25.8058543299193*sqrt(-x**2) - 9.56802870809784*log(2.36265544998931*x) - 5.69715348171961
+<lambdifygenerated-27727>:2: RuntimeWarning: divide by zero encountered in log
+  return 3.41678381902334*sqrt(-x**2) + 3.32899438492364*log(7.62694852129319*x) + 8.07369420404279
+<lambdifygenerated-27728>:2: RuntimeWarning: divide by zero encountered in log
+  return 0.0737235296418742*sqrt(x**2) - 3.69738752132216*log(-6.07958073392153*x) + 7.00545493190275
+<lambdifygenerated-27728>:2: RuntimeWarning: invalid value encountered in log
+  return 0.0737235296418742*sqrt(x**2) - 3.69738752132216*log(-6.07958073392153*x) + 7.00545493190275
+<lambdifygenerated-27729>:2: RuntimeWarning: divide by zero encountered in log
+  return -1.62112116483623*sqrt(x**2) - 7.6433612024322*log(-2.91326419297243*x) + 6.74085184342667
+<lambdifygenerated-27729>:2: RuntimeWarning: invalid value encountered in log
+  return -1.62112116483623*sqrt(x**2) - 7.6433612024322*log(-2.91326419297243*x) + 6.74085184342667
+<lambdifygenerated-27730>:2: RuntimeWarning: divide by zero encountered in log
+  return -0.667344697158961*sqrt(-x**2) - 7.23407563889074*log(-4.9237733462085*x) - 8.64097143146816
+<lambdifygenerated-27730>:2: RuntimeWarning: invalid value encountered in log
+  return -0.667344697158961*sqrt(-x**2) - 7.23407563889074*log(-4.9237733462085*x) - 8.64097143146816
+<lambdifygenerated-27731>:2: RuntimeWarning: divide by zero encountered in log
+  return -1.3920610549263*sqrt(x**2) + 6.58758175451068*log(7.18970458414642*x) + 0.756299394369595
+<lambdifygenerated-27732>:2: RuntimeWarning: divide by zero encountered in log
+  return -14.1834398061618*sqrt(-x**2) + 1.36433937915072*log(0.898722075852705*x) - 4.95265132007366
+<lambdifygenerated-27733>:2: RuntimeWarning: divide by zero encountered in log
+  return 18.451030976276*sqrt(x**2) - 1.95109174752006*log(-8.64279520531818*x) + 2.62560591185226
+<lambdifygenerated-27733>:2: RuntimeWarning: invalid value encountered in log
+  return 18.451030976276*sqrt(x**2) - 1.95109174752006*log(-8.64279520531818*x) + 2.62560591185226
+<lambdifygenerated-27734>:2: RuntimeWarning: divide by zero encountered in log
+  return -3.09609643078934*sqrt(-x**2) - 8.26932730423021*log(5.16623277193291*x) + 1.38754459523317
+<lambdifygenerated-27735>:2: RuntimeWarning: divide by zero encountered in log
+  return -21.327531926893*sqrt(-x**2) - 7.80874151808731*log(-1.76224423621389*x) - 7.44429360900516
+<lambdifygenerated-27735>:2: RuntimeWarning: invalid value encountered in log
+  return -21.327531926893*sqrt(-x**2) - 7.80874151808731*log(-1.76224423621389*x) - 7.44429360900516
+<lambdifygenerated-27736>:2: RuntimeWarning: divide by zero encountered in log
+  return 1.35027889191728*sqrt(x**2) + 6.63227248534618*log(5.80302074057706*x) + 9.69525248382901
+<lambdifygenerated-27737>:2: RuntimeWarning: divide by zero encountered in log
+  return 23.5631919036859*sqrt(x**2) - 7.09818697897713*log(-5.21398247141031*x) + 8.33812137847064
+<lambdifygenerated-27737>:2: RuntimeWarning: invalid value encountered in log
+  return 23.5631919036859*sqrt(x**2) - 7.09818697897713*log(-5.21398247141031*x) + 8.33812137847064
+<lambdifygenerated-27738>:2: RuntimeWarning: divide by zero encountered in log
+  return -12.9700873420993*sqrt(x**2) + 4.01644390096173*log(6.44968243473106*x) + 1.91479258657978
+<lambdifygenerated-27739>:2: RuntimeWarning: divide by zero encountered in log
+  return 0.853970383832477*sqrt(x**2) + 5.07239322195072*log(-5.97307663473946*x) - 5.11820491928344
+<lambdifygenerated-27739>:2: RuntimeWarning: invalid value encountered in log
+  return 0.853970383832477*sqrt(x**2) + 5.07239322195072*log(-5.97307663473946*x) - 5.11820491928344
+<lambdifygenerated-27740>:2: RuntimeWarning: divide by zero encountered in log
+  return 9.82994219820788*sqrt(-x**2) - 1.06553832250347*log(-7.5645499778679*x) + 3.06219732382226
+<lambdifygenerated-27740>:2: RuntimeWarning: invalid value encountered in log
+  return 9.82994219820788*sqrt(-x**2) - 1.06553832250347*log(-7.5645499778679*x) + 3.06219732382226
+<lambdifygenerated-27741>:2: RuntimeWarning: divide by zero encountered in log
+  return 18.8555688317746*sqrt(-x**2) + 1.78292779814429*log(4.32423919767887*x) - 8.03550342427444
+<lambdifygenerated-27742>:2: RuntimeWarning: divide by zero encountered in log
+  return -4.13501464968109*sqrt(-x**2) + 1.95691471698611*log(-7.11364397859889*x) - 3.44364435286767
+<lambdifygenerated-27742>:2: RuntimeWarning: invalid value encountered in log
+  return -4.13501464968109*sqrt(-x**2) + 1.95691471698611*log(-7.11364397859889*x) - 3.44364435286767
+<lambdifygenerated-27743>:2: RuntimeWarning: divide by zero encountered in log
+  return -19.5757173603249*sqrt(x**2) - 3.14537924319666*log(5.67695427350277*x) - 2.02006496176213
+<lambdifygenerated-27744>:2: RuntimeWarning: divide by zero encountered in log
+  return -23.784845273626*sqrt(x**2) + 6.89977217530782*log(9.05424605496772*x) - 6.66617680618642
+<lambdifygenerated-27745>:2: RuntimeWarning: divide by zero encountered in log
+  return 13.5587872540578*sqrt(-x**2) - 9.08277582500092*log(4.73904699378115*x) - 0.528637049906593
+<lambdifygenerated-27746>:2: RuntimeWarning: divide by zero encountered in log
+  return 1.65345376770187*sqrt(-x**2) + 7.02032877069659*log(4.4044745430905*x) + 5.98055098395074
+<lambdifygenerated-27747>:2: RuntimeWarning: divide by zero encountered in log
+  return 0.852184013259665*sqrt(-x**2) - 3.84761688314493*log(-3.29123770270667*x) - 7.76026394029878
+<lambdifygenerated-27747>:2: RuntimeWarning: invalid value encountered in log
+  return 0.852184013259665*sqrt(-x**2) - 3.84761688314493*log(-3.29123770270667*x) - 7.76026394029878
+<lambdifygenerated-27748>:2: RuntimeWarning: divide by zero encountered in log
+  return -9.24711872099553*sqrt(x**2) + 5.33776867214043*log(4.12494374193253*x) + 9.43480299044949
+<lambdifygenerated-27749>:2: RuntimeWarning: divide by zero encountered in log
+  return -4.32752201077082*sqrt(x**2) - 3.22528127984839*log(-8.28664021061516*x) - 9.10003833041638
+<lambdifygenerated-27749>:2: RuntimeWarning: invalid value encountered in log
+  return -4.32752201077082*sqrt(x**2) - 3.22528127984839*log(-8.28664021061516*x) - 9.10003833041638
+<lambdifygenerated-27750>:2: RuntimeWarning: divide by zero encountered in log
+  return -9.70821358693248*sqrt(x**2) + 0.998647022777581*log(2.97147858299974*x) + 6.05888692524493
+<lambdifygenerated-27751>:2: RuntimeWarning: divide by zero encountered in log
+  return -8.57575416180094*sqrt(x**2) - 8.02856495360041*log(6.67964911831227*x) - 7.01455099331996
+<lambdifygenerated-27752>:2: RuntimeWarning: divide by zero encountered in log
+  return 6.1914962539183*sqrt(-x**2) - 5.59905628911319*log(0.0762888944134033*x) + 4.61664940367077
+<lambdifygenerated-27753>:2: RuntimeWarning: divide by zero encountered in log
+  return -1.62330655378201*sqrt(-x**2) + 1.05749439861351*log(-2.48993942672288*x) - 4.7665541715382
+<lambdifygenerated-27753>:2: RuntimeWarning: invalid value encountered in log
+  return -1.62330655378201*sqrt(-x**2) + 1.05749439861351*log(-2.48993942672288*x) - 4.7665541715382
+<lambdifygenerated-27754>:2: RuntimeWarning: divide by zero encountered in log
+  return -2.46475270071339*sqrt(x**2) + 2.42201135874146*log(-1.38107563312035*x) + 9.97429016004397
+<lambdifygenerated-27754>:2: RuntimeWarning: invalid value encountered in log
+  return -2.46475270071339*sqrt(x**2) + 2.42201135874146*log(-1.38107563312035*x) + 9.97429016004397
+<lambdifygenerated-27755>:2: RuntimeWarning: divide by zero encountered in log
+  return -16.0709719244292*sqrt(-x**2) - 6.634867986589*log(-9.04578636097435*x) + 1.71615634300391
+<lambdifygenerated-27755>:2: RuntimeWarning: invalid value encountered in log
+  return -16.0709719244292*sqrt(-x**2) - 6.634867986589*log(-9.04578636097435*x) + 1.71615634300391
+<lambdifygenerated-27756>:2: RuntimeWarning: divide by zero encountered in log
+  return -14.6936282774244*sqrt(-x**2) + 7.54928344337877*log(1.2768179326344*x) - 1.52976699850956
+<lambdifygenerated-27757>:2: RuntimeWarning: divide by zero encountered in log
+  return -8.32901147605165*sqrt(x**2) - 6.57044377636162*log(-6.4988377928002*x) + 4.58172738804352
+<lambdifygenerated-27757>:2: RuntimeWarning: invalid value encountered in log
+  return -8.32901147605165*sqrt(x**2) - 6.57044377636162*log(-6.4988377928002*x) + 4.58172738804352
+<lambdifygenerated-27758>:2: RuntimeWarning: divide by zero encountered in log
+  return 12.1803900830228*sqrt(-x**2) + 6.35075696418967*log(4.99149241150329*x) + 6.51364654126769
+<lambdifygenerated-27759>:2: RuntimeWarning: divide by zero encountered in log
+  return 11.7822036908206*sqrt(x**2) - 5.78243425718723*log(1.77353747444696*x) - 2.35602778605125
+<lambdifygenerated-27760>:2: RuntimeWarning: divide by zero encountered in log
+  return -10.9470139261762*sqrt(-x**2) - 9.68246942087551*log(-5.55026419768854*x) - 1.70084736030804
+<lambdifygenerated-27760>:2: RuntimeWarning: invalid value encountered in log
+  return -10.9470139261762*sqrt(-x**2) - 9.68246942087551*log(-5.55026419768854*x) - 1.70084736030804
+<lambdifygenerated-27761>:2: RuntimeWarning: divide by zero encountered in log
+  return -11.7250289711723*sqrt(-x**2) + 7.6942145869533*log(8.3226755711563*x) + 0.554702093860306
+<lambdifygenerated-27762>:2: RuntimeWarning: divide by zero encountered in log
+  return 19.5019023553152*sqrt(-x**2) - 2.63657517697603*log(-8.89288714915168*x) - 1.00608960362702
+<lambdifygenerated-27762>:2: RuntimeWarning: invalid value encountered in log
+  return 19.5019023553152*sqrt(-x**2) - 2.63657517697603*log(-8.89288714915168*x) - 1.00608960362702
+<lambdifygenerated-27763>:2: RuntimeWarning: divide by zero encountered in log
+  return -8.1248664053472*sqrt(x**2) + 3.69492563600038*log(3.86278800703777*x) - 1.26268618861774
+<lambdifygenerated-27764>:2: RuntimeWarning: divide by zero encountered in log
+  return -20.4740663062829*sqrt(x**2) - 5.91202687985634*log(-2.29835643154295*x) - 0.62343420375554
+<lambdifygenerated-27764>:2: RuntimeWarning: invalid value encountered in log
+  return -20.4740663062829*sqrt(x**2) - 5.91202687985634*log(-2.29835643154295*x) - 0.62343420375554
+<lambdifygenerated-27765>:2: RuntimeWarning: divide by zero encountered in log
+  return 15.666383942431*sqrt(x**2) + 7.2030064312206*log(-8.41516114967848*x) + 7.70005036618696
+<lambdifygenerated-27765>:2: RuntimeWarning: invalid value encountered in log
+  return 15.666383942431*sqrt(x**2) + 7.2030064312206*log(-8.41516114967848*x) + 7.70005036618696
+<lambdifygenerated-27766>:2: RuntimeWarning: divide by zero encountered in log
+  return -3.45700976941926*sqrt(-x**2) + 2.69094054006132*log(3.63609671004321*x) - 7.38682177245538
+<lambdifygenerated-27767>:2: RuntimeWarning: divide by zero encountered in log
+  return 17.7954957856692*sqrt(x**2) - 2.44217304603309*log(9.56150583117025*x) - 4.48948684997455
+<lambdifygenerated-27768>:2: RuntimeWarning: divide by zero encountered in log
+  return 8.57431692559626*sqrt(x**2) + 4.72319425630134*log(-4.44419761929119*x) + 8.55366614245719
+<lambdifygenerated-27768>:2: RuntimeWarning: invalid value encountered in log
+  return 8.57431692559626*sqrt(x**2) + 4.72319425630134*log(-4.44419761929119*x) + 8.55366614245719
+<lambdifygenerated-27769>:2: RuntimeWarning: divide by zero encountered in log
+  return 2.08926401228991*sqrt(x**2) + 3.19821983809379*log(-0.764404438218461*x) + 2.13497151044116
+<lambdifygenerated-27769>:2: RuntimeWarning: invalid value encountered in log
+  return 2.08926401228991*sqrt(x**2) + 3.19821983809379*log(-0.764404438218461*x) + 2.13497151044116
+<lambdifygenerated-27770>:2: RuntimeWarning: divide by zero encountered in log
+  return -21.1024938436887*sqrt(-x**2) - 8.65527065622893*log(-3.86802114866833*x) + 4.24741600225637
+<lambdifygenerated-27770>:2: RuntimeWarning: invalid value encountered in log
+  return -21.1024938436887*sqrt(-x**2) - 8.65527065622893*log(-3.86802114866833*x) + 4.24741600225637
+<lambdifygenerated-27771>:2: RuntimeWarning: divide by zero encountered in log
+  return -12.3219605477121*sqrt(-x**2) + 1.51169841925913*log(9.98619697847018*x) + 3.63751103455155
+<lambdifygenerated-27772>:2: RuntimeWarning: divide by zero encountered in log
+  return -14.5082272816745*sqrt(x**2) + 0.535795708469846*log(-1.83210768352692*x) + 7.47860143916951
+<lambdifygenerated-27772>:2: RuntimeWarning: invalid value encountered in log
+  return -14.5082272816745*sqrt(x**2) + 0.535795708469846*log(-1.83210768352692*x) + 7.47860143916951
+<lambdifygenerated-27773>:2: RuntimeWarning: divide by zero encountered in log
+  return 12.2437075677766*sqrt(-x**2) + 9.2309650991237*log(3.07446107671812*x) - 3.83767681039585
+<lambdifygenerated-27774>:2: RuntimeWarning: divide by zero encountered in log
+  return 4.58221616770283*sqrt(-x**2) - 9.85158812327626*log(-3.59172249910645*x) - 6.04587329019723
+<lambdifygenerated-27774>:2: RuntimeWarning: invalid value encountered in log
+  return 4.58221616770283*sqrt(-x**2) - 9.85158812327626*log(-3.59172249910645*x) - 6.04587329019723
+<lambdifygenerated-27775>:2: RuntimeWarning: divide by zero encountered in log
+  return 8.12121757288396*sqrt(-x**2) - 0.199828889910393*log(-5.60341036844525*x) - 5.28616879730523
+<lambdifygenerated-27775>:2: RuntimeWarning: invalid value encountered in log
+  return 8.12121757288396*sqrt(-x**2) - 0.199828889910393*log(-5.60341036844525*x) - 5.28616879730523
+<lambdifygenerated-27776>:2: RuntimeWarning: divide by zero encountered in log
+  return 6.49653020655837*sqrt(-x**2) + 3.59259858079892*log(2.43934010876705*x) + 0.008755377005496
+<lambdifygenerated-27777>:2: RuntimeWarning: divide by zero encountered in log
+  return 18.1682894293601*sqrt(-x**2) - 8.53818604098914*log(0.52418289702471*x) - 3.38202966825707
+<lambdifygenerated-27778>:2: RuntimeWarning: divide by zero encountered in log
+  return -8.42950831284916*sqrt(x**2) - 0.758549479903511*log(3.36905347242616*x) - 3.00329242354255
+<lambdifygenerated-27779>:2: RuntimeWarning: divide by zero encountered in log
+  return -7.51830462299648*sqrt(-x**2) - 0.461592719035182*log(-7.93742842634311*x) - 0.209457837153295
+<lambdifygenerated-27779>:2: RuntimeWarning: invalid value encountered in log
+  return -7.51830462299648*sqrt(-x**2) - 0.461592719035182*log(-7.93742842634311*x) - 0.209457837153295
+<lambdifygenerated-27780>:2: RuntimeWarning: divide by zero encountered in log
+  return 4.87456224042485*sqrt(x**2) + 7.80995139338704*log(8.90131492663881*x) + 0.359270050482563
+<lambdifygenerated-27781>:2: RuntimeWarning: divide by zero encountered in log
+  return -5.92500890117369*sqrt(x**2) - 4.91079093523484*log(-2.17769853165547*x) + 4.99508334189392
+<lambdifygenerated-27781>:2: RuntimeWarning: invalid value encountered in log
+  return -5.92500890117369*sqrt(x**2) - 4.91079093523484*log(-2.17769853165547*x) + 4.99508334189392
+<lambdifygenerated-27782>:2: RuntimeWarning: divide by zero encountered in log
+  return 5.90737057835348*sqrt(x**2) + 2.18122187419858*log(2.03106602990905*x) + 8.69100889658026
+<lambdifygenerated-27783>:2: RuntimeWarning: divide by zero encountered in log
+  return -14.8009156355989*sqrt(x**2) + 5.93004716292977*log(-9.56852989709228*x) - 6.24631842939706
+<lambdifygenerated-27783>:2: RuntimeWarning: invalid value encountered in log
+  return -14.8009156355989*sqrt(x**2) + 5.93004716292977*log(-9.56852989709228*x) - 6.24631842939706
+<lambdifygenerated-27784>:2: RuntimeWarning: divide by zero encountered in log
+  return -5.464193201811*sqrt(-x**2) + 9.78490789146601*log(6.03937261861794*x) + 6.25884445093805
+<lambdifygenerated-27785>:2: RuntimeWarning: divide by zero encountered in log
+  return 11.9824804922638*sqrt(-x**2) - 3.46399384435288*log(-7.34905533569323*x) - 4.08985279843599
+<lambdifygenerated-27785>:2: RuntimeWarning: invalid value encountered in log
+  return 11.9824804922638*sqrt(-x**2) - 3.46399384435288*log(-7.34905533569323*x) - 4.08985279843599
+<lambdifygenerated-27786>:2: RuntimeWarning: divide by zero encountered in log
+  return 10.1974134963185*sqrt(-x**2) + 4.39985502315952*log(0.232424179581843*x) - 9.76535059259041
+<lambdifygenerated-27787>:2: RuntimeWarning: divide by zero encountered in log
+  return 27.7334005207142*sqrt(-x**2) + 0.319777350418124*log(8.46434183535234*x) - 9.44813375007927
+<lambdifygenerated-27788>:2: RuntimeWarning: divide by zero encountered in log
+  return -7.27758707085852*sqrt(-x**2) - 5.13968833722088*log(-3.00097905267643*x) - 6.46141378505196
+<lambdifygenerated-27788>:2: RuntimeWarning: invalid value encountered in log
+  return -7.27758707085852*sqrt(-x**2) - 5.13968833722088*log(-3.00097905267643*x) - 6.46141378505196
+<lambdifygenerated-27789>:2: RuntimeWarning: divide by zero encountered in log
+  return -18.7475997785554*sqrt(-x**2) - 0.277855079177489*log(-8.02022601206815*x) - 9.27598682361874
+<lambdifygenerated-27789>:2: RuntimeWarning: invalid value encountered in log
+  return -18.7475997785554*sqrt(-x**2) - 0.277855079177489*log(-8.02022601206815*x) - 9.27598682361874
+<lambdifygenerated-27790>:2: RuntimeWarning: divide by zero encountered in log
+  return -9.27772974799735*sqrt(-x**2) - 2.04735850116184*log(7.84432452715676*x) + 5.4447026387065
+<lambdifygenerated-27791>:2: RuntimeWarning: divide by zero encountered in log
+  return -25.6327917684491*sqrt(x**2) + 9.09904484030152*log(-6.25161896188272*x) + 2.39192368554125
+<lambdifygenerated-27791>:2: RuntimeWarning: invalid value encountered in log
+  return -25.6327917684491*sqrt(x**2) + 9.09904484030152*log(-6.25161896188272*x) + 2.39192368554125
+<lambdifygenerated-27792>:2: RuntimeWarning: divide by zero encountered in log
+  return 11.7301492538405*sqrt(-x**2) - 5.20769260831797*log(1.1040828648407*x) + 5.18264781114679
+<lambdifygenerated-27793>:2: RuntimeWarning: divide by zero encountered in log
+  return 4.85700225054263*sqrt(x**2) - 6.11074212437287*log(-6.91341755608715*x) + 4.18817470124538
+<lambdifygenerated-27793>:2: RuntimeWarning: invalid value encountered in log
+  return 4.85700225054263*sqrt(x**2) - 6.11074212437287*log(-6.91341755608715*x) + 4.18817470124538
+<lambdifygenerated-27794>:2: RuntimeWarning: divide by zero encountered in log
+  return 18.8362978699911*sqrt(x**2) + 8.09052409774016*log(-3.71252916752779*x) + 9.03118309003665
+<lambdifygenerated-27794>:2: RuntimeWarning: invalid value encountered in log
+  return 18.8362978699911*sqrt(x**2) + 8.09052409774016*log(-3.71252916752779*x) + 9.03118309003665
+<lambdifygenerated-27795>:2: RuntimeWarning: divide by zero encountered in log
+  return 13.0882851802563*sqrt(x**2) + 0.699287715004147*log(5.44193364534367*x) - 6.87449798972335
+<lambdifygenerated-27796>:2: RuntimeWarning: divide by zero encountered in log
+  return 4.15658175696873*sqrt(x**2) - 4.46924188151755*log(-6.73388284715799*x) - 0.904320935944553
+<lambdifygenerated-27796>:2: RuntimeWarning: invalid value encountered in log
+  return 4.15658175696873*sqrt(x**2) - 4.46924188151755*log(-6.73388284715799*x) - 0.904320935944553
+<lambdifygenerated-27797>:2: RuntimeWarning: divide by zero encountered in log
+  return -11.8905289482629*sqrt(-x**2) + 9.5223084461705*log(9.66808456123601*x) + 6.89969878692781
+<lambdifygenerated-27798>:2: RuntimeWarning: divide by zero encountered in log
+  return -11.3315310888446*sqrt(-x**2) - 2.90904468995793*log(-2.74414803425078*x) - 0.0835763354737207
+<lambdifygenerated-27798>:2: RuntimeWarning: invalid value encountered in log
+  return -11.3315310888446*sqrt(-x**2) - 2.90904468995793*log(-2.74414803425078*x) - 0.0835763354737207
+<lambdifygenerated-27799>:2: RuntimeWarning: divide by zero encountered in log
+  return 12.5158821019981*sqrt(x**2) + 2.94407908431184*log(-4.63812921637373*x) - 2.9735392897165
+<lambdifygenerated-27799>:2: RuntimeWarning: invalid value encountered in log
+  return 12.5158821019981*sqrt(x**2) + 2.94407908431184*log(-4.63812921637373*x) - 2.9735392897165
+<lambdifygenerated-27800>:2: RuntimeWarning: divide by zero encountered in log
+  return 1.91731096341586*sqrt(-x**2) - 7.42612586696913*log(9.28388443721778*x) + 2.90790691090425
+<lambdifygenerated-27801>:2: RuntimeWarning: divide by zero encountered in log
+  return 9.37502903809581*sqrt(x**2) + 3.98209215718696*log(0.612768417495053*x) + 9.3513586057544
+<lambdifygenerated-27802>:2: RuntimeWarning: divide by zero encountered in log
+  return 11.2032089147929*sqrt(x**2) - 0.906736341928082*log(-9.81616058679331*x) + 5.37975040917231
+<lambdifygenerated-27802>:2: RuntimeWarning: invalid value encountered in log
+  return 11.2032089147929*sqrt(x**2) - 0.906736341928082*log(-9.81616058679331*x) + 5.37975040917231
+<lambdifygenerated-27803>:2: RuntimeWarning: divide by zero encountered in log
+  return 3.61587463730012*sqrt(-x**2) - 0.826416682801324*log(-0.0162821129061352*x) - 2.4927792004671
+<lambdifygenerated-27803>:2: RuntimeWarning: invalid value encountered in log
+  return 3.61587463730012*sqrt(-x**2) - 0.826416682801324*log(-0.0162821129061352*x) - 2.4927792004671
+<lambdifygenerated-27804>:2: RuntimeWarning: divide by zero encountered in log
+  return -13.7346026601072*sqrt(x**2) + 4.81492380854846*log(6.20567293142583*x) + 2.03559872339214
+<lambdifygenerated-27805>:2: RuntimeWarning: divide by zero encountered in log
+  return -0.882313980148252*sqrt(-x**2) - 3.22016534552727*log(2.8650212880029*x) + 3.27279552016285
+<lambdifygenerated-27806>:2: RuntimeWarning: divide by zero encountered in log
+  return 0.491824048564108*sqrt(x**2) + 2.31938742240378*log(1.96624416444102*x) + 6.71594399819858
+<lambdifygenerated-27807>:2: RuntimeWarning: divide by zero encountered in log
+  return 14.8044911605874*sqrt(x**2) + 0.151479574090603*log(-9.68519767787508*x) - 0.610062846958741
+<lambdifygenerated-27807>:2: RuntimeWarning: invalid value encountered in log
+  return 14.8044911605874*sqrt(x**2) + 0.151479574090603*log(-9.68519767787508*x) - 0.610062846958741
+<lambdifygenerated-27808>:2: RuntimeWarning: divide by zero encountered in log
+  return 14.039555142739*sqrt(x**2) + 0.802344335069431*log(0.528279182448115*x) + 6.6793193848823
+<lambdifygenerated-27809>:2: RuntimeWarning: divide by zero encountered in log
+  return 14.1273513387609*sqrt(-x**2) - 8.46296300585235*log(6.17041028847061*x) + 3.9823485047116
+<lambdifygenerated-27810>:2: RuntimeWarning: divide by zero encountered in log
+  return -7.57663865296716*sqrt(-x**2) + 0.317654946036439*log(-4.06639422087513*x) - 2.46515890321771
+<lambdifygenerated-27810>:2: RuntimeWarning: invalid value encountered in log
+  return -7.57663865296716*sqrt(-x**2) + 0.317654946036439*log(-4.06639422087513*x) - 2.46515890321771
+<lambdifygenerated-27811>:2: RuntimeWarning: divide by zero encountered in log
+  return -6.82912294885517*sqrt(-x**2) - 9.51790402860064*log(6.80558873726202*x) - 4.19225358004889
+<lambdifygenerated-27812>:2: RuntimeWarning: divide by zero encountered in log
+  return -2.84592162545543*sqrt(x**2) - 1.59372901115039*log(8.56096146669298*x) + 5.46780559411198
+<lambdifygenerated-27813>:2: RuntimeWarning: divide by zero encountered in log
+  return -13.0915600657368*sqrt(-x**2) + 6.77644572417667*log(-1.34928635496638*x) + 3.48406233978891
+<lambdifygenerated-27813>:2: RuntimeWarning: invalid value encountered in log
+  return -13.0915600657368*sqrt(-x**2) + 6.77644572417667*log(-1.34928635496638*x) + 3.48406233978891
+<lambdifygenerated-27814>:2: RuntimeWarning: divide by zero encountered in log
+  return 5.98842624309565*sqrt(-x**2) + 7.06068725137273*log(3.01611236661971*x) - 3.58341777315038
+<lambdifygenerated-27815>:2: RuntimeWarning: divide by zero encountered in log
+  return 3.55033224190529*sqrt(x**2) + 7.07694756568338*log(6.84211443307547*x) + 5.18879394053778
+<lambdifygenerated-27816>:2: RuntimeWarning: divide by zero encountered in log
+  return -15.3877484420841*sqrt(x**2) - 0.134856746780078*log(-3.4296988195021*x) + 6.33211973041652
+<lambdifygenerated-27816>:2: RuntimeWarning: invalid value encountered in log
+  return -15.3877484420841*sqrt(x**2) - 0.134856746780078*log(-3.4296988195021*x) + 6.33211973041652
+<lambdifygenerated-27817>:2: RuntimeWarning: divide by zero encountered in log
+  return -21.5135014586863*sqrt(x**2) - 4.52438822364636*log(1.31274014986157*x) + 8.91892178097054
+<lambdifygenerated-27818>:2: RuntimeWarning: divide by zero encountered in log
+  return -0.309079112874764*sqrt(x**2) - 9.23231474535029*log(5.42758904960799*x) - 5.98292489188065
+<lambdifygenerated-27819>:2: RuntimeWarning: divide by zero encountered in log
+  return 2.62869354089184*sqrt(-x**2) - 1.33218639578293*log(-0.955321922107734*x) - 3.35739353272742
+<lambdifygenerated-27819>:2: RuntimeWarning: invalid value encountered in log
+  return 2.62869354089184*sqrt(-x**2) - 1.33218639578293*log(-0.955321922107734*x) - 3.35739353272742
+<lambdifygenerated-27820>:2: RuntimeWarning: divide by zero encountered in log
+  return 4.8248667174004*sqrt(-x**2) - 0.173429801920717*log(6.67248550556524*x) - 2.43540090972631
+<lambdifygenerated-27821>:2: RuntimeWarning: divide by zero encountered in log
+  return 8.84261873307351*sqrt(-x**2) - 5.60742749281767*log(-6.48914237285591*x) + 6.06030005622811
+<lambdifygenerated-27821>:2: RuntimeWarning: invalid value encountered in log
+  return 8.84261873307351*sqrt(-x**2) - 5.60742749281767*log(-6.48914237285591*x) + 6.06030005622811
+<lambdifygenerated-27822>:2: RuntimeWarning: divide by zero encountered in log
+  return 5.31031670664968*sqrt(-x**2) + 4.80991997879465*log(2.69083069856073*x) - 9.82919614140124
+<lambdifygenerated-27823>:2: RuntimeWarning: divide by zero encountered in log
+  return -11.8506685174971*sqrt(x**2) - 1.90619079424823*log(-5.09380128928978*x) - 0.885329327184492
+<lambdifygenerated-27823>:2: RuntimeWarning: invalid value encountered in log
+  return -11.8506685174971*sqrt(x**2) - 1.90619079424823*log(-5.09380128928978*x) - 0.885329327184492
+<lambdifygenerated-27824>:2: RuntimeWarning: divide by zero encountered in log
+  return -8.16996803624169*sqrt(x**2) - 4.3544590529436*log(8.77050495056946*x) + 8.60897941924664
+<lambdifygenerated-27825>:2: RuntimeWarning: divide by zero encountered in log
+  return 3.36804013739761*sqrt(x**2) + 4.36821383937871*log(1.81813492021727*x) - 7.80715869620311
+<lambdifygenerated-27826>:2: RuntimeWarning: divide by zero encountered in log
+  return 15.1002906839188*sqrt(-x**2) + 0.997490472365252*log(0.60497144462992*x) - 5.69715348171961
+<lambdifygenerated-27827>:2: RuntimeWarning: divide by zero encountered in log
+  return 3.41678381902334*sqrt(-x**2) - 2.87982506966484*log(-2.43528015612035*x) + 6.81488136633267
+<lambdifygenerated-27827>:2: RuntimeWarning: invalid value encountered in log
+  return 3.41678381902334*sqrt(-x**2) - 2.87982506966484*log(-2.43528015612035*x) + 6.81488136633267
+<lambdifygenerated-27828>:2: RuntimeWarning: divide by zero encountered in log
+  return 0.640821866794977*sqrt(-x**2) - 1.79858105430048*log(-6.07958073392153*x) + 7.00545493190275
+<lambdifygenerated-27828>:2: RuntimeWarning: invalid value encountered in log
+  return 0.640821866794977*sqrt(-x**2) - 1.79858105430048*log(-6.07958073392153*x) + 7.00545493190275
+<lambdifygenerated-27829>:2: RuntimeWarning: divide by zero encountered in log
+  return -3.29667275986492*sqrt(x**2) - 4.21423935976256*log(-5.11221471003894*x) + 6.74085184342667
+<lambdifygenerated-27829>:2: RuntimeWarning: invalid value encountered in log
+  return -3.29667275986492*sqrt(x**2) - 4.21423935976256*log(-5.11221471003894*x) + 6.74085184342667
+<lambdifygenerated-27830>:2: RuntimeWarning: divide by zero encountered in log
+  return 9.36732071433338*sqrt(-x**2) - 7.23407563889074*log(2.26305424202345*x) - 4.43367572540316
+<lambdifygenerated-27831>:2: RuntimeWarning: divide by zero encountered in log
+  return 6.030281179744*sqrt(-x**2) - 3.93196519489*log(-6.08400693474193*x) - 2.2744457541368
+<lambdifygenerated-27831>:2: RuntimeWarning: invalid value encountered in log
+  return 6.030281179744*sqrt(-x**2) - 3.93196519489*log(-6.08400693474193*x) - 2.2744457541368
+<lambdifygenerated-27832>:2: RuntimeWarning: divide by zero encountered in log
+  return 11.5311508387348*sqrt(-x**2) - 4.73763467362011*log(6.48272481190341*x) + 2.44914994958751
+<lambdifygenerated-27833>:2: RuntimeWarning: divide by zero encountered in log
+  return 20.6105333970936*sqrt(x**2) + 9.13855919336838*log(-8.64279520531818*x) - 9.67973985435016
+<lambdifygenerated-27833>:2: RuntimeWarning: invalid value encountered in log
+  return 20.6105333970936*sqrt(x**2) + 9.13855919336838*log(-8.64279520531818*x) - 9.67973985435016
+<lambdifygenerated-27834>:2: RuntimeWarning: divide by zero encountered in log
+  return 18.3815525971826*sqrt(x**2) - 5.571945837839*log(5.16623277193291*x) + 1.38754459523317
+<lambdifygenerated-27835>:2: RuntimeWarning: divide by zero encountered in log
+  return -10.1239003480834*sqrt(-x**2) - 7.80874151808731*log(5.39865543981495*x) - 3.71613741171782
+<lambdifygenerated-27836>:2: RuntimeWarning: divide by zero encountered in log
+  return -4.1836013988426*sqrt(x**2) - 1.09869073079232*log(5.65466531043934*x) - 2.11699879641008
+<lambdifygenerated-27837>:2: RuntimeWarning: divide by zero encountered in log
+  return 6.29375483391163*sqrt(x**2) + 4.01707650360523*log(9.15706824574103*x) - 3.51658661496535
+<lambdifygenerated-27838>:2: RuntimeWarning: divide by zero encountered in log
+  return -9.8088833111578*sqrt(x**2) + 4.01644390096173*log(0.601772474498927*x) + 6.82547661113034
+<lambdifygenerated-27839>:2: RuntimeWarning: divide by zero encountered in log
+  return 6.10191108738467*sqrt(-x**2) + 5.07239322195072*log(-0.187530714721527*x) - 5.11820491928344
+<lambdifygenerated-27839>:2: RuntimeWarning: invalid value encountered in log
+  return 6.10191108738467*sqrt(-x**2) + 5.07239322195072*log(-0.187530714721527*x) - 5.11820491928344
+<lambdifygenerated-27840>:2: RuntimeWarning: divide by zero encountered in log
+  return 0.448106546126133*sqrt(-x**2) + 1.68526085500996*log(0.42104699546347*x) + 3.06219732382226
+<lambdifygenerated-27841>:2: RuntimeWarning: divide by zero encountered in log
+  return 18.8555688317746*sqrt(-x**2) - 5.44357926395913*log(8.86261572283953*x) - 7.11510579990786
+<lambdifygenerated-27842>:2: RuntimeWarning: divide by zero encountered in log
+  return -14.4233023899453*sqrt(x**2) - 6.66994106788932*log(4.46948209006535*x) - 3.34672440487502
+<lambdifygenerated-27843>:2: RuntimeWarning: divide by zero encountered in log
+  return -11.1746886500896*sqrt(-x**2) + 0.978774197103769*log(5.67695427350277*x) + 6.86491965605668
+<lambdifygenerated-27844>:2: RuntimeWarning: divide by zero encountered in log
+  return 1.83185668770594*sqrt(x**2) - 6.75690505053615*log(-5.7338228277726*x) + 1.78737345968757
+<lambdifygenerated-27844>:2: RuntimeWarning: invalid value encountered in log
+  return 1.83185668770594*sqrt(x**2) - 6.75690505053615*log(-5.7338228277726*x) + 1.78737345968757
+<lambdifygenerated-27845>:2: RuntimeWarning: divide by zero encountered in log
+  return 3.48719568984162*sqrt(x**2) + 0.949333921076974*log(-3.51658898221456*x) + 5.89815570210372
+<lambdifygenerated-27845>:2: RuntimeWarning: invalid value encountered in log
+  return 3.48719568984162*sqrt(x**2) + 0.949333921076974*log(-3.51658898221456*x) + 5.89815570210372
+<lambdifygenerated-27846>:2: RuntimeWarning: divide by zero encountered in log
+  return 11.2991621164796*sqrt(-x**2) + 0.0843826176057738*log(4.4044745430905*x) + 0.664805033635143
+<lambdifygenerated-27847>:2: RuntimeWarning: divide by zero encountered in log
+  return 12.9957324356676*sqrt(-x**2) - 2.41180756996901*log(7.40859783531961*x) - 7.76026394029878
+<lambdifygenerated-27848>:2: RuntimeWarning: divide by zero encountered in log
+  return -2.60267550158756*sqrt(x**2) + 2.75774847821505*log(-6.54105520834436*x) + 0.772618316293332
+<lambdifygenerated-27848>:2: RuntimeWarning: invalid value encountered in log
+  return -2.60267550158756*sqrt(x**2) + 2.75774847821505*log(-6.54105520834436*x) + 0.772618316293332
+<lambdifygenerated-27849>:2: RuntimeWarning: divide by zero encountered in log
+  return -1.60344324353748*sqrt(-x**2) + 2.00074405515972*log(-8.76406832732593*x) - 9.10003833041638
+<lambdifygenerated-27849>:2: RuntimeWarning: invalid value encountered in log
+  return -1.60344324353748*sqrt(-x**2) + 2.00074405515972*log(-8.76406832732593*x) - 9.10003833041638
+<lambdifygenerated-27850>:2: RuntimeWarning: divide by zero encountered in log
+  return -2.65142457069153*sqrt(-x**2) + 0.998647022777581*log(5.16277761194317*x) - 4.55662094120792
+<lambdifygenerated-27851>:2: RuntimeWarning: divide by zero encountered in log
+  return -3.93346539394761*sqrt(-x**2) - 0.479986284518594*log(6.67964911831227*x) - 7.01455099331996
+<lambdifygenerated-27852>:2: RuntimeWarning: divide by zero encountered in log
+  return 8.19380092019759*sqrt(-x**2) - 5.59905628911319*log(-3.46497787925556*x) - 8.03644042768651
+<lambdifygenerated-27852>:2: RuntimeWarning: invalid value encountered in log
+  return 8.19380092019759*sqrt(-x**2) - 5.59905628911319*log(-3.46497787925556*x) - 8.03644042768651
+<lambdifygenerated-27853>:2: RuntimeWarning: divide by zero encountered in log
+  return 8.46931394208611*sqrt(-x**2) - 7.03355165685838*log(-4.32546138404937*x) - 4.7665541715382
+<lambdifygenerated-27853>:2: RuntimeWarning: invalid value encountered in log
+  return 8.46931394208611*sqrt(-x**2) - 7.03355165685838*log(-4.32546138404937*x) - 4.7665541715382
+<lambdifygenerated-27854>:2: RuntimeWarning: divide by zero encountered in log
+  return -3.61862291314572*sqrt(x**2) + 0.594851485396006*log(-1.38107563312035*x) + 3.32858391622481
+<lambdifygenerated-27854>:2: RuntimeWarning: invalid value encountered in log
+  return -3.61862291314572*sqrt(x**2) + 0.594851485396006*log(-1.38107563312035*x) + 3.32858391622481
+<lambdifygenerated-27855>:2: RuntimeWarning: divide by zero encountered in log
+  return 16.1165857183486*sqrt(-x**2) - 2.47689252807995*log(8.72399348029955*x) + 3.50998871797098
+<lambdifygenerated-27856>:2: RuntimeWarning: divide by zero encountered in log
+  return -0.00112790775180933*sqrt(x**2) + 7.54928344337877*log(-3.5169556639372*x) + 1.76494624846408
+<lambdifygenerated-27856>:2: RuntimeWarning: invalid value encountered in log
+  return -0.00112790775180933*sqrt(x**2) + 7.54928344337877*log(-3.5169556639372*x) + 1.76494624846408
+<lambdifygenerated-27857>:2: RuntimeWarning: divide by zero encountered in log
+  return -8.86752262325976*sqrt(x**2) + 7.69236456509238*log(-5.34450155164296*x) + 0.640431007348516
+<lambdifygenerated-27857>:2: RuntimeWarning: invalid value encountered in log
+  return -8.86752262325976*sqrt(x**2) + 7.69236456509238*log(-5.34450155164296*x) + 0.640431007348516
+<lambdifygenerated-27858>:2: RuntimeWarning: divide by zero encountered in log
+  return 20.7568840364245*sqrt(-x**2) + 4.05299105454263*log(-7.61271136289219*x) + 6.51364654126769
+<lambdifygenerated-27858>:2: RuntimeWarning: invalid value encountered in log
+  return 20.7568840364245*sqrt(-x**2) + 4.05299105454263*log(-7.61271136289219*x) + 6.51364654126769
+<lambdifygenerated-27859>:2: RuntimeWarning: divide by zero encountered in log
+  return 3.57022229478012*sqrt(x**2) - 4.3043345325163*log(-7.30564349622177*x) - 1.15364145376401
+<lambdifygenerated-27859>:2: RuntimeWarning: invalid value encountered in log
+  return 3.57022229478012*sqrt(x**2) - 4.3043345325163*log(-7.30564349622177*x) - 1.15364145376401
+<lambdifygenerated-27860>:2: RuntimeWarning: divide by zero encountered in log
+  return -0.483653387514808*sqrt(x**2) - 5.83249585768343*log(6.95268008401141*x) - 9.21510353223456
+<lambdifygenerated-27861>:2: RuntimeWarning: divide by zero encountered in log
+  return 2.54811730305927*sqrt(-x**2) - 5.04590664438069*log(8.3226755711563*x) - 7.39852983403487
+<lambdifygenerated-27862>:2: RuntimeWarning: divide by zero encountered in log
+  return 1.70117524024526*sqrt(-x**2) - 4.57450916119779*log(0.109132564724852*x) - 5.67772210606743
+<lambdifygenerated-27863>:2: RuntimeWarning: divide by zero encountered in log
+  return -0.0579147022127316*sqrt(-x**2) - 2.61183400869607*log(-7.9968059405993*x) - 3.4677989091061
+<lambdifygenerated-27863>:2: RuntimeWarning: invalid value encountered in log
+  return -0.0579147022127316*sqrt(-x**2) - 2.61183400869607*log(-7.9968059405993*x) - 3.4677989091061
+<lambdifygenerated-27864>:2: RuntimeWarning: divide by zero encountered in log
+  return 14.6004410373976*sqrt(-x**2) + 2.43088904340406*log(-0.827292665414134*x) + 0.837660970840588
+<lambdifygenerated-27864>:2: RuntimeWarning: invalid value encountered in log
+  return 14.6004410373976*sqrt(-x**2) + 2.43088904340406*log(-0.827292665414134*x) + 0.837660970840588
+<lambdifygenerated-27865>:2: RuntimeWarning: divide by zero encountered in log
+  return 11.8729990983285*sqrt(x**2) - 4.82563779676599*log(-8.41516114967848*x) + 0.0735633890122922
+<lambdifygenerated-27865>:2: RuntimeWarning: invalid value encountered in log
+  return 11.8729990983285*sqrt(x**2) - 4.82563779676599*log(-8.41516114967848*x) + 0.0735633890122922
+<lambdifygenerated-27866>:2: RuntimeWarning: divide by zero encountered in log
+  return -5.20194598608209*sqrt(-x**2) - 8.48292007054736*log(-0.811170258077496*x) - 5.16665215631238
+<lambdifygenerated-27866>:2: RuntimeWarning: invalid value encountered in log
+  return -5.20194598608209*sqrt(-x**2) - 8.48292007054736*log(-0.811170258077496*x) - 5.16665215631238
+<lambdifygenerated-27867>:2: RuntimeWarning: divide by zero encountered in log
+  return -3.71421176963138*sqrt(x**2) - 2.44217304603309*log(-1.62897193133819*x) - 0.418673481132898
+<lambdifygenerated-27867>:2: RuntimeWarning: invalid value encountered in log
+  return -3.71421176963138*sqrt(x**2) - 2.44217304603309*log(-1.62897193133819*x) - 0.418673481132898
+<lambdifygenerated-27868>:2: RuntimeWarning: divide by zero encountered in log
+  return -7.67114323843091*sqrt(-x**2) + 4.72319425630134*log(-4.44419761929119*x) + 1.53114250617226
+<lambdifygenerated-27868>:2: RuntimeWarning: invalid value encountered in log
+  return -7.67114323843091*sqrt(-x**2) + 4.72319425630134*log(-4.44419761929119*x) + 1.53114250617226
+<lambdifygenerated-27869>:2: RuntimeWarning: divide by zero encountered in log
+  return -19.5809922548861*sqrt(-x**2) - 0.784828302095136*log(-6.08460881746901*x) - 9.90093615358125
+<lambdifygenerated-27869>:2: RuntimeWarning: invalid value encountered in log
+  return -19.5809922548861*sqrt(-x**2) - 0.784828302095136*log(-6.08460881746901*x) - 9.90093615358125
+<lambdifygenerated-27870>:2: RuntimeWarning: divide by zero encountered in log
+  return 15.7996684367423*sqrt(-x**2) - 0.685896244193304*log(1.41880147658966*x) - 5.31792811678529
+<lambdifygenerated-27871>:2: RuntimeWarning: divide by zero encountered in log
+  return -9.49919935931786*sqrt(x**2) - 0.405059912650642*log(-6.78282777453985*x) - 4.21440076360619
+<lambdifygenerated-27871>:2: RuntimeWarning: invalid value encountered in log
+  return -9.49919935931786*sqrt(x**2) - 0.405059912650642*log(-6.78282777453985*x) - 4.21440076360619
+<lambdifygenerated-27872>:2: RuntimeWarning: divide by zero encountered in log
+  return -10.7733772082328*sqrt(x**2) - 0.828017285090265*log(-9.46628371805146*x) + 2.7734017497522
+<lambdifygenerated-27872>:2: RuntimeWarning: invalid value encountered in log
+  return -10.7733772082328*sqrt(x**2) - 0.828017285090265*log(-9.46628371805146*x) + 2.7734017497522
+<lambdifygenerated-27873>:2: RuntimeWarning: divide by zero encountered in log
+  return -4.91659664482371*sqrt(x**2) - 1.26768221351941*log(3.07446107671812*x) - 2.92105218403575
+<lambdifygenerated-27874>:2: RuntimeWarning: divide by zero encountered in log
+  return 16.8140471159478*sqrt(-x**2) - 8.52489108021295*log(-6.23744406551658*x) + 0.176212466541115
+<lambdifygenerated-27874>:2: RuntimeWarning: invalid value encountered in log
+  return 16.8140471159478*sqrt(-x**2) - 8.52489108021295*log(-6.23744406551658*x) + 0.176212466541115
+<lambdifygenerated-27875>:2: RuntimeWarning: divide by zero encountered in log
+  return -11.5661492397172*sqrt(-x**2) - 0.199828889910393*log(-0.8924152160086*x) + 3.99458427453986
+<lambdifygenerated-27875>:2: RuntimeWarning: invalid value encountered in log
+  return -11.5661492397172*sqrt(-x**2) - 0.199828889910393*log(-0.8924152160086*x) + 3.99458427453986
+<lambdifygenerated-27876>:2: RuntimeWarning: divide by zero encountered in log
+  return 27.9692924999526*sqrt(-x**2) + 3.59259858079892*log(2.43934010876705*x) + 5.2419725915012
+<lambdifygenerated-27877>:2: RuntimeWarning: divide by zero encountered in log
+  return 18.0845357671503*sqrt(-x**2) + 7.38140319215204*log(0.52418289702471*x) - 3.38202966825707
+<lambdifygenerated-27878>:2: RuntimeWarning: divide by zero encountered in log
+  return -4.75993038465191*sqrt(-x**2) + 3.43530208667389*log(-2.80082506632273*x) - 4.32922562281464
+<lambdifygenerated-27878>:2: RuntimeWarning: invalid value encountered in log
+  return -4.75993038465191*sqrt(-x**2) + 3.43530208667389*log(-2.80082506632273*x) - 4.32922562281464
+<lambdifygenerated-27879>:2: RuntimeWarning: divide by zero encountered in log
+  return -8.51620743780536*sqrt(-x**2) + 6.64770617938732*log(-7.93742842634311*x) + 2.65889369103258
+<lambdifygenerated-27879>:2: RuntimeWarning: invalid value encountered in log
+  return -8.51620743780536*sqrt(-x**2) + 6.64770617938732*log(-7.93742842634311*x) + 2.65889369103258
+<lambdifygenerated-27880>:2: RuntimeWarning: divide by zero encountered in log
+  return 10.9841895047065*sqrt(-x**2) - 2.76028005557723*log(1.80001874844127*x) - 5.40546606195971
+<lambdifygenerated-27881>:2: RuntimeWarning: divide by zero encountered in log
+  return 11.4945062288598*sqrt(-x**2) - 0.593934679714119*log(-1.40387319696596*x) + 4.9338068631616
+<lambdifygenerated-27881>:2: RuntimeWarning: invalid value encountered in log
+  return 11.4945062288598*sqrt(-x**2) - 0.593934679714119*log(-1.40387319696596*x) + 4.9338068631616
+<lambdifygenerated-27882>:2: RuntimeWarning: divide by zero encountered in log
+  return -4.90136164087139*sqrt(x**2) - 4.24858546790218*log(2.03106602990905*x) + 3.87322534577983
+<lambdifygenerated-27883>:2: RuntimeWarning: divide by zero encountered in log
+  return 7.7108155946043*sqrt(x**2) - 2.02199199739379*log(-9.56852989709228*x) - 2.83658919025333
+<lambdifygenerated-27883>:2: RuntimeWarning: invalid value encountered in log
+  return 7.7108155946043*sqrt(x**2) - 2.02199199739379*log(-9.56852989709228*x) - 2.83658919025333
+<lambdifygenerated-27884>:2: RuntimeWarning: divide by zero encountered in log
+  return -4.61903896033937*sqrt(-x**2) - 5.14212144942281*log(6.03937261861794*x) + 6.25884445093805
+<lambdifygenerated-27885>:2: RuntimeWarning: divide by zero encountered in log
+  return 14.3010908023539*sqrt(-x**2) - 3.96262875940141*log(-7.34905533569323*x) + 1.38050590695354
+<lambdifygenerated-27885>:2: RuntimeWarning: invalid value encountered in log
+  return 14.3010908023539*sqrt(-x**2) - 3.96262875940141*log(-7.34905533569323*x) + 1.38050590695354
+<lambdifygenerated-27886>:2: RuntimeWarning: divide by zero encountered in log
+  return -2.41882666481892*sqrt(-x**2) + 3.52094034326683*log(6.04513647833856*x) - 6.70217845818461
+<lambdifygenerated-27887>:2: RuntimeWarning: divide by zero encountered in log
+  return 30.9143695208382*sqrt(x**2) + 0.468935502357051*log(-5.12622443038076*x) + 1.86162330363093
+<lambdifygenerated-27887>:2: RuntimeWarning: invalid value encountered in log
+  return 30.9143695208382*sqrt(x**2) + 0.468935502357051*log(-5.12622443038076*x) + 1.86162330363093
+<lambdifygenerated-27888>:2: RuntimeWarning: divide by zero encountered in log
+  return -7.27758707085852*sqrt(-x**2) + 4.85545061484762*log(-1.25916194217711*x) + 7.04416221383298
+<lambdifygenerated-27888>:2: RuntimeWarning: invalid value encountered in log
+  return -7.27758707085852*sqrt(-x**2) + 4.85545061484762*log(-1.25916194217711*x) + 7.04416221383298
+<lambdifygenerated-27889>:2: RuntimeWarning: divide by zero encountered in log
+  return -26.255721189792*sqrt(-x**2) - 0.277855079177489*log(5.04555673156894*x) - 7.19093878205646
+<lambdifygenerated-27890>:2: RuntimeWarning: divide by zero encountered in log
+  return 9.77029860897091*sqrt(-x**2) - 0.233213754023112*log(1.01689419010338*x) - 1.1228178281405
+<lambdifygenerated-27891>:2: RuntimeWarning: divide by zero encountered in log
+  return 21.9781175851234*sqrt(x**2) + 9.09904484030152*log(-6.25161896188272*x) + 5.8826664081173
+<lambdifygenerated-27891>:2: RuntimeWarning: invalid value encountered in log
+  return 21.9781175851234*sqrt(x**2) + 9.09904484030152*log(-6.25161896188272*x) + 5.8826664081173
+<lambdifygenerated-27892>:2: RuntimeWarning: divide by zero encountered in log
+  return 5.61541449897589*sqrt(-x**2) + 6.99422952629253*log(-5.96238901718551*x) - 6.92824698041608
+<lambdifygenerated-27892>:2: RuntimeWarning: invalid value encountered in log
+  return 5.61541449897589*sqrt(-x**2) + 6.99422952629253*log(-5.96238901718551*x) - 6.92824698041608
+<lambdifygenerated-27893>:2: RuntimeWarning: divide by zero encountered in log
+  return 2.91863077590715*sqrt(x**2) - 0.213105406437146*log(1.4295851688906*x) + 4.18817470124538
+<lambdifygenerated-27894>:2: RuntimeWarning: divide by zero encountered in log
+  return 15.2400099869824*sqrt(-x**2) - 2.51847754188632*log(-3.71252916752779*x) + 1.00103226444869
+<lambdifygenerated-27894>:2: RuntimeWarning: invalid value encountered in log
+  return 15.2400099869824*sqrt(-x**2) - 2.51847754188632*log(-3.71252916752779*x) + 1.00103226444869
+<lambdifygenerated-27895>:2: RuntimeWarning: divide by zero encountered in log
+  return 0.871533636421303*sqrt(x**2) + 2.31944525340973*log(-8.60572946718658*x) + 3.04461867655221
+<lambdifygenerated-27895>:2: RuntimeWarning: invalid value encountered in log
+  return 0.871533636421303*sqrt(x**2) + 2.31944525340973*log(-8.60572946718658*x) + 3.04461867655221
+<lambdifygenerated-27896>:2: RuntimeWarning: divide by zero encountered in log
+  return 7.11811414342357*sqrt(-x**2) - 1.08767570263488*log(-5.06599033427671*x) - 0.904320935944553
+<lambdifygenerated-27896>:2: RuntimeWarning: invalid value encountered in log
+  return 7.11811414342357*sqrt(-x**2) - 1.08767570263488*log(-5.06599033427671*x) - 0.904320935944553
+<lambdifygenerated-27897>:2: RuntimeWarning: divide by zero encountered in log
+  return 7.67274188667966*sqrt(x**2) - 6.42727468340594*log(-8.57424808227501*x) - 6.64314325150902
+<lambdifygenerated-27897>:2: RuntimeWarning: invalid value encountered in log
+  return 7.67274188667966*sqrt(x**2) - 6.42727468340594*log(-8.57424808227501*x) - 6.64314325150902
+<lambdifygenerated-27898>:2: RuntimeWarning: divide by zero encountered in log
+  return -22.7346351848601*sqrt(-x**2) - 2.90904468995793*log(6.23006974672355*x) - 4.00819067983481
+<lambdifygenerated-27899>:2: RuntimeWarning: divide by zero encountered in log
+  return 12.5158821019981*sqrt(x**2) + 4.81776169423204*log(-5.74487033539162*x) - 0.50028156286221
+<lambdifygenerated-27899>:2: RuntimeWarning: invalid value encountered in log
+  return 12.5158821019981*sqrt(x**2) + 4.81776169423204*log(-5.74487033539162*x) - 0.50028156286221
+<lambdifygenerated-27900>:2: RuntimeWarning: divide by zero encountered in log
+  return 14.0644675027191*sqrt(x**2) - 3.7038151323861*log(-0.451757662086031*x) - 4.88745170796788
+<lambdifygenerated-27900>:2: RuntimeWarning: invalid value encountered in log
+  return 14.0644675027191*sqrt(x**2) - 3.7038151323861*log(-0.451757662086031*x) - 4.88745170796788
+<lambdifygenerated-27901>:2: RuntimeWarning: divide by zero encountered in log
+  return 13.1105200979849*sqrt(-x**2) - 4.36510992745854*log(4.77343546724951*x) - 8.1763373725228
+<lambdifygenerated-27902>:2: RuntimeWarning: divide by zero encountered in log
+  return 21.6428151997748*sqrt(x**2) + 1.69094491390706*log(3.51322095345986*x) + 5.37975040917231
+<lambdifygenerated-27903>:2: RuntimeWarning: divide by zero encountered in log
+  return 3.61587463730012*sqrt(-x**2) - 0.826416682801324*log(-0.0162821129061352*x) - 2.4927792004671
+<lambdifygenerated-27903>:2: RuntimeWarning: invalid value encountered in log
+  return 3.61587463730012*sqrt(-x**2) - 0.826416682801324*log(-0.0162821129061352*x) - 2.4927792004671
+<lambdifygenerated-27904>:2: RuntimeWarning: divide by zero encountered in log
+  return 3.61587465251607*sqrt(-x**2) - 0.826416682801324*log(-0.0162821129061352*x) - 2.4927792004671
+<lambdifygenerated-27904>:2: RuntimeWarning: invalid value encountered in log
+  return 3.61587465251607*sqrt(-x**2) - 0.826416682801324*log(-0.0162821129061352*x) - 2.4927792004671
+<lambdifygenerated-27905>:2: RuntimeWarning: divide by zero encountered in log
+  return 3.6158746294913*sqrt(-x**2) - 0.826416682801324*log(-0.0162821129061352*x) - 2.4927792004671
+<lambdifygenerated-27905>:2: RuntimeWarning: invalid value encountered in log
+  return 3.6158746294913*sqrt(-x**2) - 0.826416682801324*log(-0.0162821129061352*x) - 2.4927792004671
+<lambdifygenerated-27906>:2: RuntimeWarning: divide by zero encountered in log
+  return 3.61587463730012*sqrt(-x**2) - 0.826416672801324*log(-0.0162821129061352*x) - 2.4927792004671
+<lambdifygenerated-27906>:2: RuntimeWarning: invalid value encountered in log
+  return 3.61587463730012*sqrt(-x**2) - 0.826416672801324*log(-0.0162821129061352*x) - 2.4927792004671
+<lambdifygenerated-27907>:2: RuntimeWarning: divide by zero encountered in log
+  return 3.61587463730012*sqrt(-x**2) - 0.826416682801324*log(-0.0162821029061352*x) - 2.4927792004671
+<lambdifygenerated-27907>:2: RuntimeWarning: invalid value encountered in log
+  return 3.61587463730012*sqrt(-x**2) - 0.826416682801324*log(-0.0162821029061352*x) - 2.4927792004671
+<lambdifygenerated-27908>:2: RuntimeWarning: divide by zero encountered in log
+  return 3.61587463730012*sqrt(-x**2) - 0.826416682801324*log(-0.0162821129061352*x) - 2.4927791904671
+<lambdifygenerated-27908>:2: RuntimeWarning: invalid value encountered in log
+  return 3.61587463730012*sqrt(-x**2) - 0.826416682801324*log(-0.0162821129061352*x) - 2.4927791904671
+model: C0*sqrt(C1*x**2) + C2*log(C3*x) + C4                                  ; p: 2.935341711360001e-07  ; error: 1000000000.0
+ModelBox: 23 models
+-> 0.302429286306171*x, p = 0.08639999999999999, parse trees = 1, valid = True, error = 0.0094020746949838, time = 0.2287278175354004
+-> 0.302036017919611*x**3, p = 0.013824000000000001, parse trees = 1, valid = True, error = 0.02543251211522073, time = 0.1984996795654297
+-> 0.0868526071364961*x**2 + 0.155942116647637, p = 0.01193508864, parse trees = 5, valid = True, error = 0.008087194749131076, time = 1.529259443283081
+-> 0.3094096688707*sqrt(x**5), p = 0.0004915200000000001, parse trees = 1, valid = True, error = 0.02235890516731742, time = 1.7806422710418701
+-> 0.155556244315112*x + 0.105611693212533, p = 0.03594239999999999, parse trees = 6, valid = True, error = 0.006629411536347515, time = 1.5590143203735352
+-> -7.30788795774839*log(-6.90289204880221*x), p = 0.0192, parse trees = 1, valid = True, error = 1000000000.0, time = 0.23714280128479004
+-> 0.314159759691941*x**2, p = 0.03456, parse trees = 1, valid = True, error = 0.018630759568779673, time = 0.26563024520874023
+-> 0.115221315886209*sqrt(x**3) + 0.137912193890158, p = 9.830400000000001e-05, parse trees = 1, valid = True, error = 0.00749237119474579, time = 9.25570034980774
+-> 0.0457612008871196*x**3 + 0.175398353103521, p = 0.002719678464000001, parse trees = 3, valid = True, error = 0.00871499740526498, time = 1.7854719161987305
+-> 0.23554461008701*sqrt(x) + 0.026687557151272, p = 0.0006144000000000001, parse trees = 1, valid = True, error = 0.005542086724694066, time = 6.8649818897247314
+-> -8.32793767052575*log(7.13411507375457*x**2), p = 0.00768, parse trees = 1, valid = True, error = 1000000000.0, time = 0.202988862991333
+-> 0.284518825389201*x**4, p = 0.0055296, parse trees = 1, valid = True, error = 0.030028493281696492, time = 0.3139958381652832
+-> 0.269714268811988*sqrt(x), p = 0.0192, parse trees = 1, valid = True, error = 0.0056232432210355475, time = 1.7035796642303467
+-> 4.87584423930426*exp(0.0309731569289719*x) - 4.76869279896983, p = 0.0055296, parse trees = 2, valid = True, error = 0.006657758795879255, time = 13.997492551803589
+-> 5.17292711331292*x - 3.01004501435464*log(-2.74641026812387*x), p = 0.0011059199999999998, parse trees = 1, valid = True, error = 1000000000.0, time = 0.4494764804840088
+-> 0.250826770439036*x**6, p = 0.0008847360000000002, parse trees = 1, valid = True, error = 0.03540189392451991, time = 0.18848299980163574
+-> 0.155069603827261*sqrt(x**2) + 0.105922659306985, p = 0.00015925248, parse trees = 1, valid = True, error = 0.006629423105765227, time = 9.477434396743774
+-> 0.179220640050462*exp(0.177745661468372*x**3), p = 0.003072, parse trees = 1, valid = True, error = 0.008775425724271065, time = 2.3778419494628906
+-> -0.697123798008283*x**2 + 0.862912649481765*x, p = 0.001990656, parse trees = 1, valid = True, error = 0.0019082712853190954, time = 2.5075488090515137
+-> 0.693976134145854*sqrt(x) - 0.370577210420579*x**2 - 0.146559830556569, p = 2.9353417113600003e-07, parse trees = 1, valid = True, error = 0.002613894288146299, time = 28.12052631378174
+-> 0.134622782326133*exp(0.612741672117834*x), p = 0.0192, parse trees = 1, valid = True, error = 0.00721521329206391, time = 2.7341604232788086
+-> 9.90053905814711*log(-7.80788053758277*x) - 2.36871470324009 + 6.59138338285306*exp(-1.64081792755232*x**8), p = 1.8554258718720008e-09, parse trees = 1, valid = True, error = 1000000000.0, time = 1.5917212963104248
+-> 3.61587463730012*sqrt(-x**2) - 0.826416682801324*log(-0.0162821129061352*x) - 2.4927792004671, p = 2.935341711360001e-07, parse trees = 1, valid = True, error = 1000000000.0, time = 1.4916942119598389

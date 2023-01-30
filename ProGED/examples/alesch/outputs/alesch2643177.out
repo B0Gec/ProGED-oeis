@@ -1,0 +1,391 @@
+this is --ss=10000
+ 
+INFO:    underlay of /etc/localtime required more than 50 (87) bind mounts
+=>> Grammar used: 
+Grammar with 8 productions (start state = S)
+    S -> S '+' R [0.4]
+    S -> R [0.6]
+    R -> T [0.6]
+    R -> 'C' '*' F '(' T ')' [0.4]
+    T -> T '*' V [0.4]
+    T -> 'C' [0.6]
+    F -> 'exp' [1.0]
+    V -> 'x' [1.0]
+
+ModelBox: 176 models
+-> C0*x, p = 0.091663294464, parse trees = 3, valid = False
+-> C0*x**3, p = 0.013824000000000001, parse trees = 1, valid = False
+-> C0*x**2 + C1, p = 0.02393403522804658, parse trees = 44, valid = False
+-> C0*exp(C1*x**5), p = 0.0014745600000000004, parse trees = 1, valid = False
+-> C0*x + C1, p = 0.06553215622387708, parse trees = 97, valid = False
+-> C0*exp(C1*x), p = 0.059896774656, parse trees = 3, valid = False
+-> C0*x**2, p = 0.0353562624, parse trees = 2, valid = False
+-> C0*exp(C1*x**3) + C2, p = 0.005882117520894197, parse trees = 21, valid = False
+-> C0*x**3 + C1, p = 0.009207594828693506, parse trees = 23, valid = False
+-> C0*exp(C1*x) + C2, p = 0.04144782809745057, parse trees = 65, valid = False
+-> C0*exp(C1*x**2), p = 0.0233938944, parse trees = 2, valid = False
+-> C0*x**4, p = 0.0055296, parse trees = 1, valid = False
+-> C0*x**6, p = 0.0008847360000000002, parse trees = 1, valid = False
+-> C0*exp(C1*x**2) + C2, p = 0.015660717754046587, parse trees = 36, valid = False
+-> C0*exp(C1*x**3), p = 0.009216, parse trees = 1, valid = False
+-> C0*x**2 + C1*x, p = 0.00414844301869056, parse trees = 5, valid = False
+-> C0*x**2 + C1*exp(C2*x) + C3, p = 0.0016312917769174466, parse trees = 36, valid = False
+-> C0*x**3 + C1*x**2 + C2*exp(C3*x**2) + C4, p = 1.938651966551218e-11, parse trees = 1, valid = False
+-> C0*x**2 + C1*exp(C2*x), p = 0.0027357452697600003, parse trees = 4, valid = False
+-> C0*x + C1*exp(C2*x) + C3, p = 0.006088600985559919, parse trees = 64, valid = False
+-> C0*x**2 + C1*x + C2*exp(C3*x), p = 0.0001528823808, parse trees = 2, valid = False
+-> C0*exp(C1*x**4) + C2, p = 0.00204875073847296, parse trees = 12, valid = False
+-> C0*x**2 + C1*x + C2, p = 0.003188032207342349, parse trees = 43, valid = False
+-> C0*exp(C1*x) + C2*exp(C3*x**2), p = 0.0018034458624000002, parse trees = 3, valid = False
+-> C0*x + C1*exp(C2*x**4) + C3, p = 9.661599749920262e-05, parse trees = 6, valid = False
+-> C0*x**3 + C1*exp(C2*x**2) + C3, p = 3.780720124231681e-06, parse trees = 3, valid = False
+-> C0*x**5 + C1*x + C2, p = 0.00012494771218022404, parse trees = 9, valid = False
+-> C0*exp(C1*x**2) + C2*exp(C3*x**3) + C4, p = 5.6315074314240016e-05, parse trees = 4, valid = False
+-> C0*x**3 + C1*exp(C2*x) + C3*exp(C4*x**2) + C5, p = 9.96920320956826e-07, parse trees = 3, valid = False
+-> C0*x**2 + C1*exp(C2*x**3), p = 0.00021722887618560001, parse trees = 2, valid = False
+-> C0*x**3 + C1*x + C2, p = 0.0008269004963195711, parse trees = 26, valid = False
+-> C0*x + C1*exp(C2*x) + C3*exp(C4*x**2), p = 0.00015483927527424, parse trees = 4, valid = False
+-> C0*x + C1*exp(C2*x**2) + C3, p = 0.001796843285803444, parse trees = 43, valid = False
+-> C0*x**4 + C1*x + C2, p = 0.00012887081059674332, parse trees = 11, valid = False
+-> C0*x**4 + C1*exp(C2*x) + C3, p = 6.398227731632358e-05, parse trees = 6, valid = False
+-> C0*x + C1*exp(C2*x), p = 0.007481978781696, parse trees = 9, valid = False
+-> C0*x + C1*exp(C2*x**2), p = 0.0028070903808000004, parse trees = 4, valid = False
+-> C0*x**4 + C1, p = 0.0025749083847131137, parse trees = 13, valid = False
+-> C0*x**2 + C1*x + C2*exp(C3*x**2) + C4, p = 1.2328065257933581e-05, parse trees = 10, valid = False
+-> C0*x**3 + C1*x, p = 0.0016842542284800002, parse trees = 4, valid = False
+-> C0*x**4 + C1*x**3, p = 5.0960793600000006e-05, parse trees = 1, valid = False
+-> C0*exp(C1*x) + C2*exp(C3*x**3) + C4, p = 0.0002498978161203609, parse trees = 14, valid = False
+-> C0*x**11 + C1, p = 1.3045963161600009e-06, parse trees = 1, valid = False
+-> C0*x**3 + C1*x + C2*exp(C3*x) + C4, p = 6.680025372238887e-08, parse trees = 3, valid = False
+-> C0*x**5, p = 0.00221184, parse trees = 1, valid = False
+-> C0*x**5 + C1, p = 0.0011434872185649052, parse trees = 9, valid = False
+-> C0*x**8 + C1*x + C2*exp(C3*x**2) + C4, p = 1.108054393319169e-10, parse trees = 1, valid = False
+-> C0*x**3 + C1*x**2 + C2*x + C3, p = 2.820958553636589e-06, parse trees = 4, valid = False
+-> C0*x + C1*exp(C2*x) + C3*exp(C4*x**2) + C5, p = 2.2621700122214407e-05, parse trees = 7, valid = False
+-> C0*x + C1*exp(C2*x**3), p = 0.0010616832, parse trees = 2, valid = False
+-> C0*exp(C1*x) + C2*exp(C3*x**3), p = 0.0007213783449600001, parse trees = 3, valid = False
+-> C0*x**4 + C1*x, p = 0.00063700992, parse trees = 2, valid = False
+-> C0*x**5 + C1*x, p = 0.000254803968, parse trees = 2, valid = False
+-> C0*x**2 + C1*exp(C2*x**4) + C3, p = 2.172752980711834e-05, parse trees = 4, valid = False
+-> C0*exp(C1*x**5) + C2, p = 0.0008281921683456003, parse trees = 11, valid = False
+-> C0*x**2 + C1*x + C2*exp(C3*x) + C4, p = 4.157146854424691e-05, parse trees = 14, valid = False
+-> C0*x**6 + C1*exp(C2*x) + C3, p = 6.648222827151362e-06, parse trees = 3, valid = False
+-> C0*x**3 + C1*exp(C2*x) + C3, p = 0.0003743689288257111, parse trees = 13, valid = False
+-> C0*exp(C1*x**4), p = 0.0036954596966400004, parse trees = 2, valid = False
+-> C0*x**6 + C1*exp(C2*x**2) + C3, p = 3.9137889484800016e-06, parse trees = 2, valid = False
+-> C0*x**3 + C1*x**2 + C2*x, p = 1.8345885696000002e-05, parse trees = 1, valid = False
+-> C0*exp(C1*x) + C2*exp(C3*x**2) + C4, p = 0.0008150207228004723, parse trees = 19, valid = False
+-> C0*exp(C1*x**2) + C2*exp(C3*x**3), p = 0.00028311552000000005, parse trees = 2, valid = False
+-> C0*x**7 + C1*exp(C2*x) + C3, p = 1.6803200552140804e-06, parse trees = 3, valid = False
+-> C0*x**2 + C1*exp(C2*x**3) + C3, p = 0.00014200857050480643, parse trees = 8, valid = False
+-> C0*x**3 + C1*x**2 + C2, p = 0.00021477081233919838, parse trees = 7, valid = False
+-> C0*x**4 + C1*exp(C2*x), p = 0.00043282700697600007, parse trees = 3, valid = False
+-> C0*exp(C1*x**6), p = 0.0005898240000000002, parse trees = 1, valid = False
+-> C0*x + C1*exp(C2*x**3) + C3, p = 0.00020924357193302084, parse trees = 9, valid = False
+-> C0*exp(C1*x) + C2*exp(C3*x**4) + C4, p = 4.657841682438592e-05, parse trees = 7, valid = False
+-> C0*x**6 + C1, p = 9.806072137541225e-05, parse trees = 4, valid = False
+-> C0*x**4 + C1*x**2, p = 0.00012740198400000002, parse trees = 1, valid = False
+-> C0*exp(C1*x) + C2*exp(C3*x**4), p = 0.00014155776000000003, parse trees = 1, valid = False
+-> C0*x**2 + C1*exp(C2*x**5) + C3, p = 2.0289081908920328e-07, parse trees = 2, valid = False
+-> C0*x**4 + C1*x**2 + C2*exp(C3*x) + C4*exp(C5*x**2) + C6, p = 3.4464923849799417e-12, parse trees = 1, valid = False
+-> C0*x**3 + C1*exp(C2*x), p = 0.0010820675174400003, parse trees = 3, valid = False
+-> C0*x**5 + C1*exp(C2*x**5), p = 2.174327193600001e-06, parse trees = 1, valid = False
+-> C0*exp(C1*x**6) + C2, p = 9.308838297600003e-05, parse trees = 2, valid = False
+-> C0*x**4 + C1*x**2 + C2, p = 5.204163912381393e-05, parse trees = 6, valid = False
+-> C0*x**2 + C1*exp(C2*x**2) + C3, p = 0.00022440772182107753, parse trees = 11, valid = False
+-> C0*exp(C1*x**7) + C2, p = 3.2614907904000014e-06, parse trees = 1, valid = False
+-> C0*x**5 + C1*x**2 + C2*x + C3*exp(C4*x**2) + C5, p = 1.2407372585927791e-12, parse trees = 1, valid = False
+-> C0*x**2 + C1*exp(C2*x) + C3*exp(C4*x**3) + C5, p = 1.1741366845440001e-06, parse trees = 1, valid = False
+-> C0*x**3 + C1*x**2, p = 0.0006370099200000001, parse trees = 2, valid = False
+-> C0*x**2 + C1*exp(C2*x**7), p = 5.435817984000002e-06, parse trees = 1, valid = False
+-> C0*x**3 + C1*exp(C2*x**3) + C3, p = 2.4241106508946414e-06, parse trees = 4, valid = False
+-> C0*exp(C1*x) + C2*exp(C3*x**5), p = 0.00011324620800000004, parse trees = 2, valid = False
+-> C0*x**4 + C1*x**3 + C2*x, p = 2.9353417113600003e-06, parse trees = 1, valid = False
+-> C0*x**7 + C1*x**2 + C2*x, p = 2.7052109211893763e-08, parse trees = 1, valid = False
+-> C0*x**7 + C1*exp(C2*x), p = 1.3589544960000003e-05, parse trees = 1, valid = False
+-> C0*x**3 + C1*x + C2*exp(C3*x**2) + C4*exp(C5*x**4), p = 3.005789912432641e-08, parse trees = 1, valid = False
+-> C0*x**3 + C1*exp(C2*x**3), p = 8.4934656e-05, parse trees = 1, valid = False
+-> C0*x**3 + C1*x + C2*exp(C3*x**2) + C4, p = 2.1838942332518404e-06, parse trees = 3, valid = False
+-> C0*x**4 + C1*exp(C2*x**4), p = 1.3589544960000001e-05, parse trees = 1, valid = False
+-> C0*exp(C1*x**9), p = 3.7748736000000025e-05, parse trees = 1, valid = False
+-> C0*x**4 + C1*exp(C2*x**3) + C3, p = 3.3291210634297344e-06, parse trees = 2, valid = False
+-> C0*x**4 + C1*x + C2*exp(C3*x**6), p = 1.2524124635136004e-07, parse trees = 1, valid = False
+-> C0*x**5 + C1*x**3 + C2*x**2 + C3, p = 9.349208943630483e-10, parse trees = 1, valid = False
+-> C0*x**3 + C1*exp(C2*x**2), p = 0.00042467328000000005, parse trees = 2, valid = False
+-> C0*x**5 + C1*x**2, p = 5.0960793600000006e-05, parse trees = 1, valid = False
+-> C0*x**6 + C1*x, p = 5.389613531136001e-05, parse trees = 2, valid = False
+-> C0*exp(C1*x**2) + C2*exp(C3*x**4) + C4, p = 8.322802658574339e-06, parse trees = 2, valid = False
+-> C0*x**2 + C1*x + C2*exp(C3*x**2), p = 3.06779215695446e-05, parse trees = 2, valid = False
+-> C0*exp(C1*x**2) + C2*exp(C3*x**5), p = 2.264924160000001e-05, parse trees = 1, valid = False
+-> C0*x**5 + C1*x**2 + C2*x, p = 2.9353417113600007e-06, parse trees = 1, valid = False
+-> C0*x**7 + C1, p = 5.096079360000002e-05, parse trees = 1, valid = False
+-> C0*x**4 + C1*x**2 + C2*exp(C3*x**3), p = 7.827577896960001e-07, parse trees = 1, valid = False
+-> C0*x**6 + C1*x**2 + C2*x + C3, p = 3.895503726512702e-09, parse trees = 1, valid = False
+-> C0*x**5 + C1*exp(C2*x**2), p = 5.218385264640001e-07, parse trees = 1, valid = False
+-> C0*x + C1*exp(C2*x) + C3*exp(C4*x**3) + C5, p = 4.226892064358401e-07, parse trees = 1, valid = False
+-> C0*exp(C1*x**3) + C2*exp(C3*x**5) + C4, p = 8.349416423424003e-08, parse trees = 1, valid = False
+-> C0*x + C1*exp(C2*x) + C3*exp(C4*x**5), p = 3.2614907904000014e-06, parse trees = 1, valid = False
+-> C0*x**3 + C1*exp(C2*x) + C3*exp(C4*x**3), p = 3.2614907904000014e-06, parse trees = 1, valid = False
+-> C0*exp(C1*x) + C2*exp(C3*x**2) + C4*exp(C5*x**3), p = 2.0873541058560007e-07, parse trees = 1, valid = False
+-> C0*x**4 + C1*exp(C2*x**5), p = 5.435817984000002e-06, parse trees = 1, valid = False
+-> C0*exp(C1*x) + C2*exp(C3*x**8) + C4, p = 5.218385264640003e-07, parse trees = 1, valid = False
+-> C0*x**3 + C1*x + C2*exp(C3*x**2), p = 1.2230590464e-05, parse trees = 1, valid = False
+-> C0*x**7 + C1*x, p = 1.1741366845440003e-06, parse trees = 1, valid = False
+-> C0*x**2 + C1*exp(C2*x) + C3*exp(C4*x**7) + C5, p = 4.328337473903003e-09, parse trees = 1, valid = False
+-> C0*x**2 + C1*exp(C2*x**2), p = 0.0010616832, parse trees = 2, valid = False
+-> C0*x**3 + C1*x + C2*exp(C3*x) + C4*exp(C5*x**2) + C6*exp(C7*x**5) + C8, p = 6.648326359915016e-11, parse trees = 1, valid = False
+-> C0*exp(C1*x**2) + C2*exp(C3*x**4), p = 5.662310400000001e-05, parse trees = 1, valid = False
+-> C0*x + C1*exp(C2*x**8), p = 5.435817984000002e-06, parse trees = 1, valid = False
+-> C0*x**3 + C1*x**2 + C2*x + C3*exp(C4*x) + C5, p = 5.385144351531159e-11, parse trees = 1, valid = False
+-> C0*x**3 + C1*x + C2*exp(C3*x) + C4*exp(C5*x**2) + C6, p = 9.738759316281758e-09, parse trees = 1, valid = False
+-> C0*x**2 + C1*x + C2*exp(C3*x) + C4*exp(C5*x**2) + C6, p = 2.3373022359076214e-09, parse trees = 1, valid = False
+-> C0*x + C1*exp(C2*x**2) + C3*exp(C4*x**4) + C5, p = 4.696546738176002e-07, parse trees = 1, valid = False
+-> C0*x**5 + C1*exp(C2*x) + C3*exp(C4*x**2) + C5, p = 3.590096234354107e-11, parse trees = 1, valid = False
+-> C0*x**4 + C1*exp(C2*x**2), p = 8.4934656e-05, parse trees = 1, valid = False
+-> C0*x**3 + C1*x + C2*exp(C3*x), p = 6.115295232000001e-05, parse trees = 2, valid = False
+-> C0*x**3 + C1*exp(C2*x**4) + C3, p = 3.2614907904000014e-06, parse trees = 1, valid = False
+-> C0*exp(C1*x) + C2*exp(C3*x**2) + C4*exp(C5*x**3) + C6, p = 1.1387134504259818e-07, parse trees = 2, valid = False
+-> C0*x**2 + C1*x + C2*exp(C3*x**3) + C4, p = 2.136811660295092e-06, parse trees = 5, valid = False
+-> C0*x + C1*exp(C2*x**4), p = 0.000224567230464, parse trees = 2, valid = False
+-> C0*x**2 + C1*x + C2*exp(C3*x**3), p = 1.2230590464000004e-05, parse trees = 1, valid = False
+-> C0*x + C1*exp(C2*x**6), p = 3.3973862400000006e-05, parse trees = 1, valid = False
+-> C0*x**7, p = 0.0003538944000000001, parse trees = 1, valid = False
+-> C0*x**4 + C1*exp(C2*x) + C3*exp(C4*x**2) + C5, p = 4.696546738176002e-07, parse trees = 1, valid = False
+-> C0*x**6 + C1*x + C2, p = 2.817928042905601e-07, parse trees = 1, valid = False
+-> C0*x**4 + C1*exp(C2*x**2) + C3*exp(C4*x**3), p = 5.218385264640001e-07, parse trees = 1, valid = False
+-> C0*x**5 + C1*x**3 + C2*exp(C3*x) + C4*exp(C5*x**2), p = 1.2023159649730564e-08, parse trees = 1, valid = False
+-> C0*x**2 + C1*x + C2*exp(C3*x**4), p = 1.6231265527136257e-08, parse trees = 1, valid = False
+-> C0*x**5 + C1*x**2 + C2, p = 5.948959201689601e-06, parse trees = 2, valid = False
+-> C0*x**2 + C1*x + C2*exp(C3*x**4) + C4, p = 9.738759316281756e-09, parse trees = 1, valid = False
+-> C0*x**8, p = 0.00014155776000000005, parse trees = 1, valid = False
+-> C0*x**5 + C1*exp(C2*x**2) + C3, p = 5.361890859417602e-06, parse trees = 2, valid = False
+-> C0*exp(C1*x) + C2*exp(C3*x**6), p = 2.351897247744001e-05, parse trees = 2, valid = False
+-> C0*x**8 + C1*x**2 + C2*x + C3, p = 1.8034739474595848e-08, parse trees = 1, valid = False
+-> C0*x**4 + C1*x**2 + C2*exp(C3*x**2), p = 1.9568944742400004e-06, parse trees = 1, valid = False
+-> C0*x**6 + C1*x**5 + C2, p = 1.2524124635136004e-07, parse trees = 1, valid = False
+-> C0*x**7 + C1*x + C2*exp(C3*x), p = 7.827577896960003e-07, parse trees = 1, valid = False
+-> C0*x**4 + C1*exp(C2*x**6) + C3, p = 3.005789912432641e-08, parse trees = 1, valid = False
+-> C0*x**2 + C1*exp(C2*x**4), p = 8.493465600000002e-05, parse trees = 1, valid = False
+-> C0*x**3 + C1*x + C2*exp(C3*x**4), p = 1.9568944742400008e-06, parse trees = 1, valid = False
+-> C0*x**6 + C1*x**2, p = 2.0384317440000006e-05, parse trees = 1, valid = False
+-> C0*x**2 + C1*exp(C2*x) + C3*exp(C4*x**2), p = 2.0853972113817607e-05, parse trees = 2, valid = False
+-> C0*x**8 + C1*x + C2, p = 7.827577896960002e-07, parse trees = 1, valid = False
+-> C0*x + C1*exp(C2*x**6) + C3, p = 3.3291210634297353e-06, parse trees = 2, valid = False
+-> C0*x**5 + C1*x + C2*exp(C3*x**2) + C4, p = 2.856883080170728e-07, parse trees = 2, valid = False
+-> C0*x**2 + C1*x + C2*exp(C3*x**2) + C4*exp(C5*x**3) + C6, p = 2.7052109211893763e-08, parse trees = 1, valid = False
+-> C0*x + C1*exp(C2*x**5), p = 8.982689218560003e-05, parse trees = 2, valid = False
+-> C0*exp(C1*x) + C2*exp(C3*x**2) + C4*exp(C5*x**6) + C6, p = 7.213895789838341e-09, parse trees = 1, valid = False
+-> C0*x**3 + C1*x**2 + C2*exp(C3*x**2), p = 4.892236185600001e-06, parse trees = 1, valid = False
+-> C0*x**5 + C1*exp(C2*x), p = 8.493465600000002e-05, parse trees = 1, valid = False
+-> C0*x**6 + C1*x**2 + C2, p = 1.9568944742400008e-06, parse trees = 1, valid = False
+-> C0*x**4 + C1*x**3 + C2, p = 1.0567230160896e-06, parse trees = 1, valid = False
+-> C0*x**2 + C1*x + C2*exp(C3*x**6), p = 7.827577896960002e-07, parse trees = 1, valid = False
+-> C0*x**4 + C1*exp(C2*x) + C3*exp(C4*x**3), p = 1.3045963161600002e-06, parse trees = 1, valid = False
+-> C0*x**4 + C1*x + C2*exp(C3*x) + C4, p = 1.6231265527136257e-08, parse trees = 1, valid = False
+-> C0*x**5 + C1*x**3, p = 2.0384317440000003e-05, parse trees = 1, valid = False
+-> C0*x**4 + C1*x + C2*exp(C3*x), p = 1.2230590464000002e-05, parse trees = 1, valid = False
+-> C0*x + C1*exp(C2*x) + C3*exp(C4*x**5) + C5, p = 6.4925062108545034e-09, parse trees = 1, valid = False
+-> C0*x**4 + C1*exp(C2*x) + C3*exp(C4*x**3) + C5, p = 1.8034739474595844e-08, parse trees = 1, valid = False
+-> C0*x**4 + C1*x**3 + C2*exp(C3*x**2) + C4, p = 1.1271712171622405e-07, parse trees = 1, valid = False
+-> C0*x**8 + C1, p = 2.0384317440000006e-05, parse trees = 1, valid = False
+-> C0*x**4 + C1*x**2 + C2*x, p = 7.338354278399999e-06, parse trees = 1, valid = False
+Model skipped. More model parameters than allowed (check max constant).
+Model skipped. More model parameters than allowed (check max constant).
+Model skipped. More model parameters than allowed (check max constant).
+Model skipped. More model parameters than allowed (check max constant).
+Model skipped. More model parameters than allowed (check max constant).
+Model skipped. More model parameters than allowed (check max constant).
+Model skipped. More model parameters than allowed (check max constant).
+Model skipped. More model parameters than allowed (check max constant).
+Model skipped. More model parameters than allowed (check max constant).
+Model skipped. More model parameters than allowed (check max constant).
+Model skipped. More model parameters than allowed (check max constant).
+Model skipped. More model parameters than allowed (check max constant).
+Model skipped. More model parameters than allowed (check max constant).
+Model skipped. More model parameters than allowed (check max constant).
+Model skipped. More model parameters than allowed (check max constant).
+Model skipped. More model parameters than allowed (check max constant).
+Model skipped. More model parameters than allowed (check max constant).
+Model skipped. More model parameters than allowed (check max constant).
+Model skipped. More model parameters than allowed (check max constant).
+Model skipped. More model parameters than allowed (check max constant).
+Model skipped. More model parameters than allowed (check max constant).
+Model skipped. More model parameters than allowed (check max constant).
+ModelBox: 175 models
+-> -0.324103923928674*x**4 + 0.538199288765982*x - 8.46196500099237e-6*exp(9.99984779315027*x**6), p = 1.2524124635136004e-07, parse trees = 1, valid = True, error = 1.4218294837376154e-05, time = 862.925616979599
+-> -0.342373444019179*x**2 + 0.657807901920239*x - 9.87953876667786e-5*exp(7.9083674559215*x**3), p = 1.2230590464000004e-05, parse trees = 1, valid = True, error = 4.554659546682551e-05, time = 953.789404630661
+-> -0.00247374501657872*exp(4.81814201663166*x**4) + 0.441400505010612 - 0.450077258684223*exp(-1.66449116169235*x), p = 4.657841682438592e-05, parse trees = 7, valid = True, error = 4.980673400373337e-05, time = 1720.6015791893005
+-> -2.62374117571033e-5*exp(9.32995659440854*x**2) + 0.423055821810982 - 0.43450439371655*exp(-1.75153084090263*x), p = 0.0008150207228004723, parse trees = 19, valid = True, error = 5.5567095778202364e-05, time = 2811.6661705970764
+-> 0.453392064180724*x - 0.0811562620803176*exp(1.79648611889561*x**5) + 0.0983339034393466*exp(-0.00116899060179055*x), p = 3.2614907904000014e-06, parse trees = 1, valid = True, error = 0.00010017452238822784, time = 1038.0181293487549
+-> -0.164789349475611*x**2 + 0.57667560873235*x - 1.54507553943627e-5*exp(9.99961599484498*x), p = 0.0001528823808, parse trees = 2, valid = True, error = 0.00010339645270767854, time = 1377.448961019516
+-> -0.436822319901206*x**8 + 0.781969622196497*x - 0.286915336319492 + 0.275546737868864*exp(-2.76821373928861*x**2), p = 1.108054393319169e-10, parse trees = 1, valid = True, error = 0.00012439004291461402, time = 805.1410014629364
+-> -0.367783872459345*x**8 - 0.0780596934045733*x**2 + 0.517596797992956*x + 0.00732386622263014, p = 1.8034739474595848e-08, parse trees = 1, valid = True, error = 0.0001444876646011655, time = 338.1643295288086
+-> -8.7451065605766 + 9.84668958511698*exp(-0.0369668831697286*x**8) - 1.09870403264242*exp(-0.505357521676341*x), p = 5.218385264640003e-07, parse trees = 1, valid = True, error = 0.00014837046990831613, time = 1553.7863624095917
+-> -0.393650061926936*x**8 + 0.454833425385597*x + 0.0156624047707702, p = 7.827577896960002e-07, parse trees = 1, valid = True, error = 0.00015023414476436712, time = 127.1292519569397
+-> -0.405779407891795*x**7 + 0.477322737408441*x + 0.010308844315916*exp(0.112366046401887*x), p = 7.827577896960003e-07, parse trees = 1, valid = True, error = 0.00016844465357294318, time = 280.832288980484
+-> -0.38957996267139*x**7 + 2.66677039940844 - 2.66094269141507*exp(-0.193526383299063*x), p = 1.6803200552140804e-06, parse trees = 3, valid = True, error = 0.0001695405284486525, time = 612.8401658535004
+-> -0.389303261783913*x**7 - 0.0591611332785048*x**2 + 0.532588719160821*x, p = 2.7052109211893763e-08, parse trees = 1, valid = True, error = 0.00017255868349330163, time = 133.2886142730713
+-> -0.416910070955709*x**7 + 0.498173637545483*x, p = 1.1741366845440003e-06, parse trees = 1, valid = True, error = 0.00017839618865849913, time = 44.9656765460968
+-> -0.464674159773357*x**6 + 0.107180177495155*x**2 + 0.431353563903026*x + 0.0134662490346849, p = 3.895503726512702e-09, parse trees = 1, valid = True, error = 0.00019871947131231538, time = 319.103054523468
+-> 0.502112939508154*x - 0.0118249195070903*exp(3.63018528788116*x**3), p = 0.0010616832, parse trees = 2, valid = True, error = 0.0002024699921518143, time = 210.21348905563354
+-> -0.422570902388453*x**6 + 0.509227818146248*x + 0.00400061808555518, p = 2.817928042905601e-07, parse trees = 1, valid = True, error = 0.00020521987164011073, time = 124.1104805469513
+-> -0.427331614961074*x**6 + 0.517254799503055*x, p = 5.389613531136001e-05, parse trees = 2, valid = True, error = 0.00020663049017990276, time = 45.657264709472656
+-> -2.85942589636874*x**2 + 1.19579648292084*x + 2.31236790543361 - 2.34119310380516*exp(-1.42671933999681*x**3), p = 2.136811660295092e-06, parse trees = 5, valid = True, error = 0.00020776690837861093, time = 1182.6731584072113
+-> -0.413251519380434*x**6 + 5.6425907170545 - 5.64057326152529*exp(-0.0933303896149388*x), p = 6.648222827151362e-06, parse trees = 3, valid = True, error = 0.00020849689558434878, time = 783.4887020587921
+-> 0.51080308336033*x - 9.98699216589648 + 9.9907000162806*exp(-0.0432230496984014*x**6), p = 3.3291210634297353e-06, parse trees = 2, valid = True, error = 0.00021220175473419511, time = 733.7071869373322
+-> 9.99358533400331*exp(-0.0427023844977864*x**6) - 9.9911577736364*exp(-0.0521315230492707*x), p = 2.351897247744001e-05, parse trees = 2, valid = True, error = 0.00021397223117692308, time = 933.1736981868744
+-> -1.81924203723894*x**2 + 1.15994305638859*x + 0.787382058884296 - 0.822742639683603*exp(-3.03531334582517*x**4), p = 9.738759316281756e-09, parse trees = 1, valid = True, error = 0.00023109242377576151, time = 855.0372045040131
+-> -0.547561678277833*x**5 + 0.367310390395861*x + 1.52862709673729 - 1.51153647460341*exp(-0.185570979255505*x**2), p = 2.856883080170728e-07, parse trees = 2, valid = True, error = 0.00023912937980251502, time = 1227.355346441269
+-> -0.92952456661645*x**4 + 1.40126022955818*exp(0.26205193704622*x) - 1.38029184948134*exp(-0.545506807508078*x**3), p = 1.3045963161600002e-06, parse trees = 1, valid = True, error = 0.00024383105503708653, time = 1874.6106450557709
+-> -0.525735208688139*x**5 + 0.155971705197986*x**2 + 0.464139004224497*x, p = 2.9353417113600007e-06, parse trees = 1, valid = True, error = 0.00024939073074519184, time = 139.11621975898743
+-> -0.448374372908819*x**5 + 0.552664762233389*x - 0.00417794370663736, p = 0.00012494771218022404, parse trees = 9, valid = True, error = 0.0002709690100062889, time = 100.35600113868713
+-> -0.443305762339753*x**5 + 0.544041041234629*x, p = 0.000254803968, parse trees = 2, valid = True, error = 0.00027242915670864555, time = 46.576295614242554
+-> -1.14234293612813*x**4 + 0.779634849366752*x**3 + 0.458780158424264*x, p = 2.9353417113600003e-06, parse trees = 1, valid = True, error = 0.0002737267594548564, time = 122.92353558540344
+-> 9.98310781715806*exp(-0.0452560198320229*x**5) - 9.98857156644538*exp(-0.0565425196023339*x), p = 0.00011324620800000004, parse trees = 2, valid = True, error = 0.0002850483747461136, time = 872.617467880249
+-> -1.46194242395739*x**5 + 0.0531922474447192*exp(3.37116119880865*x), p = 8.493465600000002e-05, parse trees = 1, valid = True, error = 0.0003022377052858768, time = 163.301118850708
+-> -0.710048570196509*x**4 + 0.407130645872135*x**2 + 0.40375822294118*x, p = 7.338354278399999e-06, parse trees = 1, valid = True, error = 0.0003070100525472866, time = 131.9451196193695
+-> -1.07710295257845*x**4 + 1.16657269250099*x**2 + 0.054524762888492*exp(-7.21822495169877*x**3), p = 7.827577896960001e-07, parse trees = 1, valid = True, error = 0.00030846857115560854, time = 242.74709796905518
+-> -0.354379274870678*x**6 + 0.475001152371443 - 0.423884571573862*exp(-2.63732313404779*x**2), p = 3.9137889484800016e-06, parse trees = 2, valid = True, error = 0.00030935890568793445, time = 460.91773557662964
+-> -0.388727180177589*x**5 - 0.829001102370816*x**3 + 1.25857010907113*x**2 + 0.0505047163870656, p = 9.349208943630483e-10, parse trees = 1, valid = True, error = 0.0003137326404524121, time = 310.4978368282318
+-> -3.75324551489771*x**2 + 0.232935030151935*x + 9.99861499053918 - 9.97460132044202*exp(-0.447509959991599*x**2), p = 1.2328065257933581e-05, parse trees = 10, valid = True, error = 0.00031787890789615524, time = 1947.0808191299438
+-> -0.849627035997081*x**4 - 0.457562211787457*x**3 + 6.04212288433243*exp(0.202036251112462*x**2) - 5.99292600650057, p = 1.1271712171622405e-07, parse trees = 1, valid = True, error = 0.0003315808400780057, time = 1047.043000459671
+-> -0.457465392413304*x**5 + 0.66070641578579 - 0.606628836173215*exp(-1.68738849914039*x**2), p = 5.361890859417602e-06, parse trees = 2, valid = True, error = 0.0003327917132391965, time = 357.49373030662537
+-> -1.02086137643252*x**4 + 1.10110125941243*x**2 + 0.0547645506875646*exp(-1.64967365093502*x**2), p = 1.9568944742400004e-06, parse trees = 1, valid = True, error = 0.0003347663335363057, time = 243.53769826889038
+-> -0.985980543124256*x**4 + 1.02304932976396*x**2 + 0.0541688677670424, p = 5.204163912381393e-05, parse trees = 6, valid = True, error = 0.0003351144883803871, time = 139.93623447418213
+-> -0.698257193220697*x**4 + 1.78082354261203*exp(-0.0359880605278903*x**3) - 1.72849677015403*exp(-0.623758704698364*x**2), p = 5.218385264640001e-07, parse trees = 1, valid = True, error = 0.00033791731157142607, time = 1425.2182884216309
+-> -1.08481074946934*x**3 + 0.112505373031875*x + 2.79150370224758 - 2.7623482350895*exp(-0.476735246017245*x**2), p = 2.1838942332518404e-06, parse trees = 3, valid = True, error = 0.0003437955490977774, time = 1324.6214056015015
+-> -1.77874596747565*x**3 + 1.88005654203175*x**2 + 0.0416307002463381*exp(-5.67387916733948*x**2), p = 4.892236185600001e-06, parse trees = 1, valid = True, error = 0.0003456195030147384, time = 242.32855200767517
+-> -1.33224585422059 + 9.99948393465855*exp(-0.100062362542731*x**4) - 8.6145976189633*exp(-0.122692577777462*x**2), p = 8.322802658574339e-06, parse trees = 2, valid = True, error = 0.0003494108808313254, time = 1431.3944535255432
+-> 9.99286910764883*exp(-0.101155461365201*x**4) - 9.94046564655814*exp(-0.106487969437764*x**2), p = 5.662310400000001e-05, parse trees = 1, valid = True, error = 0.0003496332600370199, time = 704.1808683872223
+-> -3.86241253042623*x**2 + 9.95508995782076 - 9.90489459708193*exp(-0.501933685522908*x**2), p = 0.00022440772182107753, parse trees = 11, valid = True, error = 0.00035108494358281875, time = 1219.00590467453
+-> 1.06307938165347*x**2 - 9.94502504585901 + 9.9971429278865*exp(-0.107590840287917*x**4), p = 2.172752980711834e-05, parse trees = 4, valid = True, error = 0.00035150278259408487, time = 714.9064221382141
+-> -1.56361842519906*x**3 + 1.57388627640049*x**2 + 0.0640272880590909*x + 0.031055064596552, p = 2.820958553636589e-06, parse trees = 4, valid = True, error = 0.00035540767115713385, time = 290.6473388671875
+-> -0.766787046554988*x**5 + 0.783056078966406*x**2 + 0.0655375890100622, p = 5.948959201689601e-06, parse trees = 2, valid = True, error = 0.0003565946127266779, time = 133.76558899879456
+-> -1.6438020881938*x**3 + 1.70982455624683*x**2 + 0.0379302571763505, p = 0.00021477081233919838, parse trees = 7, valid = True, error = 0.00035758410286118754, time = 128.7661998271942
+-> -1.64914172762503*x**3 + 1.67360687962348*x**2 + 8.26702077272725*exp(0.00503459599018219*x**2) - 8.22957688609028, p = 1.938651966551218e-11, parse trees = 1, valid = True, error = 0.0003575878582751607, time = 1270.561729669571
+-> 7.6156325742218*exp(-0.103783833404707*x**5) - 7.55222073124912*exp(-0.107940230197545*x**2), p = 2.264924160000001e-05, parse trees = 1, valid = True, error = 0.00036013041988828187, time = 806.1651334762573
+-> 0.800362061036949*x**2 - 9.92849452619607 + 9.99274293879985*exp(-0.0813000708151507*x**5), p = 2.0289081908920328e-07, parse trees = 2, valid = True, error = 0.0003607413983597135, time = 775.2603769302368
+-> -0.685209106762639*x**7 + 0.06940677927729*exp(2.3862142373938*x), p = 1.3589544960000003e-05, parse trees = 1, valid = True, error = 0.000361191325243003, time = 177.26249504089355
+-> -1.17128708910017*x**3 + 3.03711799967764*x - 2.61728782860541 + 2.64779280089926*exp(-1.12691574254607*x), p = 6.680025372238887e-08, parse trees = 3, valid = True, error = 0.0003652730070436998, time = 1519.3353278636932
+-> -1.94359538406543*x**3 + 9.99900702744801*exp(0.183645850083102*x**2) - 9.96386347165397, p = 3.780720124231681e-06, parse trees = 3, valid = True, error = 0.0003780100779415208, time = 482.45312213897705
+-> -6.10314984271639 + 9.978905505135*exp(-0.13660130002417*x**3) - 3.83772430330262*exp(-0.430689868771226*x**2), p = 5.6315074314240016e-05, parse trees = 4, valid = True, error = 0.00038145960087199377, time = 1175.398628950119
+-> -0.493239188673603*x**4 + 0.619970068722827*x - 0.0149210578320975, p = 0.00012887081059674332, parse trees = 11, valid = True, error = 0.00038330648137676243, time = 100.87907838821411
+-> -0.493545213606532*x**4 + 0.621791267156699*x - 1.06769021734691*exp(0.00126836367627528*x) + 1.05259124247242, p = 1.6231265527136257e-08, parse trees = 1, valid = True, error = 0.00038330701292905946, time = 1007.2909944057465
+-> -0.492608549495845*x**4 + 0.61921724357602*x - 0.0147304068535191*exp(-0.00684561887092838*x), p = 1.2230590464000002e-05, parse trees = 1, valid = True, error = 0.0003833149891240254, time = 266.3003475666046
+-> -1.32258639232849*x**3 + 1.14174399348702*x**2 + 0.289256620704292*x, p = 1.8345885696000002e-05, parse trees = 1, valid = True, error = 0.0003850524514760262, time = 146.77406907081604
+-> -0.482906013178332*x**4 + 9.7774216997848 - 9.79336528254239*exp(-0.0644437083679343*x), p = 6.398227731632358e-05, parse trees = 6, valid = True, error = 0.0003896768029771977, time = 796.671067237854
+-> -0.658992976504904*x**6 + 0.659784303121*x**2 + 0.0735599282042875, p = 1.9568944742400008e-06, parse trees = 1, valid = True, error = 0.00039720767703653345, time = 115.0570011138916
+-> 0.622635412310524*x - 9.99937919587763 + 9.9842333576591*exp(-0.0507289562998067*x**4), p = 9.661599749920262e-05, parse trees = 6, valid = True, error = 0.000399081781026275, time = 621.6367733478546
+-> -0.471144707881635*x**4 + 0.585768788512118*x, p = 0.00063700992, parse trees = 2, valid = True, error = 0.00040089317390838047, time = 38.97773575782776
+-> -4.25425724750161*x**2 + 9.99015714062784*x - 7.82513086227783 + 7.85642325496434*exp(-1.27256494546313*x), p = 4.157146854424691e-05, parse trees = 14, valid = True, error = 0.0004046242366249302, time = 1883.185201883316
+-> 9.98319203363487*exp(-0.0496639273139682*x**4) - 9.99932829561595*exp(-0.0633597420335202*x), p = 0.00014155776000000003, parse trees = 1, valid = True, error = 0.00040500782802975287, time = 817.8118858337402
+-> 9.99644240836248*exp(-0.170191927145805*x**3) - 9.96132722551881*exp(-0.179928470613205*x**2), p = 0.00028311552000000005, parse trees = 2, valid = True, error = 0.00040688685023107507, time = 830.3096022605896
+-> -2.33058611201455*x**4 + 2.32616218098347*x**3 + 0.0834980292414249, p = 1.0567230160896e-06, parse trees = 1, valid = True, error = 0.0004952175153272023, time = 109.9635717868805
+-> -0.617263439479138*x**3 + 0.739151820600926*x - 0.0357492377942825*exp(-5.29417302301666*x**4), p = 1.9568944742400008e-06, parse trees = 1, valid = True, error = 0.0005140231437556258, time = 239.0722062587738
+-> -1.87722664524494*x**3 + 1.97204576874312*x**2, p = 0.0006370099200000001, parse trees = 2, valid = True, error = 0.0005287565850127774, time = 46.981940507888794
+-> 1.95426043359989*x**3 - 9.90389747781729*exp(0.181631442730444*x**4) + 9.99357379644506, p = 3.2614907904000014e-06, parse trees = 1, valid = True, error = 0.0005333928097947942, time = 793.8487129211426
+-> -0.468394265332967*x**4 + 0.571580416640651 - 0.49074336790245*exp(-3.79585663665734*x**3), p = 3.3291210634297344e-06, parse trees = 2, valid = True, error = 0.0005548692904093865, time = 535.9047975540161
+-> -0.591605168391689*x**3 + 0.721523578198253*x - 0.0307617606854703*exp(-2.05716124363465*x**2), p = 1.2230590464e-05, parse trees = 1, valid = True, error = 0.0005585820712488189, time = 211.80665564537048
+-> -0.586143526659629*x**3 + 0.7436376759332*x - 0.0302577237798808, p = 0.0008269004963195711, parse trees = 26, valid = True, error = 0.0005737866489424977, time = 102.79998207092285
+-> -0.586883670326392*x**3 + 0.744799135364132*x - 0.0306547160171534*exp(0.00189899128965612*x), p = 6.115295232000001e-05, parse trees = 2, valid = True, error = 0.0005737886070548879, time = 248.72867965698242
+-> -0.627113625836785*x**3 + 0.741360493619887 - 0.659308548739413*exp(-3.47749515753314*x**3), p = 2.4241106508946414e-06, parse trees = 4, valid = True, error = 0.0005796214809239795, time = 684.3096511363983
+-> -0.569607451588559*x**3 + 9.88176710554026 - 9.91330442443692*exp(-0.0763365742267006*x), p = 0.0003743689288257111, parse trees = 13, valid = True, error = 0.0005819324150408128, time = 816.3245580196381
+-> -0.546300690458422*x**3 + 8.49338156809085*exp(-0.00220649066709232*x**3) - 8.52457219703962*exp(-0.0887683746496183*x), p = 3.2614907904000014e-06, parse trees = 1, valid = True, error = 0.0005833281163938218, time = 1935.712070465088
+-> -0.906908520809295 + 3.19115428598292*exp(-0.409756600896512*x**5) - 2.19484694514591*exp(-0.664678662379512*x**3), p = 8.349416423424003e-08, parse trees = 1, valid = True, error = 0.0005928806211910957, time = 1097.6604850292206
+-> 0.749859598283421*x - 9.99691707521969 + 9.96602371114847*exp(-0.0609478019514819*x**3), p = 0.00020924357193302084, parse trees = 9, valid = True, error = 0.0006008433263248108, time = 666.3068401813507
+-> 9.96832416513778*exp(-0.058824603801259*x**3) - 9.99952850479891*exp(-0.07591002712618*x), p = 0.0007213783449600001, parse trees = 3, valid = True, error = 0.0006076730489366087, time = 798.9046909809113
+-> -2.42496492819577 + 9.9839700711236*exp(-0.058074870993514*x**3) - 7.59036684326362*exp(-0.100412797585975*x), p = 0.0002498978161203609, parse trees = 14, valid = True, error = 0.0006099510926031661, time = 1252.3332676887512
+-> -0.529029803288679*x**3 + 0.66223814385777*x, p = 0.0016842542284800002, parse trees = 4, valid = True, error = 0.0006379222562239398, time = 32.23128008842468
+-> -1.03010997278964*x**2 + 1.1630863628602*x - 0.0733027919987554*exp(-9.99743722738921*x**6), p = 7.827577896960002e-07, parse trees = 1, valid = True, error = 0.0006994212292659049, time = 353.7403202056885
+-> -1.17763354649086*x**4 + 1.25617531400469*x**2, p = 0.00012740198400000002, parse trees = 1, valid = True, error = 0.0007363546448282305, time = 44.3868670463562
+-> -0.957212849324481*x**2 + 1.09410798400021*x - 0.0650979755721466*exp(-7.12916208829322*x**4), p = 1.6231265527136257e-08, parse trees = 1, valid = True, error = 0.0007427539157017271, time = 254.96209597587585
+-> -0.558608926299542*x**2 + 0.67490444240578 - 0.591999482307498*exp(-5.87013756062223*x**3), p = 0.00014200857050480643, parse trees = 8, valid = True, error = 0.0007438521406121827, time = 291.9760172367096
+-> -1.44359731314085*x**4 + 0.0756248862279563*exp(3.03275649368483*x), p = 0.00043282700697600007, parse trees = 3, valid = True, error = 0.0007537630404724674, time = 165.12422943115234
+-> -0.885566520166585*x**2 + 1.033211279089*x - 0.0565877125716432*exp(-2.91841334461312*x**2), p = 3.06779215695446e-05, parse trees = 2, valid = True, error = 0.0008511391998570047, time = 212.50081419944763
+-> 2.21250735182803*x**4 - 6.24991395819103 + 6.35860952257912*exp(-0.434146152168623*x**6), p = 3.005789912432641e-08, parse trees = 1, valid = True, error = 0.0008908676377770707, time = 370.4842703342438
+-> -0.88149001728877*x**2 + 1.08481994678934*x - 0.0554478238698388, p = 0.003188032207342349, parse trees = 43, valid = True, error = 0.0009034800532749291, time = 131.07646942138672
+-> -0.754305635952999*x**2 + 4.78014249494183*exp(-0.00309015586667317*x**2) - 4.83530185330695*exp(-0.224614262574882*x), p = 2.0853972113817607e-05, parse trees = 2, valid = True, error = 0.0009092449113185798, time = 1546.213450908661
+-> -0.747069140354328*x**2 + 3.91827846270192 - 3.97331475377864*exp(-0.273538987150647*x), p = 0.0016312917769174466, parse trees = 36, valid = True, error = 0.0009117982135044011, time = 514.538610458374
+-> -1.72356722021899*x + 9.9257669206117*exp(-0.055152158099087*x**2) - 9.98152828493903*exp(-0.283425674265728*x), p = 0.00015483927527424, parse trees = 4, valid = True, error = 0.0009505372921592083, time = 1895.715815782547
+-> 1.09879287118297*x - 9.99983977252153 + 9.94550829896622*exp(-0.0938326674372813*x**2), p = 0.001796843285803444, parse trees = 43, valid = True, error = 0.0009714351825253296, time = 582.4474656581879
+-> -0.940941096938455*x**5 + 1.00808309392624*x**2, p = 5.0960793600000006e-05, parse trees = 1, valid = True, error = 0.0009874050616253643, time = 42.66974997520447
+-> -0.716129676672484*x**2 + 0.874534608846213*x, p = 0.00414844301869056, parse trees = 5, valid = True, error = 0.0010733368899808833, time = 49.38988137245178
+-> -0.822086196066848*x**6 + 0.88029215825136*x**2, p = 2.0384317440000006e-05, parse trees = 1, valid = True, error = 0.0012385386695169932, time = 38.890127182006836
+-> -3.51500954009232*x**6 + 3.43906148176801*x**5 + 0.129673104181756, p = 1.2524124635136004e-07, parse trees = 1, valid = True, error = 0.0012405853563270874, time = 99.18984150886536
+-> -0.615321531561948*exp(-7.61167481844218*x**2) + 0.694111912083393*exp(-1.30705742189106*x), p = 0.0018034458624000002, parse trees = 3, valid = True, error = 0.0013309390772655427, time = 236.7485373020172
+-> -3.10449163893265*x**4 + 3.16278813804307*x**3, p = 5.0960793600000006e-05, parse trees = 1, valid = True, error = 0.0016864737515436365, time = 32.96555995941162
+-> 0.241097203702184 - 0.206683039959816*exp(-10.0*x**2), p = 0.015660717754046587, parse trees = 36, valid = True, error = 0.002120331146272824, time = 119.29006886482239
+-> -0.781924800465623*x**3 + 0.113942985521635*exp(2.12632933673828*x), p = 0.0010820675174400003, parse trees = 3, valid = True, error = 0.0021648346755118912, time = 160.29994082450867
+-> -0.901742158925535*x**5 + 0.158482211048669*exp(1.88652663099281*x**2), p = 5.218385264640001e-07, parse trees = 1, valid = True, error = 0.002247249273104444, time = 138.91915011405945
+-> 0.237262700798692 - 0.282670638336192*exp(-5.29450874555*x), p = 0.04144782809745057, parse trees = 65, valid = True, error = 0.00225214637044103, time = 105.5028178691864
+-> -1.82280836060599*x**5 + 1.87036903946732*x**3, p = 2.0384317440000003e-05, parse trees = 1, valid = True, error = 0.002263348194509798, time = 39.9228298664093
+-> 0.195820383653911*x + 0.114573495437679*exp(-2.18515180751304*x**8), p = 5.435817984000002e-06, parse trees = 1, valid = True, error = 0.002374271460891958, time = 88.85984802246094
+-> 0.201151277391956*x + 0.111898131122672*exp(-1.86333836854149*x**6), p = 3.3973862400000006e-05, parse trees = 1, valid = True, error = 0.002597768406292663, time = 92.09750032424927
+-> 0.248053222897793 - 0.158975009661221*exp(-10.0*x**3), p = 0.005882117520894197, parse trees = 21, valid = True, error = 0.00262559779482188, time = 150.12322163581848
+-> 0.203137969809613*x + 0.11049203932195*exp(-1.64657659645342*x**5), p = 8.982689218560003e-05, parse trees = 2, valid = True, error = 0.0027485891613466605, time = 109.66913938522339
+-> 0.204208363351952*x + 0.109008145350861*exp(-1.39159736868663*x**4), p = 0.000224567230464, parse trees = 2, valid = True, error = 0.002934708246646528, time = 90.28639936447144
+-> 0.180395147387338*x**2 + 0.155414628768241*exp(-1.73442028603837*x**7), p = 5.435817984000002e-06, parse trees = 1, valid = True, error = 0.003170813498427081, time = 103.10253024101257
+-> 0.246869250165896 - 0.126994208299328*exp(-10.0*x**4), p = 0.00204875073847296, parse trees = 12, valid = True, error = 0.0032127416884207526, time = 132.5528209209442
+-> -0.45843994732631*x**4 + 0.171483974126579*exp(1.30693432895021*x**2), p = 8.4934656e-05, parse trees = 1, valid = True, error = 0.0033891444949298707, time = 129.99914479255676
+-> 0.193962068484409*x + 0.107299654960087*exp(-0.689915945015477*x**2), p = 0.0028070903808000004, parse trees = 4, valid = True, error = 0.003425609211309395, time = 86.38000893592834
+-> 0.144431220724174*x + 0.109320289308568, p = 0.06553215622387708, parse trees = 97, valid = True, error = 0.0036158647949035326, time = 43.295069456100464
+-> 0.14414378984493*x + 6.2357444478195*exp(1.43375547956965e-5*x) - 6.12628763663511, p = 0.006088600985559919, parse trees = 64, valid = True, error = 0.0036158670092931357, time = 345.50171875953674
+-> 0.145181397708049*x + 0.109324167389883*exp(-0.00689826253905242*x), p = 0.007481978781696, parse trees = 9, valid = True, error = 0.003615880761608188, time = 98.08252453804016
+-> -0.203355762227542*x**2 + 0.139887994719799*exp(1.1119096400458*x), p = 0.0027357452697600003, parse trees = 4, valid = True, error = 0.003637838944614727, time = 130.3707115650177
+-> 0.241826880399331 - 0.102272042514046*exp(-10.0*x**5), p = 0.0008281921683456003, parse trees = 11, valid = True, error = 0.0036828825506940066, time = 133.24653100967407
+-> 0.20283447858554 - 8.72347805548975e-6*exp(9.88756714443061*x**7), p = 3.2614907904000014e-06, parse trees = 1, valid = True, error = 0.0037874130260557174, time = 231.47546768188477
+-> 0.203168397430334 - 7.53086528529032e-6*exp(9.99884590200046*x**6), p = 9.308838297600003e-05, parse trees = 2, valid = True, error = 0.003800103141149329, time = 351.91347217559814
+-> 0.162660072904038*x**2 + 0.156076696087017*exp(-0.927140225408265*x**4), p = 8.493465600000002e-05, parse trees = 1, valid = True, error = 0.003832603914568743, time = 95.638507604599
+-> 0.136105701543216*exp(0.573640642342642*x), p = 0.059896774656, parse trees = 3, valid = True, error = 0.0038800865519065617, time = 40.95616388320923
+-> 0.140936623971959*x**2 + 0.156954292699469*exp(-0.562752504618452*x**3), p = 0.00021722887618560001, parse trees = 2, valid = True, error = 0.004118911679194361, time = 87.98381924629211
+-> -0.136282059019033*x**3 + 0.17326371377592*exp(0.682484273097079*x**2), p = 0.00042467328000000005, parse trees = 2, valid = True, error = 0.004229850458491839, time = 118.59529685974121
+-> 0.202060198455792 - 0.0851184642700142*x**11, p = 1.3045963161600009e-06, parse trees = 1, valid = True, error = 0.00428225180988279, time = 30.042803525924683
+-> 0.0755057789087437*x**2 + 0.158229877868426, p = 0.02393403522804658, parse trees = 44, valid = True, error = 0.004301617646054231, time = 43.71710395812988
+-> 0.0749183189004834*x**2 + 0.158184157138323*exp(0.00436660262654401*x**2), p = 0.0010616832, parse trees = 2, valid = True, error = 0.004301629159509297, time = 108.64384961128235
+-> 0.167621567710593*exp(0.283739288643511*x**2), p = 0.0233938944, parse trees = 2, valid = True, error = 0.004390598802783136, time = 45.33417057991028
+-> 0.198765926423506*exp(-0.330419673039714*x**9), p = 3.7748736000000025e-05, parse trees = 1, valid = True, error = 0.004432760349820169, time = 35.08284330368042
+-> 0.199530965682728 - 0.060281810202824*x**8, p = 2.0384317440000006e-05, parse trees = 1, valid = True, error = 0.004448803877936001, time = 44.1815767288208
+-> 0.197971737131276 - 0.0488412676646921*x**7, p = 5.096079360000002e-05, parse trees = 1, valid = True, error = 0.004512262248923781, time = 31.364339351654053
+-> 0.062910853539738*x**4 + 0.186293937050839*exp(-0.378887480648497*x**5), p = 5.435817984000002e-06, parse trees = 1, valid = True, error = 0.004556717807473029, time = 134.99546837806702
+-> 0.0347613564734088*x**3 + 0.177002918605149*exp(-0.00170855911147283*x**3), p = 8.4934656e-05, parse trees = 1, valid = True, error = 0.004570113968901385, time = 101.06346654891968
+-> 0.0347452537052085*x**3 + 0.176917816217712, p = 0.009207594828693506, parse trees = 23, valid = True, error = 0.004570117064740621, time = 36.95961046218872
+-> 0.195610378219693 - 0.0345481635550622*x**6, p = 9.806072137541225e-05, parse trees = 4, valid = True, error = 0.004574267069540001, time = 32.47511553764343
+-> 0.180155666324126*exp(0.131317169519062*x**3), p = 0.009216, parse trees = 1, valid = True, error = 0.0045880957889625935, time = 38.12781095504761
+-> 0.194314777206213*exp(-0.15451166749966*x**6), p = 0.0005898240000000002, parse trees = 1, valid = True, error = 0.004588452225228788, time = 36.801605463027954
+-> 0.192133047945958 - 0.0170989442167416*x**5, p = 0.0011434872185649052, parse trees = 9, valid = True, error = 0.004624531475167534, time = 35.38069725036621
+-> -0.0187601502190224*x**5 + 0.192267214034169*exp(0.00611582804978162*x**5), p = 2.174327193600001e-06, parse trees = 1, valid = True, error = 0.004624557415369663, time = 88.44178080558777
+-> 0.19113244500083*exp(-0.0691298062343499*x**5), p = 0.0014745600000000004, parse trees = 1, valid = True, error = 0.004628378005366743, time = 39.58001494407654
+-> 0.00508165921234103*x**4 + 0.186600782215526*exp(-0.00010180020798144*x**4), p = 1.3589544960000001e-05, parse trees = 1, valid = True, error = 0.004640144112799139, time = 93.66240382194519
+-> 0.00484991679081734*x**4 + 0.186667411032308, p = 0.0025749083847131137, parse trees = 13, valid = True, error = 0.004640146104826458, time = 27.598005294799805
+-> 0.186880858029103*exp(0.0213996493511911*x**4), p = 0.0036954596966400004, parse trees = 2, valid = True, error = 0.004640501994773397, time = 38.16385006904602
+-> 0.295508203913616*x, p = 0.091663294464, parse trees = 3, valid = True, error = 0.005107255607073794, time = 10.135980606079102
+-> 0.30382823107696*x**2, p = 0.0353562624, parse trees = 2, valid = True, error = 0.00974920598923915, time = 7.644104957580566
+-> 0.289760186883063*x**3, p = 0.013824000000000001, parse trees = 1, valid = True, error = 0.013114011000551401, time = 9.976085186004639
+-> 0.271139547551623*x**4, p = 0.0055296, parse trees = 1, valid = True, error = 0.015364902582050612, time = 8.56586217880249
+-> 0.25300089840904*x**5, p = 0.00221184, parse trees = 1, valid = True, error = 0.016895998789903777, time = 8.37935209274292
+-> 0.236640265545017*x**6, p = 0.0008847360000000002, parse trees = 1, valid = True, error = 0.01797074569242309, time = 6.858729839324951
+-> 0.222250956988095*x**7, p = 0.0003538944000000001, parse trees = 1, valid = True, error = 0.018749301812100546, time = 8.476111888885498
+-> 0.209757490366227*x**8, p = 0.00014155776000000005, parse trees = 1, valid = True, error = 0.019329544928426357, time = 8.782392978668213
+-> C0*x**2 + C1*exp(C2*x) + C3*exp(C4*x**3) + C5, p = 1.1741366845440001e-06, parse trees = 1, valid = False
+-> C0*x**3 + C1*x + C2*exp(C3*x) + C4*exp(C5*x**2) + C6*exp(C7*x**5) + C8, p = 6.648326359915016e-11, parse trees = 1, valid = False
+-> C0*x**4 + C1*exp(C2*x) + C3*exp(C4*x**3) + C5, p = 1.8034739474595844e-08, parse trees = 1, valid = False
+-> C0*x + C1*exp(C2*x) + C3*exp(C4*x**5) + C5, p = 6.4925062108545034e-09, parse trees = 1, valid = False
+-> C0*x**3 + C1*x**2 + C2*x + C3*exp(C4*x) + C5, p = 5.385144351531159e-11, parse trees = 1, valid = False
+-> C0*x**3 + C1*x + C2*exp(C3*x) + C4*exp(C5*x**2) + C6, p = 9.738759316281758e-09, parse trees = 1, valid = False
+-> C0*x**2 + C1*x + C2*exp(C3*x) + C4*exp(C5*x**2) + C6, p = 2.3373022359076214e-09, parse trees = 1, valid = False
+-> C0*x + C1*exp(C2*x**2) + C3*exp(C4*x**4) + C5, p = 4.696546738176002e-07, parse trees = 1, valid = False
+-> C0*x**5 + C1*exp(C2*x) + C3*exp(C4*x**2) + C5, p = 3.590096234354107e-11, parse trees = 1, valid = False
+-> C0*exp(C1*x) + C2*exp(C3*x**2) + C4*exp(C5*x**6) + C6, p = 7.213895789838341e-09, parse trees = 1, valid = False
+-> C0*x**4 + C1*x**2 + C2*exp(C3*x) + C4*exp(C5*x**2) + C6, p = 3.4464923849799417e-12, parse trees = 1, valid = False
+-> C0*exp(C1*x) + C2*exp(C3*x**2) + C4*exp(C5*x**3) + C6, p = 1.1387134504259818e-07, parse trees = 2, valid = False
+-> C0*x**2 + C1*x + C2*exp(C3*x**2) + C4*exp(C5*x**3) + C6, p = 2.7052109211893763e-08, parse trees = 1, valid = False
+-> C0*x**3 + C1*x + C2*exp(C3*x**2) + C4*exp(C5*x**4), p = 3.005789912432641e-08, parse trees = 1, valid = False
+-> C0*x + C1*exp(C2*x) + C3*exp(C4*x**2) + C5, p = 2.2621700122214407e-05, parse trees = 7, valid = False
+-> C0*x**4 + C1*exp(C2*x) + C3*exp(C4*x**2) + C5, p = 4.696546738176002e-07, parse trees = 1, valid = False
+-> C0*x**5 + C1*x**3 + C2*exp(C3*x) + C4*exp(C5*x**2), p = 1.2023159649730564e-08, parse trees = 1, valid = False
+-> C0*x**3 + C1*exp(C2*x) + C3*exp(C4*x**2) + C5, p = 9.96920320956826e-07, parse trees = 3, valid = False
+-> C0*x**5 + C1*x**2 + C2*x + C3*exp(C4*x**2) + C5, p = 1.2407372585927791e-12, parse trees = 1, valid = False
+-> C0*x + C1*exp(C2*x) + C3*exp(C4*x**3) + C5, p = 4.226892064358401e-07, parse trees = 1, valid = False
+-> C0*exp(C1*x) + C2*exp(C3*x**2) + C4*exp(C5*x**3), p = 2.0873541058560007e-07, parse trees = 1, valid = False
+.
+this is --ss=10000

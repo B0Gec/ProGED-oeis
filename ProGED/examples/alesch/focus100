@@ -1,0 +1,50 @@
+=>> Grammar used: 
+Grammar with 8 productions (start state = S)
+    S -> S '+' R [0.4]
+    S -> R [0.6]
+    R -> T [0.6]
+    R -> 'C' '*' F '(' T ')' [0.4]
+    T -> T '*' V [0.4]
+    T -> 'C' [0.6]
+    F -> 'exp' [1.0]
+    V -> 'x' [1.0]
+
+ModelBox: 19 models
+-> C0*x, p = 0.08639999999999999, parse trees = 1, valid = False
+-> C0*x**3, p = 0.013824000000000001, parse trees = 1, valid = False
+-> C0*x**2 + C1, p = 0.0111476736, parse trees = 4, valid = False
+-> C0*exp(C1*x**5), p = 0.0014745600000000004, parse trees = 1, valid = False
+-> C0*x + C1, p = 0.041472, parse trees = 4, valid = False
+-> C0*exp(C1*x), p = 0.0576, parse trees = 1, valid = False
+-> C0*x**2, p = 0.03456, parse trees = 1, valid = False
+-> C0*exp(C1*x**3) + C2, p = 0.0008847360000000001, parse trees = 1, valid = False
+-> C0*x**3 + C1, p = 0.0036044144640000005, parse trees = 3, valid = False
+-> C0*exp(C1*x) + C2, p = 0.013824, parse trees = 2, valid = False
+-> C0*exp(C1*x**2), p = 0.02304, parse trees = 1, valid = False
+-> C0*x**4, p = 0.0055296, parse trees = 1, valid = False
+-> C0*x**6, p = 0.0008847360000000002, parse trees = 1, valid = False
+-> C0*exp(C1*x**2) + C2, p = 0.00047775744000000007, parse trees = 1, valid = False
+-> C0*exp(C1*x**3), p = 0.009216, parse trees = 1, valid = False
+-> C0*x**2 + C1*x, p = 0.001990656, parse trees = 1, valid = False
+-> C0*x**2 + C1*exp(C2*x) + C3, p = 2.6418075402240005e-06, parse trees = 1, valid = False
+-> C0*x**3 + C1*x**2 + C2*exp(C3*x**2) + C4, p = 1.938651966551218e-11, parse trees = 1, valid = False
+-> C0*x**2 + C1*exp(C2*x), p = 0.001327104, parse trees = 1, valid = False
+ModelBox: 18 models
+-> -6.67793820738742*x**3 + 9.99894791199794*x**2 - 3.80739839700775 + 3.84431292931315*exp(-1.90545196655016*x**2), p = 1.938651966551218e-11, parse trees = 1, valid = True, error = 0.00020578881795393867, time = 373.3223502635956
+-> -0.778435515043109*x**2 + 5.34757104868842 - 5.4024805123898*exp(-0.20061405392644*x), p = 2.6418075402240005e-06, parse trees = 1, valid = True, error = 0.0009081319019859513, time = 144.66393733024597
+-> -0.717806117559616*x**2 + 0.875897167488547*x, p = 0.001990656, parse trees = 1, valid = True, error = 0.0010733536662503281, time = 13.937137603759766
+-> 0.241114450448121 - 0.206738639756782*exp(-10.0*x**2), p = 0.00047775744000000007, parse trees = 1, valid = True, error = 0.002120331393021669, time = 28.841957092285156
+-> 0.248104303231163 - 0.159069326674026*exp(-10.0*x**3), p = 0.0008847360000000001, parse trees = 1, valid = True, error = 0.002625598129091928, time = 33.00703001022339
+-> 0.144412451304157*x + 0.109331337783092, p = 0.041472, parse trees = 4, valid = True, error = 0.0036158648005314253, time = 10.153868436813354
+-> 7.58264518824237*exp(0.0187044906480397*x) - 7.47243248652765, p = 0.013824, parse trees = 2, valid = True, error = 0.003624197255212987, time = 41.69982194900513
+-> -0.201182650863711*x**2 + 0.139964280458665*exp(1.10620652243896*x), p = 0.001327104, parse trees = 1, valid = True, error = 0.0036378163316076696, time = 34.10289430618286
+-> 0.136504108377453*exp(0.569195117548467*x), p = 0.0576, parse trees = 1, valid = True, error = 0.0038800674936555063, time = 11.0250403881073
+-> 0.0753301581524307*x**2 + 0.158312093562539, p = 0.0111476736, parse trees = 4, valid = True, error = 0.004301621786122952, time = 8.140251636505127
+-> 0.167449979200398*exp(0.286164561431863*x**2), p = 0.02304, parse trees = 1, valid = True, error = 0.0043905179614728345, time = 12.201911449432373
+-> 0.0344553740483084*x**3 + 0.177005684020939, p = 0.0036044144640000005, parse trees = 3, valid = True, error = 0.0045701119729413585, time = 9.44193410873413
+-> 0.179929006756969*exp(0.13518145908287*x**3), p = 0.009216, parse trees = 1, valid = True, error = 0.004588055840106147, time = 9.074162483215332
+-> 0.191422034787106*exp(-0.0757159696555164*x**5), p = 0.0014745600000000004, parse trees = 1, valid = True, error = 0.004628381618617356, time = 9.698537111282349
+-> 0.295579078249524*x, p = 0.08639999999999999, parse trees = 1, valid = True, error = 0.005107256605730429, time = 1.9373738765716553
+-> 0.303829157729919*x**2, p = 0.03456, parse trees = 1, valid = True, error = 0.00974920599656572, time = 2.5455408096313477
+-> 0.28972056730107*x**3, p = 0.013824000000000001, parse trees = 1, valid = True, error = 0.013114010825561196, time = 2.1548051834106445
+-> 0.271158230809894*x**4, p = 0.0055296, parse trees = 1, valid = True, error = 0.015364902615769976, time = 2.372096061706543

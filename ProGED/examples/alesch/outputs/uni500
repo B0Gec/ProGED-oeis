@@ -1,0 +1,398 @@
+=>> Grammar used: 
+Grammar with 15 productions (start state = S)
+    S -> S '+' F [0.2]
+    S -> S '-' F [0.2]
+    S -> F [0.6]
+    F -> F '*' T [0.2]
+    F -> F '/' T [0.2]
+    F -> T [0.6]
+    T -> R [0.2]
+    T -> 'C' [0.4]
+    T -> V [0.4]
+    R -> '(' S ')' [0.6]
+    R -> 'sin(' S ')' [0.1]
+    R -> 'cos(' S ')' [0.1]
+    R -> 'sqrt(' S ')' [0.1]
+    R -> 'exp(' S ')' [0.1]
+    V -> 'x' [1.0]
+
+ModelBox: 174 models
+-> x, p = 0.15118221312, parse trees = 4, valid = False
+-> C0*x**3, p = 7.372800000000002e-05, parse trees = 1, valid = False
+-> C0 + x, p = 0.02269079347396608, parse trees = 16, valid = False
+-> x*(C0 + x), p = 1.5288238080000005e-07, parse trees = 1, valid = False
+-> C0*sqrt(C1 - cos(C2 + C3/x)/x) + x, p = 3.398411682050156e-35, parse trees = 1, valid = False
+-> x*sin(C0 + sin(x)), p = 2.8665446400000012e-08, parse trees = 1, valid = False
+-> C0*(C1*x + 1/sin(C2*x)), p = 3.063548786648842e-22, parse trees = 1, valid = False
+-> C0/x + x**2, p = 1.2230590464000005e-08, parse trees = 1, valid = False
+-> C0*sqrt(x) + C1*(C2*x*(C3 + x)*cos(C4 + x) + C5/x), p = 2.1954498384366857e-28, parse trees = 1, valid = False
+-> C0*(C1*x**2 + C2), p = 1.2230590464000005e-08, parse trees = 1, valid = False
+-> C0 + C1*(C2*x + C3)/(x*(C4*exp(C5*x + C6/(1 - x)) + x)) + x, p = 6.712911964543523e-37, parse trees = 1, valid = False
+-> C0*x, p = 0.03797698586674895, parse trees = 15, valid = False
+-> C0*x/cos(C1*x + C2 + x**2 - 2*x) + C3*(C4 + x) + C5 + x, p = 4.2480146025626946e-33, parse trees = 1, valid = False
+-> x**2 - x, p = 3.538944000000001e-06, parse trees = 1, valid = False
+-> C0*x**2 + C1*x*sin(x) + C2*(C3 + C4/x) + 2*x, p = 1.2349405341206357e-25, parse trees = 1, valid = False
+-> C0*x + C1 + C2/(C3*x + C4) + C5/x + x, p = 4.6617444198218864e-33, parse trees = 1, valid = False
+-> C0*x + C1 - sin(C2*x)/x, p = 9.784472371200006e-11, parse trees = 1, valid = False
+-> x/sin(C0*x + C1), p = 6.604518850560003e-10, parse trees = 1, valid = False
+-> C0/x, p = 0.01519732976871757, parse trees = 16, valid = False
+-> C0*x + C1 + C2*(C3/x + 2*x - (C4 + sqrt(C5*x))/x)/x + x*sqrt(C6/x) + x, p = 6.263952412354846e-38, parse trees = 1, valid = False
+-> exp(C0*x + C1*x/(-x + exp(C2*x**2 + C3*x - x)/(x*cos(C4*x)))), p = 4.916683567780898e-34, parse trees = 1, valid = False
+-> C0/x + exp(x)/sin(x) - (C1/x**2 - x)/x, p = 4.0388582636483757e-19, parse trees = 1, valid = False
+-> C0/x + x, p = 0.0005548965102444488, parse trees = 4, valid = False
+-> 1/(x - 1), p = 3.522410053632001e-10, parse trees = 1, valid = False
+-> x + exp(C0*x + C1 + x**2), p = 1.1631911799307322e-20, parse trees = 1, valid = False
+-> sqrt(2)*(C0 + x)*(C1 - x**2 + x)/sqrt(x), p = 6.979147079584389e-20, parse trees = 1, valid = False
+-> C0 + C1/(C2/x + x), p = 7.304069487211317e-13, parse trees = 1, valid = False
+-> C0*x**3/(C1 - x) + C2, p = 3.5292082022194633e-23, parse trees = 1, valid = False
+-> C0*x**2 + C1 + x/(C2 - x), p = 1.6907568257433607e-11, parse trees = 1, valid = False
+-> C0 - x, p = 0.006959777027918465, parse trees = 4, valid = False
+-> -x**3, p = 3.757237390540802e-12, parse trees = 1, valid = False
+-> C0*(C1 + x), p = 1.146620138521715e-06, parse trees = 2, valid = False
+-> C0*x**2, p = 0.0021191990339174405, parse trees = 10, valid = False
+-> C0*x/sin(2*x) + C1 + x, p = 4.696546738176004e-12, parse trees = 1, valid = False
+-> (C0*x + C1/(x**3*(C2 + cos(C3 - x**2 + x))*sin(x/(C4 + sin(2*x)))))*cos(x)/(x*(C5*x - x)), p = 6.862851552663722e-53, parse trees = 1, valid = False
+-> C0*exp(C1*x + C2) - x, p = 9.784472371200007e-11, parse trees = 1, valid = False
+-> C0 + C1/x**2, p = 2.2825217147535377e-12, parse trees = 1, valid = False
+-> C0*exp(C1*(C2*x + x**2 + 1)/x)/sqrt(C3*x + x**2*(C4 + x)), p = 1.1328038940167193e-34, parse trees = 1, valid = False
+-> C0 + C1/(C2*x + C3 + C4/x), p = 2.5242864147802325e-15, parse trees = 1, valid = False
+-> C0*exp(C1*x/(C2 + x) - sqrt(x)), p = 1.0517860061584306e-16, parse trees = 1, valid = False
+-> C0/x - 2*x, p = 2.1233664000000004e-06, parse trees = 1, valid = False
+-> C0*x + C1/x**3, p = 2.2649241600000014e-08, parse trees = 1, valid = False
+-> 2*x, p = 0.006912082556485632, parse trees = 2, valid = False
+-> C0*x + x + exp(C1*x + C2), p = 5.334943107401147e-28, parse trees = 1, valid = False
+-> C0 + C1/x + x, p = 2.6542080000000003e-05, parse trees = 1, valid = False
+-> C0*x*(C1 + C2/x) + x, p = 7.338354278400002e-09, parse trees = 1, valid = False
+-> C0*x*(C1 - x*sin(C2 + x) + x - sin(C3 + C4/x) + cos(C5 + x**2)/sin(2*x)) + C6, p = 1.3854860503742944e-44, parse trees = 1, valid = False
+-> exp(C0*x + C1), p = 3.9813120000000015e-06, parse trees = 1, valid = False
+-> C0*cos(C1*x) + C2 + x, p = 4.755253572403202e-12, parse trees = 1, valid = False
+-> C0 + C1/x, p = 0.0011094589592168115, parse trees = 4, valid = False
+-> C0*x + C1, p = 0.0006307717542159551, parse trees = 12, valid = False
+-> C0 + x**2 + x, p = 2.249069690880001e-07, parse trees = 2, valid = False
+-> C0*x**2 + C1 + C2/sin(C3*x**2) - x, p = 1.321302461981101e-34, parse trees = 1, valid = False
+-> C0*x + C1 + C2/(x*cos(x)), p = 4.2268920643584026e-12, parse trees = 1, valid = False
+-> C0 + x**3*(C1*x - x) - x, p = 2.8720769874832884e-20, parse trees = 1, valid = False
+-> C0*x + C1/(x*cos(C2*x)), p = 2.434689829070441e-14, parse trees = 1, valid = False
+-> C0*x + C1 - x, p = 2.243810146471318e-16, parse trees = 1, valid = False
+-> C0*x + C1/x - x, p = 2.1233664000000004e-06, parse trees = 1, valid = False
+-> C0*(C1*x + C2 + cos(x)), p = 9.860493807735282e-14, parse trees = 1, valid = False
+-> C0*x*exp(C1*x - x + exp(-x)*exp(-cos(x + exp(C2*x)/sqrt(x)))), p = 7.866693708449443e-38, parse trees = 1, valid = False
+-> exp(C0/x), p = 3.170169048268801e-11, parse trees = 1, valid = False
+-> x**2, p = 0.01152, parse trees = 1, valid = False
+-> C0*x*exp(C1/x - x) + C2, p = 2.858658643797767e-25, parse trees = 1, valid = False
+-> C0*x**3*sqrt(C1*x**2)/cos(C2/x**3 + x**2 + x), p = 2.248140634559169e-33, parse trees = 1, valid = False
+-> C0*x + C1*sin(C2*x**2 - x + 1) + C3/x + 1/(3*x), p = 3.2221977429808894e-36, parse trees = 1, valid = False
+-> C0*x*(C1 + x) + C2*x + C3*sin(C4 - 2*x) + C5 + C6/x - 2*x, p = 3.6419878279858474e-30, parse trees = 1, valid = False
+-> C0*(C1*x + C2 + (C3*(C4 + x) + C5)/(C6/x**2 + cos(C7*x**3/(x + 1) + C8))) + C9 + x, p = 2.9427824868184614e-72, parse trees = 1, valid = False
+-> C0/sin(C1 + x) - x**2, p = 2.8531521434419215e-11, parse trees = 1, valid = False
+-> C0*(C1 + 2*x - exp(C2*x)/x) + C3 + x, p = 1.5364636149315293e-29, parse trees = 1, valid = False
+-> C0/sin(C1 + x) + x, p = 7.338354278400003e-10, parse trees = 1, valid = False
+-> C0 + x - sin(C1*x*(C2*sin(x + 1)*cos(sqrt(C3*cos(C4 + C5/x) - sin(C6 - x))) + 2*x) + C7/x - x), p = 2.6302586737574506e-44, parse trees = 1, valid = False
+-> sin(x**2 + sin(x)), p = 1.2383472844800007e-09, parse trees = 1, valid = False
+-> C0*x**2/sqrt(C1/(C2/x - x*exp(C3*x + C4)) + x) + C5*x, p = 3.107829613214592e-35, parse trees = 1, valid = False
+-> C0*sqrt(C1*x**3*exp(x) + C2/x) + C3, p = 1.4778517870659155e-44, parse trees = 1, valid = False
+-> cos(x), p = 0.0010368000000000003, parse trees = 1, valid = False
+-> C0*(C1*exp(x) + C2) + C3, p = 5.2836150804480045e-11, parse trees = 1, valid = False
+-> C0*(C1 + (C2*x + C3)/x**2), p = 1.623126552713627e-13, parse trees = 1, valid = False
+-> C0*(C1*x + C2 + x)*exp(x)/((C3 + x)*(C4*x + C5)), p = 1.1878309759724754e-41, parse trees = 1, valid = False
+-> x - 1, p = 0.000576847872, parse trees = 2, valid = False
+-> C0*x + C1*sin(cos(x)) + C2/sqrt(x*sqrt(C3*exp(C4*x + C5*exp(C6*x) + C7 + 2*x) + C8 + x) + x) + x, p = 4.9740282521989104e-67, parse trees = 1, valid = False
+-> C0*exp(C1/x + E)/x, p = 1.4676708556800012e-11, parse trees = 1, valid = False
+-> sqrt(C0 - x + sin(C1*x)), p = 1.6434156346225474e-14, parse trees = 1, valid = False
+-> C0*x + C1*cos(C2*x + C3*sin(x) + C4), p = 7.587474641637188e-33, parse trees = 1, valid = False
+-> C0*sin((C1*x*(-x*cos(x) + x) + x**2)/x) + C2 + x, p = 8.374976495501269e-22, parse trees = 1, valid = False
+-> C0 - x**2/(sqrt(C1*x*cos(C2*x + 1/sin(x)) + x**2 + x)*cos(C3*x)) - x, p = 7.623089716794049e-30, parse trees = 1, valid = False
+-> C0*(C1*x - x), p = 7.827577896960007e-11, parse trees = 1, valid = False
+-> C0 + x - x/cos(C1*sin(C2*x**3*exp(exp(C3*x + C4)) + C5/x - x**2 + x) + x + sin(x)), p = 1.3363098479690354e-43, parse trees = 1, valid = False
+-> C0*(C1 + C2/(C3*x + C4*(C5*x - x) + C6)), p = 3.034989856654874e-29, parse trees = 1, valid = False
+-> C0*x + x - cos(C1 - x), p = 6.232805962420329e-17, parse trees = 1, valid = False
+-> C0 + C1/x**2 - 2*x, p = 1.1631911799307318e-18, parse trees = 1, valid = False
+-> C0*x**4 + C1*x - x, p = 3.757237390540803e-12, parse trees = 1, valid = False
+-> C0*sqrt(x**2)/x + x, p = 5.635856085811207e-13, parse trees = 1, valid = False
+-> exp(C0*x**2 + C1/x - x**3*exp(C2*sqrt(C3*x)*exp(-x)/sin(C4*x + C5) + C6 + x)), p = 1.631729968133852e-63, parse trees = 1, valid = False
+-> C0*x + C1 + x, p = 4.544395474894849e-06, parse trees = 4, valid = False
+-> C0 + 2*x, p = 0.000331776, parse trees = 1, valid = False
+-> C0*x**2*exp(x) + C1, p = 3.005789912432642e-14, parse trees = 1, valid = False
+-> C0/x**2 + x, p = 6.604518850560004e-09, parse trees = 1, valid = False
+-> C0*sin(C1 + x)*cos(x) + C2*(C3*sqrt(x*sin(x)) + C4)/x, p = 2.360008112534831e-35, parse trees = 1, valid = False
+-> C0*x*(C1*x + C2/cos(C3*sqrt(C4*x + C5 + x) + C6) + C7/x + x) + C8, p = 1.5394289448603284e-42, parse trees = 1, valid = False
+-> C0*sin(x) + C1 + C2/x + x*(C3 + x) + x, p = 7.754607866204875e-20, parse trees = 1, valid = False
+-> -x*exp(C0 + C1/x**2 - x) + x*sin(C2 - x) + x, p = 9.30552943944585e-22, parse trees = 1, valid = False
+-> -x**2 + cos(x), p = 1.1007531417600005e-09, parse trees = 1, valid = False
+-> C0*(C1 + x)/x**2, p = 1.2173449145352199e-12, parse trees = 1, valid = False
+-> C0 + x**2, p = 0.0005769497935872001, parse trees = 3, valid = False
+-> C0*(C1*x + C2*exp(C3/(C4*x - 2*x)) + C5*cos(C6*x*cos(C7*x - x))/x**2 - x**2*exp(x) + x) + C8/sqrt(C12/x + C9*(C10 + C11/x**2 + x) - x), p = 8.719355516499144e-79, parse trees = 1, valid = False
+-> C0*x - x, p = 0.00055296, parse trees = 1, valid = False
+-> C0*x/sqrt(C1*x) + C2, p = 1.6307453952000011e-10, parse trees = 1, valid = False
+-> C0*x**2 + C1 - x, p = 8.153726976000003e-09, parse trees = 1, valid = False
+-> sqrt(C0/x + 1/x), p = 2.548039680000001e-08, parse trees = 1, valid = False
+-> C0*x + C1 + 2*x, p = 1.8260173718028305e-14, parse trees = 1, valid = False
+-> C0/cos(C1 - x), p = 5.679644433255525e-16, parse trees = 1, valid = False
+-> exp(C0 + x*cos(x**3)), p = 7.925422620672002e-12, parse trees = 1, valid = False
+-> C0*x*(C1 + x) + C2*x, p = 7.338354278400002e-09, parse trees = 1, valid = False
+-> C0*x*(C1*x*(C2 + x) + x*(C3 + x + sin(x))*exp(C4/x)) + C5 + sin(C6*x**2 + x), p = 7.306274093770706e-43, parse trees = 1, valid = False
+-> x**(5/2), p = 6.6355200000000025e-06, parse trees = 1, valid = False
+-> C0*x**2*(C1*(C2*x + C3 + x**2) + sin(C4*exp(-cos(x))))*exp(C5*x) + C6, p = 8.156188036920381e-39, parse trees = 1, valid = False
+-> C0*x/sin(C1*x**2 - x) + C2, p = 9.784472371200004e-11, parse trees = 1, valid = False
+-> C0*x + C1/x, p = 1.5288238080000007e-07, parse trees = 1, valid = False
+-> C0 + cos(C1*sin(x)/sqrt(x))/(x*(C2*x + C3 + C4/x + x)), p = 2.6808013877592656e-50, parse trees = 1, valid = False
+-> C0*sqrt(C1*x + C2) + C3*cos(C4*x) + C5 + C6/x + C7/x**2, p = 2.4166483072356676e-38, parse trees = 1, valid = False
+-> C0*(C1 + x) + C2 + x, p = 5.843255589769055e-14, parse trees = 1, valid = False
+-> sin(C0*x + C1), p = 9.860493807735285e-14, parse trees = 1, valid = False
+-> C0/(x**2*(C1*(C2*x + C3 + x) + C4 + C5/x)), p = 1.4567951311943393e-31, parse trees = 1, valid = False
+-> C0*(C1 + x)/(x*sin(C2*x + 1) - x) + C3 + x**2 + sqrt(C4*x), p = 4.7421716510232414e-29, parse trees = 1, valid = False
+-> C0*sin(x)/x + x, p = 3.1850496000000015e-07, parse trees = 1, valid = False
+-> C0*x**3 + C1/x, p = 2.831155200000001e-07, parse trees = 1, valid = False
+-> -x*exp(C0*x) + 2*x, p = 1.5288238080000003e-08, parse trees = 1, valid = False
+-> C0 - x**2 - x, p = 1.1466178560000001e-06, parse trees = 1, valid = False
+-> C0 - exp(x)*sin(sin(C1 + x)) + 1/x, p = 3.0433622863380507e-15, parse trees = 1, valid = False
+-> C0*x + C1 - x/(C2*x/(C3/x**2 + x) + C4/x), p = 1.0339477154939838e-19, parse trees = 1, valid = False
+-> C0 - x + exp(C1*x + x*exp(x)), p = 3.381513651486723e-14, parse trees = 1, valid = False
+-> C0*x + C1 + 3*x, p = 2.6418075402240003e-09, parse trees = 1, valid = False
+-> C0*(C1 + x**2 + sin(C2*cos(x))) + C3 + C4*exp(-x) + C5/x, p = 7.516742894825822e-41, parse trees = 1, valid = False
+-> x**2/cos(C0*x*sin(C1*x + C2)), p = 7.977991631898025e-21, parse trees = 1, valid = False
+-> C0 + x*(C1 + x) + x*(-x + sin(C2 + C3/x + x)) - 2*x, p = 5.531269013753506e-29, parse trees = 1, valid = False
+-> C0*x/cos(C1*x) + C2, p = 1.1007531417600005e-09, parse trees = 1, valid = False
+-> C0*(C1*x + C11 + C2*(C3/(x**2*sin(C10 + C4*x*sin(C5*x**2 + x) + C6*(C7 + C8/x + x)*cos(C9 + x) + x)) + x)), p = 4.3177328578115525e-59, parse trees = 1, valid = False
+-> C0*cos(C1*x**2) + C2, p = 2.038431744000001e-09, parse trees = 1, valid = False
+-> C0*exp(C1*x + C2*cos(C3*x + C4*exp(C5*x - x)))/(C6 - cos(x)), p = 1.398523325946567e-37, parse trees = 1, valid = False
+-> sqrt(C0 + x), p = 2.3887872000000005e-06, parse trees = 1, valid = False
+-> C0 + (C1*(C2/x + x/(C3*x + C4)) + (C5 - x)/x)*(C12 + C6*x*sqrt(C7*x) + C8*x*exp(C11 + C9*exp(C10 - x)) + x**3)/x, p = 2.7848191456151056e-66, parse trees = 1, valid = False
+-> sin(C0*x)/(C1*x + C2), p = 3.8042028579225626e-12, parse trees = 1, valid = False
+-> x**2 + x, p = 0.00055296, parse trees = 1, valid = False
+-> C0/x + 2*x, p = 2.6542080000000003e-05, parse trees = 1, valid = False
+-> C0*sqrt(x) + C1 + x, p = 1.5288238080000006e-08, parse trees = 1, valid = False
+-> C0 + C1/x**2 - sqrt(C2*x), p = 9.784472371200006e-11, parse trees = 1, valid = False
+-> sqrt(x) + x - sqrt(C0 + x), p = 8.255648563200005e-10, parse trees = 1, valid = False
+-> C0 - sqrt(C1*x + C2*(C3 - x) + C4*(-x*sin(1 - 1/x**2) - 1)/(C5 - sqrt(C6*x*sqrt(x*exp(C7 - sqrt(x))))) + 4*x), p = 1.0167187485427734e-55, parse trees = 1, valid = False
+-> C0*x + C1 - 2*x, p = 1.2740198400000002e-06, parse trees = 1, valid = False
+-> C0*(C1*x**3 + C2*(C3*x - 2*x) - x) + C4, p = 1.1709065804995657e-28, parse trees = 1, valid = False
+-> C0/sin(C1*sqrt(C2*x)/(x*(C3 - x)) + x**2), p = 1.9477518632563523e-16, parse trees = 1, valid = False
+-> C0*(C1 + x**2) - x, p = 9.860493807735282e-14, parse trees = 1, valid = False
+-> C0 + x**2 + exp(C1*x + C2), p = 2.705210921189378e-15, parse trees = 1, valid = False
+-> C0*x**2 + C1 + C2/x - x, p = 2.817928042905602e-11, parse trees = 1, valid = False
+-> C0*x/sin(C1*x + C2/x), p = 5.385144351531166e-19, parse trees = 1, valid = False
+-> x**2 + 2*x, p = 2.6542080000000003e-05, parse trees = 1, valid = False
+-> C0*x + cos(C1*x + C2 + x + exp(x)*exp(C3 + x**3 - x)), p = 2.1954498384366864e-31, parse trees = 1, valid = False
+-> C0*x**2 + C1*x + C2 + C3*sin(C4*x + C5)/x**2 + x/sin(x), p = 3.8115448583970237e-26, parse trees = 1, valid = False
+-> C0/cos(C1/x) + x, p = 1.1741366845440012e-12, parse trees = 1, valid = False
+-> C0 - x*(C1*x + C2) + x, p = 5.514387815967912e-21, parse trees = 1, valid = False
+-> C0*exp(x)/x, p = 1.4676708556800013e-10, parse trees = 1, valid = False
+-> -sqrt(C0*(C1 + sqrt(C2*cos(C3*x + C4) - x)) + 2*x), p = 1.2291708919452243e-31, parse trees = 1, valid = False
+-> C0 + C1/x**2 + x, p = 8.310407949893769e-17, parse trees = 1, valid = False
+-> C0*x*exp(-x), p = 6.6355200000000025e-06, parse trees = 1, valid = False
+-> cos(C0*x), p = 6.635520000000002e-06, parse trees = 1, valid = False
+-> x*(C0*x + C1*x/cos(C2*sqrt(x) + C3*sqrt(C4 - x) + C5 + x + sqrt((C6*x + C7)/x)) + C8 + x), p = 2.6179701052336582e-48, parse trees = 1, valid = False
+-> C0 - x - 1/x, p = 5.283615080448002e-11, parse trees = 1, valid = False
+-> C0*x*exp(sqrt(C1*x)/x) + C2 + x + sin(C3*x + C4/x)/(C5*x - x**2), p = 1.4819286409447625e-28, parse trees = 1, valid = False
+-> C0*x + C1 + C2/x - x**2 + x, p = 4.328337473903003e-14, parse trees = 1, valid = False
+-> C0 + C1/(C2*x*exp(C3 - x**2*sqrt(C4/x + x - sqrt(C5 - 2*x)*sin(C6*x)) + x - cos(x)) + x) + x**2, p = 1.1384647183682792e-59, parse trees = 1, valid = False
+-> C0*sqrt(C1*cos(C2*x**2 + C3 + 3*x)/x + x) + C4 + 2*x, p = 2.298355099244912e-49, parse trees = 1, valid = False
+-> C0*x**2/(-3*x + sin(C1/x**2 - x)) + x, p = 6.979147079584387e-20, parse trees = 1, valid = False
+-> C0*x**2*sqrt(C1*x + C2 + x) + x, p = 1.0925963483957546e-31, parse trees = 1, valid = False
+-> C0*x + C1 + C2/x**2 - x*sin(C3/x) - x, p = 8.271581723951867e-22, parse trees = 1, valid = False
+Model skipped. More model parameters than allowed (check max constant).
+Model skipped. More model parameters than allowed (check max constant).
+Model skipped. More model parameters than allowed (check max constant).
+Model skipped. More model parameters than allowed (check max constant).
+Model skipped. More model parameters than allowed (check max constant).
+Model skipped. More model parameters than allowed (check max constant).
+Model skipped. More model parameters than allowed (check max constant).
+Model skipped. More model parameters than allowed (check max constant).
+Model skipped. More model parameters than allowed (check max constant).
+Model skipped. More model parameters than allowed (check max constant).
+Model skipped. More model parameters than allowed (check max constant).
+Model skipped. More model parameters than allowed (check max constant).
+Model skipped. More model parameters than allowed (check max constant).
+Model skipped. More model parameters than allowed (check max constant).
+Model skipped. More model parameters than allowed (check max constant).
+Model skipped. More model parameters than allowed (check max constant).
+Model skipped. More model parameters than allowed (check max constant).
+Model skipped. More model parameters than allowed (check max constant).
+Model skipped. More model parameters than allowed (check max constant).
+Model skipped. More model parameters than allowed (check max constant).
+Model skipped. More model parameters than allowed (check max constant).
+Model skipped. More model parameters than allowed (check max constant).
+Model skipped. More model parameters than allowed (check max constant).
+Model skipped. More model parameters than allowed (check max constant).
+Model skipped. More model parameters than allowed (check max constant).
+Model skipped. More model parameters than allowed (check max constant).
+Model skipped. More model parameters than allowed (check max constant).
+Model skipped. More model parameters than allowed (check max constant).
+Model skipped. More model parameters than allowed (check max constant).
+Model skipped. More model parameters than allowed (check max constant).
+Model skipped. More model parameters than allowed (check max constant).
+ModelBox: 173 models
+-> 0.56234633742222*x - x/(-9.99939178799598*x/(x + 0.831481372292241/x**2) + 7.49649332732332/x) + 0.00179898866880069, p = 1.0339477154939838e-19, parse trees = 1, valid = True, error = 0.00013481885231296555, time = 147.56719946861267
+-> sin(3.10942558780473*x)/(7.63283292569527 - 7.10011625196262*x), p = 3.8042028579225626e-12, parse trees = 1, valid = True, error = 0.00016695178481524101, time = 21.39756941795349
+-> -2.10552571879394*x - 2.20211826244245*cos(3.58848216817242*x - 2.44078857547088*sin(x) + 7.86175554902739), p = 7.587474641637188e-33, parse trees = 1, valid = True, error = 0.00036431713684577035, time = 230.5526659488678
+-> -0.461048827839895*x**4 + 0.582291226579267*x, p = 3.757237390540803e-12, parse trees = 1, valid = True, error = 0.0006755105831643667, time = 2.525770664215088
+-> -0.571733270678192*x**3 + 0.734649119083741*x - 0.0287543354347767, p = 1.1709065804995657e-28, parse trees = 1, valid = True, error = 0.0009924595407969066, time = 94.04918551445007
+-> -0.859704263106081*x + cos(-1.60583649468421*x + 4.67789711221313e-5*exp(x)*exp(x**3 - x) + 7.88547255459021), p = 2.1954498384366864e-31, parse trees = 1, valid = True, error = 0.0011187992302091505, time = 55.32935190200806
+-> -x*(0.856991372919426*x - 0.0653208963751295) + x - 0.0530929648204793, p = 5.514387815967912e-21, parse trees = 1, valid = True, error = 0.0015979490456328666, time = 7.998667478561401
+-> x + 9.96003380090954*cos(0.403081427228138*x) - 9.99930159484838, p = 4.755253572403202e-12, parse trees = 1, valid = True, error = 0.0016626697680480345, time = 20.31788444519043
+-> 1.12390551432446*x + 1.96708010085213*cos(x) - 2.02393619650537, p = 9.860493807735282e-14, parse trees = 1, valid = True, error = 0.0018364138877570457, time = 19.63040518760681
+-> -0.697934853447754*x*(x - 1.30569096852627) - 0.0477197225343558*x, p = 7.338354278400002e-09, parse trees = 1, valid = True, error = 0.0019082596171525262, time = 14.570188522338867
+-> -6084.40355074644*x*exp(-x - 10.0/x**2) - x*sin(x - 6.33166961789821) + x, p = 9.30552943944585e-22, parse trees = 1, valid = True, error = 0.0019238375321099428, time = 23.87974739074707
+-> 0.0341980476784022 + 0.495850121593808/(9.32742542907997*x - 9.50972967387027 + 3.47570249055633/x), p = 2.5242864147802325e-15, parse trees = 1, valid = True, error = 0.001965085916561083, time = 56.58810877799988
+-> 0.221124755819056 - 0.116672174901237*cos(5.75393799720692*x**2), p = 2.038431744000001e-09, parse trees = 1, valid = True, error = 0.0019768912213029206, time = 8.285951375961304
+-> x*sin(sin(x) - 4.1611787306438), p = 2.8665446400000012e-08, parse trees = 1, valid = True, error = 0.0022649536452327736, time = 0.5354034900665283
+-> -0.910476596470666*x**2*sqrt(1 - 0.126823825730613*x) + x, p = 1.0925963483957546e-31, parse trees = 1, valid = True, error = 0.002302832213461046, time = 13.920490503311157
+-> -x*exp(0.635487829256198*x) + 2*x, p = 1.5288238080000003e-08, parse trees = 1, valid = True, error = 0.0028748359933726923, time = 0.5987374782562256
+-> -0.0471629144889024 + 0.355342654989783/(x + 0.361247045691966/x), p = 7.304069487211317e-13, parse trees = 1, valid = True, error = 0.0029939953835818587, time = 12.738375663757324
+-> 0.000705213363268404*exp(-sqrt(x) + 7.13214339570359*x/(x + 0.0497968641834726)), p = 1.0517860061584306e-16, parse trees = 1, valid = True, error = 0.003532543078909683, time = 50.36155462265015
+-> 0.651117179084806*x*exp(-x - 1.33782636567753e-5/x) + 0.0129838303459997, p = 2.858658643797767e-25, parse trees = 1, valid = True, error = 0.0042057593871594875, time = 19.505194187164307
+-> 0.691197872240044*x*exp(-x), p = 6.6355200000000025e-06, parse trees = 1, valid = True, error = 0.004226020197417592, time = 0.2372758388519287
+-> 0.123335581153218*exp(x*cos(x**3)), p = 7.925422620672002e-12, parse trees = 1, valid = True, error = 0.004470855423825275, time = 0.31391239166259766
+-> x - 0.143233907327565/sin(x + 1.99353970779958), p = 7.338354278400003e-10, parse trees = 1, valid = True, error = 0.0050554700100948514, time = 6.416089296340942
+-> -0.470238673726209*x**2 + x/(2.65916752124075 - x) + 0.0895594459076897, p = 1.6907568257433607e-11, parse trees = 1, valid = True, error = 0.005099348666322085, time = 8.236767530441284
+-> 0.235544646140995*sqrt(x) + 0.0266875327097784, p = 1.6307453952000011e-10, parse trees = 1, valid = True, error = 0.005542086724694171, time = 6.4731125831604
+-> -sin(0.160326987242107*x + 9.52929156212001), p = 9.860493807735285e-14, parse trees = 1, valid = True, error = 0.006600681347185363, time = 5.0834574699401855
+-> 0.155414387388447*x + 0.105690999851919, p = 1.2740198400000002e-06, parse trees = 1, valid = True, error = 0.0066294095882295945, time = 2.0100581645965576
+-> 0.155414386273414*x + 0.105691000151773, p = 2.243810146471318e-16, parse trees = 1, valid = True, error = 0.0066294095882295945, time = 1.4673993587493896
+-> 0.155414388999853*x + 0.105690998123949, p = 1.8260173718028305e-14, parse trees = 1, valid = True, error = 0.006629409588229606, time = 1.8780276775360107
+-> 0.155416940411329*x + 0.105691003172768, p = 0.0006307717542159551, parse trees = 12, valid = True, error = 0.006629409590763532, time = 1.8268930912017822
+-> 0.155507092724822*x + 0.105694037168374*exp(-0.000893608903055053*x), p = 5.334943107401147e-28, parse trees = 1, valid = True, error = 0.006629410088652285, time = 10.019385576248169
+-> 0.155336947274046*x + 0.105736410914453, p = 2.6418075402240003e-09, parse trees = 1, valid = True, error = 0.006629410179155266, time = 1.7541799545288086
+-> 0.155577144133019*x + 0.105601088673913, p = 4.544395474894849e-06, parse trees = 4, valid = True, error = 0.006629412147263418, time = 1.8080084323883057
+-> 0.155414769492019*x/cos(0.00149715680625625*x) + 0.105690710775339, p = 1.1007531417600005e-09, parse trees = 1, valid = True, error = 0.00662941302300886, time = 6.5901877880096436
+-> 0.155725553056467*x + 0.105529919910591, p = 5.843255589769055e-14, parse trees = 1, valid = True, error = 0.006629418978081418, time = 9.52605152130127
+-> 0.155027995869134*x + 0.105929563862711, p = 1.146620138521715e-06, parse trees = 2, valid = True, error = 0.0066294248710020934, time = 1.9392287731170654
+-> 0.134563058535116*exp(0.61337934149594*x), p = 3.9813120000000015e-06, parse trees = 1, valid = True, error = 0.007215215121582772, time = 3.0657687187194824
+-> 0.0699116268157892*exp(x) + 0.0638316186525493, p = 5.2836150804480045e-11, parse trees = 1, valid = True, error = 0.007493447647904367, time = 20.616721391677856
+-> -0.0784106698145818*x**3/(0.163239088621536 - x) + 0.15025353661147, p = 3.5292082022194633e-23, parse trees = 1, valid = True, error = 0.007848362741278574, time = 10.951077461242676
+-> 0.0871390205337052*x**2 + 0.155815569461942, p = 1.2230590464000005e-08, parse trees = 1, valid = True, error = 0.008087204463983024, time = 6.3903489112854
+-> 0.0191791982818433*x**2*exp(x) + 0.172728580335561, p = 3.005789912432642e-14, parse trees = 1, valid = True, error = 0.008651652438781679, time = 1.9478647708892822
+-> -0.161507169147054/cos(x + 2.99590688123369), p = 5.679644433255525e-16, parse trees = 1, valid = True, error = 0.008944023779975444, time = 4.005730628967285
+-> 1.03887933886799*x - cos(x - 1.71393976474401), p = 6.232805962420329e-17, parse trees = 1, valid = True, error = 0.009230722433125024, time = 4.069391965866089
+-> 0.302421448620883*x, p = 7.827577896960007e-11, parse trees = 1, valid = True, error = 0.009402074671089946, time = 3.2068963050842285
+-> 0.302421439897705*x, p = 0.03797698586674895, parse trees = 15, valid = True, error = 0.00940207467108995, time = 0.2732808589935303
+-> 0.302433531861381*x, p = 0.00055296, parse trees = 1, valid = True, error = 0.009402074727861611, time = 0.2894020080566406
+-> -0.987958891525927*sqrt(x) + x + 0.332894408613877, p = 1.5288238080000006e-08, parse trees = 1, valid = True, error = 0.015317463784375486, time = 1.6830790042877197
+-> exp(-1.05249483108246/x), p = 3.170169048268801e-11, parse trees = 1, valid = True, error = 0.01567838757612153, time = 0.39594197273254395
+-> sqrt(-x + sin(1.34488670570564*x) + 0.0254092960799657), p = 1.6434156346225474e-14, parse trees = 1, valid = True, error = 0.01683643651444803, time = 8.100127458572388
+-> 0.314159758096333*x**2, p = 0.0021191990339174405, parse trees = 10, valid = True, error = 0.01863075956877968, time = 0.23609280586242676
+-> -x + 0.314642574017826*exp(1.41208906930867*x), p = 9.784472371200007e-11, parse trees = 1, valid = True, error = 0.02094802468505619, time = 12.225352764129639
+-> 0.302060240291941*x**3, p = 7.372800000000002e-05, parse trees = 1, valid = True, error = 0.02543251224060592, time = 0.26087379455566406
+-> 0.972813837964013*x**2 - x + 0.35216605710322, p = 8.153726976000003e-09, parse trees = 1, valid = True, error = 0.02600616370862511, time = 1.4250495433807373
+-> 0.972682931744197*x**2 - x + 0.35222154722209, p = 9.860493807735282e-14, parse trees = 1, valid = True, error = 0.026006165679735883, time = 1.83282470703125
+-> x**2 - 10.0 + 10.2919825741536*exp(-0.0911495381493402*x), p = 2.705210921189378e-15, parse trees = 1, valid = True, error = 0.02630778912768347, time = 33.869410276412964
+-> -x**2 - 0.306018562156516/sin(x - 7.52747240016746), p = 2.8531521434419215e-11, parse trees = 1, valid = True, error = 0.03255906372473469, time = 4.302667140960693
+-> x*(x - 0.501605318232585), p = 1.5288238080000005e-07, parse trees = 1, valid = True, error = 0.046255905506123955, time = 0.20908141136169434
+-> exp(-10.0*x - 8.51081495288306*x/(-x + exp(-1.30505525190273*x**2 - 1.38401812260862*x)/(x*cos(4.3868920126819*x)))), p = 4.916683567780898e-34, parse trees = 1, valid = True, error = 0.051344000578320406, time = 219.90087032318115
+-> 0.827589681464544*x**4 - x + 0.509563914438302, p = 2.8720769874832884e-20, parse trees = 1, valid = True, error = 0.057887594155207146, time = 2.051823139190674
+-> x - 0.350807526613653, p = 0.02269079347396608, parse trees = 16, valid = True, error = 0.07543191152840757, time = 0.1484816074371338
+-> -x + exp(x*exp(x) - 2.12489548960401*x) - 0.304249939023105, p = 3.381513651486723e-14, parse trees = 1, valid = True, error = 0.10364511267744586, time = 4.7004499435424805
+-> x**2 - 0.19890101729367, p = 0.0005769497935872001, parse trees = 3, valid = True, error = 0.1044674811009058, time = 0.1960132122039795
+-> -4.86523775950269*sqrt(0.0844932194371595*x + sqrt(-0.1625379825707*x + cos(0.0122046440561285*x + 6.19321825532256)) - 0.997969830064361), p = 1.2291708919452243e-31, parse trees = 1, valid = True, error = 0.10506069595025813, time = 1591.5357642173767
+-> sqrt(x) + x - sqrt(x + 0.454689285105865), p = 8.255648563200005e-10, parse trees = 1, valid = True, error = 0.12655650568427534, time = 0.5074703693389893
+-> x**(5/2), p = 6.6355200000000025e-06, parse trees = 1, valid = True, error = 0.13486169576591867, time = 0
+-> 0.730192482991201 - x, p = 0.006959777027918465, parse trees = 4, valid = True, error = 0.13539279979030097, time = 0.16839027404785156
+-> x**2 - x, p = 3.538944000000001e-06, parse trees = 1, valid = True, error = 0.1427814671636058, time = 0
+-> x**2, p = 0.01152, parse trees = 1, valid = True, error = 0.14402909668634525, time = 0
+-> x**2/cos(0.000517998865099485*x*sin(4.43835943502865*x + 8.4299874972627)), p = 7.977991631898025e-21, parse trees = 1, valid = True, error = 0.14402910098776042, time = 7.1567912101745605
+-> x, p = 0.15118221312, parse trees = 4, valid = True, error = 0.19849782731430035, time = 0
+-> x/sin(5.08700436192699e-5*x + 1.57074641496856), p = 6.604518850560003e-10, parse trees = 1, valid = True, error = 0.19849782735103624, time = 4.990427732467651
+-> x + 6.07332359355678e-5*exp(x**2 - 9.79903099761312*x), p = 1.1631911799307322e-20, parse trees = 1, valid = True, error = 0.19849838950246515, time = 1.0651228427886963
+-> sin(x**2 + sin(x)), p = 1.2383472844800007e-09, parse trees = 1, valid = True, error = 0.2778983425768022, time = 0
+-> sqrt(x + 1.88192223804506e-6), p = 2.3887872000000005e-06, parse trees = 1, valid = True, error = 0.2938825935392538, time = 0.6090857982635498
+-> cos(1.71651052049569*x), p = 6.635520000000002e-06, parse trees = 1, valid = True, error = 0.29967651263244843, time = 0.7341296672821045
+-> 2*x - 0.891307778693077, p = 0.000331776, parse trees = 1, valid = True, error = 0.33481121739752795, time = 0.22643327713012695
+-> -x**2 + cos(x), p = 1.1007531417600005e-09, parse trees = 1, valid = True, error = 0.34255472800478726, time = 0
+-> x**2 + x - 0.739401019270347, p = 2.249069690880001e-07, parse trees = 2, valid = True, error = 0.37574985846995906, time = 0.2049713134765625
+-> -x**3, p = 3.757237390540802e-12, parse trees = 1, valid = True, error = 0.387994279300251, time = 0
+-> cos(x), p = 0.0010368000000000003, parse trees = 1, valid = True, error = 0.4363730733105408, time = 0
+-> -x**2 - x + 1.11878674964529, p = 1.1466178560000001e-06, parse trees = 1, valid = True, error = 0.4758666378254411, time = 0.2614278793334961
+-> x - 1, p = 0.000576847872, parse trees = 2, valid = True, error = 0.49688278817704573, time = 0
+-> x**2 + x, p = 0.00055296, parse trees = 1, valid = True, error = 0.9224637262090847, time = 0
+-> 2*x, p = 0.006912082556485632, parse trees = 2, valid = True, error = 1.12924031183704, time = 0
+-> x**2 + 2*x, p = 2.6542080000000003e-05, parse trees = 1, valid = True, error = 2.4780853557318245, time = 0
+-> C0*x**2 + C1*x + C2 + C3*sin(C4*x + C5)/x**2 + x/sin(x), p = 3.8115448583970237e-26, parse trees = 1, valid = False
+-> C0*(C1*x + C2*exp(C3/(C4*x - 2*x)) + C5*cos(C6*x*cos(C7*x - x))/x**2 - x**2*exp(x) + x) + C8/sqrt(C12/x + C9*(C10 + C11/x**2 + x) - x), p = 8.719355516499144e-79, parse trees = 1, valid = False
+-> C0*(C1 + x**2 + sin(C2*cos(x))) + C3 + C4*exp(-x) + C5/x, p = 7.516742894825822e-41, parse trees = 1, valid = False
+-> C0 - sqrt(C1*x + C2*(C3 - x) + C4*(-x*sin(1 - 1/x**2) - 1)/(C5 - sqrt(C6*x*sqrt(x*exp(C7 - sqrt(x))))) + 4*x), p = 1.0167187485427734e-55, parse trees = 1, valid = False
+-> C0*x*(C1*x*(C2 + x) + x*(C3 + x + sin(x))*exp(C4/x)) + C5 + sin(C6*x**2 + x), p = 7.306274093770706e-43, parse trees = 1, valid = False
+-> C0 + (C1*(C2/x + x/(C3*x + C4)) + (C5 - x)/x)*(C12 + C6*x*sqrt(C7*x) + C8*x*exp(C11 + C9*exp(C10 - x)) + x**3)/x, p = 2.7848191456151056e-66, parse trees = 1, valid = False
+-> C0*x**2*(C1*(C2*x + C3 + x**2) + sin(C4*exp(-cos(x))))*exp(C5*x) + C6, p = 8.156188036920381e-39, parse trees = 1, valid = False
+-> C0*sqrt(C1*x + C2) + C3*cos(C4*x) + C5 + C6/x + C7/x**2, p = 2.4166483072356676e-38, parse trees = 1, valid = False
+-> C0*exp(C1*x + C2*cos(C3*x + C4*exp(C5*x - x)))/(C6 - cos(x)), p = 1.398523325946567e-37, parse trees = 1, valid = False
+-> C0*(C1*x + C11 + C2*(C3/(x**2*sin(C10 + C4*x*sin(C5*x**2 + x) + C6*(C7 + C8/x + x)*cos(C9 + x) + x)) + x)), p = 4.3177328578115525e-59, parse trees = 1, valid = False
+-> C0/(x**2*(C1*(C2*x + C3 + x) + C4 + C5/x)), p = 1.4567951311943393e-31, parse trees = 1, valid = False
+-> C0 + C1/(C2*x*exp(C3 - x**2*sqrt(C4/x + x - sqrt(C5 - 2*x)*sin(C6*x)) + x - cos(x)) + x) + x**2, p = 1.1384647183682792e-59, parse trees = 1, valid = False
+-> x*(C0*x + C1*x/cos(C2*sqrt(x) + C3*sqrt(C4 - x) + C5 + x + sqrt((C6*x + C7)/x)) + C8 + x), p = 2.6179701052336582e-48, parse trees = 1, valid = False
+-> C0*x*exp(sqrt(C1*x)/x) + C2 + x + sin(C3*x + C4/x)/(C5*x - x**2), p = 1.4819286409447625e-28, parse trees = 1, valid = False
+-> C0 + x - x/cos(C1*sin(C2*x**3*exp(exp(C3*x + C4)) + C5/x - x**2 + x) + x + sin(x)), p = 1.3363098479690354e-43, parse trees = 1, valid = False
+-> C0*x*(C1 - x*sin(C2 + x) + x - sin(C3 + C4/x) + cos(C5 + x**2)/sin(2*x)) + C6, p = 1.3854860503742944e-44, parse trees = 1, valid = False
+-> C0*x*(C1*x + C2/cos(C3*sqrt(C4*x + C5 + x) + C6) + C7/x + x) + C8, p = 1.5394289448603284e-42, parse trees = 1, valid = False
+-> (C0*x + C1/(x**3*(C2 + cos(C3 - x**2 + x))*sin(x/(C4 + sin(2*x)))))*cos(x)/(x*(C5*x - x)), p = 6.862851552663722e-53, parse trees = 1, valid = False
+-> C0*x + C1 + C2*(C3/x + 2*x - (C4 + sqrt(C5*x))/x)/x + x*sqrt(C6/x) + x, p = 6.263952412354846e-38, parse trees = 1, valid = False
+-> C0*x*(C1 + x) + C2*x + C3*sin(C4 - 2*x) + C5 + C6/x - 2*x, p = 3.6419878279858474e-30, parse trees = 1, valid = False
+-> C0*(C1*x + C2 + (C3*(C4 + x) + C5)/(C6/x**2 + cos(C7*x**3/(x + 1) + C8))) + C9 + x, p = 2.9427824868184614e-72, parse trees = 1, valid = False
+-> C0*x + C1 + C2/(C3*x + C4) + C5/x + x, p = 4.6617444198218864e-33, parse trees = 1, valid = False
+-> C0*x**2/sqrt(C1/(C2/x - x*exp(C3*x + C4)) + x) + C5*x, p = 3.107829613214592e-35, parse trees = 1, valid = False
+-> C0*x/cos(C1*x + C2 + x**2 - 2*x) + C3*(C4 + x) + C5 + x, p = 4.2480146025626946e-33, parse trees = 1, valid = False
+-> C0*(C1*x + C2 + x)*exp(x)/((C3 + x)*(C4*x + C5)), p = 1.1878309759724754e-41, parse trees = 1, valid = False
+-> C0*x + C1*sin(cos(x)) + C2/sqrt(x*sqrt(C3*exp(C4*x + C5*exp(C6*x) + C7 + 2*x) + C8 + x) + x) + x, p = 4.9740282521989104e-67, parse trees = 1, valid = False
+-> C0 + x - sin(C1*x*(C2*sin(x + 1)*cos(sqrt(C3*cos(C4 + C5/x) - sin(C6 - x))) + 2*x) + C7/x - x), p = 2.6302586737574506e-44, parse trees = 1, valid = False
+-> C0*sqrt(x) + C1*(C2*x*(C3 + x)*cos(C4 + x) + C5/x), p = 2.1954498384366857e-28, parse trees = 1, valid = False
+-> C0*(C1 + C2/(C3*x + C4*(C5*x - x) + C6)), p = 3.034989856654874e-29, parse trees = 1, valid = False
+-> exp(C0*x**2 + C1/x - x**3*exp(C2*sqrt(C3*x)*exp(-x)/sin(C4*x + C5) + C6 + x)), p = 1.631729968133852e-63, parse trees = 1, valid = False
+-> C0 + C1*(C2*x + C3)/(x*(C4*exp(C5*x + C6/(1 - x)) + x)) + x, p = 6.712911964543523e-37, parse trees = 1, valid = False
+-> 2*x + 1.61078674882796/x, p = 2.6542080000000003e-05, parse trees = 1, valid = True, error = 1000000000.0, time = 0.06310915946960449
+-> 8.38765920436046*x**2/(-3*x - sin(x + 9.5107370593939/x**2)) + x, p = 6.979147079584387e-20, parse trees = 1, valid = True, error = 1000000000.0, time = 0.6214621067047119
+-> 2*x - 5.53532554634465*sqrt(0.861114728698338*x + cos(7.62782466633829*x**2 + 3*x + 5.29413576621564)/x) + 7.91909987801334, p = 2.298355099244912e-49, parse trees = 1, valid = True, error = 1000000000.0, time = 2.70206356048584
+-> -3.10673184991164*sqrt(x) - 8.47504707700941 + 3.05142644395521/x**2, p = 9.784472371200006e-11, parse trees = 1, valid = True, error = 1000000000.0, time = 0.48667454719543457
+-> x - 4.98708455531909*x/sin(2*x) + 4.27709144961782, p = 4.696546738176004e-12, parse trees = 1, valid = True, error = 1000000000.0, time = 0.17207717895507812
+-> sqrt(2)*(x + 7.00640996437525)*(-x**2 + x + 2.20241766346338)/sqrt(x), p = 6.979147079584389e-20, parse trees = 1, valid = True, error = 1000000000.0, time = 0.19858384132385254
+-> 1/(x - 1), p = 3.522410053632001e-10, parse trees = 1, valid = True, error = 1000000000, time = 0
+-> x - 2.88952335363367/x, p = 0.0005548965102444488, parse trees = 4, valid = True, error = 1000000000.0, time = 0.06672310829162598
+-> -0.689271017402018/sin(x**2 - 8.64094392273229/(sqrt(x)*(-x - 9.41367521728223))), p = 1.9477518632563523e-16, parse trees = 1, valid = True, error = 1000000000.0, time = 1.9229624271392822
+-> exp(x)/sin(x) - (-x - 3.11170830759086/x**2)/x - 9.27099686742976/x, p = 4.0388582636483757e-19, parse trees = 1, valid = True, error = 1000000000.0, time = 0.3300318717956543
+-> x - 11.6882510740803*sqrt(1 - 0.227885324332574*cos(7.36626362780501 - 0.72585607457847/x)/x), p = 3.398411682050156e-35, parse trees = 1, valid = True, error = 1000000000.0, time = 2.179659366607666
+-> -5.56804044274828*x/sin(0.487226680695949*x - 9.60290698035761/x), p = 5.385144351531166e-19, parse trees = 1, valid = True, error = 1000000000.0, time = 1.2768330574035645
+-> 2.00759547900046/x, p = 0.01519732976871757, parse trees = 16, valid = True, error = 1000000000.0, time = 0.04166817665100098
+-> -3.02018962109045*x + 5.69531714077212 - sin(4.2858268987685*x)/x, p = 9.784472371200006e-11, parse trees = 1, valid = True, error = 1000000000.0, time = 0.5107245445251465
+-> -x**2 - 8.02709159168103*x - 5.57325570113715 - 9.51025505321026/x, p = 4.328337473903003e-14, parse trees = 1, valid = True, error = 1000000000.0, time = 0.4711134433746338
+-> 20.7573140682259*x + 7.14707953815074/sin(9.5498348225695*x), p = 3.063548786648842e-22, parse trees = 1, valid = True, error = 1000000000.0, time = 0.6508855819702148
+-> 3.79670582063429 + 3.35216803307625/x**2, p = 2.2825217147535377e-12, parse trees = 1, valid = True, error = 1000000000.0, time = 0.13683795928955078
+-> x - 4.43190171111956/cos(8.95032877227963/x), p = 1.1741366845440012e-12, parse trees = 1, valid = True, error = 1000000000.0, time = 0.27807140350341797
+-> 0.697921496579887*x**2 - 6.12482784703753*x*sin(x) + 2*x + 6.98346493224772 - 4.22551822728281/x, p = 1.2349405341206357e-25, parse trees = 1, valid = True, error = 1000000000.0, time = 1.1132864952087402
+-> 9.37325059346745*exp(x)/x, p = 1.4676708556800013e-10, parse trees = 1, valid = True, error = 1000000000.0, time = 0.0430760383605957
+-> -x - 7.76726849000253 - 1/x, p = 5.283615080448002e-11, parse trees = 1, valid = True, error = 1000000000.0, time = 0.04617571830749512
+-> x - 7.6859003722245 - 4.97355235936018/x**2, p = 8.310407949893769e-17, parse trees = 1, valid = True, error = 1000000000.0, time = 0.18848538398742676
+-> x**2 - 7.12116066282481/x, p = 1.2230590464000005e-08, parse trees = 1, valid = True, error = 1000000000.0, time = 0.05983877182006836
+-> 5.47099213288561*x**2 - x + 1.63459487751439 + 8.70694848679476/x, p = 2.817928042905602e-11, parse trees = 1, valid = True, error = 1000000000.0, time = 0.3687450885772705
+-> 0.784203787430499*exp(6.20443945447383*(x**2 - 2.06151409441234*x + 1)/x)/sqrt(0.124992716617233*x**2*(x - 8.40108467404921) + x), p = 1.1328038940167193e-34, parse trees = 1, valid = True, error = 1000000000.0, time = 3.0001914501190186
+-> x*(x + 0.133172615389801) + x - 6.37830487304434*sin(x) - 4.95472964437649 - 2.28764054878908/x, p = 7.754607866204875e-20, parse trees = 1, valid = True, error = 1000000000.0, time = 0.6659948825836182
+-> -2.12415929059284*x + 6.83464003292834/x**3, p = 2.2649241600000014e-08, parse trees = 1, valid = True, error = 1000000000.0, time = 0.17288422584533691
+-> 9.33150037207215*sin(x - 0.601993904877069)*cos(x) + 3.71769715832187*(0.24631880765595*sqrt(x*sin(x)) - 9.66335218684826)/x, p = 2.360008112534831e-35, parse trees = 1, valid = True, error = 1000000000.0, time = 1.373591661453247
+-> x - 6.476641970826/x**2, p = 6.604518850560004e-09, parse trees = 1, valid = True, error = 1000000000.0, time = 0.06081509590148926
+-> 9.29326544927293*(x - 9.42285554632894)/x**2, p = 1.2173449145352199e-12, parse trees = 1, valid = True, error = 1000000000.0, time = 0.15052437782287598
+-> x - 0.448506315255177*sqrt(x**2)/x, p = 5.635856085811207e-13, parse trees = 1, valid = True, error = 1000000000.0, time = 0.0808570384979248
+-> -2*x - 2.43628708409989 - 5.40613969727399/x**2, p = 1.1631911799307318e-18, parse trees = 1, valid = True, error = 1000000000.0, time = 0.15921306610107422
+-> -0.554378687761063*x**2/(sqrt(0.307335729443679*x**2 + x*cos(2.9310777165239*x + 1/sin(x)) + 0.307335729443679*x)*cos(0.726013672663282*x)) - x - 1.93416082607397, p = 7.623089716794049e-30, parse trees = 1, valid = True, error = 1000000000.0, time = 2.1379220485687256
+-> 2.04545163951121*sqrt(-1/x), p = 2.548039680000001e-08, parse trees = 1, valid = True, error = 1000000000.0, time = 0.0924534797668457
+-> x + 8.29317084861156*sin((x**2 + 2.09330823514523*x*(-x*cos(x) + x))/x) + 1.86051191279696, p = 8.374976495501269e-22, parse trees = 1, valid = True, error = 1000000000.0, time = 0.7121789455413818
+-> 7.63020051943042*exp(E - 7.36561374923696/x)/x, p = 1.4676708556800012e-11, parse trees = 1, valid = True, error = 1000000000.0, time = 0.37682151794433594
+-> -11.5860340723056 + 5.0088086141393*(0.718476646376747 - 0.468506481906138*x)/x**2, p = 1.623126552713627e-13, parse trees = 1, valid = True, error = 1000000000.0, time = 0.6907427310943604
+-> 2.68537586684889*sqrt(-x**3*exp(x) - 0.650271992439268/x) + 7.54207590589858, p = 1.4778517870659155e-44, parse trees = 1, valid = True, error = 1000000000.0, time = 1.2025749683380127
+-> -4.58140588847353*x/sin(9.96156999524777*x**2 - x) - 8.37607181518463, p = 9.784472371200004e-11, parse trees = 1, valid = True, error = 1000000000.0, time = 0.7331991195678711
+-> -5.04059864801001*x + 4.32700482041417/x, p = 1.5288238080000007e-07, parse trees = 1, valid = True, error = 1000000000.0, time = 0.1791980266571045
+-> 3.34072131893199 + cos(0.536746151484851*sin(x)/sqrt(x))/(x*(8.82641601753624*x + 6.21043872248627 + 0.190310879591671/x)), p = 2.6808013877592656e-50, parse trees = 1, valid = True, error = 1000000000.0, time = 1.7405569553375244
+-> -2*x - 0.0290465211650592/x, p = 2.1233664000000004e-06, parse trees = 1, valid = True, error = 1000000000.0, time = 0.0641026496887207
+-> -12.0449449575191*x + 31.9497577619687 + 6.52247247875955*exp(-2.87568558164626*x)/x, p = 1.5364636149315293e-29, parse trees = 1, valid = True, error = 1000000000.0, time = 0.9543633460998535
+-> x - 4.31260301529859*sin(x)/x, p = 3.1850496000000015e-07, parse trees = 1, valid = True, error = 1000000000.0, time = 0.07342171669006348
+-> -6.77094626024557*x**3 + 3.15053676933573/x, p = 2.831155200000001e-07, parse trees = 1, valid = True, error = 1000000000.0, time = 0.18643450736999512
+-> 6.28050909174191*x + 8.20052119647156*sin(8.37149708024166*x**2 + x - 1) + 3.14944165396427/x, p = 3.2221977429808894e-36, parse trees = 1, valid = True, error = 1000000000.0, time = 1.2072546482086182
+-> 3.61298524957855*x**3*sqrt(x**2)/cos(x**2 + x - 2.38081266291853/x**3), p = 2.248140634559169e-33, parse trees = 1, valid = True, error = 1000000000.0, time = 0.7088191509246826
+-> -exp(x)*sin(sin(x - 4.85178480222751)) + 6.65174362429692 + 1/x, p = 3.0433622863380507e-15, parse trees = 1, valid = True, error = 1000000000.0, time = 0.28932881355285645
+-> 4.61857078593455*x*exp(-8.57804656963813*x + exp(-x)*exp(-cos(x + exp(-2.22440912995404*x)/sqrt(x)))), p = 7.866693708449443e-38, parse trees = 1, valid = True, error = 1000000000.0, time = 2.035360097885132
+-> 6.759846458404*x + 2.61063301297626/x, p = 2.1233664000000004e-06, parse trees = 1, valid = True, error = 1000000000.0, time = 0.19574880599975586
+-> -7.83956997636481*x + 3.41141301808909/(x*cos(6.00430940421523*x)), p = 2.434689829070441e-14, parse trees = 1, valid = True, error = 1000000000.0, time = 0.6133992671966553
+-> 6.90916429562973*x + 3.94789098230622 + 4.86807754219626/(x*cos(x)), p = 4.2268920643584026e-12, parse trees = 1, valid = True, error = 1000000000.0, time = 0.43479132652282715
+-> -4.39815905000441*x**2 - x + 4.18945813648202 + 5.02528888576739/sin(1.52963367260218*x**2), p = 1.321302461981101e-34, parse trees = 1, valid = True, error = 1000000000.0, time = 1.0901038646697998
+-> x*(-x + sin(x - 8.02219635130481 + 8.27027442022901/x)) + x*(x + 7.36878069623198) - 2*x + 7.51481935785313, p = 5.531269013753506e-29, parse trees = 1, valid = True, error = 1000000000.0, time = 1.2469916343688965
+-> -4.78970647952634 - 7.80560604308021/x, p = 0.0011094589592168115, parse trees = 4, valid = True, error = 1000000000.0, time = 0.14602375030517578
+-> -7.72266202109772*x*(-2.49396159883711 + 3.14346439352375/x) + x, p = 7.338354278400002e-09, parse trees = 1, valid = True, error = 1000000000.0, time = 0.506575345993042
+-> x + 1.20755157491264 + 5.74727151270839/x, p = 2.6542080000000003e-05, parse trees = 1, valid = True, error = 1000000000.0, time = 0.1474769115447998
+-> 2.93049908475912*sqrt(x) + x**2 - 0.841881783411222*(x + 0.312779110032955)/(-x*sin(4.26873564684017*x - 1) - x) - 4.81283888406429, p = 4.7421716510232414e-29, parse trees = 1, valid = True, error = 1000000000.0, time = 2.2914083003997803

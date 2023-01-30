@@ -220,6 +220,7 @@ def fit_models(models, data, task_type="algebraic", pool_map=map, estimation_set
         "use_jacobian": False,
         "teacher_forcing": False,
         "simulate_separately": False,
+        "focus": None,
     }
 
     optimizer_settings_preset = {
@@ -493,11 +494,37 @@ def ode(model, params, T, X, Y, **objective_settings):
 def model_error(params, model, X, Y, _T=None, _ph_metric=None, estimation_settings=None):
     """Defines mean squared error as the error metric."""
 
-    try:
+    # try:
+    if True:
         verbosity = estimation_settings['verbosity']
 
         testY = model.evaluate(X, *params)
+
         res = np.mean((Y-testY)**2)
+
+#         print()
+#         print()
+#         print()
+#         print('----- - - - - - - -')
+#         print()
+#         print()
+#         print()
+#         print( estimation_settings)
+
+        if estimation_settings["objective_settings"]["focus"] is not None:
+            # print('here I stand')
+            
+            focus = estimation_settings["objective_settings"]["focus"]
+            # print(focus, type(focus))
+            locus, weight = estimation_settings["objective_settings"]["focus"]
+
+            from scipy.stats import binom
+
+            binoc = binom(Y.shape[0]-1, locus)
+            distro = np.array([binoc.pmf(i) for i in range(Y.shape[0])])
+            # print(distro.shape)
+            res2 = np.mean(distro*((Y-testY)**2))
+            res = res*(1-weight) + res2*weight
 
         if np.isnan(res) or np.isinf(res) or not np.isreal(res):
             if verbosity > 1:
@@ -506,12 +533,12 @@ def model_error(params, model, X, Y, _T=None, _ph_metric=None, estimation_settin
             return estimation_settings['default_error']
         return res
 
-    except Exception as error:
-        if verbosity > 1:
-            print("model_error: Params at error:", params, f"and {type(error)} with message:", error)
-        if verbosity > 0:
-            print(f"Program is returning default_error: {estimation_settings['default_error']}")
-        return estimation_settings['default_error']
+    # except Exception as error:
+    #     if verbosity > 1:
+    #         print("model_error: Params at error:", params, f"and {type(error)} with message:", error)
+    #     if verbosity > 0:
+    #         print(f"Program is returning default_error: {estimation_settings['default_error']}")
+    #     return estimation_settings['default_error']
 
 
 def model_error_general(params, model, X, Y, T, ph_diagram, **estimation_settings):
@@ -526,7 +553,7 @@ def model_error_general(params, model, X, Y, T, ph_diagram, **estimation_setting
     task_type = estimation_settings["task_type"]
     if task_type in ("algebraic", "integer-algebraic"):
         return model_error(params, model, X, Y, _T=None,
-                            estimation_settings=estimation_settings)
+                           estimation_settings=estimation_settings)
     elif task_type == "differential":
         return model_ode_error(params, model, X, Y, T, ph_diagram,
                                estimation_settings)
