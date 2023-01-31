@@ -46,7 +46,7 @@ def test_persistent_homology_ODE_system():
                            "objective_settings": {"use_jacobian": False,
                                                   "persistent_homology": True,
                                                   },
-                           "verbosity": 4,
+                           "verbosity": 2,
                            }
 
     np.random.seed(0)
@@ -59,5 +59,5 @@ def test_persistent_homology_ODE_system():
 
 if __name__ == "__main__":
 
-    test_persistent_homology_partial_observability()
-    # test_persistent_homology_ODE_system()
+    # test_persistent_homology_partial_observability()
+    test_persistent_homology_ODE_system()
