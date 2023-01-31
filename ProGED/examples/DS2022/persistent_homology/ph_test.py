@@ -48,6 +48,7 @@ size = 500  # 4-8sec
 def traj2diag(traj, size):
     """Returns p diagram of given trajectory"""
 
+    P1 = traj
     def downsample(lorenz):
         m = int(lorenz.shape[0] / size)
         lorenz = lorenz[:(m * size), :]
@@ -66,13 +67,21 @@ def traj2diag(traj, size):
 # P1 = trajectory; import matplotlib.pyplot as plt; fig = plt.figure(); ax = fig.add_subplot(projection='3d').scatter(P1[:, 0], P1[:, 1], P1[:, 2], s=1); plt.show()
 
 # 3d scatter tested good:
-def plottr(P1: np.ndarray):
+def plot3d(P1: np.ndarray, title=""):
     plt.close()
     fig = plt.figure()
+    plt.title(title)
     ax = fig.add_subplot(projection='3d')
     # ax = plt.axes(projection='3d')
     # ax.scatter(P1[:, 0], P1[:, 1], P1[:, 2], marker=".")
-    ax.scatter(P1[:, 0], P1[:, 1], P1[:, 2], s=1)
+    if P1.shape[1] == 3:
+        ax.scatter(P1[:, 0], P1[:, 1], P1[:, 2], s=1)
+    elif P1.shape[1] == 2:
+        ax.scatter(P1[:, 0], P1[:, 1], s=1)
+    elif P1.shape[1] == 1:
+        ax.scatter(P1[:, 0], np.zeros((P1.shape[0], 1)), s=1)
+    else:
+        raise IndexError
     plt.show()
 
 # # # archive code:
@@ -110,7 +119,7 @@ if __name__ == "__main__":
     # for P1 in lorenzs[:1]:
     # (press "q" to quit plot)
     for P1 in lorenzs:
-        plottr(P1)
+        plot3d(P1)
 
     plt.close('all')
 

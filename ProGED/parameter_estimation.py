@@ -208,12 +208,12 @@ class ParameterEstimator:
                         try:
                             import matplotlib.pyplot as plt
                             import persim
-                            persim.plot_diagrams(self.persistent_diagram[1], show=True)
+                            persim.plot_diagrams(self.persistent_diagram[1], show=True, title="init")
                         except Exception as error:
                             print(f"Error when PLOTTING of type {type(error)} and message:{error}!")
                 except Exception as error:
                     if estimation_settings["verbosity"] >= 1:
-                        print(f"WARNNING: Excepted an error when constructing ph_diagram of the original dataset "
+                        print(f"WARNING: Excepted an error when constructing ph_diagram of the original dataset "
                               f"of type {type(error)} and message:{error}!")
                     self.persistent_diagram = None
 
@@ -782,10 +782,16 @@ def ph_error(trajectory: np.ndarray, diagram_truth: List[np.ndarray], size: int,
         if verbosity >= 3:
             try:
                 import matplotlib.pyplot as plt
-                persim.plot_diagrams(diagram, show=True)
+                persim.plot_diagrams(diagram, show=True, title=f"candidate: {model.full_expr()}")
                 distance_bottleneck, matching = persim.bottleneck(diagram[1], diagram_truth[1], matching=True)
+                print(f'bottleneck distance: {distance_bottleneck}')
                 plt.close()
-                persim.bottleneck_matching(diagram[1], diagram_truth[1], matching)
+                persim.bottleneck_matching(diagram[1],
+                                           diagram_truth[1],
+                                           # matching,
+                                           matching=matching,
+                                           labels=['orignal; bottleneck distance:', f'candidate; {distance_bottleneck:.3f}', ],
+                                           )
                 plt.show()
             except Exception as error:
                 print(f"Error when PLOTTING of type {type(error)} and message:{error}!")
@@ -821,11 +827,11 @@ def ph_diag(trajectory: np.ndarray, size: int, verbosity: int) -> List[np.ndarra
 
     P1 = downsample(trajectory) if size < trajectory.shape[0] else trajectory
     diagrams = ripser.ripser(P1)['dgms']
-    if verbosity >= 3:
-        try:
-            import persim
-            persim.plot_diagrams(diagrams[1], show=True)
-        except Exception:
-            print("Verbose plotting failed.")
+    # if verbosity >= 3:
+    #     try:
+    #         import persim
+    #         persim.plot_diagrams(diagrams[1], show=True)
+    #     except Exception:
+    #         print("Verbose plotting failed.")
     return diagrams
 

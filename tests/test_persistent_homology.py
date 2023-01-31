@@ -5,6 +5,8 @@ from ProGED.parameter_estimation import fit_models
 from utils.generate_data_ODE_systems import generate_ODE_data
 
 def test_persistent_homology_partial_observability():
+    """Not the representanive case, more like error case, to check against errors."""
+
     generation_settings = {"simulation_time": 0.25}
     data = generate_ODE_data(system='VDP', inits=[-0.2, -0.8], **generation_settings)
     data = data[:, (0, 1)]  # y, 2nd column, is not observed
@@ -18,7 +20,7 @@ def test_persistent_homology_partial_observability():
                                                   },
                            "optimizer_settings": {"max_iter": 1,
                                                   "pop_size": 1},
-                           "verbosity": 2,
+                           "verbosity": 3,
                            }
     np.random.seed(0)
     system_out = fit_models(system, data, task_type='differential', estimation_settings=estimation_settings)
@@ -29,6 +31,7 @@ def test_persistent_homology_partial_observability():
     # true params: [[1.], [-0.5., -1., 0.5]]
 
 def test_persistent_homology_ODE_system():
+    """The representative case, here we should see the beauty of this metric."""
     data = generate_ODE_data(system='lorenz', inits=[0.2, 0.8, 0.5])
 
     system = ModelBox(observed=["x", "y", "z"])
@@ -41,9 +44,9 @@ def test_persistent_homology_ODE_system():
                                                   "lower_upper_bounds": (-28, 28),
                                                   },
                            "objective_settings": {"use_jacobian": False,
-                                                   "persistent_homology": True,
+                                                  "persistent_homology": True,
                                                   },
-                           "verbosity": 1,
+                           "verbosity": 4,
                            }
 
     np.random.seed(0)
@@ -57,4 +60,4 @@ def test_persistent_homology_ODE_system():
 if __name__ == "__main__":
 
     test_persistent_homology_partial_observability()
-    test_persistent_homology_ODE_system()
+    # test_persistent_homology_ODE_system()
