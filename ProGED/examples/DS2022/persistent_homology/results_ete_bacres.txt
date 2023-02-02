@@ -1,0 +1,25 @@
+bacres | snr: inf | obs: xy | init: 0
+
+
+cuda:0
+Model successfully loaded!
+0.29700000000000004*exp((0.1713673471743716*x_0 - 36.160499433342389)*(0.003717489024270901*x_1 - 0.1400142738595473)) - 0.929
+ete needed 37.14407179597765 seconds, i.e. 0.6190678632662941 minutes.
+0.3710445336923769*x_0 - 0.1070349650996728*x_1 + 3.200095525241014
+ete needed 43.297476003004704 seconds, i.e. 0.7216246000500784 minutes.
+
+Process finished with exit code 0
+
+dx = 0.297*exp(0.17*x -36) * (0.004*x - 0.14) - 1
+dy = 0.37*x - 0.1*y + 3.2
+
+groud truth:
+[
+'C - (x*y / (C * x**2 + C)) - x',
+'C - (x*y / (C * x**2 + C))'
+]
+sys_vars  =
+['x', 'y']
+consts:
+[[20, 0.5, 1], [10, 0.5, 1]]
+

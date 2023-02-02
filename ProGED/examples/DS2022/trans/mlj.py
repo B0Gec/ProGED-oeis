@@ -5,7 +5,6 @@ import numpy as np
 import sympy as sp
 import os, sys
 import symbolicregression
-# from symbolicregress import symbolicregression
 import requests
 
 
@@ -34,8 +33,6 @@ if True:
 # except Exception as e:
 #     print("ERROR: model not loaded! path was: {}".format(model_path))
 #     print(e)
-
-# 1/0
 
 def ete(x, y, settings=DEFAULT_SETTINGS):
     """
