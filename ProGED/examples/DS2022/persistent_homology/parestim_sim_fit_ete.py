@@ -41,23 +41,75 @@ data_filename = f"data_{sys_name}_{data_version}_len{data_length}_snr{snr}_init{
 path_main = "src/data/"
 data_orig = pd.read_csv(path_main + data_filename)
 
+
 # prepare data
 data = np.array(pd.concat([data_orig.iloc[:, 0], data_orig[iobs]], axis=1))
 
 iobs_name = ''.join(iobs)
 print(f"{sys_name} | snr: {snr} | obs: {iobs_name} | init: {iinit}")
 
+
+mljcsv = "data_bacres_allong_len1000_snrinf_init0.csv"
+path_main = ""
+data_orig = pd.read_csv(path_main + mljcsv)
+# print(iobs, data_orig.columns)
+data = np.array(pd.concat([data_orig.iloc[:, 0], data_orig[iobs]], axis=1))
+
+
+# print(data[:10, :10])
+# print(data.shape)
+
+
+cols_dx = ['x', 'y', 'dx']
+cols_dy = ['x', 'y', 'dy']
+# vars = ['x', 'y']
+# for dot in ['dx', 'dy']:
+print(np.array(data_orig[['x', 'y', 'dx', 'dy']]))
+# 1/0
+
+datas = []
+for choice in [cols_dx, cols_dy]:
+    x = np.array(data_orig[choice[:-1]])
+    y = np.array(data_orig[choice[-1]])
+# x = data[:, 1:2]
+# y = data[:, 2]
+    print(x[:10, :10], y[:10])
+    print(x.shape, y.shape)
+    datas += [(x, y)]
+# 1/0
+
+# x = np.random.randn(100, 2)
+# y = np.cos(2 * np.pi * x[:, 0]) + x[:, 1] ** 2
+# # (x,y)0
+# print(x.shape, y.shape)
+
 # fit
-estimation_settings = get_fit_settings(obs=iobs)
-estimation_settings["optimizer_settings"]["lower_upper_bounds"] = systems[sys_name].bounds
-estimation_settings["verbosity"] = 2
 
+# a fit ete
+
+import time
+start = time.perf_counter()
+from ProGED.examples.DS2022.trans.mlj import ete
+
+for x, y in datas:
+    eq = ete(x, y)
+    print(eq)
+    end = time.perf_counter()
+    print(f'ete needed {end-start} seconds, i.e. {(end-start)/60} minutes.')
+    start = end
+
+
+
+# b fit proged
+
+# estimation_settings = get_fit_settings(obs=iobs)
+# estimation_settings["optimizer_settings"]["lower_upper_bounds"] = systems[sys_name].bounds
+# estimation_settings["verbosity"] = 2
+#
 # systemBox = pg.ModelBox(observed=iobs)
-systemBox = ModelBox(observed=iobs)
-systemBox.add_system(systems[sys_name].sym_structure, symbols={"x": systems[sys_name].sys_vars, "const": "C"})
-print(estimation_settings)
-
-
+# systemBox = ModelBox(observed=iobs)
+# systemBox.add_system(systems[sys_name].sym_structure, symbols={"x": systems[sys_name].sys_vars, "const": "C"})
+# print(estimation_settings)
 # 1/0
 # systemBox_fitted = pg.fit_models(systemBox, data, task_type='differential', estimation_settings=estimation_settings)
 # systemBox_fitted.observed = iobs
@@ -65,7 +117,7 @@ print(estimation_settings)
 # print(systemBox_fitted[0].get_error())
 # print(systemBox_fitted[0].all_iters)
 # print(systemBox_fitted[0].ph_used)
-
+#
 # # save the fitted models and the settings file
 # path_out = f"{path_base_out}{sys_name}{os.sep}"
 # # os.makedirs(path_out, exist_ok=True)

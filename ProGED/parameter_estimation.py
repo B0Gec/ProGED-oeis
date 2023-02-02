@@ -800,7 +800,7 @@ def ph_error(trajectory: np.ndarray, diagram_truth: List[np.ndarray], size: int,
     #     distance_bottleneck = 0
     return distance_bottleneck
 
-def ph_diag(trajectory: np.ndarray, size: int) -> List[np.ndarray]:
+def ph_diag(trajectory: np.ndarray, size: int, verbosity: int) -> List[np.ndarray]:
     """Returns persistent diagram of given trajectory. See ph_test.py in examples.
 
     Inputs:
