@@ -1,0 +1,83 @@
+in one of the testings(pytest):
+
+5.599539800941615 (res, i.e. error)
+iters vs. ph_used till now: 167, ph_iters:167
+5.599539800937528 (res, i.e. error)
+iters vs. ph_used till now: 168, ph_iters:168
+5.599539800566736
+iters vs. ph_used till now: 169, ph_iters:169
+5.599539797958921
+iters vs. ph_used till now: 170, ph_iters:170
+5.594632141926635
+iters vs. ph_used till now: 171, ph_iters:171
+5.594632141788013
+iters vs. ph_used till now: 172, ph_iters:172
+5.59463214117132
+iters vs. ph_used till now: 173, ph_iters:173
+5.594632126929423
+iters vs. ph_used till now: 174, ph_iters:174
+0.9999939436124149
+iters vs. ph_used till now: 175, ph_iters:175
+0.9999939289046149
+iters vs. ph_used till now: 176, ph_iters:176
+0.999992087677433
+iters vs. ph_used till now: 177, ph_iters:177
+0.9999939270972992
+iters vs. ph_used till now: 178, ph_iters:178
+0.9936751602354682
+iters vs. ph_used till now: 179, ph_iters:179
+0.9936750538238718
+iters vs. ph_used till now: 180, ph_iters:180
+0.9936732824694906
+iters vs. ph_used till now: 181, ph_iters:181
+0.993675892848511
+iters vs. ph_used till now: 182, ph_iters:182
+0.9997957263113336
+iters vs. ph_used till now: 183, ph_iters:183
+0.99982131639035
+iters vs. ph_used till now: 184, ph_iters:184
+0.999795776286803
+iters vs. ph_used till now: 185, ph_iters:185
+0.9997962571162583
+iters vs. ph_used till now: 186, ph_iters:186
+0.9999939510722811
+iters vs. ph_used till now: 187, ph_iters:187
+0.999994019608946
+iters vs. ph_used till now: 188, ph_iters:188
+0.9999939385852831
+iters vs. ph_used till now: 189, ph_iters:189
+0.9999939629588618
+iters vs. ph_used till now: 190, ph_iters:190
+0.9999920967970837
+iters vs. ph_used till now: 191, ph_iters:191
+7.207441395759327
+iters vs. ph_used till now: 192, ph_iters:192
+7.2074903673805
+iters vs. ph_used till now: 193, ph_iters:193
+7.207441439485009
+iters vs. ph_used till now: 194, ph_iters:194
+7.2074412737608835
+iters vs. ph_used till now: 195, ph_iters:195
+7.207441388637647
+iters vs. ph_used till now: 196, ph_iters:196
+7.207441388127068
+iters vs. ph_used till now: 197, ph_iters:197
+7.2074903424524885
+iters vs. ph_used till now: 198, ph_iters:198
+7.207490291610492
+iters vs. ph_used till now: 199, ph_iters:199
+7.207489902234483
+iters vs. ph_used till now: 200, ph_iters:200
+7.207441157652603
+iters vs. ph_used till now: 201, ph_iters:201
+7.207489854387408
+{'x': array([21.80867069,  6.2458585 , -7.6682553 ]), 'fun': 5.8654033590699655, 'all_results':  message: Maximum number of iterations has been exceeded.
+ success: False
+     fun: 5.8654033590699655
+       x: [ 2.181e+01  6.246e+00 -7.668e+00]
+     nit: 1
+    nfev: 202, 'duration': 48.794275760650635} <class 'numpy.ndarray'> <class 'numpy.float64'>
+model: [-21.8086706862752*x + 21.8086706862752*y, x*(6.24585849844407 - z) - y, x*y - 7.66825529526269*z]; p: 1.0                    ; error: 5.8654033590699655
+All iters (as saved to system_model object): 202
+Iters when PH was used: 202
+Iters when zero vs zero: 0
