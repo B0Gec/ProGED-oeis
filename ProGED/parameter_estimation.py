@@ -200,9 +200,10 @@ class ParameterEstimator:
                 trajectory = np.vstack(np.vstack((self.X, self.Y))) if self.Y is not None else self.X
                 try:
                     persistent_diagrams = ph_diag(trajectory, size, estimation_settings["verbosity"])
-                    if persistent_diagrams[1].shape == (0, 2):
+                    if persistent_diagrams[1].shape == (0, 2) or trajectory.shape[1] == 1:
                         if estimation_settings["verbosity"] >= 1:
-                            print("INFO: persistent diagram of the ground truth is trivial (empty), "
+                            print("INFO: Dimensionality of the trajectory is trivially 1 or the "
+                                  "persistent diagram of the ground truth is trivially empty, "
                                   "i.e. no interesting 2D-property is present. Therefore, I will use diagrams regarding "
                                   "persistent homology dimension 0, i.e. H_0 homology group.")
                                   # "and marbuse maximum size, since its fast.")
