@@ -782,7 +782,7 @@ def ph_error(trajectory: np.ndarray, diagrams_truth: List[np.ndarray], diagram_d
 
     # size = diagram_truth[0].shape[0]
     diagrams = ph_diag(trajectory, size, verbosity)
-    if diagrams[diagram_dimension].shape == (0, 2) and diagrams_truth[diagram_dimension].shape == (0, 2):
+    if diagrams_truth[diagram_dimension].shape == (0, 2) and diagrams[diagram_dimension].shape == (0, 2):
         model.zerovszero += 1
         if verbosity >= 2:
             print(f"Both ground truth and candidate trajectory have trivial persistence diagram "
@@ -790,17 +790,17 @@ def ph_error(trajectory: np.ndarray, diagrams_truth: List[np.ndarray], diagram_d
         return 0
     # try:
     else:
-        distance_bottleneck = persim.bottleneck(diagrams[diagram_dimension], diagrams_truth[diagram_dimension])
+        distance_bottleneck = persim.bottleneck(diagrams_truth[diagram_dimension], diagrams[diagram_dimension])
         if verbosity >= 3:
             try:
                 import matplotlib.pyplot as plt
                 persim.plot_diagrams(diagrams, show=True, title=f"candidate: {model.full_expr()}")
-                distance_bottleneck, matching = persim.bottleneck(diagrams[diagram_dimension],
-                                                                  diagrams_truth[diagram_dimension], matching=True)
+                distance_bottleneck, matching = persim.bottleneck(diagrams_truth[diagram_dimension],
+                                                                  diagrams[diagram_dimension], matching=True)
                 print(f'bottleneck distance: {distance_bottleneck}')
                 plt.close()
-                persim.bottleneck_matching(diagrams[diagram_dimension],
-                                           diagrams_truth[diagram_dimension],
+                persim.bottleneck_matching(diagrams_truth[diagram_dimension],
+                                           diagrams[diagram_dimension],
                                            # matching,
                                            matching=matching,
                                            labels=['orignal; bottleneck distance:', f'candidate; {distance_bottleneck:.3f}', ],
