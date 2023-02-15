@@ -59,10 +59,10 @@ for sys_name in sys_names:
             X = np.array(data[:, 1:])
             dX = np.array([np.gradient(Xi, sim_step) for Xi in X.T]).transpose()
             data_with_der = pd.DataFrame(np.hstack((data, dX)))
-            data_with_der.to_csv(path_out + data_filename + ".csv",
-                                 header=['t'] + \
-                                        systems[sys_name].data_column_names +
-                                        ['d' + systems[sys_name].data_column_names[i] for i in range(len(systems[sys_name].data_column_names))],
-                                 index=False)
+            # data_with_der.to_csv(path_out + data_filename + ".csv",
+            #                      header=['t'] + \
+            #                             systems[sys_name].data_column_names +
+            #                             ['d' + systems[sys_name].data_column_names[i] for i in range(len(systems[sys_name].data_column_names))],
+            #                      index=False)
 
     print("---- \nFinished: " + sys_name)

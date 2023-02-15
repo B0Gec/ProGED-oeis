@@ -353,10 +353,10 @@ strogatz = {
 }
 
 mysystems = {
-    sys_myvdp.sys_name: sys_myvdp,
+    # sys_myvdp.sys_name: sys_myvdp,
     sys_stl.sys_name: sys_stl,
     sys_cphase.sys_name: sys_cphase,
     sys_lorenz.sys_name: sys_lorenz,
-    sys_vdpvdpUS.sys_name: sys_vdpvdpUS,
-    sys_stlvdpBL.sys_name: sys_stlvdpBL,
+    # sys_vdpvdpUS.sys_name: sys_vdpvdpUS,
+    # sys_stlvdpBL.sys_name: sys_stlvdpBL,
 }

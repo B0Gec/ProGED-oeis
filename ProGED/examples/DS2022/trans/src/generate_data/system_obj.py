@@ -2,7 +2,7 @@ import numpy as np
 import itertools
 import sympy
 from scipy.integrate import solve_ivp, odeint
-from extensisq import BS45, BS45_i
+# from extensisq import BS45, BS45_i
 import ProGED as pg
 
 class System():

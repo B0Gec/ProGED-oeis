@@ -8,7 +8,10 @@ import symbolicregression
 import requests
 
 
-DEFAULT_SETTINGS = {}
+DEFAULT_SETTINGS = {
+    'max_input_points': 300,
+    'n_trees_to_refine': 100,
+}
 
 model_path = "model.pt"
 model_path = "/home/bosg/EDtools/ete-sr-trans/symbolicregression/model.pt"
@@ -42,15 +45,19 @@ def ete(x, y, settings=DEFAULT_SETTINGS):
         - rescale
 
     Data:
-        -x: shape (n, 2)
-        -y: shape (n, ), i.e. (n, 0) or (1, n)?
+        - x: shape (n, 2)
+        - y: shape (n, ), i.e. (n, 0) or (1, n)?
     """
-
+    preset = dict(DEFAULT_SETTINGS)
+    preset.update(settings)
+    settings = preset
+    # print('DEFAULT_SETTINGS = ', DEFAULT_SETTINGS)
+    # print('settings', settings)
 
     est = symbolicregression.model.SymbolicTransformerRegressor(
                             model=model,
-                            max_input_points=300,
-                            n_trees_to_refine=100,
+                            max_input_points=settings['max_input_points'],
+                            n_trees_to_refine=settings['n_trees_to_refine'],
                             rescale=True
                             )
 

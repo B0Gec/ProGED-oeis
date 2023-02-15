@@ -1,0 +1,15 @@
+cuda:0
+Model successfully loaded!
+till main
+['bacres'] [['x', 'y']] [0 1 2 3] ['inf', '30', '13']
+['barmag'] [['x', 'y']] [0 1 2 3] ['inf', '30', '13']
+['glider'] [['x', 'y']] [0 1 2 3] ['inf', '30', '13']
+['lv'] [['x', 'y']] [0 1 2 3] ['inf', '30', '13']
+['predprey'] [['x', 'y']] [0 1 2 3] ['inf', '30', '13']
+['shearflow'] [['x', 'y']] [0 1 2 3] ['inf', '30', '13']
+['vdp'] [['x', 'y']] [0 1 2 3] ['inf', '30', '13']
+['stl'] [['x', 'y']] [0 1 2 3] ['inf', '30', '13']
+['cphase'] [['x', 'y']] [0 1 2 3] ['inf', '30', '13']
+['lorenz'] [['x', 'y', 'z']] [0 1 2 3] ['inf', '30', '13']
+till combo
+./results/ete/

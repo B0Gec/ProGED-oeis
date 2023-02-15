@@ -1,0 +1,13 @@
+# README
+- optional packages
+
+# equation_discoverer
+- fit_models update estimate_settings instead of using as is.
+
+# Parameter_estimation:
+- make verbosity >=1 cause to not suppress lsoda and print errors from ode(), i.e. `if not isnstance(sys.stdout,..):`
+## ode():
+- rewrite ode() function since buggy, maybe linear regression for linear equations to fulfill a wish
+- set both of `target_variable_index` and `simulate_separately` when one of them is True.
+- in ode() :
+  documentation .. Y .. inits or whole column.
