@@ -1,3 +1,10 @@
+import time
+import datetime
+
+start = time.time()
+clock_start = str(datetime.datetime.now())
+print('started:', clock_start)
+
 import pandas as pd
 import numpy as np
 import os
@@ -41,16 +48,19 @@ data = csv[['t', 'x', 'y']].to_numpy()
 # data = generate_ODE_data(system='VDP', inits=[-0.2, -0.8], **generation_settings)
 # data = data[:, (0, 1, 2)]  # y, 2nd column, is not observed
 
-job_id = int(sys.argv[1])
+job_id, task_id = int(sys.argv[1]), int(sys.argv[2])
 # job_id = 43
+
 # combs = list(it.product(['x', 'y', 'xy'], [i for i in range(20)]))
-combs = list(it.product(['x', 'y', 'xy'], [2, 3, 4, 5, 6, 8, 10, 15, 20]))
-obstring, s = combs[job_id]
+# combs = list(it.product([True, False], ['x', 'y', 'xy'], [2, 3, 4, 5, 6, 8, 10, 15, 20]))
+combs = list(it.product([True, False], ['x', 'y', 'xy'], [20]))
+ph, obstring, s = combs[task_id]
 obs = [v for v in obstring]
 
+
 print(combs)
-print(obs, s)
-# print(job_id, obsinput, sin)
+print(obs, s, ph)
+# print(task_id, obsinput, sin)
 # 1/0
 
 max_iter = 2000
@@ -60,6 +70,9 @@ pop_size = 60
 # s = 4
 max_iter = 100*s
 pop_size = 3*s
+if task_id < 0:
+    max_iter, pop_size = 1, 1
+    print('\nthis is testing input\n')
 
 np.random.seed(1)
 # obs_combs = ['x', 'y']
@@ -68,8 +81,7 @@ np.random.seed(1)
 # obs = ['y']
 # obs = [var for var in obsinput]
 
-print('s:', s, 'max_iter:', max_iter, 'pop_size:', pop_size)
-print(obs)
+print('obs', obs, 's:', s, 'max_iter:', max_iter, 'pop_size:', pop_size, 'ph:', ph, f'slurm id:{job_id}_{task_id}')
 print('')
 
 data = csv[['t'] + obs].to_numpy()
@@ -92,7 +104,7 @@ system.add_system(["C*y", "C*y - C*x*x*y - C*x"], symbols={"x": ["x", "y"], "con
                        #                        },
                        # "optimizer_settings": {"max_iter": 1,
                        #                        "pop_size": 1},
-                       # "verbosity": 1,
+                       # "verbosity": 0,
 
 objective_settings = {
     "atol": 10 ** (-6),
@@ -100,7 +112,7 @@ objective_settings = {
     "use_jacobian": False,
     "teacher_forcing": False,
     "simulate_separately": False,
-    "persistent_homology": True,
+    "persistent_homology": ph,
     # "persistent_homology_weight": 0.5,
     # "persistent_homology_size": 100, # ali 2000
     }
@@ -128,11 +140,12 @@ estimation_settings = {
         "objective_settings": objective_settings,
         "default_error": 10 ** 9,
         "timeout": np.inf,
-        "verbosity": 2,
+        "verbosity": 0,
     }
 
 np.random.seed(1)
 system_out = fit_models(system, data, task_type='differential', estimation_settings=estimation_settings)
+
 
 
 # print(f"All iters (as saved to system_model object): {system_out[0].all_iters}")
@@ -215,6 +228,13 @@ system_out = fit_models(system, data, task_type='differential', estimation_setti
 # ED.generate_models()
 # ED.fit_models()
 
+duration = time.time() - start
+print('duration of whole file:', duration)
+clock = str(datetime.datetime.now())
+print('Recap:')
+print('started:', clock_start)
+print('ended:  ', clock)
+
 print('2 -- all done')
  
 
@@ -242,7 +262,6 @@ print('2 -- all done')
 # # print(abs(system_out[0].get_error()))
 # assert abs(system_out[0].get_error()) < 1.0  # 3.2.2023
 
-print('s:', s, 'max_iter:', max_iter, 'pop_size:', pop_size)
-print(obs)
+print('obs', obs, 'ph:', ph, '\ns:', s, 'max_iter:', max_iter, 'pop_size:', pop_size, f'\nslurm id:{job_id}_{task_id}')
 print('')
 print('EOF')
