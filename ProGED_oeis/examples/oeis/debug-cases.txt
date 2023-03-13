@@ -1,0 +1,26 @@
+A013891 :  a(n) = 2476099*a(n - 1)
+truth:     a(n) = 2476099*a(n - 1),
+a(0) = 361
+"Check against website ground truth":     True
+"Manual check if equation is correct":     False
+
+A013892 :  a(n) = 2476099*a(n - 1)
+truth:     a(n) = 2476099*a(n - 1),
+a(0) = 6859
+"Check against website ground truth":     True
+"Manual check if equation is correct":     False
+
+A013893 :  a(n) = 2476099*a(n - 1)
+truth:     a(n) = 2476099*a(n - 1),
+a(0) = 130321
+"Check against website ground truth":     True
+"Manual check if equation is correct":     False
+
+A013894 :  a(n) = 3200000*a(n - 1)
+truth:     a(n) = 3200000*a(n - 1),
+a(0) = 20
+"Check against website ground truth":     True
+"Manual check if equation is correct":     False
+
+A013895 :  a(n) = 3200000*a(n - 1)
+truth:     a(n) = 3200000*a(n - 1),
