@@ -1,0 +1,8 @@
+  index    complexity    length       TE    TE_inf  expr_x                                                                  expr_y             index_column  method    data_version    system      snr    init
+    194            28       173  3.4422    4.32342  0.271/(3.697*sin((x1 - 0.852)*(x1*(x2 + 1.014) + x1 - 0.819)) + 3.698)  x1/(x2 - 0.736)             194  dso       allonger        bacres       13       0
+    146            21       117  3.46932   4.35974  0.178/(1.001 - sin(1.341*x1 - 2.704))                                   x1/(x2 - 0.736)             146  dso       allonger        bacres       13       0
+     67            12        71  3.47022   4.40344  12.518*sin(1.092*x1)                                                    0.977/sin(x1)                67  dso       allonger        bacres       13       0
+     50            11        53  3.53173   4.45736  8.361*sin(x1)                                                           x1/(x2 - 0.736)              50  dso       allonger        bacres       13       0
+     18             9        35  3.53174   4.45738  sin(x1)                                                                 x1/(x2 - 0.736)              18  dso       allonger        bacres       13       0
+     17             7        12  3.86583   4.94407  sin(x1)                                                                 x2/x1                        17  dso       allonger        bacres       13       0
+     16             5        30  5.10939   6.7318   sin(x1)                                                                 -0.12*x1                     16  dso       allonger        bacres       13       0

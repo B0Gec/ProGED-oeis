@@ -1,0 +1,13 @@
+  complexity    length          TE      TE_inf  expr_x    expr_y                                                 index_column  method    exp_type    data_version    system      snr    init
+          20        34  0.0193896   0.0193896   1.0*y     -1.996*x**2*y - 1.0*x + 1.996*y                                   0  proged    numdif      allonger        myvdp       inf       0
+          18        32  0.0224028   0.0224028   1.0*y     -1.996*x**2*y - 1.0*x + 1.996*y                                   1  proged    numdif      allonger        myvdp       inf       0
+          13        21  2.51393     2.51393     1.0*y     -0.073*x**4*y**3                                                  2  proged    numdif      allonger        myvdp       inf       0
+           6         8  4.55764     4.55764     1.0*y     -0.569*x                                                          3  proged    numdif      allonger        myvdp       inf       0
+           8        13  4.43209     4.43209     1.0*y     -0.628*x - 0.335                                                  4  proged    numdif      allonger        myvdp       inf       0
+          14        25  2.46361     2.46361     1.0*y     -1.785*x**2*y + 1.85*y + 0.411                                    5  proged    numdif      allonger        myvdp       inf       0
+           9        13  2.72074     2.72074     1.0*y     -0.253*x**4*y                                                     6  proged    numdif      allonger        myvdp       inf       0
+          16        27  0.0231619   0.0231619   1.0*y     -1.996*x**2*y - 1.0*x + 1.996*y                                   7  proged    numdif      allonger        myvdp       inf       0
+          11        16  2.51404     2.51404     1.0*y     -0.073*x**4*y**3                                                  8  proged    numdif      allonger        myvdp       inf       0
+          23        39  0.00450484  0.00450484  1.0*y     -1.996*x**2*y - 1.0*x + 1.996*y                                   9  proged    numdif      allonger        myvdp       inf       0
+          29        58  0.00317734  0.00317734  1.0*y     -1.996*x**2*y - 0.001*x*y - 1.0*x + 1.996*y - 0.e-3              10  proged    numdif      allonger        myvdp       inf       0
+          24        44  0.00321063  0.00321063  1.0*y     -1.996*x**2*y - 1.0*x + 1.996*y                                  11  proged    numdif      allonger        myvdp       inf       0

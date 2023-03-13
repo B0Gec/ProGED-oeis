@@ -1,0 +1,11 @@
+  complexity    length           TE       TE_inf  expr_x                       expr_y                                             index_column  method    exp_type    data_version    system      snr    init
+           6         8  0.679208     0.679208     -0.148*x                     0.945*x                                                       0  proged    numdif      allonger        glider      inf       2
+           8        11  0.539835     0.539835     -0.049*x**2                  0.945*x                                                       1  proged    numdif      allonger        glider      inf       2
+          10        16  0.48845      0.48845      -0.049*x**2                  4.489 - 0.128*y                                               2  proged    numdif      allonger        glider      inf       2
+          14        25  0.486396     0.486396     -0.049*x**2                  0.015*x*y - 0.135*y + 4.194                                   3  proged    numdif      allonger        glider      inf       2
+          24        45  0.485505     0.485505     -0.049*x**2                  1.0*x - 0.e-3*y*cos(1.0*y)/sin(0.001*x*y)                     4  proged    numdif      allonger        glider      inf       2
+          43        86  0.000157121  0.000157121  -0.05*x**2 - 1.0*sin(1.0*y)  1.0*x - 1.0003867888889*cos(1.0*y)/x                          5  proged    numdif      allonger        glider      inf       2
+          29        56  0.446189     0.446189     -0.05*x**2 - 1.0*sin(1.0*y)  5.0 - 4.732/(0.486*x - 0.455*cos(1.0*y) + 0.83)               6  proged    numdif      allonger        glider      inf       2
+          33        62  0.000230668  0.000230668  -0.05*x**2 - 1.0*sin(1.0*y)  1.0*x - 1.0003867888889*cos(1.0*y)/x                          7  proged    numdif      allonger        glider      inf       2
+          31        60  0.000353901  0.000353901  -0.05*x**2 - 1.0*sin(1.0*y)  1.0*x - 0.e-3*y*cos(1.0*y)/sin(0.001*x*y)                     8  proged    numdif      allonger        glider      inf       2
+          37        74  0.000169832  0.000169832  -0.05*x**2 - 1.0*sin(1.0*y)  1.0*x - 1.0003867888889*cos(1.0*y)/x                          9  proged    numdif      allonger        glider      inf       2

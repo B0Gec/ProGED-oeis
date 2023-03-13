@@ -1,0 +1,14 @@
+	complexity	length	TE	TE_inf	expr_x	expr_y	index_column	method	exp_type	data_version	system	snr	init
+0	12	24	4.582218881570926	4.952965041592158	-5.0*sin(4.018*t)	5.0*cos(2.445*t)	0	proged	numdif	allonger	cphase	13	3
+1	19	39	3.0836112698952887	3.1336360778951002	5.0*cos(4.043*t) - 5.0*cos(1.998*y)	5.0*cos(2.445*t)	1	proged	numdif	allonger	cphase	13	3
+2	20	44	3.0511658318172517	3.087060326606389	-5.0*sin(4.018*t) + 5.0*cos(4.043*t) + 1.666	5.0*cos(2.445*t)	2	proged	numdif	allonger	cphase	13	3
+3	35	81	2.4205968912226967	2.3932392501561384	-5.0*sin(4.018*t) + 5.0*cos(4.043*t) + 1.666	5.0*sin(0.392*t) - 10.0*sin(3.706*y) + 5.0*cos(2.445*t) + 5.0	3	proged	numdif	allonger	cphase	13	3
+4	27	59	2.756978626532275	2.7669987624920886	-5.0*sin(4.018*t) + 5.0*cos(4.043*t) + 1.666	5.0*sin(0.392*t) + 5.0*cos(2.445*t)	4	proged	numdif	allonger	cphase	13	3
+5	21	46	2.92009766546066	2.9436494224925935	-5.0*sin(4.018*t) + 5.0*cos(4.043*t) + 1.666	10.0*sin(2.477*t)	5	proged	numdif	allonger	cphase	13	3
+6	42	99	1.655991701307114	1.5176894610496086	-5.0*sin(4.018*t) + 5.0*cos(4.043*t) + 1.666	5.0*sin(4.424*y) + 5.0*cos(2.445*t) - 5.0*cos(3.648*y) - 5.0*cos(2.449*t + 2.92) + 5.0	6	proged	numdif	allonger	cphase	13	3
+7	13	26	4.290220554315094	4.615562637585361	10.0*sin(3.84*t)	5.0*cos(2.445*t)	7	proged	numdif	allonger	cphase	13	3
+8	14	28	4.15915238796898	4.472151733487095	10.0*sin(3.84*t)	10.0*sin(2.477*t)	8	proged	numdif	allonger	cphase	13	3
+9	39	91	2.365737522524178	2.4163405694774616	10.0*sin(1.99*y + 4.932) + 1.581	5.0*sin(4.424*y) + 5.0*cos(2.445*t) - 5.0*cos(3.648*y) - 5.0*cos(2.449*t + 2.92) + 5.0	9	proged	numdif	allonger	cphase	13	3
+10	22	46	2.758110174793818	2.7719374417323825	1.563 - 10.0*cos(1.998*y)	5.0*sin(0.392*t) + 5.0*cos(2.445*t)	10	proged	numdif	allonger	cphase	13	3
+11	16	33	3.156870075096817	3.2710347088696072	1.563 - 10.0*cos(1.998*y)	10.0*sin(2.477*t)	11	proged	numdif	allonger	cphase	13	3
+12	37	86	2.3816265645457846	2.4357450246178107	1.563 - 10.0*cos(1.998*y)	5.0*sin(4.424*y) + 5.0*cos(2.445*t) - 5.0*cos(3.648*y) - 5.0*cos(2.449*t + 2.92) + 5.0	12	proged	numdif	allonger	cphase	13	3

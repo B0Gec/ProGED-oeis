@@ -1,0 +1,7 @@
+  complexity    length       TE    TE_inf  expr_x                expr_y                                   index_column  method    exp_type    data_version    system       snr    init
+           6         8  2.82986   2.93316  0.003*x               -0.002*y                                            0  proged    numdif      allonger        shearflow     30       3
+           9        16  2.78177   2.88418  0.003*x               0.081*cos(4.944*x)                                  1  proged    numdif      allonger        shearflow     30       3
+          11        21  2.47267   2.52907  0.527*y + 0.838       0.081*cos(4.944*x)                                  2  proged    numdif      allonger        shearflow     30       3
+          18        32  1.93526   1.92371  0.527*y + 0.838       -0.003*x/(-3.949*x - 4.813*y + 4.802)               3  proged    numdif      allonger        shearflow     30       3
+          10        18  2.75092   2.83936  0.112*cos(2.894*x*y)  -0.002*y                                            4  proged    numdif      allonger        shearflow     30       3
+          12        23  2.18982   2.21384  0.112*cos(2.894*x*y)  0.194 - 0.06*x                                      5  proged    numdif      allonger        shearflow     30       3

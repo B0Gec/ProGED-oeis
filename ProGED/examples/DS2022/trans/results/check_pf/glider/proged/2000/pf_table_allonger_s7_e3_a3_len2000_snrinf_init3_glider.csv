@@ -1,0 +1,9 @@
+	complexity	length	TE	TE_inf	expr_x	expr_y	index_column	method	exp_type	data_version	system	snr	init
+0	6	8	0.7458711960587605	0.7458711960587605	-0.127*x	0.927*x	0	proged	numdif	allonger	glider	inf	3
+1	29	59	0.6095682061177432	0.6095682061177432	-0.197*x - 1.006*sin(0.999*y) + 0.139	0.042*x*y - 0.155*y + 3.241 + 1.685/(4.646*x - 0.17)	1	proged	numdif	allonger	glider	inf	3
+2	32	67	0.4710452029259752	0.4710452029259752	-0.197*x - 1.006*sin(0.999*y) + 0.139	0.928*x - 0.011*y + 0.312 - 3.726*sin(0.944*y)/(0.029 - 4.268*x)	2	proged	numdif	allonger	glider	inf	3
+3	8	11	0.7035794090054388	0.7035794090054388	-0.017*x**3	0.927*x	3	proged	numdif	allonger	glider	inf	3
+4	10	16	0.6445655381125722	0.6445655381125722	-0.017*x**3	3.922 - 0.11*y	4	proged	numdif	allonger	glider	inf	3
+5	26	50	0.6232438807572631	0.6232438807572631	-0.017*x**3	0.928*x - 0.011*y + 0.312 - 3.726*sin(0.944*y)/(0.029 - 4.268*x)	5	proged	numdif	allonger	glider	inf	3
+6	51	102	0.07694465579980946	0.07694465579980946	-0.05*x**2 - 1.0*sin(1.0*y)	-0.008*x**2 + 1.015*x + 0.002*y + 0.141*y*cos(1.001*y)/(-0.957*x**2*sin(4.763*x)*cos(1.394*y) - 3.851*x - 0.011)	6	proged	numdif	allonger	glider	inf	3
+7	30	57	0.5507244306713222	0.5507244306713222	-0.05*x**2 - 1.0*sin(1.0*y)	0.042*x*y - 0.155*y + 3.241 + 1.685/(4.646*x - 0.17)	7	proged	numdif	allonger	glider	inf	3

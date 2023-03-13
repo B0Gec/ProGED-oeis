@@ -1,0 +1,10 @@
+  complexity    length       TE    TE_inf  expr_x                                                   expr_y                             index_column  method    exp_type    data_version    system      snr    init
+          23        41  2.02207   2.02207  -0.004*x/(x + 3.62) + 0.993*y                            -0.908*x**2*y - 2.195*x - 0.584               0  proged    numdif      all             myvdp       inf       0
+          16        30  2.02416   2.02416  0.986*y - 0.014                                          -0.908*x**2*y - 2.195*x - 0.584               1  proged    numdif      all             myvdp       inf       0
+           6         8  4.48884   4.48884  0.985*y                                                  -0.836*x                                      2  proged    numdif      all             myvdp       inf       0
+           8        13  2.92974   2.92974  0.985*y                                                  -1.081*x - 1.354                              3  proged    numdif      all             myvdp       inf       0
+          14        25  2.0245    2.0245   0.985*y                                                  -0.908*x**2*y - 2.195*x - 0.584               4  proged    numdif      all             myvdp       inf       0
+           9        13  2.45797   2.45797  0.985*y                                                  -0.577*x**2*y                                 5  proged    numdif      all             myvdp       inf       0
+          13        20  2.10533   2.10533  0.985*y                                                  -0.927*x**2*y - 2.116*x                       6  proged    numdif      all             myvdp       inf       0
+          24        43  2.02172   2.02172  -0.008*x*y/(x + 3.574) + 0.992*y                         -0.908*x**2*y - 2.195*x - 0.584               7  proged    numdif      all             myvdp       inf       0
+          31        60  2.01728   2.01728  -0.e-3*x*y**4/(x + 3.494) - 0.012*x*y + 1.006*y - 0.016  -0.908*x**2*y - 2.195*x - 0.584               8  proged    numdif      all             myvdp       inf       0

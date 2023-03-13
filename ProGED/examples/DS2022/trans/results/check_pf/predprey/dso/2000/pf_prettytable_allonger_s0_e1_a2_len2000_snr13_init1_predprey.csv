@@ -1,0 +1,4 @@
+  index    complexity    length       TE    TE_inf  expr_x                                                    expr_y        index_column  method    data_version    system      snr    init
+    190            22       149  1.52806   1.45394  (x1 + 2.23)*(-0.154*x2 + 0.715 + 0.666/(x2*(x1 + 0.83)))  x1 - 1.152             190  dso       allonger        predprey     13       1
+    114            15        96  2.0179    2.07197  -0.103*x2*(x2 - 6.184) + 0.019/x1                         x1 - 1.152             114  dso       allonger        predprey     13       1
+     38             8        64  6.54887   7.13436  2.865 - 0.572*x2                                          x1 - 1.152              38  dso       allonger        predprey     13       1

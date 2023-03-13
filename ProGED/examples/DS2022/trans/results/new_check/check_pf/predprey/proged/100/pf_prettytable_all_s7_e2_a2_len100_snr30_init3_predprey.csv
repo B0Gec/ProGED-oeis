@@ -1,0 +1,11 @@
+  complexity    length        TE    TE_inf  expr_x                                                    expr_y                          index_column  method    exp_type    data_version    system      snr    init
+          12        22  1.76413   1.75349   -0.144*x*y                                                1.239*x - 0.544*y + 1.062                  0  proged    numdif      all             predprey     30       3
+           7        10  2.0555    2.04421   -0.144*x*y                                                -0.132*y                                   1  proged    numdif      all             predprey     30       3
+           6         8  2.24511   2.2328    -0.749*x                                                  -0.132*y                                   2  proged    numdif      all             predprey     30       3
+          18        32  0.692204  0.687631  -0.371*x*y + 2.01*x                                       1.249*x - 0.041*y**2 - 0.365               3  proged    numdif      all             predprey     30       3
+          15        24  0.877446  0.873403  -0.371*x*y + 2.01*x                                       1.233*x - 0.382*y                          4  proged    numdif      all             predprey     30       3
+          16        29  0.748392  0.744422  -0.371*x*y + 2.01*x                                       1.239*x - 0.544*y + 1.062                  5  proged    numdif      all             predprey     30       3
+          14        25  1.51683   1.50719   0                                                         1.239*x - 0.544*y + 1.062                  6  proged    numdif      all             predprey     30       3
+           9        13  2.01775   2.00717   0                                                         -0.132*y                                   7  proged    numdif      all             predprey     30       3
+          30        53  0.435945  0.42721   0.09*x**3 - 1.445*x**2 - 1.036*x*y/(x + 0.941) + 4.605*x  1.233*x - 0.382*y                          8  proged    numdif      all             predprey     30       3
+          31        58  0.171985  0.136133  0.09*x**3 - 1.445*x**2 - 1.036*x*y/(x + 0.941) + 4.605*x  1.239*x - 0.544*y + 1.062                  9  proged    numdif      all             predprey     30       3

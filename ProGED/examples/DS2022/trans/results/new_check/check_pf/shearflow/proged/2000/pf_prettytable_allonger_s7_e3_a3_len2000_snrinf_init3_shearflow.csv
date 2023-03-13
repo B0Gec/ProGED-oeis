@@ -1,0 +1,11 @@
+  complexity    length           TE       TE_inf  expr_x                                    expr_y                           index_column  method    exp_type    data_version    system       snr    init
+           6         8  2.6751       2.6751       0.004*y                                   -0.001*x                                    0  proged    numdif      allonger        shearflow    inf       3
+          10        18  0.0560084    0.0560084    0.98*y + 1.539                            0.321 - 0.102*x                             1  proged    numdif      allonger        shearflow    inf       3
+          11        21  0.0339524    0.0339524    0.98*y + 1.539                            -0.057*sin(2.0*x)                           2  proged    numdif      allonger        shearflow    inf       3
+          14        28  0.0319229    0.0319229    0.98*y + 1.539                            -0.018*x*sin(2.089*x) + 0.015               3  proged    numdif      allonger        shearflow    inf       3
+          15        28  0.0284226    0.0284226    0.98*y + 1.539                            0.048*cos(2.5*x)                            4  proged    numdif      allonger        shearflow    inf       3
+           7        10  2.6639       2.6639       0.001*x*y                                 -0.001*x                                    5  proged    numdif      allonger        shearflow    inf       3
+          19        39  0.0157674    0.0157674    -1.411*y**2 + 1.302*cos(2.822*y) + 3.841  -0.057*sin(2.0*x)                           6  proged    numdif      allonger        shearflow    inf       3
+          22        46  0.0118498    0.0118498    -1.411*y**2 + 1.302*cos(2.822*y) + 3.841  -0.018*x*sin(2.089*x) + 0.015               7  proged    numdif      allonger        shearflow    inf       3
+          30        63  0.000530178  0.000530178  -1.411*y**2 + 1.302*cos(2.822*y) + 3.841  0.048*cos(2.5*x)                            8  proged    numdif      allonger        shearflow    inf       3
+          23        46  0.000834193  0.000834193  -1.411*y**2 + 1.302*cos(2.822*y) + 3.841  0.048*cos(2.5*x)                            9  proged    numdif      allonger        shearflow    inf       3

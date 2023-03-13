@@ -1,0 +1,13 @@
+  index    complexity    length           TE       TE_inf  expr_x                                         expr_y                                    index_column  method    data_version    system      snr    init
+    116            42       266  6.85187e-06  6.85187e-06  0.5005*sin(1.0*x1 - 1.0*x2) + cos(x1 + 1.571)  -sin(x2) + 0.5*cos(x1 - x2 + 1.571)                116  dso       allonger        barmag      inf       0
+     76            29       160  7.6279e-06   7.6279e-06   0.5*sin(1.0*x1 - 1.0*x2) + cos(x1 + 1.571)     -sin(x2) + 0.5*cos(x1 - x2 + 1.571)                 76  dso       allonger        barmag      inf       0
+     66            25       153  0.0186327    0.0186327    -0.621*x2 + cos(1.143*x1 - 6.135) + 3.34       -sin(x2) + 0.5*cos(x1 - x2 + 1.571)                 66  dso       allonger        barmag      inf       0
+     56            23       136  0.0342257    0.0342257    -0.472*x2 + cos(x1 + 1.038) + 2.385            -sin(x2) + 0.5*cos(x1 - x2 + 1.571)                 56  dso       allonger        barmag      inf       0
+     53            19       144  0.0466668    0.0466668    -0.472*x2 + cos(x1 + 1.038) + 2.385            0.064*x2*(-x1 - 2.013) + 3.361                      53  dso       allonger        barmag      inf       0
+     14            17       124  0.132718     0.132718     2.778 - 0.46*x1                                -0.373*x1 + 0.373*x2 - sin(x2) + 0.055              14  dso       allonger        barmag      inf       0
+     42            15       117  0.135924     0.135924     -0.209*x1*(x2 - 4.204) + x2 - 3.597            -0.074*x1*x2 + 2.898                                42  dso       allonger        barmag      inf       0
+     32            14       110  0.174086     0.174086     0.738*sin(0.734*x1 + 5.005)                    -0.074*x1*x2 + 2.898                                32  dso       allonger        barmag      inf       0
+     22            13        91  0.18706      0.18706      1.556 - 0.043*x1**2                            -0.074*x1*x2 + 2.898                                22  dso       allonger        barmag      inf       0
+     12            11        88  0.20194      0.20194      2.778 - 0.46*x1                                -0.074*x1*x2 + 2.898                                12  dso       allonger        barmag      inf       0
+     10            10        65  0.281274     0.281274     2.778 - 0.46*x1                                6.576 - x2                                          10  dso       allonger        barmag      inf       0
+      0             8        45  2.46759      2.46759      0.013*x2                                       6.576 - x2                                           0  dso       allonger        barmag      inf       0

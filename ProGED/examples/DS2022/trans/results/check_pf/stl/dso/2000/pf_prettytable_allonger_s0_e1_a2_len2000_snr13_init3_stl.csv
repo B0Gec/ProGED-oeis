@@ -1,0 +1,7 @@
+  index    complexity    length       TE    TE_inf  expr_x                     expr_y                                    index_column  method    data_version    system      snr    init
+     26            18       103  1.77524   1.76493  x2*(x1 - 3.186)            x1*(x2*(-0.712*x1 - 0.712*x2) + 3.037)              26  dso       allonger        stl          13       3
+     68            17        80  2.08734   2.09034  x2*(-1.722*x1**2 - 2.378)  x1*(-x1*x2 + 2.78)                                  68  dso       allonger        stl          13       3
+     24            13        59  2.19673   2.20857  x2*(x1 - 3.186)            x1*(-x1*x2 + 2.78)                                  24  dso       allonger        stl          13       3
+      2            11        54  3.14826   3.19913  -3.268*x2                  x1*(-x1*x2 + 2.78)                                   2  dso       allonger        stl          13       3
+     22             8        48  6.95673   7.11624  x2*(x1 - 3.186)            2.392*x1                                            22  dso       allonger        stl          13       3
+      0             6        43  9.11411   9.33987  -3.268*x2                  2.392*x1                                             0  dso       allonger        stl          13       3

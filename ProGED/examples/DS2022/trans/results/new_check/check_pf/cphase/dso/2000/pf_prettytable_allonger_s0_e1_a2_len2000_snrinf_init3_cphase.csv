@@ -1,0 +1,13 @@
+  index    complexity    length           TE       TE_inf  expr_x                                         expr_y                index_column  method    data_version    system      snr    init
+    115            29       244  6.91458e-05  6.91458e-05  -0.001*x2 + 0.8*sin(x1) + 0.8*sin(x2) + 1.998  0.6*sin(x2) + 4.53             115  dso       allonger        cphase      inf       3
+    111            24       184  6.93272e-05  6.93272e-05  -0.001*x2 + 0.8*sin(x1) + 0.8*sin(x2) + 1.998  0.6*sin(x2) + 4.53             111  dso       allonger        cphase      inf       3
+    108            21       174  6.9546e-05   6.9546e-05   -0.001*x2 + 0.8*sin(x1) + 0.8*sin(x2) + 1.998  0.6*sin(x2) + 4.53             108  dso       allonger        cphase      inf       3
+    107            19       150  6.9565e-05   6.9565e-05   -0.001*x2 + 0.8*sin(x1) + 0.8*sin(x2) + 1.998  0.6*sin(x2) + 4.53             107  dso       allonger        cphase      inf       3
+     94            18       140  0.0209187    0.0209187    0.801*sin(1.0*x1) + 0.801*sin(x2) + 1.953      0.6*sin(x2) + 4.53              94  dso       allonger        cphase      inf       3
+     81            16       122  0.0209972    0.0209972    0.801*sin(x1) + 0.801*sin(x2) + 1.953          0.6*sin(x2) + 4.53              81  dso       allonger        cphase      inf       3
+     66            11        81  0.0314509    0.0314509    sin(x1) + sin(x2) + 2.021                      4.506                           66  dso       allonger        cphase      inf       3
+     29            10        74  0.0412248    0.0412248    sin(x2) + 1.756                                0.6*sin(x2) + 4.53              29  dso       allonger        cphase      inf       3
+     15             9        72  0.0604977    0.0604977    1.762 - 0.002*x2                               sin(x2) + 4.56                  15  dso       allonger        cphase      inf       3
+     28             8        55  0.100464     0.100464     sin(x2) + 1.756                                sin(x2) + 4.56                  28  dso       allonger        cphase      inf       3
+     26             7        50  0.834224     0.834224     sin(x2) + 1.756                                0.178*x1                        26  dso       allonger        cphase      inf       3
+      0             6        44  3.14939      3.14939      0.066*x1                                       0.178*x1                         0  dso       allonger        cphase      inf       3

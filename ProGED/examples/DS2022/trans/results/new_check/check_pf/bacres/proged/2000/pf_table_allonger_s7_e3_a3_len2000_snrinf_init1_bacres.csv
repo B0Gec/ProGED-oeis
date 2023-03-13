@@ -1,0 +1,17 @@
+	complexity	length	TE	TE_inf	expr_x	expr_y	index_column	method	exp_type	data_version	system	snr	init
+0	6	8	5.483204081549204	5.483204081549204	0.017*x	0.188*x	0	proged	numdif	allonger	bacres	inf	1
+1	8	13	3.4047720876303575	3.4047720876303575	0.017*x	11.422 - 0.212*y	1	proged	numdif	allonger	bacres	inf	1
+2	15	27	0.3894280844419108	0.3894280844419108	-0.446*x - 0.178*y + 13.533	0.715*x - 0.143*y	2	proged	numdif	allonger	bacres	inf	1
+3	14	28	0.4231027652707622	0.4231027652707622	-0.446*x - 0.178*y + 13.533	6.676*sin(0.06*y)	3	proged	numdif	allonger	bacres	inf	1
+4	16	27	0.3110041210555782	0.3110041210555782	-0.446*x - 0.178*y + 13.533	9.927 - 1.945*y/x	4	proged	numdif	allonger	bacres	inf	1
+5	9	15	2.142676766525655	2.142676766525655	-0.014*x*y + 7.438	0.188*x	5	proged	numdif	allonger	bacres	inf	1
+6	11	20	0.7315682080306547	0.7315682080306547	-0.014*x*y + 7.438	11.422 - 0.212*y	6	proged	numdif	allonger	bacres	inf	1
+7	13	22	0.5668884208840584	0.5668884208840584	-0.014*x*y + 7.438	0.715*x - 0.143*y	7	proged	numdif	allonger	bacres	inf	1
+8	12	23	0.5907002964600708	0.5907002964600708	-0.014*x*y + 7.438	6.676*sin(0.06*y)	8	proged	numdif	allonger	bacres	inf	1
+9	29	51	0.0066322062602944595	0.0066322062602944595	-18.876*x*y/(9.438*x**2 + 18.888) - 1.0*x + 20.0	-0.009*y + 10.09 - 1.885*y/x	9	proged	numdif	allonger	bacres	inf	1
+10	33	61	0.0026815418083305535	0.0026815418083305535	-18.876*x*y/(9.438*x**2 + 18.888) - 1.0*x + 20.0	0.008*y - 18.74*y/(8.399*x + 7.719) + 9.989	10	proged	numdif	allonger	bacres	inf	1
+11	36	66	4.5752976143557585e-05	4.5752976143557585e-05	-18.876*x*y/(9.438*x**2 + 18.888) - 1.0*x + 20.0	-19.746*x*y/(9.866*x**2 + 19.987) + 9.999	11	proged	numdif	allonger	bacres	inf	1
+12	18	29	0.18055273628869162	0.18055273628869162	-1.007*x + 20.0 - 1.945*y/x	0.715*x - 0.143*y	12	proged	numdif	allonger	bacres	inf	1
+13	19	29	0.04617885030820359	0.04617885030820359	-1.007*x + 20.0 - 1.945*y/x	9.927 - 1.945*y/x	13	proged	numdif	allonger	bacres	inf	1
+14	26	46	0.01503526961531106	0.01503526961531106	-0.993*x + 19.463*y/(-9.336*x - 5.731) + 19.947	-0.009*y + 10.09 - 1.885*y/x	14	proged	numdif	allonger	bacres	inf	1
+15	23	39	0.03191552596556681	0.03191552596556681	-0.993*x + 19.463*y/(-9.336*x - 5.731) + 19.947	9.927 - 1.945*y/x	15	proged	numdif	allonger	bacres	inf	1

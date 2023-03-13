@@ -1,0 +1,10 @@
+  index    complexity    length       TE    TE_inf  expr_x                expr_y                                 expr_z                              index_column  method    data_version    system      snr    init
+   2452            29       147  2.28287   2.27704  -9.827*x1 + 9.844*x2  x1*(28.009 - x3) - x2                  x2*(0.999*x1 - 0.055) - 2.652*x3            2452  dso       allonger        lorenz       30       2
+   1851            27       128  2.56121   2.55601  -9.827*x1 + 9.844*x2  x1*(28.009 - x3) - x2                  x2*(x1 - 0.056) - 2.655*x3                  1851  dso       allonger        lorenz       30       2
+   2474            26       143  3.12242   3.12213  -9.827*x1 + 9.844*x2  0.979*x1*(27.952 - x3) - 0.979*x2      x1*x2 - 2.662*x3                            2474  dso       allonger        lorenz       30       2
+    722            24       148  3.2561    3.25751  -9.844*x1 + 9.844*x2  -0.931*x1*(0.003*x1*x2 + x3 - 27.276)  x1*x2 - 2.662*x3                             722  dso       allonger        lorenz       30       2
+   1826            21        99  3.57833   3.58083  -9.827*x1 + 9.844*x2  x1*(27.008 - x3)                       x1*x2 - 2.662*x3                            1826  dso       allonger        lorenz       30       2
+     48            17        58  4.29619   4.29921  2.075*x2              x1*(28.009 - x3) - x2                  x1*x2                                         48  dso       allonger        lorenz       30       2
+    120            16       104  4.59383   4.59798  2.075*x2              -0.931*x1*(0.003*x1*x2 + x3 - 27.276)  x1*x2                                        120  dso       allonger        lorenz       30       2
+   1800            13        71  4.81928   4.83443  -9.827*x1 + 9.844*x2  -2.655*x1                              x1*x2                                       1800  dso       allonger        lorenz       30       2
+      0             9        48  4.92795   4.94362  2.075*x2              -2.655*x1                              x1*x2                                          0  dso       allonger        lorenz       30       2

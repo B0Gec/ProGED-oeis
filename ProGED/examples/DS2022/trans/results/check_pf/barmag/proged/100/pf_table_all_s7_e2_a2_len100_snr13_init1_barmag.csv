@@ -1,0 +1,7 @@
+	complexity	length	TE	TE_inf	expr_x	expr_y	index_column	method	exp_type	data_version	system	snr	init
+0	14	29	1.4569782153382271	2.5015591566875237	3.479*cos(2.684*x)	5.0*cos(0.394*y) - 4.929	0	proged	numdif	all	barmag	13	1
+1	12	24	1.6163435858135926	2.768076044054021	3.479*cos(2.684*x)	-5.0*sin(0.096*y)	1	proged	numdif	all	barmag	13	1
+2	16	34	1.4488092481052564	2.291069329969236	3.569*cos(2.681*x) + 0.501	5.0*cos(0.394*y) - 4.929	2	proged	numdif	all	barmag	13	1
+3	18	39	1.4447374696136994	2.178790016575581	0.537 - 3.663*sin(2.806*x + 3.969)	5.0*cos(0.394*y) - 4.929	3	proged	numdif	all	barmag	13	1
+4	22	49	1.4325336513083697	1.9817589394178743	3.685*sin(1.514*y) + 3.497*cos(2.672*x) - 1.746	5.0*cos(0.394*y) - 4.929	4	proged	numdif	all	barmag	13	1
+5	17	36	1.4488092479652168	2.2910693284109276	3.569*cos(2.681*x) + 0.501	5.0*cos(0.394*y) - 4.929	5	proged	numdif	all	barmag	13	1

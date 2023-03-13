@@ -1,0 +1,6 @@
+  index    complexity    length        TE    TE_inf  expr_x                         expr_y                 index_column  method    data_version    system      snr    init
+    149            15       114  0.508654  0.437563  -0.464*x1 - 0.179*x2 + 13.703  0.707*x1 - 0.136*x2             149  dso       allonger        bacres       30       3
+    147            11        90  0.863623  0.843555  -0.464*x1 - 0.179*x2 + 13.703  x1 - 9.605                      147  dso       allonger        bacres       30       3
+      2            10        70  4.77096   4.81879   -0.004*x2                      0.707*x1 - 0.136*x2               2  dso       allonger        bacres       30       3
+     42             8        63  4.7809    4.84316   6.204 - 0.134*x2               x1 - 9.605                       42  dso       allonger        bacres       30       3
+      1             6        45  8.70839   8.80148   -0.004*x2                      x1 - 9.563                        1  dso       allonger        bacres       30       3

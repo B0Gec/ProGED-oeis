@@ -1,0 +1,10 @@
+	complexity	length	TE	TE_inf	expr_x	expr_y	index_column	method	exp_type	data_version	system	snr	init
+0	6	8	7.061708517330871	8.129690294020522	0.085*y	0.092*y	0	proged	numdif	all	shearflow	13	2
+1	9	16	4.908288791656193	5.613244013665392	0.085*y	0.961*cos(2.885*x)	1	proged	numdif	all	shearflow	13	2
+2	18	32	4.201571688516076	4.591975152138347	0.085*y	0.067*x/(-1.43*x + 2.325*y + 1.47) - 0.289	2	proged	numdif	all	shearflow	13	2
+3	8	11	6.665503573933481	7.660030635626074	-0.05/x**2	0.092*y	3	proged	numdif	all	shearflow	13	2
+4	13	19	4.613473127423641	5.134204893365704	-0.05/x**2	0.244/cos(2.32*x)	4	proged	numdif	all	shearflow	13	2
+5	35	65	3.357814192605419	3.5848524163186193	-0.451 - 1.044/(1.665*x*y**2*cos(1.886*y**3) - 4.554)	0.067*x/(-1.43*x + 2.325*y + 1.47) - 0.289	5	proged	numdif	all	shearflow	13	2
+6	19	34	3.687771757055525	3.9868735048117854	-0.656*x + 0.053*x/(-2.408*x*y + 4.868) - 1.152	0.092*y	6	proged	numdif	all	shearflow	13	2
+7	22	42	3.486903161333335	3.7971730342610455	-0.656*x + 0.053*x/(-2.408*x*y + 4.868) - 1.152	0.961*cos(2.885*x)	7	proged	numdif	all	shearflow	13	2
+8	45	87	2.4722879127436603	2.5589133895046756	-0.656*x + 0.053*x/(-2.408*x*y + 4.868) - 1.152	-0.194*x**3 - 0.344*y - 1.49 - 0.043/(1.776*x**2*y + 2.657*x*y - 2.686*y - 1.242)	8	proged	numdif	all	shearflow	13	2

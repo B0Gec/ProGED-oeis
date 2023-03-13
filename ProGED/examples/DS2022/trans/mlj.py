@@ -19,7 +19,9 @@ model_path = "/home/bosg/EDtools/ete-sr-trans/symbolicregression/model.pt"
 # try:
 if True:
     if not os.path.isfile(model_path):
-        raise FileNotFoundError
+        model_path = "model.pt"
+        if not os.path.isfile(model_path):
+            raise FileNotFoundError
         # url = "https://dl.fbaipublicfiles.com/symbolicregression/model1.pt"
         # r = requests.get(url, allow_redirects=True)
         # open(model_path, 'wb').write(r.content)

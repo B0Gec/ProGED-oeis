@@ -1,0 +1,11 @@
+  complexity    length        TE    TE_inf  expr_x              expr_y                                                   index_column  method    exp_type    data_version    system      snr    init
+          13        20  2.65358   2.65346   -0.006*x + 0.986*y  -0.27*x**4*y                                                        0  proged    numdif      allonger        myvdp        30       1
+          20        34  0.249918  0.24095   -0.006*x + 0.986*y  -1.963*x**2*y - 0.993*x + 1.974*y                                   1  proged    numdif      allonger        myvdp        30       1
+           8        13  5.03248   5.03211   0.987*y + 0.004     -0.633*x                                                            2  proged    numdif      allonger        myvdp        30       1
+           6         8  5.03448   5.0341    0.987*y             -0.633*x                                                            3  proged    numdif      allonger        myvdp        30       1
+          14        25  2.3598    2.3601    0.987*y             -1.822*x**2*y + 1.848*y - 0.306                                     4  proged    numdif      allonger        myvdp        30       1
+          11        18  2.72033   2.72152   0.987*y             -0.278*x**4*y - 0.405                                               5  proged    numdif      allonger        myvdp        30       1
+           9        13  2.72783   2.72763   0.987*y             -0.27*x**4*y                                                        6  proged    numdif      allonger        myvdp        30       1
+          16        27  0.43452   0.428711  0.987*y             -1.963*x**2*y - 0.993*x + 1.974*y                                   7  proged    numdif      allonger        myvdp        30       1
+          26        50  0.205867  0.193651  0.01*x*y + 0.987*y  -1.963*x**2*y - 0.002*x*y - 0.993*x + 1.974*y - 0.001               8  proged    numdif      allonger        myvdp        30       1
+          21        36  0.206399  0.194213  0.01*x*y + 0.987*y  -1.963*x**2*y - 0.993*x + 1.974*y                                   9  proged    numdif      allonger        myvdp        30       1

@@ -1,0 +1,14 @@
+  complexity    length        TE    TE_inf  expr_x                                             expr_y                                  index_column  method    exp_type    data_version    system       snr    init
+           6         8  1.67626   1.70026   -0.18*y                                            0.169*x                                            0  proged    numdif      all             shearflow     30       0
+           7        10  1.66726   1.69013   -0.18*y                                            -0.099*x*y                                         1  proged    numdif      all             shearflow     30       0
+          19        38  0.67045   0.656617  -0.272*y + 0.89*cos(2.323*x) + 0.472               0.013*x*y**4 + 0.008                               2  proged    numdif      all             shearflow     30       0
+          24        48  0.384908  0.319749  -0.272*y + 0.89*cos(2.323*x) + 0.472               0.157*x/(4.769*cos(2.938*x) + 4.948)               3  proged    numdif      all             shearflow     30       0
+          17        33  0.849178  0.84701   -0.272*y + 0.89*cos(2.323*x) + 0.472               0.013*x*y**4                                       4  proged    numdif      all             shearflow     30       0
+           8        11  1.48889   1.50862   0.022*y**4                                         0.169*x                                            5  proged    numdif      all             shearflow     30       0
+          11        16  1.02702   1.01142   0.022*y**4                                         0.013*x*y**4                                       6  proged    numdif      all             shearflow     30       0
+          20        40  0.616636  0.602824  -0.342*y*cos(2.236*x) - 0.561*y - 0.325            0.013*x*y**4 + 0.008                               7  proged    numdif      all             shearflow     30       0
+          22        43  0.478978  0.448107  1.38*x**2 - 1.786*y*cos(1.085*x) - 2.811           0.013*x*y**4 + 0.008                               8  proged    numdif      all             shearflow     30       0
+          27        53  0.246456  0.154136  1.38*x**2 - 1.786*y*cos(1.085*x) - 2.811           0.157*x/(4.769*cos(2.938*x) + 4.948)               9  proged    numdif      all             shearflow     30       0
+          23        48  0.469089  0.435119  0.677*cos(1.908*y) + 0.641*cos(1.233*x*y) + 1.288  0.013*x*y**4 + 0.008                              10  proged    numdif      all             shearflow     30       0
+          18        33  0.691987  0.679093  -0.479*y + 0.806*cos(2.471*x)                      0.013*x*y**4 + 0.008                              11  proged    numdif      all             shearflow     30       0
+          16        28  0.885959  0.884315  -0.479*y + 0.806*cos(2.471*x)                      0.013*x*y**4                                      12  proged    numdif      all             shearflow     30       0

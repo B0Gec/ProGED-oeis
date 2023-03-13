@@ -1,0 +1,2 @@
+method    data_version    exp_version    benchmark    system      snr  obs_type      iinit    init_true    init_model    duration    rmseDE    max_iter    pop_size    expr_true    expr_model    params_true    params_model    TEx    TEy    TExy    RE    num_true_params    num_model_params
+ete       all             e2             strogatz     lv          inf  xy                0          nan           nan         nan       nan         nan         nan          nan           nan            nan             nan    nan    nan     nan   nan                nan                 nan

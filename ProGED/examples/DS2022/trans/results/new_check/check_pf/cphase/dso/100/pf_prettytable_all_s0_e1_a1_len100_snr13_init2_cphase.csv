@@ -1,0 +1,4 @@
+  index    complexity    length       TE    TE_inf  expr_x                       expr_y      index_column  method    data_version    system      snr    init
+     84            11        85  1.59496   1.17294  8.266*cos(0.767*x2 + 7.282)  0.407*x1              84  dso       all             cphase       13       2
+     42             7        48  1.90347   1.83168  -3.319*cos(x2)               0.407*x1              42  dso       all             cphase       13       2
+      0             6        44  2.03489   1.62258  0.118*x1                     0.407*x1               0  dso       all             cphase       13       2

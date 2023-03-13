@@ -72,6 +72,8 @@ def ete_fit(X, x_dot: np.ndarray, sys_name="default", settings=DEFAULT_SETTINGS)
 
 mode = 'debug'
 mode = 'paralel'
+mode = 'slurm'
+
 
 ## MAIN
 print('till main')
@@ -80,13 +82,42 @@ exp_type="sysident_num"
 exp_version = "e2"
 analy_version = 'a1'
 structure_version = "s0"
-data_version = "allonger"
-# data_version = "all"
+# data_version = "allonger"
+data_version = "all"
 set_obs = "full"  # either full, part or all
 # snrs = ["inf", 30, 20, 13, 10, 7]
 snrs = ['inf', '30', '13']
 inits = np.arange(0, 4)
 loaded_models = False
+
+timestamp = time.perf_counter()
+if mode == 'debug':
+    timestamp = "debug"
+elif mode == 'slurm':
+    timestamp = "slurm"
+    if len(sys.argv) >= 2:
+        job = int(sys.argv[1])
+    if len(sys.argv) >= 3:
+        data_version = sys.argv[2]
+    if len(sys.argv) >= 4:
+        expname = sys.argv[3]
+        timestamp += expname
+
+elif mode == 'paralel':
+    timestamp = 'exp1'
+    timestamp = 'exp3'
+    if len(sys.argv) >= 2:
+        timestamp = sys.argv[1]
+    if timestamp == 'exp1':
+        # from src.generate_data.systems_collection import strogatz
+        # strogatz = {'vdp': strogatz['vdp']}
+        strogatz = {}
+        # mysystems = {'lorenz': mysystems['lorenz']}
+        mysystems = {'lorenz': mysystems['lorenz']}
+        systems = {**strogatz, **mysystems}
+    # elif timestamp == 'exp2':
+    # strogatz = {'': strogatz['vdp']}
+print(f'timestamp: {timestamp}')
 
 if mode == 'debug':
     snrs = ['inf']
@@ -108,54 +139,40 @@ elif mode == 'paralel':
     # inits = np.array([1])
     # data_pts = 1850
     # # inits = np.array([3])
-    mysystems = {}
-    # # mysystems = {'lorenz': mysystems['lorenz']}
-    # mysystems = {'cphase': mysystems['cphase']}
-    # # mysystems = {'stl': mysystems['stl']}
+    # mysystems = {}
+    # mysystems = {'lorenz': mysystems['lorenz']}
+    # # mysystems = {'cphase': mysystems['cphase']}
+    # # # mysystems = {'stl': mysystems['stl']}
+    # # strogatz = {}
+    # strogatz = {
+    #         # 'bacres': strogatz['bacres'],
+    #         #     'barmag': strogatz['barmag'],
+    #             'glider': strogatz['glider'],
+    #             'lv': strogatz['lv'],
+    #             'predprey': strogatz['predprey'],
+    #             'shearflow': strogatz['shearflow'],
+    # #             'vdp': strogatz['vdp'],
+    #             }
+    pass
+if mode == 'slurm':
     # strogatz = {}
-    strogatz = {
-            'bacres': strogatz['bacres'],
-                'barmag': strogatz['barmag'],
-                'glider': strogatz['glider'],
-                'lv': strogatz['lv'],
-                'predprey': strogatz['predprey'],
-                'shearflow': strogatz['shearflow'],
-    #             'vdp': strogatz['vdp'],
-                }
+    # strogatz = {'lv': strogatz['lv']}
+    # strogatz = {'vdp': strogatz['vdp']}
+    # mysystems = {}
+    # mysystems = {'myvdp': mysystems['myvdp']}
+    # snrs = ['inf']
+    # snrs = ['30', '13']
+    # inits = np.array([0])
     pass
 
 settings = {
-    # 'max_input_points': 4000,
+    'max_input_points': 4000,
     # 'n_trees_to_refine': 1,
     'n_trees_to_refine': 3,
 }
 print(settings)
 
-slurm = False
-def job2task(job):
-    counter = 0
-    for system in systems:
-        for init in inits:
-            for snr in snrs:
-                if job == counter:
-                   print(system, init, snr)
-    return 0
 
-timestamp = time.perf_counter()
-if mode == 'debug':
-    timestamp = "debug"
-if mode == 'paralel':
-    timestamp = 'exp1'
-    timestamp = 'exp3'
-    if len(sys.argv) == 2:
-        timestamp = sys.argv[1]
-    print(f'timestamp: {timestamp}')
-    if timestamp == 'exp1':
-        from src.generate_data.systems_collection import strogatz
-        strogatz = {'vdp': strogatz['vdp']}
-        systems = {**strogatz, **mysystems}
-    # elif timestamp == 'exp2':
-    # strogatz = {'': strogatz['vdp']}
 
 systems = {**strogatz, **mysystems}
 # systems = {**mysystems}
@@ -175,20 +192,38 @@ for sys_name in sys_names:
     combinations.append(list(itertools.product([sys_name], systems[sys_name].get_obs(set_obs), inits, snrs)))
     print([sys_name], systems[sys_name].get_obs(set_obs), inits, snrs)
 combinations = [item for sublist in combinations for item in sublist]
+if mode == 'slurm':
+    if len(combinations) > job:
+        combinations = [combinations[job]]
+    else:
+        combinations = []
+print('combinations', combinations)
+print('script inputs:', sys.argv)
 
+
+def job2task(job_id):
+    counter = 0
+    for system in systems:
+        for init in inits:
+            for snr in snrs:
+                if job == counter:
+                    print(system, init, snr)
+    return 0
 print('till combo')
 path_main = "D:\\Experiments\\MLJ23"
 path_main = "."
+
 
 path_base_out = f"{path_main}{os.sep}results{os.sep}{method}_{timestamp}{os.sep}"
 os.makedirs(path_base_out, exist_ok=True)
 print(path_base_out)
 
-# previous experiments checkpoint
-csv_filename = f"{path_base_out}ete.csv"
 ete_df = pd.DataFrame()
-if os.path.isfile(csv_filename):
-    ete_df = pd.read_csv(csv_filename)
+if not mode == 'slurm':
+    # previous experiments checkpoint
+    csv_filename = f"{path_base_out}ete.csv"
+    if os.path.isfile(csv_filename):
+        ete_df = pd.read_csv(csv_filename)
 print(f'cases this far: {ete_df.columns}')
 
 # ete_extended = pd.DataFrame()
@@ -271,9 +306,10 @@ for sys_name, iobs, iinit, snr in combinations:
 
     entry[0] = duration
     ete_df[key] = entry
+    csv_filename = f"{path_base_out}{key}.csv"
     ete_df.to_csv(csv_filename, index=False)
 
-    # continue
+    continue
 
     # save eqs
     path_out = path_base_out + sys_name + os.sep

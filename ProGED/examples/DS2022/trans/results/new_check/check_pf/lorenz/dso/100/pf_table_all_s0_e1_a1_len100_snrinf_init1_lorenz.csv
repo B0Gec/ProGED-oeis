@@ -1,0 +1,5 @@
+	index	complexity	length	TE	TE_inf	expr_x	expr_y	expr_z	index_column	method	data_version	system	snr	init
+3	3130	27	48	2.9037329910702825	2.9037329910702825	-4*x1 + 4*x2	-3*x1 - 2*x2**2/x3 + x3	x2*(-x1 + x2)	3130	dso	all	lorenz	inf	1
+2	478	19	33	7.278489354259685	7.278489354259685	-x1 + 2*x2	-3*x1 + x3	x2*(-x1 + x2)	478	dso	all	lorenz	inf	1
+0	19	17	31	7.538077661354317	7.538077661354317	-x1 + x2	-2*x1 + x2	x2*(-x1 + x2)	19	dso	all	lorenz	inf	1
+1	51	15	25	10.17107223899092	10.17107223899092	-x1 + x2	-3*x1 + x3	x1 - x2	51	dso	all	lorenz	inf	1

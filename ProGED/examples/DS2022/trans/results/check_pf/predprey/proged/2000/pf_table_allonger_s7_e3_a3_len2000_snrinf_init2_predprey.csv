@@ -1,0 +1,15 @@
+	complexity	length	TE	TE_inf	expr_x	expr_y	index_column	method	exp_type	data_version	system	snr	init
+0	7	10	4.597109455442104	4.597109455442104	-0.092*x*y	0.382*x	0	proged	numdif	allonger	predprey	inf	2
+1	6	8	6.040753508624755	6.040753508624755	-0.434*x	0.382*x	1	proged	numdif	allonger	predprey	inf	2
+2	10	15	4.046525318845488	4.046525318845488	-0.434*x	1.271*x - 0.262*y	2	proged	numdif	allonger	predprey	inf	2
+3	13	20	2.3956284086446997	2.3956284086446997	-0.011*x**3*y	1.271*x - 0.262*y	3	proged	numdif	allonger	predprey	inf	2
+4	11	18	3.4578271975456834	3.4578271975456834	-0.011*x**3*y	0.947*x - 1.047	4	proged	numdif	allonger	predprey	inf	2
+5	15	24	1.2131385882224324	1.2131385882224324	-0.477*x*y + 2.729*x	1.271*x - 0.262*y	5	proged	numdif	allonger	predprey	inf	2
+6	14	27	2.150789690389584	2.150789690389584	-0.472*x*y + 2.653*x + 0.081	0.947*x - 1.047	6	proged	numdif	allonger	predprey	inf	2
+7	12	18	2.8230918937725455	2.8230918937725455	-0.02*x**4	1.271*x - 0.262*y	7	proged	numdif	allonger	predprey	inf	2
+8	18	32	1.0428663196398835	1.0428663196398835	-0.002*x**4*y - 0.351*y + 1.876	1.271*x - 0.262*y	8	proged	numdif	allonger	predprey	inf	2
+9	37	74	0.4912563987401578	0.4912563987401578	-0.014*x**4 - 0.285*x*y + 1.929*x - 0.139*y + 0.552	1.001*x*y/(x + 1.001) - 0.075*y**2	9	proged	numdif	allonger	predprey	inf	2
+10	32	60	0.4913225891785282	0.4913225891785282	-0.014*x**4 - 0.285*x*y + 1.929*x - 0.139*y + 0.552	1.0*x*y/(x + 1.0) - 0.075*y**2	10	proged	numdif	allonger	predprey	inf	2
+11	39	72	0.010106102702141536	0.010106102702141536	0.003*x**3 - 1.02*x**2 - 0.996*x*y/(x + 0.987) + 4.027*x	1.0*x*y/(x + 1.0) - 0.075*y**2	11	proged	numdif	allonger	predprey	inf	2
+12	38	67	0.010123063477611553	0.010123063477611553	0.003*x**3 - 1.02*x**2 - 0.996*x*y/(x + 0.987) + 4.027*x	1.0*x*y/(x + 1.0) - 0.075*y**2	12	proged	numdif	allonger	predprey	inf	2
+13	41	74	0.01008083310640815	0.01008083310640815	0.003*x**3 - 1.02*x**2 - 0.996*x*y/(x + 0.987) + 4.027*x	1.0*x*y/(x + 1.0) - 0.075*y**2	13	proged	numdif	allonger	predprey	inf	2

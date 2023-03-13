@@ -1,0 +1,5 @@
+  index    complexity    length           TE       TE_inf  expr_x    expr_y                     index_column  method    data_version    system      snr    init
+      4            14        25  6.19518e-12  6.19518e-12  x2        -2*x1**2*x2 - x1 + 2*x2               4  dso       allonger        myvdp       inf       0
+      3            12        23  1.30686      1.30686      x2        -2*x1**2*x2 - x1 + x2                 3  dso       allonger        myvdp       inf       0
+      1             9        16  2.63729      2.63729      x2        -x1**2*x2 + x2                        1  dso       allonger        myvdp       inf       0
+      0             4         5  3.46855      3.46855      x2        -x1                                   0  dso       allonger        myvdp       inf       0

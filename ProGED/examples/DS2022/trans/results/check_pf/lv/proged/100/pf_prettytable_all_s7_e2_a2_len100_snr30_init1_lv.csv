@@ -1,0 +1,14 @@
+  complexity    length        TE    TE_inf  expr_x                                    expr_y                          index_column  method    exp_type    data_version    system      snr    init
+           7        10  5.32988   5.5622    -1.494*x*y                                -1.324*y                                   0  proged    numdif      all             lv           30       1
+           9        13  1.98558   2.03112   -5.0*y**2                                 -0.488*x*y                                 1  proged    numdif      all             lv           30       1
+           8        11  2.80362   2.90124   -5.0*y**2                                 -1.324*y                                   2  proged    numdif      all             lv           30       1
+           6         8  5.44578   5.68277   -3.657*y                                  -1.324*y                                   3  proged    numdif      all             lv           30       1
+          11        18  1.75228   1.77332   -2.387*x*y**2 + 0.176                     -1.324*y                                   4  proged    numdif      all             lv           30       1
+          13        24  0.658944  0.503576  -1.871*x*y - 1.631*x + 5.0                -0.488*x*y                                 5  proged    numdif      all             lv           30       1
+          12        22  0.744824  0.611266  -1.871*x*y - 1.631*x + 5.0                -1.324*y                                   6  proged    numdif      all             lv           30       1
+          18        36  0.543776  0.394776  -1.871*x*y - 1.631*x + 5.0                -0.532*x*y - 0.225*x + 0.678               7  proged    numdif      all             lv           30       1
+          23        45  0.424874  0.222608  -3.369*x*y + 4.838*y/(y + 0.298) - 0.006  -0.532*x*y - 0.225*x + 0.678               8  proged    numdif      all             lv           30       1
+          15        27  0.599001  0.378398  -2.304*x*y**2 - 0.751*x + 2.288           -0.488*x*y                                 9  proged    numdif      all             lv           30       1
+          14        25  0.658055  0.454753  -2.304*x*y**2 - 0.751*x + 2.288           -1.324*y                                  10  proged    numdif      all             lv           30       1
+          20        39  0.43856   0.207384  -2.304*x*y**2 - 0.751*x + 2.288           -0.532*x*y - 0.225*x + 0.678              11  proged    numdif      all             lv           30       1
+          22        40  0.43145   0.233355  -3.371*x*y + 4.852*y/(y + 0.301)          -0.532*x*y - 0.225*x + 0.678              12  proged    numdif      all             lv           30       1

@@ -1,0 +1,14 @@
+	complexity	length	TE	TE_inf	expr_x	expr_y	index_column	method	exp_type	data_version	system	snr	init
+0	18	36	6.025003409326135	7.133252403153136	0.444 - 0.724*cos(4.83*y)	-0.813*sin(3.322*x - 5.0*y)	0	proged	numdif	allonger	barmag	30	0
+1	12	24	51.59047639571094	63.348296022149626	-0.359*cos(4.894*y)	2.457*sin(0.53*x)	1	proged	numdif	allonger	barmag	30	0
+2	14	29	42.23356340502765	51.804916243412165	-0.359*cos(4.894*y)	-2.995*cos(0.696*x) - 1.62	2	proged	numdif	allonger	barmag	30	0
+3	20	44	3.95039360355823	4.440754267512972	-0.359*cos(4.894*y)	-1.678*cos(1.713*x) - 4.699*cos(0.957*y) + 3.484	3	proged	numdif	allonger	barmag	30	0
+4	17	36	8.1205251854925	9.631851641597512	-0.359*cos(4.894*y)	0.826*cos(3.561*x - 5.0*y + 0.208)	4	proged	numdif	allonger	barmag	30	0
+5	19	39	4.058605236017062	4.566870506847826	-0.359*cos(4.894*y)	-3.12*sin(1.191*y) + 3.623*cos(1.146*x)	5	proged	numdif	allonger	barmag	30	0
+6	16	31	8.311424085429142	9.852392543931913	-0.359*cos(4.894*y)	-0.813*sin(3.322*x - 5.0*y)	6	proged	numdif	allonger	barmag	30	0
+7	29	64	3.3119062677442215	3.580443044262617	-5.0*sin(1.376*y) - 2.587*cos(2.715*y + 0.065) + 3.149	-3.12*sin(1.191*y) + 3.623*cos(1.146*x)	7	proged	numdif	allonger	barmag	30	0
+8	31	68	2.0104534896234223	1.9446054417950038	0.823*sin(3.302*x + 5.0*y + 2.581) + 0.415	-4.158*cos(0.866*y) + 1.861*cos(2.103*x - 3.71*y) + 2.405	8	proged	numdif	allonger	barmag	30	0
+9	32	73	2.010149438578287	1.9444167736488887	0.823*sin(3.302*x + 5.0*y + 2.581) + 0.415	-4.151*cos(0.866*y) - 1.858*cos(-2.106*x + 3.717*y + 3.106) + 2.4	9	proged	numdif	allonger	barmag	30	0
+10	30	63	2.0441852392788915	1.9838048426553723	0.823*sin(3.302*x + 5.0*y + 2.581) + 0.415	5.0*sin(0.498*y) + 1.617*cos(2.471*x - 4.011*y)	10	proged	numdif	allonger	barmag	30	0
+11	40	91	1.7699393026499224	1.7367842420301796	-4.536*sin(1.305*y) + 5.0*sin(0.725*x - 1.352*y) - 1.644*cos(3.955*y + 4.637) - 0.528	-1.678*cos(1.713*x) - 4.699*cos(0.957*y) + 3.484	11	proged	numdif	allonger	barmag	30	0
+12	42	96	1.7527611700938839	1.70884938089214	-4.536*sin(1.305*y) + 5.0*sin(0.725*x - 1.352*y) - 1.644*cos(3.955*y + 4.637) - 0.528	-5.0*sin(0.865*x) + 4.927*sin(0.916*y + 5.0) + 0.376	12	proged	numdif	allonger	barmag	30	0

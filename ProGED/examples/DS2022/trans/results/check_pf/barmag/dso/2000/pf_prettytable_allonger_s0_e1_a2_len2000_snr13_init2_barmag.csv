@@ -1,0 +1,7 @@
+  index    complexity    length       TE    TE_inf  expr_x                                                                    expr_y             index_column  method    data_version    system      snr    init
+    229            28       175  1.70257   1.48588  17.298*sin(1.016*x1*(0.754 - 2*x1)*(x1*(2.005*x1 + x2 - 1.089) - 1.493))  x2*(0.363 - x2)             229  dso       allonger        barmag       13       2
+    134            22       107  1.71525   1.63264  -10.16*cos(1.024*x1*(2*x1 - x2) - 2.437)                                  x2*(0.363 - x2)             134  dso       allonger        barmag       13       2
+    153            20       104  1.78415   2.27901  12.183*cos(x1*(0.87*x1*x2 + 1.807*x1))                                    x2*(0.363 - x2)             153  dso       allonger        barmag       13       2
+      1            10        51  1.90864   3.1344   0.015*x1                                                                  x2*(0.363 - x2)               1  dso       allonger        barmag       13       2
+      0             6        46  2.32031   3.73472  0.015*x1                                                                  -0.172*x2                     0  dso       allonger        barmag       13       2
+     19             5        30  3.24914   7.83236  sin(x1)                                                                   -0.172*x2                    19  dso       allonger        barmag       13       2

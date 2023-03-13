@@ -1,0 +1,10 @@
+	complexity	length	TE	TE_inf	expr_x	expr_y	index_column	method	exp_type	data_version	system	snr	init
+0	14	29	2.512153925321178	2.5164084843247534	-5.0*cos(3.423*y)	4.442 - 5.0*cos(4.306*y)	0	proged	numdif	allonger	cphase	30	1
+1	12	24	6.223533545632101	6.232107176920733	-5.0*cos(3.423*y)	-5.0*cos(4.306*y)	1	proged	numdif	allonger	cphase	30	1
+2	13	26	4.861705664073879	4.868684568077363	-5.0*cos(3.423*y)	10.0*sin(2.694*t)	2	proged	numdif	allonger	cphase	30	1
+3	20	43	2.047727164568348	2.0448708344995596	5.0*sin(-0.945*t + 1.316*y + 1.561) + 1.799	10.0*sin(2.694*t)	3	proged	numdif	allonger	cphase	30	1
+4	30	68	1.0402252328293071	1.0248907269989098	1.757 - 5.202*cos(3.424*y)	-5.0*sin(4.312*y - 4.874) - 5.0*cos(3.455*t + 2.961*y - 0.849) + 4.507	4	proged	numdif	allonger	cphase	30	1
+5	31	71	0.9845585050873071	0.9798603715920937	1.757 - 5.202*cos(3.424*y)	5.0*sin(2.693*t) - 5.0*cos(4.307*y) + 5.0*cos(2.239*t - 4.804) + 4.487	5	proged	numdif	allonger	cphase	30	1
+6	18	38	2.1378355928900374	2.1320718899961677	1.757 - 5.202*cos(3.424*y)	4.439 - 10.0*cos(4.306*y)	6	proged	numdif	allonger	cphase	30	1
+7	28	63	1.0598373320997903	1.0461902957382911	1.757 - 5.202*cos(3.424*y)	-5.0*sin(3.454*t + 2.962*y + 0.725) - 5.0*cos(4.305*y) + 4.488	7	proged	numdif	allonger	cphase	30	1
+8	27	58	1.425697554325728	1.4218481155411982	1.757 - 5.202*cos(3.424*y)	5.0*sin(2.693*t) - 5.0*cos(3.396*t + 3.08*y) + 4.475	8	proged	numdif	allonger	cphase	30	1

@@ -1,0 +1,13 @@
+	system	snr	iinit	TE	TEinf	expr_model	method	data_version	exp_version	benchmark	duration
+0	barmag	inf	0	0.1134865688946037	0.1134865688946037	[['-0.388 sin(x) + -0.298 sin(y) + -0.096 sin(x+y)', '-0.561 sin(x) + -0.689 sin(y)']]	sindy	all	e1	strogatz	0.04284954071044922
+1	barmag	30	0	0.8197059871709809	0.32543832946584983	[['-0.438 sin(x) + -0.421 sin(y)', '-0.994 sin(x) + -0.994 sin(y) + 0.591 sin(x+y)']]	sindy	all	e1	strogatz	0.05999898910522461
+2	barmag	13	0	2.7354867116785724	6.202150150208599	[['-1.083 1 + -0.915 sin(x) + 1.514 sin(y) + 0.343 cos(x) + 0.687 cos(y) + -0.755 sin(x+y) + -1.272 cos(x+y) + -0.393 sin(x-y) + 0.202 cos(x-y) + 0.393 sin(y-x) + 0.202 cos(y-x)', '-0.423 1 + -1.825 sin(x) + 0.486 sin(y) + -1.011 cos(x) + 1.854 cos(y) + 2.453 sin(x+y) + -1.391 cos(x+y) + 1.068 sin(x-y) + -0.936 cos(x-y) + -1.068 sin(y-x) + -0.936 cos(y-x)']]	sindy	all	e1	strogatz	0.009964704513549805
+3	barmag	inf	1	0.11588963140232063	0.11588963140232063	[['-0.988 sin(x) + 0.007 sin(x+y) + 0.247 sin(x-y) + -0.247 sin(y-x)', '-0.999 sin(x+y)']]	sindy	all	e1	strogatz	0.020000934600830078
+4	barmag	30	1	2.254151956594897	2.705439094894551	[['0.352 sin(x+y) + -0.071 cos(x-y) + -0.071 cos(y-x)', '0.278 sin(x) + -0.570 sin(x+y)']]	sindy	all	e1	strogatz	0.030002593994140625
+5	barmag	13	1	3.6050373114166105	12.991775355426007	[['-0.380 1 + 3.401 sin(x) + 1.739 sin(y) + -7.684 cos(x) + 2.402 sin(x+y) + 1.637 cos(x+y) + -3.210 sin(x-y) + 1.528 cos(x-y) + 3.210 sin(y-x) + 1.528 cos(y-x)', '-0.758 1 + -0.212 cos(x) + 1.128 cos(y) + -0.432 cos(x+y)']]	sindy	all	e1	strogatz	0.04999685287475586
+6	barmag	inf	2	1.7916939278576924	1.7916939278576924	[['-0.827 sin(x+y)', '0.392 sin(x+y)']]	sindy	all	e1	strogatz	0.029023408889770508
+7	barmag	30	2	1.7178136145340581	1.651660639680376	[['0.774 sin(y) + -0.198 cos(x-y) + -0.198 cos(y-x)', '-0.213 sin(y)']]	sindy	all	e1	strogatz	0.13416719436645508
+8	barmag	13	2	3.8503017895343232	8.686862607217705	[['47.104 1 + 63.981 sin(x) + -5.641 sin(y) + 114.499 cos(x) + -50.610 cos(y) + -56.482 sin(x+y) + -36.113 cos(x+y) + -31.351 cos(x-y) + -31.351 cos(y-x)', '-0.251 sin(y)']]	sindy	all	e1	strogatz	1.2219512462615967
+9	barmag	inf	3	3.6793508707876654	3.6793508707876654	[['-0.590 sin(x+y)', '0.000']]	sindy	all	e1	strogatz	0.059960365295410156
+10	barmag	30	3	5.718483711975221	5.800633747081654	[['0.000', '0.000']]	sindy	all	e1	strogatz	0.46607303619384766
+11	barmag	13	3	2.9464696270349506	5.0455946690125515	[['-23.262 sin(y) + 10.734 cos(y) + 20.726 sin(x+y) + 6.006 cos(x+y) + -4.588 sin(x-y) + -9.393 cos(x-y) + 4.588 sin(y-x) + -9.393 cos(y-x)', '0.000']]	sindy	all	e1	strogatz	0.789372444152832

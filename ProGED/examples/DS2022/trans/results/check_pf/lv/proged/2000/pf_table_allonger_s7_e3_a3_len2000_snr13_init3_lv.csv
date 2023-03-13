@@ -1,0 +1,6 @@
+	complexity	length	TE	TE_inf	expr_x	expr_y	index_column	method	exp_type	data_version	system	snr	init
+0	9	13	1.6111621958313438	1.8117092174529899	-1.076*x*y	-0.213*x**4	0	proged	numdif	allonger	lv	13	3
+1	6	8	1.679352665652979	2.0569661894231865	-1.804*x	-0.917*x	1	proged	numdif	allonger	lv	13	3
+2	10	14	1.3547987054163637	1.322019330576117	-1.456*x**2	-0.213*x**4	2	proged	numdif	allonger	lv	13	3
+3	16	28	1.3322479548357824	1.3081451335748577	-0.561*x**4*y/(x - 0.014)**2	-0.213*x**4	3	proged	numdif	allonger	lv	13	3
+4	20	32	1.329895064203529	1.2822681627677928	-0.571*x**3*y/(x + 0.068) - 0.028*y	-0.213*x**4	4	proged	numdif	allonger	lv	13	3

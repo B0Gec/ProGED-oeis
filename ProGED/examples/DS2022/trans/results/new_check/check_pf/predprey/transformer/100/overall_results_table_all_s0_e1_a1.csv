@@ -1,0 +1,110 @@
+	system	snr	iinit	TE	TEinf	expr_model	method	data_version	exp_version	benchmark	duration
+0	bacres	inf	0	0.28608498392825976	0.28608498392825976	[0.84*(0.04*x_0 + (0.032 - 0.e-3*x_1)*(3.887*x_1 - 155.033) - 1)**2 - 0.8, 0.397*x_0 + (0.388*x_0 - 10.029)*(0.031*x_1 - 1.151) - 0.808]	transformer	all	e1	strogatz	37.29185962677002
+1	bacres	30	0	inf	inf		transformer	all	e1	strogatz	
+2	bacres	13	0	inf	inf		transformer	all	e1	strogatz	
+3	bacres	inf	1	0.1754711296735246	0.1754711296735246	[-9.29*arctan((13.92 - 0.674*x_0)*(0.001*x_1 - 0.049)*(-(0.035 - 0.e-3*x_1)*(4.168*x_1 - 233.786) + 0.008 + 1/(0.07*x_1 - 40.019))) - 0.822, 8.115*sqrt(0.081*x_0 - 0.032*x_1 + 1) - 3.0]	transformer	all	e1	strogatz	36.31859731674194
+4	bacres	30	1	inf	inf		transformer	all	e1	strogatz	
+5	bacres	13	1	inf	inf		transformer	all	e1	strogatz	
+6	bacres	inf	2	0.14672042467962793	0.14672042467962793	[0.11*cos(0.072*x_1 - 3.367) + 0.006*Abs(4854.009*(0.021*x_1 - 1)**2*(0.02*x_0 + 0.005*x_1 - 1)**2 - 3.67) - 0.971, -0.148*x_1 - 0.004*(0.012*x_0 - 1)**2 + (0.947*x_0 - 13.126)*(-0.007*x_1 + (1.99 + 0.098/(0.069*arctan(-0.005*x_1 - 0.571) - 0.055))*(0.014*x_1 - 0.469) + 0.696) + 10.216]	transformer	all	e1	strogatz	39.7004656791687
+7	bacres	30	2	inf	inf		transformer	all	e1	strogatz	
+8	bacres	13	2	2.661779886612732	3.5259442632612576	[0.004*(0.286 - 0.004*x_0)*(14.45 - 0.004*cos(0.046*x_1 - 21.086 + 5.398/(0.02*x_0 - 0.224)))*(0.285*x_0 + 14.562), 2.854]	transformer	all	e1	strogatz	47.08524417877197
+9	bacres	inf	3	0.7709912075568484	0.7709912075568484	[0.014*(1 - 0.021*x_1)**3*(2511.442*(1 - 0.02*x_0)**2 - 0.069), 8.364*sqrt(0.07*x_0 - 0.03*x_1 + 1) - 3.0]	transformer	all	e1	strogatz	31.737534523010254
+10	bacres	30	3	inf	inf		transformer	all	e1	strogatz	
+11	bacres	13	3	inf	inf		transformer	all	e1	strogatz	
+12	barmag	inf	0	1.182059734975147	1.182059734975147	[0.27 - 0.3*arctan((0.031*x_0 - 0.174)*(0.002*x_1 + 84.785)), (0.084 - 0.014*x_0)*(-76.293*x_0 + (13.811 - 2.131*x_1)*(7.105*x_1 - 54.702) + 464.195)]	transformer	all	e1	strogatz	32.77144765853882
+13	barmag	30	0	inf	inf		transformer	all	e1	strogatz	
+14	barmag	13	0	inf	inf		transformer	all	e1	strogatz	
+15	barmag	inf	1	0.5547426961135072	0.5547426961135072	[-0.003*(x_1 - 0.573)**3*(-9.537*x_0 - 0.003*x_1 + 11409.285*(1 - 0.181*x_0)**3 - 46.401) + 0.008 + 0.93/(33.451 - 0.066*x_1), 0.415*arctan(0.092*x_0 - 1.797*x_1 + 1.316) - 0.38]	transformer	all	e1	strogatz	42.608457803726196
+16	barmag	30	1	2.2931376392971523	2.8014940827683854	[0.069, (-0.016*x_1 - 0.087)*(3.901*x_1 + (7.427 - 0.687*x_0)*(0.012*x_1 + cos(95.284*x_0 - 548.631) - 0.45) + 1.272 + 0.077/(3.53*x_0 - 20.979))]	transformer	all	e1	strogatz	38.490222215652466
+17	barmag	13	1	inf	inf		transformer	all	e1	strogatz	
+18	barmag	inf	2	0.7020553898082494	0.7020553898082494	[0.398*(arctan(1.197*x_0 - 0.447*x_1 - 6.711) - 0.385)**2 + 0.009, -0.018*(1 - 0.03*Abs(151.299*x_0 + 0.014*x_1 - 862.258))**2 - 0.025]	transformer	all	e1	strogatz	75.02870726585388
+19	barmag	30	2	inf	inf		transformer	all	e1	strogatz	
+20	barmag	13	2	inf	inf		transformer	all	e1	strogatz	
+21	barmag	inf	3	0.18396103053813298	0.18396103053813298	[1.033*(0.139*x_1 + 0.068)*(-sqrt(0.181*x_1 + 1) + 0.924*arctan(2.493*x_0 - 14.007) - 0.007)**2, (0.06*x_0 - 0.215*x_1 - 0.302)*(2.493*x_0 - (32.412 - 83.271*x_1)*(0.047*x_1 - 0.017)*(cos(15.922*x_1 - 6.225) + 0.217) - 13.91)]	transformer	all	e1	strogatz	26.30148673057556
+22	barmag	30	3	inf	inf		transformer	all	e1	strogatz	
+23	barmag	13	3	inf	inf		transformer	all	e1	strogatz	
+24	glider	inf	0	0.36258535756861227	0.36258535756861227	[-0.578*x_0 + 0.95*sin(0.084*x_0 - 1.065*x_1 + 19.784) + 1.165, -0.204*x_1 - 0.381*sin(5.704*x_0 - 15.059) + 6.19]	transformer	all	e1	strogatz	34.59654474258423
+25	glider	30	0	inf	inf		transformer	all	e1	strogatz	
+26	glider	13	0	inf	inf		transformer	all	e1	strogatz	
+27	glider	inf	1	0.42344625112588863	0.42344625112588863	[0.015*x_1 + 0.99*sin(0.016*x_0 + 0.968*x_1 - 9.005) - 0.244, (0.015*x_0 + 0.045)*(0.168*((-0.084 - 2.178/(x_0*(5.25 - 0.006*(x_0 - 0.28)**2)))*(18.8*cos(0.133*x_1 - 57.156) + 5.8) + (0.013 - 0.009*x_0)*(0.999*x_0 - 1.368))**2 + 14.9)]	transformer	all	e1	strogatz	40.09370756149292
+28	glider	30	1	inf	inf		transformer	all	e1	strogatz	
+29	glider	13	1	1.8023718547645848	1.738026883970306	[0, 0.991]	transformer	all	e1	strogatz	45.55079627037048
+30	glider	inf	2	0.21174317234980322	0.21174317234980322	[(-0.002*x_0 + 0.139*x_1 - 3.825)*(0.035*x_0 - 0.001*x_1 + 0.069) - 0.979*sin(0.984*x_1 - 18.449) - 0.038, -0.052*x_1 + 0.146*sin(10.011*x_0 - 9.919) + 0.092*Abs(7.46 + 27.897*exp(-0.088*x_1)) + 1.71]	transformer	all	e1	strogatz	35.14898157119751
+31	glider	30	2	inf	inf		transformer	all	e1	strogatz	
+32	glider	13	2	inf	inf		transformer	all	e1	strogatz	
+33	glider	inf	3	0.4556960629262302	0.4556960629262302	[-0.16*x_0 - 0.99*cos(0.996*x_1 - 13.884) - 0.295, 0.074*x_0 - 0.111*x_1 + (0.251*x_0 - 0.556)*cos((66.683*x_0 - 147.952)*(0.012*x_1 - 0.164)) + 3.529]	transformer	all	e1	strogatz	36.1231586933136
+34	glider	30	3	inf	inf		transformer	all	e1	strogatz	
+35	glider	13	3	inf	inf		transformer	all	e1	strogatz	
+36	lv	inf	0	0.5587690695877066	0.5587690695877066	[0.013*x_0*(-324.998*x_0 + 146.888*x_1 - 298.094), -0.684*x_1 - 8.199*(x_0 - 0.07)**2 + 1.381]	transformer	all	e1	strogatz	36.68275809288025
+37	lv	30	0	inf	inf		transformer	all	e1	strogatz	
+38	lv	13	0	inf	inf		transformer	all	e1	strogatz	
+39	lv	inf	1	6.356625471292536	6.356625471292536	[(21.464 - 207.638*x_1)*(0.039*x_1 - 0.004) + 0.307 - 0.07/(7.414 - 2.37*x_0), 0.114*x_0 - 1.527*(x_1 + 0.102)**2 - 0.324]	transformer	all	e1	strogatz	41.912116050720215
+40	lv	30	1	inf	inf		transformer	all	e1	strogatz	
+41	lv	13	1	3.7137697752786982	5.827302009520958	[0, -0.003*x_0 - 0.109]	transformer	all	e1	strogatz	41.8258912563324
+42	lv	inf	2	3.060216842335699	3.060216842335699	[-0.442*x_0 + (0.008 - 0.03*x_1)*(-58.116*x_0 + 256.515*x_1 + 154.687) + 1.333, 0.014*x_1*(0.495*x_0 - 179.355*x_1 - 16.452)]	transformer	all	e1	strogatz	30.770689725875854
+43	lv	30	2	inf	inf		transformer	all	e1	strogatz	
+44	lv	13	2	inf	inf		transformer	all	e1	strogatz	
+45	lv	inf	3	0.928630521825721	0.928630521825721	[0.384 - 2.314*sqrt(0.046 - (0.252 - x_0)**3), (0.001 - 9.76/(0.061*sqrt(-(1 - 0.012*cos(118.422*x_0 + 4.88*x_1 - 46.835))**2 + 0.647 + 0.439/(0.005 - 0.003*cos(17.2*log(0.188*x_0 + 0.49) + 0.536))) + 0.008))*(0.076*(x_0 - 0.326)**2 - 0.006)]	transformer	all	e1	strogatz	37.60137414932251
+46	lv	30	3	inf	inf		transformer	all	e1	strogatz	
+47	lv	13	3	inf	inf		transformer	all	e1	strogatz	
+48	predprey	inf	0	1.294684830239091	1.294684830239091	[(0.001*x_1 - 0.014)*(0.383*x_1 - 1.871)*(18.199*(0.15*x_1 - 1)**2 + 0.409)*(42.961*x_0 - 0.007*x_1 + 1.727), (0.799*x_0 - 4.197)*(0.014*x_0 + (0.001*x_1 + 0.001)*(-83.639*x_0 + 21.582*x_1 - 28.592) + 0.084)]	transformer	all	e1	strogatz	37.25816750526428
+49	predprey	30	0	inf	inf		transformer	all	e1	strogatz	
+50	predprey	13	0	5.095981474400851	5.407060558857235	[-0.261, -0.096]	transformer	all	e1	strogatz	45.413166761398315
+51	predprey	inf	1	6.714266143725714	6.714266143725714	[(0.051*x_0 + 0.003)*((5.231 - 0.995*x_1)*(7.68*arctan(0.003*x_1 + (0.001*x_0 + 1.787)*tan(0.797*x_0 + 48.848) + 3.713) + 0.004) - 3.046), (0.003*x_1 + 0.004)*(57.7*x_0 - 17.959*x_1 + 7.42*arctan(71.727*x_0 - 20.952) + 22.31)]	transformer	all	e1	strogatz	29.315792083740234
+52	predprey	30	1	inf	inf		transformer	all	e1	strogatz	
+53	predprey	13	1	4.044935379151813	4.091812516318281	[0.005*x_1 - 0.607, -0.001*x_0 - 0.108*x_1 - 0.005*(84.911 - 641.907*arctan(0.015 - 1.123*exp(-0.926*x_1)))*cos(0.364*x_1 + 48.853) + 0.54]	transformer	all	e1	strogatz	34.109684228897095
+54	predprey	inf	2	inf	inf		transformer	all	e1	strogatz	
+55	predprey	30	2	inf	inf		transformer	all	e1	strogatz	
+56	predprey	13	2	inf	inf		transformer	all	e1	strogatz	
+57	predprey	inf	3	1.161314007192366	1.161314007192366	[(0.64*x_0 + 0.033)*(0.026*x_1 - 0.127)*(16.3*sin(0.749*x_1 - 3.621) - 20.0), (0.026*x_0 + 0.375*x_1 + 1.403)*(3.87*sqrt((0.286 - 0.022*x_1)*(0.404*x_0 + 0.16)) + 0.042*sqrt((-0.022*x_0 - 8.747)*(-0.e-3*x_1 - 63.397)) - 2.221)]	transformer	all	e1	strogatz	69.85847759246826
+58	predprey	30	3	inf	inf		transformer	all	e1	strogatz	
+59	predprey	13	3	4.250456868873791	4.444758965713424	[-0.420, 0.018*sin(0.071 - 0.535/(0.751 - 5.442*cos(70.732*x_0 - 72.108))) - 0.465]	transformer	all	e1	strogatz	44.22082734107971
+60	shearflow	inf	0	0.15659272066171642	0.15659272066171642	[(-0.015*x_1 - 0.023)*(-0.005*x_0 + 6.448 + 0.029*exp(-3.019*x_1)), -0.003*x_0*(170.882*x_1 + (-0.854*x_1 - 1.663)*(237.526*x_1 + 462.61) + 268.806)]	transformer	all	e1	strogatz	40.869200229644775
+61	shearflow	30	0	inf	inf		transformer	all	e1	strogatz	
+62	shearflow	13	0	inf	inf		transformer	all	e1	strogatz	
+63	shearflow	inf	1	0.537458712657833	0.537458712657833	[(0.04 - 0.026*x_1)*(0.011*x_0 + (0.391 - 0.228*x_1)*(281.536*x_1 - 409.966) - 15.257), (0.02*cos(2.151*x_0 + 8.478) + 0.001)*(0.05*Abs(207.882*x_1 - 328.212) + 5.2)]	transformer	all	e1	strogatz	34.48664712905884
+64	shearflow	30	1	inf	inf		transformer	all	e1	strogatz	
+65	shearflow	13	1	inf	inf		transformer	all	e1	strogatz	
+66	shearflow	inf	2	inf	inf		transformer	all	e1	strogatz	
+67	shearflow	30	2	4.685988057814542	4.678280680552469	[0.011*x_1 + (43.269 - 0.022*x_1)*(0.021*sin(11.831*x_0 - 76.959) - 0.009)*(-0.592*x_0 + 1.779*x_1 + 2.302) + 0.536*sin(455.998*sqrt(0.108*x_0 + 1) - 5.98) + 0.009, -0.195]	transformer	all	e1	strogatz	41.736175775527954
+68	shearflow	13	2	3.172781039137811	3.402143974856762	[-0.252, -0.254]	transformer	all	e1	strogatz	35.41907739639282
+69	shearflow	inf	3	0.024795030433027672	0.024795030433027672	[(-10.149*x_1 - 15.302)*(-0.583*(0.604*x_1 + 1)**2 - 0.091) + 0.057 + 0.874/(0.088*x_1 + (-4.001*x_0 - 52.678)*(-0.003*x_0 + 11.982*x_1 + 13.448) + 0.169), 0.043*sin(-2.828*x_0 + 0.036*x_1 + 8.986) - 0.002]	transformer	all	e1	strogatz	40.01614785194397
+70	shearflow	30	3	inf	inf		transformer	all	e1	strogatz	
+71	shearflow	13	3	inf	inf		transformer	all	e1	strogatz	
+72	myvdp	inf	0	inf	inf		transformer	all	e1	strogatz	
+73	myvdp	30	0	inf	inf		transformer	all	e1	strogatz	
+74	myvdp	13	0	inf	inf		transformer	all	e1	strogatz	
+75	myvdp	inf	1	2.8194082875953637	2.8194082875953637	[0.01*x_0 + 1.023*x_1 + 0.002, 0.329]	transformer	all	e1	strogatz	38.861287117004395
+76	myvdp	30	1	inf	inf		transformer	all	e1	strogatz	
+77	myvdp	13	1	2.8727185700104796	2.9529697733015285	[-0.022, 0.376]	transformer	all	e1	strogatz	51.24354600906372
+78	myvdp	inf	2	inf	inf		transformer	all	e1	strogatz	
+79	myvdp	30	2	inf	inf		transformer	all	e1	strogatz	
+80	myvdp	13	2	inf	inf		transformer	all	e1	strogatz	
+81	myvdp	inf	3	1.1888947114899835	1.1888947114899835	[1.005*x_1 + (-4.859*x_0 - 0.277)*(-0.025*x_1 - 0.045)*(0.003*tan(7.71 - 0.284/(-0.037*x_1 - 0.796)) + 0.032) + 0.004, (0.046 - 0.049*x_0)*(0.283 - 5.886*x_1)*(-6.84*x_0 - 6.686) - (-0.003*(x_1 - 0.083)**3 - 0.131)*(6.8*arctan(-2.085*x_0 - 0.387*x_1 + 0.517) + 0.009)]	transformer	all	e1	strogatz	37.85709238052368
+82	myvdp	30	3	inf	inf		transformer	all	e1	strogatz	
+83	myvdp	13	3	3.041924872248968	3.029166210147281	[0.085, 0.489 - 0.001*Abs(0.004*x_0 + 1.521)]	transformer	all	e1	strogatz	84.00991344451904
+84	stl	inf	0	inf	inf		transformer	all	e1	strogatz	
+85	stl	30	0	inf	inf		transformer	all	e1	strogatz	
+86	stl	13	0	5.718035612603463	5.771549559221807	[1.5*arctan(0.893 - 13.03*x_1) + 3.0*sin(0.3*tan(126.062*x_0 + 3.327) - 0.01), 2.572*x_0 + (-0.122*x_1 - 0.387)*(0.049*x_1 - 0.84)*(cos(1.316*x_1 - 0.099) - 0.025)*(-9.18*cos(89.899*x_0 - 0.116*x_1 + 9.817) - 0.898) + 0.061]	transformer	all	e1	strogatz	47.50759506225586
+87	stl	inf	1	0.42783732814012976	0.42783732814012976	[-2.959*x_1 - 0.004 + 0.003/(0.004*Abs(58.2 + 76.7/(-0.002*Abs(3.119*x_0 + 0.622) - 0.006)) - 98.9), 2.968*x_0 + 0.11*(-1 - 0.016/(-0.505*x_0 + 2.59*sin(0.006*x_0 + 0.566*x_1 + 30.767) - 0.081))**2 - 0.108]	transformer	all	e1	strogatz	38.11853313446045
+88	stl	30	1	inf	inf		transformer	all	e1	strogatz	
+89	stl	13	1	3.2369908617527487	3.2109212305859773	[-2.827*x_1 + (0.004*x_0 + 0.02)*(99.0*sin(128.432*x_0 - 2.954) + 0.01) - 0.199, 2.711*x_0 + (0.01 - 92.3*sin(38.161*x_1 - 2.259))*(0.02 - 0.008*x_1) + 0.023]	transformer	all	e1	strogatz	32.44560384750366
+90	stl	inf	2	inf	inf		transformer	all	e1	strogatz	
+91	stl	30	2	inf	inf		transformer	all	e1	strogatz	
+92	stl	13	2	inf	inf		transformer	all	e1	strogatz	
+93	stl	inf	3	inf	inf		transformer	all	e1	strogatz	
+94	stl	30	3	8.041195311587993	8.06036486954628	[-2.863*x_1 - 0.044 + 0.074/(0.7*tan(87.225*x_0 - 0.196) + 0.006), 2.172*x_0 - (0.247*(x_1 + 0.109)**3 - 0.072)*(-77.601*cos(0.192 + 45.899/(0.053*x_1 + 0.028)) - 0.067)*(-0.061*x_1 - 0.082*sin(20.869*x_0 - 0.231*x_1 + 5.23) - 0.021) + 0.037]	transformer	all	e1	strogatz	33.83105182647705
+95	stl	13	3	inf	inf		transformer	all	e1	strogatz	
+96	cphase	inf	0	0.1127074491558527	0.1127074491558527	[1.693, 4.536 - 0.567*sin(3.594*x_0 - 38.619)]	transformer	all	e1	strogatz	39.57959532737732
+97	cphase	30	0	inf	inf		transformer	all	e1	strogatz	
+98	cphase	13	0	1.11476237398843	0.7661575247588369	[2.030, 41.174*arctan(0.258) - 7.626]	transformer	all	e1	strogatz	37.64863109588623
+99	cphase	inf	1	inf	inf		transformer	all	e1	strogatz	
+100	cphase	30	1	inf	inf		transformer	all	e1	strogatz	
+101	cphase	13	1	inf	inf		transformer	all	e1	strogatz	
+102	cphase	inf	2	0.08532892407894746	0.08532892407894746	[1.693, 4.496]	transformer	all	e1	strogatz	41.57054328918457
+103	cphase	30	2	0.2493400057124955	0.17250213535049275	[1.694, 4.624]	transformer	all	e1	strogatz	36.54178190231323
+104	cphase	13	2	inf	inf		transformer	all	e1	strogatz	
+105	cphase	inf	3	0.07886647611623063	0.07886647611623063	[1.387 + 115.051/(0.001*x_1 + 391.0), 4.480]	transformer	all	e1	strogatz	29.44004988670349
+106	cphase	30	3	inf	inf		transformer	all	e1	strogatz	
+107	cphase	13	3	1.1008643160862062	0.6137862475553288	[1.392, (-2.765*x_0 - 21.45*sin(0.416*x_0 + 0.003*x_1 + 1.893) + 27.979)*(-0.025*x_0 + 0.256 + 1/(0.008*x_0 + 85.003))]	transformer	all	e1	strogatz	48.1886625289917
+108	lorenz	inf	0	inf	inf		transformer	all	e1	strogatz	

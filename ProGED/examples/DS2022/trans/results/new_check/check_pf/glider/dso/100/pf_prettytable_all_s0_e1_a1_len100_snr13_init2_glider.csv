@@ -1,0 +1,6 @@
+  index    complexity    length       TE    TE_inf  expr_x                                     expr_y                 index_column  method    data_version    system      snr    init
+    219            21       122  1.18804  0.774236  2.381*cos(x1*(2*x1 + x2) + 1.974) + 0.033  36.844/(x2 + 6.882)             219  dso       all             glider       13       2
+     30            12        67  1.27888  0.91399   -0.037*x1**2                               36.844/(x2 + 6.882)              30  dso       all             glider       13       2
+      3            10        64  1.34747  1.00463   -0.124*x1                                  36.844/(x2 + 6.882)               3  dso       all             glider       13       2
+     28             8        47  2.64532  2.78906   -0.037*x1**2                               2.036*x1                         28  dso       all             glider       13       2
+      1             6        44  2.96818  3.17387   -0.124*x1                                  2.036*x1                          1  dso       all             glider       13       2

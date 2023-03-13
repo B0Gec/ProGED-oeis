@@ -1,0 +1,4 @@
+  complexity    length       TE    TE_inf  expr_x                               expr_y                 index_column  method    exp_type    data_version    system      snr    init
+          12        24  4.22448   17.6959  5.0*sin(3.708*x)                     -0.304*sin(2.697*x)               0  proged    numdif      allonger        barmag       13       1
+          16        31  3.83955   13.8986  5.0*sin(3.475*x + 3.152*y)           -0.304*sin(2.697*x)               1  proged    numdif      allonger        barmag       13       1
+          17        36  3.7638    13.9358  -5.0*sin(3.379*x + 3.021*y + 3.847)  -0.304*sin(2.697*x)               2  proged    numdif      allonger        barmag       13       1

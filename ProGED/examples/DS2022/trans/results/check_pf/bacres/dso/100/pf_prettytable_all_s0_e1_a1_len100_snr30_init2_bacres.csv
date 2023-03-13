@@ -1,0 +1,5 @@
+  index    complexity    length        TE    TE_inf  expr_x                  expr_y               index_column  method    data_version    system      snr    init
+    102            16        75  0.364089  0.207583  -0.259*x1 + 133.371/x2  241.497/(x1 + x2)             102  dso       all             bacres       30       2
+    101            14        68  0.429784  0.297648  -0.259*x1 + 133.371/x2  152.601/x2                    101  dso       all             bacres       30       2
+     76            12        63  0.53104   0.466785  -4.049 + 147.463/x2     152.601/x2                     76  dso       all             bacres       30       2
+      1            10        44  0.992616  0.956562  14.606 - x1             152.601/x2                      1  dso       all             bacres       30       2

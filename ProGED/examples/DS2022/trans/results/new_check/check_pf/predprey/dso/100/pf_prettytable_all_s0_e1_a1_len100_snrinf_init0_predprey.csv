@@ -1,0 +1,7 @@
+  index    complexity    length        TE    TE_inf  expr_x                         expr_y                   index_column  method    data_version    system      snr    init
+    181            24        56  0.703207  0.703207  -x1*x2**2/(-x1 + 3*x2) + 2*x1  x1 - 0.313*x2                     181  dso       all             predprey    inf       0
+    162            14        61  0.98754   0.98754   -x1*x2/3 + 2*x1                x1 - 0.453*x2 + 0.915             162  dso       all             predprey    inf       0
+    161            13        42  1.03591   1.03591   -x1*x2/3 + 2*x1                x1 - 0.313*x2                     161  dso       all             predprey    inf       0
+      2             9        49  1.97242   1.97242   -x1                            x1 - 0.453*x2 + 0.915               2  dso       all             predprey    inf       0
+      1             8        30  2.22671   2.22671   -x1                            x1 - 0.313*x2                       1  dso       all             predprey    inf       0
+      0             6        25  3.13008   3.13008   -x1                            x1 - 1.449                          0  dso       all             predprey    inf       0

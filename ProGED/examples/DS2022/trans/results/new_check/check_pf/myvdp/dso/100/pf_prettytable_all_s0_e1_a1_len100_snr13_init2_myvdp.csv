@@ -1,0 +1,12 @@
+  index    complexity    length       TE    TE_inf  expr_x          expr_y                                                           index_column  method    data_version    system      snr    init
+     11            33        63  1.22833   1.17716  x2              x1*x2*(-x1 + x2*(x1*x2 + 4*x1)) - x1 + x2*(x1*x2 + 4*x1) - x2              11  dso       all             myvdp        13       2
+     45            28        52  1.70828   1.8831   2*x1*x2 + 9*x2  x1*x2*(-x1 + x2*(x1*x2 + 4*x1)) - 2*x2                                     45  dso       all             myvdp        13       2
+     33            27        50  1.71194   1.89173  x1*x2 + 5*x2    x1*x2*(-x1 + x2*(x1*x2 + 4*x1)) - 2*x2                                     33  dso       all             myvdp        13       2
+      9            21        40  1.71586   1.90096  x2              x1*x2*(-x1 + x2*(x1*x2 + 4*x1)) - 2*x2                                      9  dso       all             myvdp        13       2
+      4            17        36  1.85886   2.2249   x2              x2*(-x1*x2*(-x1 + x2) + x1 + 2*x2)                                          4  dso       all             myvdp        13       2
+     26            16        24  2.61659   3.50223  x1*x2 + 5*x2    2*x2**2 - x2                                                               26  dso       all             myvdp        13       2
+     37            13        21  2.67107   3.35525  2*x1*x2 + 9*x2  2*x2**2                                                                    37  dso       all             myvdp        13       2
+      3            12        23  2.8109    3.98009  x2              x2*(x1 + 2*x2) + 3*x2                                                       3  dso       all             myvdp        13       2
+      2            10        14  3.05669   4.44511  x2              2*x2**2 - x2                                                                2  dso       all             myvdp        13       2
+      1             6         9  4.11093   6.40239  x2              2*x2**2                                                                     1  dso       all             myvdp        13       2
+      0             4         7  5.88836   9.52122  x2              x2**2                                                                       0  dso       all             myvdp        13       2

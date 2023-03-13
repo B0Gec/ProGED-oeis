@@ -1,0 +1,15 @@
+  complexity    length       TE    TE_inf  expr_x                                  expr_y                 expr_z                index_column  method    exp_type    data_version    system      snr    init
+          11        16  6.26775   6.30245  1.422*y                                 -0.102*x*z             0.449*x*y                        0  proged    numdif      allonger        lorenz       30       1
+           9        12  6.2968    6.33527  1.422*y                                 -1.686*x               0.743*y                          1  proged    numdif      allonger        lorenz       30       1
+          12        17  6.21257   6.24891  1.422*y                                 -0.027*x**3            0.449*x*y                        2  proged    numdif      allonger        lorenz       30       1
+          13        19  5.96033   5.99213  1.422*y                                 0                      0.449*x*y                        3  proged    numdif      allonger        lorenz       30       1
+          18        31  4.15981   4.17055  -9.876*x + 9.892*y - 0.027              0                      0.449*x*y                        4  proged    numdif      allonger        lorenz       30       1
+          26        44  2.93589   2.93123  -9.873*x + 9.891*y - 0.002*z            -0.934*x*z + 25.131*x  0.99*x*y - 2.633*z               5  proged    numdif      allonger        lorenz       30       1
+          20        33  4.15959   4.17034  -9.873*x + 9.891*y - 0.002*z            0                      0.449*x*y                        6  proged    numdif      allonger        lorenz       30       1
+          15        23  5.25717   5.28459  -9.878*x + 9.892*y                      -0.102*x*z             0.449*x*y                        7  proged    numdif      allonger        lorenz       30       1
+          14        21  5.90185   5.93776  -9.878*x + 9.892*y                      -1.686*x               0.449*x*y                        8  proged    numdif      allonger        lorenz       30       1
+          23        37  3.09987   3.10228  -9.878*x + 9.892*y                      -0.934*x*z + 25.131*x  0.99*x*y - 2.633*z               9  proged    numdif      allonger        lorenz       30       1
+          16        24  4.62304   4.63871  -9.878*x + 9.892*y                      -0.027*x**3            0.449*x*y                       10  proged    numdif      allonger        lorenz       30       1
+          17        26  4.16024   4.17099  -9.878*x + 9.892*y                      0                      0.449*x*y                       11  proged    numdif      allonger        lorenz       30       1
+          22        40  4.14296   4.15347  -0.018*x*z - 9.115*x + 9.687*y - 0.347  0                      0.449*x*y                       12  proged    numdif      allonger        lorenz       30       1
+          21        35  4.15576   4.16643  -9.808*x - 0.008*y*z + 10.026*y         0                      0.449*x*y                       13  proged    numdif      allonger        lorenz       30       1

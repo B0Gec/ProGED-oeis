@@ -1,0 +1,10 @@
+  index    complexity    length         TE     TE_inf  expr_x                   expr_y                                                     index_column  method    data_version    system      snr    init
+     25            34        72   0.403028   0.403028  x2*(x2**2 + 4*x2)        x1*(2*x1*x2*(x1 - x2) + x1 + x2) + x2*(x1 - x2)**2 + x2              25  dso       all             myvdp       inf       2
+     20            27        56   0.498154   0.498154  x2*(x2**2 + 4*x2)        x1*(x1 + x2 + (x1 - x2)*(x1*x2 - 2*x2))                              20  dso       all             myvdp       inf       2
+     18            26        48   2.06276    2.06276   x2*(x2**2 + 4*x2)        -x1 + x2*(x1*(-x1 + x2) + 2*x1)                                      18  dso       all             myvdp       inf       2
+      3            21        37   3.62743    3.62743   -2*x2**2*(x1 - x2) + x2  2*x2**2 - 2*x2                                                        3  dso       all             myvdp       inf       2
+     16            18        31   4.00054    4.00054   x2*(x2**2 + 4*x2)        2*x2**2 - 2*x2                                                       16  dso       all             myvdp       inf       2
+      1            17        30   4.66218    4.66218   -2*x2**2*(x1 - x2) + x2  2*x2**2                                                               1  dso       all             myvdp       inf       2
+      0            15        28   5.72407    5.72407   -2*x2**2*(x1 - x2) + x2  x2**2                                                                 0  dso       all             myvdp       inf       2
+     14            14        24   8.08777    8.08777   x2*(x2**2 + 4*x2)        2*x2**2                                                              14  dso       all             myvdp       inf       2
+     13            12        22  15.7934    15.7934    x2*(x2**2 + 4*x2)        x2**2                                                                13  dso       all             myvdp       inf       2

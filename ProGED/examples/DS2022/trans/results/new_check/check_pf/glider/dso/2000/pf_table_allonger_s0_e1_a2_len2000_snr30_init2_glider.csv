@@ -1,0 +1,4 @@
+	index	complexity	length	TE	TE_inf	expr_x	expr_y	index_column	method	data_version	system	snr	init
+2	28	10	86	0.529629520786693	0.4953298436463962	0.027*x2 - 0.791	4.443 - 0.126*x2	28	dso	allonger	glider	30	2
+1	27	8	67	0.5786278866362068	0.5532419819592245	0.027*x2 - 0.791	x1 - 0.185	27	dso	allonger	glider	30	2
+0	0	6	46	0.6930452523008668	0.6656361051915485	-0.137*x1	x1 - 0.185	0	dso	allonger	glider	30	2

@@ -1,0 +1,12 @@
+	complexity	length	TE	TE_inf	expr_x	expr_y	index_column	method	exp_type	data_version	system	snr	init
+0	9	15	1.9582848095822638	2.0126686827143585	-0.113*x*y	0.856 - 0.249*y	0	proged	numdif	all	predprey	13	3
+1	7	10	2.102823158575362	2.2007265609915994	-0.113*x*y	-0.128*y	1	proged	numdif	all	predprey	13	3
+2	22	36	1.24094436773371	1.2276299919205904	-0.225*x**2*y/(x + 0.077) + 1.005*x	1.037*x - 0.315*y	2	proged	numdif	all	predprey	13	3
+3	6	8	5.226428172026048	5.2387495870833245	-0.168*y	-0.128*y	3	proged	numdif	all	predprey	13	3
+4	13	20	1.9063896287200306	1.978637158287841	-0.011*x*y**2	1.037*x - 0.315*y	4	proged	numdif	all	predprey	13	3
+5	11	18	1.9404862488190355	1.993631102819284	-0.011*x*y**2	0.856 - 0.249*y	5	proged	numdif	all	predprey	13	3
+6	15	24	1.4957868305536377	1.5235002160149498	-0.227*x*y + 1.065*x	1.037*x - 0.315*y	6	proged	numdif	all	predprey	13	3
+7	16	29	1.241981380653229	1.225508062465177	-0.226*x*y + 1.042*x + 0.04	1.037*x - 0.315*y	7	proged	numdif	all	predprey	13	3
+8	14	27	1.8578012991950008	1.9101876859296276	-0.226*x*y + 1.042*x + 0.04	0.856 - 0.249*y	8	proged	numdif	all	predprey	13	3
+9	40	76	1.1376102162383024	1.0904550607215515	-0.226*x*y + 1.042*x + 0.04	0.262*x**2*y/(y - 2.038) + 1.692*x/(x + 0.03) - 0.02*y**3/(y - 1.778) - 2.047	9	proged	numdif	all	predprey	13	3
+10	49	97	1.0116283215970499	0.8463275569517212	-0.021*x**2*y/(x + 0.157) - 0.171*x*y + 0.867*x - 0.108*y + 0.565	1.018*x + 1.345*x/(x + 0.03) - 0.506*y	10	proged	numdif	all	predprey	13	3

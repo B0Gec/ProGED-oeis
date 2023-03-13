@@ -1,0 +1,5 @@
+	index	complexity	length	TE	TE_inf	expr_x	expr_y	index_column	method	data_version	system	snr	init
+3	141	23	140	3.448975804133965	4.498816930195294	2.098/(x2*(cos(1.1*x1 - 2.222) - 1.0))	-1.461/sin(0.988*x1)	141	dso	allonger	bacres	13	3
+2	4	12	68	3.498442673829304	4.527585486009408	0.011*x2	x2/(2.612*x1 - 6.157)	4	dso	allonger	bacres	13	3
+1	1	8	28	3.8434472163697375	5.033578144129379	0.011*x2	x1/x2	1	dso	allonger	bacres	13	3
+0	0	6	46	4.0421618398235815	5.325447646021855	0.011*x2	0.038*x2	0	dso	allonger	bacres	13	3

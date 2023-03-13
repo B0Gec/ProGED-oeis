@@ -1,0 +1,6 @@
+  index    complexity    length        TE    TE_inf  expr_x            expr_y                   index_column  method    data_version    system       snr    init
+     35            14        80  0.971187  0.615231  x2*(-x2 - 1.555)  x1*(0.032 - 0.012*x1)              35  dso       all             shearflow     30       3
+     34            12        73  1.06808   0.789341  x2*(-x2 - 1.555)  0.099 - 0.038*x1                   34  dso       all             shearflow     30       3
+      2            10        74  1.09199   0.807102  x2 + 1.568        x1*(0.032 - 0.012*x1)               2  dso       all             shearflow     30       3
+      1             8        67  1.18955   0.948955  x2 + 1.568        0.099 - 0.038*x1                    1  dso       all             shearflow     30       3
+      0             6        46  1.90944   1.96072   x2 + 1.568        -0.008*x1                           0  dso       all             shearflow     30       3

@@ -1,0 +1,11 @@
+  index    complexity    length        TE    TE_inf  expr_x                 expr_y                                               index_column  method    data_version    system      snr    init
+     84            23       150  0.596575  0.282726  x1*(0.409 - 0.068*x1)  0.452*x2**2*(cos(x2*(2.2*x1*x2 - 5.633)) - 1.313)              84  dso       allonger        barmag       30       2
+     47            21       145  0.606017  0.314468  1.873 - 0.31*x1        0.452*x2**2*(cos(x2*(2.2*x1*x2 - 5.633)) - 1.313)              47  dso       allonger        barmag       30       2
+     10            19       126  0.689921  0.505362  x2 - 0.3               0.452*x2**2*(cos(x2*(2.2*x1*x2 - 5.633)) - 1.313)              10  dso       allonger        barmag       30       2
+     43            18       139  0.703452  0.424318  1.873 - 0.31*x1        (0.853*x1 - 5.54)*(x2*(x2 - 0.698) + 0.145)                    43  dso       allonger        barmag       30       2
+     76            16        79  0.723541  0.42353   x1*(0.409 - 0.068*x1)  x2**2*(0.235 - x2)                                             76  dso       allonger        barmag       30       2
+     39            14        74  0.733664  0.456178  1.873 - 0.31*x1        x2**2*(0.235 - x2)                                             39  dso       allonger        barmag       30       2
+      4            12        75  0.791762  0.583449  x2 - 0.3               x2**3*(0.383*x1 - 2.475)                                        4  dso       allonger        barmag       30       2
+      1            10        53  1.03214   0.887096  x2 - 0.3               x2*(0.335 - x2)                                                 1  dso       allonger        barmag       30       2
+     37             8        66  1.55689   1.29747   1.873 - 0.31*x1        -0.17*x2                                                       37  dso       allonger        barmag       30       2
+      0             6        47  2.68245   2.80905   x2 - 0.3               -0.17*x2                                                        0  dso       allonger        barmag       30       2

@@ -1,0 +1,9 @@
+  index    complexity    length        TE    TE_inf  expr_x                            expr_y                        index_column  method    data_version    system       snr    init
+    136            18       123  0.363992  0.340534  (-2.937*x2 - 4.549)*cos(1.09*x1)  x1*(1.177*sin(x2) + 1.248)             136  dso       allonger        shearflow     30       2
+     70            17        96  0.805426  0.796268  -0.364*x2 + 0.666/x2              x1*(1.177*sin(x2) + 1.248)              70  dso       allonger        shearflow     30       2
+     92            16       103  1.0402    1.03215   (-2.66*x2 - 4.132)*cos(x1)        x1*(1.177*sin(x2) + 1.248)              92  dso       allonger        shearflow     30       2
+     69            15        78  1.19623   1.19003   -0.364*x2 + 0.666/x2              x1*(sin(x2) + 1.09)                     69  dso       allonger        shearflow     30       2
+     91            14        85  1.55705   1.55346   (-2.66*x2 - 4.132)*cos(x1)        x1*(sin(x2) + 1.09)                     91  dso       allonger        shearflow     30       2
+     66            12        66  1.60646   1.60379   -0.364*x2 + 0.666/x2              0.192*x1                                66  dso       allonger        shearflow     30       2
+     88            11        73  2.0488    2.04917   (-2.66*x2 - 4.132)*cos(x1)        0.192*x1                                88  dso       allonger        shearflow     30       2
+      0             8        45  2.36162   2.36348   -x2 - 1.571                       0.192*x1                                 0  dso       allonger        shearflow     30       2

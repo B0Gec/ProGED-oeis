@@ -1,0 +1,4 @@
+	complexity	length	TE	TE_inf	expr_x	expr_y	index_column	method	exp_type	data_version	system	snr	init
+0	12	24	0.4177453860339257	0.4177453860339257	1.849*cos(0.03*y)	4.489	0	proged	numdif	all	cphase	inf	1
+1	18	36	0.28827839642417674	0.28827839642417674	1.757 - 0.725*sin(1.377*t - 4.377*x)	4.489	1	proged	numdif	all	cphase	inf	1
+2	21	46	0.0970947245442154	0.0970947245442154	-0.76*sin(4.453*x) + 0.794*sin(0.999*y) + 1.922	4.489	2	proged	numdif	all	cphase	inf	1

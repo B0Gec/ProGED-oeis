@@ -1,0 +1,7 @@
+  complexity    length        TE    TE_inf  expr_x              expr_y              index_column  method    exp_type    data_version    system      snr    init
+           6         8  3.93675   3.95392   -0.005*y            0.32*x                         0  proged    numdif      all             bacres       30       0
+           8        13  2.47765   2.53274   4.09 - 0.098*y      0.32*x                         1  proged    numdif      all             bacres       30       0
+          10        18  0.751971  0.708533  4.09 - 0.098*y      11.881 - 0.184*y               2  proged    numdif      all             bacres       30       0
+           7        10  3.85102   3.86738   0                   0.32*x                         3  proged    numdif      all             bacres       30       0
+           9        15  1.34296   1.35605   -0.009*x*y + 5.101  0.32*x                         4  proged    numdif      all             bacres       30       0
+          11        20  0.43469   0.329421  -0.009*x*y + 5.101  11.881 - 0.184*y               5  proged    numdif      all             bacres       30       0

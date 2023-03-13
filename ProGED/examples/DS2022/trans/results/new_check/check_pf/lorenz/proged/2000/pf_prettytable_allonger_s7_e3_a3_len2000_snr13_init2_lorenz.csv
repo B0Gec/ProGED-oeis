@@ -1,0 +1,11 @@
+  complexity    length       TE    TE_inf  expr_x                                   expr_y       expr_z       index_column  method    exp_type    data_version    system      snr    init
+          10        14  3.75477   3.95063  1.975*y                                  -0.135*x*z   0.398*y                 0  proged    numdif      allonger        lorenz       13       2
+           9        12  3.80021   3.99509  1.975*y                                  -2.524*x     0.398*y                 1  proged    numdif      allonger        lorenz       13       2
+          11        15  3.67802   3.865    1.975*y                                  -0.024*x**3  0.398*y                 2  proged    numdif      allonger        lorenz       13       2
+          13        18  3.646     3.7809   0.007*y**3                               -0.024*x**3  0.398*y                 3  proged    numdif      allonger        lorenz       13       2
+          15        23  3.59967   3.77393  -6.869*x + 7.186*y                       -0.135*x*z   0.516*x*y               4  proged    numdif      allonger        lorenz       13       2
+          14        21  3.62531   3.80751  -6.869*x + 7.186*y                       -2.524*x     0.516*x*y               5  proged    numdif      allonger        lorenz       13       2
+          17        26  3.4025    3.49981  -6.869*x + 7.186*y                       0            0.516*x*y               6  proged    numdif      allonger        lorenz       13       2
+          16        24  3.50322   3.60345  -6.869*x + 7.186*y                       -0.024*x**3  0.516*x*y               7  proged    numdif      allonger        lorenz       13       2
+          22        40  3.35603   3.41684  -0.205*x*z + 0.111*y*z + 3.47*y - 1.439  -0.024*x**3  0.516*x*y               8  proged    numdif      allonger        lorenz       13       2
+          21        38  3.39641   3.4618   -0.076*x*z - 4.097*x + 6.663*y - 0.493   -0.024*x**3  0.516*x*y               9  proged    numdif      allonger        lorenz       13       2

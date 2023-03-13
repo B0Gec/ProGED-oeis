@@ -1,0 +1,12 @@
+	complexity	length	TE	TE_inf	expr_x	expr_y	index_column	method	exp_type	data_version	system	snr	init
+0	7	10	2.135629399680099	2.135629399680099	-1.287*x*y	-1.348*x	0	proged	numdif	allonger	lv	inf	3
+1	6	8	4.454773453550603	4.454773453550603	-2.096*x	-1.348*x	1	proged	numdif	allonger	lv	inf	3
+2	11	20	1.3269922597463486	1.3269922597463486	-2.096*x	-2.357*x - 2.433*y + 4.855	2	proged	numdif	allonger	lv	inf	3
+3	13	23	1.2001453341136759	1.2001453341136759	-2.096*x	-1.24*x**2 - 0.774*y + 1.547	3	proged	numdif	allonger	lv	inf	3
+4	12	22	1.242643544769873	1.242643544769873	-2.096*x	-1.075*x*y - 1.559*y + 3.127	4	proged	numdif	allonger	lv	inf	3
+5	20	39	0.12009672812195006	0.12009672812195006	-0.64*x*y**2 - 0.832*y + 1.664	-1.075*x*y - 1.559*y + 3.127	5	proged	numdif	allonger	lv	inf	3
+6	22	42	0.022472878299461867	0.022472878299461867	-0.64*x*y**2 - 0.832*y + 1.664	-0.994*x*y - 0.159*y**3 + 1.276	6	proged	numdif	allonger	lv	inf	3
+7	14	25	0.5650868079203524	0.5650868079203524	-0.71*x**2*y	-2.357*x - 2.433*y + 4.855	7	proged	numdif	allonger	lv	inf	3
+8	16	28	0.3742547648700313	0.3742547648700313	-0.71*x**2*y	-1.24*x**2 - 0.774*y + 1.547	8	proged	numdif	allonger	lv	inf	3
+9	33	66	0.01411551113651567	0.01411551113651567	-2.595*x*y + 2.563*x - 0.784*y**2 + 2.022*y - 0.911	1.153*x**3 - 1.552*x**2*y - 0.882*y + 1.763	9	proged	numdif	allonger	lv	inf	3
+10	32	61	0.014908955320098916	0.014908955320098916	-2.555*x*y + 2.488*x - 0.139*y**3 + 0.556*y	1.153*x**3 - 1.552*x**2*y - 0.882*y + 1.763	10	proged	numdif	allonger	lv	inf	3

@@ -1,0 +1,6 @@
+  index    complexity    length        TE    TE_inf  expr_x            expr_y             index_column  method    data_version    system      snr    init
+     15            10        88  0.171199  0.104149  0.002*x1 + 1.746  4.901 - 0.01*x2              15  dso       allonger        cphase       30       2
+     16             9        72  0.221071  0.174906  0.002*x1 + 1.746  cos(x2) + 4.392              16  dso       allonger        cphase       30       2
+     14             8        66  0.937306  0.907199  0.002*x1 + 1.746  0.174*x1                     14  dso       allonger        cphase       30       2
+      2             7        48  1.77157   1.75614   0.073*x1          cos(x2) + 4.392               2  dso       allonger        cphase       30       2
+      0             6        42  3.3197    3.32251   0.073*x1          0.174*x1                      0  dso       allonger        cphase       30       2

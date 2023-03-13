@@ -349,11 +349,11 @@ strogatz = {
     sys_lotka.sys_name: sys_lotka,
     sys_predprey.sys_name: sys_predprey,
     sys_shearflow.sys_name: sys_shearflow,
-    sys_vdp.sys_name: sys_vdp,
+    # sys_vdp.sys_name: sys_vdp,
 }
 
 mysystems = {
-    # sys_myvdp.sys_name: sys_myvdp,
+    sys_myvdp.sys_name: sys_myvdp,
     sys_stl.sys_name: sys_stl,
     sys_cphase.sys_name: sys_cphase,
     sys_lorenz.sys_name: sys_lorenz,

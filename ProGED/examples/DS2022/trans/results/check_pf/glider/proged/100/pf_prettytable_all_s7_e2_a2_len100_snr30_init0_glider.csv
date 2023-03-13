@@ -1,0 +1,6 @@
+  complexity    length        TE    TE_inf  expr_x                                 expr_y           index_column  method    exp_type    data_version    system      snr    init
+           6         8  0.438734  0.37789   -0.177*x                               0.998*x                     0  proged    numdif      all             glider       30       0
+           8        13  0.418552  0.34206   -0.177*x                               5.0 - 0.131*y               1  proged    numdif      all             glider       30       0
+          14        28  0.245604  0.165185  -0.219*x - 0.744*sin(0.992*y) + 0.155  0.998*x                     2  proged    numdif      all             glider       30       0
+          13        23  0.349466  0.289872  -0.178*x - 0.732*cos(0.919*y)          0.998*x                     3  proged    numdif      all             glider       30       0
+          15        26  0.232167  0.162651  -0.045*x**2 - 0.756*sin(0.994*y)       0.998*x                     4  proged    numdif      all             glider       30       0

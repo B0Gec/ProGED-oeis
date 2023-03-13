@@ -1,0 +1,4 @@
+	index	complexity	length	TE	TE_inf	expr_x	expr_y	index_column	method	data_version	system	snr	init
+2	99	18	111	1.422697952571745	1.240551281505124	cos(x1*(x1 + 1.125))	x2*(-0.18*x1 - 0.18*x2**2 + 0.94)	99	dso	all	barmag	13	1
+1	96	11	59	1.4233025467068088	1.2418654349297282	cos(x1*(x1 + 1.125))	-0.347*x2**2	96	dso	all	barmag	13	1
+0	20	7	33	2.359221558892288	9.981714933807941	sin(x1)	-0.347*x2**2	20	dso	all	barmag	13	1

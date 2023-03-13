@@ -1,0 +1,76 @@
+	system	snr	iinit	TE	TEinf	expr_model	method	data_version	exp_version	benchmark	duration
+0	bacres	inf	0	1.1657303375864518	1.1657303375864518	[-0.348*x_0 - 0.134*x_1 + 10.169, -0.033*x_0 + 3.6*Abs(0.216*x_0 - 1.856) - 1.066]	transformer	allonger	e1	strogatz	722.455817937851
+1	bacres	inf	1	inf	inf		transformer	allonger	e1	strogatz	
+2	bacres	inf	2	inf	inf		transformer	allonger	e1	strogatz	
+3	bacres	13	2	inf	inf		transformer	allonger	e1	strogatz	
+4	bacres	inf	3	1.6557332824110707	1.6557332824110707	[-0.206*x_0 - 0.076*x_1 + 5.508, 0.059 + 6.05/(-1.47 + 4.81/(0.361*x_0 - 3.766 + 0.013/((-0.093*(0.022*x_1 - 1)**2 - 0.006)*(-0.029*x_0 + 0.008*x_1 - 88.697))))]	transformer	allonger	e1	strogatz	333.0389316082001
+5	bacres	30	3	inf	inf		transformer	allonger	e1	strogatz	
+6	barmag	30	0	inf	inf		transformer	allonger	e1	strogatz	
+7	barmag	13	0	3.215922833070196	10.007985212622343	[0.149 - 6.642*sin(8.233*Abs(11.041*x_0 - 70.611) - 0.73), 0.17054]	transformer	allonger	e1	strogatz	380.41533303260803
+8	barmag	30	1	4.78127209088234	5.501597896264657	[3.345*tan(0.302*(-0.717*cos(0.047*x_0 + 0.678) - 1)**2 + 0.492*cos(0.88 + 2.326/(3.789 - 0.667*x_0)) - 6.644) + 0.013, 1.343]	transformer	allonger	e1	strogatz	364.65373492240906
+9	barmag	13	1	inf	inf		transformer	allonger	e1	strogatz	
+10	barmag	13	2	inf	inf		transformer	allonger	e1	strogatz	
+11	barmag	inf	3	1.0571286868434875	1.0571286868434875	[(0.035 - 0.006*x_0)*(364.657*x_1 - 91.86), 0.84*Abs((0.013*x_0 - 0.075)*(0.287*x_0 - 1.665)*(12.155*x_1 + 43.838)) - 0.03]	transformer	allonger	e1	strogatz	333.51205587387085
+12	barmag	30	3	inf	inf		transformer	allonger	e1	strogatz	
+13	barmag	13	3	inf	inf		transformer	allonger	e1	strogatz	
+14	glider	30	1	2.2992255254427167	2.2992238909085767	[0.043 - 1.539*arctan(0.114), 0.085*arctan(0) + 1.646]	transformer	allonger	e1	strogatz	351.1290647983551
+15	glider	13	1	inf	inf		transformer	allonger	e1	strogatz	
+16	glider	30	2	1.7457285136449094	1.7410643028759512	[0.013*log(0.019*x_1 + 6.713) - 0.33, 41.689 - 1637.358/(41.767 - 430.777*exp(-263.78*(1 + 0.37/(9.175 - 8.623*cos(1.577*x_1 - 33.353)))**2))]	transformer	allonger	e1	strogatz	348.3878333568573
+17	glider	13	2	4.4371912291828455	4.892753056994444	[(0.979*x_0 - sin(1.583*x_0 - 2.901) - 3.324)*(0.008*x_1 + 0.001*cos(1.869*x_1 - 24.294) + 0.01*cos(10.096*x_1 - 571.121) - 0.02), (-0.394 + 58.327/(-0.599*sin(41.359*x_0 - 43.345) - 2.317 - 73.779/(180.571 - 8.212*x_1) + 0.118/(0.004 - 0.002*(-Abs(0.048*arctan(0.052*x_1 + 6.425) + 0.354) - 0.879)**2)))*(37.107*sin(76.747*x_0 - 50.127) + 6.12)]	transformer	allonger	e1	strogatz	395.22394609451294
+18	glider	13	3	inf	inf		transformer	allonger	e1	strogatz	
+19	lv	13	0	6.75911531982856	13.296488902406391	[-0.097, (1.134 - 1.514*cos(0.103*tan(149.179*x_1 - 295.118) + 0.755))*(0.333*cos(93.045*x_1 - 185.884) - 0.07)*(2.23*x_1 + 86.954*sin(4.84*x_0 + 81.941*sqrt(1 - 0.116*x_0) - 0.542) + 19.471)]	transformer	allonger	e1	strogatz	378.6248850822449
+20	lv	30	1	inf	inf		transformer	allonger	e1	strogatz	
+21	lv	13	1	inf	inf		transformer	allonger	e1	strogatz	
+22	lv	30	3	inf	inf		transformer	allonger	e1	strogatz	
+23	lv	13	3	inf	inf		transformer	allonger	e1	strogatz	
+24	predprey	inf	0	4.045989641452375	4.045989641452375	[(0.193 - 0.045*x_1)*(0.406*x_0 + 9.319)*(1506.096*(1 - 0.185*x_1)**2*(0.009*x_0 - 0.011 + 1/(0.009*x_0 + 67.991))**2 + 0.055), 1.187*x_0 - (0.384 - 0.025*x_1)*(0.279*x_1 - 1.499) - 1.427]	transformer	allonger	e1	strogatz	375.1528401374817
+25	predprey	inf	1	2.0366582885727387	2.0366582885727387	[-0.403*x_1 + (0.019 - 0.003*x_1)*(85.787 - 85.009*x_0)*(0.471*x_1 - 2.603) + (0.074 - 0.096*x_0)*(0.471*x_1 - 2.547)*(3.534*x_1 - 18.755) + 1.888, 1.223*x_0 - (0.019*x_0 + 0.166)*(0.005*x_0 + 0.471*x_1 - 1.954) - 1.418]	transformer	allonger	e1	strogatz	371.1856212615967
+26	predprey	30	1	4.970268619246324	4.978718206992781	[4.016*arctan(-0.127) + 0.017, -1.091]	transformer	allonger	e1	strogatz	372.3315234184265
+27	predprey	13	1	inf	inf		transformer	allonger	e1	strogatz	
+28	predprey	inf	2	1.4229659400239036	1.4229659400239036	[-0.003*x_1 + (0.132 - 0.087*x_0)*(2.181*x_0 - 1.537) - (17.474*x_0 - 1.045)*(0.029*x_1 - 0.175) + 0.224, 1.628*x_0 + (-0.015*x_0 - 0.07)*(4.189*x_0 + 0.552*x_1 - 6.621) - 1.667]	transformer	allonger	e1	strogatz	348.1905748844147
+29	predprey	30	2	5.033084633863018	5.055165569040536	[-0.009*Abs(0.048*x_1 - 0.267) - 0.423, -0.095*cos(3.899*Abs(18.535*x_1 - 144.55) + 0.572) - 0.027]	transformer	allonger	e1	strogatz	737.1877963542938
+30	predprey	13	2	4.7121113033644395	5.082801149162783	[-0.443, 0]	transformer	allonger	e1	strogatz	395.66166853904724
+31	predprey	inf	3	inf	inf		transformer	allonger	e1	strogatz	
+32	predprey	30	3	5.881998555354203	5.90209607150371	[0.221*(0.148 - 6.502/(0.066 - 2463.246*(0.227*cos(130748.974*(0.018*x_0 + 1)**2 + 5.38) + 1)**2))*(5.884*sin(0.792*x_1 - 37.669*(0.14 - sqrt(1 - 0.078*x_1))**2 + 79.511) - 8.371), 0]	transformer	allonger	e1	strogatz	362.4863362312317
+33	predprey	13	3	inf	inf		transformer	allonger	e1	strogatz	
+34	shearflow	inf	0	2.817342243215366	2.817342243215366	[(-0.004*x_0 - 0.506)*(72.814*x_1 + 114.379)*(0.082*(-0.647*x_1 - 1)**2*(0.637*x_1 + 1)**2 + 0.005), (0.794*x_0 + 0.003)*(-17.961*x_1 - 24.067)*(-0.005*x_1 - 0.045)*(1.674*x_1 + 2.628)]	transformer	allonger	e1	strogatz	352.1689260005951
+35	shearflow	30	0	2.917308306861168	2.9199393331232044	[0.270, -0.023]	transformer	allonger	e1	strogatz	310.09442138671875
+36	shearflow	13	0	inf	inf		transformer	allonger	e1	strogatz	
+37	shearflow	inf	1	2.5568418229886625	2.5568418229886625	[-1.79*(77.3*x_1 - 121.426)*(-0.03*(0.624*x_1 - 1)**2 - 0.003), (1.035*x_0 + 3.252)*(0.002*Abs(1.597*x_1 - 9.193) + 0.012)*(0.052*x_0 + 1.204*x_1 + (1.084 - 0.692*x_1)*(61.624*x_1 - 96.737) - 2.063)]	transformer	allonger	e1	strogatz	316.2983253002167
+38	shearflow	30	1	3.434310297091936	3.440287988049616	[0.01 - 2.65*tan(80.0*tan(0.002*(sin(77970.368*(1 - 0.264/(0.093*(-0.139*x_0 - 0.052*x_1 - 1)**3 - 0.004))**2 + 17.8) + 0.017)**2 + 0.303) + 0.095), 0.102]	transformer	allonger	e1	strogatz	334.7241859436035
+39	shearflow	13	1	inf	inf		transformer	allonger	e1	strogatz	
+40	shearflow	inf	2	1.5690149440891208	1.5690149440891208	[(0.256*(0.616*x_1 + 1)**2 + 0.037)*(-0.053*x_0 + (0.006*x_0 - 0.078)*(0.11*x_1 + 0.739) + (0.017*x_0 - 0.984)*(2.615*x_1 + 4.088) + 0.046), -0.857*x_0*(-1.65*(0.654*x_1 + 1)**2 + 0.111*exp(0.009*x_1 - 64.594*(x_0 - 0.008)**2) - 0.064)]	transformer	allonger	e1	strogatz	308.54801893234253
+41	shearflow	inf	3	0.16106179791207598	0.16106179791207598	[(0.014 + 0.01/(83.844 - 11.799*x_0))*(6.278 - 0.772*x_1)*(9.531*x_1 + 14.961), 0.735*(-0.005*arctan(331.235*(-0.11*x_1 + (-0.037*x_1 - 0.059)*(-0.006*x_1 - 0.024) - 1)**2 + 0.651) - 0.054)*arctan(3.081*x_0 - 9.67)]	transformer	allonger	e1	strogatz	357.21047377586365
+42	shearflow	30	3	inf	inf		transformer	allonger	e1	strogatz	
+43	shearflow	13	3	inf	inf		transformer	allonger	e1	strogatz	
+44	myvdp	inf	0	2.2001724388441026	2.2001724388441026	[1.032*x_1 - 0.01, (0.058*x_0 - 0.061)*(0.64*x_0 + 1.105)*(-4.204*x_0 - 26.452*x_1 + 11.598*sqrt(1 - 0.029*x_0) - 17.544)]	transformer	allonger	e1	strogatz	331.50634813308716
+45	myvdp	30	0	inf	inf		transformer	allonger	e1	strogatz	
+46	myvdp	13	0	2.7257715892639287	2.757072928811782	[0.159, 19.84*arctan(0.003) - 0.22]	transformer	allonger	e1	strogatz	391.9833154678345
+47	myvdp	inf	1	2.4343941007735017	2.4343941007735017	[0.021*x_1*(-0.013*x_0 - sin(0.037*Abs(0.933*x_0 + 81.188) + 0.055) + 47.81), (0.667*x_0 - 0.589)*(-0.054*x_1 - 0.015)*(38.87*x_0 + (0.364*x_1 - 10.922)*(0.396*x_0 + 0.767 + 0.16/(0.211*x_0 - 6.481)) + 59.599)]	transformer	allonger	e1	strogatz	386.13358449935913
+48	myvdp	13	1	2.508905465370794	2.5248705073382784	[-0.089, -29.552*arctan(-0.007) - 0.003]	transformer	allonger	e1	strogatz	371.23597836494446
+49	myvdp	inf	3	5.003975748530886	5.003975748530886	[0.003*x_0 + 1.02*x_1 + 0.002, (-2.182*x_0 - 2.891)*(0.706*x_0 - 0.65)*(1.156*x_1 + 0.465)]	transformer	allonger	e1	strogatz	314.3663966655731
+50	myvdp	30	3	inf	inf		transformer	allonger	e1	strogatz	
+51	myvdp	13	3	2.441494472765468	2.448789139751165	[-0.004*x_1 + 0.235 - 0.049*exp(-0.092*x_1) - 0.84/(0.004 - 5752239.561*(1 - 0.e-3*x_1)**3), (0.007 - 0.003*sin(68.717*x_0 - 4.439))*(-3.937*x_0 + 0.131*x_1 + 0.655*tan(30.769*(0.845*x_1 - 1)**2 - 0.083) + 31.676)]	transformer	allonger	e1	strogatz	396.53650164604187
+52	stl	inf	0	1.6027896469139409	1.6027896469139409	[-0.014*x_1 + (0.076 - 0.112*x_1)*(0.087*sqrt(0.018*x_0 + 1) + 25.4) - 1.9, 3.312*x_0 - (0.341*x_1 + 0.012)*(x_1 - (0.633 - 7.274*(x_0 - 0.424)**3)*(0.04*x_1 + 0.069) + 0.006)**2 + 0.034]	transformer	allonger	e1	strogatz	367.42822766304016
+53	stl	30	0	inf	inf		transformer	allonger	e1	strogatz	
+54	stl	13	0	inf	inf		transformer	allonger	e1	strogatz	
+55	stl	inf	1	0.14433444670868117	0.14433444670868117	[0.048*x_1*(-0.001*x_0 - 62.6), (-19.126*x_0 - 0.002)*(-0.098*arctan(0.843*sqrt(1 + 0.489/(8.26 - 13414250740.619*(-0.215*x_0 - 1)**8)) + 96.6) - 0.005)]	transformer	allonger	e1	strogatz	721.8870084285736
+56	stl	30	1	inf	inf		transformer	allonger	e1	strogatz	
+57	stl	13	1	inf	inf		transformer	allonger	e1	strogatz	
+58	stl	inf	2	2.4794853871831886	2.4794853871831886	[1.444*(-x_0 - 0.016)**2*(x_1 - 0.3)**2 + (0.647*x_1 + 0.025)*(-0.01*x_0 + 0.051*x_1 - 0.007*cos(82.571*x_1 + 3.634) - 5.11) + 0.035, 3.216*x_0 + 0.317*(x_0 - 0.003)**2 + 0.09*exp((0.011*x_0 + 0.898)*(-8.216*x_1 - 6.172)) - 0.045]	transformer	allonger	e1	strogatz	351.18311738967896
+59	stl	30	2	inf	inf		transformer	allonger	e1	strogatz	
+60	stl	13	2	5.331496015959714	5.434711503735878	[10.176*arctan(0) + 0.39, 0.003*x_1 + 0.002*(0.077 - arctan(1688.872*(0.307 - x_0)**3 + 7.44))**2 + 0.175]	transformer	allonger	e1	strogatz	385.2388725280762
+61	stl	inf	3	2.3315393927201526	2.3315393927201526	[-0.073*x_0 + (0.006 - 0.058*x_1)*(9.171*(0.298 - sqrt((0.041*x_0*(1.353*x_0 - 59.313) + x_0 - 0.364*(-x_1 - 0.63)**3 - 0.01)**2 + 0.03802))**2 + 56.9) - 0.479, 3.185*x_0 - 0.127*(x_0 - 0.098)**2 + 0.492*(-(0.188*x_1 - 1)**2*(x_1 + 0.046)**2 + 0.004)**2 - 0.047]	transformer	allonger	e1	strogatz	325.9887099266052
+62	stl	30	3	inf	inf		transformer	allonger	e1	strogatz	
+63	stl	13	3	inf	inf		transformer	allonger	e1	strogatz	
+64	cphase	inf	0	0.050252843975527976	0.050252843975527976	[1.715, 4.499]	transformer	allonger	e1	strogatz	393.174870967865
+65	cphase	30	0	inf	inf		transformer	allonger	e1	strogatz	
+66	cphase	13	0	inf	inf		transformer	allonger	e1	strogatz	
+67	cphase	inf	1	0.05444137636276031	0.05444137636276031	[0.035*arctan((1.727 - 0.04*x_0)*(0.001*x_0 - 0.001*x_1 + 0.062)) + 1.718, 4.475]	transformer	allonger	e1	strogatz	358.69741344451904
+68	cphase	30	1	0.2630221905823363	0.21436824379695363	[1.583, 0.002*(57.932 - 41.794*sin(-0.338*x_0 + 305.46*(0.005*x_0 - 0.066*sin(6.683*x_0 - 123.809) - 1)**2 + 10.004))*(0.904*sin(0.038*x_1 + 1.183) + 51.363) + 0.002]	transformer	allonger	e1	strogatz	395.9281630516052
+69	cphase	inf	2	0.040756980716164855	0.040756980716164855	[1.700, 8.803 - 4.323*sqrt(1 - 0.285*sin(0.008 + 128243.9/(0.015173*x_0 + 1)**3))]	transformer	allonger	e1	strogatz	346.2136471271515
+70	cphase	30	2	inf	inf		transformer	allonger	e1	strogatz	
+71	cphase	13	2	inf	inf		transformer	allonger	e1	strogatz	
+72	cphase	inf	3	0.04141809630872907	0.04141809630872907	[1.719, 4.482]	transformer	allonger	e1	strogatz	351.5103681087494
+73	cphase	13	3	inf	inf		transformer	allonger	e1	strogatz	
+74	lorenz	inf	0	11.230566379086113	11.230566379086113	[(0.61 - 0.033*x_0)*(-9.134*x_0 + 10.605*x_1 - 14.973), -0.607*x_0 - 8.06*x_2 + (0.337*x_0 - 4.165)*(0.204*x_2 - 5.476)*(0.169*x_0 + 0.027*x_2 - 11.205) + 222.794, 0.657*x_0 + 9.114*x_1 - (2.344*x_1 - 18.848)*(-0.225*x_0 + (0.001*x_1 - 0.01)*(2.491*x_0 + 0.811*x_2 - 60.349) + 1.889) - 83.899]	transformer	allonger	e1	strogatz	520.1327276229858

@@ -1,0 +1,15 @@
+	complexity	length	TE	TE_inf	expr_x	expr_y	expr_z	index_column	method	exp_type	data_version	system	snr	init
+0	11	16	6.267751580612931	6.302448094858985	1.422*y	-0.102*x*z	0.449*x*y	0	proged	numdif	allonger	lorenz	30	1
+1	9	12	6.2968005625108106	6.3352662861555995	1.422*y	-1.686*x	0.743*y	1	proged	numdif	allonger	lorenz	30	1
+2	12	17	6.212570984405004	6.248909731580262	1.422*y	-0.027*x**3	0.449*x*y	2	proged	numdif	allonger	lorenz	30	1
+3	13	19	5.9603253528846185	5.992127949845555	1.422*y	0	0.449*x*y	3	proged	numdif	allonger	lorenz	30	1
+4	18	31	4.159810008550055	4.17055250449458	-9.876*x + 9.892*y - 0.027	0	0.449*x*y	4	proged	numdif	allonger	lorenz	30	1
+5	26	44	2.93588640698748	2.9312258477857522	-9.873*x + 9.891*y - 0.002*z	-0.934*x*z + 25.131*x	0.99*x*y - 2.633*z	5	proged	numdif	allonger	lorenz	30	1
+6	20	33	4.159593845750624	4.17033550081322	-9.873*x + 9.891*y - 0.002*z	0	0.449*x*y	6	proged	numdif	allonger	lorenz	30	1
+7	15	23	5.257171749676814	5.284588360022584	-9.878*x + 9.892*y	-0.102*x*z	0.449*x*y	7	proged	numdif	allonger	lorenz	30	1
+8	14	21	5.901851818056831	5.937757581770475	-9.878*x + 9.892*y	-1.686*x	0.449*x*y	8	proged	numdif	allonger	lorenz	30	1
+9	23	37	3.099872797768029	3.102275520548464	-9.878*x + 9.892*y	-0.934*x*z + 25.131*x	0.99*x*y - 2.633*z	9	proged	numdif	allonger	lorenz	30	1
+10	16	24	4.623041349540381	4.6387065478850635	-9.878*x + 9.892*y	-0.027*x**3	0.449*x*y	10	proged	numdif	allonger	lorenz	30	1
+11	17	26	4.160239139796522	4.1709859015970965	-9.878*x + 9.892*y	0	0.449*x*y	11	proged	numdif	allonger	lorenz	30	1
+12	22	40	4.14295540397536	4.153465308702418	-0.018*x*z - 9.115*x + 9.687*y - 0.347	0	0.449*x*y	12	proged	numdif	allonger	lorenz	30	1
+13	21	35	4.15575723529416	4.166434383271144	-9.808*x - 0.008*y*z + 10.026*y	0	0.449*x*y	13	proged	numdif	allonger	lorenz	30	1

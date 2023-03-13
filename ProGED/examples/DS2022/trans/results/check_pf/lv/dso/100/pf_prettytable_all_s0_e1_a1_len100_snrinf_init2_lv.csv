@@ -1,0 +1,7 @@
+  index    complexity    length        TE    TE_inf  expr_x                        expr_y                                            index_column  method    data_version    system      snr    init
+     95            21       163  0.287989  0.287989  -4.128*x1 - 8.48*x2 + 12.363  x2*(-0.403*x1*(-1.013*x1 + x2 + 9.32) + 6.237)              95  dso       all             lv          inf       2
+     90            15       115  0.390892  0.390892  -4.128*x1 - 8.48*x2 + 12.363  x2*(-2.011*x2 - 0.426)                                      90  dso       all             lv          inf       2
+     67            13        90  0.437651  0.437651  -4.128*x1 - 8.48*x2 + 12.363  -2.274*x2**2                                                67  dso       all             lv          inf       2
+     88            11        87  0.845781  0.845781  -4.128*x1 - 8.48*x2 + 12.363  -2.905*x2                                                   88  dso       all             lv          inf       2
+     22             8        45  2.56782   2.56782   -9.433*x2**2                  -2.905*x2                                                   22  dso       all             lv          inf       2
+      0             6        43  4.53135   4.53135   -11.275*x2                    -2.905*x2                                                    0  dso       all             lv          inf       2

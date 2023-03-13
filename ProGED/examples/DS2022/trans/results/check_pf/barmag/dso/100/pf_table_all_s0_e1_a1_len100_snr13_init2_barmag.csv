@@ -1,0 +1,4 @@
+	index	complexity	length	TE	TE_inf	expr_x	expr_y	index_column	method	data_version	system	snr	init
+2	2	14	53	1.671540922975848	1.8211189556266498	6.056 - x1	x2**2*(0.309 - x2)	2	dso	all	barmag	13	2
+1	1	12	51	1.6931002158484982	1.892155671692506	6.056 - x1	x2*(0.377 - x2)	1	dso	all	barmag	13	2
+0	0	10	46	1.7384424472169449	2.047082993276977	6.056 - x1	0.387 - x2	0	dso	all	barmag	13	2

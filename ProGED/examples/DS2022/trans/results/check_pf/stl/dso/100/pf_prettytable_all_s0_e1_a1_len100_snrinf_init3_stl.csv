@@ -1,0 +1,5 @@
+  index    complexity    length        TE    TE_inf  expr_x            expr_y                      index_column  method    data_version    system      snr    init
+     82            21        40  0.699642  0.699642  -x1*x2**2 - 3*x2  x1**2 + 3*x1 + x2**2 - 1              82  dso       all             stl         inf       3
+     78            17        28  1.60202   1.60202   -x1*x2**2 - 3*x2  x1**2 + 3*x1                          78  dso       all             stl         inf       3
+     75            15        23  1.99164   1.99164   -x1*x2**2 - 3*x2  x1 - x2                               75  dso       all             stl         inf       3
+      0             8        12  2.37332   2.37332   x1**2             x1 - x2                                0  dso       all             stl         inf       3
