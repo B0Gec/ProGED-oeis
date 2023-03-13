@@ -4,5 +4,6 @@ __pycache__/
 # */__pycache__/
 ProGED.egg-info/
 .idea/workspace.xml
+.idea/
 *~
-.*
+#.*
