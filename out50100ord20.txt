@@ -1,0 +1,406 @@
+ValueError('Usecols do not match columns, columns expected but not found: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 171, 172, 173, 174, 175, 176, 177, 178, 179, 180, 181, 182, 183, 184, 185, 186, 187, 188, 189, 190, 191, 192, 193, 194, 195, 196, 197, 198, 199, 200, 201, 202, 203, 204, 205, 206,  <class 'ValueError'>
+Running equation discovery for all oeis sequences, with these settings:
+=>> number of terms in every sequence saved in csv = 201
+=>> number of all considered sequences = 34371
+
+While total time consumed by now, scale:0/34371,seq_id:A000004, order:20 took:
+ 0.4 seconds, i.e. 0.01 minutes or 0.0 hours.
+
+
+
+ -->> The results are the following:  <<-- 
+
+
+
+
+
+
+ -->> The summary of the results untill now (0 sequences) are the following:  <<-- 
+
+
+
+Number of false positives in exact ED: 0
+first 20 False positives: []
+Number of different sequences: 0
+first 20 Different sequences: []
+Number of sequences without any equation found: 0
+first 20 Sequences without any equation found: []
+Running equation discovery for all oeis sequences, with these settings:
+=>> number of terms in every sequence saved in csv = 201
+=>> number of all considered sequences = 34371
+=>> max order = 20
+
+While total time consumed by now took:
+ 0.4 seconds, i.e. 0.01 minutes or 0.0 hours.
+
+
+
+ -->> The results are the following:  <<-- 
+
+
+
+
+
+
+ -->> The summary of the results untill now (1 sequences) are the following:  <<-- 
+
+
+
+Number of false positives in exact ED: 0
+first 20 False positives: []
+Number of different sequences: 1
+first 20 Different sequences: ['A000004']
+Number of sequences without any equation found: 0
+first 20 Sequences without any equation found: []
+Running equation discovery for all oeis sequences, with these settings:
+=>> number of terms in every sequence saved in csv = 201
+=>> number of all considered sequences = 34371
+=>> max order = 20
+
+While total time consumed by now took:
+ 1.6 seconds, i.e. 0.03 minutes or 0.0 hours.
+
+
+
+ -->> The results are the following:  <<-- 
+
+
+
+
+
+
+ -->> The summary of the results untill now (2 sequences) are the following:  <<-- 
+
+
+
+Number of false positives in exact ED: 0
+first 20 False positives: []
+Number of different sequences: 2
+first 20 Different sequences: ['A000004', 'A000008']
+Number of sequences without any equation found: 0
+first 20 Sequences without any equation found: []
+Running equation discovery for all oeis sequences, with these settings:
+=>> number of terms in every sequence saved in csv = 201
+=>> number of all considered sequences = 34371
+=>> max order = 20
+
+While total time consumed by now took:
+ 2.4 seconds, i.e. 0.04 minutes or 0.001 hours.
+
+
+
+ -->> The results are the following:  <<-- 
+
+
+
+
+
+
+ -->> The summary of the results untill now (4 sequences) are the following:  <<-- 
+
+
+
+Number of false positives in exact ED: 0
+first 20 False positives: []
+Number of different sequences: 4
+first 20 Different sequences: ['A000004', 'A000008', 'A000012', 'A000027']
+Number of sequences without any equation found: 0
+first 20 Sequences without any equation found: []
+Running equation discovery for all oeis sequences, with these settings:
+=>> number of terms in every sequence saved in csv = 201
+=>> number of all considered sequences = 34371
+=>> max order = 20
+
+While total time consumed by now took:
+ 6.8 seconds, i.e. 0.11 minutes or 0.002 hours.
+
+
+
+ -->> The results are the following:  <<-- 
+
+
+
+
+
+
+ -->> The summary of the results untill now (8 sequences) are the following:  <<-- 
+
+
+
+Number of false positives in exact ED: 0
+first 20 False positives: []
+Number of different sequences: 7
+first 20 Different sequences: ['A000004', 'A000008', 'A000012', 'A000027', 'A000034', 'A000035', 'A000042']
+Number of sequences without any equation found: 0
+first 20 Sequences without any equation found: []
+Running equation discovery for all oeis sequences, with these settings:
+=>> number of terms in every sequence saved in csv = 201
+=>> number of all considered sequences = 34371
+=>> max order = 20
+
+While total time consumed by now took:
+ 10.8 seconds, i.e. 0.18 minutes or 0.003 hours.
+
+
+
+ -->> The results are the following:  <<-- 
+
+
+
+
+
+
+ -->> The summary of the results untill now (16 sequences) are the following:  <<-- 
+
+
+
+Number of false positives in exact ED: 1
+first 20 False positives: ['A000051']
+Number of different sequences: 9
+first 20 Different sequences: ['A000004', 'A000008', 'A000012', 'A000027', 'A000034', 'A000035', 'A000042', 'A000051', 'A000064']
+Number of sequences without any equation found: 0
+first 20 Sequences without any equation found: []
+Running equation discovery for all oeis sequences, with these settings:
+=>> number of terms in every sequence saved in csv = 201
+=>> number of all considered sequences = 34371
+=>> max order = 20
+
+While total time consumed by now took:
+ 21.2 seconds, i.e. 0.35 minutes or 0.006 hours.
+
+
+
+ -->> The results are the following:  <<-- 
+
+
+
+
+
+
+ -->> The summary of the results untill now (32 sequences) are the following:  <<-- 
+
+
+
+Number of false positives in exact ED: 2
+first 20 False positives: ['A000051', 'A000216']
+Number of different sequences: 19
+first 20 Different sequences: ['A000004', 'A000008', 'A000012', 'A000027', 'A000034', 'A000035', 'A000042', 'A000051', 'A000064', 'A000096', 'A000102', 'A000115', 'A000124', 'A000125', 'A000126', 'A000127', 'A000212', 'A000216', 'A000217']
+Number of sequences without any equation found: 0
+first 20 Sequences without any equation found: []
+Running equation discovery for all oeis sequences, with these settings:
+=>> number of terms in every sequence saved in csv = 201
+=>> number of all considered sequences = 34371
+=>> max order = 20
+
+While total time consumed by now took:
+ 43.3 seconds, i.e. 0.72 minutes or 0.012 hours.
+
+
+
+ -->> The results are the following:  <<-- 
+
+
+
+
+
+
+ -->> The summary of the results untill now (64 sequences) are the following:  <<-- 
+
+
+
+Number of false positives in exact ED: 9
+first 20 False positives: ['A000051', 'A000216', 'A000218', 'A000221', 'A000302', 'A000351', 'A000400', 'A000420', 'A000439']
+Number of different sequences: 43
+first 20 Different sequences: ['A000004', 'A000008', 'A000012', 'A000027', 'A000034', 'A000035', 'A000042', 'A000051', 'A000064', 'A000096', 'A000102', 'A000115', 'A000124', 'A000125', 'A000126', 'A000127', 'A000212', 'A000216', 'A000217', 'A000218']
+Number of sequences without any equation found: 0
+first 20 Sequences without any equation found: []
+Running equation discovery for all oeis sequences, with these settings:
+=>> number of terms in every sequence saved in csv = 201
+=>> number of all considered sequences = 34371
+=>> max order = 20
+
+While total time consumed by now took:
+ 95.7 seconds, i.e. 1.59 minutes or 0.027 hours.
+While total time consumed by now, scale:100/34371,seq_id:A000655, order:20 took:
+ 170.6 seconds, i.e. 2.84 minutes or 0.047 hours.
+
+
+
+ -->> The results are the following:  <<-- 
+
+
+
+
+
+
+ -->> The summary of the results untill now (128 sequences) are the following:  <<-- 
+
+
+
+Number of false positives in exact ED: 22
+first 20 False positives: ['A000051', 'A000216', 'A000218', 'A000221', 'A000302', 'A000351', 'A000400', 'A000420', 'A000439', 'A000453', 'A000478', 'A000487', 'A000498', 'A000533', 'A000534', 'A000562', 'A000563', 'A000564', 'A000565', 'A000655']
+Number of different sequences: 101
+first 20 Different sequences: ['A000004', 'A000008', 'A000012', 'A000027', 'A000034', 'A000035', 'A000042', 'A000051', 'A000064', 'A000096', 'A000102', 'A000115', 'A000124', 'A000125', 'A000126', 'A000127', 'A000212', 'A000216', 'A000217', 'A000218']
+Number of sequences without any equation found: 0
+first 20 Sequences without any equation found: []
+Running equation discovery for all oeis sequences, with these settings:
+=>> number of terms in every sequence saved in csv = 201
+=>> number of all considered sequences = 34371
+=>> max order = 20
+
+While total time consumed by now took:
+ 221.1 seconds, i.e. 3.68 minutes or 0.061 hours.
+While total time consumed by now, scale:200/34371,seq_id:A001343, order:20 took:
+ 336.0 seconds, i.e. 5.6 minutes or 0.093 hours.
+
+
+
+ -->> The results are the following:  <<-- 
+
+
+
+
+
+
+ -->> The summary of the results untill now (256 sequences) are the following:  <<-- 
+
+
+
+Number of false positives in exact ED: 52
+first 20 False positives: ['A000051', 'A000216', 'A000218', 'A000221', 'A000302', 'A000351', 'A000400', 'A000420', 'A000439', 'A000453', 'A000478', 'A000487', 'A000498', 'A000533', 'A000534', 'A000562', 'A000563', 'A000564', 'A000565', 'A000655']
+Number of different sequences: 184
+first 20 Different sequences: ['A000004', 'A000008', 'A000012', 'A000027', 'A000034', 'A000035', 'A000042', 'A000051', 'A000064', 'A000096', 'A000102', 'A000115', 'A000124', 'A000125', 'A000126', 'A000127', 'A000212', 'A000216', 'A000217', 'A000218']
+Number of sequences without any equation found: 3
+first 20 Sequences without any equation found: ['A001364', 'A001365', 'A001402']
+Running equation discovery for all oeis sequences, with these settings:
+=>> number of terms in every sequence saved in csv = 201
+=>> number of all considered sequences = 34371
+=>> max order = 20
+
+While total time consumed by now took:
+ 434.3 seconds, i.e. 7.24 minutes or 0.121 hours.
+While total time consumed by now, scale:300/34371,seq_id:A001787, order:20 took:
+ 499.5 seconds, i.e. 8.32 minutes or 0.139 hours.
+While total time consumed by now, scale:400/34371,seq_id:A002492, order:20 took:
+ 662.8 seconds, i.e. 11.05 minutes or 0.184 hours.
+While total time consumed by now, scale:500/34371,seq_id:A003682, order:20 took:
+ 830.0 seconds, i.e. 13.83 minutes or 0.231 hours.
+
+
+
+ -->> The results are the following:  <<-- 
+
+
+
+
+
+
+ -->> The summary of the results untill now (512 sequences) are the following:  <<-- 
+
+
+
+Number of false positives in exact ED: 69
+first 20 False positives: ['A000051', 'A000216', 'A000218', 'A000221', 'A000302', 'A000351', 'A000400', 'A000420', 'A000439', 'A000453', 'A000478', 'A000487', 'A000498', 'A000533', 'A000534', 'A000562', 'A000563', 'A000564', 'A000565', 'A000655']
+Number of different sequences: 352
+first 20 Different sequences: ['A000004', 'A000008', 'A000012', 'A000027', 'A000034', 'A000035', 'A000042', 'A000051', 'A000064', 'A000096', 'A000102', 'A000115', 'A000124', 'A000125', 'A000126', 'A000127', 'A000212', 'A000216', 'A000217', 'A000218']
+Number of sequences without any equation found: 4
+first 20 Sequences without any equation found: ['A001364', 'A001365', 'A001402', 'A003404']
+Running equation discovery for all oeis sequences, with these settings:
+=>> number of terms in every sequence saved in csv = 201
+=>> number of all considered sequences = 34371
+=>> max order = 20
+
+While total time consumed by now took:
+ 848.3 seconds, i.e. 14.14 minutes or 0.236 hours.
+While total time consumed by now, scale:600/34371,seq_id:A004445, order:20 took:
+ 1017.9 seconds, i.e. 16.96 minutes or 0.283 hours.
+While total time consumed by now, scale:700/34371,seq_id:A005262, order:20 took:
+ 1169.7 seconds, i.e. 19.49 minutes or 0.325 hours.
+While total time consumed by now, scale:800/34371,seq_id:A005945, order:20 took:
+ 1350.9 seconds, i.e. 22.51 minutes or 0.375 hours.
+While total time consumed by now, scale:900/34371,seq_id:A006499, order:20 took:
+ 1526.1 seconds, i.e. 25.44 minutes or 0.424 hours.
+While total time consumed by now, scale:1000/34371,seq_id:A007786, order:20 took:
+ 1685.0 seconds, i.e. 28.08 minutes or 0.468 hours.
+
+
+
+ -->> The results are the following:  <<-- 
+
+
+
+
+
+
+ -->> The summary of the results untill now (1000 sequences) are the following:  <<-- 
+
+
+
+Number of false positives in exact ED: 154
+first 20 False positives: ['A000051', 'A000216', 'A000218', 'A000221', 'A000302', 'A000351', 'A000400', 'A000420', 'A000439', 'A000453', 'A000478', 'A000487', 'A000498', 'A000533', 'A000534', 'A000562', 'A000563', 'A000564', 'A000565', 'A000655']
+Number of different sequences: 698
+first 20 Different sequences: ['A000004', 'A000008', 'A000012', 'A000027', 'A000034', 'A000035', 'A000042', 'A000051', 'A000064', 'A000096', 'A000102', 'A000115', 'A000124', 'A000125', 'A000126', 'A000127', 'A000212', 'A000216', 'A000217', 'A000218']
+Number of sequences without any equation found: 15
+first 20 Sequences without any equation found: ['A001364', 'A001365', 'A001402', 'A003404', 'A003995', 'A003997', 'A003999', 'A004460', 'A004463', 'A004464', 'A004465', 'A004830', 'A007183', 'A007300', 'A007396']
+Running equation discovery for all oeis sequences, with these settings:
+=>> number of terms in every sequence saved in csv = 201
+=>> number of all considered sequences = 34371
+=>> max order = 20
+
+While total time consumed by now took:
+ 1685.0 seconds, i.e. 28.08 minutes or 0.468 hours.
+While total time consumed by now, scale:1100/34371,seq_id:A008494, order:20 took:
+ 1880.3 seconds, i.e. 31.34 minutes or 0.522 hours.
+While total time consumed by now, scale:1200/34371,seq_id:A008652, order:20 took:
+ 2070.2 seconds, i.e. 34.5 minutes or 0.575 hours.
+While total time consumed by now, scale:1300/34371,seq_id:A008818, order:20 took:
+ 2213.7 seconds, i.e. 36.89 minutes or 0.615 hours.
+While total time consumed by now, scale:1400/34371,seq_id:A009991, order:20 took:
+ 2373.7 seconds, i.e. 39.56 minutes or 0.659 hours.
+While total time consumed by now, scale:1500/34371,seq_id:A010189, order:20 took:
+ 2525.8 seconds, i.e. 42.1 minutes or 0.702 hours.
+While total time consumed by now, scale:1600/34371,seq_id:A010729, order:20 took:
+ 2632.0 seconds, i.e. 43.87 minutes or 0.731 hours.
+While total time consumed by now, scale:1700/34371,seq_id:A011661, order:20 took:
+ 2857.8 seconds, i.e. 47.63 minutes or 0.794 hours.
+While total time consumed by now, scale:1800/34371,seq_id:A011867, order:20 took:
+ 2983.8 seconds, i.e. 49.73 minutes or 0.829 hours.
+While total time consumed by now, scale:1900/34371,seq_id:A013733, order:20 took:
+ 3131.4 seconds, i.e. 52.19 minutes or 0.87 hours.
+While total time consumed by now, scale:2000/34371,seq_id:A013833, order:20 took:
+ 3210.7 seconds, i.e. 53.51 minutes or 0.892 hours.
+
+
+
+ -->> The results are the following:  <<-- 
+
+
+
+
+
+
+ -->> The summary of the results untill now (2000 sequences) are the following:  <<-- 
+
+
+
+Number of false positives in exact ED: 615
+first 20 False positives: ['A000051', 'A000216', 'A000218', 'A000221', 'A000302', 'A000351', 'A000400', 'A000420', 'A000439', 'A000453', 'A000478', 'A000487', 'A000498', 'A000533', 'A000534', 'A000562', 'A000563', 'A000564', 'A000565', 'A000655']
+Number of different sequences: 1485
+first 20 Different sequences: ['A000004', 'A000008', 'A000012', 'A000027', 'A000034', 'A000035', 'A000042', 'A000051', 'A000064', 'A000096', 'A000102', 'A000115', 'A000124', 'A000125', 'A000126', 'A000127', 'A000212', 'A000216', 'A000217', 'A000218']
+Number of sequences without any equation found: 43
+first 20 Sequences without any equation found: ['A001364', 'A001365', 'A001402', 'A003404', 'A003995', 'A003997', 'A003999', 'A004460', 'A004463', 'A004464', 'A004465', 'A004830', 'A007183', 'A007300', 'A007396', 'A007879', 'A008631', 'A008636', 'A008637', 'A008638']
+Running equation discovery for all oeis sequences, with these settings:
+=>> number of terms in every sequence saved in csv = 201
+=>> number of all considered sequences = 34371
+=>> max order = 20
+
+While total time consumed by now took:
+ 3210.7 seconds, i.e. 53.51 minutes or 0.892 hours.
+While total time consumed by now, scale:2100/34371,seq_id:A014024, order:20 took:
+ 3301.0 seconds, i.e. 55.02 minutes or 0.917 hours.
+While total time consumed by now, scale:2200/34371,seq_id:A014205, order:20 took:
+ 3384.6 seconds, i.e. 56.41 minutes or 0.94 hours.
+While total time consumed by now, scale:2300/34371,seq_id:A014515, order:20 took:
+ 3484.3 seconds, i.e. 58.07 minutes or 0.968 hours.
+While total time consumed by now, scale:2400/34371,seq_id:A014772, order:20 took:
+ 3598.6 seconds, i.e. 59.98 minutes or 1.0 hours.

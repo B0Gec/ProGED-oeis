@@ -1,0 +1,109 @@
+use this:
+#!/bin/bash
+#SBATCH --job-name=oeis14h16GB
+#SBATCH --time=14-00:00:00
+#SBATCH --partition=long
+#SBATCH --mem-per-cpu=16GB
+#####SBATCH --cpus-per-task=1
+##SBATCH --array=1
+#SBATCH --output=./joeis%A.out
+
+
+submitit?
+"""
+this is --scale=10 and --order=2
+
+FATAL:   container creation failed: mount hook function failure: mount /proc/self/fd/4->/var/apptainer/mnt/session/rootfs error: while mounting image /proc/self/fd/4: squashfuse_ll failed to mount /var/apptainer/mnt/session/rootfs in 2s:
+
+This is oeis running.
+Message:
+
+"""
+submitit seems:
+"""
+this is --scale=50 and --order=2
+
+FATAL:   container creation failed: mount hook function failure: mount /proc/self/fd/8->/var/apptainer/mnt/session/rootfs error: while mounting image /proc/self/fd/8: squashfuse_ll failed to mount /var/apptainer/mnt/session/rootfs in 2s:
+
+This is oeis running.
+Message: doone
+"""
+
+
+submitit seems:
+"""
+this is --scale=100 and --order=2
+
+INFO:    underlay of /etc/localtime required more than 50 (87) bind mounts
+INFO:    Cleanup error: while unmounting /var/apptainer/mnt/session/underlay/usr directory: device or resource busy, while unmounting /var/apptainer/mnt/session/final directory: device or resource busy
+/var/spool/slurm/job35907283/slurm_script: line 17: 1994947 Killed                  singularity exec ../proged_my310.sif python3.10 proles.py $1 $2
+
+This is oeis running.
+Message: doone
+slurmstepd: error: Detected 1 oom-kill event(s) in StepId=35907283.batch cgroup. Some of your processes may have been killed by the cgroup out-of-memory handler.
+"""
+
+submitit:
+"""
+this is --scale=50 and --order=2
+
+INFO:    underlay of /etc/localtime required more than 50 (87) bind mounts
+Running equation discovery for all oeis sequences, with these settings:
+=>> number of terms in every sequence saved in csv = 201
+=>> number of all considered sequences = 50
+
+Traceback (most recent call last):
+  File "/d/hpc/home/bgec/ProGED_oeis/proles.py", line 334, in <module>
+    results = [job.result() for job in jobs]
+  File "/d/hpc/home/bgec/ProGED_oeis/proles.py", line 334, in <listcomp>
+    results = [job.result() for job in jobs]
+  File "/usr/local/lib/python3.10/dist-packages/submitit/core/core.py", line 266, in result
+    r = self.results()
+  File "/usr/local/lib/python3.10/dist-packages/submitit/core/core.py", line 294, in results
+    raise job_exception  # pylint: disable=raising-bad-type
+submitit.core.utils.FailedJobError: Job (task=0) failed during processing with trace:
+----------------------
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/dist-packages/submitit/core/submission.py", line 54, in process_job
+    result = delayed.result()
+  File "/usr/local/lib/python3.10/dist-packages/submitit/core/utils.py", line 133, in result
+    self._result = self.function(*self.args, **self.kwargs)
+  File "/d/hpc/home/bgec/ProGED_oeis/proles.py", line 277, in doone
+    x, coeffs, eq, truth = exact_ed(seq_id, csv, VERBOSITY, MAX_ORDER, n_of_terms=n_of_terms_ed)
+  File "/d/hpc/home/bgec/ProGED_oeis/exact_ed.py", line 148, in exact_ed
+    x = diophantine_solve(A, b)
+  File "/d/hpc/home/bgec/ProGED_oeis/ProGED_oeis/diophantine_solver.py", line 12, in diophantine_solve
+    x = solve(A, b)
+  File "/usr/local/lib/python3.10/dist-packages/diophantine.py", line 102, in solve
+    hnf, P, rank = lllhermite(G)
+  File "/usr/local/lib/python3.10/dist-packages/diophantine.py", line 136, in lllhermite
+    swap_rows(k, A, B, L, D)
+  File "/usr/local/lib/python3.10/dist-packages/diophantine.py", line 223, in swap_rows
+    L[(k - 1):(k + 1), :(k - 1)] = L[k:reverse_stop:-1, :(k - 1)]
+  File "/usr/local/lib/python3.10/dist-packages/sympy/matrices/repmatrix.py", line 400, in __setitem__
+    rv = self._setitem(key, value)
+  File "/usr/local/lib/python3.10/dist-packages/sympy/matrices/matrices.py", line 1196, in _setitem
+    self.copyin_matrix(key, value)
+  File "/usr/local/lib/python3.10/dist-packages/sympy/matrices/repmatrix.py", line 632, in copyin_matrix
+    self[i + rlo, j + clo] = value[i, j]
+  File "/usr/local/lib/python3.10/dist-packages/sympy/matrices/repmatrix.py", line 400, in __setitem__
+    rv = self._setitem(key, value)
+  File "/usr/local/lib/python3.10/dist-packages/sympy/matrices/matrices.py", line 1192, in _setitem
+    i, j = key = self.key2ij(key)
+  File "/usr/local/lib/python3.10/dist-packages/sympy/matrices/matrices.py", line 1850, in key2ij
+    if is_sequence(key):
+  File "/usr/local/lib/python3.10/dist-packages/sympy/utilities/iterables.py", line 2956, in is_sequence
+    def is_sequence(i, include=None):
+  File "/usr/local/lib/python3.10/dist-packages/submitit/core/job_environment.py", line 226, in checkpoint_and_try_requeue
+    raise utils.UncompletedJobError(message)
+submitit.core.utils.UncompletedJobError: Job not requeued because: timed-out and not checkpointable.
+
+----------------------
+You can check full logs with 'job.stderr(0)' and 'job.stdout(0)'or at paths:
+  - /d/hpc/home/bgec/ProGED_oeis/log_submitit/1998921/1998921_0_log.err
+  - /d/hpc/home/bgec/ProGED_oeis/log_submitit/1998921/1998921_0_log.out
+INFO:    Cleanup error: while unmounting /var/apptainer/mnt/session/underlay/usr directory: device or resource busy, while unmounting /var/apptainer/mnt/session/final directory: device or resource busy
+
+This is oeis running.
+Message: doone50
+"""

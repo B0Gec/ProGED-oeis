@@ -1,0 +1,15 @@
+
+Number of false positives in exact ED: 32896
+first 20 False positives: ['A000008', 'A000042', 'A000044', 'A000045', 'A000051', 'A000064', 'A000071', 'A000073', 'A000078', 'A000096', 'A000100', 'A000102', 'A000115', 'A000125', 'A000126', 'A000127', 'A000129', 'A000202', 'A000211', 'A000212']
+Number of different sequences: 33894
+first 20 Different sequences: ['A000004', 'A000008', 'A000012', 'A000027', 'A000032', 'A000034', 'A000035', 'A000042', 'A000044', 'A000045', 'A000051', 'A000064', 'A000071', 'A000073', 'A000078', 'A000096', 'A000100', 'A000102', 'A000115', 'A000124']
+Number of sequences without any equation found: 1701
+first 20 Sequences without any equation found: ['A000078', 'A000100', 'A000218', 'A000392', 'A000431', 'A000439', 'A000466', 'A000565', 'A000749', 'A000773', 'A000931', 'A000962', 'A000972', 'A001148', 'A001447', 'A001496', 'A001547', 'A001588', 'A001593', 'A001628']
+Running equation discovery for all oeis sequences, with these settings:
+=>> number of terms in every sequence saved in csv = 201
+=>> number of all considered sequences = 34371
+=>> max order = 2
+
+While total time consumed by now took:
+ 9930.7 seconds, i.e. 165.51 minutes or 2.759 hours.
+

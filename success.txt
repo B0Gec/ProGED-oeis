@@ -1,0 +1,117 @@
+local:
+
+20100 2 donne in 68.45 minutes or 1.141 hours.
+
+1100 20 done  30min 137K ... predict 4M for all seqs
+3100 20 done 74.02 minutes or 1.234 hours.
+
+25058/34371 2 in 80mins
+
+
+slurm arnes (nsc specified?):
+100 2
+1100 2 
+
+1100 20 48 mins
+
+fail 4000 20 2days time limit (old full print)
+
+
+submitit:
+5 2
+fail 3 20 paral=4 part 14hlong fat sing
+fail 10 20 paral=8 part 14hlong fat sing
+10 20 paral=8
+10 2
+10 10 paral=8
+10 20 paral=8
+fail 10 20 para 8 part
+fail 10 20 para 8 part fat sing
+40 10 paral=8
+fail 50 20 para 8 part fat sing
+fail 100 20 para 8 fat sing
+fail 100 20 para 16 info sing oom-kill
+fail 1000 20 para 16 -..-
+fail 50100 20 para 8 -..-
+fail 50100 20 para 16 -..-
+
+20 2
+30 2
+30 20  t_min=1100
+50 2 long
+50 2
+50 2 long  
+50 2 timeout_min=1 or 1100
+
+fail 50 2 long  oom sing-info
+fail 30 2
+fail 40 2
+fail 45 2
+fail 50 2 singularity, not-checkpointable (often this 2 errors in one)
+fail 100 2 
+fail 100 2 oom-kill
+100 2  t_min=1100
+fail 1100 2
+
+500 2  t_min=1100
+100 2  t_min=1100
+1100 20  t_min=1100 para 16  4mins
+
+
+use this:
+#!/bin/bash
+#SBATCH --job-name=oeis14h16GB
+#SBATCH --time=14-00:00:00
+#SBATCH --partition=long
+#SBATCH --mem-per-cpu=16GB
+#####SBATCH --cpus-per-task=1
+##SBATCH --array=1
+#SBATCH --output=./joeis%A.out
+
+
+
+
+local fail at:
+econds, i.e. 46.69 minutes or 0.778 hours.
+While total time consumed by now, scale:1499/3000,seq_id:A021076, order:20 took:
+ 2804.2 seconds, i.e. 46.74 minutes or 0.779 hours.
+While total time consumed by now, scale:1500/3000,seq_id:A021079, order:20 took:
+ 2807.1 seconds, i.e. 46.78 minutes or 0.78 hours.
+While total time consumed by now, scale:1501/3000,seq_id:A021084, order:20 took:
+ 2810.2 seconds, i.e. 46.84 minutes or 0.781 hours.
+While total time consumed by now, scale:1502/3000,seq_id:A021085, order:20 took:
+ 2811.3 seconds, i.e. 46.85 minutes or 0.781 hours.
+While total time consumed by now, scale:1503/3000,seq_id:A021092, order:20 took:
+ 2814.2 seconds, i.e. 46.9 minutes or 0.782 hours.
+
+total time consumed by now, scale:489/1000,seq_id:A021030, order:20 took:
+ 723.3 seconds, i.e. 12.05 minutes or 0.201 hours.
+While total time consumed by now, scale:490/1000,seq_id:A021034, order:20 took:
+ 726.0 seconds, i.e. 12.1 minutes or 0.202 hours.
+While total time consumed by now, scale:491/1000,seq_id:A021040, order:20 took:
+ 726.8 seconds, i.e. 12.11 minutes or 0.202 hours.
+While total time consumed by now, scale:492/1000,seq_id:A021044, order:20 took:
+ 729.8 seconds, i.e. 12.16 minutes or 0.203 hours.
+While total time consumed by now, scale:493/1000,seq_id:A021048, order:20 took:
+ 732.8 seconds, i.e. 12.21 minutes or 0.204 hours.
+While total time consumed by now, scale:494/1000,seq_id:A021049, order:20 took:
+ 735.6 seconds, i.e. 12.26 minutes or 0.204 hours.
+While total time consumed by now, scale:495/1000,seq_id:A021054, order:20 took:
+ 738.5 seconds, i.e. 12.31 minutes or 0.205 hours.
+While total time consumed by now, scale:496/1000,seq_id:A021064, order:20 took:
+ 741.4 seconds, i.e. 12.36 minutes or 0.206 hours.
+While total time consumed by now, scale:497/1000,seq_id:A021069, order:20 took:
+ 744.2 seconds, i.e. 12.4 minutes or 0.207 hours.
+While total time consumed by now, scale:498/1000,seq_id:A021074, order:20 took:
+ 746.9 seconds, i.e. 12.45 minutes or 0.207 hours.
+While total time consumed by now, scale:499/1000,seq_id:A021076, order:20 took:
+ 749.8 seconds, i.e. 12.5 minutes or 0.208 hours.
+While total time consumed by now, scale:500/1000,seq_id:A021079, order:20 took:
+ 752.7 seconds, i.e. 12.55 minutes or 0.209 hours.
+While total time consumed by now, scale:501/1000,seq_id:A021084, order:20 took:
+ 755.9 seconds, i.e. 12.6 minutes or 0.21 hours.
+While total time consumed by now, scale:502/1000,seq_id:A021085, order:20 took:
+ 756.9 seconds, i.e. 12.61 minutes or 0.21 hours.
+While total time consumed by now, scale:503/1000,seq_id:A021092, order:20 took:
+ 759.8 seconds, i.e. 12.66 minutes or 0.211 hours.
+
