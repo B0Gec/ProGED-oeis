@@ -49,6 +49,8 @@ warnings.filterwarnings("ignore", message="invalid value encountered in double_s
 warnings.filterwarnings("ignore", message="overflow encountered in exp")
 warnings.filterwarnings("ignore", message="overflow encountered in square")
 warnings.filterwarnings("ignore", message="overflow encountered in double_scalars")
+warnings.filterwarnings("ignore", message="dgm1 has points with non-finite death times;ignoring those points")
+warnings.filterwarnings("ignore", message="dgm2 has points with non-finite death times;ignoring those points")
 
 def fit_models(models, data, task_type="algebraic", pool_map=map, estimation_settings={}):
     """
