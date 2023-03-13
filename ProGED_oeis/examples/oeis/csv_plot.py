@@ -182,11 +182,11 @@ print(orders)
 
 
 
-with open('relevant_seqs.txt', 'w') as file:  # Use.
+with open('../../../relevant_seqs.txt', 'w') as file:  # Use.
     file.write(str(relevant_seqs))
     # file.write('Hi there!')
 
-with open('relevant_seqs.txt', 'r') as file:  # Use.
+with open('../../../relevant_seqs.txt', 'r') as file:  # Use.
     # file.read('Hi there!')
     text = file.read()
 

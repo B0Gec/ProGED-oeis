@@ -176,7 +176,7 @@ if __name__ == '__main__':
     else:
         from scraping.downloading.download import bfile2list
 
-    csv_filename = "linear_database.csv"
+    csv_filename = "../../../linear_database.csv"
 
 
     # seqs_dict = dict()

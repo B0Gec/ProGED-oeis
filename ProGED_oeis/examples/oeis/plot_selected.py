@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-with open('relevant_seqs.txt', 'r') as file:  # Use.
+with open('../../../relevant_seqs.txt', 'r') as file:  # Use.
     text = file.read()
 
 seqs = [int(seq) for seq in text[1:-1].split(",")]
