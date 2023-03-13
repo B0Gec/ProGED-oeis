@@ -1,0 +1,1917 @@
+ModelBox: 1 models
+-> [C0*x*y + C1*x, C2*x*y + C3 - sin(C4*y)], p = 1.0, parse trees = 1, valid = False
+[[-6.19011895e-01  2.79732490e-02]
+ [-2.26534803e+00 -1.45410127e+00]
+ [-5.80518710e-01  3.20229776e-02]
+ [-1.83427625e+00 -1.53174736e+00]
+ [-2.09864829e-03  7.93000022e-01]
+ [-1.81245902e+00 -1.66324280e+00]
+ [-1.85683053e+00 -1.58955981e+00]
+ [-6.94522670e-01 -3.28874638e-01]
+ [-2.16203207e+00 -2.17561016e-01]
+ [-8.19444218e-01 -1.61393409e+00]]
+ModelBox: 4 models
+-> [C0*y, C1*z, C2*x*z], p = 3.1850495999999982e-06, parse trees = 1, valid = False
+-> [C0*x, C1*x + C2, C3*y], p = 4.953389137919998e-07, parse trees = 1, valid = False
+-> [C0*x + C1, C2*x*y, C3*x + C4*y], p = 2.6294650153960717e-11, parse trees = 1, valid = False
+-> [C0*x*z + C1, C2*x*y, C3*x*z], p = 8.153726975999994e-09, parse trees = 1, valid = False
+Estimating model [C0*y, C1*x**2*y + C2*x + C3*y]
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+model: [-22.2610419129615*y, 8.08350605091107*x**2*y - 26.7832357205031*x - 0.793219278730063*y]; p: 1.0                    ; error: 1000000000.0
+ModelBox: 1 models
+-> [C0*y, C1*x**2*y + C2*x + C3*y], p = 1.0, parse trees = 1, valid = True, error = 1000000000.0, time = 0.15288782119750977
+Estimating model [C0*y, C1*x**2*y + C2*x + C3*y]
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+model: [7.28296116733524*y, -24.2846009287275*x**2*y - 19.1450281585605*x + 9.70360794976644*y]; p: 1.0                    ; error: 1000000000.0
+Estimating model [C0*y, C1*z, C2*x*z]
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+model: [0.779094117611612*y, 15.2510042161956*z, 23.9299436534455*x*z]       ; p: 3.1850495999999982e-06 ; error: 1000000000.0
+Estimating model [C0*x, C1*x + C2, C3*y]
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+model: [7.85391913406355*x, 17.6097023897534*x - 19.6260952485455, -15.5997640721336*y]; p: 4.953389137919998e-07  ; error: 1000000000.0
+Estimating model [C0*x + C1, C2*x*y, C3*x + C4*y]
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+model: [-8.84931694941272*x - 25.6656111843696, -8.83808025883413*x*y, -6.08774699284437*x - 12.4574233996383*y]; p: 2.6294650153960717e-11 ; error: 1000000000.0
+Estimating model [C0*x*z + C1, C2*x*y, C3*x*z]
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+model: [3.2303577572244*x*z - 25.6014196773097, -20.5820681764061*x*y, 3.50613883064232*x*z]; p: 8.153726975999994e-09  ; error: 1000000000.0
+Estimating model [C0*(-x + y), x*(C1 - z) - y, C2*z + x*y]
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+model: [0.558892577529253*x - 0.558892577529253*y, x*(-z - 11.164397858886) - y, x*y + 3.89671325568752*z]; p: 1.0                    ; error: 1000000000.0
+Estimating model [C0*(-x + y), x*(C1 - z) - y, C2*z + x*y]
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+Inside ode(), error: 
+object of type 'function' has no len()
+model: [25.4743434217844*x - 25.4743434217844*y, x*(-z - 0.740605734240305) - y, x*y + 19.384529254286*z]; p: 1.0                    ; error: 1000000000.0
