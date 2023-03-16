@@ -1,0 +1,6 @@
+Sequences withoun any equation found: 61
+Number of different sequences: 10557
+Number of false positives in exact ED: 14052
+
+od 15013 zaporedij.
+

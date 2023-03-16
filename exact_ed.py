@@ -11,18 +11,20 @@ import math
 # if os.getcwd()[-11:] == 'ProGED_oeis':
 #     from ProGED_oeis.ProGED.diophantine_solver import diophantine_solve
 # else:
-from ProGED_oeis.diophantine_solver import diophantine_solve
+# from ProGED_oeis.diophantine_solver import diophantine_solve
+from diophantine_solver import diophantine_solve
 
 # print("IDEA: max ORDER for GRAMMAR = floor(DATASET ROWS (LEN(SEQ)))/2)-1")
 
 def timer(now, text=f"\nScraping all (chosen) OEIS sequences"):
     before, now = now, time.perf_counter()
     consumed = now - before
-    print(text +
-          f" took:\n {round(consumed, 1)} seconds,"
-          f" i.e. {round(consumed / 60, 2)} minutes"
-          f" or {round(consumed / 3600, 3)} hours.")
-    return now
+    printout = f"{text}" \
+          f" took:\n {round(consumed, 1)} seconds," \
+          f" i.e. {round(consumed / 60, 2)} minutes" \
+          f" or {round(consumed / 3600, 3)} hours."
+    # print(printout)
+    return now, printout
 
 
 

@@ -44,7 +44,7 @@ VERBOSITY = 1  # run scenario
 
 
 MAX_ORDER = 20  # We care only for recursive equations with max 20 terms or order.
-n_of_terms_ed = 200
+N_OF_TERMS_ED = 200
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--scale", type=int, default=SCALE)
@@ -53,7 +53,7 @@ parser.add_argument("-to", type=int, default=-1)
 parser.add_argument("--order", type=int, default=MAX_ORDER)
 parser.add_argument("--paral", type=int, default=2)
 parser.add_argument("--verb", type=int, default=VERBOSITY)
-parser.add_argument("--n_of_terms", type=int, default=n_of_terms_ed)
+parser.add_argument("--n_of_terms", type=int, default=N_OF_TERMS_ED)
 parser.add_argument("--sub", type=bool, default=False)
 args = parser.parse_args()
 
@@ -66,7 +66,7 @@ SCALE = args.scale
 print(args.to, type(args.to))
 RANGE = (args.ss, args.to) if args.to != -1 else (0, SCALE)
 
-n_of_terms_ed = 2*MAX_ORDER  # Use only first n_of_terms_ed of the given sequence.
+N_OF_TERMS_ED = 2*MAX_ORDER  # Use only first n_of_terms_ed of the given sequence.
 
 
 
@@ -300,7 +300,7 @@ INCREASING_FREQS = [2**i for i in range(SUMMARY_FREQUENCY) if 2**i <= SUMMARY_FR
 
 results = []
 
-def doone(n, seq_id):
+def doone(task_id, seq_id):
     if VERBOSITY>=2:
         print()
     # try:
@@ -331,65 +331,65 @@ def doone(n, seq_id):
     # results += [(seq_id, eq, truth, x, is_reconst, is_check_verbose)]
 
     if VERBOSITY>=2:
-        now = timer(now=now, text=f"Exact ED for {n}-th sequence of {len(selection)} in "
+        now = timer(now=now, text=f"Exact ED for {task_id}-th sequence of {len(selection)} in "
                                   f"experiment set with id {seq_id} for first "
                                   f"{n_of_terms_ed} terms with max order {MAX_ORDER} "
                                   f"while checking against first {len(csv[seq_id])-1} terms.")
     elif VERBOSITY >= 1:
         # refreshrate = 1100
         refreshrate = 1
-        if n % refreshrate == 0:
-            timer(now=start, text=f"While total time consumed by now, scale:{n}/{len(selection)},"
+        if task_id % refreshrate == 0:
+            timer(now=start, text=f"While total time consumed by now, scale:{task_id}/{len(selection)},"
                                   f"seq_id:{seq_id}, order:{MAX_ORDER}")
-    if n % SUMMARY_FREQUENCY == 0:
+    if task_id % SUMMARY_FREQUENCY == 0:
         print_results(results, verbosity=1)
-    elif n in INCREASING_FREQS:
+    elif task_id in INCREASING_FREQS:
         print_results(results, verbosity=1)
     # except Exception as RuntimeError
     return seq_id, eq, truth, x, is_reconst, is_check
 
-if SUBMITIT:
-    import submitit
-    print('\n\n ==== = = = = ======================\n going with SUBMITIT\n\n')
-    log_folder = "log_submitit/%j"
-    # a = [1, 2, 3, 4]
-    # b = [10, 20, 30, 40]
-    ns = [n for n in range(len(selection))]
-    seq_ids = [selection[n] for n in ns]
-
-    executor = submitit.AutoExecutor(folder=log_folder)
-    # the following line tells the scheduler to only run\
-    # at most 2 jobs at once. By default, this is several hundreds
-    #executor.update_parameters(slurm_array_parallelism=PARALLEL, slurm_partition="long")
-    # executor.update_parameters(slurm_array_parallelism=PARALLEL)
+# if SUBMITIT:
+#     import submitit
+#     print('\n\n ==== = = = = ======================\n going with SUBMITIT\n\n')
+#     log_folder = "log_submitit/%j"
+#     # a = [1, 2, 3, 4]
+#     # b = [10, 20, 30, 40]
+#     ns = [n for n in range(len(selection))]
+#     seq_ids = [selection[n] for n in ns]
 #
-#     parameters = {'slurm_array_parallelism': PARALLEL,
-#                   'timeout_min': 1100,
-#                   'slurm_partition':,
-#     }
-#     params = {key:parameters[key] for key in parameters if parameters[key] is not None}
+#     executor = submitit.AutoExecutor(folder=log_folder)
+#     # the following line tells the scheduler to only run\
+#     # at most 2 jobs at once. By default, this is several hundreds
+#     #executor.update_parameters(slurm_array_parallelism=PARALLEL, slurm_partition="long")
+#     # executor.update_parameters(slurm_array_parallelism=PARALLEL)
+# #
+# #     parameters = {'slurm_array_parallelism': PARALLEL,
+# #                   'timeout_min': 1100,
+# #                   'slurm_partition':,
+# #     }
+# #     params = {key:parameters[key] for key in parameters if parameters[key] is not None}
+# #
+# #     if slurm_partition is not none:
+# #                   'slurm_partition':
+# #                   }
+#     executor.update_parameters(slurm_array_parallelism=PARALLEL, timeout_min=1010)
 #
-#     if slurm_partition is not none:
-#                   'slurm_partition':
-#                   }
-    executor.update_parameters(slurm_array_parallelism=PARALLEL, timeout_min=1010)
-
-    PARTED = False
-    partsize = PARALLEL
-    if PARTED:
-        for i in ns:
-            if i % partsize == 0:
-                jobs = executor.map_array(doone, ns[i*partsize:(i+1)*partsize], seq_ids[i*partsize:(i+1)*partsize])  # just a list of jobs
-                results += [job.result() for job in jobs]
-
-    else:
-        jobs = executor.map_array(doone, ns, seq_ids)  # just a list of jobs
-        results = [job.result() for job in jobs]
-
-else:
-    for n, seq_id in enumerate(selection):
-            results += [doone(n, seq_id)]
-            # results += [(seq_id, eq, truth, x, is_reconst, is_check)]
+#     PARTED = False
+#     partsize = PARALLEL
+#     if PARTED:
+#         for i in ns:
+#             if i % partsize == 0:
+#                 jobs = executor.map_array(doone, ns[i*partsize:(i+1)*partsize], seq_ids[i*partsize:(i+1)*partsize])  # just a list of jobs
+#                 results += [job.result() for job in jobs]
+#
+#     else:
+#         jobs = executor.map_array(doone, ns, seq_ids)  # just a list of jobs
+#         results = [job.result() for job in jobs]
+#
+# else:
+for n, seq_id in enumerate(selection):
+    results += [doone(n, seq_id)]
+    # results += [(seq_id, eq, truth, x, is_reconst, is_check)]
 
 print_results(results, verbosity=1)
 
