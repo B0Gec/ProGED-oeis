@@ -182,7 +182,7 @@ files = files_debug
 # print(files)
 
 _a, _b, _, n_of_seqs = extract_file(job_dir + files[0])
-print(n_of_seqs)
+# print(n_of_seqs)
 
 summary = reduce(for_summary, files, (0, 0, 0, 0, 0,))
 corrected_sum = sum(summary[:4]) - sum(summary[4:])
@@ -192,23 +192,27 @@ print(f'all files:{len(files)}, sum:{sum(summary)}, corrected sum: {corrected_su
 # print(f((1,2,3,4,), 'c'))
 
 print()
-print(f'Results: \n')
+print(f'Results: ')
 
 
-# all_seqs = 34000
-sum(summary[:4]) - sum(summary[4:])
+# all_seqs = 34371
 jobs_fail = n_of_seqs - len(files)  # or corrected_sum.
 
 id_oeis, non_id, non_manual, fail, reconst_non_manual = summary
+official_success = id_oeis + non_id
+
 printout = f"""
-    {id_oeis: >5} - (is oeis) - successfully found equations that are identical to the recursive equations written in OEIS (hereinafter - OEIS equation)
-    {non_id: >5} - (non_id) - successfully found equations that are more complex than the OEIS equation 
-    {non_manual: >5} - (non_manual) - successfully found equations that do not apply do not apply to test cases 
-    {fail: >5} - (fail) - failure, no equation found. (but program finished smoothly, no runtime error)
-    {reconst_non_manual: >5} - (reconst_non_manual) - fail in program, specifically reconstructed oeis and wrong on test cases.
+    {id_oeis: >5} = {id_oeis/n_of_seqs*100:0.3} % - (is oeis) - successfully found equations that are identical to the recursive equations written in OEIS (hereinafter - OEIS equation)
+    {non_id: >5} = {non_id/n_of_seqs*100:0.3} % - (non_id) - successfully found equations that are more complex than the OEIS equation 
+    {non_manual: >5} = {non_manual/n_of_seqs*100:0.3} % - (non_manual) - successfully found equations that do not apply do not apply to test cases 
+    {fail: >5} = {fail/n_of_seqs*100:0.3} % - (fail) - failure, no equation found. (but program finished smoothly, no runtime error)
+    {reconst_non_manual: >5} = {reconst_non_manual/n_of_seqs*100:0.3} % - (reconst_non_manual) - fail in program, specifically: reconstructed oeis and wrong on test cases.
     
-    {jobs_fail: >5} - runtime errors - jobs failed
-    {fail + jobs_fail: >5} - all fails  <--- (look this) ---
+    {jobs_fail: >5} = {jobs_fail/n_of_seqs*100:0.3} % - runtime errors - jobs failed
+    {fail + jobs_fail: >5} = {(fail+jobs_fail)/n_of_seqs*100:0.3} % - all fails  <--- (look this) ---
     {n_of_seqs: >5} - all sequences in our dataset
+    
+    
+    {official_success: >5} = {official_success/n_of_seqs*100:0.3} % - official success (id_oeis + non_id)
 """
 print(printout)
