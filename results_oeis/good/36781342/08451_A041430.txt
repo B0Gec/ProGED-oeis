@@ -1,0 +1,11 @@
+While total time consumed by now, scale:8452/34371, seq_id:A041430, order:20 took:
+ 60.3 seconds, i.e. 1.01 minutes or 0.017 hours.
+
+A041430: 
+a(n) = -a(n - 4) + 152*a(n - 2)
+truth: 
+a(n) = 0*a(n - 1) + 152*a(n - 2) + 0*a(n - 3) + -1*a(n - 4),  
+a(0) = 15, a(1) = 76, a(2) = 2295, a(3) = 11551
+
+True  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

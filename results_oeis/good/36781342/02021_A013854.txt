@@ -1,0 +1,11 @@
+While total time consumed by now, scale:2022/34371, seq_id:A013854, order:20 took:
+ 37.2 seconds, i.e. 0.62 minutes or 0.01 hours.
+
+A013854: 
+a(n) = 100000*a(n - 1)
+truth: 
+a(n) = 100000*a(n - 1),  
+a(0) = 10
+
+True  -  checked against website ground truth.     
+False  -  "manual" check if equation is correct.    

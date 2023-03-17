@@ -1,0 +1,11 @@
+While total time consumed by now, scale:3289/34371, seq_id:A016801, order:20 took:
+ 59.8 seconds, i.e. 1.0 minutes or 0.017 hours.
+
+A016801: 
+a(n) = 84*a(n - 3) - 61*a(n - 2) + 14*a(n - 1)
+truth: 
+a(n) = 14*a(n - 1) + -61*a(n - 2) + 84*a(n - 3),  
+a(0) = 1, a(1) = 14, a(2) = 135
+
+True  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

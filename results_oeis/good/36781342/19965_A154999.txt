@@ -1,0 +1,11 @@
+While total time consumed by now, scale:19966/34371, seq_id:A154999, order:20 took:
+ 75.8 seconds, i.e. 1.26 minutes or 0.021 hours.
+
+A154999: 
+a(n) = 42*a(n - 2) + 7*a(n - 1)
+truth: 
+a(n) = 7*a(n - 1) + 42*a(n - 2),  
+a(0) = 1, a(1) = 1
+
+True  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

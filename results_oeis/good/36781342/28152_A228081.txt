@@ -1,0 +1,11 @@
+While total time consumed by now, scale:28153/34371, seq_id:A228081, order:20 took:
+ 47.8 seconds, i.e. 0.8 minutes or 0.013 hours.
+
+A228081: 
+a(n) = -64*a(n - 9) + a(n - 8) + 64*a(n - 1)
+truth: 
+a(n) = 65*a(n - 1) + -64*a(n - 2),  
+a(0) = 2, a(1) = 65
+
+False  -  checked against website ground truth.     
+False  -  "manual" check if equation is correct.    

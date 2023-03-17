@@ -1,0 +1,11 @@
+While total time consumed by now, scale:2629/34371, seq_id:A015250, order:20 took:
+ 34.3 seconds, i.e. 0.57 minutes or 0.01 hours.
+
+A015250: 
+a(n) = 0
+truth: 
+a(n) = *a(n - 1),  
+a(0) = 2017
+
+False  -  checked against website ground truth.     
+False  -  "manual" check if equation is correct.    

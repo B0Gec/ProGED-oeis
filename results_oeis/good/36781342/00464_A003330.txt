@@ -1,0 +1,11 @@
+While total time consumed by now, scale:465/34371, seq_id:A003330, order:20 took:
+ 83.9 seconds, i.e. 1.4 minutes or 0.023 hours.
+
+A003330: 
+a(n) = -154122*n - 39443*a(n - 20) - 39270*a(n - 19) - 49492*a(n - 18) + 42634*a(n - 17) + 23776*a(n - 16) + 28123*a(n - 15) + 84718*a(n - 14) + 18114*a(n - 13) + 67716*a(n - 12) - 33545*a(n - 11) + 7942*a(n - 10) + 25361*a(n - 9) + 29153*a(n - 8) - 28842*a(n - 7) - 2970*a(n - 6) - 72957*a(n - 5) + 17299*a(n - 4) - 39589*a(n - 3) + 33290*a(n - 2) - 8059*a(n - 1)
+truth: 
+a(n) = 2*a(n - 1) + -1*a(n - 2),  
+a(0) = 7, a(1) = 14
+
+False  -  checked against website ground truth.     
+False  -  "manual" check if equation is correct.    

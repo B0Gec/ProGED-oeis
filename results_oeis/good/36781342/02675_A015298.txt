@@ -1,0 +1,11 @@
+While total time consumed by now, scale:2676/34371, seq_id:A015298, order:20 took:
+ 83.1 seconds, i.e. 1.38 minutes or 0.023 hours.
+
+A015298: 
+a(n) = 10000000000*a(n - 5) - 9091000000*a(n - 4) - 918191000*a(n - 3) + 9181910*a(n - 2) + 9091*a(n - 1)
+truth: 
+a(n) = 9091*a(n - 1) + 9181910*a(n - 2) + -918191000*a(n - 3) + -9091000000*a(n - 4) + 10000000000*a(n - 5),  
+a(0) = 1, a(1) = 9091, a(2) = 91828191, a(3) = 917364637191, a(4) = 9174563736547191
+
+True  -  checked against website ground truth.     
+False  -  "manual" check if equation is correct.    

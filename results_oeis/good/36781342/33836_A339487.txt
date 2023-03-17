@@ -1,0 +1,11 @@
+While total time consumed by now, scale:33837/34371, seq_id:A339487, order:20 took:
+ 108.8 seconds, i.e. 1.81 minutes or 0.03 hours.
+
+A339487: 
+a(n) = -225*a(n - 16) + 135*a(n - 15) - 23*a(n - 14) + a(n - 13) + 225*a(n - 3) - 135*a(n - 2) + 23*a(n - 1)
+truth: 
+a(n) = 24*a(n - 1) + -158*a(n - 2) + 360*a(n - 3) + -225*a(n - 4),  
+a(0) = 2020, a(1) = 8, a(2) = 192, a(3) = 3344
+
+False  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

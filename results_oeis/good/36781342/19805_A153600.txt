@@ -1,0 +1,11 @@
+While total time consumed by now, scale:19806/34371, seq_id:A153600, order:20 took:
+ 44.5 seconds, i.e. 0.74 minutes or 0.012 hours.
+
+A153600: 
+a(n) = -78*a(n - 2) + 18*a(n - 1)
+truth: 
+a(n) = 18*a(n - 1) + -78*a(n - 2),  
+a(0) = 1, a(1) = 18
+
+True  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

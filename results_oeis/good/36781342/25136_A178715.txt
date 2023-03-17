@@ -1,0 +1,11 @@
+While total time consumed by now, scale:25137/34371, seq_id:A178715, order:20 took:
+ 44.2 seconds, i.e. 0.74 minutes or 0.012 hours.
+
+A178715: 
+a(n) = 4*a(n - 5)
+truth: 
+a(n) = 0*a(n - 1) + 0*a(n - 2) + 0*a(n - 3) + 0*a(n - 4) + 4*a(n - 5),  
+a(0) = 1, a(1) = 2, a(2) = 3, a(3) = 4, a(4) = 5
+
+True  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

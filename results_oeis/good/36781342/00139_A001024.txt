@@ -1,0 +1,11 @@
+While total time consumed by now, scale:140/34371, seq_id:A001024, order:20 took:
+ 34.8 seconds, i.e. 0.58 minutes or 0.01 hours.
+
+A001024: 
+a(n) = 15*a(n - 1)
+truth: 
+a(n) = 15*a(n - 1),  
+a(0) = 1
+
+True  -  checked against website ground truth.     
+False  -  "manual" check if equation is correct.    

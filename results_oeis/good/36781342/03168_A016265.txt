@@ -1,0 +1,11 @@
+While total time consumed by now, scale:3169/34371, seq_id:A016265, order:20 took:
+ 16.4 seconds, i.e. 0.27 minutes or 0.005 hours.
+
+A016265: 
+a(n) = 0
+truth: 
+a(n) = 22*a(n - 1) + -131*a(n - 2) + 110*a(n - 3),  
+a(0) = 1, a(1) = 22, a(2) = 353
+
+False  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

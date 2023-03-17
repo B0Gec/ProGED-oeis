@@ -1,0 +1,11 @@
+While total time consumed by now, scale:239/34371, seq_id:A001542, order:20 took:
+ 42.5 seconds, i.e. 0.71 minutes or 0.012 hours.
+
+A001542: 
+a(n) = -a(n - 2) + 6*a(n - 1)
+truth: 
+a(n) = 6*a(n - 1) + -1*a(n - 2),  
+a(0) = 0, a(1) = 2
+
+True  -  checked against website ground truth.     
+False  -  "manual" check if equation is correct.    

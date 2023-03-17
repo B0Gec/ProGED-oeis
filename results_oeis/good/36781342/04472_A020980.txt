@@ -1,0 +1,11 @@
+While total time consumed by now, scale:4473/34371, seq_id:A020980, order:20 took:
+ 72.0 seconds, i.e. 1.2 minutes or 0.02 hours.
+
+A020980: 
+a(n) = 960*a(n - 3) - 296*a(n - 2) + 30*a(n - 1)
+truth: 
+a(n) = 30*a(n - 1) + -296*a(n - 2) + 960*a(n - 3),  
+a(0) = 1, a(1) = 30, a(2) = 604
+
+True  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

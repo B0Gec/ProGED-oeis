@@ -1,0 +1,11 @@
+While total time consumed by now, scale:18864/34371, seq_id:A138721, order:20 took:
+ 12.6 seconds, i.e. 0.21 minutes or 0.004 hours.
+
+A138721: 
+a(n) = 0
+truth: 
+a(n) = 1111*a(n - 1) + -112110*a(n - 2) + 1111000*a(n - 3) + -1000000*a(n - 4),  
+a(0) = 101, a(1) = 110011, a(2) = 111000111, a(3) = 111100001111
+
+False  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

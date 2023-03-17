@@ -1,0 +1,11 @@
+While total time consumed by now, scale:24813/34371, seq_id:A174853, order:20 took:
+ 57.9 seconds, i.e. 0.96 minutes or 0.016 hours.
+
+A174853: 
+a(n) = -a(n - 2) + 96*a(n - 1)
+truth: 
+a(n) = 96*a(n - 1) + -1*a(n - 2),  
+a(0) = 0, a(1) = 7
+
+True  -  checked against website ground truth.     
+False  -  "manual" check if equation is correct.    

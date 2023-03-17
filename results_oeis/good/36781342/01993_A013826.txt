@@ -1,0 +1,11 @@
+While total time consumed by now, scale:1994/34371, seq_id:A013826, order:20 took:
+ 31.4 seconds, i.e. 0.52 minutes or 0.009 hours.
+
+A013826: 
+a(n) = 243*a(n - 1)
+truth: 
+a(n) = 243*a(n - 1),  
+a(0) = 3
+
+True  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

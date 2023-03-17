@@ -1,0 +1,11 @@
+While total time consumed by now, scale:661/34371, seq_id:A004829, order:20 took:
+ 103.3 seconds, i.e. 1.72 minutes or 0.029 hours.
+
+A004829: 
+a(n) = 11*n + 360*a(n - 20) - 376*a(n - 19) - 180*a(n - 14) + 188*a(n - 13) + 90*a(n - 8) - 94*a(n - 7) - 45*a(n - 2) + 47*a(n - 1)
+truth: 
+a(n) = 2*a(n - 1) + -1*a(n - 2),  
+a(0) = 0, a(1) = 1
+
+False  -  checked against website ground truth.     
+False  -  "manual" check if equation is correct.    

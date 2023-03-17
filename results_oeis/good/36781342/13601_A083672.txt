@@ -1,0 +1,11 @@
+While total time consumed by now, scale:13602/34371, seq_id:A083672, order:20 took:
+ 59.5 seconds, i.e. 0.99 minutes or 0.017 hours.
+
+A083672: 
+a(n) = -9*a(n - 10) - 3*a(n - 9) + 5*a(n - 8) - a(n - 7) - 9*a(n - 3) - 3*a(n - 2) + 5*a(n - 1)
+truth: 
+a(n) = 4*a(n - 1) + 2*a(n - 2) + -12*a(n - 3) + -9*a(n - 4),  
+a(0) = 1, a(1) = 1, a(2) = 9, a(3) = 25
+
+False  -  checked against website ground truth.     
+False  -  "manual" check if equation is correct.    

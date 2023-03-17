@@ -1,0 +1,11 @@
+While total time consumed by now, scale:7493/34371, seq_id:A040391, order:20 took:
+ 67.9 seconds, i.e. 1.13 minutes or 0.019 hours.
+
+A040391: 
+a(n) = a(n - 20)
+truth: 
+a(n) = 0*a(n - 1) + 0*a(n - 2) + 0*a(n - 3) + 0*a(n - 4) + 0*a(n - 5) + 0*a(n - 6) + 0*a(n - 7) + 0*a(n - 8) + 0*a(n - 9) + 0*a(n - 10) + 0*a(n - 11) + 0*a(n - 12) + 0*a(n - 13) + 0*a(n - 14) + 0*a(n - 15) + 0*a(n - 16) + 0*a(n - 17) + 0*a(n - 18) + 0*a(n - 19) + 1*a(n - 20),  
+a(0) = 20, a(1) = 3, a(2) = 2, a(3) = 1, a(4) = 3, a(5) = 1, a(6) = 4, a(7) = 3, a(8) = 2, a(9) = 13, a(10) = 10, a(11) = 13, a(12) = 2, a(13) = 3, a(14) = 4, a(15) = 1, a(16) = 3, a(17) = 1, a(18) = 2, a(19) = 3
+
+False  -  checked against website ground truth.     
+False  -  "manual" check if equation is correct.    

@@ -1,0 +1,11 @@
+While total time consumed by now, scale:7401/34371, seq_id:A040299, order:20 took:
+ 64.2 seconds, i.e. 1.07 minutes or 0.018 hours.
+
+A040299: 
+a(n) = a(n - 11)
+truth: 
+a(n) = 0*a(n - 1) + 0*a(n - 2) + 0*a(n - 3) + 0*a(n - 4) + 0*a(n - 5) + 0*a(n - 6) + 0*a(n - 7) + 0*a(n - 8) + 0*a(n - 9) + 0*a(n - 10) + 1*a(n - 11),  
+a(0) = 17, a(1) = 1, a(2) = 4, a(3) = 8, a(4) = 1, a(5) = 2, a(6) = 2, a(7) = 1, a(8) = 8, a(9) = 4, a(10) = 1
+
+True  -  checked against website ground truth.     
+False  -  "manual" check if equation is correct.    

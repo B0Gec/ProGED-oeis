@@ -1,0 +1,11 @@
+While total time consumed by now, scale:12553/34371, seq_id:A075414, order:20 took:
+ 82.7 seconds, i.e. 1.38 minutes or 0.023 hours.
+
+A075414: 
+a(n) = 1000*a(n - 7) - 110*a(n - 6) + a(n - 5) - 1000*a(n - 2) + 110*a(n - 1)
+truth: 
+a(n) = 111*a(n - 1) + -1110*a(n - 2) + 1000*a(n - 3),  
+a(0) = 0, a(1) = 25, a(2) = 3025
+
+False  -  checked against website ground truth.     
+False  -  "manual" check if equation is correct.    

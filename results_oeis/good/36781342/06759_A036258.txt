@@ -1,0 +1,11 @@
+While total time consumed by now, scale:6760/34371, seq_id:A036258, order:20 took:
+ 78.2 seconds, i.e. 1.3 minutes or 0.022 hours.
+
+A036258: 
+a(n) = 250*a(n - 4) - 75*a(n - 3) - 45*a(n - 2) + 15*a(n - 1)
+truth: 
+a(n) = 15*a(n - 1) + -45*a(n - 2) + -75*a(n - 3) + 250*a(n - 4),  
+a(0) = 1, a(1) = 9, a(2) = 90, a(3) = 945
+
+True  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

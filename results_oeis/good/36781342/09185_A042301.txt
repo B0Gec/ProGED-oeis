@@ -1,0 +1,11 @@
+While total time consumed by now, scale:9186/34371, seq_id:A042301, order:20 took:
+ 34.0 seconds, i.e. 0.57 minutes or 0.009 hours.
+
+A042301: 
+a(n) = a(n - 2) + 52*a(n - 1)
+truth: 
+a(n) = 52*a(n - 1) + 1*a(n - 2),  
+a(0) = 1, a(1) = 52
+
+True  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

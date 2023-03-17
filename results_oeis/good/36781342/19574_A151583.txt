@@ -1,0 +1,11 @@
+While total time consumed by now, scale:19575/34371, seq_id:A151583, order:20 took:
+ 76.5 seconds, i.e. 1.27 minutes or 0.021 hours.
+
+A151583: 
+a(n) = 9*a(n - 16) - 6*a(n - 15) + a(n - 14) - 9*a(n - 13) - 3*a(n - 12) + 5*a(n - 11) - a(n - 10) + 9*a(n - 6) + 3*a(n - 5) - 5*a(n - 4) + a(n - 3) - 9*a(n - 2) + 6*a(n - 1)
+truth: 
+a(n) = 9*a(n - 1) + -30*a(n - 2) + 46*a(n - 3) + -33*a(n - 4) + 9*a(n - 5),  
+a(0) = 0, a(1) = 2, a(2) = 45, a(3) = 260, a(4) = 1115
+
+False  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

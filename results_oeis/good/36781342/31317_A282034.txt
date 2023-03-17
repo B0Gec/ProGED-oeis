@@ -1,0 +1,11 @@
+While total time consumed by now, scale:31318/34371, seq_id:A282034, order:20 took:
+ 83.8 seconds, i.e. 1.4 minutes or 0.023 hours.
+
+A282034: 
+a(n) = -a(n - 7) + a(n - 6) + a(n - 1)
+truth: 
+a(n) = 1*a(n - 1) + 1*a(n - 2) + -1*a(n - 3),  
+a(0) = 1, a(1) = 2, a(2) = 3
+
+False  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

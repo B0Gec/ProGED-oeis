@@ -1,0 +1,11 @@
+While total time consumed by now, scale:14752/34371, seq_id:A097175, order:20 took:
+ 78.8 seconds, i.e. 1.31 minutes or 0.022 hours.
+
+A097175: 
+a(n) = 272*a(n - 10) - 33*a(n - 8) + a(n - 6) - 272*a(n - 4) + 33*a(n - 2)
+truth: 
+a(n) = 1*a(n - 1) + 33*a(n - 2) + -33*a(n - 3) + -272*a(n - 4) + 272*a(n - 5),  
+a(0) = 1, a(1) = 5, a(2) = 21, a(3) = 105, a(4) = 361
+
+False  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

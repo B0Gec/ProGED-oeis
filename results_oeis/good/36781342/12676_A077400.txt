@@ -1,0 +1,11 @@
+While total time consumed by now, scale:12677/34371, seq_id:A077400, order:20 took:
+ 74.5 seconds, i.e. 1.24 minutes or 0.021 hours.
+
+A077400: 
+a(n) = a(n - 7) - 254*a(n - 5) - a(n - 4) + a(n - 3) + 254*a(n - 2)
+truth: 
+a(n) = 1*a(n - 1) + 254*a(n - 2) + -254*a(n - 3) + -1*a(n - 4) + 1*a(n - 5),  
+a(0) = 0, a(1) = 21, a(2) = 105, a(3) = 5460, a(4) = 26796
+
+False  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

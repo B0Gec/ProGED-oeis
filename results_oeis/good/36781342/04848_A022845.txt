@@ -1,0 +1,11 @@
+While total time consumed by now, scale:4849/34371, seq_id:A022845, order:20 took:
+ 90.3 seconds, i.e. 1.51 minutes or 0.025 hours.
+
+A022845: 
+a(n) = -450*a(n - 13) + 185*a(n - 12) - 24*a(n - 11) + a(n - 10) + 450*a(n - 3) - 185*a(n - 2) + 24*a(n - 1)
+truth: 
+a(n) = 25*a(n - 1) + -209*a(n - 2) + 635*a(n - 3) + -450*a(n - 4),  
+a(0) = 1, a(1) = 25, a(2) = 416, a(3) = 5810
+
+False  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

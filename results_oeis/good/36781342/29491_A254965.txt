@@ -1,0 +1,11 @@
+While total time consumed by now, scale:29492/34371, seq_id:A254965, order:20 took:
+ 91.2 seconds, i.e. 1.52 minutes or 0.025 hours.
+
+A254965: 
+a(n) = a(n - 7) - 22*a(n - 5) - a(n - 4) + a(n - 3) + 22*a(n - 2)
+truth: 
+a(n) = 1*a(n - 1) + 22*a(n - 2) + -22*a(n - 3) + -1*a(n - 4) + 1*a(n - 5),  
+a(0) = 1, a(1) = 2, a(2) = 13, a(3) = 34, a(4) = 275
+
+False  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

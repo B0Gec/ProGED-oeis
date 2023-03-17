@@ -1,0 +1,11 @@
+While total time consumed by now, scale:1927/34371, seq_id:A013759, order:20 took:
+ 33.1 seconds, i.e. 0.55 minutes or 0.009 hours.
+
+A013759: 
+a(n) = 4096*a(n - 1)
+truth: 
+a(n) = 4096*a(n - 1),  
+a(0) = 256
+
+True  -  checked against website ground truth.     
+False  -  "manual" check if equation is correct.    
