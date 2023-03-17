@@ -1,0 +1,8 @@
+bacres          p 288 in 1994 but p 293 2018 and not 288
+bar mag         p 286 94 gg but p 289 18
+glider          p 188 94 gg but p 190 18 
+Lotka-Volterra  p 156 94 gg but p 157 18 
+Predator-prey   p 288 94 gg but p 292 18 
+shear flow      p 192 94 gg but p 194 18
+
+
