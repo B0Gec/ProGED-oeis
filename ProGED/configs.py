@@ -1,4 +1,3 @@
-
 import numpy as np
 
 
@@ -35,7 +34,6 @@ optimizer_DE = {
 optimizer_hyperopt = {
     "a": 1,
 }
-
 
 objective_function = {
     "use_jacobian": False,

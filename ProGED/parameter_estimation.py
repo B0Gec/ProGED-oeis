@@ -88,6 +88,9 @@ class Estimator():
             settings['parameter_estimation']['objective_function'] = objective_algebraic
         else:
             settings['parameter_estimation']['objective_function'] = objective_differential
+            # # case of disabled persistent homology
+            if self.settings["objective_function"]["persistent_homology"]:
+                ph_init(self, model)
 
             # if task is differential, check if the time is included in the data.
             if 't' not in self.data.columns:
@@ -277,30 +280,37 @@ def objective_algebraic(params, model, estimator):
 
 def objective_differential(params, model, estimator):
     """
-    Objective function for differential models. Simulated trajctories are calculated in the function 'simulate_ode'.
+    Objective function for differential models. Simulated trajectories are calculated in the function 'simulate_ode'.
 
     Returns:
         error (float):  if successfull, returns the root-mean-square error between the true trajectories (X) and
                             simulated trajectories (X_hat), else it returns the dummy error (10**9).
     """
 
-    # set the newely estimated parameters and initial states
+    # set the newly estimated parameters and initial states
     model.set_params(params, extra_params=True)
     model.set_initials(params, dict(estimator.data.iloc[0, :]))
 
-    # get appropriate data points
-    X = np.array(estimator.data[[str(i) for i in model.observed_vars]])
+    # get appropriate data points - currently bug
+    # X = np.array(estimator.data[[str(i) for i in model.observed_vars]])
+    X = np.array(estimator.data[[str(i) for i in model.observed_vars if i in model.lhs_vars]])
 
     # estimate the model
+    #to avoid
     X_hat = simulate_ode(estimator, model)
+
+
+    if estimator.settings["objective_function"]["persistent_homology"] and \
+        estimator.persistent_diagrams is not None:
+        after(estimator, model, error, X_hat)
 
     # if successful, calculate the error and optionally extend error with persistent homology calculation.
     # if not successful or error is not float, return dummy error.
     if X_hat is not None:
         error = np.sqrt(np.mean((X - X_hat) ** 2))
 
-        if estimator.settings['objective_function']["persistent_homology"]:
-            error = 1
+        # if estimator.settings['objective_function']["persistent_homology"]:
+        #     error = 1
 
         if np.isnan(error) or np.isinf(error) or not np.isreal(error):
             return estimator.settings['parameter_estimation']['default_error']
@@ -327,6 +337,7 @@ def simulate_ode(estimator, model):
 
     # Make function 'rhs' either with or without teacher forcing
     observability_mask = np.array([item in model.observed_vars for item in model.lhs_vars])
+
     if estimator.settings['objective_function']["teacher_forcing"]:
         X_interp = interp1d(estimator.data['t'], estimator.data.loc[:, estimator.data.columns != 't'],
                             axis=0, kind='cubic', fill_value="extrapolate") if estimator.data.shape[1] != 0 else (lambda t: np.array([]))
@@ -362,7 +373,7 @@ def directly_calculate_objective(params, model, estimator):
     Directly calculates objective function. It is only possible if no parameters need to be estimated.
 
     Returns:
-        error (float):  if successfull, returns the root-mean-square error between the true data and
+        error (float):  if successful, returns the root-mean-square error between the true data and
                             estimated model data, else it returns the dummy error (10**9).
     """
     if estimator.settings['parameter_estimation']['task_type'] in ("algebraic", "integer-algebraic"):
@@ -375,7 +386,7 @@ def directly_calculate_objective(params, model, estimator):
 if __name__ == '__main__':
     print("--- more parameter_estimation.py examples are included in the folder 'tests' ---")
 
-# test algebraic model with one equation
+    # test algebraic model with one equation
     X = np.linspace(-1, 1, 5).reshape(-1, 1)
     Y = 2.0 * (X + 0.3)
     data = pd.DataFrame(np.hstack((X, Y)), columns=['x', 'y'])
@@ -392,7 +403,7 @@ if __name__ == '__main__':
     print("--- parameter_estimation.py test algebraic model with one equation successfully finished ---")
 
 
-# differential model with two equations and two variables
+    # differential model with two equations and two variables
     t = np.arange(0, 1, 0.1)
     x = 3*np.exp(-2*t)
     y = 5.1*np.exp(-1*t)

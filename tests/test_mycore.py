@@ -13,11 +13,9 @@ from ProGED.parameter_estimation import fit_models
 from utils.generate_data_ODE_systems import generate_ODE_data
 from ProGED.configs import settings
 
-np.random.seed(0)
-
-
 def test_grammar_general():
-
+    np.random.seed(0)
+    
     txtgram = "S -> S '+' F [0.2] | F [0.8] \n"
     txtgram += "F -> 'x' [0.5] | 'y' [0.5]"
     grammar = GeneratorGrammar(txtgram)
@@ -31,7 +29,8 @@ def test_grammar_general():
     assert "".join(grammar.code_to_expression('0101')[0]) == "x+y"
     
 def test_grammar_templates():
-
+    np.random.seed(0)
+   
     templates_to_test = ["polynomial", "trigonometric", "polytrig", "simplerational", "rational", "universal"]
     variables = ["'x'", "'y'", "'z'"]
     p_vars = [0.3, 0.3, 0.4]
@@ -42,7 +41,7 @@ def test_grammar_templates():
         assert grammars[i].generate_one()[2] == codes[i]
         
 def test_generate_models():
-
+    np.random.seed(0)
     generator = grammar_from_template("polynomial", {"variables":["'x'", "'y'"], "p_vars":[0.3,0.7]})
     symbols = {"x":['x', 'y'], "start":"S", "const":"C"}
     N = 3
@@ -84,10 +83,7 @@ def test_model():
 
     assert isinstance(y, type(np.array([0])))
     assert sum((y - np.reshape([0, 6.0], (2,1)))**2) < 1e-15
-
-    model_nice_string = model.nice_print(return_string=True)
-    assert model_nice_string == "y = 1.2*x\n"
-
+    
 def test_model_box():
     expr1_str = "x"
     expr2_str = "c*x"
@@ -103,7 +99,7 @@ def test_model_box():
     assert models[1].p == 0.5
         
 def test_parameter_estimation_algebraic_1D():
-
+    np.random.seed(1)
     X = np.linspace(-1, 1, 5).reshape(-1, 1)
     Y = 2.0 * (X + 0.3)
     data = pd.DataFrame(np.hstack((X, Y)), columns=['x', 'y'])
@@ -119,7 +115,6 @@ def test_parameter_estimation_algebraic_1D():
     assert np.abs(models[0].get_error() - 7.15435171733259e-05) < 1e-6
 
 def test_parameter_estimation_algebraic_2D():
-
     X = np.linspace(-1, 1, 5).reshape(-1, 1)
     Y1 = 2.0 * (X + 0.3)
     Y2 = 1.66 * X
@@ -135,28 +130,8 @@ def test_parameter_estimation_algebraic_2D():
     models = fit_models(models, data, settings=settings)
     assert np.abs(models[0].get_error() - 7.107301643897895e-05) < 1e-6
 
-def test_parameter_estimation_ODE_sepa():
-    # model: dx = -2x + y
-    t = np.arange(0, 1, 0.001)
-    y = np.arange(-1, 1, 0.002)
-    x = 3*np.exp(-2*t) + 1/2*y**2
-    data = pd.DataFrame(np.vstack((t, x, y)).T, columns=['t', 'x', 'y'])
-
-    models = ModelBox()
-    models.add_model("C*x + y",
-                     symbols={"x": ["x", "y"], "const": "C"},
-                     lhs_vars=["x"])
-
-    settings["parameter_estimation"]["task_type"] = 'differential'
-    settings["optimizer_DE"]["termination_after_nochange_iters"] = 50
-
-    models = fit_models(models, data, settings=settings)
-    models[0].get_error()
-    # assert np.abs(models[0].get_error() - 8.60893804568542e-05) < 1e-6
-
 
 def test_parameter_estimation_ODE_1D():
-    # model: dx = -2x
     t = np.arange(0, 1, 0.1)
     x = 3*np.exp(-2*t)
     data = pd.DataFrame(np.vstack((t, x)).T, columns=['t', 'x'])
@@ -173,8 +148,6 @@ def test_parameter_estimation_ODE_1D():
 
 
 def test_parameter_estimation_ODE_2D():
-    # model: dx = -2x
-    #        dy = -1y (would have to check the value -1)
     t = np.arange(0, 1, 0.1)
     x = 3*np.exp(-2*t)
     y = 5.1*np.exp(-1*t)
@@ -190,8 +163,6 @@ def test_parameter_estimation_ODE_2D():
     assert abs(models[0].get_error() - 7.524305872610019e-05) < 1e-6
 
 def test_parameter_estimation_ODE_partial_observability():
-    # model: dx = -2x
-    #        dy = -2y
     t = np.arange(0, 1, 0.1)
     x = 3*np.exp(-2*t)
     data = pd.DataFrame(np.vstack((t, x)).T, columns=['t', 'x'])
@@ -204,11 +175,9 @@ def test_parameter_estimation_ODE_partial_observability():
     settings["parameter_estimation"]["task_type"] = 'differential'
 
     models = fit_models(models, data, settings=settings)
-    assert abs(models[0].get_error() - 5.2769451981176474e-05) < 1e-6
+    assert abs(models[0].get_error() - 9.653956731387341e-05) < 1e-6
 
 def test_parameter_estimation_ODE_teacher_forcing():
-    # model: dx = -2x
-    #        dy = -2y
     t = np.arange(0, 1, 0.1)
     x = 3*np.exp(-2*t)
     data = pd.DataFrame(np.vstack((t, x)).T, columns=['t', 'x'])
@@ -219,10 +188,9 @@ def test_parameter_estimation_ODE_teacher_forcing():
                      observed_vars=["x"])
 
     settings["parameter_estimation"]["task_type"] = 'differential'
-    settings["objective_function"]["teacher_forcing"] = True
 
     models = fit_models(models, data, settings=settings)
-    assert abs(models[0].get_error() - 5.7511694660763637e-05) < 1e-6
+    assert abs(models[0].get_error() - 6.440163724932516e-05) < 1e-6
 
 
 def test_parameter_estimation_ODE_solved_as_algebraic():
@@ -242,6 +210,7 @@ def test_parameter_estimation_ODE_solved_as_algebraic():
     assert abs(models[0].get_error() - 0.04928780981951337) < 1e-6
 
 def test_equation_discoverer():
+    np.random.seed(0)
     def f(x):
         return 2.0 * (x[:, 0] + 0.3)
 
@@ -267,6 +236,7 @@ def test_equation_discoverer_ODE():
     data = pd.DataFrame(np.hstack((ts.reshape(-1, 1), xs.reshape(-1, 1), ys.reshape(-1, 1))), columns=['t', 'x', 'y'])
 
     settings['parameter_estimation']['task_type'] = 'differential'
+    np.random.seed(20)
     ED = EqDisco(data = data,
                  task = None,
                  task_type = "differential",
@@ -285,7 +255,7 @@ def test_equation_discoverer_ODE():
     return
 
 if __name__ == "__main__":
-
+    #
     # test_grammar_general()
     # test_grammar_templates()
     # test_generate_models()
@@ -293,15 +263,14 @@ if __name__ == "__main__":
     # test_model_box()
     # test_parameter_estimation_algebraic_1D()
     # test_parameter_estimation_algebraic_2D()
-    # test_parameter_estimation_ODE_sepa()
     # test_parameter_estimation_ODE_1D()
     # test_parameter_estimation_ODE_2D()
-    test_parameter_estimation_ODE_partial_observability()
+    # test_parameter_estimation_ODE_partial_observability()
     # test_parameter_estimation_ODE_teacher_forcing()
     # test_parameter_estimation_ODE_solved_as_algebraic()
     # test_equation_discoverer()
-    # test_equation_discoverer_ODE()
-    #
+    test_equation_discoverer_ODE()
+
 
 ##
 

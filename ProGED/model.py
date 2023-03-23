@@ -108,11 +108,6 @@ class Model:
         self.trees = trees #trees has form {"code":[p,n]}"
         self.add_tree(code, p)
 
-        # number of successful persistent homology comparisons vs. pure rmse (should be limited to ODEs?)
-        self.ph_all_iters = 0
-        self.ph_used = 0
-        self.ph_zerovszero = 0
-
     def add_tree(self, code, p):
         """Add a new parse tree to the model.
         
