@@ -10,7 +10,7 @@ parameter_estimation = {
     "task_type": 'algebraic',
     "dataset": "./data.csv",
     "lhs_vars": None,
-    "optimizer": 'DE', # default is pymoo's DE
+    "optimizer": 'DE',  # default is pymoo's DE
     "max_constants": 15,
     "param_bounds": ((-10, 10),),
     "default_error": 10 ** 9,

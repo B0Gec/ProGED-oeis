@@ -134,14 +134,17 @@ def ph_init(estimator, model):
         if verbosity >= 1:
             print(f"WARNING: Excepted an error when constructing ph_diagram of the original dataset "
                   f"of type {type(error)} and message:{error}!")
-        estimator.persistent_diagrams = None
+        estimator.persistent_diagrams = "ph Failed"
 
-def after(estimator, model, error, X_hat):
+def ph_after(estimator, model, error, X_hat):
     """Calculate the persistent_diagram of simulated trajectory in
     the initialization of parameter_estimation."""
 
     # c. calculate the persistent_diagram of simulated trajectory
     # if estimation_settings["objective_settings"]["persistent_homology"] and ph_diagrams is not None:
+    ph_diagrams = estimator.persistent_diagrams
+    if ph_diagrams == "ph Failed":
+        return error
 
     verbosity = estimator.settings["experiment"]["verbosity"]
     weight = estimator.settings["objective_function"]["persistent_homology_weight"]
@@ -149,7 +152,6 @@ def after(estimator, model, error, X_hat):
     # if verbosity >= 2:
     #     print(f'iters vs. ph_used till now: {model.ph_all_iters}, ph_iters:{model.ph_used}')
 
-    ph_diagrams = estimator.persistent_diagrams
     trajectory = np.vstack((X_hat, estimator.data[model.extra_vars])) if model.extra_vars != [] else X_hat  # seems good
     try:
         truth_diags = ph_diagrams[0]

@@ -20,6 +20,7 @@ from pymoo.termination.default import MaximumGenerationTermination
 import ProGED as pg
 from ProGED.model_box import ModelBox
 from ProGED.configs import settings
+from ProGED.external.persistent_homology import ph_init, ph_after
 
 ## FIRST FUNCTION
 def fit_models(models, data=None, settings=settings, pool_map=map):
@@ -88,9 +89,6 @@ class Estimator():
             settings['parameter_estimation']['objective_function'] = objective_algebraic
         else:
             settings['parameter_estimation']['objective_function'] = objective_differential
-            # # case of disabled persistent homology
-            if self.settings["objective_function"]["persistent_homology"]:
-                ph_init(self, model)
 
             # if task is differential, check if the time is included in the data.
             if 't' not in self.data.columns:
@@ -116,6 +114,8 @@ class Estimator():
         #else do parameter estimation
         else:
             model = self.check_observability(model)
+            if self.settings["objective_function"]["persistent_homology"]:
+                ph_init(self, model)
             optmizers_dict = {"DE": DEwrapper, "hyperopt": "hyperopt_fit"}
             optimizer = optmizers_dict[settings["parameter_estimation"]["optimizer"]]
             t1 = time.time()
@@ -299,18 +299,13 @@ def objective_differential(params, model, estimator):
     #to avoid
     X_hat = simulate_ode(estimator, model)
 
-
-    if estimator.settings["objective_function"]["persistent_homology"] and \
-        estimator.persistent_diagrams is not None:
-        after(estimator, model, error, X_hat)
-
     # if successful, calculate the error and optionally extend error with persistent homology calculation.
     # if not successful or error is not float, return dummy error.
     if X_hat is not None:
         error = np.sqrt(np.mean((X - X_hat) ** 2))
 
-        # if estimator.settings['objective_function']["persistent_homology"]:
-        #     error = 1
+        if estimator.settings['objective_function']["persistent_homology"]:
+            error = ph_after(estimator, model, error, X_hat)
 
         if np.isnan(error) or np.isinf(error) or not np.isreal(error):
             return estimator.settings['parameter_estimation']['default_error']
