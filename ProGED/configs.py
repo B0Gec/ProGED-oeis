@@ -45,7 +45,7 @@ objective_function = {
     "default_error": 10 ** 9,
     "persistent_homology": False,
     "persistent_homology_size": 200,
-    "persistent_homology_weight": 0.5,
+    "persistent_homology_weight": 0.6,
 }
 
 settings = {
