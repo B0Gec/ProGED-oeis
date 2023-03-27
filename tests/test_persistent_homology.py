@@ -79,7 +79,6 @@ def test_parameter_estimation_ODE_2D_persistent_homology():
                      symbols={"x": ["x", "y"], "const": "C"})
 
     settings = deepcopy(default_settings)
-    settings["objective_function"]["persistent_homology_weight"] = 0.70
     settings["objective_function"]["persistent_homology_weight"] = 0.6
     # settings["optimizer_DE"]["termination_after_nochange_iters"] = 50  # proper
     # 0.00012831224361846863 [-2.00005965419591 * x, -1.00000664264945 * y]  #50 result
