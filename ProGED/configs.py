@@ -27,7 +27,7 @@ optimizer_DE = {
     "atol": 0.001,
     "termination_threshold_error": 10 ** (-4),
     "termination_after_nochange_iters": 200,
-    "termination_after_nochange_tolerance": 10 ** (-16),
+    "termination_after_nochange_tolerance": 10 ** (-6),
     "verbose": False,
     "save_history": False,
 }
