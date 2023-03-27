@@ -1,3 +1,9 @@
+# metrics alternatives:
+#   - persistent homology
+#   - dynamic time warping (DTW)
+#   - Jure's earthquake's metric
+#   - bottleneck distance (not realy big idea - maybe DTW is enough)
+
 import pandas as pd
 import numpy as np
 from copy import deepcopy
