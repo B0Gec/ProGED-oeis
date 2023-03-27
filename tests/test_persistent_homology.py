@@ -22,6 +22,29 @@ np.random.seed(0)
 # from ProGED.parameter_estimation import fit_models
 # from utils.generate_data_ODE_systems import generate_ODE_data
 
+def test_parameter_estimation_ODE_partial_observability():
+    """Not the representative case, more like bug test case, to check against bugs."""
+    # model: dx = -2x
+    #        dy = -2y
+    t = np.arange(0, 1, 0.0001)
+    x = 3*np.exp(-2*t)
+    data = pd.DataFrame(np.vstack((t, x)).T, columns=['t', 'x'])
+
+    models = ModelBox()
+    models.add_model(["C*x", "C*y"],
+                     symbols={"x": ["x", "y"], "const": "C"},
+                     observed_vars=["x"])
+
+    weight = 0.6
+    settings["parameter_estimation"]["task_type"] = 'differential'
+
+    models = fit_models(models, data, settings=settings)
+    # assert abs(models[0].get_error() - 5.2769451981176474e-05) < 1e-6
+    params = list(models[0].params.values())
+    print(params, f'{weight} homo')
+    print(models[0].nice_print(), f'{weight} homo')
+    print(models[0].get_error(), f'{weight} homo')
+
 def test_persistent_homology_partial_observability():
     """Not the representative case, more like error case, to check against errors."""
 
@@ -167,7 +190,7 @@ def test_parameter_estimation_ODE_2D_persistent_homology():
     assert abs(params[1] - -1.0000035839874042) < 1e-3
 
 if __name__ == "__main__":
-
+    test_parameter_estimation_ODE_partial_observability()
     # test_persistent_homology_partial_observability()
     # test_parameter_estimation_ODE_2D_persistent_homology()
-    test_parameter_estimation_persistent_homology_lorenz()
+    # test_parameter_estimation_persistent_homology_lorenz()
