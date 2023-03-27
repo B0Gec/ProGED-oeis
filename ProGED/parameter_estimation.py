@@ -166,7 +166,9 @@ def DEwrapper(estimator, model):
 
     termination = BestTermination(min_f = estimator.settings["optimizer_DE"]["termination_threshold_error"],
                                   n_max_gen = estimator.settings["optimizer_DE"]["max_iter"],
-                                  terminate_if_no_change=estimator.settings["optimizer_DE"]["termination_after_nochange_iters"])
+                                  terminate_if_no_change=estimator.settings["optimizer_DE"]["termination_after_nochange_iters"],
+                                  terminate_if_no_change_tolerance = estimator.settings["optimizer_DE"]["termination_after_nochange_tolerance"],
+                                  )
 
     output = minimize(pymoo_problem,
                       algorithm,
@@ -227,23 +229,31 @@ class BestTermination(Termination):
                                         In the settings, min_f is set as "termination_threshold_error".
             max_gen (int):              Maximum number of generations to be created. After that, optimization stops.
                                         In the settings, max_gen is set as "max_iter".
-            terminate_if_no_change (int): Maximum number of iterations without the change in min_f. After that,
+            terminate_if_no_change (int): Maximum number of iterations without the meaningful change in min_f. After that,
                                         optimization stops. In the settings, terminate_if_no_change is set
-                                        as "termination_after_nochange_iters".
+                                        as "termination_after_nochange_iters". By meaningful change we mean change
+                                         outside the epsilon-neighbourhood of 0, i.e. absolute change being bigger than
+                                         certain tolerance specified by `terminate_if_no_change_tolerance`.
+            terminate_if_no_change_tolerance (float): Relative tolerance that ignores small changes. It is used in
+                                        conjunction with the `terminate_if_no_change` variable (see above).
 
         Methods:
             update: checks at every iteration if termination critera are met
     """
-    def __init__(self, min_f=1e-3, n_max_gen=500, terminate_if_no_change=200) -> None:
+    def __init__(self, min_f=1e-3, n_max_gen=500, terminate_if_no_change=200, terminate_if_no_change_tolerance=10 ** (-6)) -> None:
         super().__init__()
         self.min_f = min_f
         self.max_gen = MaximumGenerationTermination(n_max_gen)
         self.terminate_if_no_change = terminate_if_no_change
+        self.terminate_if_no_change_tolerance = terminate_if_no_change_tolerance
+
     def _update(self, algorithm):
         if algorithm.problem.best_f < self.min_f:
             self.terminate()
         elif (len(algorithm.problem.optimization_curve) > self.terminate_if_no_change + 2) and \
-             (algorithm.problem.optimization_curve[-1] == algorithm.problem.optimization_curve[-self.terminate_if_no_change]):
+             abs(algorithm.problem.optimization_curve[-1] -
+                 algorithm.problem.optimization_curve[-self.terminate_if_no_change]) \
+                < self.terminate_if_no_change_tolerance:
             self.terminate()
         return self.max_gen.update(algorithm)
 

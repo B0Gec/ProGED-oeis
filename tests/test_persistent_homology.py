@@ -85,29 +85,11 @@ def test_parameter_estimation_persistent_homology_lorenz():
     settings["parameter_estimation"]["task_type"] = 'differential'
     settings["parameter_estimation"]["param_bounds"] = ((-5, 28),)
     settings["objective_function"]["persistent_homology"] = True
-
-    weight = 0.70
-    weight = 0.60
-    # weight = 0.55
-    # weight = 0.57
-    # weight = 0.56
-    # weight = 0.59
-    settings["objective_function"]["persistent_homology_weight"] = weight
-    # settings["objective_function"]["persistent_homology_weight"] = 0.99
-    # settings["optimizer_DE"]["termination_after_nochange_iters"] = 50  # proper
-    # 0.00012831224361846863 [-2.00005965419591 * x, -1.00000664264945 * y]  #50 result
-    # 0.00012831311978597356 [-2.00005960377112 * x, -1.00000667167653 * y]  #2 result
-    # settings["optimizer_DE"]["termination_after_nochange_iters"] = 2
-    # settings["optimizer_DE"]["termination_after_nochange_iters"] = 1
-    scale = 20
-    scale = 5
+    settings["objective_function"]["persistent_homology_weight"] = 0.6
     scale = 4
-    # scale = 3
-
     settings["optimizer_DE"]["max_iter"] = 50*scale
     settings["optimizer_DE"]["pop_size"] = scale
-    # settings["optimizer_DE"]["termination_after_nochange_iters"] = 3
-    settings["optimizer_DE"]["verbose"] = True
+    # settings["optimizer_DE"]["verbose"] = True
     # settings["experiment"]["verbosity"] = 2
 
     # [10.033734086410286, 27.934671707772303, -2.627103944792303] no homo
@@ -133,7 +115,7 @@ def test_parameter_estimation_persistent_homology_lorenz():
     start = time.time()
     models = fit_models(models, data, settings=settings)
     duration = time.time()-start
-    print(weight)
+    # print(weight)
     print([10, 28, -2.66667])
     print([10.033734086410286, 27.934671707772303, -2.627103944792303], 'no homo')
     # print([10.033734086410286, 27.934671707772303, -2.627103944792303], 'no homo')
@@ -146,20 +128,15 @@ def test_parameter_estimation_persistent_homology_lorenz():
     print([10.001624739484754, 27.998029955055976, -2.6720044673329273], '0.57 homo')
 
     params = list(models[0].params.values())
-    print(params, f'{weight} homo')
-    # assert abs(params[0] - -2.0000604802785835) < 1e-6
-    # assert abs(params[1] - -1.0000035839874042) < 1e-6
-    # assert abs(params[0] - -2.0000604802785835) < 1e-3
-    # assert abs(params[1] - -1.0000035839874042) < 1e-3
-    models[0].nice_print()
-    print(start)
-    print(duration)
+    # print(params, f'{weight} homo')
 
-    # print(f"All iters (as saved to system_model object): {system_out[0].ph_all_iters}")
-    # print(f"Iters when PH was used: {system_out[0].ph_used}")
-    # print(f"Iters when zero vs zero: {system_out[0].ph_zerovszero}")
-    # print(abs(system_out[0].get_error()))
-    # assert abs(system_out[0].get_error()) < 1.0  # 3.2.2023
+    # asserts: 27.3.2023
+    # assert abs(params[0] - 10.001624739484754) < 1e-6
+    # assert abs(params[1] - 27.998029955055976) < 1e-6
+    # assert abs(params[2] - -2.6717422411357985) < 1e-6
+    assert abs(params[0] - 10.001624739484754) < 1e-3
+    assert abs(params[1] - 27.998029955055976) < 1e-3
+    assert abs(params[2] - -2.6717422411357985) < 1e-3
 
 def test_parameter_estimation_ODE_2D_persistent_homology():
     # model: dx = -2x
@@ -180,11 +157,10 @@ def test_parameter_estimation_ODE_2D_persistent_homology():
     # 0.00012831224361846863 [-2.00005965419591 * x, -1.00000664264945 * y]  #50 result
     # 0.00012831311978597356 [-2.00005960377112 * x, -1.00000667167653 * y]  #2 result
     settings["optimizer_DE"]["termination_after_nochange_iters"] = 2
-    # settings["optimizer_DE"]["verbose"] = True
-    # settings["experiment"]["verbosity"] = 2
 
     models = fit_models(models, data, settings=settings)
     params = list(models[0].params.values())
+    # asserts: 23.3.2023
     # assert abs(params[0] - -2.0000604802785835) < 1e-6
     # assert abs(params[1] - -1.0000035839874042) < 1e-6
     assert abs(params[0] - -2.0000604802785835) < 1e-3
