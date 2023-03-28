@@ -103,7 +103,7 @@ def test_model_box():
     assert models[1].p == 0.5
         
 def test_parameter_estimation_algebraic_1D():
-
+    # y = 2 (x + 0.3)
     X = np.linspace(-1, 1, 5).reshape(-1, 1)
     Y = 2.0 * (X + 0.3)
     data = pd.DataFrame(np.hstack((X, Y)), columns=['x', 'y'])
@@ -119,7 +119,8 @@ def test_parameter_estimation_algebraic_1D():
     assert np.abs(models[0].get_error() - 7.15435171733259e-05) < 1e-6
 
 def test_parameter_estimation_algebraic_2D():
-
+    # y1 = 2 (x + 0.3)
+    # y2 = 1.66 x
     X = np.linspace(-1, 1, 5).reshape(-1, 1)
     Y1 = 2.0 * (X + 0.3)
     Y2 = 1.66 * X
@@ -133,12 +134,13 @@ def test_parameter_estimation_algebraic_2D():
     settings["parameter_estimation"]["task_type"] = 'algebraic'
 
     models = fit_models(models, data, settings=settings)
+    print(models[0].nice_print(round_params=10))
     assert np.abs(models[0].get_error() - 7.107301643897895e-05) < 1e-6
 
 def test_parameter_estimation_ODE_sepa():
     # model: dx = -2x + y
-    t = np.arange(0, 1, 0.001)
-    y = np.arange(-1, 1, 0.002)
+    t = np.arange(0, 1, 0.1)
+    y = np.arange(-1, 1, 0.2)
     x = 3*np.exp(-2*t) + 1/2*y**2
     data = pd.DataFrame(np.vstack((t, x, y)).T, columns=['t', 'x', 'y'])
 
@@ -148,12 +150,10 @@ def test_parameter_estimation_ODE_sepa():
                      lhs_vars=["x"])
 
     settings["parameter_estimation"]["task_type"] = 'differential'
-    settings["optimizer_DE"]["termination_after_nochange_iters"] = 50
+    settings["optimizer_DE"]["termination_after_nochange_iters"] = 10
 
     models = fit_models(models, data, settings=settings)
-    models[0].get_error()
-    # assert np.abs(models[0].get_error() - 8.60893804568542e-05) < 1e-6
-
+    assert abs(list(models[0].params.values())[0] - -1.9954050935) < 1e-6
 
 def test_parameter_estimation_ODE_1D():
     # model: dx = -2x
@@ -261,6 +261,7 @@ def test_parameter_estimation_simulate_separately():
     assert abs(models[0].get_error() - 0.00026353031019943276) < 1e-6
 
 def test_parameter_estimation_ODE_solved_as_algebraic():
+    # model: dx = -2x
     sim_step = 0.1
     t = np.arange(0, 10, sim_step)
     X = 3*np.exp(-2*t)
@@ -277,6 +278,7 @@ def test_parameter_estimation_ODE_solved_as_algebraic():
     assert abs(models[0].get_error() - 0.04928780981951337) < 1e-6
 
 def test_equation_discoverer():
+    # y = 2*x + 0.3
     def f(x):
         return 2.0 * (x[:, 0] + 0.3)
 
@@ -293,6 +295,7 @@ def test_equation_discoverer():
     
     ED.generate_models()
     ED.fit_models()
+    print(ED.models[0].nice_print())
     assert np.abs(ED.models[0].get_error() - 0.853475865) < 1e-6
     assert np.abs(ED.models[1].get_error() - 1.82093094) < 1e-6
 
@@ -328,13 +331,13 @@ if __name__ == "__main__":
     # test_model_box()
     # test_parameter_estimation_algebraic_1D()
     # test_parameter_estimation_algebraic_2D()
-    # test_parameter_estimation_ODE_sepa()
+    # # test_parameter_estimation_ODE_sepa()
     # test_parameter_estimation_ODE_1D()
     # test_parameter_estimation_ODE_2D()
-    test_parameter_estimation_ODE_partial_observability()
+    # test_parameter_estimation_ODE_partial_observability()
     # test_parameter_estimation_ODE_teacher_forcing()
     # test_parameter_estimation_ODE_solved_as_algebraic()
-    # test_equation_discoverer()
+    test_equation_discoverer()
     # test_equation_discoverer_ODE()
     #
 

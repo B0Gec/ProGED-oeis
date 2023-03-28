@@ -39,6 +39,7 @@ def test_equation_discoverer_hyperopt():
     # print(ED.models)
     # print(ED.models[0].get_error(), 'error', 3.564323422789496)
     print(ED.models[1].get_error(), 'error', 3.2218755347003)
+    print(ED.models[1].nice_print(), 'error', 3.2218755347003)
     return
 
 if __name__ == "__main__":
