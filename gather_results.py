@@ -148,6 +148,10 @@ def for_summary(aggregated: tuple, fname: str):
     reconst_non_manual = is_reconst and not is_checked
     # non_manual = we_found and not is_checked
 
+    # if debug:
+    #     if reconst_non_manual:
+    #         raise IndexError("Bug in code!")
+
     # summand = [f, m, i, o]
     to_add = (id_oeis, non_id, non_manual, fail, reconst_non_manual)
 
@@ -199,19 +203,25 @@ print(f'Results: ')
 jobs_fail = n_of_seqs - len(files)  # or corrected_sum.
 
 id_oeis, non_id, non_manual, fail, reconst_non_manual = summary
+corrected_non_manual = non_manual - reconst_non_manual
+all_fails = fail + jobs_fail
+
 official_success = id_oeis + non_id
 
 printout = f"""
-    {id_oeis: >5} = {id_oeis/n_of_seqs*100:0.3} % - (is oeis) - successfully found equations that are identical to the recursive equations written in OEIS (hereinafter - OEIS equation)
+    {id_oeis: >5} = {id_oeis/n_of_seqs*100:0.3} % - (id_oeis) - successfully found equations that are identical to the recursive equations written in OEIS (hereinafter - OEIS equation)
     {non_id: >5} = {non_id/n_of_seqs*100:0.3} % - (non_id) - successfully found equations that are more complex than the OEIS equation 
     {non_manual: >5} = {non_manual/n_of_seqs*100:0.3} % - (non_manual) - successfully found equations that do not apply do not apply to test cases 
     {fail: >5} = {fail/n_of_seqs*100:0.3} % - (fail) - failure, no equation found. (but program finished smoothly, no runtime error)
     {reconst_non_manual: >5} = {reconst_non_manual/n_of_seqs*100:0.3} % - (reconst_non_manual) - fail in program, specifically: reconstructed oeis and wrong on test cases.
+    {corrected_non_manual: >5} = {corrected_non_manual/n_of_seqs*100:0.3} % - (corrected_non_manual = non_manual - reconst_non_manual) ... non_manuals taking bug in my code into the account.
     
     {jobs_fail: >5} = {jobs_fail/n_of_seqs*100:0.3} % - runtime errors - jobs failed
-    {fail + jobs_fail: >5} = {(fail+jobs_fail)/n_of_seqs*100:0.3} % - all fails  <--- (look this) ---
+    {all_fails: >5} = {all_fails/n_of_seqs*100:0.3} % - all fails  <--- (look this) ---
     {n_of_seqs: >5} - all sequences in our dataset
     
+    _______________________________________________________
+    {id_oeis + non_id + corrected_non_manual + all_fails} - under the line check if it sums up
     
     {official_success: >5} = {official_success/n_of_seqs*100:0.3} % - official success (id_oeis + non_id)
 """

@@ -49,14 +49,14 @@ results = [
 pie1 = [
     gr.id_oeis,
     gr.non_id,
-    gr.non_manual,
-    gr.fail + gr.jobs_fail,
+    gr.corrected_non_manual,
+    gr.all_fails,
     ]
 
 sub_pie = [
     gr.id_oeis,
     gr.non_id,
-    gr.non_manual,
+    gr.corrected_non_manual,
     gr.fail,
     gr.jobs_fail,
     ]
@@ -65,11 +65,10 @@ sub_pie = [
 
 
 # Creating dataset
-labels = ['AUDI', 'BMW', 'FORD',
-        'TESLA', 'JAGUAR', 'MERCEDES']
+# labels = ['AUDI', 'BMW', 'FORD', 'TESLA', 'JAGUAR', 'MERCEDES']
 labels = pie1_labels
 
-data = [23, 17, 35, 29, 12, 41]
+# data = [23, 17, 35, 29, 12, 41]
 data = pie1
 
 if len(data) != len(labels):
@@ -89,6 +88,7 @@ wedges, texts, autotexts = ax.pie(data,
                       startangle=90,
                       counterclock=False,
                       textprops=dict(color="white"),
+                      wedgeprops=dict(edgecolor="white"),
                       )
 
 # Adding legend
@@ -105,6 +105,8 @@ plt.setp(autotexts,
          )
 
 ax.set_title("Results oeis")
-
+fig.tight_layout()
+fig.savefig("results_oeis_overwritten.png")  # , bbox_inches='tight', pad_inches=0)
 # show plot
 plt.show()
+
