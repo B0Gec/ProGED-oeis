@@ -9,8 +9,10 @@ experiment = {
 parameter_estimation = {
     "task_type": 'algebraic',
     "dataset": "./data.csv",
+    "observed_vars": None,
     "lhs_vars": None,
     "optimizer": 'DE',  # default is pymoo's DE
+    "simulate_separately": False,
     "max_constants": 15,
     "param_bounds": ((-10, 10),),
     "default_error": 10 ** 9,
@@ -39,7 +41,6 @@ optimizer_hyperopt = {
 objective_function = {
     "use_jacobian": False,
     "teacher_forcing": False,
-    "simulate_separately": False,
     "atol": 10 ** (-6),
     "rtol": 10 ** (-4),
     "max_step": 10 ** 3,
