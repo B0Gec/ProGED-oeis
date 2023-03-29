@@ -179,7 +179,7 @@ def DEwrapper(estimator, model):
     termination = BestTermination(min_f = estimator.settings["optimizer_DE"]["termination_threshold_error"],
                                   n_max_gen = estimator.settings["optimizer_DE"]["max_iter"],
                                   terminate_if_no_change=estimator.settings["optimizer_DE"]["termination_after_nochange_iters"],
-                                  terminate_if_no_change_tolerance = estimator.settings["optimizer_DE"]["termination_after_nochange_tolerance"],
+                                  terminate_if_no_change_tolerance=estimator.settings["optimizer_DE"]["termination_after_nochange_tolerance"],
                                   )
 
     output = minimize(pymoo_problem,

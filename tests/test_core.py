@@ -91,7 +91,7 @@ def test_model():
 def test_model_box():
     expr1_str = "x"
     expr2_str = "c*x"
-    symbols = {"x":['x'], "const":"c", "start":"S"}
+    symbols = {"x": ['x'], "const": "c", "start": "S"}
     
     models = ModelBox()
     models.add_model(expr1_str, symbols)
@@ -324,21 +324,21 @@ def test_equation_discoverer_ODE():
 
 if __name__ == "__main__":
 
-    # test_grammar_general()
+    test_grammar_general()
     # test_grammar_templates()
     # test_generate_models()
-    # test_model()
+    test_model()
     # test_model_box()
-    # test_parameter_estimation_algebraic_1D()
-    # test_parameter_estimation_algebraic_2D()
-    # # test_parameter_estimation_ODE_sepa()
-    # test_parameter_estimation_ODE_1D()
-    # test_parameter_estimation_ODE_2D()
-    # test_parameter_estimation_ODE_partial_observability()
-    # test_parameter_estimation_ODE_teacher_forcing()
-    # test_parameter_estimation_ODE_solved_as_algebraic()
+    test_parameter_estimation_algebraic_1D()
+    test_parameter_estimation_algebraic_2D()
+    # test_parameter_estimation_ODE_sepa()
+    test_parameter_estimation_ODE_1D()
+    test_parameter_estimation_ODE_2D()
+    test_parameter_estimation_ODE_partial_observability()
+    test_parameter_estimation_ODE_teacher_forcing()
+    test_parameter_estimation_ODE_solved_as_algebraic()
     test_equation_discoverer()
-    # test_equation_discoverer_ODE()
+    test_equation_discoverer_ODE()
     #
 
 ##

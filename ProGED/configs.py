@@ -1,3 +1,5 @@
+# todo: write documentation for this file (e.g. this are settings for par. esti. only.
+
 import numpy as np
 
 
