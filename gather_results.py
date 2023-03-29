@@ -27,9 +27,9 @@ base_dir = "results_oeis/good/"
 job_id = "01234567"
 job_id = "36765084"
 job_id = "36781342"  # 17.3. waiting 2 jobs
-seq_file = '13000_A079034.txt'
+# seq_file = '13000_A079034.txt'
 job_dir = base_dir + job_id + '/'
-fname = job_dir + seq_file
+# fname = job_dir + seq_file
 # print(os.listdir(exact_dir))
 
 
@@ -133,6 +133,7 @@ dic = {'a': (True, False, False, True),
        'c': (False, True, False, True),
        }
 l = ['b', 'c', 'a',]
+debug = True
 
 def for_summary(aggregated: tuple, fname: str):
 
@@ -148,9 +149,11 @@ def for_summary(aggregated: tuple, fname: str):
     reconst_non_manual = is_reconst and not is_checked
     # non_manual = we_found and not is_checked
 
-    # if debug:
-    #     if reconst_non_manual:
-    #         raise IndexError("Bug in code!")
+    if debug:
+        if reconst_non_manual:
+
+            print(aggregated, fname)
+            raise IndexError("Bug in code!")
 
     # summand = [f, m, i, o]
     to_add = (id_oeis, non_id, non_manual, fail, reconst_non_manual)
@@ -189,6 +192,7 @@ _a, _b, _, n_of_seqs = extract_file(job_dir + files[0])
 # print(n_of_seqs)
 
 summary = reduce(for_summary, files, (0, 0, 0, 0, 0,))
+# summary = reduce(for_summary, files, (1, 0, 0, 0, 0, []))  # save all buggy ids
 corrected_sum = sum(summary[:4]) - sum(summary[4:])
 print()
 print(summary)
@@ -209,19 +213,22 @@ all_fails = fail + jobs_fail
 official_success = id_oeis + non_id
 
 printout = f"""
-    {id_oeis: >5} = {id_oeis/n_of_seqs*100:0.3} % - (id_oeis) - successfully found equations that are identical to the recursive equations written in OEIS (hereinafter - OEIS equation)
-    {non_id: >5} = {non_id/n_of_seqs*100:0.3} % - (non_id) - successfully found equations that are more complex than the OEIS equation 
-    {non_manual: >5} = {non_manual/n_of_seqs*100:0.3} % - (non_manual) - successfully found equations that do not apply do not apply to test cases 
-    {fail: >5} = {fail/n_of_seqs*100:0.3} % - (fail) - failure, no equation found. (but program finished smoothly, no runtime error)
-    {reconst_non_manual: >5} = {reconst_non_manual/n_of_seqs*100:0.3} % - (reconst_non_manual) - fail in program, specifically: reconstructed oeis and wrong on test cases.
-    {corrected_non_manual: >5} = {corrected_non_manual/n_of_seqs*100:0.3} % - (corrected_non_manual = non_manual - reconst_non_manual) ... non_manuals taking bug in my code into the account.
+    {id_oeis: >5} = {id_oeis/n_of_seqs*100:0.3} % ... (id_oeis) ... successfully found equations that are identical to the recursive equations written in OEIS (hereinafter - OEIS equation)
+    {non_id: >5} = {non_id/n_of_seqs*100:0.3} % ... (non_id) ... successfully found equations that are more complex than the OEIS equation 
+    {non_manual: >5} = {non_manual/n_of_seqs*100:0.3} % ... (non_manual) ... successfully found equations that do not apply to test cases 
+    {fail: >5} = {fail/n_of_seqs*100:0.3} % ... (fail) ... failure, no equation found. (but program finished smoothly, no runtime error)
+    {reconst_non_manual: >5} = {reconst_non_manual/n_of_seqs*100:0.3} % ... (reconst_non_manual) ... fail in program, specifically: reconstructed oeis and wrong on test cases.
+    {corrected_non_manual: >5} = {corrected_non_manual/n_of_seqs*100:0.3} % ... (corrected_non_manual = non_manual ... reconst_non_manual) ... non_manuals taking bug in my code into the account.
     
-    {jobs_fail: >5} = {jobs_fail/n_of_seqs*100:0.3} % - runtime errors - jobs failed
-    {all_fails: >5} = {all_fails/n_of_seqs*100:0.3} % - all fails  <--- (look this) ---
-    {n_of_seqs: >5} - all sequences in our dataset
+    {(id_oeis + non_id + corrected_non_manual + fail): >5} ... (id_oeis + non_id + corrected_non_manual + fail) = sum
+    
+    
+    {jobs_fail: >5} = {jobs_fail/n_of_seqs*100:0.3} % ... runtime errors = jobs failed
+    {all_fails: >5} = {all_fails/n_of_seqs*100:0.3} % ... all fails  <--- (look this) ---
+    {n_of_seqs: >5} ... all sequences in our dataset
     
     _______________________________________________________
-    {id_oeis + non_id + corrected_non_manual + all_fails} - under the line check if it sums up
+    {id_oeis + non_id + corrected_non_manual + all_fails} ... (id_oeis + non_id + corrected_non_manual + all_fails) ... under the line check if it sums up
     
     {official_success: >5} = {official_success/n_of_seqs*100:0.3} % - official success (id_oeis + non_id)
 """

@@ -112,7 +112,8 @@ def grid_sympy(seq: sp.MutableDenseMatrix, max_order: int):  # seq.shape=(N, 1)
 # VERBOSITY = 2  # dev scena
 VERBOSITY = 1  # run scenario
 
-def exact_ed(seq_id, csv, verbosity=VERBOSITY, max_order=None, linear=True, n_of_terms=10**16):
+def exact_ed(seq_id: str, csv: pd.DataFrame, verbosity: int = VERBOSITY,
+             max_order: int = None, linear: bool = True, n_of_terms=10**16):
     # max_order = 25
     # max_order = None
     header = 1 if linear else 0
@@ -331,13 +332,17 @@ def adaptive_leed(seq_id, csv, verbosity=VERBOSITY, max_order=20, linear=True, n
     return
 
 
-def check_eq_man(x: sp.Matrix, seq_id: str, csv: pd.DataFrame, n_of_terms: int = 500, header: bool = True) -> (bool, int):
+def check_eq_man(x: sp.Matrix, seq_id: str, csv: pd.DataFrame,
+                 n_of_terms: int = 500, header: bool = True) -> (bool, int):
     "Manually check if exact ED returns correct solution, i.e. recursive equation."
     if x==[]:
         return False, "no reconst", "no reconst"
     n_of_terms = max(n_of_terms, len(x))
     header = 1 if header else 0
     seq = sp.Matrix(csv[seq_id][header:])[:n_of_terms, :]
+    # Handle nans:
+    if seq.has(sp.nan):
+        seq = seq[:list(seq).index(sp.nan), :]
 
     def an(till_now, x):
         coefs = x[:]
@@ -350,7 +355,8 @@ def check_eq_man(x: sp.Matrix, seq_id: str, csv: pd.DataFrame, n_of_terms: int =
         # reconst = reconst.col_join(sp.Matrix([an(reconst, x)]))
         reconst = reconst.col_join(an(reconst, x))
 
-    return reconst == seq, reconst, seq
+    out = reconst == seq, reconst, seq
+    return out
 
 if __name__ == '__main__':
     # from proged times:
@@ -369,4 +375,5 @@ if __name__ == '__main__':
     # eq = exact_ed("A000045", csv)
     # x, eq, truth = exact_ed("A000004", csv, n_of_terms=30)
     adaptive_leed("A152185", csv, max_order=20)
+
 

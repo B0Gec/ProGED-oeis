@@ -54,6 +54,8 @@ MAX_ORDER = 20  # We care only for recursive equations with max 20 terms or orde
 N_OF_TERMS_ED = 200
 TASK_ID = 0
 JOB_ID = "000000"
+SEQ_ID = (True, 'A153593')
+# SEQ_ID = (False, 'A153593')
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--job_id", type=str, default=JOB_ID)
@@ -120,9 +122,10 @@ n_of_seqs = len(list(csv.columns))
 if task_id >= n_of_seqs:
     print('task_id surpassed our list')
 else:
-    seq_id = list(csv.columns)[task_id]
+    seq_id = list(csv.columns)[task_id] if not SEQ_ID[0] else SEQ_ID[1]
 
     csv = pd.read_csv(csvfilename, low_memory=False, usecols=[seq_id])[:n_of_terms_load]
+    # nans are checked by every function separately
 
 
     csv.head()
@@ -158,22 +161,22 @@ else:
 
 
 
-    # seq = sp.Matrix(csv[seq_id])
-    # def grid_sympy(seq: sp.MutableDenseMatrix, nof_eqs: int = None):  # seq.shape=(N, 1)
-    def grid_sympy(seq: sp.MutableDenseMatrix, max_order: int):  # seq.shape=(N, 1)
-        # seq = seq if nof_eqs is None else seq[:nof_eqs]
-        # seq = seq[:nof_eqs, :]
-        # seq = seq[:shape[0]-1, :]
-        # n = len(seq)
-        indexes_sympy_uncut = sp.Matrix(seq.rows-1,
-            max_order,
-            (lambda i,j: (seq[max(i-j,0)])*(1 if i>=j else 0))
-            )
-        data = sp.Matrix.hstack(
-                    seq[1:,:],
-                    sp.Matrix([i for i in range(1, seq.rows)]),
-                    indexes_sympy_uncut)
-        return data
+    # # seq = sp.Matrix(csv[seq_id])
+    # # def grid_sympy(seq: sp.MutableDenseMatrix, nof_eqs: int = None):  # seq.shape=(N, 1)
+    # def grid_sympy(seq: sp.MutableDenseMatrix, max_order: int):  # seq.shape=(N, 1)
+    #     # seq = seq if nof_eqs is None else seq[:nof_eqs]
+    #     # seq = seq[:nof_eqs, :]
+    #     # seq = seq[:shape[0]-1, :]
+    #     # n = len(seq)
+    #     indexes_sympy_uncut = sp.Matrix(seq.rows-1,
+    #         max_order,
+    #         (lambda i,j: (seq[max(i-j,0)])*(1 if i>=j else 0))
+    #         )
+    #     data = sp.Matrix.hstack(
+    #                 seq[1:,:],
+    #                 sp.Matrix([i for i in range(1, seq.rows)]),
+    #                 indexes_sympy_uncut)
+    #     return data
 
 
     # Run eq. disco. on all oeis sequences:
@@ -432,7 +435,7 @@ else:
     output_string += f'{is_check}  -  \"manual\" check if equation is correct.    \n'
 
     DEBUG = True
-    DEBUG = False
+    # DEBUG = False
     # timer(now=start)
 
     sep = os.path.sep
@@ -440,14 +443,15 @@ else:
     out_dir = out_dir_base + f"{job_id}{sep}"
     if DEBUG:
         out_dir = f"results_debug"
+        print(output_string)
 
     out_fname = out_dir + f"{task_id:0>5}_{seq_id}.txt"
     os.makedirs(out_dir, exist_ok=True)
 
-    f = open(out_fname, 'w')
-    f.write(output_string)
-    # print(output_string)
-    f.close()
+    if not DEBUG:
+        f = open(out_fname, 'w')
+        f.write(output_string)
+        f.close()
     print(seq_id, ' done and written!')
 
 
