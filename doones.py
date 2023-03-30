@@ -11,7 +11,7 @@ import sympy as sp
 import pandas as pd
 import argparse
 
-# needs (listed so far) doones,: exact_ed, diophantine_solver, linear_database_full.csv, buglist.py
+# needs (listed so far) doones,: exact_ed, diophantine_solver, linear_database_full.csv, buglist.py, oeil.sh, runoeil.sh
 
 
 # if os.getcwd()[-11:] == 'ProGED_oeis':

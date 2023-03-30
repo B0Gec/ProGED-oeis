@@ -2,11 +2,10 @@
 
 date
 
-#for i in {0..35}
-for i in {0..3}
+for i in {0..35}
 do
 	{
-  echo sbatch eoi.sh $i $1 $2 $3 $4 $5
+  sbatch oei.sh $i $1 $2 $3 $4 $5
 	}	&
 done
 wait

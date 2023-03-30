@@ -13,7 +13,7 @@
 ##SBATCH --array=0-500
 ##SBATCH --array=0-50
 ##SBATCH --array=0-2
-#SBATCH --array=0-0
+##SBATCH --array=0-0
 #SBATCH --output=./joeis%A.out
 ####SBATCH --output=./MLJ23/results/slurm/parestim_sim/e0/slurm_output_%A_%a.out
 
