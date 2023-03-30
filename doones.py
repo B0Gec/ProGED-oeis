@@ -41,10 +41,11 @@ BUGLIST = True
 # BUGLIST = False
 if BUGLIST:
     from buglist import buglist
-if not DEBUG and BUGLIST:
-    print("\nWarning!!!!! buglist is used outside debug mode!!")
-    print("Warning!!!!! buglist is used outside debug mode!!")
-    print("Warning!!!!! buglist is used outside debug mode!!\n")
+
+# if not DEBUG and BUGLIST:
+#     print("\nWarning!!!!! buglist is used outside debug mode!!")
+#     print("Warning!!!!! buglist is used outside debug mode!!")
+#     print("Warning!!!!! buglist is used outside debug mode!!\n")
 
 MAX_ORDER = 20  # We care only for recursive equations with max 20 terms or order.
 N_OF_TERMS_ED = 200
@@ -108,11 +109,16 @@ if os.getcwd()[-11:] == 'ProGED_oeis':
 
 csv = pd.read_csv(csvfilename, low_memory=False, nrows=0)
 n_of_seqs = len(list(csv.columns))
-if task_id >= n_of_seqs:
+out_of_buglist = False
+if BUGLIST:
+    out_of_buglist = task_id >= len(buglist)
+
+if task_id >= n_of_seqs or out_of_buglist:
     print('task_id surpassed our list')
 else:
     seq_id = list(csv.columns)[task_id] if not SEQ_ID[0] or not DEBUG else SEQ_ID[1]
-    seq_id = buglist[task_id] if BUGLIST else seq_id
+    if BUGLIST:
+        seq_id = buglist[task_id]
 
     csv = pd.read_csv(csvfilename, low_memory=False, usecols=[seq_id])[:n_of_terms_load]
     # nans are checked by every function separately since exact_ed needs also ground truth
