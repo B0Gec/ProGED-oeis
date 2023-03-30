@@ -11,7 +11,7 @@ import sympy as sp
 import pandas as pd
 import argparse
 
-# needs (listed so far) doones,: exact_ed, diophantine_solver, linear_database_full.csv
+# needs (listed so far) doones,: exact_ed, diophantine_solver, linear_database_full.csv, buglist.py
 
 
 # if os.getcwd()[-11:] == 'ProGED_oeis':
@@ -30,25 +30,21 @@ from exact_ed import exact_ed, timer, check_eq_man
 
 
 n_of_terms_load = 100000
-# n_of_terms_load = 100
-# n_of_terms_load = 60
-# n_of_terms_load = 30
-# n_of_terms_load = 27
-# n_of_terms_load = 10
 
-SCALE = 1000
-# SCALE = 10
-# SCALE = 2
-
-# SCALE = 40
-# SCALE = 50
-# SCALE = 100
-
-SCALE = 50000
 
 VERBOSITY = 2  # dev scena
 VERBOSITY = 1  # run scenario
 
+DEBUG = True
+DEBUG = False
+BUGLIST = True
+# BUGLIST = False
+if BUGLIST:
+    from buglist import buglist
+if not DEBUG and BUGLIST:
+    print("\nWarning!!!!! buglist is used outside debug mode!!")
+    print("Warning!!!!! buglist is used outside debug mode!!")
+    print("Warning!!!!! buglist is used outside debug mode!!\n")
 
 MAX_ORDER = 20  # We care only for recursive equations with max 20 terms or order.
 N_OF_TERMS_ED = 200
@@ -56,18 +52,20 @@ TASK_ID = 0
 JOB_ID = "000000"
 SEQ_ID = (True, 'A153593')
 # SEQ_ID = (False, 'A153593')
+# EXPERIMENT_ID
+timestamp = time.strftime("%Hh%Mm%Ss-%dd%m-%Y", time.localtime())
+EXPERIMENT_ID = timestamp
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--job_id", type=str, default=JOB_ID)
 parser.add_argument("--task_id", type=int, default=TASK_ID)
-parser.add_argument("--scale", type=int, default=SCALE)
 parser.add_argument("-ss", type=int, default=-1)
 parser.add_argument("-to", type=int, default=-1)
 parser.add_argument("--order", type=int, default=MAX_ORDER)
 parser.add_argument("--paral", type=int, default=2)
 parser.add_argument("--verb", type=int, default=VERBOSITY)
 parser.add_argument("--n_of_terms", type=int, default=N_OF_TERMS_ED)
-parser.add_argument("--sub", type=bool, default=False)
+parser.add_argument("--exper_id", type=str, default=EXPERIMENT_ID)
 args = parser.parse_args()
 
 job_id = args.job_id
@@ -77,24 +75,16 @@ task_id = args.task_id
 MAX_ORDER = args.order
 PARALLEL = args.paral
 VERBOSITY = args.verb
-SUBMITIT = args.sub
-
-SCALE = args.scale
-# print(args.to, type(args.to))
-RANGE = (args.ss, args.to) if args.to != -1 else (0, SCALE)
+experiment_id = args.exper_id
 
 N_OF_TERMS_ED = 2*MAX_ORDER  # Use only first n_of_terms_ed of the given sequence.
-
 
 
 flags_dict = {argument.split("=")[0]: argument.split("=")[1]
               for argument in sys.argv[1:] if len(argument.split("=")) > 1}
 # n_of_terms_ed = 50
 # n_of_terms_ed = int(flags_dict.get("--n_of_terms", n_of_terms_ed))
-# SCALE = int(flags_dict.get("--scale", SCALE))
-# SCALE = min(SCALE, )
 
-timestamp = time.strftime("%Y-%m-%d_%H-%M-%S", time.localtime())
 
 
 
@@ -113,91 +103,36 @@ if os.getcwd()[-11:] == 'ProGED_oeis':
     # csvfilename = 'ProGED_oeis/examples/oeis/' + csvfilename
     # print(os.getcwd())
     pass
-# try:
-    # csv = pd.read_csv(csvfilename, low_memory=False, usecols=[i for i in range(SCALE)])[:n_of_terms_load]
 # except ValueError as error:
 #     print(error.__repr__()[:1000], type(error))
+
 csv = pd.read_csv(csvfilename, low_memory=False, nrows=0)
 n_of_seqs = len(list(csv.columns))
 if task_id >= n_of_seqs:
     print('task_id surpassed our list')
 else:
-    seq_id = list(csv.columns)[task_id] if not SEQ_ID[0] else SEQ_ID[1]
+    seq_id = list(csv.columns)[task_id] if not SEQ_ID[0] or not DEBUG else SEQ_ID[1]
+    seq_id = buglist[task_id] if BUGLIST else seq_id
 
     csv = pd.read_csv(csvfilename, low_memory=False, usecols=[seq_id])[:n_of_terms_load]
-    # nans are checked by every function separately
-
+    # nans are checked by every function separately since exact_ed needs also ground truth
 
     csv.head()
-    # print(csv.head())
-    # 1/0
     # now = timer(now, 'loading csv')
-    # # print(csv.)
-    # #
-    # csv = pd.read_csv('linear_database_full.csv', low_memory=False)
-    # csv.head()
-    # timer(now, 'loading csv')
-    # 1/0
-    #
-
     # csv = csv.astype('int64')
     # print("csv", csv)
     # csv = csv.astype('float')
-    # print("csv", csv)
-    # 1/0
     terms_count, seqs_count = csv.shape
 
-    # Old for fibonacci only:
-    # seq_id = "A000045"
-    # prt_id = "A000041"
-    # fibs = list(csv[seq_id])  # fibonacci = A000045
-    # prts = list(csv[prt_id])  # fibonacci = A000045
-    # # print("fibs", fibs)
-    # # fibs = np.array(fibs)
-    # # prts = np.array(prts)
-    # # oeis = fibs
-    # # sp_seq = sp.Matrix(csv[seq_id])
-    # # print(sp_seq)
 
 
 
-    # # seq = sp.Matrix(csv[seq_id])
-    # # def grid_sympy(seq: sp.MutableDenseMatrix, nof_eqs: int = None):  # seq.shape=(N, 1)
-    # def grid_sympy(seq: sp.MutableDenseMatrix, max_order: int):  # seq.shape=(N, 1)
-    #     # seq = seq if nof_eqs is None else seq[:nof_eqs]
-    #     # seq = seq[:nof_eqs, :]
-    #     # seq = seq[:shape[0]-1, :]
-    #     # n = len(seq)
-    #     indexes_sympy_uncut = sp.Matrix(seq.rows-1,
-    #         max_order,
-    #         (lambda i,j: (seq[max(i-j,0)])*(1 if i>=j else 0))
-    #         )
-    #     data = sp.Matrix.hstack(
-    #                 seq[1:,:],
-    #                 sp.Matrix([i for i in range(1, seq.rows)]),
-    #                 indexes_sympy_uncut)
-    #     return data
 
 
     # Run eq. disco. on all oeis sequences:
-
     start = time.perf_counter()
     now = start
 
-    # FIRST_ID = "A000000"
-    # LAST_ID = "A246655"
-    # # last_run = "A002378"
-    #
-    # start_id = FIRST_ID
-    # # start_id = "A000045"
-    # end_id = LAST_ID
-    # # end_id = "A000045"
-    #
-    # # start_id = "A000041"
-    # # end_id = "A000041"
-    # CATALAN = "A000108"
-
-    # pickle.dump(eq_discos, open( "exact_models.p", "wb" ) )
 
     #
     # selection_small = (
@@ -233,8 +168,6 @@ else:
             "A021092",
             )
     # selection = selection2
-    # selection = list(csv.columns)[:SCALE] if selection is None else selection
-    selection = list(csv.columns)[RANGE[0]:RANGE[1]] if selection is None else selection
     # print(selection)
     # 1/0
 
@@ -244,7 +177,6 @@ else:
     #
     # saved_seqs = re.findall(r'A\d{6}', text)
     # UNCOMMENT:
-    # selection = saved_seqs if SCALE > 10100 else selection
     selection = selection
 
     # selection = selection_small
@@ -383,46 +315,6 @@ else:
         # # except Exception as RuntimeError
         return seq_id, eq, truth, x, is_reconst, is_check, timing_print
 
-    # if SUBMITIT:
-    #     import submitit
-    #     print('\n\n ==== = = = = ======================\n going with SUBMITIT\n\n')
-    #     log_folder = "log_submitit/%j"
-    #     # a = [1, 2, 3, 4]
-    #     # b = [10, 20, 30, 40]
-    #     ns = [n for n in range(len(selection))]
-    #     seq_ids = [selection[n] for n in ns]
-    #
-    #     executor = submitit.AutoExecutor(folder=log_folder)
-    #     # the following line tells the scheduler to only run\
-    #     # at most 2 jobs at once. By default, this is several hundreds
-    #     #executor.update_parameters(slurm_array_parallelism=PARALLEL, slurm_partition="long")
-    #     # executor.update_parameters(slurm_array_parallelism=PARALLEL)
-    # #
-    # #     parameters = {'slurm_array_parallelism': PARALLEL,
-    # #                   'timeout_min': 1100,
-    # #                   'slurm_partition':,
-    # #     }
-    # #     params = {key:parameters[key] for key in parameters if parameters[key] is not None}
-    # #
-    # #     if slurm_partition is not none:
-    # #                   'slurm_partition':
-    # #                   }
-    #     executor.update_parameters(slurm_array_parallelism=PARALLEL, timeout_min=1010)
-    #
-    #     PARTED = False
-    #     partsize = PARALLEL
-    #     if PARTED:
-    #         for i in ns:
-    #             if i % partsize == 0:
-    #                 jobs = executor.map_array(doone, ns[i*partsize:(i+1)*partsize], seq_ids[i*partsize:(i+1)*partsize])  # just a list of jobs
-    #                 results += [job.result() for job in jobs]
-    #
-    #     else:
-    #         jobs = executor.map_array(doone, ns, seq_ids)  # just a list of jobs
-    #         results = [job.result() for job in jobs]
-    #
-    # else:
-    # for n, seq_id in enumerate(selection):
 
     seq_id, eq, truth, x, is_reconst, is_check, timing_print = doone(task_id=task_id, seq_id=seq_id)
     # results += [doone(task_id=task_id, seq_id=seq_id)]
@@ -434,13 +326,11 @@ else:
     output_string += f'{is_reconst}  -  checked against website ground truth.     \n'
     output_string += f'{is_check}  -  \"manual\" check if equation is correct.    \n'
 
-    DEBUG = True
-    # DEBUG = False
     # timer(now=start)
 
     sep = os.path.sep
     out_dir_base = f"results_oeis{sep}"
-    out_dir = out_dir_base + f"{job_id}{sep}"
+    out_dir = out_dir_base + f"{experiment_id}{sep}{job_id}{sep}"
     if DEBUG:
         out_dir = f"results_debug"
         print(output_string)
@@ -470,7 +360,6 @@ def prt(matrix: sp.Matrix):
 
 
 # # ad-hoc loop-check
-# SCALE = 500
 # csv = pd.read_csv(csvfilename, low_memory=False, usecols=[i for i in range(SCALE)])[:n_of_terms]
 # id = "A000027"
 # eq = exact_ed(id, csv)

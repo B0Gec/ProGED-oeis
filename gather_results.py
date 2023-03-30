@@ -149,11 +149,12 @@ def for_summary(aggregated: tuple, fname: str):
     reconst_non_manual = is_reconst and not is_checked
     # non_manual = we_found and not is_checked
 
+    buglist = aggregated[-1]
     if debug:
         if reconst_non_manual:
-
-            print(aggregated, fname)
-            raise IndexError("Bug in code!")
+            buglist += [fname]
+            # print(aggregated, fname)
+            # raise IndexError("Bug in code!")
 
     # summand = [f, m, i, o]
     to_add = (id_oeis, non_id, non_manual, fail, reconst_non_manual)
@@ -172,12 +173,9 @@ def for_summary(aggregated: tuple, fname: str):
         #     print(' --- --- look here --- --- ')
         #     raise ArithmeticError
 
-    # fs, ms, is, os = aggregated
-
-    zipped = zip(aggregated, to_add)
-
-    # return [ f+fs, m+ms, i+is, o+os for fs, ms, is, os in before]
-    return tuple(map(lambda x: x[0] + x[1], zipped))
+    zipped = zip(aggregated[:-1], to_add)
+    counters = tuple(map(lambda x: x[0] + x[1], zipped))
+    return counters + (buglist,)
 
 
 
@@ -191,12 +189,14 @@ files = files_debug
 _a, _b, _, n_of_seqs = extract_file(job_dir + files[0])
 # print(n_of_seqs)
 
-summary = reduce(for_summary, files, (0, 0, 0, 0, 0,))
-# summary = reduce(for_summary, files, (1, 0, 0, 0, 0, []))  # save all buggy ids
-corrected_sum = sum(summary[:4]) - sum(summary[4:])
+# summary = reduce(for_summary, files, (0, 0, 0, 0, 0,))
+summary = reduce(for_summary, files, (0, 0, 0, 0, 0, []))  # save all buggy ids
+# corrected_sum = sum(summary[:4]) - sum(summary[4:])
+corrected_sum = sum(summary[:4]) - sum(summary[4:5])
+print(corrected_sum)
 print()
 print(summary)
-print(f'all files:{len(files)}, sum:{sum(summary)}, corrected sum: {corrected_sum}')
+print(f'all files:{len(files)}, sum:{sum(summary[:4])}, corrected sum: {corrected_sum}')
 # print(f((1,2,3,4,), 'c'))
 
 print()
@@ -206,7 +206,7 @@ print(f'Results: ')
 # all_seqs = 34371
 jobs_fail = n_of_seqs - len(files)  # or corrected_sum.
 
-id_oeis, non_id, non_manual, fail, reconst_non_manual = summary
+id_oeis, non_id, non_manual, fail, reconst_non_manual, buglist = summary
 corrected_non_manual = non_manual - reconst_non_manual
 all_fails = fail + jobs_fail
 
@@ -233,3 +233,25 @@ printout = f"""
     {official_success: >5} = {official_success/n_of_seqs*100:0.3} % - official success (id_oeis + non_id)
 """
 print(printout)
+
+n = 6
+print(f'first {n} bugs:', buglist[:n])
+
+def fname2id(fname):
+    return re.findall("A\d{6}", fname)[0]
+
+bugids = list(map(fname2id, buglist))
+print(bugids)
+print('len(bugids)', len(bugids))
+# write_bugs = True
+write_bugs = False
+# if write_bugs:
+#     f = open('buglist.py', 'w')
+#     f.write(f'buglist = {bugids}')
+#     f.close()
+
+# test import:
+from buglist import buglist as bl
+print(bl[:5])
+
+
