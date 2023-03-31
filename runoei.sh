@@ -5,7 +5,7 @@
 #SBATCH --mem-per-cpu=1GB
 #SBATCH --cpus-per-task=1
 #SBATCH --array=0-34
-#SBATCH --array=0-2  #buglist
+##SBATCH --array=0-2  #buglist
 #SBATCH --output=./run_batch%A.out
 
 date

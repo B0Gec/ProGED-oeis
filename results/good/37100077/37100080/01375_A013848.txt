@@ -1,0 +1,11 @@
+While total time consumed by now, scale:1376/34371, seq_id:A013848, order:20 took:
+ 1.3 seconds, i.e. 0.02 minutes or 0.0 hours.
+
+A013848: 
+a(n) = 32768*a(n - 1)
+truth: 
+a(n) = 32768*a(n - 1),  
+a(0) = 512
+
+True  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

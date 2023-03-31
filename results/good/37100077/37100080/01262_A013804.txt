@@ -1,0 +1,11 @@
+While total time consumed by now, scale:1263/34371, seq_id:A013804, order:20 took:
+ 1.2 seconds, i.e. 0.02 minutes or 0.0 hours.
+
+A013804: 
+a(n) = 65536*a(n - 1)
+truth: 
+a(n) = 65536*a(n - 1),  
+a(0) = 16
+
+True  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

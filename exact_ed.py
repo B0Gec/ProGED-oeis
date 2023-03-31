@@ -132,6 +132,8 @@ def exact_ed(seq_id: str, csv: pd.DataFrame, verbosity: int = VERBOSITY,
 
     max_order = sp.floor(seq.rows/2)-1 if max_order is None else max_order
     data = grid_sympy(seq, max_order)
+    if linear:
+        data = data[:, sp.Matrix([0] + list(i for i in range(2, data.shape[1])))]
 
     m_limit = 3003
     b = data[max_order:(max_order + m_limit), 0]
@@ -176,6 +178,8 @@ def exact_ed(seq_id: str, csv: pd.DataFrame, verbosity: int = VERBOSITY,
         if verbosity >= 2:
             print('We found an equation!!!:')
         x = x[0]
+        if linear:
+            x = sp.Matrix.vstack(sp.Matrix([0]), x)
         expr = verbose_eq[:, 1:] * x
         eq = f"{verbose_eq[0]} = {expr[0]}"
         if verbosity >= 2:

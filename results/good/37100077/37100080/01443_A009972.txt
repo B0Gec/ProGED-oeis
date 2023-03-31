@@ -1,0 +1,11 @@
+While total time consumed by now, scale:1444/34371, seq_id:A009972, order:20 took:
+ 1.2 seconds, i.e. 0.02 minutes or 0.0 hours.
+
+A009972: 
+a(n) = 28*a(n - 1)
+truth: 
+a(n) = 28*a(n - 1),  
+a(0) = 1
+
+True  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

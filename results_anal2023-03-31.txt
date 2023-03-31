@@ -1,0 +1,29 @@
+23370
+
+(6040, 15095, 1410, 828, 3, ['37122278/10930_A053833.txt', '37122282/11100_A055649.txt', '37122279/09769_A044941.txt'])
+all files:23370, sum:23373, corrected sum: 23370
+
+Results: 
+
+     6040 = 17.6 % ... (id_oeis) ... successfully found equations that are identical to the recursive equations written in OEIS (hereinafter - OEIS equation)
+    15095 = 43.9 % ... (non_id) ... successfully found equations that are more complex than the OEIS equation 
+     1410 = 4.1 % ... (non_manual) ... successfully found equations that do not apply to test cases 
+      828 = 2.41 % ... (fail) ... failure, no equation found. (but program finished smoothly, no runtime error)
+        3 = 0.00873 % ... (reconst_non_manual) ... fail in program, specifically: reconstructed oeis and wrong on test cases.
+     1407 = 4.09 % ... (corrected_non_manual = non_manual ... reconst_non_manual) ... non_manuals taking bug in my code into the account.
+    
+    23370 ... (id_oeis + non_id + corrected_non_manual + fail) = sum
+    
+    
+    11001 = 32.0 % ... runtime errors = jobs failed
+    11829 = 34.4 % ... all fails  <--- (look this) ---
+    34371 ... all sequences in our dataset
+    
+    _______________________________________________________
+    34371 ... (id_oeis + non_id + corrected_non_manual + all_fails) ... under the line check if it sums up
+    
+    21135 = 61.5 % - official success (id_oeis + non_id)
+
+first 6 bugs: ['37122278/10930_A053833.txt', '37122282/11100_A055649.txt', '37122279/09769_A044941.txt']
+['A053833', 'A055649', 'A044941']
+len(bugids) 3

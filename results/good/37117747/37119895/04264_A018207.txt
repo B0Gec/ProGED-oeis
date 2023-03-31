@@ -1,0 +1,11 @@
+While total time consumed by now, scale:4265/34371, seq_id:A018207, order:20 took:
+ 2.4 seconds, i.e. 0.04 minutes or 0.001 hours.
+
+A018207: 
+a(n) = 360*a(n - 3) - 186*a(n - 2) + 25*a(n - 1)
+truth: 
+a(n) = 25*a(n - 1) + -186*a(n - 2) + 360*a(n - 3),  
+a(0) = 1, a(1) = 25, a(2) = 439
+
+True  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

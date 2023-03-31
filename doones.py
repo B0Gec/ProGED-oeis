@@ -38,7 +38,7 @@ VERBOSITY = 1  # run scenario
 DEBUG = True
 DEBUG = False
 BUGLIST = True
-# BUGLIST = False
+BUGLIST = False
 if BUGLIST:
     from buglist import buglist
 
@@ -140,65 +140,12 @@ else:
     now = start
 
 
-    #
-    # selection_small = (
-    #         "A000009",
-    #         "A000040",
-    #         "A000045",
-    #         "A000124",
-    #         # "A000108",
-    #         "A000219",
-    #         "A000292",
-    #         "A000720",
-    #         "A001045",
-    #         "A001097",
-    #         "A001481",
-    #         "A001615",
-    #         "A002572",
-    #         "A005230",
-    #         "A027642",
-    #         )
-    #
-    selection = None
-    # first seq id: A000004
-    # last  seq id: A357130
-
-    selection2 = (
-            # "A000045",
-            # "A000124",
-            # "A000565",  # Nan at 25 term
-            # "A016812",  # index error
-            # "A000292",
-            # "A001045",
-            "A000032",
-            "A021092",
-            )
-    # selection = selection2
-    # print(selection)
-    # 1/0
 
     # with open('relevant_seqs.txt', 'r') as file:  # Use.
     #     # file.read('Hi there!')
     #     text = file.read()
     #
     # saved_seqs = re.findall(r'A\d{6}', text)
-    # UNCOMMENT:
-    selection = selection
-
-    # selection = selection_small
-    # selection = saved_seqs[:5]
-    # print(saved_seqs)
-    # print(len(saved_seqs))
-
-    output_string = ""
-    # output_string = ("Running equation discovery for all oeis sequences, ",
-    #     "with these settings:\n",
-    #     f"=>> number of terms in every sequence saved in csv = {terms_count-1}\n",
-    #     # f"=>> nof_eqs = {nof_eqs}\n",
-    #     f"=>> number of all considered sequences = {n_of_seqs}\n",
-    #     # f"=>> list of considered sequences = {selection}\n",
-    #     )
-    # output_string = "".join(output_string)
 
 
     def print_results(results, verbosity=2):
@@ -267,11 +214,12 @@ else:
 
     results = []
 
-    def doone(task_id, seq_id, now=now):
+    def doone(task_id: int, seq_id: str, linear: bool, now=now):
         if VERBOSITY>=2:
             print()
         # try:
-        x, coeffs, eq, truth = exact_ed(seq_id, csv, VERBOSITY, MAX_ORDER, n_of_terms=N_OF_TERMS_ED)
+        x, coeffs, eq, truth = exact_ed(seq_id, csv, VERBOSITY, MAX_ORDER,
+                                        n_of_terms=N_OF_TERMS_ED, linear=True)
 
         # order = list(x[1:]).index(0,)
         nonzero_indices = [i for i in range(len(x[1:])) if (x[i] != 0)]
@@ -322,10 +270,12 @@ else:
         return seq_id, eq, truth, x, is_reconst, is_check, timing_print
 
 
-    seq_id, eq, truth, x, is_reconst, is_check, timing_print = doone(task_id=task_id, seq_id=seq_id)
+    seq_id, eq, truth, x, is_reconst, is_check, timing_print = \
+        doone(task_id=task_id, seq_id=seq_id, linear=True)
     # results += [doone(task_id=task_id, seq_id=seq_id)]
     # results += [(seq_id, eq, truth, x, is_reconst, is_check)]
 
+    output_string = ""
     output_string += timing_print
     output_string += f"\n\n{seq_id}: \n{eq}\n"
     output_string += f"truth: \n{truth}\n\n"
@@ -335,7 +285,7 @@ else:
     # timer(now=start)
 
     sep = os.path.sep
-    out_dir_base = f"results_oeis{sep}"
+    out_dir_base = f"results{sep}"
     out_dir = out_dir_base + f"{experiment_id}{sep}{job_id}{sep}"
     if DEBUG:
         out_dir = f"results_debug"
@@ -344,11 +294,12 @@ else:
     out_fname = out_dir + f"{task_id:0>5}_{seq_id}.txt"
     os.makedirs(out_dir, exist_ok=True)
 
-    if not DEBUG:
+    if not DEBUG and not experiment_id == timestamp:
         f = open(out_fname, 'w')
         f.write(output_string)
         f.close()
-    print(seq_id, ' done and written!')
+        print(seq_id, ' done and written!')
+    print(seq_id, ' done!')
 
 
 

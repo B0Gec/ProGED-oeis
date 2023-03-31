@@ -1,0 +1,11 @@
+While total time consumed by now, scale:28817/34371, seq_id:A243719, order:20 took:
+ 4.6 seconds, i.e. 0.08 minutes or 0.001 hours.
+
+A243719: 
+a(n) = a(n - 16) - 3*a(n - 15) - 2*a(n - 14) + 13*a(n - 13) - 2*a(n - 12) - 23*a(n - 11) + 6*a(n - 10) + 25*a(n - 9) - 25*a(n - 7) - 6*a(n - 6) + 23*a(n - 5) + 2*a(n - 4) - 13*a(n - 3) + 2*a(n - 2) + 3*a(n - 1)
+truth: 
+a(n) = 4*a(n - 1) + -1*a(n - 2) + -16*a(n - 3) + 19*a(n - 4) + 20*a(n - 5) + -45*a(n - 6) + 0*a(n - 7) + 45*a(n - 8) + -20*a(n - 9) + -19*a(n - 10) + 16*a(n - 11) + 1*a(n - 12) + -4*a(n - 13) + 1*a(n - 14),  
+a(0) = 1, a(1) = 6, a(2) = 66, a(3) = 609, a(4) = 3375, a(5) = 14181, a(6) = 47485, a(7) = 136085, a(8) = 342739, a(9) = 784059, a(10) = 1653033, a(11) = 3267471, a(12) = 6107271, a(13) = 10901405
+
+False  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

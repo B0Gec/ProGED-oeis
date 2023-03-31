@@ -1,6 +1,6 @@
 """
 Gathers results from running oeis on cluster.
-results_oeis/good/01234567
+results/good/01234567
     - 34500_A000032.txt
     - ...
 
@@ -18,20 +18,23 @@ todo categories:
 # checked = unid + oeis
 all = oeis + checked + manual fail + failure
 """
-
+##
 import os
 import re
 
-# fname = 'results_oeis/good/01234567/34500_A000032.txt'
-base_dir = "results_oeis/good/"
+# fname = 'results/good/01234567/34500_A000032.txt'
+base_dir = "results/good/"
 job_id = "01234567"
 job_id = "36765084"
 job_id = "36781342"  # 17.3. waiting 2 jobs
+job_id = "37100077"
+job_id = "37117747"
 # seq_file = '13000_A079034.txt'
 job_dir = base_dir + job_id + '/'
 # fname = job_dir + seq_file
 # print(os.listdir(exact_dir))
 
+##
 
 
 content_debug = """
@@ -178,8 +181,12 @@ def for_summary(aggregated: tuple, fname: str):
     return counters + (buglist,)
 
 
+files_subdir = [list(map(lambda x: f'{subdir}{os.sep}{x}',
+                         os.listdir(job_dir + subdir))) for subdir
+                in os.listdir(job_dir)]
+flatten = sum(files_subdir, [])
+files = flatten
 
-files = os.listdir(job_dir)
 scale = 40
 scale = 50100
 files_debug = files[:scale]
@@ -249,9 +256,9 @@ write_bugs = False
 #     f = open('buglist.py', 'w')
 #     f.write(f'buglist = {bugids}')
 #     f.close()
+#
+# # test import:
+# from buglist import buglist as bl
+# print(bl[:5])
 
-# test import:
-from buglist import buglist as bl
-print(bl[:5])
-
-
+# first 6 bugs: ['37100080/01230_A053833.txt', '37100079/00095_A166986.txt', '37100079/00278_A055649.txt']

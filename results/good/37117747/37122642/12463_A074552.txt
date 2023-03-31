@@ -1,0 +1,11 @@
+While total time consumed by now, scale:12464/34371, seq_id:A074552, order:20 took:
+ 2.2 seconds, i.e. 0.04 minutes or 0.001 hours.
+
+A074552: 
+a(n) = 105*a(n - 3) - 71*a(n - 2) + 15*a(n - 1)
+truth: 
+a(n) = 15*a(n - 1) + -71*a(n - 2) + 105*a(n - 3),  
+a(0) = 3, a(1) = 15, a(2) = 83
+
+True  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

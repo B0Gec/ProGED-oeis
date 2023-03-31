@@ -1,0 +1,11 @@
+While total time consumed by now, scale:1847/34371, seq_id:A011927, order:20 took:
+ 2.1 seconds, i.e. 0.04 minutes or 0.001 hours.
+
+A011927: 
+a(n) = -42*a(n - 20) + 85*a(n - 19) - 22*a(n - 18) - 39*a(n - 17) + 12*a(n - 16) + 30*a(n - 15) - 20*a(n - 14) - 6*a(n - 13) + 2*a(n - 12) - 44*a(n - 11) + 36*a(n - 10) + 12*a(n - 9) - 4*a(n - 8) + 22*a(n - 7) - 18*a(n - 6) - 28*a(n - 5) + 42*a(n - 4) + 30*a(n - 3) - 93*a(n - 2) + 46*a(n - 1)
+truth: 
+a(n) = 4*a(n - 1) +  -6*a(n - 2) +  4*a(n - 3) +  -1*a(n - 4) +  0*a(n - 5) +  0*a(n - 6) +  0*a(n - 7) +  0*a(n - 8) +  0*a(n - 9) +  0*a(n - 10) +  0*a(n - 11) +  0*a(n - 12) +  0*a(n - 13) +  0*a(n - 14) +  0*a(n - 15) +  0*a(n - 16) +  1*a(n - 17) +  -4*a(n - 18) +  6*a(n - 19) +  -4*a(n - 20) +  1*a(n - 21),  
+a(0) = 0, a(1) = 0, a(2) = 0, a(3) = 0, a(4) = 1, a(5) = 7, a(6) = 21, a(7) = 49, a(8) = 98, a(9) = 177, a(10) = 296, a(11) = 465, a(12) = 698, a(13) = 1009, a(14) = 1413, a(15) = 1927, a(16) = 2569, a(17) = 3360, a(18) = 4320, a(19) = 5472, a(20) = 6840
+
+False  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    
