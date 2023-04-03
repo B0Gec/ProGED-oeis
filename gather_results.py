@@ -249,6 +249,7 @@ def fname2id(fname):
 
 bugids = list(map(fname2id, buglist))
 print(bugids)
+print(buglist)
 print('len(bugids)', len(bugids))
 # write_bugs = True
 write_bugs = False

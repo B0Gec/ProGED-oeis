@@ -28,6 +28,8 @@ from exact_ed import exact_ed, timer, check_eq_man
 # search for flags with: flags_dict
 ###############
 
+# False positives (linear equation does not hold (manual check fails))
+blacklist = ['A053833', 'A055649', 'A044941']
 
 n_of_terms_load = 100000
 
@@ -107,14 +109,17 @@ if os.getcwd()[-11:] == 'ProGED_oeis':
 # except ValueError as error:
 #     print(error.__repr__()[:1000], type(error))
 
+fail = False
+fail = (BUGLIST and task_id >= len(buglist)) or fail
+
 csv = pd.read_csv(csvfilename, low_memory=False, nrows=0)
 n_of_seqs = len(list(csv.columns))
-out_of_buglist = False
-if BUGLIST:
-    out_of_buglist = task_id >= len(buglist)
+fail = (not BUGLIST and task_id >= n_of_seqs) or fail
 
-if task_id >= n_of_seqs or out_of_buglist:
-    print('task_id surpassed our list')
+fail = (not BUGLIST and list(csv.columns)[task_id] in blacklist) or fail
+
+if fail:
+    print('ED was not performed since task_id surpassed our list or target sequence is on blacklist.')
 else:
     seq_id = list(csv.columns)[task_id] if not SEQ_ID[0] or not DEBUG else SEQ_ID[1]
     if BUGLIST:
