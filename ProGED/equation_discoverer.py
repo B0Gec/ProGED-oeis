@@ -177,7 +177,7 @@ class EqDisco:
         self.estimation_settings = deepcopy(settings)
         self.estimation_settings.update(
             {"lhs_vars": self.task.lhs_vars,
-            "verbosity": verbosity})
+             "verbosity": verbosity})
         # if not estimation_settings:
         #     self.estimation_settings = {"target_variable_index": target_variable_index,
         #                                 "time_index": time_index,
@@ -199,9 +199,9 @@ class EqDisco:
         self.models = generate_models(self.generator, self.task.symbols,
                                       lhs_vars=self.task.lhs_vars,
                                       rhs_vars=self.task.rhs_vars,
-                                      system_size = self.system_size,
-                                      strategy = self.strategy,
-                                      strategy_settings = strategy_settings_preset,
+                                      system_size=self.system_size,
+                                      strategy=self.strategy,
+                                      strategy_settings=strategy_settings_preset,
                                       verbosity=self.verbosity)
         return self.models
     

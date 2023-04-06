@@ -14,7 +14,9 @@ parameter_estimation = {
     "observed_vars": None,
     "lhs_vars": None,
     "optimizer": 'DE',  # default is pymoo's DE
+    # "simulate_separately": True,
     "simulate_separately": False,
+    # set sepa to default!
     "max_constants": 15,
     "param_bounds": ((-10, 10),),
     "default_error": 10 ** 9,

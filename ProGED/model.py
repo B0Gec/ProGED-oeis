@@ -18,7 +18,7 @@ class Model:
         sym_vars    (list of Sympy symbols)  The symbols appearing in expr that are to be interpreted as variables.
         lhs_vars    (list of strings)        The variables appearing on the left hand side of the equations in the model.
         rhs_vars    (list of strings)        The variables appearing on the right hand side of the equations in the model.
-        extra_vars  (list of strings)        The subset of rhs variables that are not lhs variables.
+        extra_vars  (list of strings)        The subset of observed variables that are not lhs variables.
         sym_params  (list of strings)        Symbols appearing in expr that are to be interpreted as free constants.
         params      (list of floats)         The values for the parameters, initial or estimated.
         estimated   (dict)                   Results of optimization. Items:
@@ -58,8 +58,7 @@ class Model:
         self.sym_vars = sym_vars
         self.lhs_vars = lhs_vars
         expr_symbols = [iexpr.free_symbols for iexpr in self.expr]
-        self.rhs_vars =  [item for item in self.sym_vars if item in list(set.union(*expr_symbols))]
-        self.extra_vars = [str(item) for item in self.rhs_vars if str(item) not in self.lhs_vars]
+        self.rhs_vars = [item for item in self.sym_vars if item in list(set.union(*expr_symbols))]
         self.sym_params = sym_params
 
         # create dictionary of parameters (keys->parameter names, values->values of parameters)
@@ -90,11 +89,13 @@ class Model:
         self.observed_vars = kwargs.get('observed_vars', [str(i) for i in self.rhs_vars])
         self.unobserved_vars = kwargs.get('unobserved_vars', [])
 
+        self.extra_vars = [str(item) for item in self.observed_vars if str(item) not in self.lhs_vars]
+
         # grammar info
         self.info = kwargs.get('info', {})
         self.grammar = grammar
         self.p = p                             # TODO: CHECK IF CORRECT (BEFORE IT WAS 0 BUT MODELBOX TEST FAILED)
-        self.trees = trees #trees has form {"code":[p,n]}"
+        self.trees = trees  #trees has form {"code":[p,n]}"
         self.add_tree(code, p)
 
     def add_tree(self, code, p):
@@ -190,8 +191,8 @@ class Model:
                 self.initials[ilhs] = data_inits[ilhs]
             else:
                 if self.unobserved_vars:
-                    self.initials[ilhs] =  params[-len(self.unobserved_vars):][i]
-                    i =+ 1
+                    self.initials[ilhs] = params[-len(self.unobserved_vars):][i]
+                    i += 1
                 else:
                     raise ValueError(f'The variable "{ilhs}" is declared as observed but not present in the data.')
 
@@ -221,8 +222,11 @@ class Model:
         fullexprs = self.full_expr(params)
 
         if add_time:
-            lambdas = [sp.lambdify([sp.symbols("t")] + self.rhs_vars, full_expr, arg) for full_expr in fullexprs]
+            # lambdas = [sp.lambdify([sp.symbols("t")] + self.rhs_vars, full_expr, arg) for full_expr in fullexprs]  # currently testing with sym_vars
+            # lambdas = [sp.lambdify([sp.symbols("t")] + self.sym_vars, full_expr, arg) for full_expr in fullexprs]
+            lambdas = [sp.lambdify(["t"] + self.lhs_vars + self.extra_vars, full_expr, arg) for full_expr in fullexprs]
         else:
+            # lambdas = [sp.lambdify(self.rhs_vars, full_expr, arg) for full_expr in fullexprs]
             lambdas = [sp.lambdify(self.rhs_vars, full_expr, arg) for full_expr in fullexprs]
 
         if list:
@@ -284,6 +288,7 @@ class Model:
         model_splits = []
         for ilhs, iexpr in enumerate(self.expr):
             sym_params_split = [item for item in self.sym_params if item in list(iexpr.free_symbols)]
+            sym_vars_split = [item for item in self.sym_params if item in list(iexpr.free_symbols)]
             model_splits.append(Model(expr=iexpr,
                                       grammar=self.grammar,
                                       sym_vars=self.rhs_vars,

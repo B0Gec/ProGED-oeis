@@ -342,7 +342,8 @@ def simulate_ode(estimator, model):
     model_function = model.lambdify(add_time=True, list=True)
 
     # Interpolate the data of extra variables
-    X_extras = interp1d(estimator.data['t'], estimator.data[model.extra_vars], axis=0, kind='cubic', fill_value="extrapolate") if model.extra_vars != [] else (lambda t: np.array([]))
+    X_extras = interp1d(estimator.data['t'], estimator.data[model.extra_vars], axis=0, kind='cubic',
+                        fill_value="extrapolate") if model.extra_vars != [] else (lambda t: np.array([]))
 
     # Set jacobian
     Jf = None
@@ -370,15 +371,15 @@ def simulate_ode(estimator, model):
 
     # Simulate
     simulation, full_output = odeint(rhs,
-                                     list(model.initials.values()), # initial states
-                                     estimator.data['t'],           # time vector
+                                     list(model.initials.values()),  # initial states
+                                     estimator.data['t'],            # time vector
                                      rtol=estimator.settings['objective_function']['rtol'],
                                      atol=estimator.settings['objective_function']['atol'],
                                      Dfun=Jf,
                                      tfirst=True,
                                      full_output=True)
 
-    # Return only trajectories of observed variables, if simulation is successfull, else return dummy error
+    # Return only trajectories of observed variables, if simulation is successful, else return dummy error
     if 'successful' in full_output['message']:
         return simulation[:, observability_mask]
     else:
