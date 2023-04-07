@@ -317,7 +317,6 @@ def objective_differential(params, model, estimator):
     X = np.array(estimator.data[[str(i) for i in model.observed_vars if i in model.lhs_vars]])
 
     # estimate the model
-    #to avoid
     X_hat = simulate_ode(estimator, model)
 
     # if successful, calculate the error and optionally extend error with persistent homology calculation.

@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# todo: __main__ update to dataFrames
 import json
 
 import numpy as np
@@ -167,10 +168,6 @@ class EqDisco:
         self.system_size = system_size
             
         self.strategy = strategy
-        # if not strategy_settings:
-        #     self.strategy_settings = {"N": sample_size, "max_repeat": max_attempts}
-        # else:
-        #     self.strategy_settings = strategy_settings
         self.strategy_settings = {"N": sample_size, "max_repeat": max_attempts}
         self.strategy_settings.update(strategy_settings)
 
@@ -178,11 +175,6 @@ class EqDisco:
         self.estimation_settings.update(
             {"lhs_vars": self.task.lhs_vars,
              "verbosity": verbosity})
-        # if not estimation_settings:
-        #     self.estimation_settings = {"target_variable_index": target_variable_index,
-        #                                 "time_index": time_index,
-        #                                 "verbosity": verbosity}
-        # else:
         self.estimation_settings.update(estimation_settings)
         
         self.models = None
@@ -191,9 +183,6 @@ class EqDisco:
         self.verbosity = verbosity
 
     def generate_models(self, strategy_settings={}):
-        # strategy_settings = {} if strategy_settings is None else strategy_settings
-        # if not strategy_settings:
-        #     strategy_settings = self.strategy_settings.update(strategy_settings)
         strategy_settings_preset = deepcopy(self.strategy_settings)
         strategy_settings_preset.update(strategy_settings)
         self.models = generate_models(self.generator, self.task.symbols,

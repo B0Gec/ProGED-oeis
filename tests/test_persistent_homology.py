@@ -3,6 +3,8 @@
 #   - dynamic time warping (DTW)
 #   - Jure's earthquake's metric
 #   - bottleneck distance (not realy big idea - maybe DTW is enough)
+# todo: use ph in test_lorenz (currently no ph!! :D)
+#       -clean examples/ph_lorenz.py !!
 
 import pandas as pd
 import numpy as np

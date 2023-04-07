@@ -169,7 +169,7 @@ class Model:
         if isinstance(params, (list, np.ndarray)):
             self.params = dict(zip(self.params.keys(), true_params))
         else:
-            self.params=true_params
+            self.params = true_params
 
     def set_initials(self, params, data_inits):
         """ Sets self.initials based on arguments "params" and "data_inits". First, it checks which left hand side
@@ -192,7 +192,7 @@ class Model:
             else:
                 if self.unobserved_vars:
                     self.initials[ilhs] = params[-len(self.unobserved_vars):][i]
-                    i += 1
+                    i =+ 1
                 else:
                     raise ValueError(f'The variable "{ilhs}" is declared as observed but not present in the data.')
 
@@ -226,7 +226,6 @@ class Model:
             # lambdas = [sp.lambdify([sp.symbols("t")] + self.sym_vars, full_expr, arg) for full_expr in fullexprs]
             lambdas = [sp.lambdify(["t"] + self.lhs_vars + self.extra_vars, full_expr, arg) for full_expr in fullexprs]
         else:
-            # lambdas = [sp.lambdify(self.rhs_vars, full_expr, arg) for full_expr in fullexprs]
             lambdas = [sp.lambdify(self.rhs_vars, full_expr, arg) for full_expr in fullexprs]
 
         if list:
@@ -288,7 +287,6 @@ class Model:
         model_splits = []
         for ilhs, iexpr in enumerate(self.expr):
             sym_params_split = [item for item in self.sym_params if item in list(iexpr.free_symbols)]
-            sym_vars_split = [item for item in self.sym_params if item in list(iexpr.free_symbols)]
             model_splits.append(Model(expr=iexpr,
                                       grammar=self.grammar,
                                       sym_vars=self.rhs_vars,

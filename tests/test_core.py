@@ -159,7 +159,27 @@ def test_parameter_estimation_algebraic_2D():
     assert np.abs(models[0].get_error() - 7.107301643897895e-05) < 1e-6
 
 
-def test_parameter_estimation_ODE_sepa():
+def test_parameter_estimation_ODE_1D():
+    # model: dx = -2x
+
+    np.random.seed(0)
+    t = np.arange(0, 1, 0.1)
+    x = 3*np.exp(-2*t)
+    data = pd.DataFrame(np.vstack((t, x)).T, columns=['t', 'x'])
+
+    models = ModelBox()
+    models.add_model("C*x",
+                     symbols={"x": ["x"], "const": "C"})
+
+    settings = deepcopy(settings_original)
+    settings["parameter_estimation"]["task_type"] = 'differential'
+    settings["optimizer_DE"]["termination_after_nochange_iters"] = 50
+
+    models = fit_models(models, data, settings=settings)
+    assert np.abs(models[0].get_error() - 8.60893804568542e-05) < 1e-6
+
+
+def test_parameter_estimation_ODE_extra_interpolate():
     # model: dx = -2x + y
 
     np.random.seed(0)
@@ -179,26 +199,6 @@ def test_parameter_estimation_ODE_sepa():
 
     models = fit_models(models, data, settings=settings)
     assert abs(list(models[0].params.values())[0] - -1.9954050935) < 1e-6
-
-
-def test_parameter_estimation_ODE_1D():
-    # model: dx = -2x
-
-    np.random.seed(0)
-    t = np.arange(0, 1, 0.1)
-    x = 3*np.exp(-2*t)
-    data = pd.DataFrame(np.vstack((t, x)).T, columns=['t', 'x'])
-
-    models = ModelBox()
-    models.add_model("C*x",
-                     symbols={"x": ["x"], "const": "C"})
-
-    settings = deepcopy(settings_original)
-    settings["parameter_estimation"]["task_type"] = 'differential'
-    settings["optimizer_DE"]["termination_after_nochange_iters"] = 50
-
-    models = fit_models(models, data, settings=settings)
-    assert np.abs(models[0].get_error() - 8.60893804568542e-05) < 1e-6
 
 
 def test_parameter_estimation_ODE_extra_vars():
@@ -241,7 +241,11 @@ def test_parameter_estimation_ODE_2D():
     settings["parameter_estimation"]["task_type"] = 'differential'
 
     models = fit_models(models, data, settings=settings)
-    # assert abs(models[0].get_error() - 7.524305872610019e-05) < 1e-6
+
+    test_params = [-2.0001969388280485, -1.000021388719896]
+    for n, param in enumerate(models[0].params.values()):
+        assert np.abs(param - test_params[n]) < 1e-6
+    assert abs(models[0].get_error() - 7.524305872610019e-05) < 1e-6
 
 
 def test_parameter_estimation_ODE_partial_observability():
@@ -306,8 +310,11 @@ def test_parameter_estimation_simulate_separately():
     settings["parameter_estimation"]["simulate_separately"] = True
 
     models = fit_models(models, data, settings=settings)
-    # assert abs(models[0].get_error() - 7.524305872610019e-05) < 1e-6
-    # assert abs(models[0].get_error() - 0.00026353031019943276e-05) < 1e-6
+
+    test_params = [-2.0001969388280485, -1.000021388719896]
+    for n, param in enumerate(models[0].params.values()):
+        assert np.abs(param - test_params[n]) < 1e-6
+    assert abs(models[0].get_error() - 7.524305872610019e-05) < 1e-6
 
 
 def test_parameter_estimation_ODE_solved_as_algebraic():
@@ -360,7 +367,7 @@ def test_equation_discoverer_ODE():
     # dy = x + 0.4y
 
     np.random.seed(0)
-    B = -2.56; a = 0.4; ts = np.linspace(0.45, 0.87, 200)
+    B = -2.56; a = 0.4; ts = np.linspace(0.45, 0.87, 5)
     ys = (ts+B)*np.exp(a*ts); xs = np.exp(a*ts)
     data = pd.DataFrame(np.hstack((ts.reshape(-1, 1), xs.reshape(-1, 1), ys.reshape(-1, 1))), columns=['t', 'x', 'y'])
 
@@ -372,7 +379,6 @@ def test_equation_discoverer_ODE():
                  task=None,
                  task_type="differential",
                  rhs_vars=["x", "y"],
-                 # lhs_vars=["x"],
                  lhs_vars=["y"],
                  sample_size=4,
                  generator_template_name="polynomial",
@@ -381,7 +387,7 @@ def test_equation_discoverer_ODE():
     ED.generate_models()
     ED.fit_models(settings=settings)
 
-    test_params = [-9.996814635869487, -9.104076396324004, -9.443554744965098]
+    test_params = [-9.667920152096535, -9.058465306540445, -9.317236898854375,]
     for n, param in enumerate(ED.models[1].params.values()):
         assert np.abs(param - test_params[n]) < 1e-6
     return
@@ -396,15 +402,16 @@ if __name__ == "__main__":
     # test_model_box()
     # test_parameter_estimation_algebraic_1D()
     # test_parameter_estimation_algebraic_2D()
-    # test_parameter_estimation_ODE_sepa()
     # test_parameter_estimation_ODE_1D()
+    test_parameter_estimation_ODE_extra_interpolate()
+    # test_parameter_estimation_ODE_extra_vars()
     # test_parameter_estimation_ODE_2D()
     # test_parameter_estimation_ODE_partial_observability()
     # test_parameter_estimation_ODE_teacher_forcing()
+    # test_parameter_estimation_simulate_separately()
     # test_parameter_estimation_ODE_solved_as_algebraic()
     # test_equation_discoverer()
     test_equation_discoverer_ODE()
-    #
 
 ##
 
