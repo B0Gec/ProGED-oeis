@@ -6,6 +6,7 @@ import sympy as sp
 import pandas as pd
 import time
 import math
+# from typing import Union
 
 
 # if os.getcwd()[-11:] == 'ProGED_oeis':
@@ -336,7 +337,23 @@ def adaptive_leed(seq_id, csv, verbosity=VERBOSITY, max_order=20, linear=True, n
     return
 
 
-def check_eq_man(x: sp.Matrix, seq_id: str, csv: pd.DataFrame,
+def check_truth(seq_id: str, csv_filename: str):
+    'Check OEIS sequence\'s  website\'s supposed equation against the sequence terms.'
+
+    csv = pd.read_csv(csv_filename, low_memory=False, usecols=[seq_id])
+    truth = csv[seq_id][0]
+    coeffs = [0] + truth[1:-1].split(',')[:len(csv[seq_id])-2]
+    # print(coeffs)
+    x = sp.Matrix(list(int(i) for i in coeffs))
+    # print(x)
+    is_check = check_eq_man(x, seq_id, csv, n_of_terms=10**5)
+    # print(is_check)
+    # is_check = is_check[0]
+    # check[]
+    return is_check, truth
+
+
+def check_eq_man(x: sp.Matrix, seq_id: str, csv: str,
                  n_of_terms: int = 500, header: bool = True) -> (bool, int):
     "Manually check if exact ED returns correct solution, i.e. recursive equation."
     if x==[]:

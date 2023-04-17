@@ -16,7 +16,7 @@ import argparse
 
 # if os.getcwd()[-11:] == 'ProGED_oeis':
 #     from ProGED.examples.oeis.scraping.downloading.download import bfile2list
-from exact_ed import exact_ed, timer, check_eq_man
+from exact_ed import exact_ed, timer, check_eq_man, check_truth
 # else:
 #     from exact_ed import exact_ed, timer
 
@@ -29,7 +29,12 @@ from exact_ed import exact_ed, timer, check_eq_man
 ###############
 
 # False positives (linear equation does not hold (manual check fails))
-blacklist = ['A053833', 'A055649', 'A044941']
+from blacklist import blacklist
+blacklist += ['A053833', 'A055649', 'A044941']
+# A026471
+
+MODE = 'black_check'
+MODE = 'doone'
 
 n_of_terms_load = 100000
 
@@ -38,7 +43,7 @@ VERBOSITY = 2  # dev scena
 VERBOSITY = 1  # run scenario
 
 DEBUG = True
-DEBUG = False
+# DEBUG = False
 BUGLIST = True
 BUGLIST = False
 if BUGLIST:
@@ -52,9 +57,17 @@ if BUGLIST:
 MAX_ORDER = 20  # We care only for recursive equations with max 20 terms or order.
 N_OF_TERMS_ED = 200
 TASK_ID = 0
+# TASK_ID = 5365  # A026471
+
 JOB_ID = "000000"
 SEQ_ID = (True, 'A153593')
-# SEQ_ID = (False, 'A153593')
+SEQ_ID = (True, 'A053833')
+SEQ_ID = (True, 'A055649')
+SEQ_ID = (True, 'A044941')
+SEQ_ID = (False, 'A153593')
+SEQ_ID = (True, 'A026471')
+SEQ_ID = (True, 'A001306')
+
 # EXPERIMENT_ID
 timestamp = time.strftime("%Hh%Mm%Ss-%dd%m-%Y", time.localtime())
 EXPERIMENT_ID = timestamp
@@ -93,17 +106,16 @@ flags_dict = {argument.split("=")[0]: argument.split("=")[1]
 
 # from proged times:
 has_titles = 1
-# csv = pd.read_csv('oeis_selection.csv')[has_titles:]
 #
 # # for linear database:
 # # mabye slow:
 now = time.perf_counter()
 # # a bit faster maybe:
-csvfilename = 'linear_database_full.csv'
+csv_filename = 'linear_database_full.csv'
 
 # print(os.getcwd())
 if os.getcwd()[-11:] == 'ProGED_oeis':
-    # csvfilename = 'ProGED_oeis/examples/oeis/' + csvfilename
+    # csv_filename = 'ProGED_oeis/examples/oeis/' + csv_filename
     # print(os.getcwd())
     pass
 # except ValueError as error:
@@ -112,7 +124,7 @@ if os.getcwd()[-11:] == 'ProGED_oeis':
 fail = False
 fail = (BUGLIST and task_id >= len(buglist)) or fail
 
-csv = pd.read_csv(csvfilename, low_memory=False, nrows=0)
+csv = pd.read_csv(csv_filename, low_memory=False, nrows=0)
 n_of_seqs = len(list(csv.columns))
 fail = (not BUGLIST and task_id >= n_of_seqs) or fail
 
@@ -125,7 +137,7 @@ else:
     if BUGLIST:
         seq_id = buglist[task_id]
 
-    csv = pd.read_csv(csvfilename, low_memory=False, usecols=[seq_id])[:n_of_terms_load]
+    csv = pd.read_csv(csv_filename, low_memory=False, usecols=[seq_id])[:n_of_terms_load]
     # nans are checked by every function separately since exact_ed needs also ground truth
 
     csv.head()
@@ -275,8 +287,18 @@ else:
         return seq_id, eq, truth, x, is_reconst, is_check, timing_print
 
 
-    seq_id, eq, truth, x, is_reconst, is_check, timing_print = \
-        doone(task_id=task_id, seq_id=seq_id, linear=True)
+    if MODE == 'black_check':
+        is_check, truth = check_truth(seq_id, csv_filename)
+        print(is_check, truth)
+        is_check = is_check[0]
+
+        eq = 'This is blacklist discovery!!! i.e. only checking if ground truth holds.'
+        is_reconst = '<empty>'
+        _, timing_print = timer(now=start, text=f"While total time consumed by now, scale:{task_id + 1}/{n_of_seqs}, "
+                                                f"seq_id:{seq_id}, order:{MAX_ORDER}")
+    else:
+        seq_id, eq, truth, x, is_reconst, is_check, timing_print = \
+            doone(task_id=task_id, seq_id=seq_id, linear=True)
     # results += [doone(task_id=task_id, seq_id=seq_id)]
     # results += [(seq_id, eq, truth, x, is_reconst, is_check)]
 
@@ -304,6 +326,10 @@ else:
         f.write(output_string)
         f.close()
         print(seq_id, ' done and written!')
+    else:
+        # print(output_string)
+        pass
+
     print(seq_id, ' done!')
 
 
@@ -322,7 +348,7 @@ def prt(matrix: sp.Matrix):
 
 
 # # ad-hoc loop-check
-# csv = pd.read_csv(csvfilename, low_memory=False, usecols=[i for i in range(SCALE)])[:n_of_terms]
+# csv = pd.read_csv(csv_filename, low_memory=False, usecols=[i for i in range(SCALE)])[:n_of_terms]
 # id = "A000027"
 # eq = exact_ed(id, csv)
 # print('\n', id)

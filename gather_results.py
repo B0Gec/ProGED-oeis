@@ -29,13 +29,17 @@ job_id = "36765084"
 job_id = "36781342"  # 17.3. waiting 2 jobs
 job_id = "37100077"
 job_id = "37117747"
+# job_id = "37256280"
+# job_id = "37256396"
+job_id = "37256396_2"
+
 # seq_file = '13000_A079034.txt'
 job_dir = base_dir + job_id + '/'
 # fname = job_dir + seq_file
 # print(os.listdir(exact_dir))
 
 ##
-
+black_check = True
 
 content_debug = """
 While total time consumed by now, scale:371/34371, seq_id:A002278, order:20 took:
@@ -73,20 +77,35 @@ def extract_file(fname, verbosity=VERBOSITY):
     re_manual = re.findall(r"\n(\w{4,5}).+\"manual\" check if equation is correct", content)
     # re_reconst = re.findall(r"\n(\w.+checked against website ground truth", content)
 
+    # print(len(re_all_stars))
+    # print(content)
+    if len(re_all_stars) == 0:
+        print('--pred')
+        print(content)
+        print('--po')
     if verbosity >= 1:
         print('n_of_seqs', re_all_stars)
         print('refound', re_found)
         print('reconst', re_reconst)
         print('reman', re_manual)
 
-    n_of_seqs = int(re_all_stars[0])
+    # n_of_seqs = int(re_all_stars[0])
+    if len(re_all_stars) >= 1:
+        n_of_seqs = int(re_all_stars[0])
+    else:
+        n_of_seqs = 0
+
     we_found = re_found == []
     if verbosity >= 1:
         print('we_found:', we_found)
 
     def truefalse(the_list):
+        if black_check and the_list == []:
+            return 0
         string = the_list[0]
         if string not in ('True', 'False'):
+            if black_check:
+                return 0
             print(string)
             raise ValueError
         else:
@@ -158,6 +177,8 @@ def for_summary(aggregated: tuple, fname: str):
             buglist += [fname]
             # print(aggregated, fname)
             # raise IndexError("Bug in code!")
+        if black_check and non_manual:
+            buglist += [fname]
 
     # summand = [f, m, i, o]
     to_add = (id_oeis, non_id, non_manual, fail, reconst_non_manual)
@@ -187,9 +208,25 @@ files_subdir = [list(map(lambda x: f'{subdir}{os.sep}{x}',
 flatten = sum(files_subdir, [])
 files = flatten
 
+# files = list(map(lambda file: file[9:14], files))
+success_ids_pairs = list(map(lambda file: (file[9:14], file[15:22]), files))
+print(success_ids_pairs)
+from all_ids import all_ids
+print(all_ids[:10])
+unsuccessful = [(f"{task:0>5}", id_) for task, id_ in enumerate(all_ids) if (f"{task:0>5}", id_) not in success_ids_pairs]
+print('first few unsuccessful:')
+print(unsuccessful[:10])
+print(len(success_ids_pairs), len(unsuccessful), len(success_ids_pairs) + len(unsuccessful), len(all_ids))
+
+1/0
+# [('00191', 'A001306'), ('00193', 'A001310'), ('00194', 'A001312'), ('00200', 'A001343'), ('00209', 'A001364'), ('00210', 'A001365'), ('00946', 'A007273'), ('01218', 'A008685'), ('01691', 'A011616'), ('01692', 'A011617')]
+
+
+
 scale = 40
+scale = 4000
 scale = 50100
-files_debug = files[:scale]
+files_debug = files[0:scale]
 files = files_debug
 # print(files)
 
@@ -213,9 +250,9 @@ print(f'Results: ')
 # all_seqs = 34371
 jobs_fail = n_of_seqs - len(files)  # or corrected_sum.
 
-id_oeis, non_id, non_manual, fail, reconst_non_manual, buglist = summary
+id_oeis, non_id, non_manual, ed_fail, reconst_non_manual, buglist = summary
 corrected_non_manual = non_manual - reconst_non_manual
-all_fails = fail + jobs_fail
+all_fails = ed_fail + jobs_fail
 
 official_success = id_oeis + non_id
 
@@ -223,11 +260,11 @@ printout = f"""
     {id_oeis: >5} = {id_oeis/n_of_seqs*100:0.3} % ... (id_oeis) ... successfully found equations that are identical to the recursive equations written in OEIS (hereinafter - OEIS equation)
     {non_id: >5} = {non_id/n_of_seqs*100:0.3} % ... (non_id) ... successfully found equations that are more complex than the OEIS equation 
     {non_manual: >5} = {non_manual/n_of_seqs*100:0.3} % ... (non_manual) ... successfully found equations that do not apply to test cases 
-    {fail: >5} = {fail/n_of_seqs*100:0.3} % ... (fail) ... failure, no equation found. (but program finished smoothly, no runtime error)
+    {ed_fail: >5} = {ed_fail/n_of_seqs*100:0.3} % ... (fail) ... failure, no equation found. (but program finished smoothly, no runtime error)
     {reconst_non_manual: >5} = {reconst_non_manual/n_of_seqs*100:0.3} % ... (reconst_non_manual) ... fail in program, specifically: reconstructed oeis and wrong on test cases.
     {corrected_non_manual: >5} = {corrected_non_manual/n_of_seqs*100:0.3} % ... (corrected_non_manual = non_manual ... reconst_non_manual) ... non_manuals taking bug in my code into the account.
     
-    {(id_oeis + non_id + corrected_non_manual + fail): >5} ... (id_oeis + non_id + corrected_non_manual + fail) = sum
+    {(id_oeis + non_id + corrected_non_manual + ed_fail): >5} ... (id_oeis + non_id + corrected_non_manual + fail) = sum
     
     
     {jobs_fail: >5} = {jobs_fail/n_of_seqs*100:0.3} % ... runtime errors = jobs failed
@@ -239,6 +276,8 @@ printout = f"""
     
     {official_success: >5} = {official_success/n_of_seqs*100:0.3} % - official success (id_oeis + non_id)
 """
+
+
 print(printout)
 
 n = 6
@@ -253,13 +292,22 @@ print(buglist)
 print('len(bugids)', len(bugids))
 # write_bugs = True
 write_bugs = False
-# if write_bugs:
-#     f = open('buglist.py', 'w')
-#     f.write(f'buglist = {bugids}')
-#     f.close()
+write_blacklist = True
+write_blacklist = False
+if write_blacklist:
+    f = open('blacklist.py', 'w')
+    f.write(f'blacklist = {bugids}')
+    f.close()
+if write_bugs:
+    f = open('buglist.py', 'w')
+    f.write(f'buglist = {bugids}')
+    f.close()
 #
-# # test import:
-# from buglist import buglist as bl
-# print(bl[:5])
+# test import:
+from buglist import buglist as bl
+from blacklist import blacklist as bl
+print(bl[:5])
 
 # first 6 bugs: ['37100080/01230_A053833.txt', '37100079/00095_A166986.txt', '37100079/00278_A055649.txt']
+# 37256442/05365_A026471.txt', '37256442/05484_A027636.txt', '37256442/05778_A028253.txt', '37256442/05478_A027630.txt', '37256442/05367_A026474.txt', '37256442/05480_A027632.txt']
+

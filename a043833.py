@@ -1,3 +1,7 @@
+# todo rec_secnion
+# input A053833 at of 21:27, 8 August 2015 by Ray Chandler
+#
+
 import math
 from numpy import base_repr as br
 
@@ -71,3 +75,5 @@ print('eof')
 print(seq[199], csv[seq_id][100])
 print(seq[upperl-1], reconst[upperl-1])
 print(seq[upperl-1] == reconst[upperl-1])
+
+
