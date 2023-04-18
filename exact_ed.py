@@ -113,6 +113,17 @@ def grid_sympy(seq: sp.MutableDenseMatrix, max_order: int):  # seq.shape=(N, 1)
 # VERBOSITY = 2  # dev scena
 VERBOSITY = 1  # run scenario
 
+
+def truth2coeffs(truth: str):
+    """Convert truth from first row of csv into list of coefficients"""
+    # truth = csv[seq_id][0]
+    replaced = truth.replace('{', '').replace('}', '')
+    peeled = replaced[1:-2] if replaced[-2] == ',' else replaced[1:-1]
+    coeffs = peeled.split(',')
+    check_coeffs = sp.Matrix(list(int(i) for i in coeffs))
+    return check_coeffs
+
+
 def exact_ed(seq_id: str, csv: pd.DataFrame, verbosity: int = VERBOSITY,
              max_order: int = None, linear: bool = True, n_of_terms=10**16):
     # max_order = 25
@@ -129,7 +140,8 @@ def exact_ed(seq_id: str, csv: pd.DataFrame, verbosity: int = VERBOSITY,
         # truth = '(-34,45,1, -35, 8)'
         truth = csv[seq_id][0]
         # print(f'truth:{truth}')
-        coeffs = truth[1:-1].split(',')[:min(n_of_terms, len(seq))]
+        # coeffs = truth[1:-1].split(',')[:min(n_of_terms, len(seq))]
+        coeffs = truth2coeffs(truth)
 
     max_order = sp.floor(seq.rows/2)-1 if max_order is None else max_order
     data = grid_sympy(seq, max_order)
@@ -342,7 +354,12 @@ def check_truth(seq_id: str, csv_filename: str):
 
     csv = pd.read_csv(csv_filename, low_memory=False, usecols=[seq_id])
     truth = csv[seq_id][0]
-    coeffs = [0] + truth[1:-1].split(',')[:len(csv[seq_id])-2]
+
+    # replaced = truth.replace('{', '').replace('}', '')
+    # peeled = replaced[1:-2] if replaced[-2] == ',' else replaced[1:-1]
+    # coeffs = peeled.split(',')
+    coeffs = truth2coeffs(truth)
+    coeffs = [0] + coeffs[:len(csv[seq_id])-2]
     # print(coeffs)
     x = sp.Matrix(list(int(i) for i in coeffs))
     # print(x)
@@ -355,8 +372,9 @@ def check_truth(seq_id: str, csv_filename: str):
 
 def check_eq_man(x: sp.Matrix, seq_id: str, csv: str,
                  n_of_terms: int = 500, header: bool = True) -> (bool, int):
-    "Manually check if exact ED returns correct solution, i.e. recursive equation."
-    if x==[]:
+    """Manually check if exact ED returns correct solution, i.e. recursive equation."""
+    if not x:
+    # if x==[]:
         return False, "no reconst", "no reconst"
     n_of_terms = max(n_of_terms, len(x))
     header = 1 if header else 0
@@ -393,8 +411,27 @@ if __name__ == '__main__':
     csv = pd.read_csv(csvfilename, low_memory=False)
     # print(csv.columns)
 
-    # eq = exact_ed("A000045", csv)
-    # x, eq, truth = exact_ed("A000004", csv, n_of_terms=30)
-    adaptive_leed("A152185", csv, max_order=20)
+    # # eq = exact_ed("A000045", csv)
+    # # x, eq, truth = exact_ed("A000004", csv, n_of_terms=30)
+    # adaptive_leed("A152185", csv, max_order=20)
+
+    x = sp.Matrix([0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, -1, -1, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 1])
+    tuple_ = (6, -6, -19, 24, 24, -19, -6, 6, -1)
+    tuple_ = (0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, -1, 0, -1, -1, 0, 0, 0, 0, 0, 0, 0, 0, 1)
+    tuple_ = (0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, -1, 0, -1, -1)
+    tuple_ = (0, 0, 1, 1, 0, 1, -1, 1, -1, -1, -1, -1, 1, -1, 1, 0, 1, 1, 0, 0, -1)
+    tuple_ = (3, -2, 0, 0, 0, -1, 1) #  'A356621'
+    x = sp.Matrix([0] + list(tuple_))
+    id_ = 'A025858'
+    id_ = 'A246175'
+    id_ = 'A025924'  # george fisher 24 september 2022
+    id_ = 'A029252'
+    # ({0, 0, 1, 1, 0, 1, -1, 1, -1, -1, -1, -1, 1, -1, 1, 0, 1, 1, 0, 0, -1): A029252
+    id_ = 'A356621'
+
+    is_check = check_eq_man(x, id_, csv)
+    print(is_check[0])
+    print(list(is_check[1]))
+    print(list(is_check[2]))
 
 

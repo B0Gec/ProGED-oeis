@@ -11,7 +11,7 @@ import sympy as sp
 import pandas as pd
 import argparse
 
-# needs (listed so far) doones,: exact_ed, diophantine_solver, linear_database_full.csv, buglist.py, oeil.sh, runoeil.sh
+# needs (listed so far) doones,: exact_ed, diophantine_solver, linear_database_full.csv, buglist.py, oei.sh, runoei.sh, blacklist, unsuccessful.py
 
 
 # if os.getcwd()[-11:] == 'ProGED_oeis':
@@ -28,13 +28,18 @@ from exact_ed import exact_ed, timer, check_eq_man, check_truth
 # search for flags with: flags_dict
 ###############
 
-# False positives (linear equation does not hold (manual check fails))
+# False positives (linear equation does not hold (manual check fails), or empty or noncomplete lists of coeffs (e.k. >200 coefficients))
 from blacklist import blacklist
-blacklist += ['A053833', 'A055649', 'A044941']
+blacklist += ['A053833', 'A055649', 'A044941', 'A025858', 'A025858', 'A246175', 'A025924', 'A356621', ]
 # A026471
 
-MODE = 'black_check'
-MODE = 'doone'
+# successful_only = True
+# if successful_only:
+#     from successful import successful_list
+
+
+MODE = 'black_check'  # try only unsuccessful
+# MODE = 'doone'
 
 n_of_terms_load = 100000
 
@@ -58,6 +63,8 @@ MAX_ORDER = 20  # We care only for recursive equations with max 20 terms or orde
 N_OF_TERMS_ED = 200
 TASK_ID = 0
 # TASK_ID = 5365  # A026471
+TASK_ID = 191  # A026471
+TASK_ID = 2000
 
 JOB_ID = "000000"
 SEQ_ID = (True, 'A153593')
@@ -67,6 +74,12 @@ SEQ_ID = (True, 'A044941')
 SEQ_ID = (False, 'A153593')
 SEQ_ID = (True, 'A026471')
 SEQ_ID = (True, 'A001306')
+SEQ_ID = (True, 'A001343')
+SEQ_ID = (True, 'A008685')
+SEQ_ID = (False, 'A013833')
+# ('00193', 'A001310')  # ('00194', 'A001312'), ('00200', 'A001343'), ('00209', 'A001364'), ('00210', 'A001365'), ('00946', 'A007273'), ('01218', 'A008685'), ('01691', 'A011616'), ('01692', 'A011617')]
+
+
 
 # EXPERIMENT_ID
 timestamp = time.strftime("%Hh%Mm%Ss-%dd%m-%Y", time.localtime())
@@ -289,7 +302,7 @@ else:
 
     if MODE == 'black_check':
         is_check, truth = check_truth(seq_id, csv_filename)
-        print(is_check, truth)
+        # print(is_check, truth)
         is_check = is_check[0]
 
         eq = 'This is blacklist discovery!!! i.e. only checking if ground truth holds.'

@@ -210,13 +210,28 @@ files = flatten
 
 # files = list(map(lambda file: file[9:14], files))
 success_ids_pairs = list(map(lambda file: (file[9:14], file[15:22]), files))
-print(success_ids_pairs)
+# print(success_ids_pairs)
 from all_ids import all_ids
 print(all_ids[:10])
 unsuccessful = [(f"{task:0>5}", id_) for task, id_ in enumerate(all_ids) if (f"{task:0>5}", id_) not in success_ids_pairs]
+successful_list = [id_ for task, id_ in enumerate(all_ids) if (f"{task:0>5}", id_) in success_ids_pairs]
 print('first few unsuccessful:')
 print(unsuccessful[:10])
 print(len(success_ids_pairs), len(unsuccessful), len(success_ids_pairs) + len(unsuccessful), len(all_ids))
+
+from blacklist import blacklist
+not_blacklisted = [(task, i) for task, i in unsuccessful if not i in blacklist]
+print(not_blacklisted[:10])
+
+
+
+# output_string = f'successful_list = {successful_list}'
+# # writo new files:
+# out_fname = 'successful.py'
+# f = open(out_fname, 'w')
+# f.write(output_string)
+# f.close()
+#
 
 1/0
 # [('00191', 'A001306'), ('00193', 'A001310'), ('00194', 'A001312'), ('00200', 'A001343'), ('00209', 'A001364'), ('00210', 'A001365'), ('00946', 'A007273'), ('01218', 'A008685'), ('01691', 'A011616'), ('01692', 'A011617')]
