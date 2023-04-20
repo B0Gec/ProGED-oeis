@@ -29,9 +29,11 @@ job_id = "36765084"
 job_id = "36781342"  # 17.3. waiting 2 jobs
 job_id = "37100077"
 job_id = "37117747"
-# job_id = "37256280"
+# job_id = "37256280"  # little of results
 # job_id = "37256396"
-job_id = "37256396_2"
+# job_id = "37507488"
+# job_id = "37507488_1"
+# job_id = "37256396_6"
 
 # seq_file = '13000_A079034.txt'
 job_dir = base_dir + job_id + '/'
@@ -171,7 +173,7 @@ def for_summary(aggregated: tuple, fname: str):
     reconst_non_manual = is_reconst and not is_checked
     # non_manual = we_found and not is_checked
 
-    buglist = aggregated[-1]
+    buglist, job_bins = aggregated[-2:]
     if debug:
         if reconst_non_manual:
             buglist += [fname]
@@ -179,6 +181,16 @@ def for_summary(aggregated: tuple, fname: str):
             # raise IndexError("Bug in code!")
         if black_check and non_manual:
             buglist += [fname]
+
+    task_id = int(fname[:5])
+    # Fail analysis:
+    # a. 34 bins for jobs
+    job_bins[task_id//1000] += 1
+    # print(job_bins)
+    # bins = [bin0, bin1, ... bin 34]
+
+
+
 
     # summand = [f, m, i, o]
     to_add = (id_oeis, non_id, non_manual, fail, reconst_non_manual)
@@ -197,32 +209,50 @@ def for_summary(aggregated: tuple, fname: str):
         #     print(' --- --- look here --- --- ')
         #     raise ArithmeticError
 
-    zipped = zip(aggregated[:-1], to_add)
+
+
+
+    zipped = zip(aggregated[:-2], to_add)
     counters = tuple(map(lambda x: x[0] + x[1], zipped))
-    return counters + (buglist,)
+    return counters + (buglist, job_bins)
+
+# # Hierarhical:
+# files_subdir = [list(map(lambda x: f'{subdir}{os.sep}{x}',
+#                          os.listdir(job_dir + subdir))) for subdir
+#                 in os.listdir(job_dir)]
+# flatten = sum(files_subdir, [])
+# files = flatten
+# one for all:
+files = os.listdir(job_dir)
 
 
-files_subdir = [list(map(lambda x: f'{subdir}{os.sep}{x}',
-                         os.listdir(job_dir + subdir))) for subdir
-                in os.listdir(job_dir)]
-flatten = sum(files_subdir, [])
-files = flatten
+# # # # debugging:
+# # # files = list(map(lambda file: file[9:14], files))
+# cut = (9, 14, 15, 22)
+# cut = tuple(i-9 for i in cut)
+# success_ids_pairs = list(map(lambda file: (file[cut[0]:cut[1]], file[cut[2]:cut[3]]), files))
+# success_ids = list(map(lambda file: file[cut[2]:cut[3]], files))
+# from all_ids import all_ids
+# print(all_ids[:10])
+# print(len(success_ids), len(all_ids)-len(success_ids))
+# # unsuccessful = [(f"{task:0>5}", id_) for task, id_ in enumerate(all_ids) if (f"{task:0>5}", id_) not in success_ids_pairs]
+# # print('first few unsuccessful:')
+# # print(unsuccessful[:10])
+# # print(len(success_ids_pairs), len(unsuccessful), len(success_ids_pairs) + len(unsuccessful), len(all_ids))
 
-# files = list(map(lambda file: file[9:14], files))
-success_ids_pairs = list(map(lambda file: (file[9:14], file[15:22]), files))
-# print(success_ids_pairs)
-from all_ids import all_ids
-print(all_ids[:10])
-unsuccessful = [(f"{task:0>5}", id_) for task, id_ in enumerate(all_ids) if (f"{task:0>5}", id_) not in success_ids_pairs]
-successful_list = [id_ for task, id_ in enumerate(all_ids) if (f"{task:0>5}", id_) in success_ids_pairs]
-print('first few unsuccessful:')
-print(unsuccessful[:10])
-print(len(success_ids_pairs), len(unsuccessful), len(success_ids_pairs) + len(unsuccessful), len(all_ids))
-
-from blacklist import blacklist
-not_blacklisted = [(task, i) for task, i in unsuccessful if not i in blacklist]
-print(not_blacklisted[:10])
-
+# # a. check for not blacklisted unsuccessful jobs
+# from blacklist import blacklist, no_truth
+# print(len(blacklist), len(set(blacklist)))
+# # not_blacklisted = [(task, i) for task, i in unsuccessful if not i in blacklist]
+# not_blacklisted = [i for i in all_ids if not i in blacklist and not i in success_ids]
+# not_missing_truth = [i for i in all_ids if not i in no_truth and not i in success_ids]
+# # ['A044941', 'A053833', 'A055649'] 3
+# these are blacklisted due to false ground truth
+# print(not_blacklisted[:10], len(not_blacklisted))
+# print('A055649' in blacklist)
+# # 1/0
+#
+#
 
 
 # output_string = f'successful_list = {successful_list}'
@@ -233,7 +263,7 @@ print(not_blacklisted[:10])
 # f.close()
 #
 
-1/0
+# 1/0
 # [('00191', 'A001306'), ('00193', 'A001310'), ('00194', 'A001312'), ('00200', 'A001343'), ('00209', 'A001364'), ('00210', 'A001365'), ('00946', 'A007273'), ('01218', 'A008685'), ('01691', 'A011616'), ('01692', 'A011617')]
 
 
@@ -249,7 +279,7 @@ _a, _b, _, n_of_seqs = extract_file(job_dir + files[0])
 # print(n_of_seqs)
 
 # summary = reduce(for_summary, files, (0, 0, 0, 0, 0,))
-summary = reduce(for_summary, files, (0, 0, 0, 0, 0, []))  # save all buggy ids
+summary = reduce(for_summary, files, (0, 0, 0, 0, 0, [], [0 for i in range(36)]))  # save all buggy ids
 # corrected_sum = sum(summary[:4]) - sum(summary[4:])
 corrected_sum = sum(summary[:4]) - sum(summary[4:5])
 print(corrected_sum)
@@ -265,7 +295,7 @@ print(f'Results: ')
 # all_seqs = 34371
 jobs_fail = n_of_seqs - len(files)  # or corrected_sum.
 
-id_oeis, non_id, non_manual, ed_fail, reconst_non_manual, buglist = summary
+id_oeis, non_id, non_manual, ed_fail, reconst_non_manual, buglist, job_bins = summary
 corrected_non_manual = non_manual - reconst_non_manual
 all_fails = ed_fail + jobs_fail
 
@@ -297,6 +327,12 @@ print(printout)
 
 n = 6
 print(f'first {n} bugs:', buglist[:n])
+print(f'job bins (task_id= 0, 1, ... 34):', job_bins)
+print(f'zipped job bins (task_id= 0, 1, ... 34):', [(n, i) for n, i in enumerate(job_bins)])
+print(f'check bins: {len(files)} = {sum(job_bins)} ?')
+# for n, i in enumerate(job_bins):
+#     print(n, i)
+
 
 def fname2id(fname):
     return re.findall("A\d{6}", fname)[0]
@@ -309,19 +345,39 @@ print('len(bugids)', len(bugids))
 write_bugs = False
 write_blacklist = True
 write_blacklist = False
-if write_blacklist:
-    f = open('blacklist.py', 'w')
-    f.write(f'blacklist = {bugids}')
-    f.close()
-if write_bugs:
-    f = open('buglist.py', 'w')
-    f.write(f'buglist = {bugids}')
-    f.close()
+
+# # from blacklistit import no_truth
+# from blacklist import blacklist_old, no_truth
+# if write_blacklist:
+#     output_string = ""
+#     output_string += f'blacklist_old = {blacklist_old}\n'
+#     output_string += f'no_truth = {no_truth}\n'
+#     output_string += f'false_truth = {bugids}\n'
 #
-# test import:
-from buglist import buglist as bl
-from blacklist import blacklist as bl
-print(bl[:5])
+#     # writo new files:
+#     out_fname = 'blacklist.py'  # v 18.4.2023
+#     # f = open(out_fname, 'r')
+#     # before = f.read()
+#     print('output:')
+#     # output_string = f'{before}\n{output_string}'
+#     print(output_string)
+#     # f.close()
+#
+#     # f = open(out_fname, 'w')
+#     # f.write(output_string)
+#     # f.close()
+
+# if write_bugs:
+#     f = open('buglist.py', 'w')
+#     f.write(f'buglist = {bugids}')
+#     f.close()
+
+# # test import:
+# from buglist import buglist as bl
+# from blacklist import blacklist_old, no_truth, false_truth
+# print(len(blacklist_old), blacklist_old)
+# print(len(no_truth))
+# print(len(false_truth))
 
 # first 6 bugs: ['37100080/01230_A053833.txt', '37100079/00095_A166986.txt', '37100079/00278_A055649.txt']
 # 37256442/05365_A026471.txt', '37256442/05484_A027636.txt', '37256442/05778_A028253.txt', '37256442/05478_A027630.txt', '37256442/05367_A026474.txt', '37256442/05480_A027632.txt']

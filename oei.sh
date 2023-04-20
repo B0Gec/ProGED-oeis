@@ -24,4 +24,4 @@ singularity exec ../pg.sif python3 doones.py --job_id $SLURM_ARRAY_JOB_ID \
 date
 
 echo "this is oei.sh $1 $2 $3 $4 $5 $6 $7 doing \
-  doones job_id $SLURM_ARRAY_JOB_ID task_id $1 * 1000 + $SLURM_ARRAY_JOB_ID --exper_id $2"
+  doones job_id $SLURM_ARRAY_JOB_ID task_id $1 * 1000 + $SLURM_ARRAY_TASK_ID --exper_id $2"

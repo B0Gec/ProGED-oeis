@@ -11,12 +11,14 @@ import sympy as sp
 import pandas as pd
 import argparse
 
-# needs (listed so far) doones,: exact_ed, diophantine_solver, linear_database_full.csv, buglist.py, oei.sh, runoei.sh, blacklist, unsuccessful.py
+
+# needs (listed so far) doones,: exact_ed, diophantine_solver, linear_database_full.csv, buglist.py, oei.sh, runoei.sh, blacklist, unsuccessful.py, task2job
 
 
 # if os.getcwd()[-11:] == 'ProGED_oeis':
 #     from ProGED.examples.oeis.scraping.downloading.download import bfile2list
 from exact_ed import exact_ed, timer, check_eq_man, check_truth
+# from task2job import task2job
 # else:
 #     from exact_ed import exact_ed, timer
 
@@ -29,8 +31,11 @@ from exact_ed import exact_ed, timer, check_eq_man, check_truth
 ###############
 
 # False positives (linear equation does not hold (manual check fails), or empty or noncomplete lists of coeffs (e.k. >200 coefficients))
-from blacklist import blacklist
-blacklist += ['A053833', 'A055649', 'A044941', 'A025858', 'A025858', 'A246175', 'A025924', 'A356621', ]
+from blacklist import blacklist_old, no_truth, false_truth
+# mini_false_truth += ['A053833', 'A055649', 'A044941',]  # some of false_truth manually checked
+# mini_no_truth ['A025858', 'A025858', 'A246175', 'A025924', 'A356621', ]  # some of no_true manually checked
+blacklist = no_truth + false_truth
+# blacklist = []
 # A026471
 
 # successful_only = True
@@ -48,7 +53,7 @@ VERBOSITY = 2  # dev scena
 VERBOSITY = 1  # run scenario
 
 DEBUG = True
-# DEBUG = False
+DEBUG = False
 BUGLIST = True
 BUGLIST = False
 if BUGLIST:
@@ -64,7 +69,15 @@ N_OF_TERMS_ED = 200
 TASK_ID = 0
 # TASK_ID = 5365  # A026471
 TASK_ID = 191  # A026471
-TASK_ID = 2000
+# TASK_ID = 2000
+# list(df.columns).index('A044941')
+TASK_ID = 9769
+# list(df.columns).index('A053833')
+TASK_ID = 10930
+# list(df.columns).index('A055649')
+TASK_ID = 11100
+TASK_ID = 10930  # A053833
+TASK_ID = 11100  # A055649
 
 JOB_ID = "000000"
 SEQ_ID = (True, 'A153593')
@@ -78,7 +91,6 @@ SEQ_ID = (True, 'A001343')
 SEQ_ID = (True, 'A008685')
 SEQ_ID = (False, 'A013833')
 # ('00193', 'A001310')  # ('00194', 'A001312'), ('00200', 'A001343'), ('00209', 'A001364'), ('00210', 'A001365'), ('00946', 'A007273'), ('01218', 'A008685'), ('01691', 'A011616'), ('01692', 'A011617')]
-
 
 
 # EXPERIMENT_ID
@@ -114,6 +126,10 @@ flags_dict = {argument.split("=")[0]: argument.split("=")[1]
 # n_of_terms_ed = 50
 # n_of_terms_ed = int(flags_dict.get("--n_of_terms", n_of_terms_ed))
 
+# if experiment_id == 'task2job':
+#     job_id = task2job(task_id)  # State also experiment_id there.
+#
+# print(job_id)
 
 
 
@@ -140,16 +156,26 @@ fail = (BUGLIST and task_id >= len(buglist)) or fail
 csv = pd.read_csv(csv_filename, low_memory=False, nrows=0)
 n_of_seqs = len(list(csv.columns))
 fail = (not BUGLIST and task_id >= n_of_seqs) or fail
-
-fail = (not BUGLIST and list(csv.columns)[task_id] in blacklist) or fail
-
-if fail:
-    print('ED was not performed since task_id surpassed our list or target sequence is on blacklist.')
-else:
+if not fail:
+    fail = (not BUGLIST and list(csv.columns)[task_id] in blacklist) or fail
     seq_id = list(csv.columns)[task_id] if not SEQ_ID[0] or not DEBUG else SEQ_ID[1]
     if BUGLIST:
         seq_id = buglist[task_id]
 
+    # b. set output folder and check is file for this task already exists
+    sep = os.path.sep
+    out_dir_base = f"results{sep}"
+    # out_dir = out_dir_base + f"{experiment_id}{sep}{job_id}{sep}"
+    out_dir = out_dir_base + f"{experiment_id}{sep}"
+
+    os.makedirs(out_dir, exist_ok=True)
+    out_fname = out_dir + f"{task_id:0>5}_{seq_id}.txt"
+    fail = fail or os.path.isfile(out_fname)
+
+if fail:
+    print('ED was not performed since task_id surpassed our list or target sequence is on blacklist or '
+          'the task was already performed in the past.')
+else:
     csv = pd.read_csv(csv_filename, low_memory=False, usecols=[seq_id])[:n_of_terms_load]
     # nans are checked by every function separately since exact_ed needs also ground truth
 
@@ -324,21 +350,16 @@ else:
 
     # timer(now=start)
 
-    sep = os.path.sep
-    out_dir_base = f"results{sep}"
-    out_dir = out_dir_base + f"{experiment_id}{sep}{job_id}{sep}"
     if DEBUG:
         out_dir = f"results_debug"
         print(output_string)
 
-    out_fname = out_dir + f"{task_id:0>5}_{seq_id}.txt"
-    os.makedirs(out_dir, exist_ok=True)
-
+    # print(DEBUG, experiment_id)
     if not DEBUG and not experiment_id == timestamp:
         f = open(out_fname, 'w')
         f.write(output_string)
         f.close()
-        print(seq_id, ' done and written!')
+        print(seq_id, f' done and written! (to {out_fname})')
     else:
         # print(output_string)
         pass

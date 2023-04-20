@@ -41,14 +41,17 @@ def ok_coefs(seq_id: str, csv: pd.DataFrame):
     coeffs = peeled.split(',')
     if coeffs == ['']:
         return False
-    elif '...' in truth:
-        return -2
-    elif seq_id in ('A025858', 'A246175', 'A025924'):
-        return -2
-    elif seq_id in ('A356621'):
-        return -2
-        # elif seq_id in ('A029252', 'A356621'):
+    elif '...' in truth or '"' in truth or '.' in truth:
+        print(truth)
         return False
+    # if '"' in truth:
+    #     return False
+    # elif seq_id in ('A025858', 'A246175', 'A025924'):
+    #     return -2
+    # elif seq_id in ('A356621'):
+    #     return -2
+        # elif seq_id in ('A029252', 'A356621'):
+        # return False
     else:
         try:
             # try:
@@ -64,8 +67,32 @@ def ok_coefs(seq_id: str, csv: pd.DataFrame):
             x = list(int(i) for i in coeffs)
         return True
 
+
 # from blacklist import blacklist
 # newblacklisted = [i for i in csv if ok_coefs(i, csv) == -2 and i not in blacklist]
+no_truth = [i for i in csv if not ok_coefs(i, csv)]
+print('no_truth:')
+print(no_truth[:10], len(no_truth))
+output_string = f'no_truth = {no_truth}'
+
+# writo new files:
+out_fname = 'blacklist.py'  # v 18.4.2023
+f = open(out_fname, 'r')
+before = f.read()
+print(before)
+output_string = f'{before}\n{output_string}'
+print(output_string)
+
+# f.close()
+# f = open(out_fname, 'w')
+# f.write(output_string)
+# f.close()
+
+# test import:
+from blacklist import no_truth
+print(no_truth)
+print(type(no_truth), len(no_truth))
+
 # print(len(blacklist))
 # print('new blacklisted:')
 # print(len(newblacklisted), newblacklisted)
