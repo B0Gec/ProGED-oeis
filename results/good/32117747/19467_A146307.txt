@@ -1,0 +1,11 @@
+While total time consumed by now, scale:19468/34371, seq_id:A146307, order:20 took:
+ 3.0 seconds, i.e. 0.05 minutes or 0.001 hours.
+
+A146307: 
+a(n) = NOT RECONSTRUCTED :-(
+truth: 
+a(n) = 0*a(n - 1) + 0*a(n - 2) + 0*a(n - 3) + 0*a(n - 4) + 0*a(n - 5) + 0*a(n - 6) + 0*a(n - 7) + 0*a(n - 8) + 0*a(n - 9) + 0*a(n - 10) + 0*a(n - 11) + 2*a(n - 12) + 0*a(n - 13) + 0*a(n - 14) + 0*a(n - 15) + 0*a(n - 16) + 0*a(n - 17) + 0*a(n - 18) + 0*a(n - 19) + 0*a(n - 20) + 0*a(n - 21) + 0*a(n - 22) + 0*a(n - 23) + -1*a(n - 24),  
+a(0) = 2021, a(1) = 2, a(2) = 1, a(3) = 2, a(4) = 4, a(5) = 10, a(6) = 1, a(7) = 14, a(8) = 8, a(9) = 6, a(10) = 5, a(11) = 22, a(12) = 4, a(13) = 26, a(14) = 7, a(15) = 10, a(16) = 16, a(17) = 34, a(18) = 3, a(19) = 38, a(20) = 20, a(21) = 14, a(22) = 11, a(23) = 46
+
+False  -  checked against website ground truth.     
+False  -  "manual" check if equation is correct.    

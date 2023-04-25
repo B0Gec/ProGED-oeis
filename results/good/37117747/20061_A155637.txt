@@ -1,0 +1,11 @@
+While total time consumed by now, scale:20062/34371, seq_id:A155637, order:20 took:
+ 2.9 seconds, i.e. 0.05 minutes or 0.001 hours.
+
+A155637: 
+a(n) = 50*a(n - 16) - 15*a(n - 15) + a(n - 14) - 50*a(n - 2) + 15*a(n - 1)
+truth: 
+a(n) = 16*a(n - 1) + -65*a(n - 2) + 50*a(n - 3),  
+a(0) = 1, a(1) = 14, a(2) = 124
+
+False  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

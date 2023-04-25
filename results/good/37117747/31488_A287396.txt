@@ -1,0 +1,11 @@
+While total time consumed by now, scale:31489/34371, seq_id:A287396, order:20 took:
+ 1.8 seconds, i.e. 0.03 minutes or 0.0 hours.
+
+A287396: 
+a(n) = 3136*a(n - 3) - 784*a(n - 2) + 56*a(n - 1)
+truth: 
+a(n) = 56*a(n - 1) + -784*a(n - 2) + 3136*a(n - 3),  
+a(0) = 3, a(1) = 56, a(2) = 1568
+
+False  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

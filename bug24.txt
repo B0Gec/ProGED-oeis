@@ -1,0 +1,108 @@
+    return self[i][j]
+========================
+^^^^^^
+Starting time (of array_subjob 37757821_51):
+er exception occurred:
+==============================================
+327, in <module>
+effs)]
+Starting time (of array_subjob 37757821_52):
+, _ in enumerate(coeffs)]
+
+ File "/usr/local/lib/python3.11/site-packages/sympy/polys/matrices/sdm.py", line 89, in getitem
+Thu Apr 20 15:10:33 CEST 2023
+_id=seq_id, linear=True)
+doone
+KeyError: 20
+                ~~~^^^
+[bgec@hpc-login1 ~]$ cat j*7821.out
+IndexError: index out of range
+    init_vals = [f'a({n}) = {seq[n]}, ' for n, _ in enumerate(coeffs)]
+    return _getitem_RepMatrix(self, key)
+^^^^^^^^^^^^
+    init_vals = [f'a({n}) = {seq[n]}, ' for n, _ in enumerate(coeffs)]
+m.py", line 89, in getitem
+                             ~~~^^^
+==========
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ckages/sympy/polys/matrices/sdm.py", line 89, in getitem
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+m.py", line 80, in getitem
+    return self[i][j]
+/python3.11/site-packages/sympy/matrices/repmatrix.py", line 233, in __getitem__
+  File "/usr/local/lib/python3.11/site-packages/sympy/matrices/repmatrix.py", line 750, in _getitem_RepMatrix
+KeyError: 18
+c/home/bgec/oeis/exact_ed.py", line 178, in <listcomp>
+
+   return _getitem_RepMatrix(self, key)
+ckages/sympy/matrices/repmatrix.py", line 750, in _getitem_RepMatrix
+    values = [rep.getitem(*divmod(index_(key), cols))]
+on occurred:
+id 24 * 1000 + 47 --exper_id 37117747
+this is oei.sh 24 37117747      doing   doones job_id 37757821 task_id 24 * 1000 + 37 --exper_id 37117747
+Traceback (most recent call last):
+^^^^^
+ line 264, in doone
+  File "/d/hpc/home/bgec/oeis/doones.py", line 327, in <module>
+ORDER,
+    doone(task_id=task_id, seq_id=seq_id, linear=True)
+^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/sympy/matrices/repmatrix.py", line 750, in _getitem_RepMatrix
+    x, coeffs, eq, truth = exact_ed(seq_id, csv, VERBOSITY, MAX_ORDER,
+m.py", line 89, in getitem
+  File "/usr/local/lib/python3.11/site-packages/sympy/matrices/repmatrix.py", line 233, in __getitem__
+    values = [rep.getitem(*divmod(index_(key), cols))]
+n exact_ed
+>
+==============================================
+_ in enumerate(coeffs)]
+    return _getitem_RepMatrix(self, key)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+24 * 1000 + 40 --exper_id 37117747
+  File "/d/hpc/home/bgec/oeis/exact_ed.py", line 178, in <listcomp>
+trix.py", line 233, in __getitem__
+    init_vals = [f'a({n}) = {seq[n]}, ' for n, _ in enumerate(coeffs)]
+                             ~~~^^^
+^^^^
+=====
+KeyError: 18
+local/lib/python3.11/site-packages/sympy/matrices/repmatrix.py", line 750, in _getitem_RepMatrix
+  File "/usr/local/lib/python3.11/site-packages/sympy/matrices/repmatrix.py", line 750, in _getitem_RepMatrix
+During handling of the above exception, another exception occurred:
+    values = [rep.getitem(*divmod(index_(key), cols))]
+atrices/repmatrix.py", line 750, in _getitem_RepMatrix
+IndexError: index out of range
+od(index_(key), cols))]
+olys/matrices/sdm.py", line 80, in getitem
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ <module>
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+olys/matrices/sdm.py", line 89, in getitem
+this is oei.sh 24 37117747      doing   doones job_id 37757821 task_id 24 * 1000 + 44 --exper_id 37117747
+IndexError: index out of range
+t_ed(seq_id, csv, VERBOSITY, MAX_ORDER,
+m.py", line 89, in getitem
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Traceback (most recent call last):
+range")
+ line 178, in exact_ed
+k_id 24 * 1000 + 48 --exper_id 37117747
+           ~~~~^^^
+ut of range
+q[n]}, ' for n, _ in enumerate(coeffs)]
+KeyError: 40
+   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+m.py", line 80, in getitem
+
+ File "/d/hpc/home/bgec/oeis/exact_ed.py", line 178, in <listcomp>
+id 24 * 1000 + 45 --exper_id 37117747
+this is oei.sh 24 37117747      doing   doones job_id 37757821 task_id 24 * 1000 + 49 --exper_id 37117747
+                             ~~~^^^
+.py", line 327, in <module>
+
+ File "/usr/local/lib/python3.11/site-packages/sympy/matrices/repmatrix.py", line 233, in __getitem__
+Traceback (most recent call last):
+ key)
+ linear=True)
+[

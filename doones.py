@@ -44,7 +44,7 @@ blacklist = no_truth + false_truth
 
 
 MODE = 'black_check'  # try only unsuccessful
-# MODE = 'doone'
+MODE = 'doone'
 
 n_of_terms_load = 100000
 
@@ -67,17 +67,14 @@ if BUGLIST:
 MAX_ORDER = 20  # We care only for recursive equations with max 20 terms or order.
 N_OF_TERMS_ED = 200
 TASK_ID = 0
+TASK_ID = 187
 # TASK_ID = 5365  # A026471
-TASK_ID = 191  # A026471
+# TASK_ID = 191  # A026471
 # TASK_ID = 2000
-# list(df.columns).index('A044941')
-TASK_ID = 9769
-# list(df.columns).index('A053833')
-TASK_ID = 10930
-# list(df.columns).index('A055649')
-TASK_ID = 11100
-TASK_ID = 10930  # A053833
-TASK_ID = 11100  # A055649
+# unsucc [11221, 27122, 27123]
+TASK_ID = 11221
+
+
 
 JOB_ID = "000000"
 SEQ_ID = (True, 'A153593')
@@ -90,7 +87,12 @@ SEQ_ID = (True, 'A001306')
 SEQ_ID = (True, 'A001343')
 SEQ_ID = (True, 'A008685')
 SEQ_ID = (False, 'A013833')
+# SEQ_ID = (True, 'A000045')
+# SEQ_ID = (True, 'A000187')
+# ['A056457', 'A212593', 'A212594']
+SEQ_ID = (True, 'A056457')
 # ('00193', 'A001310')  # ('00194', 'A001312'), ('00200', 'A001343'), ('00209', 'A001364'), ('00210', 'A001365'), ('00946', 'A007273'), ('01218', 'A008685'), ('01691', 'A011616'), ('01692', 'A011617')]
+# [('00184', 'A001299'), ('00185', 'A001300'), ('00186', 'A001301'), ('00187', 'A001302'), ('00195', 'A001313'), ('00196', 'A001314'), ('00198', 'A001319'), ('00222', 'A001492'), ('00347', 'A002015'), ('00769', 'A005813')] 1921
 
 
 # EXPERIMENT_ID
@@ -125,11 +127,6 @@ flags_dict = {argument.split("=")[0]: argument.split("=")[1]
               for argument in sys.argv[1:] if len(argument.split("=")) > 1}
 # n_of_terms_ed = 50
 # n_of_terms_ed = int(flags_dict.get("--n_of_terms", n_of_terms_ed))
-
-# if experiment_id == 'task2job':
-#     job_id = task2job(task_id)  # State also experiment_id there.
-#
-# print(job_id)
 
 
 
@@ -289,6 +286,7 @@ else:
 
             # ed_coeffs = [str(c) for c in x[1:] if c!=0]
             ed_coeffs = [str(c) for c in x[1:1 + order]]
+            ed_coeffs = x[1:1 + order, :]
 
         if VERBOSITY>=2:
             print('ed_coeffs:', ed_coeffs)

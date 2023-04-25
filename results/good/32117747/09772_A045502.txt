@@ -1,0 +1,11 @@
+While total time consumed by now, scale:9773/34371, seq_id:A045502, order:20 took:
+ 1.8 seconds, i.e. 0.03 minutes or 0.0 hours.
+
+A045502: 
+a(n) = a(n - 7) - 98*a(n - 6) + a(n - 5) - a(n - 2) + 98*a(n - 1)
+truth: 
+a(n) = 99*a(n - 1) + -99*a(n - 2) + 1*a(n - 3),  
+a(0) = 0, a(1) = 40, a(2) = 3960
+
+False  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

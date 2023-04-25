@@ -1,0 +1,11 @@
+While total time consumed by now, scale:27778/34371, seq_id:A220493, order:20 took:
+ 1.1 seconds, i.e. 0.02 minutes or 0.0 hours.
+
+A220493: 
+a(n) = -a(n - 16) + 2*a(n - 1)
+truth: 
+a(n) = 1*a(n - 1) + 1*a(n - 2) + 1*a(n - 3) + 1*a(n - 4) + 1*a(n - 5) + 1*a(n - 6) + 1*a(n - 7) + 1*a(n - 8) + 1*a(n - 9) + 1*a(n - 10) + 1*a(n - 11) + 1*a(n - 12) + 1*a(n - 13) + 1*a(n - 14) + 1*a(n - 15),  
+a(0) = 2019, a(1) = 1, a(2) = 1, a(3) = 2, a(4) = 4, a(5) = 8, a(6) = 16, a(7) = 32, a(8) = 64, a(9) = 128, a(10) = 256, a(11) = 512, a(12) = 1024, a(13) = 2048, a(14) = 4096
+
+False  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

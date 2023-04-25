@@ -1,0 +1,11 @@
+While total time consumed by now, scale:25692/34371, seq_id:A187919, order:20 took:
+ 1.6 seconds, i.e. 0.03 minutes or 0.0 hours.
+
+A187919: 
+a(n) = -9*a(n - 4) - 24*a(n - 3) - 2*a(n - 2) + 8*a(n - 1)
+truth: 
+a(n) = 8*a(n - 1) + -2*a(n - 2) + -24*a(n - 3) + -9*a(n - 4),  
+a(0) = 3, a(1) = 32, a(2) = 256, a(3) = 1912
+
+False  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

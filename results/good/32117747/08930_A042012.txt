@@ -1,0 +1,11 @@
+While total time consumed by now, scale:8931/34371, seq_id:A042012, order:20 took:
+ 0.9 seconds, i.e. 0.02 minutes or 0.0 hours.
+
+A042012: 
+a(n) = a(n - 2) + 46*a(n - 1)
+truth: 
+a(n) = 46*a(n - 1) + 1*a(n - 2),  
+a(0) = 23, a(1) = 1059
+
+False  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

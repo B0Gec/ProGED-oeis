@@ -1,0 +1,11 @@
+While total time consumed by now, scale:30942/34371, seq_id:A275101, order:20 took:
+ 3.9 seconds, i.e. 0.07 minutes or 0.001 hours.
+
+A275101: 
+a(n) = 6912*a(n - 8) - 3744*a(n - 7) + 672*a(n - 6) - 46*a(n - 5) - 6911*a(n - 4) + 3744*a(n - 3) - 672*a(n - 2) + 46*a(n - 1)
+truth: 
+a(n) = 47*a(n - 1) + -718*a(n - 2) + 4416*a(n - 3) + -10656*a(n - 4) + 6912*a(n - 5),  
+a(0) = 1, a(1) = 15, a(2) = 131, a(3) = 1613, a(4) = 25097
+
+False  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

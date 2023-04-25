@@ -1,0 +1,11 @@
+While total time consumed by now, scale:29236/34371, seq_id:A251861, order:20 took:
+ 1.4 seconds, i.e. 0.02 minutes or 0.0 hours.
+
+A251861: 
+a(n) = -676*a(n - 3) + 26*a(n - 2) + 26*a(n - 1)
+truth: 
+a(n) = 26*a(n - 1) + 26*a(n - 2) + -676*a(n - 3),  
+a(0) = 0, a(1) = 650, a(2) = 16900
+
+False  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

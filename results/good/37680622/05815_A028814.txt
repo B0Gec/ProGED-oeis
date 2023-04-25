@@ -1,0 +1,11 @@
+While total time consumed by now, scale:5816/34371, seq_id:A028814, order:20 took:
+ 3.2 seconds, i.e. 0.05 minutes or 0.001 hours.
+
+A028814: 
+a(n) = -4*a(n - 17) + a(n - 16) + 4*a(n - 15) - a(n - 14) + 4*a(n - 11) - a(n - 10) - 4*a(n - 7) + a(n - 6) - 4*a(n - 3) + a(n - 2) + 4*a(n - 1)
+truth: 
+a(n) = 7*a(n - 1) + -15*a(n - 2) + 13*a(n - 3) + -4*a(n - 4),  
+a(0) = 1, a(1) = 5, a(2) = 20, a(3) = 78
+
+False  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

@@ -1,0 +1,11 @@
+While total time consumed by now, scale:25463/34371, seq_id:A182754, order:20 took:
+ 1.0 seconds, i.e. 0.02 minutes or 0.0 hours.
+
+A182754: 
+a(n) = 77*a(n - 2)
+truth: 
+a(n) = 0*a(n - 1) + 77*a(n - 2),  
+a(0) = 1, a(1) = 21
+
+False  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

@@ -1,0 +1,11 @@
+While total time consumed by now, scale:16935/34371, seq_id:A118512, order:20 took:
+ 2.1 seconds, i.e. 0.03 minutes or 0.001 hours.
+
+A118512: 
+a(n) = NOT RECONSTRUCTED :-(
+truth: 
+a(n) = 0*a(n - 1) + 0*a(n - 2) + 0*a(n - 3) + 0*a(n - 4) + 0*a(n - 5) + 0*a(n - 6) + 0*a(n - 7) + 0*a(n - 8) + 1*a(n - 9),  
+a(0) = 11, a(1) = 12, a(2) = 22, a(3) = 23, a(4) = 33, a(5) = 34, a(6) = 44, a(7) = 45, a(8) = 55
+
+False  -  checked against website ground truth.     
+False  -  "manual" check if equation is correct.    

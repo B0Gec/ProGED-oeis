@@ -1,0 +1,11 @@
+While total time consumed by now, scale:20820/34371, seq_id:A159716, order:20 took:
+ 2.8 seconds, i.e. 0.05 minutes or 0.001 hours.
+
+A159716: 
+a(n) = 2700*a(n - 6) - 540*a(n - 5) - 1773*a(n - 4) + 1160*a(n - 3) - 278*a(n - 2) + 28*a(n - 1)
+truth: 
+a(n) = 29*a(n - 1) + -307*a(n - 2) + 1467*a(n - 3) + -3240*a(n - 4) + 2700*a(n - 5),  
+a(0) = 2, a(1) = 66, a(2) = 1168, a(3) = 16220, a(4) = 202416
+
+False  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

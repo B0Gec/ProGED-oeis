@@ -1,0 +1,11 @@
+While total time consumed by now, scale:14247/34371, seq_id:A091281, order:20 took:
+ 0.4 seconds, i.e. 0.01 minutes or 0.0 hours.
+
+A091281: 
+a(n) = 0
+truth: 
+a(n) = 15*a(n - 1) + 24*a(n - 2) + -360*a(n - 3),  
+a(0) = 1, a(1) = 5, a(2) = 91
+
+False  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

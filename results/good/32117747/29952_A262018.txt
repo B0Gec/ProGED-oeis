@@ -1,0 +1,11 @@
+While total time consumed by now, scale:29953/34371, seq_id:A262018, order:20 took:
+ 2.0 seconds, i.e. 0.03 minutes or 0.001 hours.
+
+A262018: 
+a(n) = a(n - 7) - 178*a(n - 6) + a(n - 5) - a(n - 2) + 178*a(n - 1)
+truth: 
+a(n) = 179*a(n - 1) + -179*a(n - 2) + 1*a(n - 3),  
+a(0) = 28, a(1) = 5308, a(2) = 945148
+
+False  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

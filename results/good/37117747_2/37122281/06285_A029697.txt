@@ -1,0 +1,11 @@
+While total time consumed by now, scale:6286/34371, seq_id:A029697, order:20 took:
+ 1.5 seconds, i.e. 0.02 minutes or 0.0 hours.
+
+A029697: 
+a(n) = -144*a(n - 2) + 40*a(n - 1)
+truth: 
+a(n) = 40*a(n - 1) + -144*a(n - 2),  
+a(0) = 6, a(1) = 120
+
+True  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

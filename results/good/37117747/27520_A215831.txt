@@ -1,0 +1,11 @@
+While total time consumed by now, scale:27521/34371, seq_id:A215831, order:20 took:
+ 1.7 seconds, i.e. 0.03 minutes or 0.0 hours.
+
+A215831: 
+a(n) = a(n - 9) + 105*a(n - 6) - 33*a(n - 3)
+truth: 
+a(n) = 0*a(n - 1) + 0*a(n - 2) + -33*a(n - 3) + 0*a(n - 4) + 0*a(n - 5) + 105*a(n - 6) + 0*a(n - 7) + 0*a(n - 8) + 1*a(n - 9),  
+a(0) = 1, a(1) = -1, a(2) = 9, a(3) = -11, a(4) = 59, a(5) = -267, a(6) = 433, a(7) = -2041, a(8) = 9753
+
+False  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

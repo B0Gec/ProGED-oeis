@@ -1,0 +1,11 @@
+While total time consumed by now, scale:34269/34371, seq_id:A353029, order:20 took:
+ 6.1 seconds, i.e. 0.1 minutes or 0.002 hours.
+
+A353029: 
+a(n) = -8*a(n - 19) - 7*a(n - 18) - 3*a(n - 17) + 5*a(n - 16) - 3*a(n - 15) - 3*a(n - 14) - 5*a(n - 13) - 8*a(n - 12) - 3*a(n - 11) + 14*a(n - 10) - 6*a(n - 9) - a(n - 8) - 7*a(n - 7) + 4*a(n - 6) + a(n - 5) - a(n - 4) - 7*a(n - 3) - a(n - 2) + 4*a(n - 1)
+truth: 
+a(n) = 14*a(n - 1) + -84*a(n - 2) + 280*a(n - 3) + -560*a(n - 4) + 672*a(n - 5) + -448*a(n - 6) + 128*a(n - 7),  
+a(0) = 0, a(1) = 0, a(2) = 16, a(3) = 1152, a(4) = 16640, a(5) = 140800, a(6) = 887040
+
+False  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

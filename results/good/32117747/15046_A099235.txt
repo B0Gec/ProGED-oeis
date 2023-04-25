@@ -1,0 +1,11 @@
+While total time consumed by now, scale:15047/34371, seq_id:A099235, order:20 took:
+ 2.2 seconds, i.e. 0.04 minutes or 0.001 hours.
+
+A099235: 
+a(n) = a(n - 15) + 2*a(n - 14) - a(n - 12) - 3*a(n - 10) + a(n - 9) - a(n - 6) - 2*a(n - 5) + a(n - 3) + 3*a(n - 1)
+truth: 
+a(n) = 1*a(n - 1) + 4*a(n - 2) + 6*a(n - 3) + 4*a(n - 4) + 1*a(n - 5),  
+a(0) = 1, a(1) = 1, a(2) = 5, a(3) = 15, a(4) = 45
+
+False  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

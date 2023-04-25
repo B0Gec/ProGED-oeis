@@ -1,0 +1,11 @@
+While total time consumed by now, scale:17766/34371, seq_id:A128787, order:20 took:
+ 1.4 seconds, i.e. 0.02 minutes or 0.0 hours.
+
+A128787: 
+a(n) = 512*a(n - 3) - 192*a(n - 2) + 24*a(n - 1)
+truth: 
+a(n) = 24*a(n - 1) + -192*a(n - 2) + 512*a(n - 3),  
+a(0) = 0, a(1) = 8, a(2) = 256
+
+False  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

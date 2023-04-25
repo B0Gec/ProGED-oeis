@@ -175,7 +175,7 @@ def exact_ed(seq_id: str, csv: pd.DataFrame, verbosity: int = VERBOSITY,
 
     if linear:
         truth = ['a(n) = '] + [f'{str(coeff)}*a(n - {n+1}) + ' for n, coeff in enumerate(coeffs)]
-        init_vals = [f'a({n}) = {seq[n]}, ' for n, _ in enumerate(coeffs)]
+        init_vals = [f'a({n}) = {seq[n]}, ' for n, _ in enumerate(coeffs[:len(seq)])]
         # print(f'truth: {truth}')
         truth = ''.join(truth)[:-3] + ',  \n' + ''.join(init_vals)[:-2]
         if verbosity >= 2:
@@ -349,7 +349,7 @@ def adaptive_leed(seq_id, csv, verbosity=VERBOSITY, max_order=20, linear=True, n
     return
 
 
-def check_truth(seq_id: str, csv_filename: str):
+def check_truth(seq_id: str, csv_filename: str, oeis_friendly=False):
     'Check OEIS sequence\'s  website\'s supposed equation against the sequence terms.'
 
     csv = pd.read_csv(csv_filename, low_memory=False, usecols=[seq_id])
@@ -358,12 +358,13 @@ def check_truth(seq_id: str, csv_filename: str):
     # replaced = truth.replace('{', '').replace('}', '')
     # peeled = replaced[1:-2] if replaced[-2] == ',' else replaced[1:-1]
     # coeffs = peeled.split(',')
-    coeffs = truth2coeffs(truth)
-    coeffs = [0] + coeffs[:len(csv[seq_id])-2]
+    # coeffs = [0] + truth2coeffs(truth)
+    # coeffs = [0] + coeffs[:len(csv[seq_id])-2]
     # print(coeffs)
-    x = sp.Matrix(list(int(i) for i in coeffs))
+    x = truth2coeffs(truth).row_insert(0, sp.Matrix([0]))
+    # x = sp.Matrix(list(int(i) for i in coeffs))
     # print(x)
-    is_check = check_eq_man(x, seq_id, csv, n_of_terms=10**5)
+    is_check = check_eq_man(x, seq_id, csv, n_of_terms=10**5, oeis_friendly=oeis_friendly)
     # print(is_check)
     # is_check = is_check[0]
     # check[]
@@ -371,7 +372,8 @@ def check_truth(seq_id: str, csv_filename: str):
 
 
 def check_eq_man(x: sp.Matrix, seq_id: str, csv: str,
-                 n_of_terms: int = 500, header: bool = True) -> (bool, int):
+                 n_of_terms: int = 500, header: bool = True,
+                 oeis_friendly=0) -> (bool, int):
     """Manually check if exact ED returns correct solution, i.e. recursive equation."""
     if not x:
     # if x==[]:
@@ -388,9 +390,12 @@ def check_eq_man(x: sp.Matrix, seq_id: str, csv: str,
         coefs.reverse()
         return sp.Matrix([coefs[-1]*till_now.rows]) + till_now[-len(coefs[:-1]):, :].transpose()*sp.Matrix(coefs[:-1])
         # return (x[0] * till_now.rows + till_now[-len(x[1:]):, :].transpose() * x[1:, :])[0]
-    reconst = seq[:len(x), :]  # init reconst
 
-    for i in range(len(seq) - len(x)):
+    reconst = seq[:max(len(x)-1, min(oeis_friendly, len(seq))), :]  # init reconst
+    # else:
+    #     reconst = seq[:len(x)-1, :]  # init reconst
+
+    for i in range(len(seq) - len(reconst)):
         # reconst = reconst.col_join(sp.Matrix([an(reconst, x)]))
         reconst = reconst.col_join(an(reconst, x))
 
@@ -420,7 +425,9 @@ if __name__ == '__main__':
     tuple_ = (0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, -1, 0, -1, -1, 0, 0, 0, 0, 0, 0, 0, 0, 1)
     tuple_ = (0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, -1, 0, -1, -1)
     tuple_ = (0, 0, 1, 1, 0, 1, -1, 1, -1, -1, -1, -1, 1, -1, 1, 0, 1, 1, 0, 0, -1)
-    tuple_ = (3, -2, 0, 0, 0, -1, 1) #  'A356621'
+    tuple_ = (3, -2, 0, 0, 0, -1, 1)  #  'A356621'
+    tuple_ = (1, 0, 0, 1, -1)  #  'A356621'
+    tuple_ = (3, -2, -1, 0, 1, 2, -3, 1)
     x = sp.Matrix([0] + list(tuple_))
     id_ = 'A025858'
     id_ = 'A246175'
@@ -428,8 +435,12 @@ if __name__ == '__main__':
     id_ = 'A029252'
     # ({0, 0, 1, 1, 0, 1, -1, 1, -1, -1, -1, -1, 1, -1, 1, 0, 1, 1, 0, 0, -1): A029252
     id_ = 'A356621'
+    id_ = 'A026471'
+    id_ = 'A057524'
 
-    is_check = check_eq_man(x, id_, csv)
+    # ['A057524', 'A164009']
+
+    is_check = check_eq_man(x, id_, csv, oeis_friendly=25)
     print(is_check[0])
     print(list(is_check[1]))
     print(list(is_check[2]))

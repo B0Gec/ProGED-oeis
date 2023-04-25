@@ -1,0 +1,11 @@
+While total time consumed by now, scale:22091/34371, seq_id:A166611, order:20 took:
+ 1.9 seconds, i.e. 0.03 minutes or 0.001 hours.
+
+A166611: 
+a(n) = -253*a(n - 12) + 22*a(n - 11) + 22*a(n - 10) + 22*a(n - 9) + 22*a(n - 8) + 22*a(n - 7) + 22*a(n - 6) + 22*a(n - 5) + 22*a(n - 4) + 22*a(n - 3) + 22*a(n - 2) + 22*a(n - 1)
+truth: 
+a(n) = 22*a(n - 1) + 22*a(n - 2) + 22*a(n - 3) + 22*a(n - 4) + 22*a(n - 5) + 22*a(n - 6) + 22*a(n - 7) + 22*a(n - 8) + 22*a(n - 9) + 22*a(n - 10) + 22*a(n - 11) + -253*a(n - 12),  
+a(0) = 1, a(1) = 24, a(2) = 552, a(3) = 12696, a(4) = 292008, a(5) = 6716184, a(6) = 154472232, a(7) = 3552861336, a(8) = 81715810728, a(9) = 1879463646744, a(10) = 43227663875112, a(11) = 994236269127576
+
+False  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    
