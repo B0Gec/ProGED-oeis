@@ -1,42 +1,42 @@
 import pandas as pd
 fname = 'header_database_linear.csv'
+from blacklist import blacklist
 csv = pd.read_csv(fname)
 
-from blacklist import blacklist
-from blacklist import no_truth, false_truth
 from exact_ed import truth2coeffs
+def order(id_, csv, sign=-1):
+    if id_ in blacklist:
+        return 10**6*sign
+    else:
+        truth = csv[id_][0]
+        coeffs = truth2coeffs(truth)
+        return len(coeffs)
 
-print('fail:', [i for i in csv.columns if i in no_truth and i in false_truth])
+print(order(csv.columns[0], csv))
 
+from ed_fails import ed_fails
+from non_manuals import non_manuals
 
-# bigger = [i for i in csv.columns if len(truth2coeffs(csv[i][0])) > 20 if i not in blacklist]
-# print(2)
-
-from all_ids import all_ids
-csv_filename = 'linear_database_full.csv'
-full = pd.read_csv(csv_filename, low_memory=False, nrows=0)
-
-from exact_ed import check_truth
-
-# correct = ['A000045', 'A000004', 'A000008']
-# for i in correct[:10]:
-#     print(check_truth(i, csv_filename)[0][0])
-for i in false_truth[:4]:
-    check = check_truth(i, csv_filename, oeis_friendly=15)[0]
-    print(i, check[1][:20])
-    print(i, check[2][:20])
-    print(check[0])
+cut = (9, 14, 15, 22)
+cut = tuple(i-9 for i in cut)
+ed_fails = [file[cut[2]:cut[3]] for file in ed_fails]
 
 
-oeis_friendly=25
-false_oeis_friendly = [id_ for id_ in false_truth
-                       if not check_truth(id_, csv_filename, oeis_friendly=oeis_friendly)[0][0]]
-print('oeis_friendly:', oeis_friendly)
-print(len(false_oeis_friendly), false_oeis_friendly[:10])
-print(false_oeis_friendly)
+# orders = [(i, order(i, csv)) for i in csv]
+# print(max(orders))
 
-from exact_ed import check_eq_man
-# check_eq_man(sp.Matrix())
+orders = [(i, order(i, csv)) for i in ed_fails]
+less20 = [(i, order(i, csv)) for i in ed_fails if order(i, csv, sign=1) <= 20]
+less20 = [(i, order(i, csv)) for i in non_manuals if order(i, csv, sign=1) <= 20]
+# print(orders)
+print(less20)
 
+# more100 = [i for i in csv if order(i, csv) >= 100]
+# more50 = [i for i in csv if order(i, csv) >= 50]
+more20 = [i for i in csv if order(i, csv) >= 20 and not i in ed_fails]
+# print(more100[:10])
+# print(more100[:1000], len(more100))
+# print(len(more50), more50[:1000])
+print(len(more20), more20[:1000])
 
 

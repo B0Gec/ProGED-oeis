@@ -182,7 +182,7 @@ def for_summary(aggregated: tuple, fname: str):
     reconst_non_manual = is_reconst and not is_checked
     # non_manual = we_found and not is_checked
 
-    buglist, job_bins = aggregated[-2:]
+    buglist, job_bins, ed_fail_list, non_manual_list = aggregated[-4:]
     if debug:
         if reconst_non_manual:
             buglist += [fname]
@@ -190,6 +190,10 @@ def for_summary(aggregated: tuple, fname: str):
             # raise IndexError("Bug in code!")
         if black_check and non_manual:
             buglist += [fname]
+        if fail:
+            ed_fail_list += [fname]
+        if non_manual:
+            non_manual_list += [fname]
 
     task_id = int(fname[:5])
     # Fail analysis:
@@ -223,7 +227,7 @@ def for_summary(aggregated: tuple, fname: str):
 
     zipped = zip(aggregated[:-2], to_add)
     counters = tuple(map(lambda x: x[0] + x[1], zipped))
-    return counters + (buglist, job_bins)
+    return counters + (buglist, job_bins, ed_fail_list, non_manual_list)
 
 # # Hierarhical:
 # files_subdir = [list(map(lambda x: f'{subdir}{os.sep}{x}',
@@ -244,9 +248,9 @@ cut = tuple(i-9 for i in cut)
 # success_ids = list(map(lambda file: file[cut[2]:cut[3]], files))
 from all_ids import all_ids
 # renaming = [(job_dir + file, job_dir + all_ids.index(str(file[cut[2]:cut[3]])) + file[cut[0]:cut[1]]) for file in files]
-renaming = [(job_dir + file, job_dir + f"{all_ids.index(str(file[cut[2]:cut[3]])):0>5}_{file[cut[2]:cut[3]]}.txt") for file in files]
+# renaming = [(job_dir + file, job_dir + f"{all_ids.index(str(file[cut[2]:cut[3]])):0>5}_{file[cut[2]:cut[3]]}.txt") for file in files]
 # list(map(lambda pair: os.rename(pair[0], pair[1]), renaming))
-print(renaming[:10])
+# print(renaming[:10])
 # 1/0
 
 
@@ -314,7 +318,7 @@ _a, _b, _, n_of_seqs = extract_file(job_dir + files[0])
 # print(n_of_seqs)
 
 # summary = reduce(for_summary, files, (0, 0, 0, 0, 0,))
-summary = reduce(for_summary, files, (0, 0, 0, 0, 0, [], [0 for i in range(36)]))  # save all buggy ids
+summary = reduce(for_summary, files, (0, 0, 0, 0, 0, [], [0 for i in range(36)], [], []))  # save all buggy ids
 # corrected_sum = sum(summary[:4]) - sum(summary[4:])
 corrected_sum = sum(summary[:4]) - sum(summary[4:5])
 print(corrected_sum)
@@ -335,7 +339,8 @@ n_of_seqs_db = n_of_seqs
 n_of_seqs = n_of_seqs - ignored
 jobs_fail = n_of_seqs - len(files)  # or corrected_sum.
 
-id_oeis, non_id, non_manual, ed_fail, reconst_non_manual, buglist, job_bins = summary
+id_oeis, non_id, non_manual, ed_fail, reconst_non_manual, buglist, \
+    job_bins, ed_fail_list, non_manual_list = summary
 corrected_non_manual = non_manual - reconst_non_manual
 all_fails = ed_fail + jobs_fail
 
@@ -348,7 +353,7 @@ printout = f"""
     {ed_fail: >5} = {ed_fail/n_of_seqs*100:0.3} % ... (fail) ... failure, no equation found. (but program finished smoothly, no runtime error)
     {reconst_non_manual: >5} = {reconst_non_manual/n_of_seqs*100:0.3} % ... (reconst_non_manual) ... fail in program, specifically: reconstructed oeis and wrong on test cases.
     ~~{corrected_non_manual:~>5} = {corrected_non_manual/n_of_seqs*100:0.3} % ... (corrected_non_manual = non_manual ... reconst_non_manual) ... non_manuals taking bug in my code into the account.~~
-    
+
     {(id_oeis + non_id + corrected_non_manual + ed_fail): >5} ... (id_oeis + non_id + corrected_non_manual + fail) = sum
     
     
@@ -392,6 +397,11 @@ print(f'check bins: {len(files)} = {sum(job_bins)} ?')
 for n, i in enumerate(job_bins):
     print(n, i)
 
+print(f'first {n} ed_fails:', ed_fail_list[:n])
+print(len(ed_fail_list))
+print(f'first {n} non_manuals:', non_manual_list[:n])
+print(len(non_manual_list))
+
 
 def fname2id(fname):
     return re.findall("A\d{6}", fname)[0]
@@ -401,9 +411,10 @@ print(bugids)
 print(buglist)
 print('len(bugids)', len(bugids))
 # write_bugs = True
-write_bugs = False
 write_blacklist = True
 write_blacklist = False
+write_bugs = False
+# write_bugs = True
 
 # # from blacklistit import no_truth
 # from blacklist import blacklist_old, no_truth
@@ -427,10 +438,14 @@ write_blacklist = False
 #     # f.close()
 
 # if write_bugs:
-#     f = open('buglist.py', 'w')
-#     f.write(f'buglist = {bugids}')
+#     f = open('non_manuals.py', 'w')
+#     f.write(f'non_manuals = {non_manual_list}')
+#     # f = open('ed_fails.py', 'w')
+#     # f.write(f'ed_fails = {ed_fail_list}')
+#     # f = open('buglist.py', 'w')
+#     # f.write(f'buglist = {bugids}')
 #     f.close()
-
+#
 # # test import:
 # from buglist import buglist as bl
 # from blacklist import blacklist_old, no_truth, false_truth
