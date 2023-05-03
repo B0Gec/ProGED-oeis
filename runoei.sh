@@ -15,13 +15,13 @@
 ##SBATCH --array=0-34%5  #finish 32117747
 #SBATCH --array=4,6-11,13-17,19,21,25,28%1
 #SBATCH --array=23,24%1
-##SBATCH --array=0-1%1
+#SBATCH --array=0-0%1
 #SBATCH --output=./run_batch%A.out
 
 date
 
 #sbatch oei.sh $SLURM_ARRAY_TASK_ID $SLURM_ARRAY_JOB_ID $1 $2 $3 $4 $5
-sbatch oei.sh $SLURM_ARRAY_TASK_ID 32117747 $1 $2 $3 $4 $5
+sbatch oei.sh $SLURM_ARRAY_TASK_ID cores1234 $1 $2 $3 $4 $5
 
 
 

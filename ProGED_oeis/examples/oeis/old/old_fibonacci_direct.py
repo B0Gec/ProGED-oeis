@@ -9,6 +9,7 @@ nrows = 50
 data = pd.read_csv('../oeis_selection.csv', nrows=nrows)
 fibonacci_no = 45
 fibonacci_id = f"A{fibonacci_no:0>6}"
+
 # if nrows=50, dtype=int64:
 # oeis = list(data[fibonacci_id])
 # if nrows=100, dtype=object:

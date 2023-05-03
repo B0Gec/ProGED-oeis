@@ -56,8 +56,11 @@ DEBUG = True
 DEBUG = False
 BUGLIST = True
 BUGLIST = False
+CORELIST = True  # have to scrape core sequences!
+CORELIST = False
 if BUGLIST:
     from buglist import buglist
+
 
 # if not DEBUG and BUGLIST:
 #     print("\nWarning!!!!! buglist is used outside debug mode!!")
@@ -67,13 +70,12 @@ if BUGLIST:
 MAX_ORDER = 20  # We care only for recursive equations with max 20 terms or order.
 N_OF_TERMS_ED = 200
 TASK_ID = 0
-TASK_ID = 187
+# TASK_ID = 187
 # TASK_ID = 5365  # A026471
 # TASK_ID = 191  # A026471
 # TASK_ID = 2000
 # unsucc [11221, 27122, 27123]
-TASK_ID = 11221
-
+# TASK_ID = 11221
 
 
 JOB_ID = "000000"
@@ -142,6 +144,9 @@ has_titles = 1
 now = time.perf_counter()
 # # a bit faster maybe:
 csv_filename = 'linear_database_full.csv'
+if CORELIST:
+    # from core_nice_nomore import cores
+    csv_filename = 'cores.csv'
 
 # print(os.getcwd())
 if os.getcwd()[-11:] == 'ProGED_oeis':
@@ -153,6 +158,7 @@ if os.getcwd()[-11:] == 'ProGED_oeis':
 
 fail = False
 fail = (BUGLIST and task_id >= len(buglist)) or fail
+# fail = (CORELIST and task_id >= len(cores)) or fail
 
 csv = pd.read_csv(csv_filename, low_memory=False, nrows=0)
 n_of_seqs = len(list(csv.columns))
@@ -162,6 +168,8 @@ if not fail:
     seq_id = list(csv.columns)[task_id] if not SEQ_ID[0] or not DEBUG else SEQ_ID[1]
     if BUGLIST:
         seq_id = buglist[task_id]
+    # if CORELIST:
+    #     seq_id = cores[task_id]
 
     # b. set output folder and check is file for this task already exists
     sep = os.path.sep

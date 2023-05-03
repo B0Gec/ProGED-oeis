@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=oeis_array_slurms
+#SBATCH --job-name=oeis_core_array
 ##SBATCH --partition=long
 ##SBATCH --time=14-00:00:00
 ##SBATCH --time=00:10:00
@@ -9,6 +9,7 @@
 #SBATCH --array=0-1000  # 1001 is upper limit
 ##SBATCH --array=0-2
 #SBATCH --array=0-999
+#SBATCH --array=0-150
 #SBATCH --output=./joeis%A.out
 
 echo "=============================================="

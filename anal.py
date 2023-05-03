@@ -20,6 +20,7 @@ from non_manuals import non_manuals
 cut = (9, 14, 15, 22)
 cut = tuple(i-9 for i in cut)
 ed_fails = [file[cut[2]:cut[3]] for file in ed_fails]
+non_manuals = [file[cut[2]:cut[3]] for file in non_manuals]
 
 
 # orders = [(i, order(i, csv)) for i in csv]
@@ -27,16 +28,39 @@ ed_fails = [file[cut[2]:cut[3]] for file in ed_fails]
 
 orders = [(i, order(i, csv)) for i in ed_fails]
 less20 = [(i, order(i, csv)) for i in ed_fails if order(i, csv, sign=1) <= 20]
-less20 = [(i, order(i, csv)) for i in non_manuals if order(i, csv, sign=1) <= 20]
+less20 = [(i, order(i, csv)) for i in non_manuals if order(i, csv, sign=1) > 20]
 # print(orders)
 print(less20)
 
 # more100 = [i for i in csv if order(i, csv) >= 100]
 # more50 = [i for i in csv if order(i, csv) >= 50]
-more20 = [i for i in csv if order(i, csv) >= 20 and not i in ed_fails]
-# print(more100[:10])
-# print(more100[:1000], len(more100))
-# print(len(more50), more50[:1000])
-print(len(more20), more20[:1000])
+# more20 = [i for i in csv if order(i, csv) >= 20 and not i in ed_fails]
+# # print(more100[:10])
+# # print(more100[:1000], len(more100))
+# # print(len(more50), more50[:1000])
+# print(len(more20), more20[:1000])
+
+
+# from saved_new_bfile10000 import bseqs
+# # core_nice_nomore = list(bseqs.keys())
+# # print(core_nice_nomore)
+# from core_nice_nomore import cores
+# print(len(cores))
+# seqs = {i: bseqs[i][1:101] for i in cores if len(bseqs[i][1:200]) >= 100}
+# # print(len(seqs))
+# # # print(seqs[0][1:200])
+# # # print([(len(seqs[i])) for i in seqs])
+# # # print([(i, len(seqs[i])) for i in seqs if len(seqs[i]) <= 198])
+# # # print([len(seqs[i]) for i in seqs if len(seqs[i]) <= 198])
+# # print(seqs['A000045'])
+# df = pd.DataFrame(seqs)
+# df_sorted = df.sort_index(axis=1)
+# # print(df_sorted.head())
+csv_filename = "cores.csv"
+# df_sorted.to_csv(csv_filename, index=False)
+df = pd.read_csv(csv_filename)
+print(df)
+
+
 
 
