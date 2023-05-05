@@ -1,0 +1,11 @@
+While total time consumed by now, scale:2481/34371, seq_id:A014914, order:20 took:
+ 3.2 seconds, i.e. 0.05 minutes or 0.001 hours.
+
+A014914: 
+a(n) = 25*a(n - 16) - a(n - 15) - 25*a(n - 9) - 24*a(n - 8) + a(n - 7) + 25*a(n - 1)
+truth: 
+a(n) = 27*a(n - 1) + -51*a(n - 2) + 25*a(n - 3),  
+a(0) = 1, a(1) = 27, a(2) = 678
+
+False  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

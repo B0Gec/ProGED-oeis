@@ -116,13 +116,143 @@ VERBOSITY = 1  # run scenario
 
 def truth2coeffs(truth: str):
     """Convert truth from first row of csv into list of coefficients"""
-    # truth = csv[seq_id][0]
     replaced = truth.replace('{', '').replace('}', '')
     peeled = replaced[1:-2] if replaced[-2] == ',' else replaced[1:-1]
     coeffs = peeled.split(',')
     check_coeffs = sp.Matrix(list(int(i) for i in coeffs))
     return check_coeffs
 
+
+def unpack_seq(seq_id: str, csv: pd.DataFrame):
+    "Unpack ground truth and terms of the sequence from given csv."
+
+    seq = sp.Matrix(csv[seq_id][1:])
+    if seq.has(sp.nan):
+        seq = seq[:list(seq).index(sp.nan), :]
+    truth = csv[seq_id][0]
+    coeffs = truth2coeffs(truth)
+    truth = ['a(n) = '] + [f'{str(coeff)}*a(n - {n+1}) + ' for n, coeff in enumerate(coeffs)]
+    init_vals = [f'a({n}) = {seq[n]}, ' for n, _ in enumerate(coeffs[:len(seq)])]
+    truth = ''.join(truth)[:-3] + ',  \n' + ''.join(init_vals)[:-2]
+    return seq, coeffs, truth
+
+
+def solution_vs_truth(x: sp.Matrix, truth_coeffs: sp.Matrix):
+    "is_oeis/is_reconst, i.e. return True if solution is identical to the ground truth"
+
+    nonzero_indices = [i for i in range(len(x[1:])) if (x[i] != 0)]
+    if nonzero_indices == []:
+        ed_coeffs = []
+    elif x[0] != 0:
+        ed_coeffs = "containing non-recursive n-term"
+    else:
+        order = nonzero_indices[-1]
+        ed_coeffs = x[1:1 + order, :]
+    return ed_coeffs == truth_coeffs
+
+
+def solution2str(x: sp.Matrix):
+    verbose_eq = ['a(n)', 'n'] + [f"a(n-{i+1})" for i in range(len(x)-1)]
+    verbose_eq = sp.Matrix([verbose_eq])
+    if x==[]:
+        eq = "a(n) = NOT RECONSTRUCTED :-("
+    else:
+        expr = verbose_eq[:, 1:] * x
+        eq = f"{verbose_eq[0]} = {expr[0]}"
+    return eq
+
+
+def instant_solution_vs_truth(x: sp.Matrix, seq_id: str, csv: pd.DataFrame):
+    "Instant version of solution_vs_truth to avoid manual extraction of truth from csv."
+
+    _, coeffs, _ = unpack_seq(seq_id, csv)
+    return solution_vs_truth(x, coeffs)
+
+
+# def check_solution(x: sp.Matrix, seq_id: str, csv: pd.DataFrame):
+#     return
+
+
+#
+# def exact_ed(seq_id: str, csv: pd.DataFrame, verbosity: int = VERBOSITY,
+#              max_order: int = None, linear: bool = True, n_of_terms=10**16):
+#     # max_order = 25
+#     # max_order = None
+#     header = 1 if linear else 0
+#
+#     # POTENTIAL ERROR!!!!: WHEN NOT CONVERTING 3.0 INTO 3 FOR SOLVING DIOFANTINE
+#     seq = sp.Matrix(csv[seq_id][header:(header+n_of_terms)])
+#     # Handle nans:
+#     if seq.has(sp.nan):
+#         seq = seq[:list(seq).index(sp.nan), :]
+#
+#     if linear:
+#         # truth = '(-34,45,1, -35, 8)'
+#         truth = csv[seq_id][0]
+#         # print(f'truth:{truth}')
+#         # coeffs = truth[1:-1].split(',')[:min(n_of_terms, len(seq))]
+#         coeffs = truth2coeffs(truth)
+#
+#     max_order = sp.floor(seq.rows/2)-1 if max_order is None else max_order
+#     data = grid_sympy(seq, max_order)
+#     if linear:
+#         data = data[:, sp.Matrix([0] + list(i for i in range(2, data.shape[1])))]
+#
+#     m_limit = 3003
+#     b = data[max_order:(max_order + m_limit), 0]
+#     # b = max_order + m_limit
+#     A = data[max_order:(max_order + m_limit), 1:]
+#     # A = sp.Matrix(
+#     #     [[3, 0],
+#     #      [0, 3],
+#     #      [1, 0]])
+#     # b = sp.Matrix([6, 9, 2])
+#
+#     if verbosity >= 3:
+#         print('A, b', A.__repr__(), b.__repr__())
+#         print('A[:4][:4] :', A[:6, :6].__repr__(), '\n', A[:, -2].__repr__())
+#         print('A, b  shapes', A.shape, b.shape)
+#
+#     x = diophantine_solve(A, b)
+#     if verbosity >= 3:
+#         print('x', x)
+#     verbose_eq = ['a(n)', 'n']
+#
+#     for i in range(max_order):
+#         verbose_eq += [f"a(n-{i+1})"]
+#     verbose_eq = sp.Matrix([verbose_eq])
+#     # print('--- csv to linear truth ok:', truth, coeffs)
+#
+#     if linear:
+#         truth = ['a(n) = '] + [f'{str(coeff)}*a(n - {n+1}) + ' for n, coeff in enumerate(coeffs)]
+#         init_vals = [f'a({n}) = {seq[n]}, ' for n, _ in enumerate(coeffs[:len(seq)])]
+#         # print(f'truth: {truth}')
+#         truth = ''.join(truth)[:-3] + ',  \n' + ''.join(init_vals)[:-2]
+#         if verbosity >= 2:
+#             print(f'truth: {truth}')
+#         # print(seq[:len(coeffs)])
+#
+#     if x==[]:
+#         if verbosity >= 2:
+#             print('NO EQS FOUND!!!')
+#         eq = "a(n) = NOT RECONSTRUCTED :-("
+#         # 1/0
+#     else:
+#         if verbosity >= 2:
+#             print('We found an equation!!!:')
+#         x = x[0]
+#         if linear:
+#             x = sp.Matrix.vstack(sp.Matrix([0]), x)
+#         expr = verbose_eq[:, 1:] * x
+#         eq = f"{verbose_eq[0]} = {expr[0]}"
+#         if verbosity >= 2:
+#             print('eq: ', eq)
+#         # x = eq
+#
+#     if linear:
+#         return x, coeffs, eq, truth
+#     else:
+#         return x, coeffs, eq, ""
 
 def exact_ed(seq_id: str, csv: pd.DataFrame, verbosity: int = VERBOSITY,
              max_order: int = None, linear: bool = True, n_of_terms=10**16):

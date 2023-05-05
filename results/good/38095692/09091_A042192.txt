@@ -1,0 +1,11 @@
+While total time consumed by now, scale:9092/34371, seq_id:A042192, order:20 took:
+ 4.5 seconds, i.e. 0.07 minutes or 0.001 hours.
+
+A042192: 
+a(n) = -a(n - 12) + 15550*a(n - 6)
+truth: 
+a(n) = 0*a(n - 1) + 0*a(n - 2) + 0*a(n - 3) + 0*a(n - 4) + 0*a(n - 5) + 15550*a(n - 6) + 0*a(n - 7) + 0*a(n - 8) + 0*a(n - 9) + 0*a(n - 10) + 0*a(n - 11) + -1*a(n - 12),  
+a(0) = 24, a(1) = 25, a(2) = 299, a(3) = 623, a(4) = 7152, a(5) = 7775, a(6) = 380352, a(7) = 388127, a(8) = 4649749, a(9) = 9687625, a(10) = 111213624, a(11) = 120901249
+
+True  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

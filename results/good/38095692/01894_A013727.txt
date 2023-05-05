@@ -1,0 +1,11 @@
+While total time consumed by now, scale:1895/34371, seq_id:A013727, order:20 took:
+ 0.7 seconds, i.e. 0.01 minutes or 0.0 hours.
+
+A013727: 
+a(n) = 484*a(n - 1)
+truth: 
+a(n) = 484*a(n - 1),  
+a(0) = 22
+
+True  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

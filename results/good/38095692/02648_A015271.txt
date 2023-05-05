@@ -1,0 +1,11 @@
+While total time consumed by now, scale:2649/34371, seq_id:A015271, order:20 took:
+ 2.6 seconds, i.e. 0.04 minutes or 0.001 hours.
+
+A015271: 
+a(n) = -4096*a(n - 4) + 3264*a(n - 3) + 884*a(n - 2) - 51*a(n - 1)
+truth: 
+a(n) = -51*a(n - 1) + 884*a(n - 2) + 3264*a(n - 3) + -4096*a(n - 4),  
+a(0) = 1, a(1) = -51, a(2) = 3485, a(3) = -219555
+
+True  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

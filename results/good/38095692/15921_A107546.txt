@@ -1,0 +1,11 @@
+While total time consumed by now, scale:15922/34371, seq_id:A107546, order:20 took:
+ 0.3 seconds, i.e. 0.01 minutes or 0.0 hours.
+
+A107546: 
+a(n) = 0
+truth: 
+a(n) = 13*a(n - 1) + -78*a(n - 2) + 286*a(n - 3) + -715*a(n - 4) + 1287*a(n - 5) + -1716*a(n - 6) + 1716*a(n - 7) + -1287*a(n - 8) + 715*a(n - 9) + -286*a(n - 10) + 78*a(n - 11) + -13*a(n - 12) + 1*a(n - 13),  
+a(0) = 1, a(1) = 338, a(2) = 21554, a(3) = 548418, a(4) = 7758530, a(5) = 72431762, a(6) = 495680562, a(7) = 2668186562, a(8) = 11873899778, a(9) = 45303445330, a(10) = 152290870706, a(11) = 460565724866, a(12) = 1273675451074
+
+False  -  checked against website ground truth.     
+False  -  "manual" check if equation is correct.    

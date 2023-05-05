@@ -17,10 +17,12 @@ import argparse
 
 # if os.getcwd()[-11:] == 'ProGED_oeis':
 #     from ProGED.examples.oeis.scraping.downloading.download import bfile2list
-from exact_ed import exact_ed, timer, check_eq_man, check_truth
+from exact_ed import exact_ed, timer, check_eq_man, check_truth, solution_vs_truth, solution2str, instant_solution_vs_truth
 # from task2job import task2job
 # else:
 #     from exact_ed import exact_ed, timer
+# from sindy.sindy_oeis import sindy
+# 1/0
 
 # print("IDEA: max ORDER for GRAMMAR = floor(DATASET ROWS (LEN(SEQ)))/2)-1")
 
@@ -53,7 +55,7 @@ VERBOSITY = 2  # dev scena
 VERBOSITY = 1  # run scenario
 
 DEBUG = True
-DEBUG = False
+# DEBUG = False
 BUGLIST = True
 BUGLIST = False
 CORELIST = True  # have to scrape core sequences!
@@ -89,12 +91,12 @@ SEQ_ID = (True, 'A001306')
 SEQ_ID = (True, 'A001343')
 SEQ_ID = (True, 'A008685')
 SEQ_ID = (False, 'A013833')
-# SEQ_ID = (True, 'A000045')
+SEQ_ID = (True, 'A000045')
 # SEQ_ID = (True, 'A000187')
 # ['A056457', 'A212593', 'A212594']
 
-SEQ_ID = (True, 'A056457')
-SEQ_ID = (True, 'A029378')
+# SEQ_ID = (True, 'A056457')
+# SEQ_ID = (True, 'A029378')
 
 # ('00193', 'A001310')  # ('00194', 'A001312'), ('00200', 'A001343'), ('00209', 'A001364'), ('00210', 'A001365'), ('00946', 'A007273'), ('01218', 'A008685'), ('01691', 'A011616'), ('01692', 'A011617')]
 # [('00184', 'A001299'), ('00185', 'A001300'), ('00186', 'A001301'), ('00187', 'A001302'), ('00195', 'A001313'), ('00196', 'A001314'), ('00198', 'A001319'), ('00222', 'A001492'), ('00347', 'A002015'), ('00769', 'A005813')] 1921
@@ -286,24 +288,26 @@ else:
         x, coeffs, eq, truth = exact_ed(seq_id, csv, VERBOSITY, MAX_ORDER,
                                         n_of_terms=N_OF_TERMS_ED, linear=True)
 
-        # order = list(x[1:]).index(0,)
-        nonzero_indices = [i for i in range(len(x[1:])) if (x[i] != 0)]
-        if nonzero_indices == []:
-            ed_coeffs = []
-        elif x[0] != 0:
-            ed_coeffs = "containing non-recursive n-term"
-        else:
-            # order = len(nonzeros) - 1
-            order = nonzero_indices[-1]
+        # # order = list(x[1:]).index(0,)
+        # nonzero_indices = [i for i in range(len(x[1:])) if (x[i] != 0)]
+        # if nonzero_indices == []:
+        #     ed_coeffs = []
+        # elif x[0] != 0:
+        #     ed_coeffs = "containing non-recursive n-term"
+        # else:
+        #     # order = len(nonzeros) - 1
+        #     order = nonzero_indices[-1]
+        #
+        #     # ed_coeffs = [str(c) for c in x[1:] if c!=0]
+        #     ed_coeffs = [str(c) for c in x[1:1 + order]]
+        #     ed_coeffs = x[1:1 + order, :]
+        #
+        # if VERBOSITY>=2:
+        #     print('ed_coeffs:', ed_coeffs)
+        # # print('coeffs:', coeffs)
+        # is_reconst = coeffs == ed_coeffs
+        is_reconst = solution_vs_truth(x, coeffs)
 
-            # ed_coeffs = [str(c) for c in x[1:] if c!=0]
-            ed_coeffs = [str(c) for c in x[1:1 + order]]
-            ed_coeffs = x[1:1 + order, :]
-
-        if VERBOSITY>=2:
-            print('ed_coeffs:', ed_coeffs)
-        # print('coeffs:', coeffs)
-        is_reconst = coeffs == ed_coeffs
         is_check_verbose = check_eq_man(x, seq_id, csv, n_of_terms=10**5)
         is_check = is_check_verbose[0]
         # print(f"{is_reconst}!, reconstructed as in ground truth.")

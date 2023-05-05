@@ -1,0 +1,11 @@
+While total time consumed by now, scale:12967/34371, seq_id:A078427, order:20 took:
+ 2.4 seconds, i.e. 0.04 minutes or 0.001 hours.
+
+A078427: 
+a(n) = 100*a(n - 5) - 20*a(n - 4) + a(n - 3) - 100*a(n - 2) + 20*a(n - 1)
+truth: 
+a(n) = 21*a(n - 1) + -120*a(n - 2) + 100*a(n - 3),  
+a(0) = 46, a(1) = 901, a(2) = 13501
+
+False  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

@@ -1,0 +1,11 @@
+While total time consumed by now, scale:17349/34371, seq_id:A123115, order:20 took:
+ 1.7 seconds, i.e. 0.03 minutes or 0.0 hours.
+
+A123115: 
+a(n) = -a(n - 4) + 40*a(n - 3) - 206*a(n - 2) + 40*a(n - 1)
+truth: 
+a(n) = 40*a(n - 1) + -206*a(n - 2) + 40*a(n - 3) + -1*a(n - 4),  
+a(0) = 0, a(1) = 2, a(2) = 96, a(3) = 3430
+
+True  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

@@ -1,0 +1,11 @@
+While total time consumed by now, scale:11466/34371, seq_id:A060183, order:20 took:
+ 4.1 seconds, i.e. 0.07 minutes or 0.001 hours.
+
+A060183: 
+a(n) = 100*a(n - 18) - a(n - 17) - 100*a(n - 10) - 99*a(n - 9) + a(n - 8) + 100*a(n - 1)
+truth: 
+a(n) = 102*a(n - 1) + -201*a(n - 2) + 100*a(n - 3),  
+a(0) = 1, a(1) = 8, a(2) = 744
+
+False  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    
