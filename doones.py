@@ -17,12 +17,15 @@ import argparse
 
 # if os.getcwd()[-11:] == 'ProGED_oeis':
 #     from ProGED.examples.oeis.scraping.downloading.download import bfile2list
-from exact_ed import exact_ed, timer, check_eq_man, check_truth, solution_vs_truth, solution2str, instant_solution_vs_truth
+from exact_ed import exact_ed, timer, check_eq_man, check_truth, unpack_seq, solution_vs_truth, solution2str, instant_solution_vs_truth
 # from task2job import task2job
 # else:
 #     from exact_ed import exact_ed, timer
-# from sindy.sindy_oeis import sindy
-# 1/0
+
+SINDy = True
+# SINDy = False
+if SINDy:
+    from sindy.sindy_oeis import sindy, sindy_grid
 
 # print("IDEA: max ORDER for GRAMMAR = floor(DATASET ROWS (LEN(SEQ)))/2)-1")
 
@@ -81,16 +84,16 @@ TASK_ID = 0
 
 
 JOB_ID = "000000"
-SEQ_ID = (True, 'A153593')
-SEQ_ID = (True, 'A053833')
-SEQ_ID = (True, 'A055649')
-SEQ_ID = (True, 'A044941')
-SEQ_ID = (False, 'A153593')
-SEQ_ID = (True, 'A026471')
-SEQ_ID = (True, 'A001306')
-SEQ_ID = (True, 'A001343')
-SEQ_ID = (True, 'A008685')
-SEQ_ID = (False, 'A013833')
+# SEQ_ID = (True, 'A153593')
+# SEQ_ID = (True, 'A053833')
+# SEQ_ID = (True, 'A055649')
+# SEQ_ID = (True, 'A044941')
+# SEQ_ID = (False, 'A153593')
+# SEQ_ID = (True, 'A026471')
+# SEQ_ID = (True, 'A001306')
+# SEQ_ID = (True, 'A001343')
+# SEQ_ID = (True, 'A008685')
+# SEQ_ID = (False, 'A013833')
 SEQ_ID = (True, 'A000045')
 # SEQ_ID = (True, 'A000187')
 # ['A056457', 'A212593', 'A212594']
@@ -198,14 +201,9 @@ else:
     terms_count, seqs_count = csv.shape
 
 
-
-
-
-
     # Run eq. disco. on all oeis sequences:
     start = time.perf_counter()
     now = start
-
 
 
     # with open('relevant_seqs.txt', 'r') as file:  # Use.
@@ -285,29 +283,22 @@ else:
         if VERBOSITY>=2:
             print()
         # try:
-        x, coeffs, eq, truth = exact_ed(seq_id, csv, VERBOSITY, MAX_ORDER,
-                                        n_of_terms=N_OF_TERMS_ED, linear=True)
+        if SINDy:
+            seq, coeffs, truth = unpack_seq(seq_id, csv)
+            x = sindy(list(seq), MAX_ORDER, seq_len=30)
+            eq = solution2str(x)
 
-        # # order = list(x[1:]).index(0,)
-        # nonzero_indices = [i for i in range(len(x[1:])) if (x[i] != 0)]
-        # if nonzero_indices == []:
-        #     ed_coeffs = []
-        # elif x[0] != 0:
-        #     ed_coeffs = "containing non-recursive n-term"
-        # else:
-        #     # order = len(nonzeros) - 1
-        #     order = nonzero_indices[-1]
-        #
-        #     # ed_coeffs = [str(c) for c in x[1:] if c!=0]
-        #     ed_coeffs = [str(c) for c in x[1:1 + order]]
-        #     ed_coeffs = x[1:1 + order, :]
-        #
-        # if VERBOSITY>=2:
-        #     print('ed_coeffs:', ed_coeffs)
-        # # print('coeffs:', coeffs)
-        # is_reconst = coeffs == ed_coeffs
+            # grid = sindy_grid(seq, seq_id, csv, coeffs, MAX_ORDER)
+            grid = sindy_grid(seq, seq_id, csv, coeffs, 5)
+            for max_order_item in grid:
+                print(max_order_item[0:])
+
+        else:
+            x, eq, coeffs, truth = exact_ed(seq_id, csv, VERBOSITY, MAX_ORDER,
+                                            n_of_terms=N_OF_TERMS_ED, linear=True)
+
+
         is_reconst = solution_vs_truth(x, coeffs)
-
         is_check_verbose = check_eq_man(x, seq_id, csv, n_of_terms=10**5)
         is_check = is_check_verbose[0]
         # print(f"{is_reconst}!, reconstructed as in ground truth.")

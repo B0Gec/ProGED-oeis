@@ -55,6 +55,16 @@ def grid_sympy(seq: sp.MutableDenseMatrix, max_order: int):  # seq.shape=(N, 1)
         indexes_sympy_uncut)
     return data
 
+def dataset(seq: list, max_order: int, linear: bool):
+    "Instant list -> (b, A) for equation discovery / LA system."
+
+    data = grid_sympy(sp.Matrix(seq), max_order)
+    if linear:
+        data = data[:, sp.Matrix([0] + list(i for i in range(2, data.shape[1])))]
+    m_limit = 3003
+    b = data[max_order:(max_order + m_limit), 0]
+    A = data[max_order:(max_order + m_limit), 1:]
+    return b, A
 
 
 # Test diophantine solver:
@@ -140,7 +150,7 @@ def unpack_seq(seq_id: str, csv: pd.DataFrame):
 def solution_vs_truth(x: sp.Matrix, truth_coeffs: sp.Matrix):
     "is_oeis/is_reconst, i.e. return True if solution is identical to the ground truth"
 
-    nonzero_indices = [i for i in range(len(x[1:])) if (x[i] != 0)]
+    nonzero_indices = [i for i in range(len(x)) if (x[i] != 0)]
     if nonzero_indices == []:
         ed_coeffs = []
     elif x[0] != 0:
@@ -169,91 +179,6 @@ def instant_solution_vs_truth(x: sp.Matrix, seq_id: str, csv: pd.DataFrame):
     return solution_vs_truth(x, coeffs)
 
 
-# def check_solution(x: sp.Matrix, seq_id: str, csv: pd.DataFrame):
-#     return
-
-
-#
-# def exact_ed(seq_id: str, csv: pd.DataFrame, verbosity: int = VERBOSITY,
-#              max_order: int = None, linear: bool = True, n_of_terms=10**16):
-#     # max_order = 25
-#     # max_order = None
-#     header = 1 if linear else 0
-#
-#     # POTENTIAL ERROR!!!!: WHEN NOT CONVERTING 3.0 INTO 3 FOR SOLVING DIOFANTINE
-#     seq = sp.Matrix(csv[seq_id][header:(header+n_of_terms)])
-#     # Handle nans:
-#     if seq.has(sp.nan):
-#         seq = seq[:list(seq).index(sp.nan), :]
-#
-#     if linear:
-#         # truth = '(-34,45,1, -35, 8)'
-#         truth = csv[seq_id][0]
-#         # print(f'truth:{truth}')
-#         # coeffs = truth[1:-1].split(',')[:min(n_of_terms, len(seq))]
-#         coeffs = truth2coeffs(truth)
-#
-#     max_order = sp.floor(seq.rows/2)-1 if max_order is None else max_order
-#     data = grid_sympy(seq, max_order)
-#     if linear:
-#         data = data[:, sp.Matrix([0] + list(i for i in range(2, data.shape[1])))]
-#
-#     m_limit = 3003
-#     b = data[max_order:(max_order + m_limit), 0]
-#     # b = max_order + m_limit
-#     A = data[max_order:(max_order + m_limit), 1:]
-#     # A = sp.Matrix(
-#     #     [[3, 0],
-#     #      [0, 3],
-#     #      [1, 0]])
-#     # b = sp.Matrix([6, 9, 2])
-#
-#     if verbosity >= 3:
-#         print('A, b', A.__repr__(), b.__repr__())
-#         print('A[:4][:4] :', A[:6, :6].__repr__(), '\n', A[:, -2].__repr__())
-#         print('A, b  shapes', A.shape, b.shape)
-#
-#     x = diophantine_solve(A, b)
-#     if verbosity >= 3:
-#         print('x', x)
-#     verbose_eq = ['a(n)', 'n']
-#
-#     for i in range(max_order):
-#         verbose_eq += [f"a(n-{i+1})"]
-#     verbose_eq = sp.Matrix([verbose_eq])
-#     # print('--- csv to linear truth ok:', truth, coeffs)
-#
-#     if linear:
-#         truth = ['a(n) = '] + [f'{str(coeff)}*a(n - {n+1}) + ' for n, coeff in enumerate(coeffs)]
-#         init_vals = [f'a({n}) = {seq[n]}, ' for n, _ in enumerate(coeffs[:len(seq)])]
-#         # print(f'truth: {truth}')
-#         truth = ''.join(truth)[:-3] + ',  \n' + ''.join(init_vals)[:-2]
-#         if verbosity >= 2:
-#             print(f'truth: {truth}')
-#         # print(seq[:len(coeffs)])
-#
-#     if x==[]:
-#         if verbosity >= 2:
-#             print('NO EQS FOUND!!!')
-#         eq = "a(n) = NOT RECONSTRUCTED :-("
-#         # 1/0
-#     else:
-#         if verbosity >= 2:
-#             print('We found an equation!!!:')
-#         x = x[0]
-#         if linear:
-#             x = sp.Matrix.vstack(sp.Matrix([0]), x)
-#         expr = verbose_eq[:, 1:] * x
-#         eq = f"{verbose_eq[0]} = {expr[0]}"
-#         if verbosity >= 2:
-#             print('eq: ', eq)
-#         # x = eq
-#
-#     if linear:
-#         return x, coeffs, eq, truth
-#     else:
-#         return x, coeffs, eq, ""
-
 def exact_ed(seq_id: str, csv: pd.DataFrame, verbosity: int = VERBOSITY,
              max_order: int = None, linear: bool = True, n_of_terms=10**16):
     # max_order = 25
@@ -261,27 +186,32 @@ def exact_ed(seq_id: str, csv: pd.DataFrame, verbosity: int = VERBOSITY,
     header = 1 if linear else 0
 
     # POTENTIAL ERROR!!!!: WHEN NOT CONVERTING 3.0 INTO 3 FOR SOLVING DIOFANTINE
-    seq = sp.Matrix(csv[seq_id][header:(header+n_of_terms)])
-    # Handle nans:
-    if seq.has(sp.nan):
-        seq = seq[:list(seq).index(sp.nan), :]
-
     if linear:
-        # truth = '(-34,45,1, -35, 8)'
-        truth = csv[seq_id][0]
-        # print(f'truth:{truth}')
-        # coeffs = truth[1:-1].split(',')[:min(n_of_terms, len(seq))]
-        coeffs = truth2coeffs(truth)
+        seq, coeffs, truth = unpack_seq(seq_id, csv)
+        # Handle nans:
+        if seq.has(sp.nan):
+            seq = seq[:list(seq).index(sp.nan), :]
+    else:
+        seq = sp.Matrix(csv[seq_id][header:(header + n_of_terms)])
+
+    # if linear:
+    #     # truth = '(-34,45,1, -35, 8)'
+    #     truth = csv[seq_id][0]
+    #     # print(f'truth:{truth}')
+    #     # coeffs = truth[1:-1].split(',')[:min(n_of_terms, len(seq))]
+    #     coeffs = truth2coeffs(truth)
 
     max_order = sp.floor(seq.rows/2)-1 if max_order is None else max_order
-    data = grid_sympy(seq, max_order)
-    if linear:
-        data = data[:, sp.Matrix([0] + list(i for i in range(2, data.shape[1])))]
+    # data = grid_sympy(seq, max_order)
+    # if linear:
+    #     data = data[:, sp.Matrix([0] + list(i for i in range(2, data.shape[1])))]
+    # b, A = dataset(seq, max_order, linear=linear)
+    b, A = dataset(list(seq), max_order, linear=linear)
 
-    m_limit = 3003
-    b = data[max_order:(max_order + m_limit), 0]
+    # m_limit = 3003
+    # b = data[max_order:(max_order + m_limit), 0]
+    # A = data[max_order:(max_order + m_limit), 1:]
     # b = max_order + m_limit
-    A = data[max_order:(max_order + m_limit), 1:]
     # A = sp.Matrix(
     #     [[3, 0],
     #      [0, 3],
@@ -296,21 +226,21 @@ def exact_ed(seq_id: str, csv: pd.DataFrame, verbosity: int = VERBOSITY,
     x = diophantine_solve(A, b)
     if verbosity >= 3:
         print('x', x)
-    verbose_eq = ['a(n)', 'n']
+    # verbose_eq = ['a(n)', 'n']
+    #
+    # for i in range(max_order):
+    #     verbose_eq += [f"a(n-{i+1})"]
+    # verbose_eq = sp.Matrix([verbose_eq])
+    # # print('--- csv to linear truth ok:', truth, coeffs)
 
-    for i in range(max_order):
-        verbose_eq += [f"a(n-{i+1})"]
-    verbose_eq = sp.Matrix([verbose_eq])
-    # print('--- csv to linear truth ok:', truth, coeffs)
-
-    if linear:
-        truth = ['a(n) = '] + [f'{str(coeff)}*a(n - {n+1}) + ' for n, coeff in enumerate(coeffs)]
-        init_vals = [f'a({n}) = {seq[n]}, ' for n, _ in enumerate(coeffs[:len(seq)])]
-        # print(f'truth: {truth}')
-        truth = ''.join(truth)[:-3] + ',  \n' + ''.join(init_vals)[:-2]
-        if verbosity >= 2:
-            print(f'truth: {truth}')
-        # print(seq[:len(coeffs)])
+    # if linear:
+    #     truth = ['a(n) = '] + [f'{str(coeff)}*a(n - {n+1}) + ' for n, coeff in enumerate(coeffs)]
+    #     init_vals = [f'a({n}) = {seq[n]}, ' for n, _ in enumerate(coeffs[:len(seq)])]
+    #     # print(f'truth: {truth}')
+    #     truth = ''.join(truth)[:-3] + ',  \n' + ''.join(init_vals)[:-2]
+    #     if verbosity >= 2:
+    #         print(f'truth: {truth}')
+    #     # print(seq[:len(coeffs)])
 
     if x==[]:
         if verbosity >= 2:
@@ -323,16 +253,17 @@ def exact_ed(seq_id: str, csv: pd.DataFrame, verbosity: int = VERBOSITY,
         x = x[0]
         if linear:
             x = sp.Matrix.vstack(sp.Matrix([0]), x)
-        expr = verbose_eq[:, 1:] * x
-        eq = f"{verbose_eq[0]} = {expr[0]}"
+        eq = solution2str(x)
+        # expr = verbose_eq[:, 1:] * x
+        # eq = f"{verbose_eq[0]} = {expr[0]}"
         if verbosity >= 2:
             print('eq: ', eq)
         # x = eq
 
     if linear:
-        return x, coeffs, eq, truth
+        return x, eq, coeffs, truth
     else:
-        return x, coeffs, eq, ""
+        return x, eq, "", ""
 
 def eed(x):
     return x>=6

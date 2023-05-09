@@ -1,0 +1,73 @@
+- problem solution
+hello, I am .. from e8 and I am doing second year of ICT PhD at ijs.
+- I am part of the equation discovery research team at dept of knowledge technologies.
+This/which means that I am researching methods or algorithms for automatic discovery of equations from data.
+Equation discovery is subfield of machine learning.
+
+My concrete
+- Problem is the following:
+Given  a sequence of integers (e.g. fibonacci/(this) sequence), find equation that governs it.
+(That is, which equation defines this sequence/ what rule holds for it.)
+So I want to create computer program, that takes first few terms of sequence (lets say 100),
+and then output the equation that corresponds to it.
+
+The reasons for why this would be useful are different, e.g. with equation we can easily
+predict what will be the next terms, but more important is that with this we get new
+insights of the data. In this way we extracted some new knowledge from the data, and also
+we made it more explainable if you want, more meaningful or we can describe it with
+less data - kind of compression.
+
+
+Solution is the following:
+
+- With our solution we limit ourselves to discovering only polynomial recursive equations or any
+recursive equations linear in integer coefficients.
+- We take the advantage of a solver of diophantine equations.
+- We reformulate the fact of a recursive equation holding for all the terms in the sequence into a system of
+diophantine equations, i.e. equations linear in coefficients and with number taking only integer values.
+- We convert the sequence of given length into a system of diophantine equations by taking slices of specific
+window size.
+- We take the window size according to our prescribed maximum order ... or more in general the prescribed
+ library of expressions with which we want to express the recursive equation.
+- Resulting system of diophantine equations can be viewed as a dataset in context of machine learning where
+- Each slice corresponds to one learning example. Where machine learning task is to find model that expresses first
+column with the help of the others.
+- When we get this system of Diophantine we send it to a Diophantine solver.
+- Linear Diophantine problem is old there exist many algorithmic implementations, we used one that was available in python.
+- Actually we did a non-significant modification to it but I would not like to go into the details here.
+- Nor into the details of how Diophantine solver works but in a few words, I kinda does Gaussian elimination so solve
+the system with addition to calculating a lot of gcd-s (greatest common divisors) of numbers instead of doing
+standard division in order to preserve integer values in the solution.
+- So in the end we get one vector that corresponds to recursive equations.
+
+- practice:
+We tested our algorithm on more than 34.000+ sequences that we got on the online encyclopedia of integer sequences.
+We chosed those sequences since they have labeled groud truth at their side.
+Library of axpressions in our experiment was simply to use last 20 terms in the sequence, i.e.
+a_{n-1}, a_{n-2}, ... a_{n-20}.
+
+Results are the following:
+
+- Future work:
+- We plan to compare our method to the alternatives such as SINDy which is primarely used for identification of
+ dynamical systems.
+- We plan to test our method on
+- Our method could be readily applied on many mathematical data where discovery of exact integer equations is sought.
+- E.g. in graph theory where we could reconstruct some well known equations e.g. lema o rokovanju, where we
+have for training examples graphs with their integer properties such as number of nodes and edges, etc.
+
+
+
+or table where number of
+columns depend on the number of maximum
+
+
+
+
+
+
+
+
+
+
+
