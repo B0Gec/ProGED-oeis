@@ -129,8 +129,7 @@ job_id = args.job_id
 task_id = args.task_id
 
 
-MAX_ORDER = args.order
-max_order = MAX_ORDER
+max_order = args.order
 threshold = args.threshold
 PARALLEL = args.paral
 VERBOSITY = args.verb
@@ -256,7 +255,7 @@ else:
                 print('Different sequences:', non_ground_truth)
             else:
                 print('first 20 Different sequences:', non_ground_truth[:20])
-            print('Number of sequences without any equation found:', len(no_discovery))
+            print('Number of sequence without any equation found:', len(no_discovery))
             if verbosity >= 2:
                 print('Sequences without any equation found:', no_discovery)
             else:
@@ -292,9 +291,8 @@ else:
         if VERBOSITY>=2:
             print()
         output_string = "\n"
-        # max_order = MAX_ORDER
-        # print(max_order)
-        print(MAX_ORDER)
+        max_order_ = max_order
+        print(max_order_)
 
         # try:
         if SINDy:
@@ -306,9 +304,9 @@ else:
                 output_string += f'Preprocessing sees only first {len(seq)} terms.\n'
                 seq_len = 30
                 output_string += f'default setting for how many terms should sindy see: {seq_len}\n'
-                max_order = min(heuristic(len(seq)), MAX_ORDER)
-                output_string += f'sindy will use max_order: {MAX_ORDER}\n'
-                x = sindy(list(seq), max_order, seq_len=seq_len, threshold=threshold)
+                max_order_ = min(heuristic(len(seq)), max_order_)
+                output_string += f'sindy will use max_order: {max_order_}\n'
+                x = sindy(list(seq), max_order_, seq_len=seq_len, threshold=threshold)
             eq = solution2str(x)
 
             # grid = sindy_grid(seq, seq_id, csv, coeffs, max_order)
@@ -317,7 +315,7 @@ else:
             #     print(max_order_item[0:])
 
         else:
-            x, eq, coeffs, truth = exact_ed(seq_id, csv, VERBOSITY, max_order,
+            x, eq, coeffs, truth = exact_ed(seq_id, csv, VERBOSITY, max_order_,
                                             n_of_terms=N_OF_TERMS_ED, linear=True)
 
 
