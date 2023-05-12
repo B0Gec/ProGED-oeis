@@ -18,6 +18,15 @@ todo:
  3 4 5 6 7
  ...
  26 27 28 29 30
+ 
+ 
+ Sindy fails:
+   - too sparse (0 vs 1*a(n-1), a(n-1) vs a(n-1)+a(n-2), ... )
+   - uncorrect param estimated even with correct order set in dataset
+
+ To try:
+   - lower treshold from 0.1 to 0.05?
+   
 """
 
 
@@ -44,7 +53,7 @@ def preprocess(seq):
     else:
         return seq, fail
 
-def sindy(seq: Union[list, sp.Matrix], max_order: int, seq_len: int):
+def sindy(seq: Union[list, sp.Matrix], max_order: int, seq_len: int, threshold: float):
     """Perform SINDy."""
 
     # Generate training data
@@ -86,7 +95,7 @@ def sindy(seq: Union[list, sp.Matrix], max_order: int, seq_len: int):
 
     # poly_order = 8
     poly_order = 1
-    threshold = 0.1
+    # threshold = 0.1
 
     model = ps.SINDy(
         optimizer=ps.STLSQ(threshold=threshold),

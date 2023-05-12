@@ -58,7 +58,7 @@ VERBOSITY = 2  # dev scena
 VERBOSITY = 1  # run scenario
 
 DEBUG = True
-DEBUG = False
+# DEBUG = False
 BUGLIST = True
 BUGLIST = False
 CORELIST = True  # have to scrape core sequences!
@@ -73,6 +73,7 @@ if BUGLIST:
 #     print("Warning!!!!! buglist is used outside debug mode!!\n")
 
 MAX_ORDER = 20  # We care only for recursive equations with max 20 terms or order.
+THRESHOLD = 20  # For sindy - masking threshold.
 N_OF_TERMS_ED = 200
 TASK_ID = 0
 # TASK_ID = 187
@@ -100,6 +101,7 @@ SEQ_ID = (True, 'A000045')
 
 # SEQ_ID = (True, 'A056457')
 # SEQ_ID = (True, 'A029378')
+SEQ_ID = (True, 'A000042')
 
 # ('00193', 'A001310')  # ('00194', 'A001312'), ('00200', 'A001343'), ('00209', 'A001364'), ('00210', 'A001365'), ('00946', 'A007273'), ('01218', 'A008685'), ('01691', 'A011616'), ('01692', 'A011617')]
 # [('00184', 'A001299'), ('00185', 'A001300'), ('00186', 'A001301'), ('00187', 'A001302'), ('00195', 'A001313'), ('00196', 'A001314'), ('00198', 'A001319'), ('00222', 'A001492'), ('00347', 'A002015'), ('00769', 'A005813')] 1921
@@ -116,6 +118,7 @@ parser.add_argument("--task_id", type=int, default=TASK_ID)
 parser.add_argument("-ss", type=int, default=-1)
 parser.add_argument("-to", type=int, default=-1)
 parser.add_argument("--order", type=int, default=MAX_ORDER)
+parser.add_argument("--threshold", type=int, default=THRESHOLD)
 parser.add_argument("--paral", type=int, default=2)
 parser.add_argument("--verb", type=int, default=VERBOSITY)
 parser.add_argument("--n_of_terms", type=int, default=N_OF_TERMS_ED)
@@ -127,11 +130,13 @@ task_id = args.task_id
 
 
 MAX_ORDER = args.order
+max_order = MAX_ORDER
+threshold = args.threshold
 PARALLEL = args.paral
 VERBOSITY = args.verb
 experiment_id = args.exper_id
 
-N_OF_TERMS_ED = 2*MAX_ORDER  # Use only first n_of_terms_ed of the given sequence.
+N_OF_TERMS_ED = 2*max_order  # Use only first n_of_terms_ed of the given sequence.
 
 
 flags_dict = {argument.split("=")[0]: argument.split("=")[1]
@@ -266,7 +271,7 @@ else:
                   # f"=>> nof_eqs = {nof_eqs}\n"
                   f"=>> number of all considered sequences = {n_of_seqs}\n"
                   # f"=>> list of considered sequences = {selection}\n"
-                  f"=>> max order = {MAX_ORDER}\n"
+                  f"=>> max order = {max_order}\n"
                   )
             timer(now=start, text=f"While total time consumed by now")
         return 0
@@ -281,10 +286,15 @@ else:
     results = []
 
 
+    print(max_order)
+
     def doone(task_id: int, seq_id: str, linear: bool, now=now):
         if VERBOSITY>=2:
             print()
         output_string = "\n"
+        # max_order = MAX_ORDER
+        # print(max_order)
+        print(MAX_ORDER)
 
         # try:
         if SINDy:
@@ -297,17 +307,17 @@ else:
                 seq_len = 30
                 output_string += f'default setting for how many terms should sindy see: {seq_len}\n'
                 max_order = min(heuristic(len(seq)), MAX_ORDER)
-                output_string += f'sindy will use max_order: {max_order}\n'
-                x = sindy(list(seq), max_order, seq_len=seq_len)
+                output_string += f'sindy will use max_order: {MAX_ORDER}\n'
+                x = sindy(list(seq), max_order, seq_len=seq_len, threshold=threshold)
             eq = solution2str(x)
 
-            # grid = sindy_grid(seq, seq_id, csv, coeffs, MAX_ORDER)
+            # grid = sindy_grid(seq, seq_id, csv, coeffs, max_order)
             # grid = sindy_grid(seq, seq_id, csv, coeffs, max_order=5, seq_len=30)
             # for max_order_item in grid:
             #     print(max_order_item[0:])
 
         else:
-            x, eq, coeffs, truth = exact_ed(seq_id, csv, VERBOSITY, MAX_ORDER,
+            x, eq, coeffs, truth = exact_ed(seq_id, csv, VERBOSITY, max_order,
                                             n_of_terms=N_OF_TERMS_ED, linear=True)
 
 
@@ -328,14 +338,14 @@ else:
         if VERBOSITY>=2:
             now = timer(now=now, text=f"Exact ED for {task_id+1}-th sequence of {n_of_seqs} in "
                                       f"experiment set with id {seq_id} for first "
-                                      f"{N_OF_TERMS_ED} terms with max order {MAX_ORDER} "
+                                      f"{N_OF_TERMS_ED} terms with max order {max_order} "
                                       f"while double checking against first {len(csv[seq_id])-1} terms.")
         elif VERBOSITY >= 1:
             # refreshrate = 1100
             refreshrate = 1
             if task_id % refreshrate == 0:
                 _, timing_print = timer(now=start, text=f"While total time consumed by now, scale:{task_id+1}/{n_of_seqs}, "
-                                      f"seq_id:{seq_id}, order:{MAX_ORDER}")
+                                      f"seq_id:{seq_id}, order:{max_order}")
         # if task_id % SUMMARY_FREQUENCY == 0:
         #     print_results(results, verbosity=1)
         # elif task_id in INCREASING_FREQS:
@@ -343,6 +353,7 @@ else:
         # # except Exception as RuntimeError
         return seq_id, eq, truth, x, is_reconst, is_check, timing_print, output_string
 
+    print('outer after', max_order)
 
     if MODE == 'black_check':
         is_check, truth = check_truth(seq_id, csv_filename)
@@ -352,7 +363,7 @@ else:
         eq = 'This is blacklist discovery!!! i.e. only checking if ground truth holds.'
         is_reconst = '<empty>'
         _, timing_print = timer(now=start, text=f"While total time consumed by now, scale:{task_id + 1}/{n_of_seqs}, "
-                                                f"seq_id:{seq_id}, order:{MAX_ORDER}")
+                                                f"seq_id:{seq_id}, order:{max_order}")
     else:
         seq_id, eq, truth, x, is_reconst, is_check, timing_print, output_string = \
             doone(task_id=task_id, seq_id=seq_id, linear=True)
