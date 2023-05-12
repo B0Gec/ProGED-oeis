@@ -21,7 +21,7 @@
 date
 
 #sbatch oei.sh $SLURM_ARRAY_TASK_ID $SLURM_ARRAY_JOB_ID $1 $2 $3 $4 $5
-sbatch oei.sh $SLURM_ARRAY_TASK_ID cores1234 $1 $2 $3 $4 $5
+sbatch oei.sh $SLURM_ARRAY_TASK_ID sindy512135 $1 $2 $3 $4 $5
 
 
 

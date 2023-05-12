@@ -9,7 +9,7 @@
 #SBATCH --array=0-1000  # 1001 is upper limit
 ##SBATCH --array=0-2
 #SBATCH --array=0-999
-#SBATCH --array=0-150
+#SBATCH --array=0-1
 #SBATCH --output=./joeis%A.out
 
 echo "=============================================="
@@ -18,8 +18,11 @@ echo "Starting time (of array_subjob "$SLURM_ARRAY_JOB_ID"_"$SLURM_ARRAY_TASK_ID
 date
 
 # $1=batch (0-34); $2=dir_id
+# pip install pysindy sympy numpy diophantine pandas
+
 cd oeis/
-singularity exec ../pg.sif python3 doones.py --job_id $SLURM_ARRAY_JOB_ID \
+#singularity exec ../pg.sif python3 doones.py --job_id $SLURM_ARRAY_JOB_ID \
+singularity exec ../oeis.sif python3 doones.py \
         --task_id $(($1*1000 + $SLURM_ARRAY_TASK_ID)) --exper_id $2
 
 date

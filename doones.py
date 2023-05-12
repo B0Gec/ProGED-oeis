@@ -4,7 +4,6 @@
 import os
 import sys
 import time
-import re
 
 # import numpy as np  # not really since diophantine
 import sympy as sp
@@ -17,7 +16,8 @@ import argparse
 
 # if os.getcwd()[-11:] == 'ProGED_oeis':
 #     from ProGED.examples.oeis.scraping.downloading.download import bfile2list
-from exact_ed import exact_ed, timer, check_eq_man, check_truth, unpack_seq, solution_vs_truth, solution2str, instant_solution_vs_truth
+from exact_ed import exact_ed, timer, check_eq_man, check_truth, unpack_seq, solution_vs_truth, solution2str
+
 # from task2job import task2job
 # else:
 #     from exact_ed import exact_ed, timer
@@ -25,7 +25,7 @@ from exact_ed import exact_ed, timer, check_eq_man, check_truth, unpack_seq, sol
 SINDy = True
 # SINDy = False
 if SINDy:
-    from sindy.sindy_oeis import sindy, sindy_grid
+    from sindy_oeis import sindy, preprocess, heuristic
 
 # print("IDEA: max ORDER for GRAMMAR = floor(DATASET ROWS (LEN(SEQ)))/2)-1")
 
@@ -36,7 +36,7 @@ if SINDy:
 ###############
 
 # False positives (linear equation does not hold (manual check fails), or empty or noncomplete lists of coeffs (e.k. >200 coefficients))
-from blacklist import blacklist_old, no_truth, false_truth
+from blacklist import no_truth, false_truth
 # mini_false_truth += ['A053833', 'A055649', 'A044941',]  # some of false_truth manually checked
 # mini_no_truth ['A025858', 'A025858', 'A246175', 'A025924', 'A356621', ]  # some of no_true manually checked
 blacklist = no_truth + false_truth
@@ -58,7 +58,7 @@ VERBOSITY = 2  # dev scena
 VERBOSITY = 1  # run scenario
 
 DEBUG = True
-# DEBUG = False
+DEBUG = False
 BUGLIST = True
 BUGLIST = False
 CORELIST = True  # have to scrape core sequences!
@@ -182,7 +182,8 @@ if not fail:
     # out_dir = out_dir_base + f"{experiment_id}{sep}{job_id}{sep}"
     out_dir = out_dir_base + f"{experiment_id}{sep}"
 
-    os.makedirs(out_dir, exist_ok=True)
+    if not DEBUG and not experiment_id == timestamp:
+        os.makedirs(out_dir, exist_ok=True)
     out_fname = out_dir + f"{task_id:0>5}_{seq_id}.txt"
     fail = fail or os.path.isfile(out_fname)
 
@@ -279,19 +280,31 @@ else:
 
     results = []
 
+
     def doone(task_id: int, seq_id: str, linear: bool, now=now):
         if VERBOSITY>=2:
             print()
+        output_string = "\n"
+
         # try:
         if SINDy:
             seq, coeffs, truth = unpack_seq(seq_id, csv)
-            x = sindy(list(seq), MAX_ORDER, seq_len=30)
+            seq, pre_fail = preprocess(seq)
+            if pre_fail:
+                x = sp.Matrix([0,0,0,0])
+            else:
+                output_string += f'Preprocessing sees only first {len(seq)} terms.\n'
+                seq_len = 30
+                output_string += f'default setting for how many terms should sindy see: {seq_len}\n'
+                max_order = min(heuristic(len(seq)), MAX_ORDER)
+                output_string += f'sindy will use max_order: {max_order}\n'
+                x = sindy(list(seq), max_order, seq_len=seq_len)
             eq = solution2str(x)
 
             # grid = sindy_grid(seq, seq_id, csv, coeffs, MAX_ORDER)
-            grid = sindy_grid(seq, seq_id, csv, coeffs, 5)
-            for max_order_item in grid:
-                print(max_order_item[0:])
+            # grid = sindy_grid(seq, seq_id, csv, coeffs, max_order=5, seq_len=30)
+            # for max_order_item in grid:
+            #     print(max_order_item[0:])
 
         else:
             x, eq, coeffs, truth = exact_ed(seq_id, csv, VERBOSITY, MAX_ORDER,
@@ -328,7 +341,7 @@ else:
         # elif task_id in INCREASING_FREQS:
         #     print_results(results, verbosity=1)
         # # except Exception as RuntimeError
-        return seq_id, eq, truth, x, is_reconst, is_check, timing_print
+        return seq_id, eq, truth, x, is_reconst, is_check, timing_print, output_string
 
 
     if MODE == 'black_check':
@@ -341,12 +354,12 @@ else:
         _, timing_print = timer(now=start, text=f"While total time consumed by now, scale:{task_id + 1}/{n_of_seqs}, "
                                                 f"seq_id:{seq_id}, order:{MAX_ORDER}")
     else:
-        seq_id, eq, truth, x, is_reconst, is_check, timing_print = \
+        seq_id, eq, truth, x, is_reconst, is_check, timing_print, output_string = \
             doone(task_id=task_id, seq_id=seq_id, linear=True)
     # results += [doone(task_id=task_id, seq_id=seq_id)]
     # results += [(seq_id, eq, truth, x, is_reconst, is_check)]
 
-    output_string = ""
+    # output_string = ""
     output_string += timing_print
     output_string += f"\n\n{seq_id}: \n{eq}\n"
     output_string += f"truth: \n{truth}\n\n"

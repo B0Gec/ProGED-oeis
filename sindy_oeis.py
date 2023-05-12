@@ -6,6 +6,43 @@ import pysindy as ps
 
 from exact_ed import grid_sympy, dataset, unpack_seq, truth2coeffs, solution_vs_truth, instant_solution_vs_truth, solution2str, check_eq_man
 
+"""
+todo:
+ - n = 30 .... except if      abs(i) > 10**16 for any i in seq. Then half-half strategy n -> order=n/2, n/2 slices.
+ 
+ 
+ 1 2 3 4 .... 30
+
+ 1 2 3 4 5
+ 2 3 4 5 6
+ 3 4 5 6 7
+ ...
+ 26 27 28 29 30
+"""
+
+
+def heuristic(terms_avail):
+    """Calculate/decide on max_order given the number of available terms (of size < 10**16)."""
+    return round(terms_avail/2)
+
+def preprocess(seq):
+    """Filter in only small sized terms of the sequence."""
+
+    biggie = list(map(lambda term: abs(term) >= 10**16, seq))
+    fail = False
+    if True in biggie:
+        pos = biggie.index(True)
+        if pos <= 0:
+            print('Only huge terms in the sequence!!!')
+            fail = True
+            return [], fail
+        else:
+            if pos <= 2:
+                print('Only huge terms in the sequence!!!')
+                fail = True
+            return seq[:pos], fail
+    else:
+        return seq, fail
 
 def sindy(seq: Union[list, sp.Matrix], max_order: int, seq_len: int):
     """Perform SINDy."""
@@ -30,7 +67,7 @@ def sindy(seq: Union[list, sp.Matrix], max_order: int, seq_len: int):
     # b, A = dataset(sp.Matrix(seq), 2, linear=True)
     # 2-7, 9-14, 16-19 finds, 8,15 not
     b, A = np.array(b, dtype=int), np.array(A, dtype=int)
-    print(b, A)
+    # print(b, A)
     # 1/0
     # data = grid_sympy(sp.Matrix(seq), max_order)
     # data = sp.Matrix.hstack(b, A)
@@ -47,7 +84,7 @@ def sindy(seq: Union[list, sp.Matrix], max_order: int, seq_len: int):
     # print(data)
 
 
-    poly_order = 8
+    # poly_order = 8
     poly_order = 1
     threshold = 0.1
 
@@ -121,7 +158,7 @@ def sindy_grid(seq, seq_id, csv, coeffs, max_order: int, seq_len: int):
 
 
 if __file__ == '__main__':
-    csv_filename = '../linear_database_full.csv'
+    csv_filename = 'linear_database_full.csv'
 
     # if CORELIST:
     #     # from core_nice_nomore import cores
