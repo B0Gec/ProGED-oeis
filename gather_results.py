@@ -43,6 +43,7 @@ job_id = "37117747"
 job_id = "32117747"
 # job_id = "debug2"
 job_id = "38095692"
+job_id = "sindy512135"
 
 
 # seq_file = '13000_A079034.txt'
@@ -408,9 +409,9 @@ def fname2id(fname):
     return re.findall("A\d{6}", fname)[0]
 
 bugids = list(map(fname2id, buglist))
-print(bugids)
-print(buglist)
-print('len(bugids)', len(bugids))
+# print(bugids)
+# print(buglist)
+# print('len(bugids)', len(bugids))
 # write_bugs = True
 write_blacklist = True
 write_blacklist = False

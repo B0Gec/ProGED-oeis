@@ -1,0 +1,16 @@
+
+Preprocessing sees only first 13 terms.
+Sindy threshold: 0.1
+Default setting for how many terms should sindy see: 70
+Sindy will use max_order: 6
+While total time consumed by now, scale:19030/34371, seq_id:A140406, order:20 took:
+ 0.3 seconds, i.e. 0.01 minutes or 0.0 hours.
+
+A140406: 
+a(n) = -486933*a(n - 6) + 319534*a(n - 5) - 88756*a(n - 4) + 13313*a(n - 3) - 1135*a(n - 2) + 52*a(n - 1)
+truth: 
+a(n) = 56*a(n - 1) + -1344*a(n - 2) + 17920*a(n - 3) + -143360*a(n - 4) + 688128*a(n - 5) + -1835008*a(n - 6) + 2097152*a(n - 7),  
+a(0) = 1, a(1) = 56, a(2) = 1792, a(3) = 43008, a(4) = 860160, a(5) = 15138816, a(6) = 242221056
+
+False  -  checked against website ground truth.     
+False  -  "manual" check if equation is correct.    

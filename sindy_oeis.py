@@ -1,4 +1,6 @@
 from typing import Union
+from itertools import product
+
 import pandas as pd
 import sympy as sp
 import numpy as np
@@ -27,6 +29,21 @@ todo:
  To try:
    - lower treshold from 0.1 to 0.05?
    
+   
+   
+   grid:
+   
+    max_order x seq_len
+        1..20 x 200/10 = 20
+       # 5, ...  
+       # seq len: len ... 200 
+       20 
+       [1, len]/20 =     
+       [i for i in range(1, 20+1)] x [i for i in range(4, len, (len-4)/20)]
+       l= 30;s=[round(4+i*(l-4)/20) for i in range(20)];len(s),s
+       l= 10;s=list(set([round(4+i*(l-4)/20) for i in range(20)]));len(s),s
+
+   
 """
 
 
@@ -53,7 +70,7 @@ def preprocess(seq):
     else:
         return seq, fail
 
-def sindy(seq: Union[list, sp.Matrix], max_order: int, seq_len: int, threshold: float):
+def sindy(seq: Union[list, sp.Matrix], max_order: int, seq_len: int, threshold: float = 0.1):
     """Perform SINDy."""
 
     # Generate training data
@@ -158,12 +175,50 @@ def one_results(seq, seq_id, csv, coeffs, max_order: int, seq_len: int):
     return summary
 
 
-def sindy_grid(seq, seq_id, csv, coeffs, max_order: int, seq_len: int):
+def sindy_grid_order(seq, seq_id, csv, coeffs, max_order: int, seq_len: int):
     # weird lazy error: !!!!!
     # for i in range(2, 5):
     #     print(one_results(seq, seq_id, csv, coeffs, i), [i for i in range(3, 8)])
 
     return map(lambda order: one_results(seq, seq_id, csv, coeffs, order, seq_len), [i for i in range(1, max_order+1)])
+
+def sindy_grid(seq, seq_id, csv, coeffs, max_order: int, seq_len: int, grid_order: int = 20, grid_len: int = 20):
+    # weird lazy error: !!!!!
+    # for i in range(2, 5):
+    #     print(one_results(seq, seq_id, csv, coeffs, i), [i for i in range(3, 8)])
+
+    seq_len = min(len(seq), seq_len)
+
+
+    def equidist(start, end, n_of_pts):
+        return list(set([round(start + i * (end - start) / n_of_pts) for i in range(n_of_pts)]));
+
+    grid = list(product(equidist(1, max_order, grid_order), equidist(4, seq_len, grid_len)))
+    grid = grid[:2]
+    print(grid)
+
+    ongrid = list(map((lambda order_leng: (order_leng[0], order_leng[1], one_results(seq, seq_id, csv, coeffs, max_order, seq_len)[:3])), grid))
+    printable = [(order, leng, oneres[1], oneres[2]) for order, leng, oneres in ongrid]
+    print(printable)
+    xs = [case[2][0] for case in ongrid if case[2][1:2] == (True, True)]
+    if xs != []:
+        x = xs[0]
+    else:
+        x = sp.Matrix([0, 0, 0, 0])
+
+
+    # [i for i in range(1, 20 + 1)]
+    # x[i
+    # for i in range(4, len, (len - 4) / 20)]
+    # l = 30;
+    # s = [round(4 + i * (l - 4) / 20) for i in range(20)];
+    # len(s), s
+    # l = 10;
+    # s = list(set([round(4 + i * (l - 4) / 20) for i in range(20)]));
+    # len(s), s
+
+    # return map(lambda order: one_results(seq, seq_id, csv, coeffs, order, seq_len), [i for i in range(1, max_order+1)])
+    return x
 
 
 if __file__ == '__main__':

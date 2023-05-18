@@ -25,7 +25,7 @@ from exact_ed import exact_ed, timer, check_eq_man, check_truth, unpack_seq, sol
 SINDy = True
 # SINDy = False
 if SINDy:
-    from sindy_oeis import sindy, preprocess, heuristic
+    from sindy_oeis import sindy, preprocess, heuristic, sindy_grid
 
 # print("IDEA: max ORDER for GRAMMAR = floor(DATASET ROWS (LEN(SEQ)))/2)-1")
 
@@ -58,7 +58,7 @@ VERBOSITY = 2  # dev scena
 VERBOSITY = 1  # run scenario
 
 DEBUG = True
-# DEBUG = False
+DEBUG = False
 BUGLIST = True
 BUGLIST = False
 CORELIST = True  # have to scrape core sequences!
@@ -73,7 +73,18 @@ if BUGLIST:
 #     print("Warning!!!!! buglist is used outside debug mode!!\n")
 
 MAX_ORDER = 20  # We care only for recursive equations with max 20 terms or order.
-THRESHOLD = 20  # For sindy - masking threshold.
+# MAX_ORDER = 2
+THRESHOLD = 0.2  # For sindy - masking threshold.
+THRESHOLD = 0.1  # For sindy - masking threshold.
+# THRESHOLD = 0.08  # For sindy - masking threshold.
+# THRESHOLD = 0.05  # For sindy - masking threshold.
+# THRESHOLD = 0.0001  # For sindy - masking threshold.
+# THRESHOLD = 0.00000001  # For sindy - masking threshold.
+
+SEQ_LEN_SINDY = 30
+SEQ_LEN_SINDY = 70
+# SEQ_LEN_SINDY = 4
+
 N_OF_TERMS_ED = 200
 TASK_ID = 0
 # TASK_ID = 187
@@ -101,7 +112,11 @@ SEQ_ID = (True, 'A000045')
 
 # SEQ_ID = (True, 'A056457')
 # SEQ_ID = (True, 'A029378')
-SEQ_ID = (True, 'A000042')
+# SEQ_ID = (True, 'A000042')
+# SEQ_ID = (True, 'A000004')
+# SEQ_ID = (True, 'A000008')
+# SEQ_ID = (True, 'A000027')
+# SEQ_ID = (True, 'A000034')
 
 # ('00193', 'A001310')  # ('00194', 'A001312'), ('00200', 'A001343'), ('00209', 'A001364'), ('00210', 'A001365'), ('00946', 'A007273'), ('01218', 'A008685'), ('01691', 'A011616'), ('01692', 'A011617')]
 # [('00184', 'A001299'), ('00185', 'A001300'), ('00186', 'A001301'), ('00187', 'A001302'), ('00195', 'A001313'), ('00196', 'A001314'), ('00198', 'A001319'), ('00222', 'A001492'), ('00347', 'A002015'), ('00769', 'A005813')] 1921
@@ -119,6 +134,7 @@ parser.add_argument("-ss", type=int, default=-1)
 parser.add_argument("-to", type=int, default=-1)
 parser.add_argument("--order", type=int, default=MAX_ORDER)
 parser.add_argument("--threshold", type=int, default=THRESHOLD)
+parser.add_argument("--seq_len", type=int, default=SEQ_LEN_SINDY)
 parser.add_argument("--paral", type=int, default=2)
 parser.add_argument("--verb", type=int, default=VERBOSITY)
 parser.add_argument("--n_of_terms", type=int, default=N_OF_TERMS_ED)
@@ -131,6 +147,7 @@ task_id = args.task_id
 
 max_order = args.order
 threshold = args.threshold
+seq_len = args.seq_len
 PARALLEL = args.paral
 VERBOSITY = args.verb
 experiment_id = args.exper_id
@@ -285,14 +302,11 @@ else:
     results = []
 
 
-    print(max_order)
-
     def doone(task_id: int, seq_id: str, linear: bool, now=now):
         if VERBOSITY>=2:
             print()
         output_string = "\n"
         max_order_ = max_order
-        print(max_order_)
 
         # try:
         if SINDy:
@@ -302,14 +316,17 @@ else:
                 x = sp.Matrix([0,0,0,0])
             else:
                 output_string += f'Preprocessing sees only first {len(seq)} terms.\n'
-                seq_len = 30
-                output_string += f'default setting for how many terms should sindy see: {seq_len}\n'
+                # seq_len = 10
+                output_string += f'Sindy threshold: {threshold}\n'
+                output_string += f'Default setting for how many terms should sindy see: {seq_len}\n'
                 max_order_ = min(heuristic(len(seq)), max_order_)
-                output_string += f'sindy will use max_order: {max_order_}\n'
-                x = sindy(list(seq), max_order_, seq_len=seq_len, threshold=threshold)
+                output_string += f'Sindy will use max_order: {max_order_}\n'
+                # x = sindy(list(seq), max_order_, seq_len=seq_len, threshold=threshold)
+                x = sindy_grid(seq, seq_id, csv, coeffs, max_order, seq_len)
+                # x = sp.Matrix([0, 0, 0, 0])
             eq = solution2str(x)
 
-            # grid = sindy_grid(seq, seq_id, csv, coeffs, max_order)
+
             # grid = sindy_grid(seq, seq_id, csv, coeffs, max_order=5, seq_len=30)
             # for max_order_item in grid:
             #     print(max_order_item[0:])
@@ -317,7 +334,6 @@ else:
         else:
             x, eq, coeffs, truth = exact_ed(seq_id, csv, VERBOSITY, max_order_,
                                             n_of_terms=N_OF_TERMS_ED, linear=True)
-
 
         is_reconst = solution_vs_truth(x, coeffs)
         is_check_verbose = check_eq_man(x, seq_id, csv, n_of_terms=10**5)
@@ -351,7 +367,7 @@ else:
         # # except Exception as RuntimeError
         return seq_id, eq, truth, x, is_reconst, is_check, timing_print, output_string
 
-    print('outer after', max_order)
+    # print('outer after', max_order)
 
     if MODE == 'black_check':
         is_check, truth = check_truth(seq_id, csv_filename)
@@ -416,3 +432,10 @@ def prt(matrix: sp.Matrix):
 # print(eq)
 # print(check_eq(eq[0], id, csv))
 # print(check_eq(eq[0], id, csv, sp.floor(n_of_terms/2 -1)))
+
+# li = [(i,j) for i in range(20) for j in range(20)]
+# for i in range(20):
+#     size = 5
+#     print(li[size*i:size*(i+1)])
+#     # for j in range(20):
+#     #     print(i,j)

@@ -1,0 +1,16 @@
+
+Preprocessing sees only first 103 terms.
+Sindy threshold: 0.1
+Default setting for how many terms should sindy see: 70
+Sindy will use max_order: 20
+While total time consumed by now, scale:18776/34371, seq_id:A137607, order:20 took:
+ 0.2 seconds, i.e. 0.0 minutes or 0.0 hours.
+
+A137607: 
+a(n) = 0
+truth: 
+a(n) = 0*a(n - 1) + 0*a(n - 2) + 0*a(n - 3) + 0*a(n - 4) + 0*a(n - 5) + 0*a(n - 6) + 0*a(n - 7) + 0*a(n - 8) + 0*a(n - 9) + 0*a(n - 10) + 0*a(n - 11) + 0*a(n - 12) + 0*a(n - 13) + 0*a(n - 14) + 0*a(n - 15) + 0*a(n - 16) + 0*a(n - 17) + 0*a(n - 18) + 0*a(n - 19) + 0*a(n - 20) + 0*a(n - 21) + 0*a(n - 22) + 0*a(n - 23) + 0*a(n - 24) + 0*a(n - 25) + 0*a(n - 26) + 0*a(n - 27) + 0*a(n - 28) + 0*a(n - 29) + 0*a(n - 30) + 0*a(n - 31) + 0*a(n - 32) + 0*a(n - 33) + 0*a(n - 34) + 0*a(n - 35) + 0*a(n - 36) + 0*a(n - 37) + 0*a(n - 38) + 0*a(n - 39) + 0*a(n - 40) + 0*a(n - 41) + 0*a(n - 42) + 0*a(n - 43) + 0*a(n - 44) + 0*a(n - 45) + 0*a(n - 46) + 0*a(n - 47) + 0*a(n - 48) + 0*a(n - 49) + 0*a(n - 50) + 1*a(n - 51),  
+a(0) = 361, a(1) = 180, a(2) = 90, a(3) = 45, a(4) = 338, a(5) = 169, a(6) = 276, a(7) = 138, a(8) = 69, a(9) = 326, a(10) = 163, a(11) = 279, a(12) = 221, a(13) = 250, a(14) = 125, a(15) = 298, a(16) = 149, a(17) = 286, a(18) = 143, a(19) = 289, a(20) = 216, a(21) = 108, a(22) = 54, a(23) = 27, a(24) = 347, a(25) = 187, a(26) = 267, a(27) = 227, a(28) = 247, a(29) = 237, a(30) = 242, a(31) = 121, a(32) = 300, a(33) = 150, a(34) = 75, a(35) = 323, a(36) = 199, a(37) = 261, a(38) = 230, a(39) = 115, a(40) = 303, a(41) = 209, a(42) = 256, a(43) = 128, a(44) = 64, a(45) = 32, a(46) = 16, a(47) = 8, a(48) = 4, a(49) = 2, a(50) = 1
+
+False  -  checked against website ground truth.     
+False  -  "manual" check if equation is correct.    
