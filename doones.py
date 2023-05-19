@@ -73,6 +73,8 @@ if BUGLIST:
 #     print("Warning!!!!! buglist is used outside debug mode!!\n")
 
 MAX_ORDER = 20  # We care only for recursive equations with max 20 terms or order.
+if DEBUG:
+    MAX_ORDER = 5  # We care only for recursive equations with max 20 terms or order.
 # MAX_ORDER = 2
 THRESHOLD = 0.2  # For sindy - masking threshold.
 THRESHOLD = 0.1  # For sindy - masking threshold.
@@ -322,9 +324,18 @@ else:
                 max_order_ = min(heuristic(len(seq)), max_order_)
                 output_string += f'Sindy will use max_order: {max_order_}\n'
                 # x = sindy(list(seq), max_order_, seq_len=seq_len, threshold=threshold)
-                x = sindy_grid(seq, seq_id, csv, coeffs, max_order, seq_len)
+                x, printout, x_avg = sindy_grid(seq, seq_id, csv, coeffs, max_order, seq_len)
+                output_string += printout
                 # x = sp.Matrix([0, 0, 0, 0])
+
+                eq_avg = solution2str(x_avg)
+                is_reconst_avg = solution_vs_truth(x, coeffs)
+                is_check_avg = check_eq_man(x, seq_id, csv, n_of_terms=10 ** 5)[0]
+                output_string += f"\n\navg sindy: \n{eq_avg}\n"
+                output_string += f'{is_reconst_avg}  -  checked avg against website ground truth.     \n'
+                output_string += f'{is_check_avg}  -  \"manual\" check avg if equation is correct.    \n'
             eq = solution2str(x)
+
 
 
             # grid = sindy_grid(seq, seq_id, csv, coeffs, max_order=5, seq_len=30)

@@ -164,6 +164,7 @@ def sindy_grid_search(seq, coeffs, truth, max_order: int, stepsize: int, evals: 
 
 def one_results(seq, seq_id, csv, coeffs, max_order: int, seq_len: int):
 
+    # print(max_order, seq_len)
     x = sindy(seq, max_order, seq_len)
     is_reconst = solution_vs_truth(x, coeffs)
     is_check_verbose = check_eq_man(x, seq_id, csv, n_of_terms=10 ** 5)
@@ -172,6 +173,7 @@ def one_results(seq, seq_id, csv, coeffs, max_order: int, seq_len: int):
     # print()
     # print(summary)
     # print('one result !!!!!!!')
+    # print(max_order, seq_len)
     return summary
 
 
@@ -193,18 +195,47 @@ def sindy_grid(seq, seq_id, csv, coeffs, max_order: int, seq_len: int, grid_orde
     def equidist(start, end, n_of_pts):
         return list(set([round(start + i * (end - start) / n_of_pts) for i in range(n_of_pts)]));
 
-    grid = list(product(equidist(1, max_order, grid_order), equidist(4, seq_len, grid_len)))
-    grid = grid[:2]
-    print(grid)
+    subopt_grid = list(product(equidist(1, max_order, grid_order), equidist(4, seq_len, grid_len)))
+    grid = [pair for pair in subopt_grid if abs(pair[0]-pair[1]) > 4]
+    # grid = grid[:6]
 
-    ongrid = list(map((lambda order_leng: (order_leng[0], order_leng[1], one_results(seq, seq_id, csv, coeffs, max_order, seq_len)[:3])), grid))
+    printout = str(grid)
+    # print(grid)
+
+    ongrid = list(map((lambda order_leng: (order_leng[0], order_leng[1], one_results(seq, seq_id, csv, coeffs, order_leng[0], order_leng[1])[:3])), grid))
     printable = [(order, leng, oneres[1], oneres[2]) for order, leng, oneres in ongrid]
-    print(printable)
-    xs = [case[2][0] for case in ongrid if case[2][1:2] == (True, True)]
-    if xs != []:
-        x = xs[0]
+    printout += '\n'
+    for i in range(round(len(printable)/5) + 1):
+        printout += ', ' + "".join([f"{str(i): >22}, " for i in printable[5*i:5*(i+1)]]) + '\n'
+        # printout += str([f"{str(i): >20}" for i in printable[5*i:5*(i+1)]])
+    # printout += ']\n'
+
+    oeis = [case[2][0] for case in ongrid if case[2][1:3] == (True, True)]
+    manually = [case[2][0] for case in ongrid if case[2][2] == True]
+    printout += "\n"
+    printout += f"number of all configurations: {len(grid)}\n"
+    printout += f"number of fully (True, true) successful configurations: {len(oeis)}\n"
+    printout += f"number of partially (false, true) successful configurations: {len(manually)}\n"
+    # allxs = [case[2][0] for case in ongrid]
+    # sp.Matrix([round(i) for i in list(sum(ll, sp.Matrix([0, 0, 0])) / 3)])
+
+    # print(xs)
+    if oeis != []:
+        x = oeis[0]
+    elif manually != []:
+        x = manually[0]
     else:
         x = sp.Matrix([0, 0, 0, 0])
+    # print(x)
+
+    xs = [case[2][0] for case in ongrid]
+    # print([len(x) for x in xs])
+    max_len = max([len(x) for x in xs])
+    xs = [sp.Matrix.vstack(x, sp.zeros(max_len-len(x), 1)) for x in xs]
+    # x_avg = sp.Matrix([round(i) for i in list(sum(xs, sp.Matrix([0, 0, 0])) / 3)])
+    x_avg = sp.Matrix([round(i) for i in list(sum(xs, sp.zeros(max_len, 1)) / len(xs))])
+    # print('xs', xs)
+    # print('x_avg', x_avg)
 
 
     # [i for i in range(1, 20 + 1)]
@@ -218,7 +249,7 @@ def sindy_grid(seq, seq_id, csv, coeffs, max_order: int, seq_len: int, grid_orde
     # len(s), s
 
     # return map(lambda order: one_results(seq, seq_id, csv, coeffs, order, seq_len), [i for i in range(1, max_order+1)])
-    return x
+    return x, printout, x_avg
 
 
 if __file__ == '__main__':
