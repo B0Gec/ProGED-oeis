@@ -1,0 +1,32 @@
+
+Preprocessing sees only first 10 terms.
+Sindy threshold: 0.1
+Default setting for how many terms should sindy see: 70
+Sindy will use max_order: 5
+[(1, 6), (1, 7), (1, 8), (1, 9), (1, 10), (2, 7), (2, 8), (2, 9), (2, 10), (3, 8), (3, 9), (3, 10), (4, 9), (4, 10), (5, 10)]
+,   (1, 6, False, False),   (1, 7, False, False),   (1, 8, False, False),   (1, 9, False, False),  (1, 10, False, False), 
+,   (2, 7, False, False),   (2, 8, False, False),   (2, 9, False, False),  (2, 10, False, False),   (3, 8, False, False), 
+,   (3, 9, False, False),  (3, 10, False, False),   (4, 9, False, False),  (4, 10, False, False),  (5, 10, False, False), 
+, 
+
+number of all configurations: 15
+number of fully (true, true) successful configurations: 0
+number of partially only (false, true) successful configurations: 0
+number of total fail (false, false) configurations: 15
+
+
+avg sindy: 
+a(n) = a(n - 2) + 43*a(n - 1)
+False  -  checked avg against website ground truth.     
+False  -  "manual" check avg if equation is correct.    
+While total time consumed by now, scale:23315/34371, seq_id:A169345, order:20 took:
+ 30.0 seconds, i.e. 0.5 minutes or 0.008 hours.
+
+A169345: 
+a(n) = 0
+truth: 
+a(n) = 42*a(n - 1) + 42*a(n - 2) + 42*a(n - 3) + 42*a(n - 4) + 42*a(n - 5) + 42*a(n - 6) + 42*a(n - 7) + 42*a(n - 8) + 42*a(n - 9) + 42*a(n - 10) + 42*a(n - 11) + 42*a(n - 12) + 42*a(n - 13) + 42*a(n - 14) + 42*a(n - 15) + 42*a(n - 16) + 42*a(n - 17) + 42*a(n - 18) + 42*a(n - 19) + 42*a(n - 20) + 42*a(n - 21) + 42*a(n - 22) + 42*a(n - 23) + 42*a(n - 24) + 42*a(n - 25) + 42*a(n - 26) + 42*a(n - 27) + 42*a(n - 28) + 42*a(n - 29) + -903*a(n - 30),  
+a(0) = 1, a(1) = 44, a(2) = 1892, a(3) = 81356, a(4) = 3498308, a(5) = 150427244, a(6) = 6468371492, a(7) = 278139974156, a(8) = 11960018888708, a(9) = 514280812214444, a(10) = 22114074925221092, a(11) = 950905221784506956, a(12) = 40888924536733799108, a(13) = 1758223755079553361644, a(14) = 75603621468420794550692, a(15) = 3250955723142094165679756, a(16) = 139791096095110049124229508, a(17) = 6011017132089732112341868844, a(18) = 258473736679858480830700360292, a(19) = 11114370677233914675720115492556, a(20) = 477917939121058331055964966179908, a(21) = 20550471382205508235406493545736044, a(22) = 883670269434836854122479222466649892, a(23) = 37997821585697984727266606566065945356, a(24) = 1633906328185013343272464082340835650308, a(25) = 70257972111955573760715955540655932963244, a(26) = 3021092800814089671710786088248205117419492, a(27) = 129906990435005855883563801794672820049038156, a(28) = 5586000588705251802993243477170931262108640708, a(29) = 240198025314325827528709469518350044270671550444
+
+False  -  checked against website ground truth.     
+False  -  "manual" check if equation is correct.    

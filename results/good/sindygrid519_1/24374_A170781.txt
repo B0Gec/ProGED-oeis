@@ -1,0 +1,32 @@
+
+Preprocessing sees only first 10 terms.
+Sindy threshold: 0.1
+Default setting for how many terms should sindy see: 70
+Sindy will use max_order: 5
+[(1, 6), (1, 7), (1, 8), (1, 9), (1, 10), (2, 7), (2, 8), (2, 9), (2, 10), (3, 8), (3, 9), (3, 10), (4, 9), (4, 10), (5, 10)]
+,   (1, 6, False, False),   (1, 7, False, False),   (1, 8, False, False),   (1, 9, False, False),  (1, 10, False, False), 
+,   (2, 7, False, False),   (2, 8, False, False),   (2, 9, False, False),  (2, 10, False, False),   (3, 8, False, False), 
+,   (3, 9, False, False),  (3, 10, False, False),   (4, 9, False, False),  (4, 10, False, False),  (5, 10, False, False), 
+, 
+
+number of all configurations: 15
+number of fully (true, true) successful configurations: 0
+number of partially only (false, true) successful configurations: 0
+number of total fail (false, false) configurations: 15
+
+
+avg sindy: 
+a(n) = -208*a(n - 5) - 77736*a(n - 4) + 7709*a(n - 3) - 537*a(n - 2) + 31*a(n - 1)
+False  -  checked avg against website ground truth.     
+False  -  "manual" check avg if equation is correct.    
+While total time consumed by now, scale:24375/34371, seq_id:A170781, order:20 took:
+ 2.5 seconds, i.e. 0.04 minutes or 0.001 hours.
+
+A170781: 
+a(n) = 0
+truth: 
+a(n) = 18*a(n - 1) + -153*a(n - 2) + 816*a(n - 3) + -3060*a(n - 4) + 8568*a(n - 5) + -18564*a(n - 6) + 31824*a(n - 7) + -43758*a(n - 8) + 48620*a(n - 9) + -43758*a(n - 10) + 31824*a(n - 11) + -18564*a(n - 12) + 8568*a(n - 13) + -3060*a(n - 14) + 816*a(n - 15) + -153*a(n - 16) + 18*a(n - 17) + -1*a(n - 18),  
+a(0) = 0, a(1) = 1, a(2) = 65664, a(3) = 64573362, a(4) = 8589967360, a(5) = 381469921875, a(6) = 8463330562176, a(7) = 116315259876004, a(8) = 1125899915231232, a(9) = 8338590871356645, a(10) = 50000000050000000, a(11) = 252723514356826326, a(12) = 1109305553585209344, a(13) = 4325207960098534327, a(14) = 15245673365403492480, a(15) = 49263062669128125000, a(16) = 147573952591823896576, a(17) = 413620130946656260809
+
+False  -  checked against website ground truth.     
+False  -  "manual" check if equation is correct.    

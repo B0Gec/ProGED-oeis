@@ -1,0 +1,29 @@
+
+Preprocessing sees only first 6 terms.
+Sindy threshold: 0.1
+Default setting for how many terms should sindy see: 70
+Sindy will use max_order: 3
+[(1, 6)]
+,   (1, 6, False, False), 
+
+number of all configurations: 1
+number of fully (true, true) successful configurations: 0
+number of partially only (false, true) successful configurations: 0
+number of total fail (false, false) configurations: 1
+
+
+avg sindy: 
+a(n) = 675*a(n - 1)
+False  -  checked avg against website ground truth.     
+False  -  "manual" check avg if equation is correct.    
+While total time consumed by now, scale:12229/34371, seq_id:A070833, order:20 took:
+ 0.9 seconds, i.e. 0.01 minutes or 0.0 hours.
+
+A070833: 
+a(n) = 0
+truth: 
+a(n) = 522*a(n - 1) + 587797*a(n - 2) + -75135226*a(n - 3) + -392963125*a(n - 4) + 3200000*a(n - 5),  
+a(0) = 1, a(1) = 2, a(2) = 184758, a(3) = 60090032, a(4) = 139541849878
+
+False  -  checked against website ground truth.     
+False  -  "manual" check if equation is correct.    

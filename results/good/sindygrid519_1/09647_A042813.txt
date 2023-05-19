@@ -1,0 +1,80 @@
+
+Preprocessing sees only first 38 terms.
+Sindy threshold: 0.1
+Default setting for how many terms should sindy see: 70
+Sindy will use max_order: 19
+[(1, 6), (1, 7), (1, 9), (1, 11), (1, 12), (1, 14), (1, 16), (1, 18), (1, 19), (1, 21), (1, 23), (1, 24), (1, 26), (1, 28), (1, 30), (1, 31), (1, 33), (1, 35), (1, 36), (2, 7), (2, 9), (2, 11), (2, 12), (2, 14), (2, 16), (2, 18), (2, 19), (2, 21), (2, 23), (2, 24), (2, 26), (2, 28), (2, 30), (2, 31), (2, 33), (2, 35), (2, 36), (3, 9), (3, 11), (3, 12), (3, 14), (3, 16), (3, 18), (3, 19), (3, 21), (3, 23), (3, 24), (3, 26), (3, 28), (3, 30), (3, 31), (3, 33), (3, 35), (3, 36), (4, 9), (4, 11), (4, 12), (4, 14), (4, 16), (4, 18), (4, 19), (4, 21), (4, 23), (4, 24), (4, 26), (4, 28), (4, 30), (4, 31), (4, 33), (4, 35), (4, 36), (5, 11), (5, 12), (5, 14), (5, 16), (5, 18), (5, 19), (5, 21), (5, 23), (5, 24), (5, 26), (5, 28), (5, 30), (5, 31), (5, 33), (5, 35), (5, 36), (6, 11), (6, 12), (6, 14), (6, 16), (6, 18), (6, 19), (6, 21), (6, 23), (6, 24), (6, 26), (6, 28), (6, 30), (6, 31), (6, 33), (6, 35), (6, 36), (7, 12), (7, 14), (7, 16), (7, 18), (7, 19), (7, 21), (7, 23), (7, 24), (7, 26), (7, 28), (7, 30), (7, 31), (7, 33), (7, 35), (7, 36), (8, 14), (8, 16), (8, 18), (8, 19), (8, 21), (8, 23), (8, 24), (8, 26), (8, 28), (8, 30), (8, 31), (8, 33), (8, 35), (8, 36), (9, 14), (9, 16), (9, 18), (9, 19), (9, 21), (9, 23), (9, 24), (9, 26), (9, 28), (9, 30), (9, 31), (9, 33), (9, 35), (9, 36), (10, 16), (10, 18), (10, 19), (10, 21), (10, 23), (10, 24), (10, 26), (10, 28), (10, 30), (10, 31), (10, 33), (10, 35), (10, 36), (11, 16), (11, 18), (11, 19), (11, 21), (11, 23), (11, 24), (11, 26), (11, 28), (11, 30), (11, 31), (11, 33), (11, 35), (11, 36), (12, 18), (12, 19), (12, 21), (12, 23), (12, 24), (12, 26), (12, 28), (12, 30), (12, 31), (12, 33), (12, 35), (12, 36), (13, 18), (13, 19), (13, 21), (13, 23), (13, 24), (13, 26), (13, 28), (13, 30), (13, 31), (13, 33), (13, 35), (13, 36), (14, 19), (14, 21), (14, 23), (14, 24), (14, 26), (14, 28), (14, 30), (14, 31), (14, 33), (14, 35), (14, 36), (15, 21), (15, 23), (15, 24), (15, 26), (15, 28), (15, 30), (15, 31), (15, 33), (15, 35), (15, 36), (16, 21), (16, 23), (16, 24), (16, 26), (16, 28), (16, 30), (16, 31), (16, 33), (16, 35), (16, 36), (17, 23), (17, 24), (17, 26), (17, 28), (17, 30), (17, 31), (17, 33), (17, 35), (17, 36), (18, 23), (18, 24), (18, 26), (18, 28), (18, 30), (18, 31), (18, 33), (18, 35), (18, 36), (19, 24), (19, 26), (19, 28), (19, 30), (19, 31), (19, 33), (19, 35), (19, 36)]
+,   (1, 6, False, False),   (1, 7, False, False),   (1, 9, False, False),  (1, 11, False, False),  (1, 12, False, False), 
+,  (1, 14, False, False),  (1, 16, False, False),  (1, 18, False, False),  (1, 19, False, False),  (1, 21, False, False), 
+,  (1, 23, False, False),  (1, 24, False, False),  (1, 26, False, False),  (1, 28, False, False),  (1, 30, False, False), 
+,  (1, 31, False, False),  (1, 33, False, False),  (1, 35, False, False),  (1, 36, False, False),   (2, 7, False, False), 
+,   (2, 9, False, False),  (2, 11, False, False),  (2, 12, False, False),  (2, 14, False, False),  (2, 16, False, False), 
+,  (2, 18, False, False),  (2, 19, False, False),  (2, 21, False, False),  (2, 23, False, False),  (2, 24, False, False), 
+,  (2, 26, False, False),  (2, 28, False, False),  (2, 30, False, False),  (2, 31, False, False),  (2, 33, False, False), 
+,  (2, 35, False, False),  (2, 36, False, False),   (3, 9, False, False),  (3, 11, False, False),  (3, 12, False, False), 
+,  (3, 14, False, False),  (3, 16, False, False),  (3, 18, False, False),  (3, 19, False, False),  (3, 21, False, False), 
+,  (3, 23, False, False),  (3, 24, False, False),  (3, 26, False, False),  (3, 28, False, False),  (3, 30, False, False), 
+,  (3, 31, False, False),  (3, 33, False, False),  (3, 35, False, False),  (3, 36, False, False),   (4, 9, False, False), 
+,  (4, 11, False, False),  (4, 12, False, False),  (4, 14, False, False),  (4, 16, False, False),  (4, 18, False, False), 
+,  (4, 19, False, False),  (4, 21, False, False),  (4, 23, False, False),  (4, 24, False, False),  (4, 26, False, False), 
+,  (4, 28, False, False),  (4, 30, False, False),  (4, 31, False, False),  (4, 33, False, False),  (4, 35, False, False), 
+,  (4, 36, False, False),  (5, 11, False, False),  (5, 12, False, False),  (5, 14, False, False),  (5, 16, False, False), 
+,  (5, 18, False, False),  (5, 19, False, False),  (5, 21, False, False),  (5, 23, False, False),  (5, 24, False, False), 
+,  (5, 26, False, False),  (5, 28, False, False),  (5, 30, False, False),  (5, 31, False, False),  (5, 33, False, False), 
+,  (5, 35, False, False),  (5, 36, False, False),  (6, 11, False, False),  (6, 12, False, False),  (6, 14, False, False), 
+,  (6, 16, False, False),  (6, 18, False, False),  (6, 19, False, False),  (6, 21, False, False),  (6, 23, False, False), 
+,  (6, 24, False, False),  (6, 26, False, False),  (6, 28, False, False),  (6, 30, False, False),  (6, 31, False, False), 
+,  (6, 33, False, False),  (6, 35, False, False),  (6, 36, False, False),  (7, 12, False, False),  (7, 14, False, False), 
+,  (7, 16, False, False),  (7, 18, False, False),  (7, 19, False, False),  (7, 21, False, False),  (7, 23, False, False), 
+,  (7, 24, False, False),  (7, 26, False, False),  (7, 28, False, False),  (7, 30, False, False),  (7, 31, False, False), 
+,  (7, 33, False, False),  (7, 35, False, False),  (7, 36, False, False),  (8, 14, False, False),  (8, 16, False, False), 
+,  (8, 18, False, False),  (8, 19, False, False),  (8, 21, False, False),  (8, 23, False, False),  (8, 24, False, False), 
+,  (8, 26, False, False),  (8, 28, False, False),  (8, 30, False, False),  (8, 31, False, False),  (8, 33, False, False), 
+,  (8, 35, False, False),  (8, 36, False, False),  (9, 14, False, False),  (9, 16, False, False),  (9, 18, False, False), 
+,  (9, 19, False, False),  (9, 21, False, False),  (9, 23, False, False),  (9, 24, False, False),  (9, 26, False, False), 
+,  (9, 28, False, False),  (9, 30, False, False),  (9, 31, False, False),  (9, 33, False, False),  (9, 35, False, False), 
+,  (9, 36, False, False), (10, 16, False, False), (10, 18, False, False), (10, 19, False, False), (10, 21, False, False), 
+, (10, 23, False, False), (10, 24, False, False), (10, 26, False, False), (10, 28, False, False), (10, 30, False, False), 
+, (10, 31, False, False), (10, 33, False, False), (10, 35, False, False), (10, 36, False, False), (11, 16, False, False), 
+, (11, 18, False, False), (11, 19, False, False), (11, 21, False, False), (11, 23, False, False), (11, 24, False, False), 
+, (11, 26, False, False), (11, 28, False, False), (11, 30, False, False), (11, 31, False, False), (11, 33, False, False), 
+, (11, 35, False, False), (11, 36, False, False), (12, 18, False, False), (12, 19, False, False), (12, 21, False, False), 
+, (12, 23, False, False), (12, 24, False, False), (12, 26, False, False), (12, 28, False, False), (12, 30, False, False), 
+, (12, 31, False, False), (12, 33, False, False), (12, 35, False, False), (12, 36, False, False), (13, 18, False, False), 
+, (13, 19, False, False), (13, 21, False, False), (13, 23, False, False), (13, 24, False, False), (13, 26, False, False), 
+, (13, 28, False, False), (13, 30, False, False), (13, 31, False, False), (13, 33, False, False), (13, 35, False, False), 
+, (13, 36, False, False), (14, 19, False, False), (14, 21, False, False), (14, 23, False, False), (14, 24, False, False), 
+, (14, 26, False, False), (14, 28, False, False), (14, 30, False, False), (14, 31, False, False), (14, 33, False, False), 
+, (14, 35, False, False), (14, 36, False, False), (15, 21, False, False), (15, 23, False, False), (15, 24, False, False), 
+, (15, 26, False, False), (15, 28, False, False), (15, 30, False, False), (15, 31, False, False), (15, 33, False, False), 
+, (15, 35, False, False), (15, 36, False, False), (16, 21, False, False), (16, 23, False, False), (16, 24, False, False), 
+, (16, 26, False, False), (16, 28, False, False), (16, 30, False, False), (16, 31, False, False), (16, 33, False, False), 
+, (16, 35, False, False), (16, 36, False, False), (17, 23, False, False), (17, 24, False, False), (17, 26, False, False), 
+, (17, 28, False, False), (17, 30, False, False), (17, 31, False, False), (17, 33, False, False), (17, 35, False, False), 
+, (17, 36, False, False), (18, 23, False, False), (18, 24, False, False), (18, 26, False, False), (18, 28, False, False), 
+, (18, 30, False, False), (18, 31, False, False), (18, 33, False, False), (18, 35, False, False), (18, 36, False, False), 
+, (19, 24, False, False), (19, 26, False, False), (19, 28, False, False), (19, 30, False, False), (19, 31, False, False), 
+, (19, 33, False, False), (19, 35, False, False), (19, 36, False, False), 
+, 
+
+number of all configurations: 253
+number of fully (true, true) successful configurations: 0
+number of partially only (false, true) successful configurations: 0
+number of total fail (false, false) configurations: 253
+
+
+avg sindy: 
+a(n) = 2843*a(n - 19) - 65939*a(n - 18) + 373579*a(n - 17) + 1402156*a(n - 16) + 450818*a(n - 15) + 15088*a(n - 14) + 43321*a(n - 13) + 44903*a(n - 12) - 8087*a(n - 11) - 2841*a(n - 10) + 650*a(n - 9) - 674*a(n - 8) + 985*a(n - 7) + 216*a(n - 6) + 90*a(n - 5) - 13*a(n - 4) + 3*a(n - 3) - a(n - 2)
+False  -  checked avg against website ground truth.     
+False  -  "manual" check avg if equation is correct.    
+While total time consumed by now, scale:9648/34371, seq_id:A042813, order:20 took:
+ 38.4 seconds, i.e. 0.64 minutes or 0.011 hours.
+
+A042813: 
+a(n) = 0
+truth: 
+a(n) = 0*a(n - 1) + 0*a(n - 2) + 0*a(n - 3) + 0*a(n - 4) + 0*a(n - 5) + 0*a(n - 6) + 0*a(n - 7) + 0*a(n - 8) + 0*a(n - 9) + 0*a(n - 10) + 0*a(n - 11) + 0*a(n - 12) + 0*a(n - 13) + 0*a(n - 14) + 0*a(n - 15) + 0*a(n - 16) + 0*a(n - 17) + 0*a(n - 18) + 0*a(n - 19) + 0*a(n - 20) + 0*a(n - 21) + 0*a(n - 22) + 0*a(n - 23) + 0*a(n - 24) + 0*a(n - 25) + 0*a(n - 26) + 0*a(n - 27) + 0*a(n - 28) + 0*a(n - 29) + 0*a(n - 30) + 0*a(n - 31) + 0*a(n - 32) + 980453390021592*a(n - 33) + 0*a(n - 34) + 0*a(n - 35) + 0*a(n - 36) + 0*a(n - 37) + 0*a(n - 38) + 0*a(n - 39) + 0*a(n - 40) + 0*a(n - 41) + 0*a(n - 42) + 0*a(n - 43) + 0*a(n - 44) + 0*a(n - 45) + 0*a(n - 46) + 0*a(n - 47) + 0*a(n - 48) + 0*a(n - 49) + 0*a(n - 50) + 0*a(n - 51) + 0*a(n - 52) + 0*a(n - 53) + 0*a(n - 54) + 0*a(n - 55) + 0*a(n - 56) + 0*a(n - 57) + 0*a(n - 58) + 0*a(n - 59) + 0*a(n - 60) + 0*a(n - 61) + 0*a(n - 62) + 0*a(n - 63) + 0*a(n - 64) + 0*a(n - 65) + 1*a(n - 66),  
+a(0) = 1, a(1) = 1, a(2) = 2, a(3) = 3, a(4) = 5, a(5) = 18, a(6) = 77, a(7) = 172, a(8) = 593, a(9) = 3730, a(10) = 4323, a(11) = 8053, a(12) = 157330, a(13) = 165383, a(14) = 1149628, a(15) = 1315011, a(16) = 3779650, a(17) = 8874311, a(18) = 12653961, a(19) = 84798077, a(20) = 97452038, a(21) = 1936386799, a(22) = 2033838837, a(23) = 3970225636, a(24) = 25855192653, a(25) = 81535803595, a(26) = 188926799843, a(27) = 837243002967, a(28) = 2700655808744, a(29) = 3537898811711, a(30) = 6238554620455, a(31) = 9776453432166, a(32) = 16015008052621, a(33) = 970676936589426, a(34) = 986691944642047, a(35) = 1957368881231473, a(36) = 2944060825873520, a(37) = 4901429707104993, a(38) = 17648349947188499, a(39) = 75494829495858989, a(40) = 168638008938906477, a(41) = 581408856312578420, a(42) = 3657091146814376997, a(43) = 4238500003126955417, a(44) = 7895591149941332414, a(45) = 154254731852012271283, a(46) = 162150323001953603697, a(47) = 1127156669863733893465, a(48) = 1289306992865687497162, a(49) = 3705770655595108887789, a(50) = 8700848304055905272740, a(51) = 12406618959651014160529, a(52) = 83140562061961990235914, a(53) = 95547181021613004396443, a(54) = 1898537001472609073768331, a(55) = 1994084182494222078164774, a(56) = 3892621183966831151933105, a(57) = 25349811286295208989763404, a(58) = 79942055042852458121223317, a(59) = 185233921372000125232210038, a(60) = 820877740530852959050063469, a(61) = 2647867142964559002382400445, a(62) = 3468744883495411961432463914, a(63) = 6116612026459970963814864359, a(64) = 9585356909955382925247328273, a(65) = 15701968936415353889062192632
+
+False  -  checked against website ground truth.     
+False  -  "manual" check if equation is correct.    

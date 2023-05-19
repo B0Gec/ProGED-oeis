@@ -1,0 +1,32 @@
+
+Preprocessing sees only first 10 terms.
+Sindy threshold: 0.1
+Default setting for how many terms should sindy see: 70
+Sindy will use max_order: 5
+[(1, 6), (1, 7), (1, 8), (1, 9), (1, 10), (2, 7), (2, 8), (2, 9), (2, 10), (3, 8), (3, 9), (3, 10), (4, 9), (4, 10), (5, 10)]
+,   (1, 6, False, False),   (1, 7, False, False),   (1, 8, False, False),   (1, 9, False, False),  (1, 10, False, False), 
+,   (2, 7, False, False),   (2, 8, False, False),   (2, 9, False, False),  (2, 10, False, False),   (3, 8, False, False), 
+,   (3, 9, False, False),  (3, 10, False, False),   (4, 9, False, False),  (4, 10, False, False),  (5, 10, False, False), 
+, 
+
+number of all configurations: 15
+number of fully (true, true) successful configurations: 0
+number of partially only (false, true) successful configurations: 0
+number of total fail (false, false) configurations: 15
+
+
+avg sindy: 
+a(n) = -6*a(n - 5) - 70*a(n - 4) + 59*a(n - 3) - 28*a(n - 2) + 8*a(n - 1)
+False  -  checked avg against website ground truth.     
+False  -  "manual" check avg if equation is correct.    
+While total time consumed by now, scale:3310/34371, seq_id:A016822, order:20 took:
+ 2.6 seconds, i.e. 0.04 minutes or 0.001 hours.
+
+A016822: 
+a(n) = 0
+truth: 
+a(n) = 11*a(n - 1) + -55*a(n - 2) + 165*a(n - 3) + -330*a(n - 4) + 462*a(n - 5) + -462*a(n - 6) + 330*a(n - 7) + -165*a(n - 8) + 55*a(n - 9) + -11*a(n - 10) + 1*a(n - 11),  
+a(0) = 1, a(1) = 9765625, a(2) = 3486784401, a(3) = 137858491849, a(4) = 2015993900449, a(5) = 16679880978201, a(6) = 95367431640625, a(7) = 420707233300201, a(8) = 1531578985264449, a(9) = 4808584372417849, a(10) = 13422659310152401
+
+False  -  checked against website ground truth.     
+False  -  "manual" check if equation is correct.    

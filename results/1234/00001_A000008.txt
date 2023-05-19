@@ -1,0 +1,37 @@
+
+Preprocessing sees only first 200 terms.
+Sindy threshold: 0.1
+Default setting for how many terms should sindy see: 70
+Sindy will use max_order: 2
+[(1, 7), (1, 11), (1, 14), (1, 17), (1, 20), (1, 24), (1, 27), (1, 30), (1, 34), (1, 37), (1, 40), (1, 44), (1, 47), (1, 50), (1, 54), (1, 57), (1, 60), (1, 63), (1, 67), (2, 7), (2, 11), (2, 14), (2, 17), (2, 20), (2, 24), (2, 27), (2, 30), (2, 34), (2, 37), (2, 40), (2, 44), (2, 47), (2, 50), (2, 54), (2, 57), (2, 60), (2, 63), (2, 67)]
+,   (1, 7, False, False),  (1, 11, False, False),  (1, 14, False, False),  (1, 17, False, False),  (1, 20, False, False), 
+,  (1, 24, False, False),  (1, 27, False, False),  (1, 30, False, False),  (1, 34, False, False),  (1, 37, False, False), 
+,  (1, 40, False, False),  (1, 44, False, False),  (1, 47, False, False),  (1, 50, False, False),  (1, 54, False, False), 
+,  (1, 57, False, False),  (1, 60, False, False),  (1, 63, False, False),  (1, 67, False, False),   (2, 7, False, False), 
+,  (2, 11, False, False),  (2, 14, False, False),  (2, 17, False, False),  (2, 20, False, False),  (2, 24, False, False), 
+,  (2, 27, False, False),  (2, 30, False, False),  (2, 34, False, False),  (2, 37, False, False),  (2, 40, False, False), 
+,  (2, 44, False, False),  (2, 47, False, False),  (2, 50, False, False),  (2, 54, False, False),  (2, 57, False, False), 
+,  (2, 60, False, False),  (2, 63, False, False),  (2, 67, False, False), 
+, 
+
+number of all configurations: 38
+number of fully (true, true) successful configurations: 0
+number of partially only (false, true) successful configurations: 0
+number of total fail (false, false) configurations: 38
+
+
+avg sindy: 
+a(n) = a(n - 1)
+False  -  checked avg against website ground truth.     
+False  -  "manual" check avg if equation is correct.    
+While total time consumed by now, scale:2/34371, seq_id:A000008, order:2 took:
+ 3.7 seconds, i.e. 0.06 minutes or 0.001 hours.
+
+A000008: 
+a(n) = 0
+truth: 
+a(n) = 1*a(n - 1) + 1*a(n - 2) + -1*a(n - 3) + 0*a(n - 4) + 1*a(n - 5) + -1*a(n - 6) + -1*a(n - 7) + 1*a(n - 8) + 0*a(n - 9) + 1*a(n - 10) + -1*a(n - 11) + -1*a(n - 12) + 1*a(n - 13) + 0*a(n - 14) + -1*a(n - 15) + 1*a(n - 16) + 1*a(n - 17) + -1*a(n - 18),  
+a(0) = 1, a(1) = 1, a(2) = 2, a(3) = 2, a(4) = 3, a(5) = 4, a(6) = 5, a(7) = 6, a(8) = 7, a(9) = 8, a(10) = 11, a(11) = 12, a(12) = 15, a(13) = 16, a(14) = 19, a(15) = 22, a(16) = 25, a(17) = 28
+
+False  -  checked against website ground truth.     
+False  -  "manual" check if equation is correct.    

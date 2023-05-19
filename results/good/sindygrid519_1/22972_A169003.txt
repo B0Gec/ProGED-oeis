@@ -1,0 +1,33 @@
+
+Preprocessing sees only first 11 terms.
+Sindy threshold: 0.1
+Default setting for how many terms should sindy see: 70
+Sindy will use max_order: 6
+[(1, 6), (1, 7), (1, 8), (1, 9), (1, 10), (1, 11), (2, 7), (2, 8), (2, 9), (2, 10), (2, 11), (3, 8), (3, 9), (3, 10), (3, 11), (4, 9), (4, 10), (4, 11), (5, 10), (5, 11), (6, 11)]
+,   (1, 6, False, False),   (1, 7, False, False),   (1, 8, False, False),   (1, 9, False, False),  (1, 10, False, False), 
+,  (1, 11, False, False),   (2, 7, False, False),   (2, 8, False, False),   (2, 9, False, False),   (2, 10, False, True), 
+,  (2, 11, False, False),   (3, 8, False, False),   (3, 9, False, False),   (3, 10, False, True),  (3, 11, False, False), 
+,   (4, 9, False, False),  (4, 10, False, False),  (4, 11, False, False),  (5, 10, False, False),  (5, 11, False, False), 
+,  (6, 11, False, False), 
+
+number of all configurations: 21
+number of fully (true, true) successful configurations: 0
+number of partially only (false, true) successful configurations: 2
+number of total fail (false, false) configurations: 19
+
+
+avg sindy: 
+a(n) = a(n - 2) + 37*a(n - 1)
+False  -  checked avg against website ground truth.     
+True  -  "manual" check avg if equation is correct.    
+While total time consumed by now, scale:22973/34371, seq_id:A169003, order:20 took:
+ 0.5 seconds, i.e. 0.01 minutes or 0.0 hours.
+
+A169003: 
+a(n) = 37*a(n - 1)
+truth: 
+a(n) = 36*a(n - 1) + 36*a(n - 2) + 36*a(n - 3) + 36*a(n - 4) + 36*a(n - 5) + 36*a(n - 6) + 36*a(n - 7) + 36*a(n - 8) + 36*a(n - 9) + 36*a(n - 10) + 36*a(n - 11) + 36*a(n - 12) + 36*a(n - 13) + 36*a(n - 14) + 36*a(n - 15) + 36*a(n - 16) + 36*a(n - 17) + 36*a(n - 18) + 36*a(n - 19) + 36*a(n - 20) + 36*a(n - 21) + 36*a(n - 22) + -666*a(n - 23),  
+a(0) = 1, a(1) = 38, a(2) = 1406, a(3) = 52022, a(4) = 1924814, a(5) = 71218118, a(6) = 2635070366, a(7) = 97497603542, a(8) = 3607411331054, a(9) = 133474219248998, a(10) = 4938546112212926, a(11) = 182726206151878262, a(12) = 6760869627619495694, a(13) = 250152176221921340678, a(14) = 9255630520211089605086
+
+False  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

@@ -1,0 +1,36 @@
+
+Preprocessing sees only first 13 terms.
+Sindy threshold: 0.1
+Default setting for how many terms should sindy see: 70
+Sindy will use max_order: 6
+[(1, 6), (1, 7), (1, 8), (1, 9), (1, 10), (1, 11), (1, 12), (1, 13), (2, 7), (2, 8), (2, 9), (2, 10), (2, 11), (2, 12), (2, 13), (3, 8), (3, 9), (3, 10), (3, 11), (3, 12), (3, 13), (4, 9), (4, 10), (4, 11), (4, 12), (4, 13), (5, 10), (5, 11), (5, 12), (5, 13), (6, 11), (6, 12), (6, 13), (7, 12), (7, 13), (8, 13)]
+,   (1, 6, False, False),   (1, 7, False, False),   (1, 8, False, False),   (1, 9, False, False),  (1, 10, False, False), 
+,  (1, 11, False, False),  (1, 12, False, False),  (1, 13, False, False),   (2, 7, False, False),   (2, 8, False, False), 
+,   (2, 9, False, False),  (2, 10, False, False),  (2, 11, False, False),  (2, 12, False, False),  (2, 13, False, False), 
+,   (3, 8, False, False),   (3, 9, False, False),  (3, 10, False, False),  (3, 11, False, False),  (3, 12, False, False), 
+,  (3, 13, False, False),   (4, 9, False, False),  (4, 10, False, False),  (4, 11, False, False),  (4, 12, False, False), 
+,  (4, 13, False, False),  (5, 10, False, False),  (5, 11, False, False),  (5, 12, False, False),  (5, 13, False, False), 
+,  (6, 11, False, False),  (6, 12, False, False),  (6, 13, False, False),  (7, 12, False, False),  (7, 13, False, False), 
+,  (8, 13, False, False), 
+
+number of all configurations: 36
+number of fully (true, true) successful configurations: 0
+number of partially only (false, true) successful configurations: 0
+number of total fail (false, false) configurations: 36
+
+
+avg sindy: 
+a(n) = 175*a(n - 7) - 38728*a(n - 6) + 40625*a(n - 5) - 17416*a(n - 4) + 3566*a(n - 3) - 423*a(n - 2) + 30*a(n - 1)
+False  -  checked avg against website ground truth.     
+False  -  "manual" check avg if equation is correct.    
+While total time consumed by now, scale:6672/34371, seq_id:A035810, order:20 took:
+ 0.7 seconds, i.e. 0.01 minutes or 0.0 hours.
+
+A035810: 
+a(n) = 0
+truth: 
+a(n) = 50*a(n - 1) + -1225*a(n - 2) + 19600*a(n - 3) + -230300*a(n - 4) + 2118760*a(n - 5) + -15890700*a(n - 6) + 99884400*a(n - 7) + -536878650*a(n - 8) + 2505433700*a(n - 9) + -10272278170*a(n - 10) + 37353738800*a(n - 11) + -121399651100*a(n - 12) + 354860518600*a(n - 13) + -937845656300*a(n - 14) + 2250829575120*a(n - 15) + -4923689695575*a(n - 16) + 9847379391150*a(n - 17) + -18053528883775*a(n - 18) + 30405943383200*a(n - 19) + -47129212243960*a(n - 20) + 67327446062800*a(n - 21) + -88749815264600*a(n - 22) + 108043253365600*a(n - 23) + -121548660036300*a(n - 24) + 126410606437752*a(n - 25) + -121548660036300*a(n - 26) + 108043253365600*a(n - 27) + -88749815264600*a(n - 28) + 67327446062800*a(n - 29) + -47129212243960*a(n - 30) + 30405943383200*a(n - 31) + -18053528883775*a(n - 32) + 9847379391150*a(n - 33) + -4923689695575*a(n - 34) + 2250829575120*a(n - 35) + -937845656300*a(n - 36) + 354860518600*a(n - 37) + -121399651100*a(n - 38) + 37353738800*a(n - 39) + -10272278170*a(n - 40) + 2505433700*a(n - 41) + -536878650*a(n - 42) + 99884400*a(n - 43) + -15890700*a(n - 44) + 2118760*a(n - 45) + -230300*a(n - 46) + 19600*a(n - 47) + -1225*a(n - 48) + 50*a(n - 49) + -1*a(n - 50),  
+a(0) = 1, a(1) = 100, a(2) = 5000, a(3) = 166700, a(4) = 4170000, a(5) = 83500020, a(6) = 1394447000, a(7) = 19980314300, a(8) = 250799764000, a(9) = 2802204288900, a(10) = 28222682700200, a(11) = 258862555329100, a(12) = 2180706863326000, a(13) = 16993705726247700, a(14) = 123252789641763000, a(15) = 836413142574501340
+
+False  -  checked against website ground truth.     
+False  -  "manual" check if equation is correct.    

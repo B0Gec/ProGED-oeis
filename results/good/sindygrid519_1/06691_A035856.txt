@@ -1,0 +1,32 @@
+
+Preprocessing sees only first 10 terms.
+Sindy threshold: 0.1
+Default setting for how many terms should sindy see: 70
+Sindy will use max_order: 5
+[(1, 6), (1, 7), (1, 8), (1, 9), (1, 10), (2, 7), (2, 8), (2, 9), (2, 10), (3, 8), (3, 9), (3, 10), (4, 9), (4, 10), (5, 10)]
+,   (1, 6, False, False),   (1, 7, False, False),   (1, 8, False, False),   (1, 9, False, False),  (1, 10, False, False), 
+,   (2, 7, False, False),   (2, 8, False, False),   (2, 9, False, False),  (2, 10, False, False),   (3, 8, False, False), 
+,   (3, 9, False, False),  (3, 10, False, False),   (4, 9, False, False),  (4, 10, False, False),  (5, 10, False, False), 
+, 
+
+number of all configurations: 15
+number of fully (true, true) successful configurations: 0
+number of partially only (false, true) successful configurations: 0
+number of total fail (false, false) configurations: 15
+
+
+avg sindy: 
+a(n) = -1249*a(n - 5) - 86524*a(n - 4) + 11714*a(n - 3) - 870*a(n - 2) + 43*a(n - 1)
+False  -  checked avg against website ground truth.     
+False  -  "manual" check avg if equation is correct.    
+While total time consumed by now, scale:6692/34371, seq_id:A035856, order:20 took:
+ 0.3 seconds, i.e. 0.01 minutes or 0.0 hours.
+
+A035856: 
+a(n) = 0
+truth: 
+a(n) = 30*a(n - 1) + -435*a(n - 2) + 4060*a(n - 3) + -27405*a(n - 4) + 142506*a(n - 5) + -593775*a(n - 6) + 2035800*a(n - 7) + -5852925*a(n - 8) + 14307150*a(n - 9) + -30045015*a(n - 10) + 54627300*a(n - 11) + -86493225*a(n - 12) + 119759850*a(n - 13) + -145422675*a(n - 14) + 155117520*a(n - 15) + -145422675*a(n - 16) + 119759850*a(n - 17) + -86493225*a(n - 18) + 54627300*a(n - 19) + -30045015*a(n - 20) + 14307150*a(n - 21) + -5852925*a(n - 22) + 2035800*a(n - 23) + -593775*a(n - 24) + 142506*a(n - 25) + -27405*a(n - 26) + 4060*a(n - 27) + -435*a(n - 28) + 30*a(n - 29) + -1*a(n - 30),  
+a(0) = 1, a(1) = 930, a(2) = 216690, a(3) = 22583810, a(4) = 1338036570, a(5) = 51479517042, a(6) = 1400792169890, a(7) = 28618505434770, a(8) = 458896797950430, a(9) = 5976672906978410, a(10) = 64971574193515962, a(11) = 602758415976923850, a(12) = 4860664625733355250, a(13) = 34599738140887685850
+
+False  -  checked against website ground truth.     
+False  -  "manual" check if equation is correct.    

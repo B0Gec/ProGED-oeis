@@ -1,0 +1,33 @@
+
+Preprocessing sees only first 11 terms.
+Sindy threshold: 0.1
+Default setting for how many terms should sindy see: 70
+Sindy will use max_order: 6
+[(1, 6), (1, 7), (1, 8), (1, 9), (1, 10), (1, 11), (2, 7), (2, 8), (2, 9), (2, 10), (2, 11), (3, 8), (3, 9), (3, 10), (3, 11), (4, 9), (4, 10), (4, 11), (5, 10), (5, 11), (6, 11)]
+,   (1, 6, False, False),   (1, 7, False, False),   (1, 8, False, False),   (1, 9, False, False),  (1, 10, False, False), 
+,  (1, 11, False, False),   (2, 7, False, False),   (2, 8, False, False),   (2, 9, False, False),  (2, 10, False, False), 
+,  (2, 11, False, False),   (3, 8, False, False),   (3, 9, False, False),  (3, 10, False, False),  (3, 11, False, False), 
+,   (4, 9, False, False),  (4, 10, False, False),  (4, 11, False, False),  (5, 10, False, False),  (5, 11, False, False), 
+,  (6, 11, False, False), 
+
+number of all configurations: 21
+number of fully (true, true) successful configurations: 0
+number of partially only (false, true) successful configurations: 0
+number of total fail (false, false) configurations: 21
+
+
+avg sindy: 
+a(n) = -2*a(n - 6) + 11186*a(n - 5) - 24283*a(n - 4) + 3235*a(n - 3) - 307*a(n - 2) + 23*a(n - 1)
+False  -  checked avg against website ground truth.     
+False  -  "manual" check avg if equation is correct.    
+While total time consumed by now, scale:22630/34371, seq_id:A168634, order:20 took:
+ 3.1 seconds, i.e. 0.05 minutes or 0.001 hours.
+
+A168634: 
+a(n) = 0
+truth: 
+a(n) = 17*a(n - 1) + -136*a(n - 2) + 680*a(n - 3) + -2380*a(n - 4) + 6188*a(n - 5) + -12376*a(n - 6) + 19448*a(n - 7) + -24310*a(n - 8) + 24310*a(n - 9) + -19448*a(n - 10) + 12376*a(n - 11) + -6188*a(n - 12) + 2380*a(n - 13) + -680*a(n - 14) + 136*a(n - 15) + -17*a(n - 16) + 1*a(n - 17),  
+a(0) = 0, a(1) = 1, a(2) = 32800, a(3) = 21523725, a(4) = 2147485696, a(5) = 76293953125, a(6) = 1410554977056, a(7) = 16616465343625, a(8) = 140737488486400, a(9) = 926510094691641, a(10) = 5000000000500000, a(11) = 22974864932671861, a(12) = 92442129449011200, a(13) = 332708304594003325, a(14) = 1088976668908450336, a(15) = 3284204177862140625, a(16) = 9223372036863164416
+
+False  -  checked against website ground truth.     
+False  -  "manual" check if equation is correct.    

@@ -1,0 +1,40 @@
+
+Preprocessing sees only first 16 terms.
+Sindy threshold: 0.1
+Default setting for how many terms should sindy see: 70
+Sindy will use max_order: 8
+[(1, 6), (1, 7), (1, 8), (1, 9), (1, 10), (1, 11), (1, 12), (1, 13), (1, 14), (1, 15), (2, 7), (2, 8), (2, 9), (2, 10), (2, 11), (2, 12), (2, 13), (2, 14), (2, 15), (3, 8), (3, 9), (3, 10), (3, 11), (3, 12), (3, 13), (3, 14), (3, 15), (4, 9), (4, 10), (4, 11), (4, 12), (4, 13), (4, 14), (4, 15), (5, 10), (5, 11), (5, 12), (5, 13), (5, 14), (5, 15), (6, 11), (6, 12), (6, 13), (6, 14), (6, 15), (7, 12), (7, 13), (7, 14), (7, 15), (8, 13), (8, 14), (8, 15), (9, 14), (9, 15), (10, 15)]
+,   (1, 6, False, False),   (1, 7, False, False),   (1, 8, False, False),   (1, 9, False, False),  (1, 10, False, False), 
+,  (1, 11, False, False),  (1, 12, False, False),  (1, 13, False, False),  (1, 14, False, False),  (1, 15, False, False), 
+,   (2, 7, False, False),   (2, 8, False, False),   (2, 9, False, False),  (2, 10, False, False),  (2, 11, False, False), 
+,  (2, 12, False, False),  (2, 13, False, False),  (2, 14, False, False),  (2, 15, False, False),   (3, 8, False, False), 
+,   (3, 9, False, False),  (3, 10, False, False),  (3, 11, False, False),  (3, 12, False, False),  (3, 13, False, False), 
+,  (3, 14, False, False),  (3, 15, False, False),   (4, 9, False, False),  (4, 10, False, False),  (4, 11, False, False), 
+,  (4, 12, False, False),  (4, 13, False, False),  (4, 14, False, False),  (4, 15, False, False),  (5, 10, False, False), 
+,  (5, 11, False, False),  (5, 12, False, False),  (5, 13, False, False),  (5, 14, False, False),  (5, 15, False, False), 
+,  (6, 11, False, False),  (6, 12, False, False),  (6, 13, False, False),  (6, 14, False, False),  (6, 15, False, False), 
+,  (7, 12, False, False),  (7, 13, False, False),  (7, 14, False, False),  (7, 15, False, False),  (8, 13, False, False), 
+,  (8, 14, False, False),  (8, 15, False, False),  (9, 14, False, False),  (9, 15, False, False), (10, 15, False, False), 
+, 
+
+number of all configurations: 55
+number of fully (true, true) successful configurations: 0
+number of partially only (false, true) successful configurations: 0
+number of total fail (false, false) configurations: 55
+
+
+avg sindy: 
+a(n) = a(n - 9) - 219*a(n - 8) + 8548*a(n - 7) - 16089*a(n - 6) + 12548*a(n - 5) - 5618*a(n - 4) + 1442*a(n - 3) - 227*a(n - 2) + 22*a(n - 1)
+False  -  checked avg against website ground truth.     
+False  -  "manual" check avg if equation is correct.    
+While total time consumed by now, scale:6665/34371, seq_id:A035803, order:20 took:
+ 3.6 seconds, i.e. 0.06 minutes or 0.001 hours.
+
+A035803: 
+a(n) = 0
+truth: 
+a(n) = 36*a(n - 1) + -630*a(n - 2) + 7140*a(n - 3) + -58905*a(n - 4) + 376992*a(n - 5) + -1947792*a(n - 6) + 8347680*a(n - 7) + -30260340*a(n - 8) + 94143280*a(n - 9) + -254186856*a(n - 10) + 600805296*a(n - 11) + -1251677700*a(n - 12) + 2310789600*a(n - 13) + -3796297200*a(n - 14) + 5567902560*a(n - 15) + -7307872110*a(n - 16) + 8597496600*a(n - 17) + -9075135300*a(n - 18) + 8597496600*a(n - 19) + -7307872110*a(n - 20) + 5567902560*a(n - 21) + -3796297200*a(n - 22) + 2310789600*a(n - 23) + -1251677700*a(n - 24) + 600805296*a(n - 25) + -254186856*a(n - 26) + 94143280*a(n - 27) + -30260340*a(n - 28) + 8347680*a(n - 29) + -1947792*a(n - 30) + 376992*a(n - 31) + -58905*a(n - 32) + 7140*a(n - 33) + -630*a(n - 34) + 36*a(n - 35) + -1*a(n - 36),  
+a(0) = 1, a(1) = 72, a(2) = 2592, a(3) = 62232, a(4) = 1121472, a(5) = 16186536, a(6) = 194986080, a(7) = 2017132920, a(8) = 18300435840, a(9) = 147972367880, a(10) = 1080041397408, a(11) = 7190430174936, a(12) = 44042615547456, a(13) = 250012542410856, a(14) = 1323529602867936, a(15) = 6569619630522168, a(16) = 30721376739859200
+
+False  -  checked against website ground truth.     
+False  -  "manual" check if equation is correct.    

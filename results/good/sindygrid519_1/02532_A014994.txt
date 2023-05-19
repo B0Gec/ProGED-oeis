@@ -1,0 +1,38 @@
+
+Preprocessing sees only first 15 terms.
+Sindy threshold: 0.1
+Default setting for how many terms should sindy see: 70
+Sindy will use max_order: 8
+[(1, 6), (1, 7), (1, 8), (1, 9), (1, 10), (1, 11), (1, 12), (1, 13), (1, 14), (2, 7), (2, 8), (2, 9), (2, 10), (2, 11), (2, 12), (2, 13), (2, 14), (3, 8), (3, 9), (3, 10), (3, 11), (3, 12), (3, 13), (3, 14), (4, 9), (4, 10), (4, 11), (4, 12), (4, 13), (4, 14), (5, 10), (5, 11), (5, 12), (5, 13), (5, 14), (6, 11), (6, 12), (6, 13), (6, 14), (7, 12), (7, 13), (7, 14), (8, 13), (8, 14), (9, 14)]
+,   (1, 6, False, False),   (1, 7, False, False),   (1, 8, False, False),   (1, 9, False, False),  (1, 10, False, False), 
+,  (1, 11, False, False),  (1, 12, False, False),  (1, 13, False, False),  (1, 14, False, False),   (2, 7, False, False), 
+,   (2, 8, False, False),   (2, 9, False, False),  (2, 10, False, False),  (2, 11, False, False),  (2, 12, False, False), 
+,  (2, 13, False, False),  (2, 14, False, False),   (3, 8, False, False),   (3, 9, False, False),  (3, 10, False, False), 
+,  (3, 11, False, False),  (3, 12, False, False),  (3, 13, False, False),  (3, 14, False, False),   (4, 9, False, False), 
+,  (4, 10, False, False),  (4, 11, False, False),  (4, 12, False, False),  (4, 13, False, False),  (4, 14, False, False), 
+,    (5, 10, True, True),    (5, 11, True, True),  (5, 12, False, False),  (5, 13, False, False),  (5, 14, False, False), 
+,    (6, 11, True, True),    (6, 12, True, True),  (6, 13, False, False),  (6, 14, False, False),    (7, 12, True, True), 
+,    (7, 13, True, True),    (7, 14, True, True),    (8, 13, True, True),    (8, 14, True, True),    (9, 14, True, True), 
+, 
+
+number of all configurations: 45
+number of fully (true, true) successful configurations: 10
+number of partially only (false, true) successful configurations: 0
+number of total fail (false, false) configurations: 35
+
+
+avg sindy: 
+a(n) = 3*a(n - 2) - 12*a(n - 1)
+True  -  checked avg against website ground truth.     
+True  -  "manual" check avg if equation is correct.    
+While total time consumed by now, scale:2533/34371, seq_id:A014994, order:20 took:
+ 7.1 seconds, i.e. 0.12 minutes or 0.002 hours.
+
+A014994: 
+a(n) = 12*a(n - 2) - 11*a(n - 1)
+truth: 
+a(n) = -11*a(n - 1) + 12*a(n - 2),  
+a(0) = 1, a(1) = -11
+
+True  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

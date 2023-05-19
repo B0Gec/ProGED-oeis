@@ -1,0 +1,33 @@
+
+Preprocessing sees only first 11 terms.
+Sindy threshold: 0.1
+Default setting for how many terms should sindy see: 70
+Sindy will use max_order: 6
+[(1, 6), (1, 7), (1, 8), (1, 9), (1, 10), (1, 11), (2, 7), (2, 8), (2, 9), (2, 10), (2, 11), (3, 8), (3, 9), (3, 10), (3, 11), (4, 9), (4, 10), (4, 11), (5, 10), (5, 11), (6, 11)]
+,   (1, 6, False, False),   (1, 7, False, False),   (1, 8, False, False),   (1, 9, False, False),  (1, 10, False, False), 
+,  (1, 11, False, False),   (2, 7, False, False),   (2, 8, False, False),   (2, 9, False, False),  (2, 10, False, False), 
+,  (2, 11, False, False),   (3, 8, False, False),   (3, 9, False, False),  (3, 10, False, False),  (3, 11, False, False), 
+,   (4, 9, False, False),  (4, 10, False, False),  (4, 11, False, False),  (5, 10, False, False),  (5, 11, False, False), 
+,  (6, 11, False, False), 
+
+number of all configurations: 21
+number of fully (true, true) successful configurations: 0
+number of partially only (false, true) successful configurations: 0
+number of total fail (false, false) configurations: 21
+
+
+avg sindy: 
+a(n) = a(n - 2) + 33*a(n - 1)
+False  -  checked avg against website ground truth.     
+False  -  "manual" check avg if equation is correct.    
+While total time consumed by now, scale:22681/34371, seq_id:A168711, order:20 took:
+ 3.7 seconds, i.e. 0.06 minutes or 0.001 hours.
+
+A168711: 
+a(n) = 0
+truth: 
+a(n) = 32*a(n - 1) + 32*a(n - 2) + 32*a(n - 3) + 32*a(n - 4) + 32*a(n - 5) + 32*a(n - 6) + 32*a(n - 7) + 32*a(n - 8) + 32*a(n - 9) + 32*a(n - 10) + 32*a(n - 11) + 32*a(n - 12) + 32*a(n - 13) + 32*a(n - 14) + 32*a(n - 15) + 32*a(n - 16) + -528*a(n - 17),  
+a(0) = 1, a(1) = 34, a(2) = 1122, a(3) = 37026, a(4) = 1221858, a(5) = 40321314, a(6) = 1330603362, a(7) = 43909910946, a(8) = 1449027061218, a(9) = 47817893020194, a(10) = 1577990469666402, a(11) = 52073685498991266, a(12) = 1718431621466711778, a(13) = 56708243508401488674, a(14) = 1871372035777249126242, a(15) = 61755277180649221165986, a(16) = 2037924146961424298477538
+
+False  -  checked against website ground truth.     
+False  -  "manual" check if equation is correct.    

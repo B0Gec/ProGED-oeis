@@ -1,0 +1,35 @@
+
+Preprocessing sees only first 12 terms.
+Sindy threshold: 0.1
+Default setting for how many terms should sindy see: 70
+Sindy will use max_order: 6
+[(1, 6), (1, 7), (1, 8), (1, 9), (1, 10), (1, 11), (1, 12), (2, 7), (2, 8), (2, 9), (2, 10), (2, 11), (2, 12), (3, 8), (3, 9), (3, 10), (3, 11), (3, 12), (4, 9), (4, 10), (4, 11), (4, 12), (5, 10), (5, 11), (5, 12), (6, 11), (6, 12), (7, 12)]
+,   (1, 6, False, False),   (1, 7, False, False),   (1, 8, False, False),   (1, 9, False, False),  (1, 10, False, False), 
+,  (1, 11, False, False),  (1, 12, False, False),   (2, 7, False, False),   (2, 8, False, False),   (2, 9, False, False), 
+,  (2, 10, False, False),  (2, 11, False, False),  (2, 12, False, False),   (3, 8, False, False),   (3, 9, False, False), 
+,  (3, 10, False, False),  (3, 11, False, False),  (3, 12, False, False),   (4, 9, False, False),  (4, 10, False, False), 
+,  (4, 11, False, False),  (4, 12, False, False),  (5, 10, False, False),  (5, 11, False, False),  (5, 12, False, False), 
+,  (6, 11, False, False),  (6, 12, False, False),  (7, 12, False, False), 
+, 
+
+number of all configurations: 28
+number of fully (true, true) successful configurations: 0
+number of partially only (false, true) successful configurations: 0
+number of total fail (false, false) configurations: 28
+
+
+avg sindy: 
+a(n) = a(n - 2) + 24*a(n - 1)
+False  -  checked avg against website ground truth.     
+False  -  "manual" check avg if equation is correct.    
+While total time consumed by now, scale:22092/34371, seq_id:A166612, order:20 took:
+ 4.8 seconds, i.e. 0.08 minutes or 0.001 hours.
+
+A166612: 
+a(n) = 0
+truth: 
+a(n) = 23*a(n - 1) + 23*a(n - 2) + 23*a(n - 3) + 23*a(n - 4) + 23*a(n - 5) + 23*a(n - 6) + 23*a(n - 7) + 23*a(n - 8) + 23*a(n - 9) + 23*a(n - 10) + 23*a(n - 11) + -276*a(n - 12),  
+a(0) = 1, a(1) = 25, a(2) = 600, a(3) = 14400, a(4) = 345600, a(5) = 8294400, a(6) = 199065600, a(7) = 4777574400, a(8) = 114661785600, a(9) = 2751882854400, a(10) = 66045188505600, a(11) = 1585084524134400
+
+False  -  checked against website ground truth.     
+False  -  "manual" check if equation is correct.    

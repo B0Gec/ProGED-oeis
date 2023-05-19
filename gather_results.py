@@ -44,6 +44,7 @@ job_id = "32117747"
 # job_id = "debug2"
 job_id = "38095692"
 job_id = "sindy512135"
+job_id = "sindygrid519_1"
 
 
 # seq_file = '13000_A079034.txt'

@@ -1,0 +1,36 @@
+
+Preprocessing sees only first 13 terms.
+Sindy threshold: 0.1
+Default setting for how many terms should sindy see: 70
+Sindy will use max_order: 6
+[(1, 6), (1, 7), (1, 8), (1, 9), (1, 10), (1, 11), (1, 12), (1, 13), (2, 7), (2, 8), (2, 9), (2, 10), (2, 11), (2, 12), (2, 13), (3, 8), (3, 9), (3, 10), (3, 11), (3, 12), (3, 13), (4, 9), (4, 10), (4, 11), (4, 12), (4, 13), (5, 10), (5, 11), (5, 12), (5, 13), (6, 11), (6, 12), (6, 13), (7, 12), (7, 13), (8, 13)]
+,   (1, 6, False, False),   (1, 7, False, False),   (1, 8, False, False),   (1, 9, False, False),  (1, 10, False, False), 
+,  (1, 11, False, False),  (1, 12, False, False),  (1, 13, False, False),   (2, 7, False, False),   (2, 8, False, False), 
+,   (2, 9, False, False),  (2, 10, False, False),  (2, 11, False, False),  (2, 12, False, False),  (2, 13, False, False), 
+,   (3, 8, False, False),   (3, 9, False, False),  (3, 10, False, False),  (3, 11, False, False),  (3, 12, False, False), 
+,  (3, 13, False, False),   (4, 9, False, False),  (4, 10, False, False),  (4, 11, False, False),  (4, 12, False, False), 
+,  (4, 13, False, False),  (5, 10, False, False),  (5, 11, False, False),  (5, 12, False, False),  (5, 13, False, False), 
+,  (6, 11, False, False),  (6, 12, False, False),  (6, 13, False, False),  (7, 12, False, False),  (7, 13, False, False), 
+,  (8, 13, False, False), 
+
+number of all configurations: 36
+number of fully (true, true) successful configurations: 0
+number of partially only (false, true) successful configurations: 0
+number of total fail (false, false) configurations: 36
+
+
+avg sindy: 
+a(n) = a(n - 2) + 17*a(n - 1)
+False  -  checked avg against website ground truth.     
+False  -  "manual" check avg if equation is correct.    
+While total time consumed by now, scale:23433/34371, seq_id:A169463, order:20 took:
+ 48.5 seconds, i.e. 0.81 minutes or 0.013 hours.
+
+A169463: 
+a(n) = 0
+truth: 
+a(n) = 16*a(n - 1) + 16*a(n - 2) + 16*a(n - 3) + 16*a(n - 4) + 16*a(n - 5) + 16*a(n - 6) + 16*a(n - 7) + 16*a(n - 8) + 16*a(n - 9) + 16*a(n - 10) + 16*a(n - 11) + 16*a(n - 12) + 16*a(n - 13) + 16*a(n - 14) + 16*a(n - 15) + 16*a(n - 16) + 16*a(n - 17) + 16*a(n - 18) + 16*a(n - 19) + 16*a(n - 20) + 16*a(n - 21) + 16*a(n - 22) + 16*a(n - 23) + 16*a(n - 24) + 16*a(n - 25) + 16*a(n - 26) + 16*a(n - 27) + 16*a(n - 28) + 16*a(n - 29) + 16*a(n - 30) + 16*a(n - 31) + 16*a(n - 32) + -136*a(n - 33),  
+a(0) = 1, a(1) = 18, a(2) = 306, a(3) = 5202, a(4) = 88434, a(5) = 1503378, a(6) = 25557426, a(7) = 434476242, a(8) = 7386096114, a(9) = 125563633938, a(10) = 2134581776946, a(11) = 36287890208082, a(12) = 616894133537394, a(13) = 10487200270135698, a(14) = 178282404592306866, a(15) = 3030800878069216722, a(16) = 51523614927176684274, a(17) = 875901453762003632658, a(18) = 14890324713954061755186, a(19) = 253135520137219049838162, a(20) = 4303303842332723847248754, a(21) = 73156165319656305403228818, a(22) = 1243654810434157191854889906, a(23) = 21142131777380672261533128402, a(24) = 359416240215471428446063182834, a(25) = 6110076083663014283583074108178, a(26) = 103871293422271242820912259839026, a(27) = 1765811988178611127955508417263442, a(28) = 30018803799036389175243643093478514, a(29) = 510319664583618615979141932589134738, a(30) = 8675434297921516471645412854015290546, a(31) = 147482383064665780017972018518259939282, a(32) = 2507200512099318260305524314810418967794
+
+False  -  checked against website ground truth.     
+False  -  "manual" check if equation is correct.    

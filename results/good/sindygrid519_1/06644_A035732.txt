@@ -1,0 +1,40 @@
+
+Preprocessing sees only first 16 terms.
+Sindy threshold: 0.1
+Default setting for how many terms should sindy see: 70
+Sindy will use max_order: 8
+[(1, 6), (1, 7), (1, 8), (1, 9), (1, 10), (1, 11), (1, 12), (1, 13), (1, 14), (1, 15), (2, 7), (2, 8), (2, 9), (2, 10), (2, 11), (2, 12), (2, 13), (2, 14), (2, 15), (3, 8), (3, 9), (3, 10), (3, 11), (3, 12), (3, 13), (3, 14), (3, 15), (4, 9), (4, 10), (4, 11), (4, 12), (4, 13), (4, 14), (4, 15), (5, 10), (5, 11), (5, 12), (5, 13), (5, 14), (5, 15), (6, 11), (6, 12), (6, 13), (6, 14), (6, 15), (7, 12), (7, 13), (7, 14), (7, 15), (8, 13), (8, 14), (8, 15), (9, 14), (9, 15), (10, 15)]
+,   (1, 6, False, False),   (1, 7, False, False),   (1, 8, False, False),   (1, 9, False, False),  (1, 10, False, False), 
+,  (1, 11, False, False),  (1, 12, False, False),  (1, 13, False, False),  (1, 14, False, False),  (1, 15, False, False), 
+,   (2, 7, False, False),   (2, 8, False, False),   (2, 9, False, False),  (2, 10, False, False),  (2, 11, False, False), 
+,  (2, 12, False, False),  (2, 13, False, False),  (2, 14, False, False),  (2, 15, False, False),   (3, 8, False, False), 
+,   (3, 9, False, False),  (3, 10, False, False),  (3, 11, False, False),  (3, 12, False, False),  (3, 13, False, False), 
+,  (3, 14, False, False),  (3, 15, False, False),   (4, 9, False, False),  (4, 10, False, False),  (4, 11, False, False), 
+,  (4, 12, False, False),  (4, 13, False, False),  (4, 14, False, False),  (4, 15, False, False),  (5, 10, False, False), 
+,  (5, 11, False, False),  (5, 12, False, False),  (5, 13, False, False),  (5, 14, False, False),  (5, 15, False, False), 
+,  (6, 11, False, False),  (6, 12, False, False),  (6, 13, False, False),  (6, 14, False, False),  (6, 15, False, False), 
+,  (7, 12, False, False),  (7, 13, False, False),  (7, 14, False, False),  (7, 15, False, False),  (8, 13, False, False), 
+,  (8, 14, False, False),  (8, 15, False, False),  (9, 14, False, False),  (9, 15, False, False), (10, 15, False, False), 
+, 
+
+number of all configurations: 55
+number of fully (true, true) successful configurations: 0
+number of partially only (false, true) successful configurations: 0
+number of total fail (false, false) configurations: 55
+
+
+avg sindy: 
+a(n) = a(n - 9) - 247*a(n - 8) + 10461*a(n - 7) - 19078*a(n - 6) + 14445*a(n - 5) - 6282*a(n - 4) + 1567*a(n - 3) - 240*a(n - 2) + 23*a(n - 1)
+False  -  checked avg against website ground truth.     
+False  -  "manual" check avg if equation is correct.    
+While total time consumed by now, scale:6645/34371, seq_id:A035732, order:20 took:
+ 9.1 seconds, i.e. 0.15 minutes or 0.003 hours.
+
+A035732: 
+a(n) = 0
+truth: 
+a(n) = 37*a(n - 1) + -666*a(n - 2) + 7770*a(n - 3) + -66045*a(n - 4) + 435897*a(n - 5) + -2324784*a(n - 6) + 10295472*a(n - 7) + -38608020*a(n - 8) + 124403620*a(n - 9) + -348330136*a(n - 10) + 854992152*a(n - 11) + -1852482996*a(n - 12) + 3562467300*a(n - 13) + -6107086800*a(n - 14) + 9364199760*a(n - 15) + -12875774670*a(n - 16) + 15905368710*a(n - 17) + -17672631900*a(n - 18) + 17672631900*a(n - 19) + -15905368710*a(n - 20) + 12875774670*a(n - 21) + -9364199760*a(n - 22) + 6107086800*a(n - 23) + -3562467300*a(n - 24) + 1852482996*a(n - 25) + -854992152*a(n - 26) + 348330136*a(n - 27) + -124403620*a(n - 28) + 38608020*a(n - 29) + -10295472*a(n - 30) + 2324784*a(n - 31) + -435897*a(n - 32) + 66045*a(n - 33) + -7770*a(n - 34) + 666*a(n - 35) + -37*a(n - 36) + 1*a(n - 37),  
+a(0) = 1, a(1) = 74, a(2) = 2738, a(3) = 67562, a(4) = 1251266, a(5) = 18559274, a(6) = 229731890, a(7) = 2441850890, a(8) = 22759419650, a(9) = 189032223370, a(10) = 1417045988658, a(11) = 9687517561002, a(12) = 60920563283394, a(13) = 354975721241706, a(14) = 1928517866520498, a(15) = 9821667099910602, a(16) = 47112663470291970, a(17) = 213744829605897930, a(18) = 920606667020062130, a(19) = 3776766076988676970, a(20) = 14802580485176160706, a(21) = 55578548160277178794, a(22) = 200402916980183383858, a(23) = 695520233386930050442, a(24) = 2328223393508202424066, a(25) = 7531419859500254821642, a(26) = 23584708886431373653042, a(27) = 71613109410497334106154, a(28) = 211163304550857801386946, a(29) = 605504775546445011155178, a(30) = 1690664197262031642143922, a(31) = 4602219002846362801359690, a(32) = 12227629129015368642654210, a(33) = 31742828625314379587835210, a(34) = 80595689717698702531315890, a(35) = 200331268107002243249026794, a(36) = 487910202508886719069242306
+
+False  -  checked against website ground truth.     
+False  -  "manual" check if equation is correct.    

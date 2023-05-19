@@ -1,0 +1,38 @@
+
+Preprocessing sees only first 15 terms.
+Sindy threshold: 0.1
+Default setting for how many terms should sindy see: 70
+Sindy will use max_order: 8
+[(1, 6), (1, 7), (1, 8), (1, 9), (1, 10), (1, 11), (1, 12), (1, 13), (1, 14), (2, 7), (2, 8), (2, 9), (2, 10), (2, 11), (2, 12), (2, 13), (2, 14), (3, 8), (3, 9), (3, 10), (3, 11), (3, 12), (3, 13), (3, 14), (4, 9), (4, 10), (4, 11), (4, 12), (4, 13), (4, 14), (5, 10), (5, 11), (5, 12), (5, 13), (5, 14), (6, 11), (6, 12), (6, 13), (6, 14), (7, 12), (7, 13), (7, 14), (8, 13), (8, 14), (9, 14)]
+,   (1, 6, False, False),   (1, 7, False, False),   (1, 8, False, False),   (1, 9, False, False),  (1, 10, False, False), 
+,  (1, 11, False, False),  (1, 12, False, False),  (1, 13, False, False),  (1, 14, False, False),   (2, 7, False, False), 
+,   (2, 8, False, False),   (2, 9, False, False),  (2, 10, False, False),  (2, 11, False, False),  (2, 12, False, False), 
+,  (2, 13, False, False),  (2, 14, False, False),   (3, 8, False, False),    (3, 9, False, True),  (3, 10, False, False), 
+,  (3, 11, False, False),  (3, 12, False, False),  (3, 13, False, False),  (3, 14, False, False),   (4, 9, False, False), 
+,  (4, 10, False, False),  (4, 11, False, False),  (4, 12, False, False),  (4, 13, False, False),  (4, 14, False, False), 
+,  (5, 10, False, False),  (5, 11, False, False),  (5, 12, False, False),  (5, 13, False, False),  (5, 14, False, False), 
+,  (6, 11, False, False),  (6, 12, False, False),  (6, 13, False, False),  (6, 14, False, False),  (7, 12, False, False), 
+,  (7, 13, False, False),  (7, 14, False, False),  (8, 13, False, False),  (8, 14, False, False),  (9, 14, False, False), 
+, 
+
+number of all configurations: 45
+number of fully (true, true) successful configurations: 0
+number of partially only (false, true) successful configurations: 1
+number of total fail (false, false) configurations: 44
+
+
+avg sindy: 
+a(n) = a(n - 2) + 13*a(n - 1)
+False  -  checked avg against website ground truth.     
+True  -  "manual" check avg if equation is correct.    
+While total time consumed by now, scale:23909/34371, seq_id:A170311, order:20 took:
+ 10.4 seconds, i.e. 0.17 minutes or 0.003 hours.
+
+A170311: 
+a(n) = 13*a(n - 1)
+truth: 
+a(n) = 12*a(n - 1) + 12*a(n - 2) + 12*a(n - 3) + 12*a(n - 4) + 12*a(n - 5) + 12*a(n - 6) + 12*a(n - 7) + 12*a(n - 8) + 12*a(n - 9) + 12*a(n - 10) + 12*a(n - 11) + 12*a(n - 12) + 12*a(n - 13) + 12*a(n - 14) + 12*a(n - 15) + 12*a(n - 16) + 12*a(n - 17) + 12*a(n - 18) + 12*a(n - 19) + 12*a(n - 20) + 12*a(n - 21) + 12*a(n - 22) + 12*a(n - 23) + 12*a(n - 24) + 12*a(n - 25) + 12*a(n - 26) + 12*a(n - 27) + 12*a(n - 28) + 12*a(n - 29) + 12*a(n - 30) + 12*a(n - 31) + 12*a(n - 32) + 12*a(n - 33) + 12*a(n - 34) + 12*a(n - 35) + 12*a(n - 36) + 12*a(n - 37) + 12*a(n - 38) + 12*a(n - 39) + 12*a(n - 40) + 12*a(n - 41) + -78*a(n - 42),  
+a(0) = 1, a(1) = 14, a(2) = 182, a(3) = 2366, a(4) = 30758, a(5) = 399854, a(6) = 5198102, a(7) = 67575326, a(8) = 878479238, a(9) = 11420230094, a(10) = 148462991222, a(11) = 1930018885886, a(12) = 25090245516518, a(13) = 326173191714734, a(14) = 4240251492291542, a(15) = 55123269399790046, a(16) = 716602502197270598
+
+False  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

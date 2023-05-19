@@ -1,0 +1,31 @@
+
+Preprocessing sees only first 9 terms.
+Sindy threshold: 0.1
+Default setting for how many terms should sindy see: 70
+Sindy will use max_order: 4
+[(1, 6), (1, 7), (1, 8), (1, 9), (2, 7), (2, 8), (2, 9), (3, 8), (3, 9), (4, 9)]
+,   (1, 6, False, False),   (1, 7, False, False),   (1, 8, False, False),   (1, 9, False, False),   (2, 7, False, False), 
+,   (2, 8, False, False),   (2, 9, False, False),   (3, 8, False, False),   (3, 9, False, False),   (4, 9, False, False), 
+, 
+
+number of all configurations: 10
+number of fully (true, true) successful configurations: 0
+number of partially only (false, true) successful configurations: 0
+number of total fail (false, false) configurations: 10
+
+
+avg sindy: 
+a(n) = -178251*a(n - 4) + 20041*a(n - 3) - 1253*a(n - 2) + 53*a(n - 1)
+False  -  checked avg against website ground truth.     
+False  -  "manual" check avg if equation is correct.    
+While total time consumed by now, scale:6695/34371, seq_id:A035859, order:20 took:
+ 0.3 seconds, i.e. 0.0 minutes or 0.0 hours.
+
+A035859: 
+a(n) = 0
+truth: 
+a(n) = 33*a(n - 1) + -528*a(n - 2) + 5456*a(n - 3) + -40920*a(n - 4) + 237336*a(n - 5) + -1107568*a(n - 6) + 4272048*a(n - 7) + -13884156*a(n - 8) + 38567100*a(n - 9) + -92561040*a(n - 10) + 193536720*a(n - 11) + -354817320*a(n - 12) + 573166440*a(n - 13) + -818809200*a(n - 14) + 1037158320*a(n - 15) + -1166803110*a(n - 16) + 1166803110*a(n - 17) + -1037158320*a(n - 18) + 818809200*a(n - 19) + -573166440*a(n - 20) + 354817320*a(n - 21) + -193536720*a(n - 22) + 92561040*a(n - 23) + -38567100*a(n - 24) + 13884156*a(n - 25) + -4272048*a(n - 26) + 1107568*a(n - 27) + -237336*a(n - 28) + 40920*a(n - 29) + -5456*a(n - 30) + 528*a(n - 31) + -33*a(n - 32) + 1*a(n - 33),  
+a(0) = 1, a(1) = 1122, a(2) = 315282, a(3) = 39585282, a(4) = 2820372522, a(5) = 130174144914, a(6) = 4236638107746, a(7) = 103169215245426, a(8) = 1964280056680326, a(9) = 30250552830905946, a(10) = 387159959112556938, a(11) = 4209712158409065210, a(12) = 39606467973324369810
+
+False  -  checked against website ground truth.     
+False  -  "manual" check if equation is correct.    

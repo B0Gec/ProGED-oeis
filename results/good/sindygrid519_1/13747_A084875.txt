@@ -1,0 +1,35 @@
+
+Preprocessing sees only first 12 terms.
+Sindy threshold: 0.1
+Default setting for how many terms should sindy see: 70
+Sindy will use max_order: 6
+[(1, 6), (1, 7), (1, 8), (1, 9), (1, 10), (1, 11), (1, 12), (2, 7), (2, 8), (2, 9), (2, 10), (2, 11), (2, 12), (3, 8), (3, 9), (3, 10), (3, 11), (3, 12), (4, 9), (4, 10), (4, 11), (4, 12), (5, 10), (5, 11), (5, 12), (6, 11), (6, 12), (7, 12)]
+,   (1, 6, False, False),   (1, 7, False, False),   (1, 8, False, False),   (1, 9, False, False),  (1, 10, False, False), 
+,  (1, 11, False, False),  (1, 12, False, False),   (2, 7, False, False),   (2, 8, False, False),   (2, 9, False, False), 
+,  (2, 10, False, False),  (2, 11, False, False),  (2, 12, False, False),   (3, 8, False, False),   (3, 9, False, False), 
+,  (3, 10, False, False),  (3, 11, False, False),  (3, 12, False, False),   (4, 9, False, False),  (4, 10, False, False), 
+,  (4, 11, False, False),  (4, 12, False, False),  (5, 10, False, False),  (5, 11, False, False),  (5, 12, False, False), 
+,  (6, 11, False, False),  (6, 12, False, False),  (7, 12, False, False), 
+, 
+
+number of all configurations: 28
+number of fully (true, true) successful configurations: 0
+number of partially only (false, true) successful configurations: 0
+number of total fail (false, false) configurations: 28
+
+
+avg sindy: 
+a(n) = -67*a(n - 6) + 15546*a(n - 5) - 16006*a(n - 4) + 6165*a(n - 3) - 870*a(n - 2) + 53*a(n - 1)
+False  -  checked avg against website ground truth.     
+False  -  "manual" check avg if equation is correct.    
+While total time consumed by now, scale:13748/34371, seq_id:A084875, order:20 took:
+ 6.6 seconds, i.e. 0.11 minutes or 0.002 hours.
+
+A084875: 
+a(n) = 0
+truth: 
+a(n) = 77*a(n - 1) + -2277*a(n - 2) + 32895*a(n - 3) + -242514*a(n - 4) + 854388*a(n - 5) + -1102248*a(n - 6),  
+a(0) = 0, a(1) = 0, a(2) = 1, a(3) = 350, a(4) = 24025, a(5) = 1061570
+
+False  -  checked against website ground truth.     
+False  -  "manual" check if equation is correct.    

@@ -1,0 +1,36 @@
+
+Preprocessing sees only first 13 terms.
+Sindy threshold: 0.1
+Default setting for how many terms should sindy see: 70
+Sindy will use max_order: 6
+[(1, 6), (1, 7), (1, 8), (1, 9), (1, 10), (1, 11), (1, 12), (1, 13), (2, 7), (2, 8), (2, 9), (2, 10), (2, 11), (2, 12), (2, 13), (3, 8), (3, 9), (3, 10), (3, 11), (3, 12), (3, 13), (4, 9), (4, 10), (4, 11), (4, 12), (4, 13), (5, 10), (5, 11), (5, 12), (5, 13), (6, 11), (6, 12), (6, 13), (7, 12), (7, 13), (8, 13)]
+,   (1, 6, False, False),   (1, 7, False, False),   (1, 8, False, False),   (1, 9, False, False),  (1, 10, False, False), 
+,  (1, 11, False, False),  (1, 12, False, False),  (1, 13, False, False),   (2, 7, False, False),   (2, 8, False, False), 
+,   (2, 9, False, False),  (2, 10, False, False),  (2, 11, False, False),  (2, 12, False, False),  (2, 13, False, False), 
+,   (3, 8, False, False),   (3, 9, False, False),  (3, 10, False, False),  (3, 11, False, False),  (3, 12, False, False), 
+,  (3, 13, False, False),   (4, 9, False, False),  (4, 10, False, False),  (4, 11, False, False),  (4, 12, False, False), 
+,  (4, 13, False, False),  (5, 10, False, False),  (5, 11, False, False),  (5, 12, False, False),  (5, 13, False, False), 
+,  (6, 11, False, False),  (6, 12, False, False),  (6, 13, False, False),  (7, 12, False, False),  (7, 13, False, False), 
+,  (8, 13, False, False), 
+
+number of all configurations: 36
+number of fully (true, true) successful configurations: 0
+number of partially only (false, true) successful configurations: 0
+number of total fail (false, false) configurations: 36
+
+
+avg sindy: 
+a(n) = 5*a(n - 7) - 1061*a(n - 6) + 3624*a(n - 5) - 6243*a(n - 4) + 1168*a(n - 3) - 159*a(n - 2) + 17*a(n - 1)
+False  -  checked avg against website ground truth.     
+False  -  "manual" check avg if equation is correct.    
+While total time consumed by now, scale:22589/34371, seq_id:A168507, order:20 took:
+ 5.4 seconds, i.e. 0.09 minutes or 0.001 hours.
+
+A168507: 
+a(n) = 0
+truth: 
+a(n) = 16*a(n - 1) + -120*a(n - 2) + 560*a(n - 3) + -1820*a(n - 4) + 4368*a(n - 5) + -8008*a(n - 6) + 11440*a(n - 7) + -12870*a(n - 8) + 11440*a(n - 9) + -8008*a(n - 10) + 4368*a(n - 11) + -1820*a(n - 12) + 560*a(n - 13) + -120*a(n - 14) + 16*a(n - 15) + -1*a(n - 16),  
+a(0) = 0, a(1) = 1, a(2) = 16400, a(3) = 7174575, a(4) = 536871424, a(5) = 15258790625, a(6) = 235092496176, a(7) = 2373780763375, a(8) = 17592186060800, a(9) = 102945566076849, a(10) = 500000000050000, a(11) = 2088624084788351, a(12) = 7703510787417600, a(13) = 25592946507231025, a(14) = 77784047779175024, a(15) = 218946945190809375
+
+False  -  checked against website ground truth.     
+False  -  "manual" check if equation is correct.    

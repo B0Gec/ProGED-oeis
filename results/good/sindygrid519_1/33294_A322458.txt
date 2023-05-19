@@ -1,0 +1,47 @@
+
+Preprocessing sees only first 19 terms.
+Sindy threshold: 0.1
+Default setting for how many terms should sindy see: 70
+Sindy will use max_order: 10
+[(1, 6), (1, 7), (1, 8), (1, 9), (1, 10), (1, 11), (1, 12), (1, 13), (1, 14), (1, 15), (1, 16), (1, 17), (1, 18), (2, 7), (2, 8), (2, 9), (2, 10), (2, 11), (2, 12), (2, 13), (2, 14), (2, 15), (2, 16), (2, 17), (2, 18), (3, 8), (3, 9), (3, 10), (3, 11), (3, 12), (3, 13), (3, 14), (3, 15), (3, 16), (3, 17), (3, 18), (4, 9), (4, 10), (4, 11), (4, 12), (4, 13), (4, 14), (4, 15), (4, 16), (4, 17), (4, 18), (5, 10), (5, 11), (5, 12), (5, 13), (5, 14), (5, 15), (5, 16), (5, 17), (5, 18), (6, 11), (6, 12), (6, 13), (6, 14), (6, 15), (6, 16), (6, 17), (6, 18), (7, 12), (7, 13), (7, 14), (7, 15), (7, 16), (7, 17), (7, 18), (8, 13), (8, 14), (8, 15), (8, 16), (8, 17), (8, 18), (9, 14), (9, 15), (9, 16), (9, 17), (9, 18), (10, 15), (10, 16), (10, 17), (10, 18), (11, 16), (11, 17), (11, 18), (12, 17), (12, 18), (13, 18)]
+,   (1, 6, False, False),   (1, 7, False, False),   (1, 8, False, False),   (1, 9, False, False),  (1, 10, False, False), 
+,  (1, 11, False, False),  (1, 12, False, False),  (1, 13, False, False),  (1, 14, False, False),  (1, 15, False, False), 
+,  (1, 16, False, False),  (1, 17, False, False),  (1, 18, False, False),   (2, 7, False, False),   (2, 8, False, False), 
+,   (2, 9, False, False),  (2, 10, False, False),  (2, 11, False, False),  (2, 12, False, False),  (2, 13, False, False), 
+,  (2, 14, False, False),  (2, 15, False, False),  (2, 16, False, False),  (2, 17, False, False),  (2, 18, False, False), 
+,     (3, 8, True, True),     (3, 9, True, True),    (3, 10, True, True),    (3, 11, True, True),    (3, 12, True, True), 
+,    (3, 13, True, True),    (3, 14, True, True),    (3, 15, True, True),    (3, 16, True, True),    (3, 17, True, True), 
+,    (3, 18, True, True),   (4, 9, False, False),  (4, 10, False, False),  (4, 11, False, False),  (4, 12, False, False), 
+,  (4, 13, False, False),  (4, 14, False, False),  (4, 15, False, False),  (4, 16, False, False),  (4, 17, False, False), 
+,  (4, 18, False, False),  (5, 10, False, False),  (5, 11, False, False),  (5, 12, False, False),  (5, 13, False, False), 
+,  (5, 14, False, False),  (5, 15, False, False),  (5, 16, False, False),  (5, 17, False, False),  (5, 18, False, False), 
+,  (6, 11, False, False),  (6, 12, False, False),  (6, 13, False, False),  (6, 14, False, False),  (6, 15, False, False), 
+,  (6, 16, False, False),  (6, 17, False, False),  (6, 18, False, False),  (7, 12, False, False),  (7, 13, False, False), 
+,  (7, 14, False, False),  (7, 15, False, False),  (7, 16, False, False),  (7, 17, False, False),  (7, 18, False, False), 
+,  (8, 13, False, False),  (8, 14, False, False),  (8, 15, False, False),  (8, 16, False, False),  (8, 17, False, False), 
+,  (8, 18, False, False),  (9, 14, False, False),  (9, 15, False, False),  (9, 16, False, False),  (9, 17, False, False), 
+,  (9, 18, False, False), (10, 15, False, False), (10, 16, False, False), (10, 17, False, False), (10, 18, False, False), 
+, (11, 16, False, False), (11, 17, False, False), (11, 18, False, False), (12, 17, False, False), (12, 18, False, False), 
+, (13, 18, False, False), 
+
+number of all configurations: 91
+number of fully (true, true) successful configurations: 11
+number of partially only (false, true) successful configurations: 0
+number of total fail (false, false) configurations: 80
+
+
+avg sindy: 
+a(n) = -a(n - 7) - 2*a(n - 6) - 3*a(n - 5) - 12*a(n - 4) - 18*a(n - 3) + 42*a(n - 2) - 2*a(n - 1)
+True  -  checked avg against website ground truth.     
+True  -  "manual" check avg if equation is correct.    
+While total time consumed by now, scale:33295/34371, seq_id:A322458, order:20 took:
+ 24.8 seconds, i.e. 0.41 minutes or 0.007 hours.
+
+A322458: 
+a(n) = -49*a(n - 3) + 49*a(n - 2)
+truth: 
+a(n) = 0*a(n - 1) + 49*a(n - 2) + -49*a(n - 3),  
+a(0) = 3, a(1) = 0, a(2) = 98
+
+True  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

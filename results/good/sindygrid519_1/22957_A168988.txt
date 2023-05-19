@@ -1,0 +1,35 @@
+
+Preprocessing sees only first 12 terms.
+Sindy threshold: 0.1
+Default setting for how many terms should sindy see: 70
+Sindy will use max_order: 6
+[(1, 6), (1, 7), (1, 8), (1, 9), (1, 10), (1, 11), (1, 12), (2, 7), (2, 8), (2, 9), (2, 10), (2, 11), (2, 12), (3, 8), (3, 9), (3, 10), (3, 11), (3, 12), (4, 9), (4, 10), (4, 11), (4, 12), (5, 10), (5, 11), (5, 12), (6, 11), (6, 12), (7, 12)]
+,   (1, 6, False, False),   (1, 7, False, False),   (1, 8, False, False),   (1, 9, False, False),  (1, 10, False, False), 
+,  (1, 11, False, False),  (1, 12, False, False),   (2, 7, False, False),   (2, 8, False, False),   (2, 9, False, False), 
+,  (2, 10, False, False),  (2, 11, False, False),  (2, 12, False, False),   (3, 8, False, False),    (3, 9, False, True), 
+,  (3, 10, False, False),  (3, 11, False, False),  (3, 12, False, False),   (4, 9, False, False),  (4, 10, False, False), 
+,  (4, 11, False, False),  (4, 12, False, False),  (5, 10, False, False),  (5, 11, False, False),  (5, 12, False, False), 
+,  (6, 11, False, False),  (6, 12, False, False),  (7, 12, False, False), 
+, 
+
+number of all configurations: 28
+number of fully (true, true) successful configurations: 0
+number of partially only (false, true) successful configurations: 1
+number of total fail (false, false) configurations: 27
+
+
+avg sindy: 
+a(n) = a(n - 2) + 22*a(n - 1)
+False  -  checked avg against website ground truth.     
+True  -  "manual" check avg if equation is correct.    
+While total time consumed by now, scale:22958/34371, seq_id:A168988, order:20 took:
+ 0.6 seconds, i.e. 0.01 minutes or 0.0 hours.
+
+A168988: 
+a(n) = 22*a(n - 1)
+truth: 
+a(n) = 21*a(n - 1) + 21*a(n - 2) + 21*a(n - 3) + 21*a(n - 4) + 21*a(n - 5) + 21*a(n - 6) + 21*a(n - 7) + 21*a(n - 8) + 21*a(n - 9) + 21*a(n - 10) + 21*a(n - 11) + 21*a(n - 12) + 21*a(n - 13) + 21*a(n - 14) + 21*a(n - 15) + 21*a(n - 16) + 21*a(n - 17) + 21*a(n - 18) + 21*a(n - 19) + 21*a(n - 20) + 21*a(n - 21) + 21*a(n - 22) + -231*a(n - 23),  
+a(0) = 1, a(1) = 23, a(2) = 506, a(3) = 11132, a(4) = 244904, a(5) = 5387888, a(6) = 118533536, a(7) = 2607737792, a(8) = 57370231424, a(9) = 1262145091328, a(10) = 27767192009216, a(11) = 610878224202752, a(12) = 13439320932460544, a(13) = 295665060514131968, a(14) = 6504631331310903296, a(15) = 143101889288839872512
+
+False  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

@@ -1,0 +1,32 @@
+
+Preprocessing sees only first 10 terms.
+Sindy threshold: 0.1
+Default setting for how many terms should sindy see: 70
+Sindy will use max_order: 5
+[(1, 6), (1, 7), (1, 8), (1, 9), (1, 10), (2, 7), (2, 8), (2, 9), (2, 10), (3, 8), (3, 9), (3, 10), (4, 9), (4, 10), (5, 10)]
+,   (1, 6, False, False),   (1, 7, False, False),   (1, 8, False, False),   (1, 9, False, False),  (1, 10, False, False), 
+,   (2, 7, False, False),   (2, 8, False, False),   (2, 9, False, False),  (2, 10, False, False),   (3, 8, False, False), 
+,   (3, 9, False, False),  (3, 10, False, False),   (4, 9, False, False),  (4, 10, False, False),  (5, 10, False, False), 
+, 
+
+number of all configurations: 15
+number of fully (true, true) successful configurations: 0
+number of partially only (false, true) successful configurations: 0
+number of total fail (false, false) configurations: 15
+
+
+avg sindy: 
+a(n) = 42*a(n - 1)
+False  -  checked avg against website ground truth.     
+False  -  "manual" check avg if equation is correct.    
+While total time consumed by now, scale:22438/34371, seq_id:A167959, order:20 took:
+ 3.2 seconds, i.e. 0.05 minutes or 0.001 hours.
+
+A167959: 
+a(n) = 0
+truth: 
+a(n) = 41*a(n - 1) + 41*a(n - 2) + 41*a(n - 3) + 41*a(n - 4) + 41*a(n - 5) + 41*a(n - 6) + 41*a(n - 7) + 41*a(n - 8) + 41*a(n - 9) + 41*a(n - 10) + 41*a(n - 11) + 41*a(n - 12) + 41*a(n - 13) + 41*a(n - 14) + 41*a(n - 15) + -861*a(n - 16),  
+a(0) = 1, a(1) = 43, a(2) = 1806, a(3) = 75852, a(4) = 3185784, a(5) = 133802928, a(6) = 5619722976, a(7) = 236028364992, a(8) = 9913191329664, a(9) = 416354035845888, a(10) = 17486869505527296, a(11) = 734448519232146432, a(12) = 30846837807750150144, a(13) = 1295567187925506306048, a(14) = 54413821892871264854016, a(15) = 2285380519500593123868672
+
+False  -  checked against website ground truth.     
+False  -  "manual" check if equation is correct.    

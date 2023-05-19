@@ -1,0 +1,38 @@
+
+Preprocessing sees only first 14 terms.
+Sindy threshold: 0.1
+Default setting for how many terms should sindy see: 70
+Sindy will use max_order: 7
+[(1, 6), (1, 7), (1, 8), (1, 9), (1, 10), (1, 11), (1, 12), (1, 13), (1, 14), (2, 7), (2, 8), (2, 9), (2, 10), (2, 11), (2, 12), (2, 13), (2, 14), (3, 8), (3, 9), (3, 10), (3, 11), (3, 12), (3, 13), (3, 14), (4, 9), (4, 10), (4, 11), (4, 12), (4, 13), (4, 14), (5, 10), (5, 11), (5, 12), (5, 13), (5, 14), (6, 11), (6, 12), (6, 13), (6, 14), (7, 12), (7, 13), (7, 14), (8, 13), (8, 14), (9, 14)]
+,   (1, 6, False, False),   (1, 7, False, False),   (1, 8, False, False),   (1, 9, False, False),  (1, 10, False, False), 
+,  (1, 11, False, False),  (1, 12, False, False),  (1, 13, False, False),  (1, 14, False, False),   (2, 7, False, False), 
+,   (2, 8, False, False),   (2, 9, False, False),  (2, 10, False, False),  (2, 11, False, False),  (2, 12, False, False), 
+,  (2, 13, False, False),  (2, 14, False, False),   (3, 8, False, False),   (3, 9, False, False),  (3, 10, False, False), 
+,  (3, 11, False, False),  (3, 12, False, False),  (3, 13, False, False),  (3, 14, False, False),   (4, 9, False, False), 
+,  (4, 10, False, False),  (4, 11, False, False),  (4, 12, False, False),  (4, 13, False, False),  (4, 14, False, False), 
+,  (5, 10, False, False),  (5, 11, False, False),  (5, 12, False, False),  (5, 13, False, False),  (5, 14, False, False), 
+,  (6, 11, False, False),  (6, 12, False, False),  (6, 13, False, False),  (6, 14, False, False),  (7, 12, False, False), 
+,  (7, 13, False, False),  (7, 14, False, False),  (8, 13, False, False),  (8, 14, False, False),  (9, 14, False, False), 
+, 
+
+number of all configurations: 45
+number of fully (true, true) successful configurations: 0
+number of partially only (false, true) successful configurations: 0
+number of total fail (false, false) configurations: 45
+
+
+avg sindy: 
+a(n) = 366*a(n - 6) - 1022*a(n - 5) - 1594*a(n - 4) + 8*a(n - 3) + 125*a(n - 2) + 9*a(n - 1)
+False  -  checked avg against website ground truth.     
+False  -  "manual" check avg if equation is correct.    
+While total time consumed by now, scale:11786/34371, seq_id:A063654, order:20 took:
+ 1.9 seconds, i.e. 0.03 minutes or 0.001 hours.
+
+A063654: 
+a(n) = 0
+truth: 
+a(n) = 11*a(n - 1) + 195*a(n - 2) + -1459*a(n - 3) + -10427*a(n - 4) + 79002*a(n - 5) + 188873*a(n - 6) + -1922453*a(n - 7) + -522744*a(n - 8) + 21726132*a(n - 9) + -11085988*a(n - 10) + -137059276*a(n - 11) + 114023550*a(n - 12) + 533938164*a(n - 13) + -503739499*a(n - 14) + -1345858084*a(n - 15) + 1272444796*a(n - 16) + 2223076291*a(n - 17) + -1997887777*a(n - 18) + -2382027317*a(n - 19) + 2015253425*a(n - 20) + 1613022647*a(n - 21) + -1309632545*a(n - 22) + -660948344*a(n - 23) + 533727589*a(n - 24) + 152685069*a(n - 25) + -128889883*a(n - 26) + -17772195*a(n - 27) + 16954690*a(n - 28) + 883980*a(n - 29) + -1089264*a(n - 30) + -11392*a(n - 31) + 26112*a(n - 32),  
+a(0) = 1, a(1) = 1, a(2) = 89, a(3) = 683, a(4) = 16717, a(5) = 221799, a(6) = 4005785, a(7) = 61643709, a(8) = 1029574631, a(9) = 16484061769, a(10) = 269718819131, a(11) = 4364059061933, a(12) = 71019435701025, a(13) = 1152314664726905, a(14) = 18725412666911121, a(15) = 304052089851133193, a(16) = 4939032362569285343
+
+False  -  checked against website ground truth.     
+False  -  "manual" check if equation is correct.    

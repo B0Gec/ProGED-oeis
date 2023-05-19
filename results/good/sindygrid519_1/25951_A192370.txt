@@ -1,0 +1,32 @@
+
+Preprocessing sees only first 10 terms.
+Sindy threshold: 0.1
+Default setting for how many terms should sindy see: 70
+Sindy will use max_order: 5
+[(1, 6), (1, 7), (1, 8), (1, 9), (1, 10), (2, 7), (2, 8), (2, 9), (2, 10), (3, 8), (3, 9), (3, 10), (4, 9), (4, 10), (5, 10)]
+,   (1, 6, False, False),   (1, 7, False, False),   (1, 8, False, False),   (1, 9, False, False),  (1, 10, False, False), 
+,     (2, 7, True, True),     (2, 8, True, True),     (2, 9, True, True),  (2, 10, False, False),   (3, 8, False, False), 
+,   (3, 9, False, False),  (3, 10, False, False),     (4, 9, True, True),  (4, 10, False, False),    (5, 10, True, True), 
+, 
+
+number of all configurations: 15
+number of fully (true, true) successful configurations: 5
+number of partially only (false, true) successful configurations: 0
+number of total fail (false, false) configurations: 10
+
+
+avg sindy: 
+a(n) = -a(n - 4) - 11*a(n - 3) - 93*a(n - 2) + 42*a(n - 1)
+True  -  checked avg against website ground truth.     
+True  -  "manual" check avg if equation is correct.    
+While total time consumed by now, scale:25952/34371, seq_id:A192370, order:20 took:
+ 0.6 seconds, i.e. 0.01 minutes or 0.0 hours.
+
+A192370: 
+a(n) = -160*a(n - 2) + 44*a(n - 1)
+truth: 
+a(n) = 44*a(n - 1) + -160*a(n - 2),  
+a(0) = 20, a(1) = 880
+
+True  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

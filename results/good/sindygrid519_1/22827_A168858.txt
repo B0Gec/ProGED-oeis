@@ -1,0 +1,33 @@
+
+Preprocessing sees only first 11 terms.
+Sindy threshold: 0.1
+Default setting for how many terms should sindy see: 70
+Sindy will use max_order: 6
+[(1, 6), (1, 7), (1, 8), (1, 9), (1, 10), (1, 11), (2, 7), (2, 8), (2, 9), (2, 10), (2, 11), (3, 8), (3, 9), (3, 10), (3, 11), (4, 9), (4, 10), (4, 11), (5, 10), (5, 11), (6, 11)]
+,   (1, 6, False, False),   (1, 7, False, False),   (1, 8, False, False),   (1, 9, False, False),  (1, 10, False, False), 
+,  (1, 11, False, False),    (2, 7, False, True),    (2, 8, False, True),   (2, 9, False, False),  (2, 10, False, False), 
+,  (2, 11, False, False),    (3, 8, False, True),   (3, 9, False, False),  (3, 10, False, False),  (3, 11, False, False), 
+,   (4, 9, False, False),  (4, 10, False, False),  (4, 11, False, False),  (5, 10, False, False),   (5, 11, False, True), 
+,  (6, 11, False, False), 
+
+number of all configurations: 21
+number of fully (true, true) successful configurations: 0
+number of partially only (false, true) successful configurations: 4
+number of total fail (false, false) configurations: 17
+
+
+avg sindy: 
+a(n) = a(n - 2) + 36*a(n - 1)
+False  -  checked avg against website ground truth.     
+True  -  "manual" check avg if equation is correct.    
+While total time consumed by now, scale:22828/34371, seq_id:A168858, order:20 took:
+ 0.5 seconds, i.e. 0.01 minutes or 0.0 hours.
+
+A168858: 
+a(n) = 36*a(n - 1)
+truth: 
+a(n) = 35*a(n - 1) + 35*a(n - 2) + 35*a(n - 3) + 35*a(n - 4) + 35*a(n - 5) + 35*a(n - 6) + 35*a(n - 7) + 35*a(n - 8) + 35*a(n - 9) + 35*a(n - 10) + 35*a(n - 11) + 35*a(n - 12) + 35*a(n - 13) + 35*a(n - 14) + 35*a(n - 15) + 35*a(n - 16) + 35*a(n - 17) + 35*a(n - 18) + 35*a(n - 19) + -630*a(n - 20),  
+a(0) = 1, a(1) = 37, a(2) = 1332, a(3) = 47952, a(4) = 1726272, a(5) = 62145792, a(6) = 2237248512, a(7) = 80540946432, a(8) = 2899474071552, a(9) = 104381066575872, a(10) = 3757718396731392, a(11) = 135277862282330112, a(12) = 4870003042163884032, a(13) = 175320109517899825152, a(14) = 6311523942644393705472
+
+False  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

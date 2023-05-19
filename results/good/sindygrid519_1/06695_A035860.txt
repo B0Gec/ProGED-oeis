@@ -1,0 +1,31 @@
+
+Preprocessing sees only first 9 terms.
+Sindy threshold: 0.1
+Default setting for how many terms should sindy see: 70
+Sindy will use max_order: 4
+[(1, 6), (1, 7), (1, 8), (1, 9), (2, 7), (2, 8), (2, 9), (3, 8), (3, 9), (4, 9)]
+,   (1, 6, False, False),   (1, 7, False, False),   (1, 8, False, False),   (1, 9, False, False),   (2, 7, False, False), 
+,   (2, 8, False, False),   (2, 9, False, False),   (3, 8, False, False),   (3, 9, False, False),   (4, 9, False, False), 
+, 
+
+number of all configurations: 10
+number of fully (true, true) successful configurations: 0
+number of partially only (false, true) successful configurations: 0
+number of total fail (false, false) configurations: 10
+
+
+avg sindy: 
+a(n) = -225080*a(n - 4) + 23856*a(n - 3) - 1406*a(n - 2) + 56*a(n - 1)
+False  -  checked avg against website ground truth.     
+False  -  "manual" check avg if equation is correct.    
+While total time consumed by now, scale:6696/34371, seq_id:A035860, order:20 took:
+ 0.3 seconds, i.e. 0.0 minutes or 0.0 hours.
+
+A035860: 
+a(n) = 0
+truth: 
+a(n) = 34*a(n - 1) + -561*a(n - 2) + 5984*a(n - 3) + -46376*a(n - 4) + 278256*a(n - 5) + -1344904*a(n - 6) + 5379616*a(n - 7) + -18156204*a(n - 8) + 52451256*a(n - 9) + -131128140*a(n - 10) + 286097760*a(n - 11) + -548354040*a(n - 12) + 927983760*a(n - 13) + -1391975640*a(n - 14) + 1855967520*a(n - 15) + -2203961430*a(n - 16) + 2333606220*a(n - 17) + -2203961430*a(n - 18) + 1855967520*a(n - 19) + -1391975640*a(n - 20) + 927983760*a(n - 21) + -548354040*a(n - 22) + 286097760*a(n - 23) + -131128140*a(n - 24) + 52451256*a(n - 25) + -18156204*a(n - 26) + 5379616*a(n - 27) + -1344904*a(n - 28) + 278256*a(n - 29) + -46376*a(n - 30) + 5984*a(n - 31) + -561*a(n - 32) + 34*a(n - 33) + -1*a(n - 34),  
+a(0) = 1, a(1) = 1190, a(2) = 354620, a(3) = 47203730, a(4) = 3563792960, a(5) = 174181206542, a(6) = 5997990984020, a(7) = 154390001870810, a(8) = 3103724917721540, a(9) = 50409189277349630, a(10) = 679545855082425212, a(11) = 7772608216802526650, a(12) = 76822363756617886400
+
+False  -  checked against website ground truth.     
+False  -  "manual" check if equation is correct.    

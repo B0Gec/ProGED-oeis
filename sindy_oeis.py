@@ -80,6 +80,7 @@ def sindy(seq: Union[list, sp.Matrix], max_order: int, seq_len: int, threshold: 
     #        2178309, 3524578, 5702887, 9227465, 14930352, 24157817,
     #        39088169, 63245986, 102334155]
 
+    # print(len(ongrid))
     seq = [int(i) for i in seq][:seq_len]
     # print(type(seq), type(seq[-1]))
     # seq = seq[:90]
@@ -196,7 +197,7 @@ def sindy_grid(seq, seq_id, csv, coeffs, max_order: int, seq_len: int, grid_orde
         return list(set([round(start + i * (end - start) / n_of_pts) for i in range(n_of_pts)]));
 
     subopt_grid = list(product(equidist(1, max_order, grid_order), equidist(4, seq_len, grid_len)))
-    grid = [pair for pair in subopt_grid if abs(pair[0]-pair[1]) > 4]
+    grid = [pair for pair in subopt_grid if (pair[1]-pair[0]) > 4]
     # grid = grid[:6]
 
     printout = str(grid)
@@ -211,11 +212,14 @@ def sindy_grid(seq, seq_id, csv, coeffs, max_order: int, seq_len: int, grid_orde
     # printout += ']\n'
 
     oeis = [case[2][0] for case in ongrid if case[2][1:3] == (True, True)]
-    manually = [case[2][0] for case in ongrid if case[2][2] == True]
+    manually = [case[2][0] for case in ongrid if case[2][1:3] == (False, True)]
+    # bug = [case[2][0] for case in ongrid if case[2][1:3] == (True, False)]
+    fail = [case[2][0] for case in ongrid if case[2][1:3] == (False, False)]
     printout += "\n"
     printout += f"number of all configurations: {len(grid)}\n"
-    printout += f"number of fully (True, true) successful configurations: {len(oeis)}\n"
-    printout += f"number of partially (false, true) successful configurations: {len(manually)}\n"
+    printout += f"number of fully (true, true) successful configurations: {len(oeis)}\n"
+    printout += f"number of partially only (false, true) successful configurations: {len(manually)}\n"
+    printout += f"number of total fail (false, false) configurations: {len(fail)}\n"
     # allxs = [case[2][0] for case in ongrid]
     # sp.Matrix([round(i) for i in list(sum(ll, sp.Matrix([0, 0, 0])) / 3)])
 
