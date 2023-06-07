@@ -1,3 +1,9 @@
+comment = """
+    This file creates no_truth, false_truth lists where: 
+    no_truth = sequences with dots ... or some other hard to parse symbols in coefficients description
+    false_truth = sequences whose truth written is incorrect.
+"""
+
 import pandas as pd
 
 # csv_filename = 'linear_database_full.csv'
@@ -70,7 +76,11 @@ def ok_coefs(seq_id: str, csv: pd.DataFrame):
 
 # from blacklist import blacklist
 # newblacklisted = [i for i in csv if ok_coefs(i, csv) == -2 and i not in blacklist]
+comment = """No truth sequences are those that do not actually have truth written on website or they have only truth with
+    sympols such as truth = (0,0, ..., 0, 1), etc."""
 no_truth = [i for i in csv if not ok_coefs(i, csv)]
+
+
 print('no_truth:')
 print(no_truth[:10], len(no_truth))
 output_string = f'no_truth = {no_truth}'

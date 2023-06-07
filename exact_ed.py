@@ -7,6 +7,7 @@ import pandas as pd
 import time
 import math
 # from typing import Union
+from functools import reduce
 
 
 # if os.getcwd()[-11:] == 'ProGED_oeis':
@@ -269,12 +270,31 @@ def exact_ed(seq_id: str, csv: pd.DataFrame, verbosity: int = VERBOSITY,
 
 def increasing_eed(seq_id: str, csv: pd.DataFrame, verbosity: int = VERBOSITY,
                    max_order: int = None, linear: bool = True, n_of_terms=10 ** 16):
-    for i in range(1, max_order):
-        if x != []:
-            x = exact_ed()
-        else:
-            return x, eg, ...
-    return
+    """Perform exact_ed with increasing the *max_order* untill the equation that holds (with minimum order) is found."""
+
+    def eed_step(ed_output, order):
+        # print('summary', ed_output, order)
+        # x = ed_output[0]
+        # if x != []:
+        #     return ed_output
+        # else:
+        #     print('tle meljem')
+        #     ed_out  = exact_ed(seq_id, csv, verbosity,
+        #                  order, linear, n_of_terms)
+        #     return ed_out
+        output = ed_output if ed_output[0] != [] else exact_ed(seq_id, csv, verbosity, order, linear, n_of_terms)
+        return output
+
+    start = ([], "", "", "")
+    orders = range(1, max_order)
+
+    eed = reduce(eed_step, orders, start)
+    # for i in range(1, max_order):
+    #     if x != []:
+    #         x = exact_ed()
+    #     else:
+    #         return x, eg, ...
+    return eed
 
 
 def eed(x):
@@ -461,7 +481,8 @@ def check_eq_man(x: sp.Matrix, seq_id: str, csv: str,
     def an(till_now, x):
         coefs = x[:]
         coefs.reverse()
-        return sp.Matrix([coefs[-1]*till_now.rows]) + till_now[-len(coefs[:-1]):, :].transpose()*sp.Matrix(coefs[:-1])
+        out =  sp.Matrix([coefs[-1]*till_now.rows]) + till_now[-len(coefs[:-1]):, :].transpose()*sp.Matrix(coefs[:-1])
+        return out
         # return (x[0] * till_now.rows + till_now[-len(x[1:]):, :].transpose() * x[1:, :])[0]
 
     reconst = seq[:max(len(x)-1, min(oeis_friendly, len(seq))), :]  # init reconst

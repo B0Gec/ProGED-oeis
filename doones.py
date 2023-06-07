@@ -17,7 +17,7 @@ import argparse
 
 # if os.getcwd()[-11:] == 'ProGED_oeis':
 #     from ProGED.examples.oeis.scraping.downloading.download import bfile2list
-from exact_ed import exact_ed, timer, check_eq_man, check_truth, unpack_seq, solution_vs_truth, solution2str
+from exact_ed import exact_ed, increasing_eed, timer, check_eq_man, check_truth, unpack_seq, solution_vs_truth, solution2str
 
 # from task2job import task2job
 # else:
@@ -28,6 +28,7 @@ SINDy = False
 if SINDy:
     from sindy_oeis import sindy, preprocess, heuristic, sindy_grid
 
+INCREASING_EED = True
 # print("IDEA: max ORDER for GRAMMAR = floor(DATASET ROWS (LEN(SEQ)))/2)-1")
 
 ##############################
@@ -41,8 +42,13 @@ from blacklist import no_truth, false_truth
 # mini_false_truth += ['A053833', 'A055649', 'A044941',]  # some of false_truth manually checked
 # mini_no_truth ['A025858', 'A025858', 'A246175', 'A025924', 'A356621', ]  # some of no_true manually checked
 blacklist = no_truth + false_truth
-# blacklist = []
+blacklist = no_truth
 # A026471
+
+# remnants = ['00191', '00193', '00194', '00200', '00209', '00210', '00946', '01218', '01691', '01692', '01693', '01713', '01714', '01715', '01716', '01717', '01718', '01719', '01720', '01721', '01722', '01723', '01724', '01725', '01726', '01727', '01728', '01729', '01730', '01731', '01733', '01734', '01736', '01743', '01744', '01745', '01747', '01748', '01749', '01750', '01752', '01754', '01756', '01758', '01760', '01761', '01762', '01763', '01764', '01765', '01766', '01767', '01768', '01769', '02176', '02179', '02180', '02184', '02187', '02192', ]
+remnants = [191, 193, 194, 200, 209, 210, ]
+REMNANTS = True
+REMNANTS = False
 
 # successful_only = True
 # if successful_only:
@@ -50,8 +56,8 @@ blacklist = no_truth + false_truth
 
 
 MODE = 'black_check'  # try only unsuccessful
-MODE = 'doone'
-MODE = 'diofant grid'
+# MODE = 'doone'
+# MODE = 'diofant grid'
 
 n_of_terms_load = 100000
 
@@ -60,7 +66,7 @@ VERBOSITY = 2  # dev scena
 VERBOSITY = 1  # run scenario
 
 DEBUG = True
-# DEBUG = False
+DEBUG = False
 BUGLIST = True
 BUGLIST = False
 CORELIST = True  # have to scrape core sequences!
@@ -75,8 +81,8 @@ if BUGLIST:
 #     print("Warning!!!!! buglist is used outside debug mode!!\n")
 
 MAX_ORDER = 20  # We care only for recursive equations with max 20 terms or order.
-if DEBUG:
-    MAX_ORDER = 5  # We care only for recursive equations with max 20 terms or order.
+# if DEBUG:
+#     MAX_ORDER = 5  # We care only for recursive equations with max 20 terms or order.
 # MAX_ORDER = 2
 THRESHOLD = 0.2  # For sindy - masking threshold.
 THRESHOLD = 0.1  # For sindy - masking threshold.
@@ -110,7 +116,7 @@ JOB_ID = "000000"
 # SEQ_ID = (True, 'A001343')
 # SEQ_ID = (True, 'A008685')
 # SEQ_ID = (False, 'A013833')
-SEQ_ID = (True, 'A000045')
+# SEQ_ID = (True, 'A000045')
 # SEQ_ID = (True, 'A000187')
 # ['A056457', 'A212593', 'A212594']
 
@@ -121,6 +127,9 @@ SEQ_ID = (True, 'A000045')
 # SEQ_ID = (True, 'A000008')
 # SEQ_ID = (True, 'A000027')
 # SEQ_ID = (True, 'A000034')
+# SEQ_ID = (True, 'A000012')
+SEQ_ID = (True, 'A000392')
+# SEQ_ID = (True, 'A000045')
 
 # DIOFANT_GRID = False
 
@@ -151,6 +160,7 @@ args = parser.parse_args()
 job_id = args.job_id
 task_id = args.task_id
 
+task_id = remnants[task_id]
 # diofant_grid = True if args.diogrid == "True" else False
 
 max_order = args.order
@@ -160,7 +170,8 @@ PARALLEL = args.paral
 VERBOSITY = args.verb
 experiment_id = args.exper_id
 
-N_OF_TERMS_ED = 2*max_order  # Use only first n_of_terms_ed of the given sequence.
+# N_OF_TERMS_ED = 2*max_order  # Use only first n_of_terms_ed of the given sequence.
+N_OF_TERMS_ED = None
 
 
 flags_dict = {argument.split("=")[0]: argument.split("=")[1]
@@ -353,14 +364,21 @@ else:
             #     print(max_order_item[0:])
 
         else:
-            x, eq, coeffs, truth = exact_ed(seq_id, csv, VERBOSITY, max_order_,
-                                            n_of_terms=N_OF_TERMS_ED, linear=True)
+            if INCREASING_EED:
+                x, eq, coeffs, truth = increasing_eed(seq_id, csv, VERBOSITY, max_order_,
+                                                      n_of_terms=N_OF_TERMS_ED, linear=True)
+            # x, eq, coeffs, truth = exact_ed(seq_id, csv, VERBOSITY, max_order_,
+            #                                 n_of_terms=N_OF_TERMS_ED, linear=True)
 
         is_reconst = solution_vs_truth(x, coeffs)
         is_check_verbose = check_eq_man(x, seq_id, csv, n_of_terms=10**5)
         is_check = is_check_verbose[0]
         # print(f"{is_reconst}!, reconstructed as in ground truth.")
         # print(f"{is_check}!, \"manually\" checked if the equation holds for all terms.")
+        # print('second check: ', check_truth(seq_id, csv_filename)[0][0])
+        # print(seq_id in false_truth, seq_id, len(blacklist))
+
+        # 1/0
 
         # except Exception as error:
         #     print(type(error), ':', error)
@@ -391,6 +409,7 @@ else:
     # print('outer after', max_order)
 
     if MODE == 'black_check':
+        output_string = ""
         is_check, truth = check_truth(seq_id, csv_filename)
         # print(is_check, truth)
         is_check = is_check[0]

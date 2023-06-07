@@ -1,0 +1,10 @@
+While total time consumed by now, scale:28339/34371, seq_id:A231485, order:20 took:
+ 1.3 seconds, i.e. 0.02 minutes or 0.0 hours.
+
+A231485: 
+This is blacklist discovery!!! i.e. only checking if ground truth holds.
+truth: 
+(29,-261,1029,-2001,2001,-1029,261,-29,1)
+
+<empty>  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

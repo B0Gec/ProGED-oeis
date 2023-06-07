@@ -18,12 +18,15 @@ todo categories:
 # checked = unid + oeis
 all = oeis + checked + manual fail + failure
 """
-##
 
+##
 import os
 import re
 
+import pandas as pd
+
 from blacklist import no_truth, false_truth
+false_truth_list = false_truth
 
 # fname = 'results/good/01234567/34500_A000032.txt'
 base_dir = "results/good/"
@@ -34,17 +37,19 @@ job_id = "36781342"  # 17.3. waiting 2 jobs  # to check
 job_id = "37117747"
 # job_id = "37117747_2"  # 23k succ
 # job_id = "37256280"  # little of results
-# job_id = "37256396"
-# job_id = "37507488"
-# job_id = "37507488_1"
-# job_id = "37256396_6"
-# job_id = "37680622"
-# job_id = "37683622"
-job_id = "32117747"
+# job_id = "37256396"   # old school
+# job_id = "37507488"   # old school
+# job_id = "37507488_1"   # false_truth in progress
+# job_id = "37256396_6" # false_truth in progress
+# job_id = "37680622"     # false_truth in progress
+job_id = "37683622"  # seems like for false_truth list creation
+# job_id = "32117747"
 # job_id = "debug2"
-job_id = "38095692"
-job_id = "sindy512135"
-job_id = "sindygrid519_1"
+# job_id = "38095692"
+# job_id = "sindy512135"
+# job_id = "sindygrid519_1"
+# job_id = "incdio76"
+job_id = "blacklist76"
 
 
 # seq_file = '13000_A079034.txt'
@@ -207,7 +212,7 @@ def for_summary(aggregated: tuple, fname: str):
     # non_manual = we_found and not is_checked
 
 
-    buglist, job_bins, ed_fail_list, non_manual_list, agg_confs = aggregated[-5:]
+    buglist, job_bins, non_id_list, ed_fail_list, non_manual_list, agg_confs = aggregated[-6:]
     if debug:
         if reconst_non_manual:
             buglist += [fname]
@@ -215,6 +220,8 @@ def for_summary(aggregated: tuple, fname: str):
             # raise IndexError("Bug in code!")
         if black_check and non_manual:
             buglist += [fname]
+        if non_id:
+            non_id_list += [fname]
         if fail:
             ed_fail_list += [fname]
         if non_manual:
@@ -227,13 +234,12 @@ def for_summary(aggregated: tuple, fname: str):
     # print(job_bins)
     # bins = [bin0, bin1, ... bin 34]
 
-    print(len(trueconfs))
+    # print(len(trueconfs))
     agg_confs = trueconfs if agg_confs == ['start'] else agg_confs
     # trueconfs = [(conf[0], conf[1]+trueconfs[n][]) for n, conf in enumerate(agg_confs)]
     new_confs = [(x[0], x[1]+y[1]) for x, y in zip(agg_confs, trueconfs)]
+    # print(new_confs)
     # print(len(new_confs))
-    print(new_confs)
-    print(len(new_confs))
 
 
 
@@ -259,7 +265,7 @@ def for_summary(aggregated: tuple, fname: str):
 
     zipped = zip(aggregated[:-2], to_add)
     counters = tuple(map(lambda x: x[0] + x[1], zipped))
-    return counters + (buglist, job_bins, ed_fail_list, non_manual_list, new_confs)
+    return counters + (buglist, job_bins, non_id_list, ed_fail_list, non_manual_list, new_confs)
 
 # # Hierarhical:
 # files_subdir = [list(map(lambda x: f'{subdir}{os.sep}{x}',
@@ -349,13 +355,28 @@ files = files_debug
 _a, _b, _, n_of_seqs, avg_is_best, true_confs = extract_file(job_dir + files[0])
 # print(n_of_seqs)
 
+# # 10.) checked that no_truth == mia task ids from experiment job_id = "blacklist76"
+# csv_filename = 'linear_database_full.csv'
+# csv = pd.read_csv(csv_filename, low_memory=False, nrows=0)
+# files_task_ids = [file[:5] for file in files]
+# mia_task_ids = [task_id for task_id in range(n_of_seqs) if f"{task_id:0>5}" not in files_task_ids]
+# mia_ids = [csv.columns[i] for i in mia_task_ids]
+# print(mia_ids[0])
+# # print(mia_task_ids, len(mia_task_ids))
+# # print(mia_task_ids[:6], len(mia_task_ids))
+# print(len(mia_task_ids), len(no_truth), mia_task_ids == no_truth, no_truth[0], mia_task_ids[0])
+# print(len(mia_ids), len(no_truth), mia_ids == no_truth, no_truth[0], mia_ids[0])
+# 1/0
+#
+
+
 # summary = reduce(for_summary, files, (0, 0, 0, 0, 0,))
-summary = reduce(for_summary, files, (0, 0, 0, 0, 0, 0, [], [0 for i in range(36)], [], [], ['start']))  # save all buggy ids
+summary = reduce(for_summary, files, (0, 0, 0, 0, 0, 0, [], [0 for i in range(36)], [], [], [], ['start']))  # save all buggy ids
 # corrected_sum = sum(summary[:4]) - sum(summary[4:])
 corrected_sum = sum(summary[:4]) - sum(summary[4:5])
 print(corrected_sum)
 print()
-print(summary)
+print(str(summary)[:1*10**2])
 print(f'all files:{len(files)}, sum:{sum(summary[:4])}, corrected sum: {corrected_sum}')
 # print(f((1,2,3,4,), 'c'))
 
@@ -372,7 +393,7 @@ n_of_seqs = n_of_seqs - ignored
 jobs_fail = n_of_seqs - len(files)  # or corrected_sum.
 
 id_oeis, non_id, non_manual, ed_fail, reconst_non_manual, avg_is_best, buglist, \
-    job_bins, ed_fail_list, non_manual_list, trueconfs = summary
+    job_bins, non_id_list, ed_fail_list, non_manual_list, trueconfs = summary
 corrected_non_manual = non_manual - reconst_non_manual
 all_fails = ed_fail + jobs_fail
 
@@ -431,10 +452,17 @@ print(f'check bins: {len(files)} = {sum(job_bins)} ?')
 for n, i in enumerate(job_bins):
     print(n, i)
 
+print(f'first {n} non_ids:', non_id_list[:n])
+print(len(non_id_list))
+print(f'first {n} non_manuals:', non_manual_list[:n])
+# check if new false_truth blacklist contains all old false_truths:  # experiment job_id = "blacklist76"
+false_non_man = [i[6:6+7] for i in non_manual_list]
+print(false_non_man)
+print(false_non_man[0], len(false_non_man), false_non_man[:6], false_truth_list[:6], len(false_truth_list))
+# print([i for i in false_truth_list if i not in false_non_man], 'sanity')
+# print(len(non_manual_list))
 print(f'first {n} ed_fails:', ed_fail_list[:n])
 print(len(ed_fail_list))
-print(f'first {n} non_manuals:', non_manual_list[:n])
-print(len(non_manual_list))
 print(f'first {n} true configs:', trueconfs[:n])
 print(len(trueconfs))
 
