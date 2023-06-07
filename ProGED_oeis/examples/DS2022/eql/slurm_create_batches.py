@@ -5,7 +5,7 @@ import pandas as pd
 import numpy as np
 import ProGED as pg
 from ProGED.generate import generate_models
-from utils.generate_data_ODE_systems import generate_ODE_data
+from ProGED_oeis.utils import generate_ODE_data
 from ProGED.generators.grammar_construction import construct_production
 
 def create_sh_file(**batch_settings):

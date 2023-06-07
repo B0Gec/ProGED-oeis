@@ -3,12 +3,11 @@
 
 import os
 import numpy as np
-import pickle as pkl
 import pandas as pd
 import ProGED as pg
 from proged.code.lorenz_for_bogec import get_lorenz
 from proged.code.MLJ_add_noise_to_data import add_noise_to_data, plot_noisy_data
-from utils.generate_data_ODE_systems import generate_ODE_data
+from ProGED_oeis.utils import generate_ODE_data
 
 # check config file before start!
 

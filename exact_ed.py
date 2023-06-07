@@ -207,6 +207,7 @@ def exact_ed(seq_id: str, csv: pd.DataFrame, verbosity: int = VERBOSITY,
     #     data = data[:, sp.Matrix([0] + list(i for i in range(2, data.shape[1])))]
     # b, A = dataset(seq, max_order, linear=linear)
     b, A = dataset(list(seq), max_order, linear=linear)
+    print(A.shape)
 
     # m_limit = 3003
     # b = data[max_order:(max_order + m_limit), 0]
@@ -264,6 +265,17 @@ def exact_ed(seq_id: str, csv: pd.DataFrame, verbosity: int = VERBOSITY,
         return x, eq, coeffs, truth
     else:
         return x, eq, "", ""
+
+
+def increasing_eed(seq_id: str, csv: pd.DataFrame, verbosity: int = VERBOSITY,
+                   max_order: int = None, linear: bool = True, n_of_terms=10 ** 16):
+    for i in range(1, max_order):
+        if x != []:
+            x = exact_ed()
+        else:
+            return x, eg, ...
+    return
+
 
 def eed(x):
     return x>=6

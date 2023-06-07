@@ -9,6 +9,7 @@ import time
 import sympy as sp
 import pandas as pd
 import argparse
+# import random  # for performing diofant grid
 
 
 # needs (listed so far) doones,: exact_ed, diophantine_solver, linear_database_full.csv, buglist.py, oei.sh, runoei.sh, blacklist, unsuccessful.py, task2job
@@ -23,7 +24,7 @@ from exact_ed import exact_ed, timer, check_eq_man, check_truth, unpack_seq, sol
 #     from exact_ed import exact_ed, timer
 
 SINDy = True
-# SINDy = False
+SINDy = False
 if SINDy:
     from sindy_oeis import sindy, preprocess, heuristic, sindy_grid
 
@@ -50,6 +51,7 @@ blacklist = no_truth + false_truth
 
 MODE = 'black_check'  # try only unsuccessful
 MODE = 'doone'
+MODE = 'diofant grid'
 
 n_of_terms_load = 100000
 
@@ -58,7 +60,7 @@ VERBOSITY = 2  # dev scena
 VERBOSITY = 1  # run scenario
 
 DEBUG = True
-DEBUG = False
+# DEBUG = False
 BUGLIST = True
 BUGLIST = False
 CORELIST = True  # have to scrape core sequences!
@@ -120,6 +122,8 @@ SEQ_ID = (True, 'A000045')
 # SEQ_ID = (True, 'A000027')
 # SEQ_ID = (True, 'A000034')
 
+# DIOFANT_GRID = False
+
 # ('00193', 'A001310')  # ('00194', 'A001312'), ('00200', 'A001343'), ('00209', 'A001364'), ('00210', 'A001365'), ('00946', 'A007273'), ('01218', 'A008685'), ('01691', 'A011616'), ('01692', 'A011617')]
 # [('00184', 'A001299'), ('00185', 'A001300'), ('00186', 'A001301'), ('00187', 'A001302'), ('00195', 'A001313'), ('00196', 'A001314'), ('00198', 'A001319'), ('00222', 'A001492'), ('00347', 'A002015'), ('00769', 'A005813')] 1921
 
@@ -141,11 +145,13 @@ parser.add_argument("--paral", type=int, default=2)
 parser.add_argument("--verb", type=int, default=VERBOSITY)
 parser.add_argument("--n_of_terms", type=int, default=N_OF_TERMS_ED)
 parser.add_argument("--exper_id", type=str, default=EXPERIMENT_ID)
+# parser.add_argument("--diogrid", type=str, default=DIOFANT_GRID)
 args = parser.parse_args()
 
 job_id = args.job_id
 task_id = args.task_id
 
+# diofant_grid = True if args.diogrid == "True" else False
 
 max_order = args.order
 threshold = args.threshold
@@ -190,6 +196,10 @@ fail = (BUGLIST and task_id >= len(buglist)) or fail
 
 csv = pd.read_csv(csv_filename, low_memory=False, nrows=0)
 n_of_seqs = len(list(csv.columns))
+
+# if diofant_grid:
+#     task_id = random.randint(0, n_of_seqs)
+
 fail = (not BUGLIST and task_id >= n_of_seqs) or fail
 if not fail:
     fail = (not BUGLIST and list(csv.columns)[task_id] in blacklist) or fail

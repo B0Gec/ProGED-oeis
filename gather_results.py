@@ -87,9 +87,21 @@ def extract_file(fname, verbosity=VERBOSITY):
 
     re_all_stars = re.findall(r"scale:\d+/(\d+),", content)
     re_found = re.findall(r"NOT RECONSTRUCTED", content)
-    re_reconst = re.findall(r"\n(\w{4,5}).+checked against website ground truth", content)
-    re_manual = re.findall(r"\n(\w{4,5}).+\"manual\" check if equation is correct", content)
-    # re_reconst = re.findall(r"\n(\w.+checked against website ground truth", content)
+    # avg = True
+    avg = False
+    added = 'avg ' if avg else ''
+    #re_reconst = re.findall(r"\n(\w{4,5}).+checked against website ground truth", content)
+    re_reconst = re.findall(r"\n(\w{4,5}).+" + f"checked {added}against website ground truth", content)
+    re_manual = re.findall(r"\n(\w{4,5}).+" + f"\"manual\" check {added}if equation is correct", content)
+
+    avg_vs_best = True
+    avg_is_best = False
+    if avg_vs_best:
+        avg = True
+        re_reconst_avg = re.findall(r"\n(\w{4,5}).+" + f"checked {added}against website ground truth", content)
+        re_manual_avg = re.findall(r"\n(\w{4,5}).+" + f"\"manual\" check {added}if equation is correct", content)
+        avg_is_best = re_reconst_avg == re_reconst and re_manual_avg == re_manual
+
 
     # print(len(re_all_stars))
     # print(content)
@@ -132,10 +144,19 @@ def extract_file(fname, verbosity=VERBOSITY):
     # for now:
     # we_found = is_check
 
+    # analysis: config vs success
+    # re_configs = re.findall(r"\n(\w{4,5}).+" + f"checked {added}against website ground truth", content)
+    re_configs = re.findall(r"\((\d{1,2}), (\d{1,2}), (\w{4,5}), (\w{4,5})\),", content)
+    confs = map(lambda stri: (stri[:2], True if stri[2:] == ('True', 'True') else False), re_configs)
+    # trueconfs = [conf[0] for conf in confs if conf[1]] # nonsense - no all true config!
+    # print(list(trueconfs))
+    confs = list(confs)
+
+    # 1/0
 
     f.close()
 
-    return we_found, is_reconst, is_check, n_of_seqs
+    return we_found, is_reconst, is_check, n_of_seqs, avg_is_best, confs
 
 # print(os.getcwd())
 # print(os.listdir())
@@ -174,7 +195,7 @@ debug = True
 def for_summary(aggregated: tuple, fname: str):
 
     # now -> f, m, i, o
-    we_found, is_reconst, is_checked, _ = extract_file(job_dir + fname)
+    we_found, is_reconst, is_checked, _, avg_is_best, trueconfs = extract_file(job_dir + fname)
 
     id_oeis = is_reconst
     non_id = not is_reconst and is_checked
@@ -185,7 +206,8 @@ def for_summary(aggregated: tuple, fname: str):
     reconst_non_manual = is_reconst and not is_checked
     # non_manual = we_found and not is_checked
 
-    buglist, job_bins, ed_fail_list, non_manual_list = aggregated[-4:]
+
+    buglist, job_bins, ed_fail_list, non_manual_list, agg_confs = aggregated[-5:]
     if debug:
         if reconst_non_manual:
             buglist += [fname]
@@ -205,11 +227,18 @@ def for_summary(aggregated: tuple, fname: str):
     # print(job_bins)
     # bins = [bin0, bin1, ... bin 34]
 
+    print(len(trueconfs))
+    agg_confs = trueconfs if agg_confs == ['start'] else agg_confs
+    # trueconfs = [(conf[0], conf[1]+trueconfs[n][]) for n, conf in enumerate(agg_confs)]
+    new_confs = [(x[0], x[1]+y[1]) for x, y in zip(agg_confs, trueconfs)]
+    # print(len(new_confs))
+    print(new_confs)
+    print(len(new_confs))
 
 
 
     # summand = [f, m, i, o]
-    to_add = (id_oeis, non_id, non_manual, fail, reconst_non_manual)
+    to_add = (id_oeis, non_id, non_manual, fail, reconst_non_manual, avg_is_best)
 
 
     # f, m, i, o = aggregated
@@ -230,7 +259,7 @@ def for_summary(aggregated: tuple, fname: str):
 
     zipped = zip(aggregated[:-2], to_add)
     counters = tuple(map(lambda x: x[0] + x[1], zipped))
-    return counters + (buglist, job_bins, ed_fail_list, non_manual_list)
+    return counters + (buglist, job_bins, ed_fail_list, non_manual_list, new_confs)
 
 # # Hierarhical:
 # files_subdir = [list(map(lambda x: f'{subdir}{os.sep}{x}',
@@ -317,11 +346,11 @@ files_debug = files[0:scale]
 files = files_debug
 # print(files)
 
-_a, _b, _, n_of_seqs = extract_file(job_dir + files[0])
+_a, _b, _, n_of_seqs, avg_is_best, true_confs = extract_file(job_dir + files[0])
 # print(n_of_seqs)
 
 # summary = reduce(for_summary, files, (0, 0, 0, 0, 0,))
-summary = reduce(for_summary, files, (0, 0, 0, 0, 0, [], [0 for i in range(36)], [], []))  # save all buggy ids
+summary = reduce(for_summary, files, (0, 0, 0, 0, 0, 0, [], [0 for i in range(36)], [], [], ['start']))  # save all buggy ids
 # corrected_sum = sum(summary[:4]) - sum(summary[4:])
 corrected_sum = sum(summary[:4]) - sum(summary[4:5])
 print(corrected_sum)
@@ -342,8 +371,8 @@ n_of_seqs_db = n_of_seqs
 n_of_seqs = n_of_seqs - ignored
 jobs_fail = n_of_seqs - len(files)  # or corrected_sum.
 
-id_oeis, non_id, non_manual, ed_fail, reconst_non_manual, buglist, \
-    job_bins, ed_fail_list, non_manual_list = summary
+id_oeis, non_id, non_manual, ed_fail, reconst_non_manual, avg_is_best, buglist, \
+    job_bins, ed_fail_list, non_manual_list, trueconfs = summary
 corrected_non_manual = non_manual - reconst_non_manual
 all_fails = ed_fail + jobs_fail
 
@@ -376,6 +405,8 @@ printout = f"""
     
     {official_success: >5} = {official_success/n_of_seqs*100:0.3} % - official success (id_oeis + non_id)
     
+    {avg_is_best: >5} = avg is best 
+    
     
     
     ==========================================================
@@ -404,6 +435,8 @@ print(f'first {n} ed_fails:', ed_fail_list[:n])
 print(len(ed_fail_list))
 print(f'first {n} non_manuals:', non_manual_list[:n])
 print(len(non_manual_list))
+print(f'first {n} true configs:', trueconfs[:n])
+print(len(trueconfs))
 
 
 def fname2id(fname):
