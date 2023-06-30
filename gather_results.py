@@ -17,11 +17,17 @@ todo categories:
 # success = manually fail + checked
 # checked = unid + oeis
 all = oeis + checked + manual fail + failure
+
+ALSO!:
+    - create false_truth list for blacklist.py:
+        copy list false_non_man for experiment job_id=blacklist76
 """
 
 ##
 import os
 import re
+import random
+import string
 
 import pandas as pd
 
@@ -50,6 +56,7 @@ job_id = "37683622"  # seems like for false_truth list creation
 # job_id = "sindygrid519_1"
 # job_id = "incdio76"
 job_id = "blacklist76"
+job_id = "incdio86"
 
 
 # seq_file = '13000_A079034.txt'
@@ -399,6 +406,13 @@ all_fails = ed_fail + jobs_fail
 
 official_success = id_oeis + non_id
 
+# for latex new experiment variables:
+forbidden = ['S', ]
+my_alphabet = [i for i in string.ascii_uppercase if i not in forbidden]
+my_alphabet = ['U']
+random_symbol = random.choice(my_alphabet)
+symbol = random_symbol + random_symbol
+
 printout = f"""
     {id_oeis: >5} = {id_oeis/n_of_seqs*100:0.3} % ... (id_oeis) ... successfully found equations that are identical to the recursive equations written in OEIS (hereinafter - OEIS equation)
     {non_id: >5} = {non_id/n_of_seqs*100:0.3} % ... (non_id) ... successfully found equations that are more complex than the OEIS equation 
@@ -431,13 +445,81 @@ printout = f"""
     
     
     ==========================================================
-    
+
     \\newcommand{{\\allSeqs}}{{{n_of_seqs}}}
     \\newcommand{{\\isOeis}}{{{id_oeis}}}
     \\newcommand{{\\nonId}}{{{non_id}}}
     \\newcommand{{\\nonMan}}{{{non_manual}}}
     \\newcommand{{\\edFail}}{{{ed_fail}}}
     \\newcommand{{\\jobFail}}{{{jobs_fail}}}
+
+    \\newcommand{{\\{symbol}allSeqs}}{{{n_of_seqs}}}
+    \\newcommand{{\\{symbol}isOeis}}{{{id_oeis}}}
+    \\newcommand{{\\{symbol}nonId}}{{{non_id}}}
+    \\newcommand{{\\{symbol}nonMan}}{{{non_manual}}}
+    \\newcommand{{\\{symbol}edFail}}{{{ed_fail}}}
+    \\newcommand{{\\{symbol}jobFail}}{{{jobs_fail}}}
+
+    \\FPeval{{\\{symbol}ok}}{{           clip(\\{symbol}isOeis+\\{symbol}nonId)}}
+    \\FPeval{{\\{symbol}notOeis}}{{      clip(\\{symbol}nonMan+\\{symbol}nonId)}}
+    \\FPeval{{\\{symbol}notIsFound}}{{   clip(\\{symbol}edFail+\\{symbol}jobFail)}}
+    \\FPeval{{\\{symbol}isFound}}{{      clip(\\{symbol}isOeis+\\{symbol}notOeis)}}
+    \\FPeval{{\\{symbol}allSeqsc}}{{     clip(\\{symbol}isFound+\\{symbol}notIsFound)}}
+    
+    \\FPeval{{\\perc{symbol}IsOeis}}{{       round(100 * \\{symbol}isOeis/\\{symbol}allSeqs:2)}}
+    \\FPeval{{\\perc{symbol}NonId}}{{        round(100 * \\{symbol}nonId/\\{symbol}allSeqs:2)}}
+    \\FPeval{{\\perc{symbol}NonMan}}{{       round(100 * \\{symbol}nonMan/\\{symbol}allSeqs:2)}}
+    \\FPeval{{\\perc{symbol}NotIsFound}}{{   round(100 * \\{symbol}notIsFound/\\{symbol}allSeqs:2)}}
+
+    
+    \\begin{{table}}[h]
+    \\caption{{Table describing the (new/fresh) results of novel method experiments so far.}}
+    \\label{{tab:results_numbers{symbol}}}
+       \\renewcommand{{\\arraystretch}}{{1.5}} \\begin{{center}}
+       \\begin{{tabular}}{{c|rrcc|c}} \\toprule \\centering
+    &                   \\textbf{{is\\_found}} &  & \\textbf{{not\\_is\\_found}} &  \\\\
+    \\textbf{{Validation}} & \\textbf{{identical}} & \\textbf{{nonidentical}} & \\textbf{{none (ed\\_fail)}}
+    & \\textbf{{error (jobs\\_fail)}} & $\\Sigma$  \\\\
+        \\midrule
+        OK       & \\{symbol}isOeis & \\{symbol}nonId     &  $\\times$ & $\\times$ & \\{symbol}ok \\\\
+        not - OK & 0 & \\{symbol}nonMan &  $\\times$ & $\\times$   \\\\
+        \\midrule
+        $\\Sigma$ & \\{symbol}isOeis  &  \\{symbol}notOeis  &  \\{symbol}edFail
+        & \\{symbol}jobFail
+        &  \\{symbol}allSeqsc \\\\
+        \\bottomrule \\end{{tabular}} \\end{{center}}
+    \\end{{table}}
+
+
+\\begin{{figure}}
+    \\centering
+\\Tree[.$\\{symbol}allSeqs$ [.is\\_found [.$\\{symbol}isOeis$ ] 
+               [.$\\{symbol}notOeis$
+                    [.$\\{symbol}nonId$ ] 
+                    [.$\\{symbol}nonMan$ ]] ] 
+               [.not\\_is\\_found 
+                    [.$\\{symbol}edFail$ ]
+                    [.$\\{symbol}jobFail$ ]
+                    ]] 
+    \\caption{{Tree explaining the process of grouping sequences into disjoint bins with tangible numbers.}}
+    \\label{{fig:explain_numbers{symbol}}}
+\\end{{figure}}
+
+\\begin{{figure}}
+    \\begin{{tikzpicture}}
+    % \\pie[text=legend,
+        \\pie[color={{ipsscblue, ipsscred, ipsscorange, ipsscyellow}}] 
+        {{   \\perc{symbol}IsOeis/identical (\\{symbol}isOeis),
+            \\perc{symbol}NonId/ \\begin{{tabular}}{{c}} valid for   first \\\\ test terms  (\\{symbol}nonId) \\end{{tabular}} ,
+            \\perc{symbol}NonMan/invalid (\\{symbol}nonMan),
+            \\perc{symbol}NotIsFound/no output (\\{symbol}notIsFound) 
+            }}
+    \\end{{tikzpicture}}
+
+    \\caption{{Summary of (fresh) results with pie chart.}}
+    \\label{{fig:explain_tree{symbol}}}
+\\end{{figure}}
+
 """
 
 
@@ -457,8 +539,8 @@ print(len(non_id_list))
 print(f'first {n} non_manuals:', non_manual_list[:n])
 # check if new false_truth blacklist contains all old false_truths:  # experiment job_id = "blacklist76"
 false_non_man = [i[6:6+7] for i in non_manual_list]
-print(false_non_man)
-print(false_non_man[0], len(false_non_man), false_non_man[:6], false_truth_list[:6], len(false_truth_list))
+# print(false_non_man)
+# print(false_non_man[0], len(false_non_man), false_non_man[:6], false_truth_list[:6], len(false_truth_list))
 # print([i for i in false_truth_list if i not in false_non_man], 'sanity')
 # print(len(non_manual_list))
 print(f'first {n} ed_fails:', ed_fail_list[:n])

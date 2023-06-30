@@ -1,0 +1,12 @@
+
+While total time consumed by now, scale:12414/34371, seq_id:A074502, order:20 took:
+ 0.2 seconds, i.e. 0.0 minutes or 0.0 hours.
+
+A074502: 
+a(n) = 12*a(n - 3) - 20*a(n - 2) + 9*a(n - 1)
+truth: 
+a(n) = 9*a(n - 1) + -20*a(n - 2) + 12*a(n - 3),  
+a(0) = 3, a(1) = 9, a(2) = 41
+
+True  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

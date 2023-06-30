@@ -1,0 +1,12 @@
+
+While total time consumed by now, scale:30382/34371, seq_id:A267061, order:20 took:
+ 30.2 seconds, i.e. 0.5 minutes or 0.008 hours.
+
+A267061: 
+a(n) = a(n - 9) - 34*a(n - 8) - 714*a(n - 7) + 4641*a(n - 6) + 12376*a(n - 5) - 12376*a(n - 4) - 4641*a(n - 3) + 714*a(n - 2) + 34*a(n - 1)
+truth: 
+a(n) = 34*a(n - 1) + 714*a(n - 2) + -4641*a(n - 3) + -12376*a(n - 4) + 12376*a(n - 5) + 4641*a(n - 6) + -714*a(n - 7) + -34*a(n - 8) + 1*a(n - 9),  
+a(0) = -50, a(1) = 2498, a(2) = 173262, a(3) = 7783550, a(4) = 376636138, a(5) = 17527857350, a(6) = 826628182158, a(7) = 38778106729442, a(8) = 1822757247598510
+
+True  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

@@ -1,0 +1,12 @@
+
+While total time consumed by now, scale:29578/34371, seq_id:A256044, order:20 took:
+ 7.8 seconds, i.e. 0.13 minutes or 0.002 hours.
+
+A256044: 
+a(n) = a(n - 7) - 40*a(n - 6) + 416*a(n - 5) - 1224*a(n - 4) + 1224*a(n - 3) - 416*a(n - 2) + 40*a(n - 1)
+truth: 
+a(n) = 40*a(n - 1) + -416*a(n - 2) + 1224*a(n - 3) + -1224*a(n - 4) + 416*a(n - 5) + -40*a(n - 6) + 1*a(n - 7),  
+a(0) = 1, a(1) = 13, a(2) = 281, a(3) = 6728, a(4) = 167089, a(5) = 4213133, a(6) = 106912793
+
+True  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

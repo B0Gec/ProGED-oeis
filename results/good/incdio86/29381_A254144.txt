@@ -1,0 +1,12 @@
+
+While total time consumed by now, scale:29382/34371, seq_id:A254144, order:20 took:
+ 3.8 seconds, i.e. 0.06 minutes or 0.001 hours.
+
+A254144: 
+a(n) = -720*a(n - 6) + 1764*a(n - 5) - 1624*a(n - 4) + 735*a(n - 3) - 175*a(n - 2) + 21*a(n - 1)
+truth: 
+a(n) = 21*a(n - 1) + -175*a(n - 2) + 735*a(n - 3) + -1624*a(n - 4) + 1764*a(n - 5) + -720*a(n - 6),  
+a(0) = 21, a(1) = 56, a(2) = 196, a(3) = 812, a(4) = 3724, a(5) = 18236
+
+True  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

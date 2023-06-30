@@ -42,7 +42,7 @@ from blacklist import no_truth, false_truth
 # mini_false_truth += ['A053833', 'A055649', 'A044941',]  # some of false_truth manually checked
 # mini_no_truth ['A025858', 'A025858', 'A246175', 'A025924', 'A356621', ]  # some of no_true manually checked
 blacklist = no_truth + false_truth
-blacklist = no_truth
+# blacklist = no_truth
 # A026471
 
 # remnants = ['00191', '00193', '00194', '00200', '00209', '00210', '00946', '01218', '01691', '01692', '01693', '01713', '01714', '01715', '01716', '01717', '01718', '01719', '01720', '01721', '01722', '01723', '01724', '01725', '01726', '01727', '01728', '01729', '01730', '01731', '01733', '01734', '01736', '01743', '01744', '01745', '01747', '01748', '01749', '01750', '01752', '01754', '01756', '01758', '01760', '01761', '01762', '01763', '01764', '01765', '01766', '01767', '01768', '01769', '02176', '02179', '02180', '02184', '02187', '02192', ]
@@ -56,7 +56,7 @@ REMNANTS = False
 
 
 MODE = 'black_check'  # try only unsuccessful
-# MODE = 'doone'
+MODE = 'doone'
 # MODE = 'diofant grid'
 
 n_of_terms_load = 100000
@@ -66,9 +66,9 @@ VERBOSITY = 2  # dev scena
 VERBOSITY = 1  # run scenario
 
 DEBUG = True
-DEBUG = False
+# DEBUG = False
 BUGLIST = True
-BUGLIST = False
+# BUGLIST = False
 CORELIST = True  # have to scrape core sequences!
 CORELIST = False
 if BUGLIST:
@@ -123,13 +123,16 @@ JOB_ID = "000000"
 # SEQ_ID = (True, 'A056457')
 # SEQ_ID = (True, 'A029378')
 # SEQ_ID = (True, 'A000042')
-# SEQ_ID = (True, 'A000004')
+SEQ_ID = (True, 'A000004')
 # SEQ_ID = (True, 'A000008')
 # SEQ_ID = (True, 'A000027')
 # SEQ_ID = (True, 'A000034')
 # SEQ_ID = (True, 'A000012')
-SEQ_ID = (True, 'A000392')
+# SEQ_ID = (True, 'A000392')
 # SEQ_ID = (True, 'A000045')
+# non_manuals =  ['23167_A169198.txt', '23917_A170320.txt', '03322_A016835.txt', '24141_A170544.txt', '24240_A170643.txt', '24001_A170404.txt', '24014_A170417.txt', '23207_A169238.txt', '22912_A168943.txt', '03330_A016844.txt', '23872_A170275.txt', '22983_A169014.txt', '24006_A170409.txt', '24211_A170614.txt', '15737_A105944.txt', '24053_A170456.txt', '23488_A169519.txt', '23306_A169337.txt', '22856_A168887.txt', '23049_A169080.txt', '23980_A170383.txt', '23742_A170145.txt', '23109_A169140.txt', '06659_A035798.txt', '23860_A170263.txt', '23800_A170203.txt', '23649_A170052.txt', '23219_A169250.txt', '23682_A170085.txt', '06706_A035871.txt', '23720_A170123.txt', '31181_A279282.txt', '23382_A169413.txt', '24034_A170437.txt', '24192_A170595.txt']
+SEQ_ID = (True, 'A169198')
+SEQ_ID = (False, 'A169198')
 
 # DIOFANT_GRID = False
 
@@ -160,7 +163,7 @@ args = parser.parse_args()
 job_id = args.job_id
 task_id = args.task_id
 
-task_id = remnants[task_id]
+# task_id = remnants[task_id]
 # diofant_grid = True if args.diogrid == "True" else False
 
 max_order = args.order
@@ -333,6 +336,7 @@ else:
 
         # try:
         if SINDy:
+            print('Attempting SINDy')
             seq, coeffs, truth = unpack_seq(seq_id, csv)
             seq, pre_fail = preprocess(seq)
             if pre_fail:
@@ -364,14 +368,17 @@ else:
             #     print(max_order_item[0:])
 
         else:
+            print('Going for exact ed')
             if INCREASING_EED:
                 x, eq, coeffs, truth = increasing_eed(seq_id, csv, VERBOSITY, max_order_,
                                                       n_of_terms=N_OF_TERMS_ED, linear=True)
             # x, eq, coeffs, truth = exact_ed(seq_id, csv, VERBOSITY, max_order_,
             #                                 n_of_terms=N_OF_TERMS_ED, linear=True)
 
+        print('eq', eq, 'x', x)
         is_reconst = solution_vs_truth(x, coeffs)
         is_check_verbose = check_eq_man(x, seq_id, csv, n_of_terms=10**5)
+        print('manual check \n', is_check_verbose[1], '\n', is_check_verbose[2])
         is_check = is_check_verbose[0]
         # print(f"{is_reconst}!, reconstructed as in ground truth.")
         # print(f"{is_check}!, \"manually\" checked if the equation holds for all terms.")

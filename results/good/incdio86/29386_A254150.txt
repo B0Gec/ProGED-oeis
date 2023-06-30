@@ -1,0 +1,12 @@
+
+While total time consumed by now, scale:29387/34371, seq_id:A254150, order:20 took:
+ 1.0 seconds, i.e. 0.02 minutes or 0.0 hours.
+
+A254150: 
+a(n) = 5*a(n - 3) - 24*a(n - 2) + 12*a(n - 1)
+truth: 
+a(n) = 12*a(n - 1) + -24*a(n - 2) + 5*a(n - 3),  
+a(0) = 1, a(1) = 8, a(2) = 73
+
+True  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

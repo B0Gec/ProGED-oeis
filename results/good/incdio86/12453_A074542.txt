@@ -1,0 +1,12 @@
+
+While total time consumed by now, scale:12454/34371, seq_id:A074542, order:20 took:
+ 0.9 seconds, i.e. 0.01 minutes or 0.0 hours.
+
+A074542: 
+a(n) = 96*a(n - 3) - 76*a(n - 2) + 16*a(n - 1)
+truth: 
+a(n) = 16*a(n - 1) + -76*a(n - 2) + 96*a(n - 3),  
+a(0) = 3, a(1) = 16, a(2) = 104
+
+True  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

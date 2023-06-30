@@ -1,0 +1,12 @@
+
+While total time consumed by now, scale:29267/34371, seq_id:A252769, order:20 took:
+ 1.6 seconds, i.e. 0.03 minutes or 0.0 hours.
+
+A252769: 
+a(n) = a(n - 3) - 63*a(n - 2) + 63*a(n - 1)
+truth: 
+a(n) = 63*a(n - 1) + -63*a(n - 2) + 1*a(n - 3),  
+a(0) = 94, a(1) = 5908, a(2) = 366282
+
+True  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

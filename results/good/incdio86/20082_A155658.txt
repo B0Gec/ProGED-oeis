@@ -1,0 +1,12 @@
+
+While total time consumed by now, scale:20083/34371, seq_id:A155658, order:20 took:
+ 1.1 seconds, i.e. 0.02 minutes or 0.0 hours.
+
+A155658: 
+a(n) = 77*a(n - 3) - 95*a(n - 2) + 19*a(n - 1)
+truth: 
+a(n) = 19*a(n - 1) + -95*a(n - 2) + 77*a(n - 3),  
+a(0) = 1, a(1) = 17, a(2) = 169
+
+True  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

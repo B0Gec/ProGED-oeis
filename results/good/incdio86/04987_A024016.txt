@@ -1,0 +1,12 @@
+
+While total time consumed by now, scale:4988/34371, seq_id:A024016, order:20 took:
+ 11.4 seconds, i.e. 0.19 minutes or 0.003 hours.
+
+A024016: 
+a(n) = -2*a(n - 8) + 15*a(n - 7) - 49*a(n - 6) + 91*a(n - 5) - 105*a(n - 4) + 77*a(n - 3) - 35*a(n - 2) + 9*a(n - 1)
+truth: 
+a(n) = 9*a(n - 1) + -35*a(n - 2) + 77*a(n - 3) + -105*a(n - 4) + 91*a(n - 5) + -49*a(n - 6) + 15*a(n - 7) + -2*a(n - 8),  
+a(0) = 1, a(1) = 1, a(2) = -60, a(3) = -721, a(4) = -4080, a(5) = -15593, a(6) = -46592, a(7) = -117521
+
+True  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

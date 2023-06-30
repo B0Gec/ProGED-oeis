@@ -1,0 +1,12 @@
+
+While total time consumed by now, scale:6727/34371, seq_id:A036121, order:20 took:
+ 9.5 seconds, i.e. 0.16 minutes or 0.003 hours.
+
+A036121: 
+a(n) = a(n - 12) - a(n - 11) + a(n - 1)
+truth: 
+a(n) = 1*a(n - 1) + 0*a(n - 2) + 0*a(n - 3) + 0*a(n - 4) + 0*a(n - 5) + 0*a(n - 6) + 0*a(n - 7) + 0*a(n - 8) + 0*a(n - 9) + 0*a(n - 10) + -1*a(n - 11) + 1*a(n - 12),  
+a(0) = 1, a(1) = 5, a(2) = 2, a(3) = 10, a(4) = 4, a(5) = 20, a(6) = 8, a(7) = 17, a(8) = 16, a(9) = 11, a(10) = 9, a(11) = 22
+
+True  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

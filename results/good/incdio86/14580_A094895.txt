@@ -1,0 +1,12 @@
+
+While total time consumed by now, scale:14581/34371, seq_id:A094895, order:20 took:
+ 1.6 seconds, i.e. 0.03 minutes or 0.0 hours.
+
+A094895: 
+a(n) = 544*a(n - 3) + 324*a(n - 2) + 24*a(n - 1)
+truth: 
+a(n) = 24*a(n - 1) + 324*a(n - 2) + 544*a(n - 3),  
+a(0) = 1, a(1) = 280, a(2) = 8524
+
+True  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

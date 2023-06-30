@@ -1,0 +1,12 @@
+
+While total time consumed by now, scale:33856/34371, seq_id:A340199, order:20 took:
+ 0.3 seconds, i.e. 0.0 minutes or 0.0 hours.
+
+A340199: 
+a(n) = 21*a(n - 3) - 31*a(n - 2) + 11*a(n - 1)
+truth: 
+a(n) = 11*a(n - 1) + -31*a(n - 2) + 21*a(n - 3),  
+a(0) = 43, a(1) = 379, a(2) = 2899
+
+True  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

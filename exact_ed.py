@@ -59,12 +59,19 @@ def grid_sympy(seq: sp.MutableDenseMatrix, max_order: int):  # seq.shape=(N, 1)
 def dataset(seq: list, max_order: int, linear: bool):
     "Instant list -> (b, A) for equation discovery / LA system."
 
+    if max_order <= 0:
+        raise ValueError("max_order must be > 0. Otherwise needs to be implemented properly.")
     data = grid_sympy(sp.Matrix(seq), max_order)
+    # print('order', max_order)
+    # print('data', data)
     if linear:
         data = data[:, sp.Matrix([0] + list(i for i in range(2, data.shape[1])))]
     m_limit = 3003
-    b = data[max_order:(max_order + m_limit), 0]
-    A = data[max_order:(max_order + m_limit), 1:]
+    # print('data', data)
+    # b = data[max_order:(max_order + m_limit), 0]
+    # A = data[max_order:(max_order + m_limit), 1:]
+    b = data[max_order-1:(max_order + m_limit), 0]
+    A = data[max_order-1:(max_order + m_limit), 1:]
     return b, A
 
 
@@ -186,6 +193,7 @@ def exact_ed(seq_id: str, csv: pd.DataFrame, verbosity: int = VERBOSITY,
     # max_order = None
     header = 1 if linear else 0
 
+    # print('in exact_ed')
     # POTENTIAL ERROR!!!!: WHEN NOT CONVERTING 3.0 INTO 3 FOR SOLVING DIOFANTINE
     if linear:
         seq, coeffs, truth = unpack_seq(seq_id, csv)
@@ -195,6 +203,7 @@ def exact_ed(seq_id: str, csv: pd.DataFrame, verbosity: int = VERBOSITY,
     else:
         seq = sp.Matrix(csv[seq_id][header:(header + n_of_terms)])
 
+    # print('after if in exact_ed')
     # if linear:
     #     # truth = '(-34,45,1, -35, 8)'
     #     truth = csv[seq_id][0]
@@ -208,7 +217,13 @@ def exact_ed(seq_id: str, csv: pd.DataFrame, verbosity: int = VERBOSITY,
     #     data = data[:, sp.Matrix([0] + list(i for i in range(2, data.shape[1])))]
     # b, A = dataset(seq, max_order, linear=linear)
     b, A = dataset(list(seq), max_order, linear=linear)
-    print(A.shape)
+    print('order', max_order)
+    # print(A.shape)
+    print(b.shape)
+    print(b)
+    print(A)
+    print('after dataset')
+    # verbosity = 3
 
     # m_limit = 3003
     # b = data[max_order:(max_order + m_limit), 0]
@@ -222,10 +237,13 @@ def exact_ed(seq_id: str, csv: pd.DataFrame, verbosity: int = VERBOSITY,
 
     if verbosity >= 3:
         print('A, b', A.__repr__(), b.__repr__())
-        print('A[:4][:4] :', A[:6, :6].__repr__(), '\n', A[:, -2].__repr__())
+        # print('A[:4][:4] :', A[:6, :6].__repr__(), '\n', A[:, -2].__repr__())
         print('A, b  shapes', A.shape, b.shape)
 
     x = diophantine_solve(A, b)
+    # print(A*x[0])
+    print(b)
+    print('after sanity check')
     if verbosity >= 3:
         print('x', x)
     # verbose_eq = ['a(n)', 'n']
@@ -262,6 +280,7 @@ def exact_ed(seq_id: str, csv: pd.DataFrame, verbosity: int = VERBOSITY,
             print('eq: ', eq)
         # x = eq
 
+    print('x', x)
     if linear:
         return x, eq, coeffs, truth
     else:
@@ -273,22 +292,53 @@ def increasing_eed(seq_id: str, csv: pd.DataFrame, verbosity: int = VERBOSITY,
     """Perform exact_ed with increasing the *max_order* untill the equation that holds (with minimum order) is found."""
 
     def eed_step(ed_output, order):
-        # print('summary', ed_output, order)
-        # x = ed_output[0]
-        # if x != []:
-        #     return ed_output
-        # else:
-        #     print('tle meljem')
-        #     ed_out  = exact_ed(seq_id, csv, verbosity,
-        #                  order, linear, n_of_terms)
-        #     return ed_out
-        output = ed_output if ed_output[0] != [] else exact_ed(seq_id, csv, verbosity, order, linear, n_of_terms)
+        print('summary', order)
+        print('summary', ed_output)
+
+        # output = ed_output if ed_output[0] != [] else exact_ed(seq_id, csv, verbosity, order, linear, n_of_terms) + (False,)
+        # # output = ed_output if ed_output[-1] else exact_ed(seq_id, csv, verbosity, order, linear, n_of_terms) + (False,)
+        if not ed_output[-1]:
+            output = exact_ed(seq_id, csv, verbosity, order, linear, n_of_terms) + ( False,)
+            # print(output[1:])
+            if output[0] != []:
+                if len(output[0]) > 0 and output[0][-1] == 0 and order >= 2:
+                    print('Unlucky me! The order is lower than maximum although it\'s increasing eed!'
+                        'this indicates that the equation probably the equation found a loophole in'
+                        'construction of dataset since it ignores first terms of the sequence.'
+                        'There may be a way to fix this - not sure but I\'m too lazy to do it now. '
+                        'I suspect that the equation is not correct for all terms (wrong for the first few).')
+
+                is_check = check_eq_man(output[0], seq_id, csv, n_of_terms=10**5)[0]
+                if not is_check:
+                    # output = [], "", "", "", False
+                    output = ed_output[:2] + output[2:]
+                else:
+                    output = output[:-1] + (True,)
+                    # output = ed_output[:2] + output[2:-1] + (True,)
+            else:
+                # output = ([],) + (output[1:])
+                # output = ed_output[:2] + output[2:]
+                pass
+        else:
+            output = ed_output
+
+
+        # # x_before = output[0]
+        # # nonzero_indices = [i for i in range(len(x)) if (x[i] != 0)]
+        # # x = x[:max(nonzero_indices) + 1] if len(nonzero_indices) > 0 else []
+        # # # if len(x_before) ,
+        # # print('x', x)
+        #
+        # # if
+
+        print('after one step of order', order, output)
         return output
 
-    start = ([], "", "", "")
+    start = ([], "a(n) = NOT RECONSTRUCTED :-(", "", "", False)
+    # start = ([], "", "", "")
     orders = range(1, max_order)
 
-    eed = reduce(eed_step, orders, start)
+    eed = reduce(eed_step, orders, start)[:4]
     # for i in range(1, max_order):
     #     if x != []:
     #         x = exact_ed()
@@ -478,21 +528,43 @@ def check_eq_man(x: sp.Matrix, seq_id: str, csv: str,
     if seq.has(sp.nan):
         seq = seq[:list(seq).index(sp.nan), :]
 
+    nonzero_indices = [i for i in range(len(x)) if (x[i] != 0)]
+    if nonzero_indices == []:
+        x = [0, 0]
+        print(type(seq), type(seq[0, :]))
+        fake_reconst = seq[0, :] + sp.Matrix([1])
+    elif nonzero_indices == [0]:
+        x = x[0] + [0]
+        fake_reconst = seq[0, :] + sp.Matrix([1])
+    else:
+        x = x[:max(nonzero_indices) + 1]
+        fake_reconst = []
+    x = sp.Matrix(x)
+
     def an(till_now, x):
+        # print('till_now, x', till_now, x)
+        # print(type(x), x[0])
         coefs = x[:]
         coefs.reverse()
+        # print(type(coefs))
         out =  sp.Matrix([coefs[-1]*till_now.rows]) + till_now[-len(coefs[:-1]):, :].transpose()*sp.Matrix(coefs[:-1])
         return out
         # return (x[0] * till_now.rows + till_now[-len(x[1:]):, :].transpose() * x[1:, :])[0]
 
-    reconst = seq[:max(len(x)-1, min(oeis_friendly, len(seq))), :]  # init reconst
+    if fake_reconst != []:
+        reconst = an(fake_reconst, x)
+    else:
+        reconst = seq[:max(len(x)-1, min(oeis_friendly, len(seq))), :]  # init reconst
     # else:
     #     reconst = seq[:len(x)-1, :]  # init reconst
 
     for i in range(len(seq) - len(reconst)):
         # reconst = reconst.col_join(sp.Matrix([an(reconst, x)]))
         reconst = reconst.col_join(an(reconst, x))
+        # print(i, reconst)
 
+    # print(reconst)
+    # print(seq)
     out = reconst == seq, reconst, seq
     return out
 
