@@ -1,4 +1,8 @@
+##
+from functools import reduce
+
 import pandas as pd
+import matplotlib.pyplot as plt
 fname = 'header_database_linear.csv'
 from blacklist import blacklist
 csv = pd.read_csv(fname)
@@ -13,6 +17,42 @@ def order(id_, csv, sign=-1):
         return len(coeffs)
 
 print(order(csv.columns[0], csv))
+
+# 2.) analyze how many of order below 20.
+print(order(csv.columns[1], csv))
+print(len([i for i in csv.columns if order(i, csv) <= 20]))
+##
+
+bigger = [i for i in csv.columns if order(i, csv) > 20]
+print(len(bigger), 'len(bigger)')
+bigger = bigger[:4000]
+orders = [order(i, csv) for i in bigger]
+print(max(orders))
+
+##
+
+start = dict()
+def summary(till_now, i):
+    ordr = order(i, csv)
+    if not ordr in till_now:
+        till_now[ordr] = 1
+    else:
+        till_now[ordr] = till_now[ordr] + 1
+    return till_now
+
+# print(reduce(summary, csv.columns, start))
+bigger_dic = reduce(summary, bigger, start)
+##
+
+print(bigger_dic)
+xs = sorted([i for i in bigger_dic])
+ys = [bigger_dic[i] for i in bigger_dic]
+print(max(xs))
+plt.plot(xs, ys)
+plt.show()
+##
+
+1/0
 
 from ed_fails import ed_fails
 from non_manuals import non_manuals

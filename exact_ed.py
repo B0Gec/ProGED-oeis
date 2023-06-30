@@ -217,13 +217,12 @@ def exact_ed(seq_id: str, csv: pd.DataFrame, verbosity: int = VERBOSITY,
     #     data = data[:, sp.Matrix([0] + list(i for i in range(2, data.shape[1])))]
     # b, A = dataset(seq, max_order, linear=linear)
     b, A = dataset(list(seq), max_order, linear=linear)
-    print('order', max_order)
-    # print(A.shape)
-    print(b.shape)
-    print(b)
-    print(A)
-    print('after dataset')
-    # verbosity = 3
+    # print('order', max_order)
+    # # print(A.shape)
+    # print(b.shape)
+    # print(b)
+    # print(A)
+    # print('after dataset')
 
     # m_limit = 3003
     # b = data[max_order:(max_order + m_limit), 0]
@@ -242,8 +241,8 @@ def exact_ed(seq_id: str, csv: pd.DataFrame, verbosity: int = VERBOSITY,
 
     x = diophantine_solve(A, b)
     # print(A*x[0])
-    print(b)
-    print('after sanity check')
+    # print(b)
+    # print('after sanity check')
     if verbosity >= 3:
         print('x', x)
     # verbose_eq = ['a(n)', 'n']
@@ -280,7 +279,7 @@ def exact_ed(seq_id: str, csv: pd.DataFrame, verbosity: int = VERBOSITY,
             print('eq: ', eq)
         # x = eq
 
-    print('x', x)
+    # print('x', x)
     if linear:
         return x, eq, coeffs, truth
     else:
@@ -292,8 +291,8 @@ def increasing_eed(seq_id: str, csv: pd.DataFrame, verbosity: int = VERBOSITY,
     """Perform exact_ed with increasing the *max_order* untill the equation that holds (with minimum order) is found."""
 
     def eed_step(ed_output, order):
-        print('summary', order)
-        print('summary', ed_output)
+        # print('summary', order)
+        # print('summary', ed_output)
 
         # output = ed_output if ed_output[0] != [] else exact_ed(seq_id, csv, verbosity, order, linear, n_of_terms) + (False,)
         # # output = ed_output if ed_output[-1] else exact_ed(seq_id, csv, verbosity, order, linear, n_of_terms) + (False,)
@@ -302,11 +301,12 @@ def increasing_eed(seq_id: str, csv: pd.DataFrame, verbosity: int = VERBOSITY,
             # print(output[1:])
             if output[0] != []:
                 if len(output[0]) > 0 and output[0][-1] == 0 and order >= 2:
-                    print('Unlucky me! The order is lower than maximum although it\'s increasing eed!'
-                        'this indicates that the equation probably the equation found a loophole in'
-                        'construction of dataset since it ignores first terms of the sequence.'
-                        'There may be a way to fix this - not sure but I\'m too lazy to do it now. '
-                        'I suspect that the equation is not correct for all terms (wrong for the first few).')
+                    # print('Unlucky me!' + seq_id + ' The order is lower than maximum although it\'s increasing eed!'
+                    #     'this indicates that the equation probably the equation found a loophole in'
+                    #     'construction of dataset since it ignores first terms of the sequence.'
+                    #     'There may be a way to fix this - not sure but I\'m too lazy to do it now. '
+                    #     'I suspect that the equation is not correct for all terms (wrong for the first few).')
+                    pass
 
                 is_check = check_eq_man(output[0], seq_id, csv, n_of_terms=10**5)[0]
                 if not is_check:
@@ -331,7 +331,7 @@ def increasing_eed(seq_id: str, csv: pd.DataFrame, verbosity: int = VERBOSITY,
         #
         # # if
 
-        print('after one step of order', order, output)
+        # print('after one step of order', order, output)
         return output
 
     start = ([], "a(n) = NOT RECONSTRUCTED :-(", "", "", False)
@@ -531,7 +531,7 @@ def check_eq_man(x: sp.Matrix, seq_id: str, csv: str,
     nonzero_indices = [i for i in range(len(x)) if (x[i] != 0)]
     if nonzero_indices == []:
         x = [0, 0]
-        print(type(seq), type(seq[0, :]))
+        # print(type(seq), type(seq[0, :]))
         fake_reconst = seq[0, :] + sp.Matrix([1])
     elif nonzero_indices == [0]:
         x = x[0] + [0]

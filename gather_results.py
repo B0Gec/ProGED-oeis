@@ -53,10 +53,11 @@ job_id = "37683622"  # seems like for false_truth list creation
 # job_id = "debug2"
 # job_id = "38095692"
 # job_id = "sindy512135"
-# job_id = "sindygrid519_1"
-# job_id = "incdio76"
-job_id = "blacklist76"
+job_id = "sindygrid519_1"
+# # job_id = "incdio76"
+# # job_id = "blacklist76"
 job_id = "incdio86"
+# # job_id = "i86bugfix"
 
 
 # seq_file = '13000_A079034.txt'
@@ -526,6 +527,7 @@ printout = f"""
 print(printout)
 
 n = 6
+print(n)
 print(f'first {n} bugs:', buglist[:n])
 print(len(buglist))
 print(f'job bins (task_id= 0, 1, ... 34):', job_bins)
@@ -537,6 +539,7 @@ for n, i in enumerate(job_bins):
 print(f'first {n} non_ids:', non_id_list[:n])
 print(len(non_id_list))
 print(f'first {n} non_manuals:', non_manual_list[:n])
+print(f'all non_manuals:', non_manual_list)
 # check if new false_truth blacklist contains all old false_truths:  # experiment job_id = "blacklist76"
 false_non_man = [i[6:6+7] for i in non_manual_list]
 # print(false_non_man)

@@ -66,7 +66,7 @@ VERBOSITY = 2  # dev scena
 VERBOSITY = 1  # run scenario
 
 DEBUG = True
-# DEBUG = False
+DEBUG = False
 BUGLIST = True
 # BUGLIST = False
 CORELIST = True  # have to scrape core sequences!
@@ -219,7 +219,11 @@ if not fail:
     fail = (not BUGLIST and list(csv.columns)[task_id] in blacklist) or fail
     seq_id = list(csv.columns)[task_id] if not SEQ_ID[0] or not DEBUG else SEQ_ID[1]
     if BUGLIST:
-        seq_id = buglist[task_id]
+        if isinstance(buglist[task_id], str):
+            seq_id = buglist[task_id]
+        else:
+            seq_id = buglist[task_id][1]
+            task_id = int(buglist[task_id][0])
     # if CORELIST:
     #     seq_id = cores[task_id]
 
@@ -368,17 +372,17 @@ else:
             #     print(max_order_item[0:])
 
         else:
-            print('Going for exact ed')
+            # print('Going for exact ed')
             if INCREASING_EED:
                 x, eq, coeffs, truth = increasing_eed(seq_id, csv, VERBOSITY, max_order_,
                                                       n_of_terms=N_OF_TERMS_ED, linear=True)
             # x, eq, coeffs, truth = exact_ed(seq_id, csv, VERBOSITY, max_order_,
             #                                 n_of_terms=N_OF_TERMS_ED, linear=True)
 
-        print('eq', eq, 'x', x)
+        # print('eq', eq, 'x', x)
         is_reconst = solution_vs_truth(x, coeffs)
         is_check_verbose = check_eq_man(x, seq_id, csv, n_of_terms=10**5)
-        print('manual check \n', is_check_verbose[1], '\n', is_check_verbose[2])
+        # print('manual check \n', is_check_verbose[1], '\n', is_check_verbose[2])
         is_check = is_check_verbose[0]
         # print(f"{is_reconst}!, reconstructed as in ground truth.")
         # print(f"{is_check}!, \"manually\" checked if the equation holds for all terms.")

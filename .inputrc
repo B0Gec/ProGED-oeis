@@ -1,0 +1,14 @@
+# To import all default settings(jst dodal):
+$include /etc/inputrc
+"\e[A": history-search-backward
+"\e[B": history-search-forward
+set show-all-if-ambiguous on
+set completion-ignore-case on
+
+set visible-stats On
+set colored-stats On
+set mark-symlinked-directories On
+
+set show-all-if-unmodified On
+# set completion-prefix-display-length 3
+

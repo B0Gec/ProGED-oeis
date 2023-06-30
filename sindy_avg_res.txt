@@ -1,0 +1,162 @@
+31443
+
+(18498, 1795, 11150, 0, 0, 31443, ['05101_A024347.txt', '25707_A188270.txt', '29660_A257293.txt', '3
+all files:31443, sum:31443, corrected sum: 31443
+
+Results: 
+
+    18498 = 66.2 % ... (id_oeis) ... successfully found equations that are identical to the recursive equations written in OEIS (hereinafter - OEIS equation)
+     1795 = 6.43 % ... (non_id) ... successfully found equations that are more complex than the OEIS equation 
+    11150 = 39.9 % ... (non_manual) ... successfully found equations that do not apply to test cases 
+        0 = 0.0 % ... (fail) ... failure, no equation found. (but program finished smoothly, no runtime error)
+        0 = 0.0 % ... (reconst_non_manual) ... fail in program, specifically: reconstructed oeis and wrong on test cases.
+    ~~11150 = 39.9 % ... (corrected_non_manual = non_manual ... reconst_non_manual) ... non_manuals taking bug in my code into the account.~~
+
+    31443 ... (id_oeis + non_id + corrected_non_manual + fail) = sum
+    
+    
+      696 = 2.49 % ... sequences with no ground truth -> missing jobs
+     5749 = 20.6 % ... sequences with false ground truth -> missing jobs
+     6445 = 23.1 % ... sequences with no or false ground truth -> all missing jobs by default
+    34371 ... all sequences in our dataset
+    
+    -3517 = -12.6 % ... runtime errors = jobs failed
+    -3517 = -12.6 % ... all fails  <--- (look this) ---
+    27926 ... all considered sequences, i.e. in our dataset - ignored
+    
+    _______________________________________________________
+    27926 ... (id_oeis + non_id + corrected_non_manual + all_fails) ... under the line check if it sums up
+    37888 ... (id_oeis + non_id + corrected_non_manual + ed_fails + ignored) ... under the line check if it sums up
+    34371 ... (id_oeis + non_id + corrected_non_manual + ed_fails + ignored + jobs_fail) ... under the line check if it sums up
+    
+    20293 = 72.7 % - official success (id_oeis + non_id)
+    
+    31443 = avg is best 
+    
+    
+    
+    ==========================================================
+
+    \newcommand{\allSeqs}{27926}
+    \newcommand{\isOeis}{18498}
+    \newcommand{\nonId}{1795}
+    \newcommand{\nonMan}{11150}
+    \newcommand{\edFail}{0}
+    \newcommand{\jobFail}{-3517}
+
+    \newcommand{\UUallSeqs}{27926}
+    \newcommand{\UUisOeis}{18498}
+    \newcommand{\UUnonId}{1795}
+    \newcommand{\UUnonMan}{11150}
+    \newcommand{\UUedFail}{0}
+    \newcommand{\UUjobFail}{-3517}
+
+    \FPeval{\UUok}{           clip(\UUisOeis+\UUnonId)}
+    \FPeval{\UUnotOeis}{      clip(\UUnonMan+\UUnonId)}
+    \FPeval{\UUnotIsFound}{   clip(\UUedFail+\UUjobFail)}
+    \FPeval{\UUisFound}{      clip(\UUisOeis+\UUnotOeis)}
+    \FPeval{\UUallSeqsc}{     clip(\UUisFound+\UUnotIsFound)}
+    
+    \FPeval{\percUUIsOeis}{       round(100 * \UUisOeis/\UUallSeqs:2)}
+    \FPeval{\percUUNonId}{        round(100 * \UUnonId/\UUallSeqs:2)}
+    \FPeval{\percUUNonMan}{       round(100 * \UUnonMan/\UUallSeqs:2)}
+    \FPeval{\percUUNotIsFound}{   round(100 * \UUnotIsFound/\UUallSeqs:2)}
+
+    
+    \begin{table}[h]
+    \caption{Table describing the (new/fresh) results of novel method experiments so far.}
+    \label{tab:results_numbersUU}
+       \renewcommand{\arraystretch}{1.5} \begin{center}
+       \begin{tabular}{c|rrcc|c} \toprule \centering
+    &                   \textbf{is\_found} &  & \textbf{not\_is\_found} &  \\
+    \textbf{Validation} & \textbf{identical} & \textbf{nonidentical} & \textbf{none (ed\_fail)}
+    & \textbf{error (jobs\_fail)} & $\Sigma$  \\
+        \midrule
+        OK       & \UUisOeis & \UUnonId     &  $\times$ & $\times$ & \UUok \\
+        not - OK & 0 & \UUnonMan &  $\times$ & $\times$   \\
+        \midrule
+        $\Sigma$ & \UUisOeis  &  \UUnotOeis  &  \UUedFail
+        & \UUjobFail
+        &  \UUallSeqsc \\
+        \bottomrule \end{tabular} \end{center}
+    \end{table}
+
+
+\begin{figure}
+    \centering
+\Tree[.$\UUallSeqs$ [.is\_found [.$\UUisOeis$ ] 
+               [.$\UUnotOeis$
+                    [.$\UUnonId$ ] 
+                    [.$\UUnonMan$ ]] ] 
+               [.not\_is\_found 
+                    [.$\UUedFail$ ]
+                    [.$\UUjobFail$ ]
+                    ]] 
+    \caption{Tree explaining the process of grouping sequences into disjoint bins with tangible numbers.}
+    \label{fig:explain_numbersUU}
+\end{figure}
+
+\begin{figure}
+    \begin{tikzpicture}
+    % \pie[text=legend,
+        \pie[color={ipsscblue, ipsscred, ipsscorange, ipsscyellow}] 
+        {   \percUUIsOeis/identical (\UUisOeis),
+            \percUUNonId/ \begin{tabular}{c} valid for   first \\ test terms  (\UUnonId) \end{tabular} ,
+            \percUUNonMan/invalid (\UUnonMan),
+            \percUUNotIsFound/no output (\UUnotIsFound) 
+            }
+    \end{tikzpicture}
+
+    \caption{Summary of (fresh) results with pie chart.}
+    \label{fig:explain_treeUU}
+\end{figure}
+
+
+first 6 bugs: ['05101_A024347.txt', '25707_A188270.txt', '29660_A257293.txt', '32300_A294799.txt', '04581_A021502.txt', '18476_A134465.txt']
+11150
+job bins (task_id= 0, 1, ... 34): [941, 831, 405, 792, 931, 975, 972, 993, 1000, 990, 961, 937, 947, 949, 957, 944, 884, 932, 940, 930, 961, 968, 988, 994, 938, 933, 939, 943, 885, 916, 802, 908, 897, 853, 307, 0]
+zipped job bins (task_id= 0, 1, ... 34): [(0, 941), (1, 831), (2, 405), (3, 792), (4, 931), (5, 975), (6, 972), (7, 993), (8, 1000), (9, 990), (10, 961), (11, 937), (12, 947), (13, 949), (14, 957), (15, 944), (16, 884), (17, 932), (18, 940), (19, 930), (20, 961), (21, 968), (22, 988), (23, 994), (24, 938), (25, 933), (26, 939), (27, 943), (28, 885), (29, 916), (30, 802), (31, 908), (32, 897), (33, 853), (34, 307), (35, 0)]
+check bins: 31443 = 31443 ?
+0 941
+1 831
+2 405
+3 792
+4 931
+5 975
+6 972
+7 993
+8 1000
+9 990
+10 961
+11 937
+12 947
+13 949
+14 957
+15 944
+16 884
+17 932
+18 940
+19 930
+20 961
+21 968
+22 988
+23 994
+24 938
+25 933
+26 939
+27 943
+28 885
+29 916
+30 802
+31 908
+32 897
+33 853
+34 307
+35 0
+first 35 non_ids: ['23167_A169198.txt', '23917_A170320.txt', '27218_A212973.txt', '25346_A181288.txt', '27886_A224251.txt', '24141_A170544.txt', '24706_A174007.txt', '24240_A170643.txt', '24001_A170404.txt', '24014_A170417.txt', '23207_A169238.txt', '22912_A168943.txt', '24970_A176780.txt', '23872_A170275.txt', '24006_A170409.txt', '09804_A046023.txt', '24211_A170614.txt', '24053_A170456.txt', '23488_A169519.txt', '23306_A169337.txt', '22856_A168887.txt', '23049_A169080.txt', '23980_A170383.txt', '23742_A170145.txt', '23109_A169140.txt', '15106_A099480.txt', '23860_A170263.txt', '23649_A170052.txt', '29717_A257934.txt', '23219_A169250.txt', '23682_A170085.txt', '33917_A341744.txt', '23720_A170123.txt', '01036_A008259.txt', '23382_A169413.txt']
+1795
+first 35 non_manuals: ['05101_A024347.txt', '25707_A188270.txt', '29660_A257293.txt', '32300_A294799.txt', '04581_A021502.txt', '18476_A134465.txt', '27737_A219531.txt', '19050_A140674.txt', '02145_A014084.txt', '17002_A119284.txt', '01790_A011851.txt', '19582_A151626.txt', '30408_A267207.txt', '11353_A058331.txt', '01812_A011879.txt', '12684_A077415.txt', '06545_A034265.txt', '09627_A042791.txt', '32681_A302710.txt', '19335_A144930.txt', '00831_A006096.txt', '22715_A168746.txt', '06210_A029378.txt', '06350_A031878.txt', '19866_A154223.txt', '09608_A042772.txt', '28975_A246640.txt', '03322_A016835.txt', '00670_A005023.txt', '04936_A023470.txt', '22035_A166443.txt', '32291_A294767.txt', '20072_A155648.txt', '28785_A242971.txt', '08631_A041653.txt']
+first 35 ed_fails: []
+0
+first 35 true configs: []
+0
