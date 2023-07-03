@@ -99,6 +99,7 @@ def sindy(seq: Union[list, sp.Matrix], max_order: int, seq_len: int, threshold: 
     # data = grid_sympy(sp.Matrix(seq), max_order)
     # data = sp.Matrix.hstack(b, A)
     data = np.hstack((b, A))
+
     # print(data.shape, type(data))
     head = data[:6, :6]
     # for i in range(head.rows):
@@ -126,15 +127,20 @@ def sindy(seq: Union[list, sp.Matrix], max_order: int, seq_len: int, threshold: 
     # # model.fit(x_train, t=dt)
     # model.fit(x_train, t=dt, x_dot=dot_x)
     model.fit(A, x_dot=b)
+    model.fit(A, x_dot=b, ensemble=True)
     # model.print()
     model.coefficients()
+    print(model.coefficients(), 'model.coefficients()')
+    print(type(model.coefficients()), 'type of model.coefficients()')
+    print(np.mean(model.coef_list, axis=0), 'model.coefficients()')
+    # print(type(model.coef_list), 'type of model.coefficients()')
+    1/0
     # print(model.coefficients())
     x = sp.Matrix([round(i) for i in model.coefficients()[0][1:]])
     x = sp.Matrix.vstack(sp.Matrix([0]), x)
 
     # print(x)
     return x
-
 
 
 
@@ -200,7 +206,7 @@ def sindy_grid(seq, seq_id, csv, coeffs, max_order: int, seq_len: int, grid_orde
         """
         return list(set([round(start + i * (end - start) / n_of_pts) for i in range(n_of_pts)]));
 
-    # todo grid 20x8x50 or 20x10x40 (10h for experiment) where 50 for different values of (sindy's) phi.
+    # todo grid 20x20x20 (10h for experiment) where 20 for different values of (sindy's) threshold.
     subopt_grid = list(product(equidist(1, max_order, grid_order), equidist(4, seq_len, grid_len)))  # i.e.
     grid = [pair for pair in subopt_grid if (pair[1]-pair[0]) > 4]  # Avoids too short sequences vis-a-vis order.
     # grid = grid[:6]
