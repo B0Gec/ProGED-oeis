@@ -250,6 +250,7 @@ def sindy_grid(seq, seq_id, csv, coeffs, max_order: int, seq_len: int,
         # printout += str([f"{str(i): >20}" for i in printable[5*i:5*(i+1)]])
     # printout += ']\n'
 
+    idx = len(grid[0])
     oeis = [case[2][0] for case in ongrid if case[2][1:3] == (True, True)]
     manually = [case[2][0] for case in ongrid if case[2][1:3] == (False, True)]
     # bug = [case[2][0] for case in ongrid if case[2][1:3] == (True, False)]
