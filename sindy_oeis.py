@@ -193,14 +193,23 @@ def sindy_grid_order(seq, seq_id, csv, coeffs, max_order: int, seq_len: int):
     return map(lambda order: one_results(seq, seq_id, csv, coeffs, order, seq_len), [i for i in range(1, max_order+1)])
 
 def sindy_grid(seq, seq_id, csv, coeffs, max_order: int, seq_len: int,
-               ths_bounds: tuple = (0.1, 0.9),
+               ths_bounds: tuple = (0.1, 0.9), ensemble_grid: tuple = (True, False, False),
                order_pts: int = 20, len_pts: int = 20, threshold_pts: int = 20):
+    """Performs sindy on grid of parameters until the correct sindy equation is found according to the ground truth.
+    Otherwise outputs more complex equation or nothing.
+
+    Args:
+        ths_bounds: (min, max) for threshold
+        ensemble_grid: (default, ensemble, library_ensemble)
+        order_pts: number of points for order grid
+        len_pts: number of points for sequence length grid
+        threshold_pts: number of points for threshold grid
+    """
     # weird lazy error: !!!!!
     # for i in range(2, 5):
     #     print(one_results(seq, seq_id, csv, coeffs, i), [i for i in range(3, 8)])
 
     seq_len = min(len(seq), seq_len)
-
 
     def equidist(start, end, n_of_pts):
         """Returns list of n_of_pts equidistant points between start and end.
@@ -213,6 +222,7 @@ def sindy_grid(seq, seq_id, csv, coeffs, max_order: int, seq_len: int,
     order_grid = equidist(1, max_order, order_pts)
     terms_grid = equidist(4, seq_len, len_pts)
     treshold_grid = equidist(ths_bounds[0], ths_bounds[1], threshold_pts)
+    ensemble_grid =
 
     # subopt_grid = list(product(equidist(1, max_order, grid_order), equidist(4, seq_len, grid_len)))  # i.e.
     subopt_grid = list(product(order_grid, terms_grid, threshold_grid)  # i.e.
