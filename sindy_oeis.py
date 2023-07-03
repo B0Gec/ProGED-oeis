@@ -192,7 +192,9 @@ def sindy_grid_order(seq, seq_id, csv, coeffs, max_order: int, seq_len: int):
 
     return map(lambda order: one_results(seq, seq_id, csv, coeffs, order, seq_len), [i for i in range(1, max_order+1)])
 
-def sindy_grid(seq, seq_id, csv, coeffs, max_order: int, seq_len: int, grid_order: int = 20, grid_len: int = 20):
+def sindy_grid(seq, seq_id, csv, coeffs, max_order: int, seq_len: int,
+               ths_bounds: tuple = (0.1, 0.9),
+               order_pts: int = 20, len_pts: int = 20, threshold_pts: int = 20):
     # weird lazy error: !!!!!
     # for i in range(2, 5):
     #     print(one_results(seq, seq_id, csv, coeffs, i), [i for i in range(3, 8)])
@@ -208,7 +210,12 @@ def sindy_grid(seq, seq_id, csv, coeffs, max_order: int, seq_len: int, grid_orde
         return list(set([round(start + i * (end - start) / n_of_pts) for i in range(n_of_pts)]));
 
     # todo grid 20x20x20 (10h for experiment) where 20 for different values of (sindy's) threshold.
-    subopt_grid = list(product(equidist(1, max_order, grid_order), equidist(4, seq_len, grid_len)))  # i.e.
+    order_grid = equidist(1, max_order, order_pts)
+    terms_grid = equidist(4, seq_len, len_pts)
+    treshold_grid = equidist(ths_bounds[0], ths_bounds[1], threshold_pts)
+
+    # subopt_grid = list(product(equidist(1, max_order, grid_order), equidist(4, seq_len, grid_len)))  # i.e.
+    subopt_grid = list(product(order_grid, terms_grid, threshold_grid)  # i.e.
     grid = [pair for pair in subopt_grid if (pair[1]-pair[0]) > 4]  # Avoids too short sequences vis-a-vis order.
     # grid = grid[:6]
 
