@@ -221,11 +221,11 @@ def sindy_grid(seq, seq_id, csv, coeffs, max_order: int, seq_len: int,
     # todo grid 20x20x20 (10h for experiment) where 20 for different values of (sindy's) threshold.
     order_grid = equidist(1, max_order, order_pts)
     terms_grid = equidist(4, seq_len, len_pts)
-    treshold_grid = equidist(ths_bounds[0], ths_bounds[1], threshold_pts)
-    ensemble_grid =
+    threshold_grid = equidist(ths_bounds[0], ths_bounds[1], threshold_pts)
+    ensemble_grid = [i for i in range(len(ensemble_grid)) if ensemble_grid[i]]
 
     # subopt_grid = list(product(equidist(1, max_order, grid_order), equidist(4, seq_len, grid_len)))  # i.e.
-    subopt_grid = list(product(order_grid, terms_grid, threshold_grid)  # i.e.
+    subopt_grid = list(product(order_grid, terms_grid, threshold_grid, ensemble_grid))  # i.e.
     grid = [pair for pair in subopt_grid if (pair[1]-pair[0]) > 4]  # Avoids too short sequences vis-a-vis order.
     # grid = grid[:6]
 
