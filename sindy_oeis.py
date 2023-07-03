@@ -191,7 +191,7 @@ def sindy_grid_order(seq, seq_id, csv, coeffs, max_order: int, seq_len: int):
     return map(lambda order: one_results(seq, seq_id, csv, coeffs, order, seq_len), [i for i in range(1, max_order+1)])
 
 def sindy_grid(seq, seq_id, csv, coeffs, max_order: int, seq_len: int,
-               ths_bounds: tuple = (0.1, 0.9), ensemble_grid: tuple = (True, False, False),
+               ths_bounds: tuple = (0, 0.9), ensemble_grid: tuple = (True, False, False),
                order_pts: int = 20, len_pts: int = 20, threshold_pts: int = 20):
     """Performs sindy on grid of parameters until the correct sindy equation is found according to the ground truth.
     Otherwise outputs more complex equation or nothing.
@@ -219,15 +219,17 @@ def sindy_grid(seq, seq_id, csv, coeffs, max_order: int, seq_len: int,
     # todo grid 20x20x20 (10h for experiment) where 20 for different values of (sindy's) threshold.
     order_grid = equidist(1, max_order, order_pts)
     terms_grid = equidist(4, seq_len, len_pts)
-    threshold_grid = equidist(ths_bounds[0], ths_bounds[1], threshold_pts)
+    threshold_grid = np.linspace(ths_bounds[0], ths_bounds[1], threshold_pts)
     ensemble_grid = [i for i in range(len(ensemble_grid)) if ensemble_grid[i]]
     print(ensemble_grid)
 
     # subopt_grid = list(product(equidist(1, max_order, grid_order), equidist(4, seq_len, grid_len)))  # i.e.
     subopt_grid = list(product(order_grid, terms_grid, threshold_grid, ensemble_grid))  # i.e.
     grid = [pair for pair in subopt_grid if (pair[1]-pair[0]) > 4]  # Avoids too short sequences vis-a-vis order.
-    grid = grid[:6]
+    grid = grid[:3000]
+    # grid = grid[4000:4200]
     print(grid)
+    print(len(grid), 'of', order_pts * len_pts * threshold_pts + len(ensemble_grid))
     # 1/0
 
     printout = str(grid)
@@ -251,10 +253,10 @@ def sindy_grid(seq, seq_id, csv, coeffs, max_order: int, seq_len: int,
     # printout += ']\n'
 
     idx = len(grid[0])
-    oeis = [case[2][0] for case in ongrid if case[2][1:3] == (True, True)]
-    manually = [case[2][0] for case in ongrid if case[2][1:3] == (False, True)]
-    # bug = [case[2][0] for case in ongrid if case[2][1:3] == (True, False)]
-    fail = [case[2][0] for case in ongrid if case[2][1:3] == (False, False)]
+    oeis = [case[idx][0] for case in ongrid if case[idx][1:3] == (True, True)]
+    manually = [case[idx][0] for case in ongrid if case[idx][1:3] == (False, True)]
+    # bug = [case[idx][0] for case in ongrid if case[idx][1:3] == (True, False)]
+    fail = [case[idx][0] for case in ongrid if case[idx][1:3] == (False, False)]
     printout += "\n"
     printout += f"number of all configurations: {len(grid)}\n"
     printout += f"number of fully (true, true) successful configurations: {len(oeis)}\n"
@@ -273,7 +275,7 @@ def sindy_grid(seq, seq_id, csv, coeffs, max_order: int, seq_len: int,
         # x = sp.Matrix([0, 0, 0, 0])
     # print(x)
 
-    xs = [case[2][0] for case in ongrid]
+    xs = [case[idx][0] for case in ongrid]
     # print([len(x) for x in xs])
     max_len = max([len(x) for x in xs])
     xs = [sp.Matrix.vstack(x, sp.zeros(max_len-len(x), 1)) for x in xs]
