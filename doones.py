@@ -355,8 +355,8 @@ else:
                 output_string += f'Default setting for how many terms should sindy see: {seq_len}\n'
                 max_order_ = min(heuristic(len(seq)), max_order_)
                 output_string += f'Sindy will use max_order: {max_order_}\n'
-                x = sindy(list(seq), max_order_, seq_len=seq_len, threshold=threshold)
-                # x, printout, x_avg = sindy_grid(seq, seq_id, csv, coeffs, max_order, seq_len)
+                # x = sindy(list(seq), max_order_, seq_len=seq_len, threshold=threshold)
+                x, printout, x_avg = sindy_grid(seq, seq_id, csv, coeffs, max_order, seq_len)
                 output_string += printout
                 # x = sp.Matrix([0, 0, 0, 0])
 
