@@ -128,6 +128,7 @@ def sindy(seq: Union[list, sp.Matrix], max_order: int, seq_len: int, threshold: 
     # model.fit(x_train, t=dt, x_dot=dot_x)
     model.fit(A, x_dot=b)
     model.fit(A, x_dot=b, ensemble=True)
+    model.fit(A, x_dot=b, library_ensemble=True)
     # model.print()
     model.coefficients()
     print(model.coefficients(), 'model.coefficients()')
@@ -266,6 +267,8 @@ def sindy_grid(seq, seq_id, csv, coeffs, max_order: int, seq_len: int, grid_orde
 
     # return map(lambda order: one_results(seq, seq_id, csv, coeffs, order, seq_len), [i for i in range(1, max_order+1)])
     return x, printout, x_avg
+
+# todo + sindy ensemble (with different thresholds) x 2 versions (ensamble + library_ensemble)
 
 
 if __file__ == '__main__':
