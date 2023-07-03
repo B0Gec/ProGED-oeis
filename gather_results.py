@@ -56,7 +56,7 @@ job_id = "37683622"  # seems like for false_truth list creation
 job_id = "sindygrid519_1"
 # # job_id = "incdio76"
 # # job_id = "blacklist76"
-job_id = "incdio86"
+# job_id = "incdio86"
 # job_id = "i86bugfix"
 
 
@@ -359,6 +359,8 @@ scale = 50100
 files_debug = files[0:scale]
 files = files_debug
 # print(files)
+# print('len files', len(files))
+# 1/0
 
 _a, _b, _, n_of_seqs, avg_is_best, true_confs = extract_file(job_dir + files[0])
 # print(n_of_seqs)
@@ -397,8 +399,13 @@ ignored = no_truth + false_truth
 
 # all_seqs = 34371
 n_of_seqs_db = n_of_seqs
+print(n_of_seqs_db)
+jobs_fail = n_of_seqs_db - len(files)  # or corrected_sum.
 n_of_seqs = n_of_seqs - ignored
-jobs_fail = n_of_seqs - len(files)  # or corrected_sum.
+print(n_of_seqs)
+print('jobs_fail', jobs_fail)
+print(len(files))
+# 1/0
 
 id_oeis, non_id, non_manual, ed_fail, reconst_non_manual, avg_is_best, buglist, \
     job_bins, non_id_list, ed_fail_list, non_manual_list, trueconfs = summary
@@ -425,9 +432,9 @@ printout = f"""
     {(id_oeis + non_id + corrected_non_manual + ed_fail): >5} ... (id_oeis + non_id + corrected_non_manual + fail) = sum
     
     
-    {no_truth: >5} = {no_truth/n_of_seqs*100:0.3} % ... sequences with no ground truth -> missing jobs
-    {false_truth: >5} = {false_truth/n_of_seqs*100:0.3} % ... sequences with false ground truth -> missing jobs
-    {ignored: >5} = {ignored/n_of_seqs*100:0.3} % ... sequences with no or false ground truth -> all missing jobs by default
+    {no_truth: >5} = {no_truth/n_of_seqs_db*100:0.3} % ... sequences with no ground truth -> missing jobs
+    {false_truth: >5} = {false_truth/n_of_seqs_db*100:0.3} % ... sequences with false ground truth -> missing jobs
+    {ignored: >5} = {ignored/n_of_seqs_db*100:0.3} % ... sequences with no or false ground truth -> all missing jobs by default
     {n_of_seqs_db: >5} ... all sequences in our dataset
     
     {jobs_fail: >5} = {jobs_fail/n_of_seqs*100:0.3} % ... runtime errors = jobs failed

@@ -194,10 +194,15 @@ def sindy_grid(seq, seq_id, csv, coeffs, max_order: int, seq_len: int, grid_orde
 
 
     def equidist(start, end, n_of_pts):
+        """Returns list of n_of_pts equidistant points between start and end.
+
+        E.g. equidist(1, 10, 3) = [1, 5, 10]
+        """
         return list(set([round(start + i * (end - start) / n_of_pts) for i in range(n_of_pts)]));
 
-    subopt_grid = list(product(equidist(1, max_order, grid_order), equidist(4, seq_len, grid_len)))
-    grid = [pair for pair in subopt_grid if (pair[1]-pair[0]) > 4]
+    # todo grid 20x8x50 or 20x10x40 (10h for experiment) where 50 for different values of (sindy's) phi.
+    subopt_grid = list(product(equidist(1, max_order, grid_order), equidist(4, seq_len, grid_len)))  # i.e.
+    grid = [pair for pair in subopt_grid if (pair[1]-pair[0]) > 4]  # Avoids too short sequences vis-a-vis order.
     # grid = grid[:6]
 
     printout = str(grid)
@@ -229,7 +234,8 @@ def sindy_grid(seq, seq_id, csv, coeffs, max_order: int, seq_len: int, grid_orde
     elif manually != []:
         x = manually[0]
     else:
-        x = sp.Matrix([0, 0, 0, 0])
+        x = []
+        # x = sp.Matrix([0, 0, 0, 0])
     # print(x)
 
     xs = [case[2][0] for case in ongrid]

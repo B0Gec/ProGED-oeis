@@ -261,23 +261,25 @@ def exact_ed(seq_id: str, csv: pd.DataFrame, verbosity: int = VERBOSITY,
     #         print(f'truth: {truth}')
     #     # print(seq[:len(coeffs)])
 
-    if x==[]:
-        if verbosity >= 2:
-            print('NO EQS FOUND!!!')
-        eq = "a(n) = NOT RECONSTRUCTED :-("
-        # 1/0
-    else:
-        if verbosity >= 2:
-            print('We found an equation!!!:')
+    if len(x) > 0:
         x = x[0]
         if linear:
             x = sp.Matrix.vstack(sp.Matrix([0]), x)
-        eq = solution2str(x)
-        # expr = verbose_eq[:, 1:] * x
-        # eq = f"{verbose_eq[0]} = {expr[0]}"
-        if verbosity >= 2:
-            print('eq: ', eq)
-        # x = eq
+    eq = solution2str(x)
+
+    # if x==[]:
+    #     if verbosity >= 2:
+    #         print('NO EQS FOUND!!!')
+    #     eq = "a(n) = NOT RECONSTRUCTED :-("
+    # else:
+    #     if verbosity >= 2:
+    #         print('We found an equation!!!:')
+    #     x = x[0]
+    #     if linear:
+    #         x = sp.Matrix.vstack(sp.Matrix([0]), x)
+    #     eq = solution2str(x)
+    #     if verbosity >= 2:
+    #         print('eq: ', eq)
 
     # print('x', x)
     if linear:
@@ -322,7 +324,6 @@ def increasing_eed(seq_id: str, csv: pd.DataFrame, verbosity: int = VERBOSITY,
         else:
             output = ed_output
 
-
         # # x_before = output[0]
         # # nonzero_indices = [i for i in range(len(x)) if (x[i] != 0)]
         # # x = x[:max(nonzero_indices) + 1] if len(nonzero_indices) > 0 else []
@@ -334,8 +335,8 @@ def increasing_eed(seq_id: str, csv: pd.DataFrame, verbosity: int = VERBOSITY,
         # print('after one step of order', order, output)
         return output
 
-    start = ([], "a(n) = NOT RECONSTRUCTED :-(", "", "", False)
-    # start = ([], "", "", "")
+    # start = ([], "a(n) = NOT RECONSTRUCTED :-(", "", "", False)
+    start = ([], solution2str([]), "", "", False)
     orders = range(1, max_order)
 
     eed = reduce(eed_step, orders, start)[:4]
