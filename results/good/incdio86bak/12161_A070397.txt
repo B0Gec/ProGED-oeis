@@ -1,0 +1,12 @@
+
+While total time consumed by now, scale:12162/34371, seq_id:A070397, order:20 took:
+ 1.7 seconds, i.e. 0.03 minutes or 0.0 hours.
+
+A070397: 
+a(n) = a(n - 5)
+truth: 
+a(n) = 0*a(n - 1) + 0*a(n - 2) + 0*a(n - 3) + 0*a(n - 4) + 1*a(n - 5),  
+a(0) = 1, a(1) = 6, a(2) = 11, a(3) = 16, a(4) = 21
+
+True  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

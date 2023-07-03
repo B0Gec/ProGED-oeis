@@ -1,0 +1,12 @@
+
+While total time consumed by now, scale:3497/34371, seq_id:A017010, order:20 took:
+ 11.3 seconds, i.e. 0.19 minutes or 0.003 hours.
+
+A017010: 
+a(n) = a(n - 7) - 7*a(n - 6) + 21*a(n - 5) - 35*a(n - 4) + 35*a(n - 3) - 21*a(n - 2) + 7*a(n - 1)
+truth: 
+a(n) = 7*a(n - 1) + -21*a(n - 2) + 35*a(n - 3) + -35*a(n - 4) + 21*a(n - 5) + -7*a(n - 6) + 1*a(n - 7),  
+a(0) = 64, a(1) = 531441, a(2) = 16777216, a(3) = 148035889, a(4) = 729000000, a(5) = 2565726409, a(6) = 7256313856
+
+True  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

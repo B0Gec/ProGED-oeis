@@ -1,0 +1,12 @@
+
+While total time consumed by now, scale:19675/34371, seq_id:A152494, order:20 took:
+ 1.1 seconds, i.e. 0.02 minutes or 0.0 hours.
+
+A152494: 
+a(n) = 90*a(n - 3) - 69*a(n - 2) + 16*a(n - 1)
+truth: 
+a(n) = 16*a(n - 1) + -69*a(n - 2) + 90*a(n - 3),  
+a(0) = 0, a(1) = 1, a(2) = 19
+
+True  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

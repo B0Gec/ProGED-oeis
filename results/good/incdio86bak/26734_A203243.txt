@@ -1,0 +1,12 @@
+
+While total time consumed by now, scale:26735/34371, seq_id:A203243, order:20 took:
+ 0.2 seconds, i.e. 0.0 minutes or 0.0 hours.
+
+A203243: 
+a(n) = 27*a(n - 3) - 39*a(n - 2) + 13*a(n - 1)
+truth: 
+a(n) = 13*a(n - 1) + -39*a(n - 2) + 27*a(n - 3),  
+a(0) = 3, a(1) = 39, a(2) = 390
+
+True  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

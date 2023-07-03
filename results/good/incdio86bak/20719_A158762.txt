@@ -1,0 +1,12 @@
+
+While total time consumed by now, scale:20720/34371, seq_id:A158762, order:20 took:
+ 0.2 seconds, i.e. 0.0 minutes or 0.0 hours.
+
+A158762: 
+a(n) = 729*a(n - 3) + a(n - 2)
+truth: 
+a(n) = 0*a(n - 1) + 1*a(n - 2) + 729*a(n - 3),  
+a(0) = 1, a(1) = 9, a(2) = 81
+
+True  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

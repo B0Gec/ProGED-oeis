@@ -1,0 +1,12 @@
+
+While total time consumed by now, scale:31757/34371, seq_id:A290127, order:20 took:
+ 14.2 seconds, i.e. 0.24 minutes or 0.004 hours.
+
+A290127: 
+a(n) = a(n - 9) - 9*a(n - 8) + 36*a(n - 7) - 84*a(n - 6) + 126*a(n - 5) - 126*a(n - 4) + 84*a(n - 3) - 36*a(n - 2) + 9*a(n - 1)
+truth: 
+a(n) = 9*a(n - 1) + -36*a(n - 2) + 84*a(n - 3) + -126*a(n - 4) + 126*a(n - 5) + -84*a(n - 6) + 36*a(n - 7) + -9*a(n - 8) + 1*a(n - 9),  
+a(0) = 40, a(1) = 252, a(2) = 1457, a(3) = 6168, a(4) = 20773, a(5) = 59279, a(6) = 149271, a(7) = 340821, a(8) = 719187
+
+True  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

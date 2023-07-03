@@ -24,7 +24,7 @@ from exact_ed import exact_ed, increasing_eed, timer, check_eq_man, check_truth,
 #     from exact_ed import exact_ed, timer
 
 SINDy = True
-SINDy = False
+# SINDy = False
 if SINDy:
     from sindy_oeis import sindy, preprocess, heuristic, sindy_grid
 
@@ -66,9 +66,9 @@ VERBOSITY = 2  # dev scena
 VERBOSITY = 1  # run scenario
 
 DEBUG = True
-DEBUG = False
+# DEBUG = False
 BUGLIST = True
-# BUGLIST = False
+BUGLIST = False
 CORELIST = True  # have to scrape core sequences!
 CORELIST = False
 if BUGLIST:
@@ -133,6 +133,8 @@ SEQ_ID = (True, 'A000004')
 # non_manuals =  ['23167_A169198.txt', '23917_A170320.txt', '03322_A016835.txt', '24141_A170544.txt', '24240_A170643.txt', '24001_A170404.txt', '24014_A170417.txt', '23207_A169238.txt', '22912_A168943.txt', '03330_A016844.txt', '23872_A170275.txt', '22983_A169014.txt', '24006_A170409.txt', '24211_A170614.txt', '15737_A105944.txt', '24053_A170456.txt', '23488_A169519.txt', '23306_A169337.txt', '22856_A168887.txt', '23049_A169080.txt', '23980_A170383.txt', '23742_A170145.txt', '23109_A169140.txt', '06659_A035798.txt', '23860_A170263.txt', '23800_A170203.txt', '23649_A170052.txt', '23219_A169250.txt', '23682_A170085.txt', '06706_A035871.txt', '23720_A170123.txt', '31181_A279282.txt', '23382_A169413.txt', '24034_A170437.txt', '24192_A170595.txt']
 SEQ_ID = (True, 'A169198')
 SEQ_ID = (False, 'A169198')
+SEQ_ID = (True, 'A024347')
+# debug and sindy and buglist
 
 # DIOFANT_GRID = False
 

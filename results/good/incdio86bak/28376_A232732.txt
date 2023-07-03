@@ -1,0 +1,12 @@
+
+While total time consumed by now, scale:28377/34371, seq_id:A232732, order:20 took:
+ 2.6 seconds, i.e. 0.04 minutes or 0.001 hours.
+
+A232732: 
+a(n) = -64*a(n - 3) - 172929*a(n - 2) - 2766*a(n - 1)
+truth: 
+a(n) = -2766*a(n - 1) + -172929*a(n - 2) + -64*a(n - 3),  
+a(0) = -922, a(1) = 2434966, a(2) = -6575675482
+
+True  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

@@ -1,0 +1,12 @@
+
+While total time consumed by now, scale:19393/34371, seq_id:A145323, order:20 took:
+ 0.3 seconds, i.e. 0.01 minutes or 0.0 hours.
+
+A145323: 
+a(n) = a(n - 3) - 24303*a(n - 2) + 24303*a(n - 1)
+truth: 
+a(n) = 24303*a(n - 1) + -24303*a(n - 2) + 1*a(n - 3),  
+a(0) = 22, a(1) = 546817, a(2) = 13288758862
+
+True  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

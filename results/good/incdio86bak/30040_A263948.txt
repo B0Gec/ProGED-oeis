@@ -1,0 +1,12 @@
+
+While total time consumed by now, scale:30041/34371, seq_id:A263948, order:20 took:
+ 1.7 seconds, i.e. 0.03 minutes or 0.0 hours.
+
+A263948: 
+a(n) = a(n - 3) - 975*a(n - 2) + 975*a(n - 1)
+truth: 
+a(n) = 975*a(n - 1) + -975*a(n - 2) + 1*a(n - 3),  
+a(0) = 244, a(1) = 267607, a(2) = 260678620
+
+True  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

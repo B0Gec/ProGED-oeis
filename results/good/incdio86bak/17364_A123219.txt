@@ -1,0 +1,12 @@
+
+While total time consumed by now, scale:17365/34371, seq_id:A123219, order:20 took:
+ 3.5 seconds, i.e. 0.06 minutes or 0.001 hours.
+
+A123219: 
+a(n) = a(n - 5) - 29*a(n - 4) - 174*a(n - 3) + 174*a(n - 2) + 29*a(n - 1)
+truth: 
+a(n) = 29*a(n - 1) + 174*a(n - 2) + -174*a(n - 3) + -29*a(n - 4) + 1*a(n - 5),  
+a(0) = 1, a(1) = 1, a(2) = 81, a(3) = 2401, a(4) = 83521
+
+True  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

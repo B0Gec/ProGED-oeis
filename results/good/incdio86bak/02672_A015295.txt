@@ -1,0 +1,12 @@
+
+While total time consumed by now, scale:2673/34371, seq_id:A015295, order:20 took:
+ 3.8 seconds, i.e. 0.06 minutes or 0.001 hours.
+
+A015295: 
+a(n) = 3486784401*a(n - 5) - 3138159105*a(n - 4) - 352989090*a(n - 3) + 4357890*a(n - 2) + 5905*a(n - 1)
+truth: 
+a(n) = 5905*a(n - 1) + 4357890*a(n - 2) + -352989090*a(n - 3) + -3138159105*a(n - 4) + 3486784401*a(n - 5),  
+a(0) = 1, a(1) = 5905, a(2) = 39226915, a(3) = 257015284435, a(4) = 1686534296462470
+
+True  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

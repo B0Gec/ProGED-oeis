@@ -57,7 +57,7 @@ job_id = "sindygrid519_1"
 # # job_id = "incdio76"
 # # job_id = "blacklist76"
 job_id = "incdio86"
-# # job_id = "i86bugfix"
+# job_id = "i86bugfix"
 
 
 # seq_file = '13000_A079034.txt'
@@ -408,9 +408,9 @@ all_fails = ed_fail + jobs_fail
 official_success = id_oeis + non_id
 
 # for latex new experiment variables:
-forbidden = ['S', ]
+forbidden = ['S', 'U', 'V', 'G']
 my_alphabet = [i for i in string.ascii_uppercase if i not in forbidden]
-my_alphabet = ['U']
+my_alphabet = ['G']
 random_symbol = random.choice(my_alphabet)
 symbol = random_symbol + random_symbol
 
@@ -539,7 +539,7 @@ for n, i in enumerate(job_bins):
 print(f'first {n} non_ids:', non_id_list[:n])
 print(len(non_id_list))
 print(f'first {n} non_manuals:', non_manual_list[:n])
-print(f'all non_manuals:', non_manual_list)
+# print(f'all non_manuals:', non_manual_list)
 # check if new false_truth blacklist contains all old false_truths:  # experiment job_id = "blacklist76"
 false_non_man = [i[6:6+7] for i in non_manual_list]
 # print(false_non_man)

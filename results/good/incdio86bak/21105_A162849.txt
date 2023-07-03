@@ -1,0 +1,12 @@
+
+While total time consumed by now, scale:21106/34371, seq_id:A162849, order:20 took:
+ 1.0 seconds, i.e. 0.02 minutes or 0.0 hours.
+
+A162849: 
+a(n) = 9900*a(n - 6) - 10100*a(n - 4) + 201*a(n - 2)
+truth: 
+a(n) = 0*a(n - 1) + 201*a(n - 2) + 0*a(n - 3) + -10100*a(n - 4) + 0*a(n - 5) + 9900*a(n - 6),  
+a(0) = 0, a(1) = 1, a(2) = 10, a(3) = 101, a(4) = 2010, a(5) = 10201
+
+True  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

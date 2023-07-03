@@ -1,0 +1,12 @@
+
+While total time consumed by now, scale:14981/34371, seq_id:A098808, order:20 took:
+ 0.2 seconds, i.e. 0.0 minutes or 0.0 hours.
+
+A098808: 
+a(n) = -2*a(n - 2) + 3*a(n - 1)
+truth: 
+a(n) = 3*a(n - 1) + -2*a(n - 2),  
+a(0) = 2037, a(1) = 4085
+
+True  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    
