@@ -24,7 +24,7 @@ from exact_ed import exact_ed, increasing_eed, timer, check_eq_man, check_truth,
 #     from exact_ed import exact_ed, timer
 
 SINDy = True
-# SINDy = False
+SINDy = False
 if SINDy:
     from sindy_oeis import sindy, preprocess, heuristic, sindy_grid
 
@@ -66,7 +66,7 @@ VERBOSITY = 2  # dev scena
 VERBOSITY = 1  # run scenario
 
 DEBUG = True
-# DEBUG = False
+DEBUG = False
 BUGLIST = True
 BUGLIST = False
 CORELIST = True  # have to scrape core sequences!
@@ -91,8 +91,8 @@ THRESHOLD = 0.1  # For sindy - masking threshold.
 # THRESHOLD = 0.0001  # For sindy - masking threshold.
 # THRESHOLD = 0.00000001  # For sindy - masking threshold.
 
-SEQ_LEN_SINDY = 30
-SEQ_LEN_SINDY = 70
+# SEQ_LEN_SINDY = 30
+# SEQ_LEN_SINDY = 70
 # SEQ_LEN_SINDY = 4
 
 N_OF_TERMS_ED = 200
@@ -154,7 +154,7 @@ parser.add_argument("-ss", type=int, default=-1)
 parser.add_argument("-to", type=int, default=-1)
 parser.add_argument("--order", type=int, default=MAX_ORDER)
 parser.add_argument("--threshold", type=int, default=THRESHOLD)
-parser.add_argument("--seq_len", type=int, default=SEQ_LEN_SINDY)
+# parser.add_argument("--seq_len", type=int, default=SEQ_LEN_SINDY)
 parser.add_argument("--paral", type=int, default=2)
 parser.add_argument("--verb", type=int, default=VERBOSITY)
 parser.add_argument("--n_of_terms", type=int, default=N_OF_TERMS_ED)
@@ -170,7 +170,7 @@ task_id = args.task_id
 
 max_order = args.order
 threshold = args.threshold
-seq_len = args.seq_len
+# seq_len = args.seq_len
 PARALLEL = args.paral
 VERBOSITY = args.verb
 experiment_id = args.exper_id
@@ -345,11 +345,11 @@ else:
             print('Attempting SINDy')
             seq, coeffs, truth = unpack_seq(seq_id, csv)
             seq, pre_fail = preprocess(seq)
+            seq_len = len(seq)
             if pre_fail:
                 x = sp.Matrix([0,0,0,0])
             else:
                 output_string += f'Preprocessing sees only first {len(seq)} terms.\n'
-                # seq_len = 10
 
                 output_string += f'Sindy threshold: {threshold}\n'
                 output_string += f'Default setting for how many terms should sindy see: {seq_len}\n'

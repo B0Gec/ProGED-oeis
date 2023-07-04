@@ -58,6 +58,7 @@ job_id = "sindygrid519_1"
 # # job_id = "blacklist76"
 # job_id = "incdio86"
 # job_id = "i86bugfix"
+job_id = "incdio74"
 
 
 # seq_file = '13000_A079034.txt'

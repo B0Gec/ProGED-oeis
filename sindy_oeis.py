@@ -190,9 +190,53 @@ def sindy_grid_order(seq, seq_id, csv, coeffs, max_order: int, seq_len: int):
 
     return map(lambda order: one_results(seq, seq_id, csv, coeffs, order, seq_len), [i for i in range(1, max_order+1)])
 
-def sindy_grid(seq, seq_id, csv, coeffs, max_order: int, seq_len: int,
-               ths_bounds: tuple = (0, 0.9), ensemble_grid: tuple = (True, False, False),
-               order_pts: int = 20, len_pts: int = 20, threshold_pts: int = 20):
+
+def create_grid(seq, seq_id, csv, coeffs, max_order: int, seq_len: int,
+                ths_bounds: tuple = (0, 0.9), ensemble_grid: tuple = (True, False, False),
+                order_pts: int = 20, len_pts: int = 20, threshold_pts: int = 20):
+
+    seq_len = min(len(seq), seq_len)
+
+    def equidist(start, end, n_of_pts):
+        """Returns list of n_of_pts equidistant points between start and end.
+
+        E.g. equidist(1, 10, 3) = [1, 5, 10]
+        """
+        if n_of_pts == 1:
+            return [round(end)]
+        else:
+            return list(set([round(start + i * (end - start) / n_of_pts) for i in range(n_of_pts)]))
+
+    # todo grid 20x20x20 (10h for experiment) where 20 for different values of (sindy's) threshold.
+
+    order_grid = equidist(1, max_order, order_pts)
+    # print('ord', order_grid)
+    terms_grid = equidist(4, seq_len, len_pts)
+    # print(terms_grid)
+    threshold_grid = np.linspace(ths_bounds[0], ths_bounds[1], threshold_pts)
+    ensemble_grid = [i for i in range(len(ensemble_grid)) if ensemble_grid[i]]
+    # print(ensemble_grid)
+
+    # subopt_grid = list(product(equidist(1, max_order, grid_order), equidist(4, seq_len, grid_len)))  # i.e.
+    subopt_grid = list(product(order_grid, terms_grid, threshold_grid, ensemble_grid))  # i.e.
+    # print(subopt_grid)
+    grid = [pair for pair in subopt_grid if (pair[1]-pair[0]) > 4]  # Avoids too short sequences vis-a-vis order.
+    return grid
+
+def default_grids(seq, seq_id, csv, coeffs, max_order: int, seq_len: int,
+                ths_bounds: tuple = (0, 0.9), ensemble_grid: tuple = (True, False, False),
+                order_pts: int = 20, len_pts: int = 20, threshold_pts: int = 20):
+    """Creates default grids, if none are provided. As in old times."""
+    grid = create_grid(seq, seq_id, csv, coeffs, max_order, seq_len)
+
+    return
+
+def sindy_grid(seq, seq_id, csv, coeffs,
+               max_order: int, seq_len: int):
+               # ths_bounds: tuple = (0, 0.9), ensemble_grid: tuple = (True, False, False),
+               # order_pts: int = 20, len_pts: int = 20, threshold_pts: int = 20, grids: dict = None):
+               # grids={'max_order': 20, 'seq_len': 70, 'threshold': (0, 0.9),
+               #        'ensemble': (True, False, False), 'library_ensemble': (True, False, False)}):
     """Performs sindy on grid of parameters until the correct sindy equation is found according to the ground truth.
     Otherwise outputs more complex equation or nothing.
 
@@ -207,29 +251,50 @@ def sindy_grid(seq, seq_id, csv, coeffs, max_order: int, seq_len: int,
     # for i in range(2, 5):
     #     print(one_results(seq, seq_id, csv, coeffs, i), [i for i in range(3, 8)])
 
-    seq_len = min(len(seq), seq_len)
+    # todo: default seq_len depending on huge values of terms in seq!!!!.
 
-    def equidist(start, end, n_of_pts):
-        """Returns list of n_of_pts equidistant points between start and end.
+    #plan:
+    # 3 grids:
+    # 1) order x len x ths x ens:
+    #            20*20*18 + 20*18*2 = 7920
+    #            grid (ord=20, len=20, ths=18, ens=0)
+    #            grid (ord=20,  ths=18, ens=1)
+    #            grid (ord=20,  ths=18, ens=2)
 
-        E.g. equidist(1, 10, 3) = [1, 5, 10]
-        """
-        return list(set([round(start + i * (end - start) / n_of_pts) for i in range(n_of_pts)]));
+    grid1 = create_grid(seq, seq_id, csv, coeffs, max_order, seq_len,
+                       ths_bounds = (0, 0.9), ensemble_grid=(True, False, False),
+                       order_pts=20, len_pts=20, threshold_pts=18)
+    grid2 = create_grid(seq, seq_id, csv, coeffs, max_order, seq_len,
+                       ths_bounds=(0, 0.9), ensemble_grid=(False, True, True),
+                       order_pts=20, len_pts=1, threshold_pts=18)
+    small_grid = create_grid(seq, seq_id, csv, coeffs, max_order, seq_len,
+                       ths_bounds = (0, 0.9), ensemble_grid=(True, False, False),
+                       order_pts=2, len_pts=2, threshold_pts=3)
+    grid = grid1 + grid2
+    # grid = grid1
+    # grid = grid2
+    # grid = small_grid
 
-    # todo grid 20x20x20 (10h for experiment) where 20 for different values of (sindy's) threshold.
-    order_grid = equidist(1, max_order, order_pts)
-    terms_grid = equidist(4, seq_len, len_pts)
-    threshold_grid = np.linspace(ths_bounds[0], ths_bounds[1], threshold_pts)
-    ensemble_grid = [i for i in range(len(ensemble_grid)) if ensemble_grid[i]]
-    print(ensemble_grid)
 
-    # subopt_grid = list(product(equidist(1, max_order, grid_order), equidist(4, seq_len, grid_len)))  # i.e.
-    subopt_grid = list(product(order_grid, terms_grid, threshold_grid, ensemble_grid))  # i.e.
-    grid = [pair for pair in subopt_grid if (pair[1]-pair[0]) > 4]  # Avoids too short sequences vis-a-vis order.
-    grid = grid[:3000]
+    # 2x2x3 = 12 + 2x1x3x2 = 12 ... = 24
+
+    # if grid is none
+    # grid = []
+    # for grid in grids:
+    #     grid += create_grid(**grid)
+
+    # grid = grid[:3000]
     # grid = grid[4000:4200]
+    five = []
+    for i in range(len(grid)):
+        if i%5 == 0:
+            print(five)
+            five = []
+        five += [grid[i]]
+    print(five)
     print(grid)
-    print(len(grid), 'of', order_pts * len_pts * threshold_pts + len(ensemble_grid))
+    print(len(grid))
+    # print(len(grid), 'of', order_pts * len_pts * threshold_pts + len(ensemble_grid))
     # 1/0
 
     printout = str(grid)
@@ -299,6 +364,7 @@ def sindy_grid(seq, seq_id, csv, coeffs, max_order: int, seq_len: int,
     return x, printout, x_avg
 
 # todo + sindy ensemble (with different thresholds) x 2 versions (ensamble + library_ensemble)
+
 
 
 if __file__ == '__main__':
