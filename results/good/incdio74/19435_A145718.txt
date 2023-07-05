@@ -1,0 +1,12 @@
+
+While total time consumed by now, scale:19436/34371, seq_id:A145718, order:20 took:
+ 1.6 seconds, i.e. 0.03 minutes or 0.0 hours.
+
+A145718: 
+a(n) = a(n - 3) - 2031*a(n - 2) + 2031*a(n - 1)
+truth: 
+a(n) = 2031*a(n - 1) + -2031*a(n - 2) + 1*a(n - 3),  
+a(0) = 762, a(1) = 1676527, a(2) = 3403477826
+
+True  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

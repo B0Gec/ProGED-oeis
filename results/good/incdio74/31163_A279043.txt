@@ -1,0 +1,12 @@
+
+While total time consumed by now, scale:31164/34371, seq_id:A279043, order:20 took:
+ 1.2 seconds, i.e. 0.02 minutes or 0.0 hours.
+
+A279043: 
+a(n) = a(n - 3) - 195*a(n - 2) + 195*a(n - 1)
+truth: 
+a(n) = 195*a(n - 1) + -195*a(n - 2) + 1*a(n - 3),  
+a(0) = 63, a(1) = 12285, a(2) = 2383290
+
+True  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

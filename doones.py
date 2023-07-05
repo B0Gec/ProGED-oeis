@@ -197,6 +197,9 @@ csv_filename = 'linear_database_full.csv'
 if CORELIST:
     # from core_nice_nomore import cores
     csv_filename = 'cores.csv'
+    # Explained cores, how I got them: back at the time they were scraped.
+    # specs: only first 100 terms, 150 sequences
+    # i think I will redowmnload them, because I have a better way to do it now.
 
 # print(os.getcwd())
 if os.getcwd()[-11:] == 'ProGED_oeis':

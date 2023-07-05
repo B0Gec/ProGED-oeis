@@ -1,0 +1,12 @@
+
+While total time consumed by now, scale:5777/34371, seq_id:A028245, order:20 took:
+ 1.7 seconds, i.e. 0.03 minutes or 0.0 hours.
+
+A028245: 
+a(n) = 120*a(n - 5) - 274*a(n - 4) + 225*a(n - 3) - 85*a(n - 2) + 15*a(n - 1)
+truth: 
+a(n) = 15*a(n - 1) + -85*a(n - 2) + 225*a(n - 3) + -274*a(n - 4) + 120*a(n - 5),  
+a(0) = 0, a(1) = 0, a(2) = 0, a(3) = 0, a(4) = 24
+
+True  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

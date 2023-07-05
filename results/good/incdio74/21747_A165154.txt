@@ -1,0 +1,12 @@
+
+While total time consumed by now, scale:21748/34371, seq_id:A165154, order:20 took:
+ 0.5 seconds, i.e. 0.01 minutes or 0.0 hours.
+
+A165154: 
+a(n) = 900*a(n - 2) + 91*a(n - 1)
+truth: 
+a(n) = 91*a(n - 1) + 900*a(n - 2),  
+a(0) = 0, a(1) = 1
+
+True  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

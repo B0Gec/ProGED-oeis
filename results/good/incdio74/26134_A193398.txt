@@ -1,0 +1,12 @@
+
+While total time consumed by now, scale:26135/34371, seq_id:A193398, order:20 took:
+ 9.4 seconds, i.e. 0.16 minutes or 0.003 hours.
+
+A193398: 
+a(n) = a(n - 8) - 2*a(n - 7) - 2*a(n - 6) + 6*a(n - 5) - 6*a(n - 3) + 2*a(n - 2) + 2*a(n - 1)
+truth: 
+a(n) = 2*a(n - 1) + 2*a(n - 2) + -6*a(n - 3) + 0*a(n - 4) + 6*a(n - 5) + -2*a(n - 6) + -2*a(n - 7) + 1*a(n - 8),  
+a(0) = 215, a(1) = 636, a(2) = 1557, a(3) = 3018, a(4) = 5555, a(5) = 8968, a(6) = 14225, a(7) = 20790
+
+True  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

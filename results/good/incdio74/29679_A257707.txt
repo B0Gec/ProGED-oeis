@@ -1,0 +1,12 @@
+
+While total time consumed by now, scale:29680/34371, seq_id:A257707, order:20 took:
+ 57.7 seconds, i.e. 0.96 minutes or 0.016 hours.
+
+A257707: 
+a(n) = a(n - 13) - a(n - 12) - 48670*a(n - 7) + 48670*a(n - 6) + a(n - 1)
+truth: 
+a(n) = 1*a(n - 1) + 0*a(n - 2) + 0*a(n - 3) + 0*a(n - 4) + 0*a(n - 5) + 48670*a(n - 6) + -48670*a(n - 7) + 0*a(n - 8) + 0*a(n - 9) + 0*a(n - 10) + 0*a(n - 11) + -1*a(n - 12) + 1*a(n - 13),  
+a(0) = 56, a(1) = 470, a(2) = 1094, a(3) = 7856, a(4) = 128534, a(5) = 201539, a(6) = 3293081, a(7) = 23435699, a(8) = 53805155, a(9) = 382911281, a(10) = 6256309475, a(11) = 9809462822, a(12) = 160274811896
+
+True  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

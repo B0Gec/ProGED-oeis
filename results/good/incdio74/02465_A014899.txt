@@ -1,0 +1,12 @@
+
+While total time consumed by now, scale:2466/34371, seq_id:A014899, order:20 took:
+ 1.1 seconds, i.e. 0.02 minutes or 0.0 hours.
+
+A014899: 
+a(n) = 16*a(n - 3) - 33*a(n - 2) + 18*a(n - 1)
+truth: 
+a(n) = 18*a(n - 1) + -33*a(n - 2) + 16*a(n - 3),  
+a(0) = 0, a(1) = 1, a(2) = 18
+
+True  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

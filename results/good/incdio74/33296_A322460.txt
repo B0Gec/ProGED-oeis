@@ -1,0 +1,12 @@
+
+While total time consumed by now, scale:33297/34371, seq_id:A322460, order:20 took:
+ 1.6 seconds, i.e. 0.03 minutes or 0.0 hours.
+
+A322460: 
+a(n) = a(n - 3) + 88*a(n - 2) - 95*a(n - 1)
+truth: 
+a(n) = -95*a(n - 1) + 88*a(n - 2) + 1*a(n - 3),  
+a(0) = 3, a(1) = -95, a(2) = 9201
+
+True  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

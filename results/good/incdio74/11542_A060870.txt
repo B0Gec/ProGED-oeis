@@ -1,0 +1,12 @@
+
+While total time consumed by now, scale:11543/34371, seq_id:A060870, order:20 took:
+ 1.5 seconds, i.e. 0.02 minutes or 0.0 hours.
+
+A060870: 
+a(n) = 125*a(n - 3) - 155*a(n - 2) + 31*a(n - 1)
+truth: 
+a(n) = 31*a(n - 1) + -155*a(n - 2) + 125*a(n - 3),  
+a(0) = 4, a(1) = 144, a(2) = 3844
+
+True  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

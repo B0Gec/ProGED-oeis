@@ -1,0 +1,12 @@
+
+While total time consumed by now, scale:11542/34371, seq_id:A060869, order:20 took:
+ 1.5 seconds, i.e. 0.02 minutes or 0.0 hours.
+
+A060869: 
+a(n) = 64*a(n - 3) - 84*a(n - 2) + 21*a(n - 1)
+truth: 
+a(n) = 21*a(n - 1) + -84*a(n - 2) + 64*a(n - 3),  
+a(0) = 3, a(1) = 75, a(2) = 1323
+
+True  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

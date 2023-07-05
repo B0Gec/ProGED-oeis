@@ -1,0 +1,12 @@
+
+While total time consumed by now, scale:8181/34371, seq_id:A041118, order:20 took:
+ 0.9 seconds, i.e. 0.02 minutes or 0.0 hours.
+
+A041118: 
+a(n) = -a(n - 4) + 66*a(n - 2)
+truth: 
+a(n) = 0*a(n - 1) + 66*a(n - 2) + 0*a(n - 3) + -1*a(n - 4),  
+a(0) = 8, a(1) = 33, a(2) = 536, a(3) = 2177
+
+True  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

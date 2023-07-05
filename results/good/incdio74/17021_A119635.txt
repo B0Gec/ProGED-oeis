@@ -1,0 +1,12 @@
+
+While total time consumed by now, scale:17022/34371, seq_id:A119635, order:20 took:
+ 1.5 seconds, i.e. 0.03 minutes or 0.0 hours.
+
+A119635: 
+a(n) = -16*a(n - 4) + 32*a(n - 3) - 24*a(n - 2) + 8*a(n - 1)
+truth: 
+a(n) = 8*a(n - 1) + -24*a(n - 2) + 32*a(n - 3) + -16*a(n - 4),  
+a(0) = 4, a(1) = 40, a(2) = 240, a(3) = 1088
+
+True  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

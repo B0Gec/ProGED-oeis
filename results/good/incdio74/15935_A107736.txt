@@ -1,0 +1,12 @@
+
+While total time consumed by now, scale:15936/34371, seq_id:A107736, order:20 took:
+ 1.5 seconds, i.e. 0.03 minutes or 0.0 hours.
+
+A107736: 
+a(n) = a(n - 3) - 1331715*a(n - 2) + 1331715*a(n - 1)
+truth: 
+a(n) = 1331715*a(n - 1) + -1331715*a(n - 2) + 1*a(n - 3),  
+a(0) = 35, a(1) = 46651605, a(2) = 62126595542551
+
+True  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

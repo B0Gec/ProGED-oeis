@@ -1,0 +1,12 @@
+
+While total time consumed by now, scale:12482/34371, seq_id:A074570, order:20 took:
+ 1.2 seconds, i.e. 0.02 minutes or 0.0 hours.
+
+A074570: 
+a(n) = 288*a(n - 3) - 140*a(n - 2) + 21*a(n - 1)
+truth: 
+a(n) = 21*a(n - 1) + -140*a(n - 2) + 288*a(n - 3),  
+a(0) = 3, a(1) = 21, a(2) = 161
+
+True  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

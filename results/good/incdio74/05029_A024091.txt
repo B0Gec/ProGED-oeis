@@ -1,0 +1,12 @@
+
+While total time consumed by now, scale:5030/34371, seq_id:A024091, order:20 took:
+ 3.0 seconds, i.e. 0.05 minutes or 0.001 hours.
+
+A024091: 
+a(n) = 8*a(n - 5) - 33*a(n - 4) + 52*a(n - 3) - 38*a(n - 2) + 12*a(n - 1)
+truth: 
+a(n) = 12*a(n - 1) + -38*a(n - 2) + 52*a(n - 3) + -33*a(n - 4) + 8*a(n - 5),  
+a(0) = 1, a(1) = 7, a(2) = 56, a(3) = 485, a(4) = 4032
+
+True  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

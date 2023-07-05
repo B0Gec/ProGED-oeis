@@ -1,0 +1,12 @@
+
+While total time consumed by now, scale:13411/34371, seq_id:A082134, order:20 took:
+ 1.4 seconds, i.e. 0.02 minutes or 0.0 hours.
+
+A082134: 
+a(n) = -64*a(n - 4) + 96*a(n - 3) - 52*a(n - 2) + 12*a(n - 1)
+truth: 
+a(n) = 12*a(n - 1) + -52*a(n - 2) + 96*a(n - 3) + -64*a(n - 4),  
+a(0) = 0, a(1) = 1, a(2) = 6, a(3) = 30
+
+True  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

@@ -1,0 +1,12 @@
+
+While total time consumed by now, scale:11431/34371, seq_id:A059937, order:20 took:
+ 0.8 seconds, i.e. 0.01 minutes or 0.0 hours.
+
+A059937: 
+a(n) = -8*a(n - 6) + 36*a(n - 5) - 66*a(n - 4) + 63*a(n - 3) - 33*a(n - 2) + 9*a(n - 1)
+truth: 
+a(n) = 9*a(n - 1) + -33*a(n - 2) + 63*a(n - 3) + -66*a(n - 4) + 36*a(n - 5) + -8*a(n - 6),  
+a(0) = 0, a(1) = 7, a(2) = 45, a(3) = 186, a(4) = 630, a(5) = 1905
+
+True  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

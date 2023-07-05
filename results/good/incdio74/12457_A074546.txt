@@ -1,0 +1,12 @@
+
+While total time consumed by now, scale:12458/34371, seq_id:A074546, order:20 took:
+ 1.4 seconds, i.e. 0.02 minutes or 0.0 hours.
+
+A074546: 
+a(n) = 144*a(n - 3) - 106*a(n - 2) + 19*a(n - 1)
+truth: 
+a(n) = 19*a(n - 1) + -106*a(n - 2) + 144*a(n - 3),  
+a(0) = 3, a(1) = 19, a(2) = 149
+
+True  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

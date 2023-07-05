@@ -1,0 +1,12 @@
+
+While total time consumed by now, scale:25422/34371, seq_id:A182019, order:20 took:
+ 11.5 seconds, i.e. 0.19 minutes or 0.003 hours.
+
+A182019: 
+a(n) = a(n - 8) + 5*a(n - 7) - 109*a(n - 6) + 187*a(n - 5) + 334*a(n - 4) - 317*a(n - 3) - 65*a(n - 2) + 29*a(n - 1)
+truth: 
+a(n) = 29*a(n - 1) + -65*a(n - 2) + -317*a(n - 3) + 334*a(n - 4) + 187*a(n - 5) + -109*a(n - 6) + 5*a(n - 7) + 1*a(n - 8),  
+a(0) = 1, a(1) = 47, a(2) = 1155, a(3) = 30277, a(4) = 788453, a(5) = 20546803, a(6) = 535404487, a(7) = 13951571713
+
+True  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    
