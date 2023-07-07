@@ -62,8 +62,11 @@ seqs = {i: bseqs[i][1:101] for i in cores if len(bseqs[i][1:201]) >= 200}
 seqs = {i: bseqs[i][1:101] for i in cores if len(bseqs[i][1:201]) >= 15}
 seqs = {i: bseqs[i][1:101] for i in cores if len(bseqs[i][1:205]) >= 12}
 # seqs = {i: bseqs[i][1:201] + [0 for i in range(200-len(bseqs[i][1:201]))] for i in cores}
-seqs = {i: [int(j) for j in bseqs[i][1:201]] + [np.nan for i in range(200-len(bseqs[i][1:201]))] for i in cores}
-print(bseqs['A000043'][1:40])
+seqs = {i: bseqs[i][1:201] + [np.nan for i in range(200-len(bseqs[i][1:201]))] for i in cores}
+# seqs = {i: [int(j) for j in bseqs[i][1:201]] + [np.nan for i in range(200-len(bseqs[i][1:201]))] for i in cores}
+print(seqs['A000043'][1:50])
+
+print(bseqs['A000043'][1:50])
 # 1/0
 
 
@@ -77,6 +80,8 @@ print(len(seqs))
 # # # print([len(seqs[i]) for i in seqs if len(seqs[i]) <= 198])
 # # print(seqs['A000045'])
 df = pd.DataFrame(seqs)
+print(df['A000043'][:50])
+1/0
 df_sorted = df.sort_index(axis=1)
 print(df_sorted.head())
 print(df_sorted)

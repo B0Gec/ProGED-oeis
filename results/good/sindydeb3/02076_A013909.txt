@@ -1,0 +1,12 @@
+
+While total time consumed by now, scale:2077/34371, seq_id:A013909, order:20 took:
+ 0.1 seconds, i.e. 0.0 minutes or 0.0 hours.
+
+A013909: 
+a(n) = 0
+truth: 
+a(n) = 6436343*a(n - 1),  
+a(0) = 279841
+
+False  -  checked against website ground truth.     
+False  -  "manual" check if equation is correct.    

@@ -1,0 +1,43 @@
+
+Preprocessing sees only first 7 terms.
+Sindy threshold: 0.1
+Default setting for how many terms should sindy see: 7
+Sindy will use max_order: 4
+
+, (1, 6, 0.0, 0, False, False), (1, 6, 0.1, 0, False, False), (1, 6, 0.2, 0, False, False), (1, 6, 0.30000000000000004, 0, False, False), (1, 6, 0.4, 0, False, False), 
+, (1, 6, 0.5, 0, False, False), (1, 6, 0.6000000000000001, 0, False, False), (1, 6, 0.7000000000000001, 0, False, False), (1, 6, 0.8, 0, False, False), (1, 6, 0.9, 0, False, False), 
+, (1, 7, 0.0, 0, False, False), (1, 7, 0.1, 0, False, False), (1, 7, 0.2, 0, False, False), (1, 7, 0.30000000000000004, 0, False, False), (1, 7, 0.4, 0, False, False), 
+, (1, 7, 0.5, 0, False, False), (1, 7, 0.6000000000000001, 0, False, False), (1, 7, 0.7000000000000001, 0, False, False), (1, 7, 0.8, 0, False, False), (1, 7, 0.9, 0, False, False), 
+, (2, 7, 0.0, 0, False, False), (2, 7, 0.1, 0, False, False), (2, 7, 0.2, 0, False, False), (2, 7, 0.30000000000000004, 0, False, False), (2, 7, 0.4, 0, False, False), 
+, (2, 7, 0.5, 0, False, False), (2, 7, 0.6000000000000001, 0, False, False), (2, 7, 0.7000000000000001, 0, False, False), (2, 7, 0.8, 0, False, False), (2, 7, 0.9, 0, False, False), 
+, (1, 7, 0.0, 1, False, False), (1, 7, 0.0, 2, False, False), (1, 7, 0.1, 1, False, False), (1, 7, 0.1, 2, False, False), (1, 7, 0.2, 1, False, False), 
+, (1, 7, 0.2, 2, False, False), (1, 7, 0.30000000000000004, 1, False, False), (1, 7, 0.30000000000000004, 2, False, False), (1, 7, 0.4, 1, False, False), (1, 7, 0.4, 2, False, False), 
+, (1, 7, 0.5, 1, False, False), (1, 7, 0.5, 2, False, False), (1, 7, 0.6000000000000001, 1, False, False), (1, 7, 0.6000000000000001, 2, False, False), (1, 7, 0.7000000000000001, 1, False, False), 
+, (1, 7, 0.7000000000000001, 2, False, False), (1, 7, 0.8, 1, False, False), (1, 7, 0.8, 2, False, False), (1, 7, 0.9, 1, False, False), (1, 7, 0.9, 2, False, False), 
+, (2, 7, 0.0, 1, False, False), (2, 7, 0.0, 2, False, False), (2, 7, 0.1, 1, False, False), (2, 7, 0.1, 2, False, False), (2, 7, 0.2, 1, False, False), 
+, (2, 7, 0.2, 2, False, False), (2, 7, 0.30000000000000004, 1, False, False), (2, 7, 0.30000000000000004, 2, False, False), (2, 7, 0.4, 1, False, False), (2, 7, 0.4, 2, False, False), 
+, (2, 7, 0.5, 1, False, False), (2, 7, 0.5, 2, False, False), (2, 7, 0.6000000000000001, 1, False, False), (2, 7, 0.6000000000000001, 2, False, False), (2, 7, 0.7000000000000001, 1, False, False), 
+, (2, 7, 0.7000000000000001, 2, False, False), (2, 7, 0.8, 1, False, False), (2, 7, 0.8, 2, False, False), (2, 7, 0.9, 1, False, False), (2, 7, 0.9, 2, False, False), 
+, 
+
+number of all configurations: 70
+number of fully (true, true) successful configurations: 0
+number of partially only (false, true) successful configurations: 0
+number of total fail (false, false) configurations: 70
+
+
+avg sindy: 
+a(n) = 13372*a(n - 2) + 190*a(n - 1)
+False  -  checked avg against website ground truth.     
+False  -  "manual" check avg if equation is correct.    
+While total time consumed by now, scale:2718/34371, seq_id:A015356, order:20 took:
+ 10.1 seconds, i.e. 0.17 minutes or 0.003 hours.
+
+A015356: 
+a(n) = NOT RECONSTRUCTED :-(
+truth: 
+a(n) = 171*a(n - 1) + 29070*a(n - 2) + -1666680*a(n - 3) + -56000448*a(n - 4) + 896007168*a(n - 5) + 6826721280*a(n - 6) + -30482104320*a(n - 7) + -45902462976*a(n - 8) + 68719476736*a(n - 9),  
+a(0) = 1, a(1) = 171, a(2) = 58311, a(3) = 13275471, a(4) = 3624203583, a(5) = 899790907743, a(6) = 233988483199263, a(7) = 59438516325245343, a(8) = 15275698695588053151
+
+False  -  checked against website ground truth.     
+False  -  "manual" check if equation is correct.    

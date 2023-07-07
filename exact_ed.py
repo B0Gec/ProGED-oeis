@@ -141,12 +141,20 @@ def truth2coeffs(truth: str):
     return check_coeffs
 
 
+def unnan(seq: list):
+    seq = sp.Matrix(seq)
+    if seq.has(sp.nan):
+        seq = seq[:list(seq).index(sp.nan), :]
+    return seq
+
+
 def unpack_seq(seq_id: str, csv: pd.DataFrame):
     "Unpack ground truth and terms of the sequence from given csv."
 
-    seq = sp.Matrix(csv[seq_id][1:])
-    if seq.has(sp.nan):
-        seq = seq[:list(seq).index(sp.nan), :]
+    # seq = sp.Matrix(csv[seq_id][1:])
+    # if seq.has(sp.nan):
+    #     seq = seq[:list(seq).index(sp.nan), :]
+    seq = unnan(csv[seq_id][1:])
     truth = csv[seq_id][0]
     coeffs = truth2coeffs(truth)
     truth = ['a(n) = '] + [f'{str(coeff)}*a(n - {n+1}) + ' for n, coeff in enumerate(coeffs)]
@@ -201,7 +209,13 @@ def exact_ed(seq_id: str, csv: pd.DataFrame, verbosity: int = VERBOSITY,
         if seq.has(sp.nan):
             seq = seq[:list(seq).index(sp.nan), :]
     else:
-        seq = sp.Matrix(csv[seq_id][header:(header + n_of_terms)])
+        dfcont = csv[seq_id]
+        # print(type(header), type(n_of_terms))
+        slice = dfcont[header:(header + n_of_terms)]
+        # seq = sp.Matrix(list(slice))
+        seq = sp.Matrix(slice)
+        # 1/0
+        # seq = sp.Matrix(csv[seq_id][header:(header + n_of_terms)])
 
     # print('after if in exact_ed')
     # if linear:
@@ -293,8 +307,9 @@ def increasing_eed(seq_id: str, csv: pd.DataFrame, verbosity: int = VERBOSITY,
     """Perform exact_ed with increasing the *max_order* untill the equation that holds (with minimum order) is found."""
 
     def eed_step(ed_output, order):
-        # print('summary', order)
         # print('summary', ed_output)
+        if verbosity >= 2:
+            print('eed_step', order, seq_id, 'calculating ...')
 
         # output = ed_output if ed_output[0] != [] else exact_ed(seq_id, csv, verbosity, order, linear, n_of_terms) + (False,)
         # # output = ed_output if ed_output[-1] else exact_ed(seq_id, csv, verbosity, order, linear, n_of_terms) + (False,)

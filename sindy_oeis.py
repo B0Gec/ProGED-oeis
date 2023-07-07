@@ -1,3 +1,6 @@
+import warnings
+warnings.simplefilter("ignore")
+
 from typing import Union
 from itertools import product
 
@@ -6,7 +9,11 @@ import sympy as sp
 import numpy as np
 import pysindy as ps
 
+warnings.filterwarnings('ignore', module='pysindy')
 from exact_ed import grid_sympy, dataset, unpack_seq, truth2coeffs, solution_vs_truth, instant_solution_vs_truth, solution2str, check_eq_man
+
+import warnings
+warnings.filterwarnings("ignore")
 
 """
 todo:
@@ -223,13 +230,6 @@ def create_grid(seq, seq_id, csv, coeffs, max_order: int, seq_len: int,
     grid = [pair for pair in subopt_grid if (pair[1]-pair[0]) > 4]  # Avoids too short sequences vis-a-vis order.
     return grid
 
-def default_grids(seq, seq_id, csv, coeffs, max_order: int, seq_len: int,
-                ths_bounds: tuple = (0, 0.9), ensemble_grid: tuple = (True, False, False),
-                order_pts: int = 20, len_pts: int = 20, threshold_pts: int = 20):
-    """Creates default grids, if none are provided. As in old times."""
-    grid = create_grid(seq, seq_id, csv, coeffs, max_order, seq_len)
-
-    return
 
 def sindy_grid(seq, seq_id, csv, coeffs,
                max_order: int, seq_len: int):
@@ -263,13 +263,17 @@ def sindy_grid(seq, seq_id, csv, coeffs,
 
     grid1 = create_grid(seq, seq_id, csv, coeffs, max_order, seq_len,
                        ths_bounds = (0, 0.9), ensemble_grid=(True, False, False),
-                       order_pts=20, len_pts=20, threshold_pts=18)
+                       # order_pts=20, len_pts=20, threshold_pts=18)
+                       order_pts = 20, len_pts = 10, threshold_pts = 10)
     grid2 = create_grid(seq, seq_id, csv, coeffs, max_order, seq_len,
                        ths_bounds=(0, 0.9), ensemble_grid=(False, True, True),
-                       order_pts=20, len_pts=1, threshold_pts=18)
-    small_grid = create_grid(seq, seq_id, csv, coeffs, max_order, seq_len,
-                       ths_bounds = (0, 0.9), ensemble_grid=(True, False, False),
-                       order_pts=2, len_pts=2, threshold_pts=3)
+                       order_pts=20, len_pts=1, threshold_pts=10)
+    # small_grid = create_grid(seq, seq_id, csv, coeffs, max_order, seq_len,
+    #                    ths_bounds = (0, 0.9), ensemble_grid=(True, False, False),
+    #                    order_pts=2, len_pts=2, threshold_pts=3)
+    # small_grid = create_grid(seq, seq_id, csv, coeffs, 4, seq_len,
+    #                         ths_bounds = (0.1, 0.2), ensemble_grid=(False, False, True),
+    #                         order_pts=3, len_pts=3, threshold_pts=3)
     grid = grid1 + grid2
     # grid = grid1
     # grid = grid2
@@ -288,17 +292,18 @@ def sindy_grid(seq, seq_id, csv, coeffs,
     five = []
     for i in range(len(grid)):
         if i%5 == 0:
-            print(five)
+            # print(five)
             five = []
         five += [grid[i]]
-    print(five)
-    print(grid)
-    print(len(grid))
+    # print(five)
+    # print(grid)
+    # print(len(grid))
     # print(len(grid), 'of', order_pts * len_pts * threshold_pts + len(ensemble_grid))
     # 1/0
 
-    printout = str(grid)
-    # print(grid)
+    # printout = str(grid)
+    printout = ''
+    # print('here grid', grid)
     def ens2dict(ensemble):
         if ensemble == 0:
             return {'ensemble': False, 'library_ensemble': False, }
@@ -309,7 +314,7 @@ def sindy_grid(seq, seq_id, csv, coeffs,
 
     ongrid = list(map(
         (lambda i: i + (one_results(seq, seq_id, csv, coeffs, i[0], i[1], i[2], **ens2dict(i[3]))[:3], )), grid))
-    print(ongrid)
+    # print(ongrid)
     printable = [(order, leng, thrs, ens, oneres[1], oneres[2]) for order, leng, thrs, ens, oneres in ongrid]
     printout += '\n'
     for i in range(round(len(printable)/5) + 1):
@@ -317,11 +322,16 @@ def sindy_grid(seq, seq_id, csv, coeffs,
         # printout += str([f"{str(i): >20}" for i in printable[5*i:5*(i+1)]])
     # printout += ']\n'
 
-    idx = len(grid[0])
-    oeis = [case[idx][0] for case in ongrid if case[idx][1:3] == (True, True)]
-    manually = [case[idx][0] for case in ongrid if case[idx][1:3] == (False, True)]
-    # bug = [case[idx][0] for case in ongrid if case[idx][1:3] == (True, False)]
-    fail = [case[idx][0] for case in ongrid if case[idx][1:3] == (False, False)]
+    if len(grid) == 0:
+        printout += f"\nNo configurations to test!\n"
+        oeis, manually, fail = [], [], []
+    else:
+        idx = len(grid[0])
+        oeis = [case[idx][0] for case in ongrid if case[idx][1:3] == (True, True)]
+        manually = [case[idx][0] for case in ongrid if case[idx][1:3] == (False, True)]
+        # bug = [case[idx][0] for case in ongrid if case[idx][1:3] == (True, False)]
+        fail = [case[idx][0] for case in ongrid if case[idx][1:3] == (False, False)]
+
     printout += "\n"
     printout += f"number of all configurations: {len(grid)}\n"
     printout += f"number of fully (true, true) successful configurations: {len(oeis)}\n"
@@ -342,10 +352,10 @@ def sindy_grid(seq, seq_id, csv, coeffs,
 
     xs = [case[idx][0] for case in ongrid]
     # print([len(x) for x in xs])
-    max_len = max([len(x) for x in xs])
+    max_len = max([len(x) for x in xs]) if xs != [] else 0
     xs = [sp.Matrix.vstack(x, sp.zeros(max_len-len(x), 1)) for x in xs]
     # x_avg = sp.Matrix([round(i) for i in list(sum(xs, sp.Matrix([0, 0, 0])) / 3)])
-    x_avg = sp.Matrix([round(i) for i in list(sum(xs, sp.zeros(max_len, 1)) / len(xs))])
+    x_avg = sp.Matrix([round(i) for i in list(sum(xs, sp.zeros(max_len, 1)) / len(xs))]) if xs != [] else []
     # print('xs', xs)
     # print('x_avg', x_avg)
 
@@ -366,9 +376,13 @@ def sindy_grid(seq, seq_id, csv, coeffs,
 # todo + sindy ensemble (with different thresholds) x 2 versions (ensamble + library_ensemble)
 
 
-
-if __file__ == '__main__':
+if __name__ == '__main__':
     csv_filename = 'linear_database_full.csv'
+
+    # import warnings
+
+    warnings.filterwarnings('ignore', module='pysindy')
+    # warnings.simplefilter("ignore")
 
     # if CORELIST:
     #     # from core_nice_nomore import cores
@@ -399,5 +413,8 @@ if __file__ == '__main__':
 
     seq, coeffs, truth = unpack_seq(seq_id, csv)
 
-
+    warnings.filterwarnings('ignore', module='pysindy')
+    # warnings.simplefilter("ignore")
+    x = sindy(seq, max_order = 2, seq_len = 10, threshold=21.9)
+    print(x)
 

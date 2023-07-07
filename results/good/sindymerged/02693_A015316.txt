@@ -1,0 +1,31 @@
+
+Preprocessing sees only first 4 terms.
+Sindy threshold: 0.1
+Default setting for how many terms should sindy see: 4
+Sindy will use max_order: 2
+
+, 
+
+No configurations to test!
+
+number of all configurations: 0
+number of fully (true, true) successful configurations: 0
+number of partially only (false, true) successful configurations: 0
+number of total fail (false, false) configurations: 0
+
+
+avg sindy: 
+a(n) = NOT RECONSTRUCTED :-(
+False  -  checked avg against website ground truth.     
+False  -  "manual" check avg if equation is correct.    
+While total time consumed by now, scale:2694/34371, seq_id:A015316, order:20 took:
+ 0.1 seconds, i.e. 0.0 minutes or 0.0 hours.
+
+A015316: 
+a(n) = NOT RECONSTRUCTED :-(
+truth: 
+a(n) = -90909*a(n - 1) + 918281910*a(n - 2) + 917272809000*a(n - 3) + -91828191000000*a(n - 4) + -909090000000000*a(n - 5) + 1000000000000000*a(n - 6),  
+a(0) = 1, a(1) = -90909, a(2) = 9182728191, a(3) = -917355454462809, a(4) = 91744720010017447191, a(5) = -9174380256281734701652809
+
+False  -  checked against website ground truth.     
+False  -  "manual" check if equation is correct.    

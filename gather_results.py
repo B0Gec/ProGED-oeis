@@ -58,7 +58,27 @@ job_id = "sindygrid519_1"
 # # job_id = "blacklist76"
 # job_id = "incdio86"
 # job_id = "i86bugfix"
-job_id = "incdio74t"
+job_id = "incdio74"  # 2023-07-04
+# job_id = "sindyens75"  # 2023-07-04
+job_id = "sindydeb3"  # 2023-07-06
+job_id = "sindydeb3-1"  # 2023-07-06
+job_id = "sindydeb3-2"  # 2023-07-06
+job_id = "sindydeb3-3"  # 2023-07-06
+job_id = "sindydeb3-4"  # 2023-07-06
+job_id = "sindymerged"  # 2023-07-06
+
+
+time_complexity_dict = {
+    'incdio74': '2h (+ 20h+ for 9 sequences)',
+    'sindyens75': '? ... still running',
+    'sindydeb3': '? ... still running',
+    'sindydeb3-1': '? ... still running',
+    'sindydeb3-2': '? ... still running',
+    'sindydeb3-3': '? ... still running',
+    'sindydeb3-4': '? ... still running',
+    'sindymerged': '? ... still running',
+}
+time_complexity = time_complexity_dict[job_id]
 
 
 # seq_file = '13000_A079034.txt'
@@ -291,9 +311,18 @@ files = os.listdir(job_dir)
 # # # # files = list(map(lambda file: file[9:14], files))
 cut = (9, 14, 15, 22)
 cut = tuple(i-9 for i in cut)
-# # success_ids_pairs = list(map(lambda file: (file[cut[0]:cut[1]], file[cut[2]:cut[3]]), files))
-# success_ids = list(map(lambda file: file[cut[2]:cut[3]], files))
+# success_ids_pairs = sorted(list(map(lambda file: (file[cut[0]:cut[1]], file[cut[2]:cut[3]]), files)))
+# print(success_ids_pairs)
+success_ids = list(map(lambda file: file[cut[2]:cut[3]], files))
+start = 13000
+start = 10000
+start = 0
+limited_runs = 123456
 from all_ids import all_ids
+all_ids_ref = all_ids
+all_ids = all_ids[start:limited_runs]
+
+# print('all_ids', all_ids[:10])
 # renaming = [(job_dir + file, job_dir + all_ids.index(str(file[cut[2]:cut[3]])) + file[cut[0]:cut[1]]) for file in files]
 # renaming = [(job_dir + file, job_dir + f"{all_ids.index(str(file[cut[2]:cut[3]])):0>5}_{file[cut[2]:cut[3]]}.txt") for file in files]
 # list(map(lambda pair: os.rename(pair[0], pair[1]), renaming))
@@ -307,27 +336,31 @@ from all_ids import all_ids
 # # # print('first few unsuccessful:')
 # # # print(unsuccessful[:10])
 # # # print(len(success_ids_pairs), len(unsuccessful), len(success_ids_pairs) + len(unsuccessful), len(all_ids))
-#
-#
-# # a. check for not blacklisted unsuccessful jobs
-# from blacklist import blacklist, no_truth
+
+
+# a. check for not blacklisted unsuccessful jobs
+from blacklist import blacklist, no_truth
 # print(len(blacklist), len(set(blacklist)))
-# # not_blacklisted = [(task, i) for task, i in unsuccessful if not i in blacklist]
-# not_blacklisted = [i for i in all_ids if not i in blacklist and not i in success_ids]
-# # not_blacklisted = [i for n, i in enumerate(all_ids) if not i in blacklist and not i in success_ids and i]
-# print(not_blacklisted[:10], len(not_blacklisted))
-# # not_missing_truth = [i for i in all_ids if not i in no_truth and not i in success_ids]
-# # not_blacklisted_pairs = [(f"{task:0>5}", id_) for task, id_ in enumerate(all_ids)
-# #                          if not id_ in blacklist and not id_ in success_ids]
-# not_blacklisted_pairs = [(f"{all_ids.index(id_):0>5}", id_) for id_ in not_blacklisted]
-# print(not_blacklisted_pairs[:10], len(not_blacklisted_pairs))
-# # ['A044941', 'A053833', 'A055649'] 3
-# # [('00184', 'A001299'), ('00185', 'A001300'), ('00186', 'A001301'), ('00187', 'A001302'), ('00195', 'A001313'), ('00196', 'A001314'), ('00198', 'A001319'), ('00222', 'A001492'), ('00347', 'A002015'), ('00769', 'A005813')] 1921
-# # these are blacklisted due to false ground truth
+# not_blacklisted = [(task, i) for task, i in unsuccessful if not i in blacklist]
+not_blacklisted = [i for i in all_ids if not i in blacklist and not i in success_ids]
+# not_blacklisted = [i for n, i in enumerate(all_ids) if not i in blacklist and not i in success_ids and i]
+print(not_blacklisted[:10], len(not_blacklisted))
+# not_missing_truth = [i for i in all_ids if not i in no_truth and not i in success_ids]
+# not_blacklisted_pairs = [(f"{task:0>5}", id_) for task, id_ in enumerate(all_ids)
+#                          if not id_ in blacklist and not id_ in success_ids]
+
+not_blacklisted_pairs = [(f"{all_ids_ref.index(id_):0>5}", id_) for id_ in not_blacklisted]
+print(not_blacklisted_pairs[:10], len(not_blacklisted_pairs))
+print(not_blacklisted_pairs[:100], len(not_blacklisted_pairs))
+print('here i am')
+# 1/0
+# ['A044941', 'A053833', 'A055649'] 3
+# [('00184', 'A001299'), ('00185', 'A001300'), ('00186', 'A001301'), ('00187', 'A001302'), ('00195', 'A001313'), ('00196', 'A001314'), ('00198', 'A001319'), ('00222', 'A001492'), ('00347', 'A002015'), ('00769', 'A005813')] 1921
+# these are blacklisted due to false ground truth
 # print('A055649' in blacklist)
-# # 1/0
-#
-#
+# 1/0
+
+
 # # buglist = not_blacklisted
 # # # output_string = f'successful_list = {successful_list}'
 # # output_string = f'buglist = {buglist}'
@@ -336,7 +369,7 @@ from all_ids import all_ids
 # # f = open(out_fname, 'w')
 # # f.write(output_string)
 # # f.close()
-#
+
 
 
 
@@ -411,7 +444,7 @@ official_success = id_oeis + non_id
 # for latex new experiment variables:
 forbidden = ['S', 'U', 'V', 'G']
 my_alphabet = [i for i in string.ascii_uppercase if i not in forbidden]
-my_alphabet = ['G']
+# my_alphabet = ['G']
 random_symbol = random.choice(my_alphabet)
 symbol = random_symbol + random_symbol
 
@@ -443,6 +476,8 @@ printout = f"""
     {official_success: >5} = {official_success/n_of_seqs*100:0.3} % - official success (id_oeis + non_id)
     
     {avg_is_best: >5} = avg is best ... I might be wrong ... 
+    
+    time complexity: {time_complexity}
     
     
     
@@ -539,7 +574,8 @@ for n, i in enumerate(job_bins):
 
 print(f'first {n} non_ids:', non_id_list[:n])
 print(len(non_id_list))
-print(f'first {n} non_manuals:', non_manual_list[:n])
+n = 100
+print(f'first {n} non_manuals:', sorted(non_manual_list[:n]))
 # print(f'all non_manuals:', non_manual_list)
 # check if new false_truth blacklist contains all old false_truths:  # experiment job_id = "blacklist76"
 false_non_man = [i[6:6+7] for i in non_manual_list]

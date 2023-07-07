@@ -1,0 +1,13 @@
+- sindy parameters
+- remove non_manual
+- 164 core sequences ... (nice, -more)
+- dso for cores.
+
+sindy pars:
+    - best case scenario
+    - 20x10x10
+    - 20x1x10
+    - 15 mins
+
+
+

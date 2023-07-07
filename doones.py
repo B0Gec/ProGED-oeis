@@ -17,7 +17,14 @@ import argparse
 
 # if os.getcwd()[-11:] == 'ProGED_oeis':
 #     from ProGED.examples.oeis.scraping.downloading.download import bfile2list
-from exact_ed import exact_ed, increasing_eed, timer, check_eq_man, check_truth, unpack_seq, solution_vs_truth, solution2str
+from exact_ed import exact_ed, increasing_eed, timer, check_eq_man, check_truth, unnan, unpack_seq, solution_vs_truth, solution2str
+
+
+import warnings
+warnings.simplefilter("ignore")
+# # warnings.filterwarnings("ignore", category=UserWarning, message='UserWarning: Sparsity parameter is too big (0.9) and eliminated all coefficients')
+# # warnings.filterwarnings("ignore", message='UserWarning: Sparsity parameter is too big (0.9) and eliminated all coefficients')
+# warnings.filterwarnings("ignore")
 
 # from task2job import task2job
 # else:
@@ -28,6 +35,8 @@ SINDy = False
 if SINDy:
     from sindy_oeis import sindy, preprocess, heuristic, sindy_grid
 
+LINEAR = True
+LINEAR = False
 INCREASING_EED = True
 # print("IDEA: max ORDER for GRAMMAR = floor(DATASET ROWS (LEN(SEQ)))/2)-1")
 
@@ -70,7 +79,7 @@ DEBUG = False
 BUGLIST = True
 BUGLIST = False
 CORELIST = True  # have to scrape core sequences!
-CORELIST = False
+# CORELIST = False
 if BUGLIST:
     from buglist import buglist
 
@@ -97,6 +106,8 @@ THRESHOLD = 0.1  # For sindy - masking threshold.
 
 N_OF_TERMS_ED = 200
 TASK_ID = 0
+# TASK_ID = 8
+TASK_ID = 14
 # TASK_ID = 187
 # TASK_ID = 5365  # A026471
 # TASK_ID = 191  # A026471
@@ -132,8 +143,10 @@ SEQ_ID = (True, 'A000045')
 # SEQ_ID = (True, 'A000045')
 # non_manuals =  ['23167_A169198.txt', '23917_A170320.txt', '03322_A016835.txt', '24141_A170544.txt', '24240_A170643.txt', '24001_A170404.txt', '24014_A170417.txt', '23207_A169238.txt', '22912_A168943.txt', '03330_A016844.txt', '23872_A170275.txt', '22983_A169014.txt', '24006_A170409.txt', '24211_A170614.txt', '15737_A105944.txt', '24053_A170456.txt', '23488_A169519.txt', '23306_A169337.txt', '22856_A168887.txt', '23049_A169080.txt', '23980_A170383.txt', '23742_A170145.txt', '23109_A169140.txt', '06659_A035798.txt', '23860_A170263.txt', '23800_A170203.txt', '23649_A170052.txt', '23219_A169250.txt', '23682_A170085.txt', '06706_A035871.txt', '23720_A170123.txt', '31181_A279282.txt', '23382_A169413.txt', '24034_A170437.txt', '24192_A170595.txt']
 # SEQ_ID = (True, 'A169198')
-# SEQ_ID = (False, 'A169198')
+SEQ_ID = (False, 'A169198')
 # SEQ_ID = (True, 'A024347')
+# SEQ_ID = (True, 'A010034')
+# SEQ_ID = (True, 'A000518')
 # debug and sindy and buglist
 
 # DIOFANT_GRID = False
@@ -172,18 +185,17 @@ max_order = args.order
 threshold = args.threshold
 # seq_len = args.seq_len
 PARALLEL = args.paral
-VERBOSITY = args.verb
+VERBOSITY = args.verb if not DEBUG else 2
 experiment_id = args.exper_id
 
 # N_OF_TERMS_ED = 2*max_order  # Use only first n_of_terms_ed of the given sequence.
-N_OF_TERMS_ED = None
+# N_OF_TERMS_ED = None
 
 
 flags_dict = {argument.split("=")[0]: argument.split("=")[1]
               for argument in sys.argv[1:] if len(argument.split("=")) > 1}
 # n_of_terms_ed = 50
 # n_of_terms_ed = int(flags_dict.get("--n_of_terms", n_of_terms_ed))
-
 
 
 # from proged times:
@@ -197,6 +209,7 @@ csv_filename = 'linear_database_full.csv'
 if CORELIST:
     # from core_nice_nomore import cores
     csv_filename = 'cores.csv'
+    csv_filename = 'cores_test.csv'
     # Explained cores, how I got them: back at the time they were scraped.
     # specs: only first 100 terms, 150 sequences
     # i think I will redowmnload them, because I have a better way to do it now.
@@ -215,6 +228,9 @@ fail = (BUGLIST and task_id >= len(buglist)) or fail
 
 csv = pd.read_csv(csv_filename, low_memory=False, nrows=0)
 n_of_seqs = len(list(csv.columns))
+# print(csv.columns[:100])
+# 1/0
+# print(n_of_seqs)
 
 # if diofant_grid:
 #     task_id = random.randint(0, n_of_seqs)
@@ -231,6 +247,8 @@ if not fail:
             task_id = int(buglist[task_id][0])
     # if CORELIST:
     #     seq_id = cores[task_id]
+    if DEBUG:
+        print(TASK_ID, task_id, seq_id, " ... TASK ID, task_id, seq_id")
 
     # b. set output folder and check is file for this task already exists
     sep = os.path.sep
@@ -346,11 +364,15 @@ else:
         # try:
         if SINDy:
             print('Attempting SINDy')
-            seq, coeffs, truth = unpack_seq(seq_id, csv)
+            if LINEAR:
+                seq, coeffs, truth = unpack_seq(seq_id, csv)
+            else:
+                seq = unnan(csv[seq_id])
             seq, pre_fail = preprocess(seq)
             seq_len = len(seq)
             if pre_fail:
-                x = sp.Matrix([0,0,0,0])
+                output_string += f'Only huge terms in the sequence!!!\n\n'
+                x = []
             else:
                 output_string += f'Preprocessing sees only first {len(seq)} terms.\n'
 
@@ -381,14 +403,15 @@ else:
 
         else:
             # print('Going for exact ed')
+            # print(' tle ', max_order_, linear, N_OF_TERMS_ED)
             if INCREASING_EED:
                 x, eq, coeffs, truth = increasing_eed(seq_id, csv, VERBOSITY, max_order_,
-                                                      n_of_terms=N_OF_TERMS_ED, linear=True)
+                                                      linear=LINEAR, n_of_terms=N_OF_TERMS_ED)
             # x, eq, coeffs, truth = exact_ed(seq_id, csv, VERBOSITY, max_order_,
             #                                 n_of_terms=N_OF_TERMS_ED, linear=True)
 
         # print('eq', eq, 'x', x)
-        is_reconst = solution_vs_truth(x, coeffs)
+        is_reconst = solution_vs_truth(x, coeffs) if LINEAR else ""
         is_check_verbose = check_eq_man(x, seq_id, csv, n_of_terms=10**5)
         # print('manual check \n', is_check_verbose[1], '\n', is_check_verbose[2])
         is_check = is_check_verbose[0]
@@ -412,6 +435,7 @@ else:
                                       f"experiment set with id {seq_id} for first "
                                       f"{N_OF_TERMS_ED} terms with max order {max_order} "
                                       f"while double checking against first {len(csv[seq_id])-1} terms.")
+            timing_print = now[1]
         elif VERBOSITY >= 1:
             # refreshrate = 1100
             refreshrate = 1
