@@ -1,0 +1,35 @@
+
+Preprocessing sees only first 6 terms.
+Sindy threshold: 0.1
+Default setting for how many terms should sindy see: 6
+Sindy will use max_order: 3
+
+, (1, 6, 0.0, 0, False, False), (1, 6, 0.1, 0, False, False), (1, 6, 0.2, 0, False, False), (1, 6, 0.30000000000000004, 0, False, False), (1, 6, 0.4, 0, False, False), 
+, (1, 6, 0.5, 0, False, False), (1, 6, 0.6000000000000001, 0, False, False), (1, 6, 0.7000000000000001, 0, False, False), (1, 6, 0.8, 0, False, False), (1, 6, 0.9, 0, False, False), 
+, (1, 6, 0.0, 1, False, False), (1, 6, 0.0, 2, False, False), (1, 6, 0.1, 1, False, False), (1, 6, 0.1, 2, False, False), (1, 6, 0.2, 1, False, False), 
+, (1, 6, 0.2, 2, False, False), (1, 6, 0.30000000000000004, 1, False, False), (1, 6, 0.30000000000000004, 2, False, False), (1, 6, 0.4, 1, False, False), (1, 6, 0.4, 2, False, False), 
+, (1, 6, 0.5, 1, False, False), (1, 6, 0.5, 2, False, False), (1, 6, 0.6000000000000001, 1, False, False), (1, 6, 0.6000000000000001, 2, False, False), (1, 6, 0.7000000000000001, 1, False, False), 
+, (1, 6, 0.7000000000000001, 2, False, False), (1, 6, 0.8, 1, False, False), (1, 6, 0.8, 2, False, False), (1, 6, 0.9, 1, False, False), (1, 6, 0.9, 2, False, False), 
+, 
+
+number of all configurations: 30
+number of fully (true, true) successful configurations: 0
+number of partially only (false, true) successful configurations: 0
+number of total fail (false, false) configurations: 30
+
+
+avg sindy: 
+a(n) = 562*a(n - 1)
+False  -  checked avg against website ground truth.     
+False  -  "manual" check avg if equation is correct.    
+While total time consumed by now, scale:10408/34371, seq_id:A048922, order:20 took:
+ 6.5 seconds, i.e. 0.11 minutes or 0.002 hours.
+
+A048922: 
+a(n) = NOT RECONSTRUCTED :-(
+truth: 
+a(n) = 675*a(n - 1) + -675*a(n - 2) + 1*a(n - 3),  
+a(0) = 1, a(1) = 425, a(2) = 286209
+
+False  -  checked against website ground truth.     
+False  -  "manual" check if equation is correct.    

@@ -72,12 +72,15 @@ n_of_terms_load = 100000
 
 
 VERBOSITY = 2  # dev scena
-VERBOSITY = 1  # run scenario
+# VERBOSITY = 1  # run scenario
 
 DEBUG = True
 DEBUG = False
+# BUGLIST ignores blacklisting (runs also blacklisted) !!!!!
 BUGLIST = True
-BUGLIST = False
+#BUGLIST = False
+BUGLIST_BLACKLISTING = True
+# BUGLIST ignores blacklisted sequences !!!!!
 CORELIST = True  # have to scrape core sequences!
 # CORELIST = False
 if BUGLIST:
@@ -90,6 +93,7 @@ if BUGLIST:
 #     print("Warning!!!!! buglist is used outside debug mode!!\n")
 
 MAX_ORDER = 20  # We care only for recursive equations with max 20 terms or order.
+# MAX_ORDER = 20  # We care only for recursive equations with max 20 terms or order.
 # if DEBUG:
 #     MAX_ORDER = 5  # We care only for recursive equations with max 20 terms or order.
 # MAX_ORDER = 2
@@ -107,7 +111,7 @@ THRESHOLD = 0.1  # For sindy - masking threshold.
 N_OF_TERMS_ED = 200
 TASK_ID = 0
 # TASK_ID = 8
-TASK_ID = 14
+# TASK_ID = 14
 # TASK_ID = 187
 # TASK_ID = 5365  # A026471
 # TASK_ID = 191  # A026471
@@ -178,6 +182,7 @@ args = parser.parse_args()
 job_id = args.job_id
 task_id = args.task_id
 
+print('task_id', task_id)
 # task_id = remnants[task_id]
 # diofant_grid = True if args.diogrid == "True" else False
 
@@ -207,6 +212,7 @@ now = time.perf_counter()
 # # a bit faster maybe:
 csv_filename = 'linear_database_full.csv'
 if CORELIST:
+    blacklist = []
     # from core_nice_nomore import cores
     csv_filename = 'cores.csv'
     csv_filename = 'cores_test.csv'
@@ -237,7 +243,10 @@ n_of_seqs = len(list(csv.columns))
 
 fail = (not BUGLIST and task_id >= n_of_seqs) or fail
 if not fail:
-    fail = (not BUGLIST and list(csv.columns)[task_id] in blacklist) or fail
+    if BUGLIST_BLACKLISTING:
+        fail = list(csv.columns)[task_id] in blacklist or fail
+    else:
+        fail = (not BUGLIST and list(csv.columns)[task_id] in blacklist) or fail
     seq_id = list(csv.columns)[task_id] if not SEQ_ID[0] or not DEBUG else SEQ_ID[1]
     if BUGLIST:
         if isinstance(buglist[task_id], str):
@@ -247,8 +256,8 @@ if not fail:
             task_id = int(buglist[task_id][0])
     # if CORELIST:
     #     seq_id = cores[task_id]
-    if DEBUG:
-        print(TASK_ID, task_id, seq_id, " ... TASK ID, task_id, seq_id")
+    # if DEBUG:
+    print(TASK_ID, task_id, seq_id, " ... TASK ID, task_id, seq_id")
 
     # b. set output folder and check is file for this task already exists
     sep = os.path.sep
@@ -405,10 +414,10 @@ else:
             # print('Going for exact ed')
             # print(' tle ', max_order_, linear, N_OF_TERMS_ED)
             if INCREASING_EED:
-                x, eq, coeffs, truth = increasing_eed(seq_id, csv, VERBOSITY, max_order_,
-                                                      linear=LINEAR, n_of_terms=N_OF_TERMS_ED)
-            # x, eq, coeffs, truth = exact_ed(seq_id, csv, VERBOSITY, max_order_,
-            #                                 n_of_terms=N_OF_TERMS_ED, linear=True)
+                # x, eq, coeffs, truth = increasing_eed(seq_id, csv, VERBOSITY, max_order_,
+                #                                       linear=LINEAR, n_of_terms=N_OF_TERMS_ED)
+                x, eq, coeffs, truth = exact_ed(seq_id, csv, VERBOSITY, max_order_,
+                                                n_of_terms=N_OF_TERMS_ED, linear=LINEAR)
 
         # print('eq', eq, 'x', x)
         is_reconst = solution_vs_truth(x, coeffs) if LINEAR else ""

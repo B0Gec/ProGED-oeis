@@ -1,0 +1,57 @@
+
+Preprocessing sees only first 9 terms.
+Sindy threshold: 0.1
+Default setting for how many terms should sindy see: 9
+Sindy will use max_order: 4
+
+, (1, 6, 0.0, 0, False, False), (1, 6, 0.1, 0, False, False), (1, 6, 0.2, 0, False, False), (1, 6, 0.30000000000000004, 0, False, False), (1, 6, 0.4, 0, False, False), 
+, (1, 6, 0.5, 0, False, False), (1, 6, 0.6000000000000001, 0, False, False), (1, 6, 0.7000000000000001, 0, False, False), (1, 6, 0.8, 0, False, False), (1, 6, 0.9, 0, False, False), 
+, (1, 7, 0.0, 0, False, False), (1, 7, 0.1, 0, False, False), (1, 7, 0.2, 0, False, False), (1, 7, 0.30000000000000004, 0, False, False), (1, 7, 0.4, 0, False, False), 
+, (1, 7, 0.5, 0, False, False), (1, 7, 0.6000000000000001, 0, False, False), (1, 7, 0.7000000000000001, 0, False, False), (1, 7, 0.8, 0, False, False), (1, 7, 0.9, 0, False, False), 
+, (1, 8, 0.0, 0, False, False), (1, 8, 0.1, 0, False, False), (1, 8, 0.2, 0, False, False), (1, 8, 0.30000000000000004, 0, False, False), (1, 8, 0.4, 0, False, False), 
+, (1, 8, 0.5, 0, False, False), (1, 8, 0.6000000000000001, 0, False, False), (1, 8, 0.7000000000000001, 0, False, False), (1, 8, 0.8, 0, False, False), (1, 8, 0.9, 0, False, False), 
+, (2, 7, 0.0, 0, False, False), (2, 7, 0.1, 0, False, False), (2, 7, 0.2, 0, False, False), (2, 7, 0.30000000000000004, 0, False, False), (2, 7, 0.4, 0, False, False), 
+, (2, 7, 0.5, 0, False, False), (2, 7, 0.6000000000000001, 0, False, False), (2, 7, 0.7000000000000001, 0, False, False), (2, 7, 0.8, 0, False, False), (2, 7, 0.9, 0, False, False), 
+, (2, 8, 0.0, 0, False, False), (2, 8, 0.1, 0, False, False), (2, 8, 0.2, 0, False, False), (2, 8, 0.30000000000000004, 0, False, False), (2, 8, 0.4, 0, False, False), 
+, (2, 8, 0.5, 0, False, False), (2, 8, 0.6000000000000001, 0, False, False), (2, 8, 0.7000000000000001, 0, False, False), (2, 8, 0.8, 0, False, False), (2, 8, 0.9, 0, False, False), 
+, (3, 8, 0.0, 0, False, False), (3, 8, 0.1, 0, False, False), (3, 8, 0.2, 0, False, False), (3, 8, 0.30000000000000004, 0, False, False), (3, 8, 0.4, 0, False, False), 
+, (3, 8, 0.5, 0, False, False), (3, 8, 0.6000000000000001, 0, False, False), (3, 8, 0.7000000000000001, 0, False, False), (3, 8, 0.8, 0, False, False), (3, 8, 0.9, 0, False, False), 
+, (1, 9, 0.0, 1, False, False), (1, 9, 0.0, 2, False, False), (1, 9, 0.1, 1, False, False), (1, 9, 0.1, 2, False, False), (1, 9, 0.2, 1, False, False), 
+, (1, 9, 0.2, 2, False, False), (1, 9, 0.30000000000000004, 1, False, False), (1, 9, 0.30000000000000004, 2, False, False), (1, 9, 0.4, 1, False, False), (1, 9, 0.4, 2, False, False), 
+, (1, 9, 0.5, 1, False, False), (1, 9, 0.5, 2, False, False), (1, 9, 0.6000000000000001, 1, False, False), (1, 9, 0.6000000000000001, 2, False, False), (1, 9, 0.7000000000000001, 1, False, False), 
+, (1, 9, 0.7000000000000001, 2, False, False), (1, 9, 0.8, 1, False, False), (1, 9, 0.8, 2, False, False), (1, 9, 0.9, 1, False, False), (1, 9, 0.9, 2, False, False), 
+, (2, 9, 0.0, 1, False, False), (2, 9, 0.0, 2, False, False), (2, 9, 0.1, 1, False, False), (2, 9, 0.1, 2, False, False), (2, 9, 0.2, 1, False, False), 
+, (2, 9, 0.2, 2, False, False), (2, 9, 0.30000000000000004, 1, False, False), (2, 9, 0.30000000000000004, 2, False, False), (2, 9, 0.4, 1, False, False), (2, 9, 0.4, 2, False, False), 
+, (2, 9, 0.5, 1, False, False), (2, 9, 0.5, 2, False, False), (2, 9, 0.6000000000000001, 1, False, False), (2, 9, 0.6000000000000001, 2, False, False), (2, 9, 0.7000000000000001, 1, False, False), 
+, (2, 9, 0.7000000000000001, 2, False, False), (2, 9, 0.8, 1, False, False), (2, 9, 0.8, 2, False, False), (2, 9, 0.9, 1, False, False), (2, 9, 0.9, 2, False, False), 
+, (3, 9, 0.0, 1, False, False), (3, 9, 0.0, 2, False, False), (3, 9, 0.1, 1, False, False), (3, 9, 0.1, 2, False, False), (3, 9, 0.2, 1, False, False), 
+, (3, 9, 0.2, 2, False, False), (3, 9, 0.30000000000000004, 1, False, False), (3, 9, 0.30000000000000004, 2, False, False), (3, 9, 0.4, 1, False, False), (3, 9, 0.4, 2, False, False), 
+, (3, 9, 0.5, 1, False, False), (3, 9, 0.5, 2, False, False), (3, 9, 0.6000000000000001, 1, False, False), (3, 9, 0.6000000000000001, 2, False, False), (3, 9, 0.7000000000000001, 1, False, False), 
+, (3, 9, 0.7000000000000001, 2, False, False), (3, 9, 0.8, 1, False, False), (3, 9, 0.8, 2, False, False), (3, 9, 0.9, 1, False, False), (3, 9, 0.9, 2, False, False), 
+, (4, 9, 0.0, 1, False, False), (4, 9, 0.0, 2, False, False), (4, 9, 0.1, 1, False, False), (4, 9, 0.1, 2, False, False), (4, 9, 0.2, 1, False, False), 
+, (4, 9, 0.2, 2, False, False), (4, 9, 0.30000000000000004, 1, False, False), (4, 9, 0.30000000000000004, 2, False, False), (4, 9, 0.4, 1, False, False), (4, 9, 0.4, 2, False, False), 
+, (4, 9, 0.5, 1, False, False), (4, 9, 0.5, 2, False, False), (4, 9, 0.6000000000000001, 1, False, False), (4, 9, 0.6000000000000001, 2, False, False), (4, 9, 0.7000000000000001, 1, False, False), 
+, (4, 9, 0.7000000000000001, 2, False, False), (4, 9, 0.8, 1, False, False), (4, 9, 0.8, 2, False, False), (4, 9, 0.9, 1, False, False), (4, 9, 0.9, 2, False, False), 
+, 
+
+number of all configurations: 140
+number of fully (true, true) successful configurations: 0
+number of partially only (false, true) successful configurations: 0
+number of total fail (false, false) configurations: 140
+
+
+avg sindy: 
+a(n) = -2016*a(n - 4) - 101*a(n - 3) - 72*a(n - 2) + 12*a(n - 1)
+False  -  checked avg against website ground truth.     
+False  -  "manual" check avg if equation is correct.    
+While total time consumed by now, scale:29832/34371, seq_id:A259563, order:20 took:
+ 2.2 seconds, i.e. 0.04 minutes or 0.001 hours.
+
+A259563: 
+a(n) = NOT RECONSTRUCTED :-(
+truth: 
+a(n) = 16*a(n - 1) + -120*a(n - 2) + 560*a(n - 3) + -1820*a(n - 4) + 4368*a(n - 5) + -8008*a(n - 6) + 11440*a(n - 7) + -12870*a(n - 8) + 11440*a(n - 9) + -8008*a(n - 10) + 4368*a(n - 11) + -1820*a(n - 12) + 560*a(n - 13) + -120*a(n - 14) + 16*a(n - 15) + -1*a(n - 16),  
+a(0) = 0, a(1) = 0, a(2) = 2571912, a(3) = 2472394752, a(4) = 138662798400, a(5) = 1666179072000, a(6) = -4637478825000, a(7) = -272992368918528, a(8) = -3187483870330368, a(9) = -23209723979366400, a(10) = -126970182577359000, a(11) = -566493158246400000, a(12) = -2161675076294530368, a(13) = -7278963158259007488, a(14) = -22112928086617859400, a(15) = -61611251010011136000
+
+False  -  checked against website ground truth.     
+False  -  "manual" check if equation is correct.    

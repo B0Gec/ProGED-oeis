@@ -1,0 +1,11 @@
+
+While total time consumed by now, scale:48/164, seq_id:A000292, order:20 took:
+ 12.1 seconds, i.e. 0.2 minutes or 0.003 hours.
+
+A000292: 
+a(n) = -a(n - 15) + a(n - 14) + a(n - 12) - a(n - 10) - a(n - 5) + a(n - 3) + a(n - 1)
+truth: 
+
+
+  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

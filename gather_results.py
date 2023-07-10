@@ -61,12 +61,24 @@ job_id = "sindygrid519_1"
 job_id = "incdio74"  # 2023-07-04
 # job_id = "sindyens75"  # 2023-07-04
 job_id = "sindydeb3"  # 2023-07-06
-job_id = "sindydeb3-1"  # 2023-07-06
-job_id = "sindydeb3-2"  # 2023-07-06
-job_id = "sindydeb3-3"  # 2023-07-06
-job_id = "sindydeb3-4"  # 2023-07-06
-job_id = "sindymerged"  # 2023-07-06
+job_id = "sindydeb3-1"  #
+job_id = "sindydeb3-2"  #
+job_id = "sindydeb3-3"  #
+job_id = "sindydeb3-4"  #
+job_id = "sindydeb3-5"  #
+job_id = "sindydeb3-7"  # 2023-07-10
+job_id = "sindymerged"  #
+print(job_id)
 
+# job_id = "diocores77"
+# job_id = "diocor-merge"  #
+CORES = True if job_id in ("diocores77", 'diocor-merge') else False
+# CORES = True
+# CORES = False
+if CORES:
+    csv_cols = list(pd.read_csv('cores_test.csv').columns)
+    # print(csv_cols)
+    # 1/0
 
 time_complexity_dict = {
     'incdio74': '2h (+ 20h+ for 9 sequences)',
@@ -77,7 +89,10 @@ time_complexity_dict = {
     'sindydeb3-3': '? ... still running',
     'sindydeb3-4': '? ... still running',
     'sindymerged': '? ... still running',
+    'diocores77': '25 mins',
+    'diocor-merge': '25 mins',
 }
+time_complexity_dict[job_id] = 'unknomn' if job_id not in time_complexity_dict else time_complexity_dict[job_id]
 time_complexity = time_complexity_dict[job_id]
 
 
@@ -319,6 +334,8 @@ start = 10000
 start = 0
 limited_runs = 123456
 from all_ids import all_ids
+if CORES:
+    all_ids = csv_cols
 all_ids_ref = all_ids
 all_ids = all_ids[start:limited_runs]
 
@@ -342,6 +359,7 @@ all_ids = all_ids[start:limited_runs]
 from blacklist import blacklist, no_truth
 # print(len(blacklist), len(set(blacklist)))
 # not_blacklisted = [(task, i) for task, i in unsuccessful if not i in blacklist]
+# blacklisted = [(task, i) for task, i in enumerate(all_ids) if not i in blacklist]
 not_blacklisted = [i for i in all_ids if not i in blacklist and not i in success_ids]
 # not_blacklisted = [i for n, i in enumerate(all_ids) if not i in blacklist and not i in success_ids and i]
 print(not_blacklisted[:10], len(not_blacklisted))
@@ -349,11 +367,22 @@ print(not_blacklisted[:10], len(not_blacklisted))
 # not_blacklisted_pairs = [(f"{task:0>5}", id_) for task, id_ in enumerate(all_ids)
 #                          if not id_ in blacklist and not id_ in success_ids]
 
+# jobs_failed_per_bin = [0 for _ in range(35)]
 not_blacklisted_pairs = [(f"{all_ids_ref.index(id_):0>5}", id_) for id_ in not_blacklisted]
 print(not_blacklisted_pairs[:10], len(not_blacklisted_pairs))
-print(not_blacklisted_pairs[:100], len(not_blacklisted_pairs))
+print(not_blacklisted_pairs[:3100], len(not_blacklisted_pairs))
+
+def failed_bins(agg, pair):
+    agg[int(pair[0])//1000] += 1
+    return agg
+
+bins_failed = reduce(failed_bins, not_blacklisted_pairs, [0 for _ in range(35)])
+for n, jobs in enumerate(bins_failed):
+    print(n, jobs)
+
+print(bins_failed)
 print('here i am')
-# 1/0
+1/0
 # ['A044941', 'A053833', 'A055649'] 3
 # [('00184', 'A001299'), ('00185', 'A001300'), ('00186', 'A001301'), ('00187', 'A001302'), ('00195', 'A001313'), ('00196', 'A001314'), ('00198', 'A001319'), ('00222', 'A001492'), ('00347', 'A002015'), ('00769', 'A005813')] 1921
 # these are blacklisted due to false ground truth
@@ -427,12 +456,18 @@ print(f'Results: ')
 
 
 no_truth, false_truth = len(no_truth), len(false_truth)
+if CORES:
+    no_truth, false_truth = 0, 0
 ignored = no_truth + false_truth
+print(ignored)
 
 # all_seqs = 34371
 n_of_seqs_db = n_of_seqs
+print(n_of_seqs_db)
 n_of_seqs = n_of_seqs - ignored
 jobs_fail = n_of_seqs - len(files)  # or corrected_sum.
+print(n_of_seqs)
+print(jobs_fail)
 
 id_oeis, non_id, non_manual, ed_fail, reconst_non_manual, avg_is_best, buglist, \
     job_bins, non_id_list, ed_fail_list, non_manual_list, trueconfs = summary

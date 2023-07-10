@@ -1,0 +1,14 @@
+
+Only huge terms in the sequence!!!
+
+While total time consumed by now, scale:29748/34371, seq_id:A258442, order:20 took:
+ 0.1 seconds, i.e. 0.0 minutes or 0.0 hours.
+
+A258442: 
+a(n) = NOT RECONSTRUCTED :-(
+truth: 
+a(n) = 1536796803*a(n - 1) + -1536796803*a(n - 2) + 1*a(n - 3),  
+a(0) = 2484, a(1) = 3706711688304, a(2) = 5696462668411740751524
+
+False  -  checked against website ground truth.     
+False  -  "manual" check if equation is correct.    

@@ -128,8 +128,8 @@ def dataset(seq: list, max_order: int, linear: bool):
 # # print(solve(Ainfty, infty))
 
 
-# VERBOSITY = 2  # dev scena
-VERBOSITY = 1  # run scenario
+VERBOSITY = 2  # dev scena
+# VERBOSITY = 1  # run scenario
 
 
 def truth2coeffs(truth: str):
@@ -232,10 +232,11 @@ def exact_ed(seq_id: str, csv: pd.DataFrame, verbosity: int = VERBOSITY,
     # b, A = dataset(seq, max_order, linear=linear)
     b, A = dataset(list(seq), max_order, linear=linear)
     # print('order', max_order)
-    # # print(A.shape)
-    # print(b.shape)
-    # print(b)
-    # print(A)
+    print(A.shape)
+    print(b.shape)
+    print(b)
+    print(A)
+    1/0
     # print('after dataset')
 
     # m_limit = 3003
@@ -550,7 +551,7 @@ def check_eq_man(x: sp.Matrix, seq_id: str, csv: str,
         # print(type(seq), type(seq[0, :]))
         fake_reconst = seq[0, :] + sp.Matrix([1])
     elif nonzero_indices == [0]:
-        x = x[0] + [0]
+        x = [x[0]] + [0]
         fake_reconst = seq[0, :] + sp.Matrix([1])
     else:
         x = x[:max(nonzero_indices) + 1]

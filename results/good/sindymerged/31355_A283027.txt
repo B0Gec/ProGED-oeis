@@ -1,0 +1,83 @@
+
+Preprocessing sees only first 11 terms.
+Sindy threshold: 0.1
+Default setting for how many terms should sindy see: 11
+Sindy will use max_order: 6
+
+, (1, 6, 0.0, 0, False, False), (1, 6, 0.1, 0, False, False), (1, 6, 0.2, 0, False, False), (1, 6, 0.30000000000000004, 0, False, False), (1, 6, 0.4, 0, False, False), 
+, (1, 6, 0.5, 0, False, False), (1, 6, 0.6000000000000001, 0, False, False), (1, 6, 0.7000000000000001, 0, False, False), (1, 6, 0.8, 0, False, False), (1, 6, 0.9, 0, False, False), 
+, (1, 7, 0.0, 0, False, False), (1, 7, 0.1, 0, False, False), (1, 7, 0.2, 0, False, False), (1, 7, 0.30000000000000004, 0, False, False), (1, 7, 0.4, 0, False, False), 
+, (1, 7, 0.5, 0, False, False), (1, 7, 0.6000000000000001, 0, False, False), (1, 7, 0.7000000000000001, 0, False, False), (1, 7, 0.8, 0, False, False), (1, 7, 0.9, 0, False, False), 
+, (1, 8, 0.0, 0, False, False), (1, 8, 0.1, 0, False, False), (1, 8, 0.2, 0, False, False), (1, 8, 0.30000000000000004, 0, False, False), (1, 8, 0.4, 0, False, False), 
+, (1, 8, 0.5, 0, False, False), (1, 8, 0.6000000000000001, 0, False, False), (1, 8, 0.7000000000000001, 0, False, False), (1, 8, 0.8, 0, False, False), (1, 8, 0.9, 0, False, False), 
+, (1, 9, 0.0, 0, False, False), (1, 9, 0.1, 0, False, False), (1, 9, 0.2, 0, False, False), (1, 9, 0.30000000000000004, 0, False, False), (1, 9, 0.4, 0, False, False), 
+, (1, 9, 0.5, 0, False, False), (1, 9, 0.6000000000000001, 0, False, False), (1, 9, 0.7000000000000001, 0, False, False), (1, 9, 0.8, 0, False, False), (1, 9, 0.9, 0, False, False), 
+, (1, 10, 0.0, 0, False, False), (1, 10, 0.1, 0, False, False), (1, 10, 0.2, 0, False, False), (1, 10, 0.30000000000000004, 0, False, False), (1, 10, 0.4, 0, False, False), 
+, (1, 10, 0.5, 0, False, False), (1, 10, 0.6000000000000001, 0, False, False), (1, 10, 0.7000000000000001, 0, False, False), (1, 10, 0.8, 0, False, False), (1, 10, 0.9, 0, False, False), 
+, (2, 7, 0.0, 0, False, False), (2, 7, 0.1, 0, False, False), (2, 7, 0.2, 0, False, False), (2, 7, 0.30000000000000004, 0, False, False), (2, 7, 0.4, 0, False, False), 
+, (2, 7, 0.5, 0, False, False), (2, 7, 0.6000000000000001, 0, False, False), (2, 7, 0.7000000000000001, 0, False, False), (2, 7, 0.8, 0, False, False), (2, 7, 0.9, 0, False, False), 
+, (2, 8, 0.0, 0, False, False), (2, 8, 0.1, 0, False, False), (2, 8, 0.2, 0, False, False), (2, 8, 0.30000000000000004, 0, False, False), (2, 8, 0.4, 0, False, False), 
+, (2, 8, 0.5, 0, False, False), (2, 8, 0.6000000000000001, 0, False, False), (2, 8, 0.7000000000000001, 0, False, False), (2, 8, 0.8, 0, False, False), (2, 8, 0.9, 0, False, False), 
+, (2, 9, 0.0, 0, False, False), (2, 9, 0.1, 0, False, False), (2, 9, 0.2, 0, False, False), (2, 9, 0.30000000000000004, 0, False, False), (2, 9, 0.4, 0, False, False), 
+, (2, 9, 0.5, 0, False, False), (2, 9, 0.6000000000000001, 0, False, False), (2, 9, 0.7000000000000001, 0, False, False), (2, 9, 0.8, 0, False, False), (2, 9, 0.9, 0, False, False), 
+, (2, 10, 0.0, 0, False, False), (2, 10, 0.1, 0, False, False), (2, 10, 0.2, 0, False, False), (2, 10, 0.30000000000000004, 0, False, False), (2, 10, 0.4, 0, False, False), 
+, (2, 10, 0.5, 0, False, False), (2, 10, 0.6000000000000001, 0, False, False), (2, 10, 0.7000000000000001, 0, False, False), (2, 10, 0.8, 0, False, False), (2, 10, 0.9, 0, False, False), 
+, (3, 8, 0.0, 0, False, False), (3, 8, 0.1, 0, False, False), (3, 8, 0.2, 0, False, False), (3, 8, 0.30000000000000004, 0, False, False), (3, 8, 0.4, 0, False, False), 
+, (3, 8, 0.5, 0, False, False), (3, 8, 0.6000000000000001, 0, False, False), (3, 8, 0.7000000000000001, 0, False, False), (3, 8, 0.8, 0, False, False), (3, 8, 0.9, 0, False, False), 
+, (3, 9, 0.0, 0, False, False), (3, 9, 0.1, 0, False, False), (3, 9, 0.2, 0, False, False), (3, 9, 0.30000000000000004, 0, False, False), (3, 9, 0.4, 0, False, False), 
+, (3, 9, 0.5, 0, False, False), (3, 9, 0.6000000000000001, 0, False, False), (3, 9, 0.7000000000000001, 0, False, False), (3, 9, 0.8, 0, False, False), (3, 9, 0.9, 0, False, False), 
+, (3, 10, 0.0, 0, False, False), (3, 10, 0.1, 0, False, False), (3, 10, 0.2, 0, False, False), (3, 10, 0.30000000000000004, 0, False, False), (3, 10, 0.4, 0, False, False), 
+, (3, 10, 0.5, 0, False, False), (3, 10, 0.6000000000000001, 0, False, False), (3, 10, 0.7000000000000001, 0, False, False), (3, 10, 0.8, 0, False, False), (3, 10, 0.9, 0, False, False), 
+, (4, 9, 0.0, 0, False, False), (4, 9, 0.1, 0, False, False), (4, 9, 0.2, 0, False, False), (4, 9, 0.30000000000000004, 0, False, False), (4, 9, 0.4, 0, False, False), 
+, (4, 9, 0.5, 0, False, False), (4, 9, 0.6000000000000001, 0, False, False), (4, 9, 0.7000000000000001, 0, False, False), (4, 9, 0.8, 0, False, False), (4, 9, 0.9, 0, False, False), 
+, (4, 10, 0.0, 0, False, False), (4, 10, 0.1, 0, False, False), (4, 10, 0.2, 0, False, False), (4, 10, 0.30000000000000004, 0, False, False), (4, 10, 0.4, 0, False, False), 
+, (4, 10, 0.5, 0, False, False), (4, 10, 0.6000000000000001, 0, False, False), (4, 10, 0.7000000000000001, 0, False, False), (4, 10, 0.8, 0, False, False), (4, 10, 0.9, 0, False, False), 
+, (5, 10, 0.0, 0, False, False), (5, 10, 0.1, 0, False, False), (5, 10, 0.2, 0, False, False), (5, 10, 0.30000000000000004, 0, False, False), (5, 10, 0.4, 0, False, False), 
+, (5, 10, 0.5, 0, False, False), (5, 10, 0.6000000000000001, 0, False, False), (5, 10, 0.7000000000000001, 0, False, False), (5, 10, 0.8, 0, False, False), (5, 10, 0.9, 0, False, False), 
+, (1, 11, 0.0, 1, False, False), (1, 11, 0.0, 2, False, False), (1, 11, 0.1, 1, False, False), (1, 11, 0.1, 2, False, False), (1, 11, 0.2, 1, False, False), 
+, (1, 11, 0.2, 2, False, False), (1, 11, 0.30000000000000004, 1, False, False), (1, 11, 0.30000000000000004, 2, False, False), (1, 11, 0.4, 1, False, False), (1, 11, 0.4, 2, False, False), 
+, (1, 11, 0.5, 1, False, False), (1, 11, 0.5, 2, False, False), (1, 11, 0.6000000000000001, 1, False, False), (1, 11, 0.6000000000000001, 2, False, False), (1, 11, 0.7000000000000001, 1, False, False), 
+, (1, 11, 0.7000000000000001, 2, False, False), (1, 11, 0.8, 1, False, False), (1, 11, 0.8, 2, False, False), (1, 11, 0.9, 1, False, False), (1, 11, 0.9, 2, False, False), 
+, (2, 11, 0.0, 1, False, False), (2, 11, 0.0, 2, False, False), (2, 11, 0.1, 1, False, False), (2, 11, 0.1, 2, False, False), (2, 11, 0.2, 1, False, False), 
+, (2, 11, 0.2, 2, False, False), (2, 11, 0.30000000000000004, 1, False, False), (2, 11, 0.30000000000000004, 2, False, False), (2, 11, 0.4, 1, False, False), (2, 11, 0.4, 2, False, False), 
+, (2, 11, 0.5, 1, False, False), (2, 11, 0.5, 2, False, False), (2, 11, 0.6000000000000001, 1, False, False), (2, 11, 0.6000000000000001, 2, False, False), (2, 11, 0.7000000000000001, 1, False, False), 
+, (2, 11, 0.7000000000000001, 2, False, False), (2, 11, 0.8, 1, False, False), (2, 11, 0.8, 2, False, False), (2, 11, 0.9, 1, False, False), (2, 11, 0.9, 2, False, False), 
+, (3, 11, 0.0, 1, False, False), (3, 11, 0.0, 2, False, False), (3, 11, 0.1, 1, False, False), (3, 11, 0.1, 2, False, False), (3, 11, 0.2, 1, False, False), 
+, (3, 11, 0.2, 2, False, False), (3, 11, 0.30000000000000004, 1, False, False), (3, 11, 0.30000000000000004, 2, False, False), (3, 11, 0.4, 1, False, False), (3, 11, 0.4, 2, False, False), 
+, (3, 11, 0.5, 1, False, False), (3, 11, 0.5, 2, False, False), (3, 11, 0.6000000000000001, 1, False, False), (3, 11, 0.6000000000000001, 2, False, False), (3, 11, 0.7000000000000001, 1, False, False), 
+, (3, 11, 0.7000000000000001, 2, False, False), (3, 11, 0.8, 1, False, False), (3, 11, 0.8, 2, False, False), (3, 11, 0.9, 1, False, False), (3, 11, 0.9, 2, False, False), 
+, (4, 11, 0.0, 1, False, False), (4, 11, 0.0, 2, False, False), (4, 11, 0.1, 1, False, False), (4, 11, 0.1, 2, False, False), (4, 11, 0.2, 1, False, False), 
+, (4, 11, 0.2, 2, False, False), (4, 11, 0.30000000000000004, 1, False, False), (4, 11, 0.30000000000000004, 2, False, False), (4, 11, 0.4, 1, False, False), (4, 11, 0.4, 2, False, False), 
+, (4, 11, 0.5, 1, False, False), (4, 11, 0.5, 2, False, False), (4, 11, 0.6000000000000001, 1, False, False), (4, 11, 0.6000000000000001, 2, False, False), (4, 11, 0.7000000000000001, 1, False, False), 
+, (4, 11, 0.7000000000000001, 2, False, False), (4, 11, 0.8, 1, False, False), (4, 11, 0.8, 2, False, False), (4, 11, 0.9, 1, False, False), (4, 11, 0.9, 2, False, False), 
+, (5, 11, 0.0, 1, False, False), (5, 11, 0.0, 2, False, False), (5, 11, 0.1, 1, False, False), (5, 11, 0.1, 2, False, False), (5, 11, 0.2, 1, False, False), 
+, (5, 11, 0.2, 2, False, False), (5, 11, 0.30000000000000004, 1, False, False), (5, 11, 0.30000000000000004, 2, False, False), (5, 11, 0.4, 1, False, False), (5, 11, 0.4, 2, False, False), 
+, (5, 11, 0.5, 1, False, False), (5, 11, 0.5, 2, False, False), (5, 11, 0.6000000000000001, 1, False, False), (5, 11, 0.6000000000000001, 2, False, False), (5, 11, 0.7000000000000001, 1, False, False), 
+, (5, 11, 0.7000000000000001, 2, False, False), (5, 11, 0.8, 1, False, False), (5, 11, 0.8, 2, False, False), (5, 11, 0.9, 1, False, False), (5, 11, 0.9, 2, False, False), 
+, (6, 11, 0.0, 1, False, False), (6, 11, 0.0, 2, False, False), (6, 11, 0.1, 1, False, False), (6, 11, 0.1, 2, False, False), (6, 11, 0.2, 1, False, False), 
+, (6, 11, 0.2, 2, False, False), (6, 11, 0.30000000000000004, 1, False, False), (6, 11, 0.30000000000000004, 2, False, False), (6, 11, 0.4, 1, False, False), (6, 11, 0.4, 2, False, False), 
+, (6, 11, 0.5, 1, False, False), (6, 11, 0.5, 2, False, False), (6, 11, 0.6000000000000001, 1, False, False), (6, 11, 0.6000000000000001, 2, False, False), (6, 11, 0.7000000000000001, 1, False, False), 
+, (6, 11, 0.7000000000000001, 2, False, False), (6, 11, 0.8, 1, False, False), (6, 11, 0.8, 2, False, False), (6, 11, 0.9, 1, False, False), (6, 11, 0.9, 2, False, False), 
+, 
+
+number of all configurations: 270
+number of fully (true, true) successful configurations: 0
+number of partially only (false, true) successful configurations: 0
+number of total fail (false, false) configurations: 270
+
+
+avg sindy: 
+a(n) = 676226*a(n - 6) + 252601*a(n - 5) - 37310*a(n - 4) + 3687*a(n - 3) - 309*a(n - 2) + 22*a(n - 1)
+False  -  checked avg against website ground truth.     
+False  -  "manual" check avg if equation is correct.    
+While total time consumed by now, scale:31356/34371, seq_id:A283027, order:20 took:
+ 178.7 seconds, i.e. 2.98 minutes or 0.05 hours.
+
+A283027: 
+a(n) = NOT RECONSTRUCTED :-(
+truth: 
+a(n) = 17*a(n - 1) + -136*a(n - 2) + 680*a(n - 3) + -2380*a(n - 4) + 6188*a(n - 5) + -12376*a(n - 6) + 19448*a(n - 7) + -24310*a(n - 8) + 24310*a(n - 9) + -19448*a(n - 10) + 12376*a(n - 11) + -6188*a(n - 12) + 2380*a(n - 13) + -680*a(n - 14) + 136*a(n - 15) + -17*a(n - 16) + 1*a(n - 17),  
+a(0) = 0, a(1) = 1, a(2) = 16456, a(3) = 10763361, a(4) = 1073758336, a(5) = 38147070625, a(6) = 705277897416, a(7) = 8308234084801, a(8) = 70368748374016, a(9) = 463255057977921, a(10) = 2500000025005000, a(11) = 11487432519490081, a(12) = 46221064831264896, a(13) = 166354152499741921, a(14) = 544488334821309256, a(15) = 1642102089568970625, a(16) = 4611686019501162496
+
+False  -  checked against website ground truth.     
+False  -  "manual" check if equation is correct.    
