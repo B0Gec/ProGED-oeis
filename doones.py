@@ -36,7 +36,7 @@ if SINDy:
     from sindy_oeis import sindy, preprocess, heuristic, sindy_grid
 
 LINEAR = True
-# LINEAR = False
+LINEAR = False
 INCREASING_EED = True
 # print("IDEA: max ORDER for GRAMMAR = floor(DATASET ROWS (LEN(SEQ)))/2)-1")
 
@@ -78,11 +78,11 @@ DEBUG = True
 DEBUG = False
 # BUGLIST ignores blacklisting (runs also blacklisted) !!!!!
 BUGLIST = True
-#BUGLIST = False
+BUGLIST = False
 BUGLIST_BLACKLISTING = True
 # BUGLIST ignores blacklisted sequences !!!!!
 CORELIST = True  # have to scrape core sequences!
-CORELIST = False
+# CORELIST = False
 if BUGLIST:
     from buglist import buglist
 
@@ -377,10 +377,11 @@ else:
         # try:
         if SINDy:
             print('Attempting SINDy for', seq_id)
-            if LINEAR:
-                seq, coeffs, truth = unpack_seq(seq_id, csv)
-            else:
-                seq = unnan(csv[seq_id])
+            # if LINEAR:
+            seq, coeffs, truth = unpack_seq(seq_id, csv) if LINEAR else unnan(csv[seq_id]), None, None
+            # else:
+            #     seq, coeffs, truth = unnan(csv[seq_id]), None, None
+
             seq, pre_fail = preprocess(seq)
             seq_len = len(seq)
             if pre_fail:

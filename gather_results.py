@@ -68,11 +68,13 @@ job_id = "sindydeb3-4"  #
 job_id = "sindydeb3-5"  #
 job_id = "sindydeb3-7"  # 2023-07-10
 job_id = "sindymerged"  #
-print(job_id)
 
-# job_id = "diocores77"
-# job_id = "diocor-merge"  #
-CORES = True if job_id in ("diocores77", 'diocor-merge') else False
+job_id = "diocores77"
+job_id = "diocor-merge"  #
+job_id = "sindycore83"
+
+print(job_id)
+CORES = True if job_id in ("diocores77", 'diocor-merge', 'sindycore83') else False
 # CORES = True
 # CORES = False
 if CORES:
@@ -91,6 +93,7 @@ time_complexity_dict = {
     'sindymerged': '? ... still running',
     'diocores77': '25 mins',
     'diocor-merge': '25 mins',
+    'sindycore83': '43 + mins',
 }
 time_complexity_dict[job_id] = 'unknomn' if job_id not in time_complexity_dict else time_complexity_dict[job_id]
 time_complexity = time_complexity_dict[job_id]
@@ -156,9 +159,9 @@ def extract_file(fname, verbosity=VERBOSITY):
     # print(content)
     if len(re_all_stars) == 0:
         pass
-        # print('--pred')
-        # print(content[:100])
-        # print('--po')
+        print('--pred')
+        print(content[:100])
+        print('--po')
     if verbosity >= 1:
         print('n_of_seqs', re_all_stars)
         print('refound', re_found)
@@ -359,9 +362,9 @@ all_ids = all_ids[start:limited_runs]
 # a. check for not blacklisted unsuccessful jobs
 from blacklist import blacklist, no_truth
 ## sanity check: successful_id in blacklist
-successful_black = [i for i in success_ids if i in blacklist]
-print('sanity check:', successful_black)
-print(sorted(blacklist[:10]), '\n', sorted(success_ids[:10]))
+# successful_black = [i for i in success_ids if i in blacklist]
+# print('sanity check:', successful_black)
+# print(sorted(blacklist[:10]), '\n', sorted(success_ids[:10]))
 
 # print(len(blacklist), len(set(blacklist)))
 # not_blacklisted = [(task, i) for task, i in unsuccessful if not i in blacklist]
@@ -430,6 +433,8 @@ files = files_debug
 # print(files)
 
 _a, _b, _, n_of_seqs, avg_is_best, true_confs = extract_file(job_dir + files[0])
+if CORES:
+    n_of_seqs = 164
 # print(n_of_seqs)
 
 # # 10.) checked that no_truth == mia task ids from experiment job_id = "blacklist76"
@@ -484,7 +489,7 @@ all_fails = ed_fail + jobs_fail
 official_success = id_oeis + non_id
 
 # for latex new experiment variables:
-forbidden = ['S', 'U', 'V', 'G']
+forbidden = ['S', 'U', 'V', 'G', 'X', 'P', 'I']
 my_alphabet = [i for i in string.ascii_uppercase if i not in forbidden]
 # my_alphabet = ['G']
 random_symbol = random.choice(my_alphabet)

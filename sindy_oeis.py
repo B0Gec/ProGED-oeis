@@ -179,7 +179,7 @@ def one_results(seq, seq_id, csv, coeffs, max_order: int, seq_len: int,
 
     # print(max_order, seq_len)
     x = sindy(seq, max_order, seq_len, threshold, ensemble, library_ensemble)
-    is_reconst = solution_vs_truth(x, coeffs)
+    is_reconst = solution_vs_truth(x, coeffs) if coeffs is None else ' - NaN - '
     is_check_verbose = check_eq_man(x, seq_id, csv, n_of_terms=10 ** 5)
     is_check = is_check_verbose[0]
     summary = x, is_reconst, is_check, max_order
@@ -198,7 +198,7 @@ def sindy_grid_order(seq, seq_id, csv, coeffs, max_order: int, seq_len: int):
     return map(lambda order: one_results(seq, seq_id, csv, coeffs, order, seq_len), [i for i in range(1, max_order+1)])
 
 
-def create_grid(seq, seq_id, csv, coeffs, max_order: int, seq_len: int,
+def create_grid(seq, seq_id, csv, max_order: int, seq_len: int,
                 ths_bounds: tuple = (0, 0.9), ensemble_grid: tuple = (True, False, False),
                 order_pts: int = 20, len_pts: int = 20, threshold_pts: int = 20):
 
@@ -261,11 +261,11 @@ def sindy_grid(seq, seq_id, csv, coeffs,
     #            grid (ord=20,  ths=18, ens=1)
     #            grid (ord=20,  ths=18, ens=2)
 
-    grid1 = create_grid(seq, seq_id, csv, coeffs, max_order, seq_len,
+    grid1 = create_grid(seq, seq_id, csv, max_order, seq_len,
                        ths_bounds = (0, 0.9), ensemble_grid=(True, False, False),
                        # order_pts=20, len_pts=20, threshold_pts=18)
                        order_pts = 20, len_pts = 10, threshold_pts = 10)
-    grid2 = create_grid(seq, seq_id, csv, coeffs, max_order, seq_len,
+    grid2 = create_grid(seq, seq_id, csv, max_order, seq_len,
                        ths_bounds=(0, 0.9), ensemble_grid=(False, True, True),
                        order_pts=20, len_pts=1, threshold_pts=10)
     # small_grid = create_grid(seq, seq_id, csv, coeffs, max_order, seq_len,
