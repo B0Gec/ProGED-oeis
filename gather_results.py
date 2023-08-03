@@ -58,11 +58,11 @@ job_id = "sindygrid519_1"
 # # job_id = "blacklist76"
 # job_id = "incdio86"
 # job_id = "i86bugfix"
-job_id = "incdio74"  # 2023-07-04
-# job_id = "sindyens75"  # 2023-07-04
+job_id = "incdio74"  # 2023-07-04  ... I think this will be in final results.
+job_id = "sindyens75"  # 2023-07-04
 job_id = "sindydeb3"  # 2023-07-06
-job_id = "sindydeb3-1"  #
-job_id = "sindydeb3-2"  #
+# job_id = "sindydeb3-1"  #
+# job_id = "sindydeb3-2"  #
 job_id = "sindydeb3-3"  #
 job_id = "sindydeb3-4"  #
 job_id = "sindydeb3-5"  #
@@ -155,9 +155,10 @@ def extract_file(fname, verbosity=VERBOSITY):
     # print(len(re_all_stars))
     # print(content)
     if len(re_all_stars) == 0:
-        print('--pred')
-        print(content)
-        print('--po')
+        pass
+        # print('--pred')
+        # print(content[:100])
+        # print('--po')
     if verbosity >= 1:
         print('n_of_seqs', re_all_stars)
         print('refound', re_found)
@@ -357,6 +358,11 @@ all_ids = all_ids[start:limited_runs]
 
 # a. check for not blacklisted unsuccessful jobs
 from blacklist import blacklist, no_truth
+## sanity check: successful_id in blacklist
+successful_black = [i for i in success_ids if i in blacklist]
+print('sanity check:', successful_black)
+print(sorted(blacklist[:10]), '\n', sorted(success_ids[:10]))
+
 # print(len(blacklist), len(set(blacklist)))
 # not_blacklisted = [(task, i) for task, i in unsuccessful if not i in blacklist]
 # blacklisted = [(task, i) for task, i in enumerate(all_ids) if not i in blacklist]
@@ -382,7 +388,7 @@ for n, jobs in enumerate(bins_failed):
 
 print(bins_failed)
 print('here i am')
-1/0
+# 1/0
 # ['A044941', 'A053833', 'A055649'] 3
 # [('00184', 'A001299'), ('00185', 'A001300'), ('00186', 'A001301'), ('00187', 'A001302'), ('00195', 'A001313'), ('00196', 'A001314'), ('00198', 'A001319'), ('00222', 'A001492'), ('00347', 'A002015'), ('00769', 'A005813')] 1921
 # these are blacklisted due to false ground truth
@@ -446,6 +452,7 @@ summary = reduce(for_summary, files, (0, 0, 0, 0, 0, 0, [], [0 for i in range(36
 # corrected_sum = sum(summary[:4]) - sum(summary[4:])
 corrected_sum = sum(summary[:4]) - sum(summary[4:5])
 print(corrected_sum)
+# 1/0
 print()
 print(str(summary)[:1*10**2])
 print(f'all files:{len(files)}, sum:{sum(summary[:4])}, corrected sum: {corrected_sum}')

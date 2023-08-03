@@ -1,0 +1,31 @@
+
+Preprocessing sees only first 5 terms.
+Sindy threshold: 0.1
+Default setting for how many terms should sindy see: 5
+Sindy will use max_order: 2
+
+, 
+
+No configurations to test!
+
+number of all configurations: 0
+number of fully (true, true) successful configurations: 0
+number of partially only (false, true) successful configurations: 0
+number of total fail (false, false) configurations: 0
+
+
+avg sindy: 
+a(n) = NOT RECONSTRUCTED :-(
+False  -  checked avg against website ground truth.     
+False  -  "manual" check avg if equation is correct.    
+Exact ED for 3537-th sequence of 34371 in experiment set with id A017050 for first 200 terms with max order 20 while double checking against first 200 terms. took:
+ 0.1 seconds, i.e. 0.0 minutes or 0.0 hours.
+
+A017050: 
+a(n) = NOT RECONSTRUCTED :-(
+truth: 
+a(n) = 11*a(n - 1) + -55*a(n - 2) + 165*a(n - 3) + -330*a(n - 4) + 462*a(n - 5) + -462*a(n - 6) + 330*a(n - 7) + -165*a(n - 8) + 55*a(n - 9) + -11*a(n - 10) + 1*a(n - 11),  
+a(0) = 9765625, a(1) = 61917364224, a(2) = 6131066257801, a(3) = 141167095653376, a(4) = 1531578985264449, a(5) = 10485760000000000, a(6) = 52599132235830049, a(7) = 210832519264920576, a(8) = 713342911662882601, a(9) = 2113922820157210624, a(10) = 5631351470947265625
+
+False  -  checked against website ground truth.     
+False  -  "manual" check if equation is correct.    

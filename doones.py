@@ -31,12 +31,12 @@ warnings.simplefilter("ignore")
 #     from exact_ed import exact_ed, timer
 
 SINDy = True
-SINDy = False
+# SINDy = False
 if SINDy:
     from sindy_oeis import sindy, preprocess, heuristic, sindy_grid
 
 LINEAR = True
-LINEAR = False
+# LINEAR = False
 INCREASING_EED = True
 # print("IDEA: max ORDER for GRAMMAR = floor(DATASET ROWS (LEN(SEQ)))/2)-1")
 
@@ -82,7 +82,7 @@ BUGLIST = True
 BUGLIST_BLACKLISTING = True
 # BUGLIST ignores blacklisted sequences !!!!!
 CORELIST = True  # have to scrape core sequences!
-# CORELIST = False
+CORELIST = False
 if BUGLIST:
     from buglist import buglist
 
@@ -274,6 +274,9 @@ if fail:
     print('ED was not performed since task_id surpassed our list or target sequence is on blacklist or '
           'the task was already performed in the past.')
 else:
+    print()
+    # csv = pd.read_csv(csv_filename, low_memory=False, nrows=0)
+    # print(csv.columns[:100])
     csv = pd.read_csv(csv_filename, low_memory=False, usecols=[seq_id])[:n_of_terms_load]
     # nans are checked by every function separately since exact_ed needs also ground truth
 
@@ -369,10 +372,11 @@ else:
             print()
         output_string = "\n"
         max_order_ = max_order
+        print('Attempting doone for', seq_id)
 
         # try:
         if SINDy:
-            print('Attempting SINDy')
+            print('Attempting SINDy for', seq_id)
             if LINEAR:
                 seq, coeffs, truth = unpack_seq(seq_id, csv)
             else:
