@@ -124,7 +124,7 @@ True  -  "manual" check if equation is correct.
 
 
 VERBOSITY = 0
-# VERBOSITY = 1
+VERBOSITY = 1
 # VERBOSITY = 2
 def extract_file(fname, verbosity=VERBOSITY):
 
@@ -137,8 +137,12 @@ def extract_file(fname, verbosity=VERBOSITY):
     if verbosity >= 2:
         print(content)
 
+    eq = re.findall(r"A\d+:\n(.+)\ntruth:", content)
+    eq = re.findall(r"truth:", content)
+    eq = re.findall(r"A\d+:.*\n(.+)\ntruth:", content)
     re_all_stars = re.findall(r"scale:\d+/(\d+),", content)
     re_found = re.findall(r"NOT RECONSTRUCTED", content)
+    eq = None if len(re_found) > 0 else eq[0]
     # avg = True
     avg = False
     added = 'avg ' if avg else ''
@@ -165,6 +169,7 @@ def extract_file(fname, verbosity=VERBOSITY):
     if verbosity >= 1:
         print('n_of_seqs', re_all_stars)
         print('refound', re_found)
+        print('eq', eq)
         print('reconst', re_reconst)
         print('reman', re_manual)
 
@@ -209,7 +214,7 @@ def extract_file(fname, verbosity=VERBOSITY):
 
     f.close()
 
-    return we_found, is_reconst, is_check, n_of_seqs, avg_is_best, confs
+    return we_found, is_reconst, is_check, n_of_seqs, avg_is_best, confs, eq
 
 # print(os.getcwd())
 # print(os.listdir())
@@ -248,7 +253,7 @@ debug = True
 def for_summary(aggregated: tuple, fname: str):
 
     # now -> f, m, i, o
-    we_found, is_reconst, is_checked, _, avg_is_best, trueconfs = extract_file(job_dir + fname)
+    we_found, is_reconst, is_checked, _, avg_is_best, trueconfs, eq = extract_file(job_dir + fname)
 
     id_oeis = is_reconst
     non_id = not is_reconst and is_checked
@@ -432,7 +437,7 @@ files_debug = files[0:scale]
 files = files_debug
 # print(files)
 
-_a, _b, _, n_of_seqs, avg_is_best, true_confs = extract_file(job_dir + files[0])
+_a, _b, _, n_of_seqs, avg_is_best, true_confs, eq = extract_file(job_dir + files[0])
 if CORES:
     n_of_seqs = 164
 # print(n_of_seqs)
@@ -453,7 +458,7 @@ if CORES:
 
 
 # summary = reduce(for_summary, files, (0, 0, 0, 0, 0,))
-summary = reduce(for_summary, files, (0, 0, 0, 0, 0, 0, [], [0 for i in range(36)], [], [], [], ['start']))  # save all buggy ids
+summary = reduce(for_summary, files[:], (0, 0, 0, 0, 0, 0, [], [0 for i in range(36)], [], [], [], ['start']))  # save all buggy ids
 # corrected_sum = sum(summary[:4]) - sum(summary[4:])
 corrected_sum = sum(summary[:4]) - sum(summary[4:5])
 print(corrected_sum)
