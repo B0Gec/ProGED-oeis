@@ -1,0 +1,9 @@
+- diocores 11 bugs is 5% is this worth debugging
+- 4 seqs are better with sindy -> debug?
+- 2 seqs are not found with diof -> debug?
+
+- try poly library + term n
+
+
+
+

@@ -73,6 +73,8 @@ job_id = "diocores77"
 job_id = "diocor-merge"  #
 job_id = "sindycore83"
 
+
+
 print(job_id)
 CORES = True if job_id in ("diocores77", 'diocor-merge', 'sindycore83') else False
 # CORES = True
@@ -124,7 +126,7 @@ True  -  "manual" check if equation is correct.
 
 
 VERBOSITY = 0
-VERBOSITY = 1
+# VERBOSITY = 1
 # VERBOSITY = 2
 def extract_file(fname, verbosity=VERBOSITY):
 
@@ -137,8 +139,6 @@ def extract_file(fname, verbosity=VERBOSITY):
     if verbosity >= 2:
         print(content)
 
-    eq = re.findall(r"A\d+:\n(.+)\ntruth:", content)
-    eq = re.findall(r"truth:", content)
     eq = re.findall(r"A\d+:.*\n(.+)\ntruth:", content)
     re_all_stars = re.findall(r"scale:\d+/(\d+),", content)
     re_found = re.findall(r"NOT RECONSTRUCTED", content)
@@ -163,13 +163,12 @@ def extract_file(fname, verbosity=VERBOSITY):
     # print(content)
     if len(re_all_stars) == 0:
         pass
-        print('--pred')
-        print(content[:100])
-        print('--po')
+        # print('--pred')
+        # print(content[:100])
+        # print('--po')
     if verbosity >= 1:
         print('n_of_seqs', re_all_stars)
         print('refound', re_found)
-        print('eq', eq)
         print('reconst', re_reconst)
         print('reman', re_manual)
 
@@ -182,6 +181,9 @@ def extract_file(fname, verbosity=VERBOSITY):
     we_found = re_found == []
     if verbosity >= 1:
         print('we_found:', we_found)
+
+    if we_found:
+        print('"', fname[-7-4: -4], f'.. h .. {eq}",')
 
     def truefalse(the_list):
         if black_check and the_list == []:
@@ -458,7 +460,11 @@ if CORES:
 
 
 # summary = reduce(for_summary, files, (0, 0, 0, 0, 0,))
-summary = reduce(for_summary, files[:], (0, 0, 0, 0, 0, 0, [], [0 for i in range(36)], [], [], [], ['start']))  # save all buggy ids
+# summary = reduce(for_summary, files[:], (0, 0, 0, 0, 0, 0, [], [0 for i in range(36)], [], [], [], ['start']))  # save all buggy ids
+summary = reduce(for_summary, sorted(files[:]), (0, 0, 0, 0, 0, 0, [], [0 for i in range(36)], [], [], [], ['start']))  # save all buggy ids
+print(summary)
+1/0
+
 # corrected_sum = sum(summary[:4]) - sum(summary[4:])
 corrected_sum = sum(summary[:4]) - sum(summary[4:5])
 print(corrected_sum)
