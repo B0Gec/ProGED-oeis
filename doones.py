@@ -31,7 +31,7 @@ warnings.simplefilter("ignore")
 #     from exact_ed import exact_ed, timer
 
 SINDy = True
-# SINDy = False
+SINDy = False
 if SINDy:
     from sindy_oeis import sindy, preprocess, heuristic, sindy_grid
 
@@ -41,8 +41,9 @@ LINEAR = False
 # only libraries allowed:
 LIBRARY = 'lin'
 LIBRARY = 'nlin'
-LIBRARY = 'nquad'
-LIBRARY = 'ncub'
+LIBRARY = 'quad'
+# LIBRARY = 'nquad'
+# LIBRARY = 'ncub'
 
 
 INCREASING_EED = True
@@ -162,6 +163,7 @@ SEQ_ID = (True, 'A000045')
 # SEQ_ID = (True, 'A024347')
 # SEQ_ID = (True, 'A010034')
 # SEQ_ID = (True, 'A000518')
+# SEQ_ID = (True, 'A055512')
 # debug and sindy and buglist
 
 # DIOFANT_GRID = False
@@ -430,9 +432,11 @@ else:
         else:
             # print('Going for exact ed')
             # print(' tle ', max_order_, linear, N_OF_TERMS_ED)
+            START_ORDER = 6
+            START_ORDER = 1
             if INCREASING_EED:
                 x, eq, coeffs, truth = increasing_eed(seq_id, csv, VERBOSITY, max_order_,
-                                                      linear=LINEAR, n_of_terms=N_OF_TERMS_ED, library=LIBRARY)
+                                                      linear=LINEAR, n_of_terms=N_OF_TERMS_ED, library=LIBRARY, start_order=START_ORDER)
                 # x, eq, coeffs, truth = exact_ed(seq_id, csv, VERBOSITY, max_order_,
                 #                                 n_of_terms=N_OF_TERMS_ED, linear=LINEAR)
 

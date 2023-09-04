@@ -41,24 +41,33 @@ def timer(now, text=f"\nScraping all (chosen) OEIS sequences"):
 
 # seq = sp.Matrix(csv[seq_id])
 # def grid_sympy(seq: sp.MutableDenseMatrix, nof_eqs: int = None):  # seq.shape=(N, 1)
-def grid_sympy(seq: sp.MutableDenseMatrix, max_order: int, max_degree: int):  # seq.shape=(N, 1)
+def grid_sympy(seq: sp.MutableDenseMatrix, max_order: int, library: str):  # seq.shape=(N, 1)
     # seq = seq if nof_eqs is None else seq[:nof_eqs]
     # seq = seq[:nof_eqs, :]
     # seq = seq[:shape[0]-1, :]
     # n = len(seq)
 
+    max_degree = 1 if library in ('lin', 'nlin') else 2 if library in ('quad', 'nquad') else 3 if library in ('cub', 'ncub') else 'Unknown Library!!'
+    n_cols = sp.Matrix.hstack(*[sp.Matrix([n**degree for n in range(1, seq.rows)]) for degree in range(1, max_degree+1)]) if library in ('nlin', 'nquad', 'ncub') else sp.Matrix()
+    # ntriangles = triangle_grid(1)
+
     def triangle_grid(max_degree):
         return sp.Matrix(seq.rows-1, max_order,
                         (lambda i,j: (seq[max(i-j,0)]**max_degree)*(1 if i>=j else 0))
                         )
-    triangles = triangle_grid(1)
-    for degree in range(2, max_degree+1):
-        triangles = sp.Matrix.hstack(triangles, triangle_grid(degree))
+    # ntriangles = sp.Matrix.hstack(sp.Matrix([i for i in range(1, seq.rows)]), triangle_grid(1))
+
+    # for degree in range(2, max_degree+1):
+    #     ntriangles = sp.Matrix.hstack(ntriangles, sp.Matrix([i**degree for i in range(1, seq.rows)]), triangle_grid(degree))
+    triangles = sp.Matrix.hstack(*[triangle_grid(degree) for degree in range(1, max_degree+1)])
 
     data = sp.Matrix.hstack(
         seq[1:,:],
-        sp.Matrix([i for i in range(1, seq.rows)]),
-        triangles)
+        n_cols,
+        triangles
+        )
+        # sp.Matrix([i for i in range(1, seq.rows)]),
+        # triangles)
     return data
 
 def dataset(seq: list, max_order: int, linear: bool, library: str):
@@ -67,13 +76,12 @@ def dataset(seq: list, max_order: int, linear: bool, library: str):
     if max_order <= 0:
         raise ValueError("max_order must be > 0. Otherwise needs to be implemented properly.")
 
-    max_degree = 1 if library in ('lin', 'nlin') else 2 if library in ('quad', 'nquad') else 3 if library in ('cub', 'ncub') else 'Unknown Library!!'
-    data = grid_sympy(sp.Matrix(seq), max_order, max_degree=max_degree)
+    data = grid_sympy(sp.Matrix(seq), max_order, library=library)
     # print('order', max_order)
     # print('data', data)
 
-    if linear or library in ('lin', 'quad', 'cub'):
-        data = data[:, sp.Matrix([0] + list(i for i in range(2, data.shape[1])))]
+    # if linear or library in ('lin', 'quad', 'cub'):
+    #     data = data[:, sp.Matrix([0] + list(i for i in range(2, data.shape[1])))]
     m_limit = 3003
     # print('data', data)
     # b = data[max_order:(max_order + m_limit), 0]
@@ -190,8 +198,17 @@ def solution_vs_truth(x: sp.Matrix, truth_coeffs: sp.Matrix) -> bool:
     return ed_coeffs == truth_coeffs
 
 
-def solution2str(x: sp.Matrix) -> str:
-    verbose_eq = ['a(n)', 'n'] + [f"a(n-{i+1})" for i in range(len(x)-1)]
+def solution2str(x: sp.Matrix, degree: int = 1) -> str:
+    "Convert solution to string."
+    order = (len(x) - 1) // degree
+    print(degree, order, len(x))
+    print([(i, i%order, i//order) for i in range(1+order+1, 1+order*degree+1)])
+
+    verbose_eq = (['a(n)', 'n'] + [f'n^{degree}' for degree in range(2, degree+1)] + [f"a(n-{i})" for i in range(1, order + 1)]
+        + sum([[f"a(n-{i})^{degree}" for i in range(1, order+1)] for degree in range(2, degree + 1)], []))
+    # print(verbose_eq)
+    # 1/0
+
     verbose_eq = sp.Matrix([verbose_eq])
     if x==[]:
         eq = "a(n) = NOT RECONSTRUCTED :-("
@@ -275,7 +292,8 @@ def exact_ed(seq_id: str, csv: pd.DataFrame, verbosity: int = VERBOSITY,
 
 
 def increasing_eed(seq_id: str, csv: pd.DataFrame, verbosity: int = VERBOSITY,
-                   max_order: int = None, linear: bool = True, n_of_terms=10 ** 16, library: str = 'lin') -> tuple[sp.Matrix, str, str, str]:
+                   max_order: int = None, linear: bool = True, n_of_terms=10 ** 16, library: str = 'lin',
+                   start_order: int = 1) -> tuple[sp.Matrix, str, str, str]:
     """Perform exact_ed with increasing the *max_order* untill the equation that holds (with minimum order) is found."""
 
     # verbosity = 2
@@ -326,7 +344,7 @@ def increasing_eed(seq_id: str, csv: pd.DataFrame, verbosity: int = VERBOSITY,
 
     # start = ([], "a(n) = NOT RECONSTRUCTED :-(", "", "", False)
     start = ([], solution2str([]), "", "", False)
-    orders = range(1, max_order+1)
+    orders = range(start_order, max_order+1)
 
     eed = reduce(eed_step, orders, start)[:4]
     # for i in range(1, max_order):
@@ -613,5 +631,7 @@ if __name__ == '__main__':
     print(list(is_check[2]))
     print(list(is_check[1])[20:120])
     print(list(is_check[2])[20:120])
+    print('solution2str', solution2str(sp.Matrix([2, 3,1,1,0,5]), 2))
+    print('solution2str', solution2str(sp.Matrix([2,1,1,5,5,623, 57,6, 76,6, 6, 76, ]), 3))
 
 
