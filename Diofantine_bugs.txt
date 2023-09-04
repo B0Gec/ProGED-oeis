@@ -1,0 +1,177 @@
+containing bugs for ids:
+
+t17 .. A000058 .. line 8        ..  AssertionError
+t54 .. A000396 .. line 108      ..  OverflowError: cannot convert float infinity to integer
+t116 .. A002658 .. line 53      ..  OverflowError: cannot convert float infinity to integer (step order 9)
+t137 .. A006894 .. line 145      ..  OverflowError: cannot convert float infinity to integer ( step order 9)
+
+==========================================
+Starting time (of array_subjob 41514935_17):
+Fri Sep  1 16:51:52 CEST 2023
+task_id 17
+0 17 A000058  ... TASK ID, task_id, seq_id
+
+Attempting doone for A000058
+Traceback (most recent call last):
+  File "/d/hpc/home/bgec/oeis/doones.py", line 481, in <module>
+    doone(task_id=task_id, seq_id=seq_id, linear=True)
+  File "/d/hpc/home/bgec/oeis/doones.py", line 423, in doone
+    x, eq, coeffs, truth = increasing_eed(seq_id, csv, VERBOSITY, max_order_,
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/d/hpc/home/bgec/oeis/exact_ed.py", line 321, in increasing_eed
+    eed = reduce(eed_step, orders, start)[:4]
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/d/hpc/home/bgec/oeis/exact_ed.py", line 281, in eed_step
+    output = exact_ed(seq_id, csv, verbosity, order, linear, n_of_terms) + ( False,)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/d/hpc/home/bgec/oeis/exact_ed.py", line 248, in exact_ed
+    x = diophantine_solve(A, b)
+        ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/d/hpc/home/bgec/oeis/diophantine_solver.py", line 12, in diophantine_solve
+    x = solve(A, b)
+        ^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/diophantine.py", line 108, in solve
+    solutions = get_solutions(basis)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/diophantine.py", line 265, in get_solutions
+    UB[i] = introot(Zn, Zd, num, den)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/diophantine.py", line 342, in introot
+    assert x >= 0
+           ^^^^^^
+AssertionError
+
+
+
+
+Attempting doone for A000302
+
+A000302  done and written! (to results/diocores-unfail/00048_A000302.txt)
+A000302  done!
+Fri Sep  1 16:56:35 CEST 2023
+
+
+Attempting doone for A002658
+Traceback (most recent call last):
+  File "/d/hpc/home/bgec/oeis/doones.py", line 481, in <module>
+    doone(task_id=task_id, seq_id=seq_id, linear=True)
+  File "/d/hpc/home/bgec/oeis/doones.py", line 423, in doone
+    x, eq, coeffs, truth = increasing_eed(seq_id, csv, VERBOSITY, max_order_,
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/d/hpc/home/bgec/oeis/exact_ed.py", line 321, in increasing_eed
+    eed = reduce(eed_step, orders, start)[:4]
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/d/hpc/home/bgec/oeis/exact_ed.py", line 281, in eed_step
+    output = exact_ed(seq_id, csv, verbosity, order, linear, n_of_terms) + ( False,)
+
+Traceback (most recent call last):
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/d/hpc/home/bgec/oeis/exact_ed.py", line 248, in exact_ed
+    x = diophantine_solve(A, b)
+d=seq_id, linear=True)
+  File "/d/hpc/home/bgec/oeis/doones.py", line 423, in doone
+    x, eq, coeffs, truth = increasing_eed(seq_id, csv, VERBOSITY, max_order_,
+solve
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    x = solve(A, b)
+bgec/oeis/exact_ed.py", line 321, in increasing_eed
+    eed = reduce(eed_step, orders, start)[:4]
+  File "/usr/local/lib/python3.11/site-packages/diophantine.py", line 108, in solve
+  File "/d/hpc/home/bgec/oeis/exact_ed.py", line 281, in eed_step
+                ^^^^^^^^^^^^^^^^^^^^
+rbosity, order, linear, n_of_terms) + ( False,)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+, in get_solutions
+  File "/d/hpc/home/bgec/oeis/exact_ed.py", line 248, in exact_ed
+            ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/diophantine.py", line 343, in introot
+  File "/d/hpc/home/bgec/oeis/diophantine_solver.py", line 12, in diophantine_solve
+                 ^^^^^^^^^^^^^^
+    x = solve(A, b)
+t convert float infinity to integer
+        ^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/diophantine.py", line 108, in solve
+    solutions = get_solutions(basis)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/diophantine.py", line 265, in get_solutions
+    UB[i] = introot(Zn, Zd, num, den)
+oing   doones job_id 41515047 task_id 116 --exper_id diocores-unfail
+            ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/diophantine.py", line 343, in introot
+    x_sqrt = int(floor(sqrt(x)))
+                 ^^^^^^^^^^^^^^
+OverflowError: cannot convert float infinity to integer
+
+
+
+
+
+
+Attempting doone for A000396
+Traceback (most recent call last):
+  File "/d/hpc/home/bgec/oeis/doones.py", line 481, in <module>
+    doone(task_id=task_id, seq_id=seq_id, linear=True)
+  File "/d/hpc/home/bgec/oeis/doones.py", line 423, in doone
+    x, eq, coeffs, truth = increasing_eed(seq_id, csv, VERBOSITY, max_order_,
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/d/hpc/home/bgec/oeis/exact_ed.py", line 321, in increasing_eed
+    eed = reduce(eed_step, orders, start)[:4]
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/d/hpc/home/bgec/oeis/exact_ed.py", line 281, in eed_step
+    output = exact_ed(seq_id, csv, verbosity, order, linear, n_of_terms) + ( False,)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/d/hpc/home/bgec/oeis/exact_ed.py", line 248, in exact_ed
+    x = diophantine_solve(A, b)
+        ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/d/hpc/home/bgec/oeis/diophantine_solver.py", line 12, in diophantine_solve
+    x = solve(A, b)
+        ^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/diophantine.py", line 108, in solve
+    solutions = get_solutions(basis)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/diophantine.py", line 265, in get_solutions
+    UB[i] = introot(Zn, Zd, num, den)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/diophantine.py", line 343, in introot
+    x_sqrt = int(floor(sqrt(x)))
+                 ^^^^^^^^^^^^^^
+OverflowError: cannot convert float infinity to integer
+
+
+
+
+
+
+eed_step 8 A006894 calculating ...
+summary ([], 'a(n) = NOT RECONSTRUCTED :-(', '', '', False)
+eed_step 9 A006894 calculating ...
+Traceback (most recent call last):
+  File "/d/hpc/home/bgec/oeis/doones.py", line 481, in <module>
+    doone(task_id=task_id, seq_id=seq_id, linear=True)
+  File "/d/hpc/home/bgec/oeis/doones.py", line 423, in doone
+    x, eq, coeffs, truth = increasing_eed(seq_id, csv, VERBOSITY, max_order_,
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/d/hpc/home/bgec/oeis/exact_ed.py", line 322, in increasing_eed
+    eed = reduce(eed_step, orders, start)[:4]
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/d/hpc/home/bgec/oeis/exact_ed.py", line 282, in eed_step
+    output = exact_ed(seq_id, csv, verbosity, order, linear, n_of_terms) + ( False,)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/d/hpc/home/bgec/oeis/exact_ed.py", line 248, in exact_ed
+    x = diophantine_solve(A, b)
+        ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/d/hpc/home/bgec/oeis/diophantine_solver.py", line 12, in diophantine_solve
+    x = solve(A, b)
+        ^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/diophantine.py", line 108, in solve
+    solutions = get_solutions(basis)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/diophantine.py", line 265, in get_solutions
+    UB[i] = introot(Zn, Zd, num, den)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/diophantine.py", line 343, in introot
+    x_sqrt = int(floor(sqrt(x)))
+                 ^^^^^^^^^^^^^^
+OverflowError: cannot convert float infinity to integer
+Mon Sep  4 10:03:10 CEST 2023
+this is oei.sh diocore-sin       doing   doones job_id 41604631 task_id 137 --exper_id diocore-sin

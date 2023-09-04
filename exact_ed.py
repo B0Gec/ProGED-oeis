@@ -41,30 +41,38 @@ def timer(now, text=f"\nScraping all (chosen) OEIS sequences"):
 
 # seq = sp.Matrix(csv[seq_id])
 # def grid_sympy(seq: sp.MutableDenseMatrix, nof_eqs: int = None):  # seq.shape=(N, 1)
-def grid_sympy(seq: sp.MutableDenseMatrix, max_order: int):  # seq.shape=(N, 1)
+def grid_sympy(seq: sp.MutableDenseMatrix, max_order: int, max_degree: int):  # seq.shape=(N, 1)
     # seq = seq if nof_eqs is None else seq[:nof_eqs]
     # seq = seq[:nof_eqs, :]
     # seq = seq[:shape[0]-1, :]
     # n = len(seq)
-    indexes_sympy_uncut = sp.Matrix(seq.rows-1,
-                                    max_order,
-                                    (lambda i,j: (seq[max(i-j,0)])*(1 if i>=j else 0))
-                                    )
+
+    def triangle_grid(max_degree):
+        return sp.Matrix(seq.rows-1, max_order,
+                        (lambda i,j: (seq[max(i-j,0)]**max_degree)*(1 if i>=j else 0))
+                        )
+    triangles = triangle_grid(1)
+    for degree in range(2, max_degree+1):
+        triangles = sp.Matrix.hstack(triangles, triangle_grid(degree))
+
     data = sp.Matrix.hstack(
         seq[1:,:],
         sp.Matrix([i for i in range(1, seq.rows)]),
-        indexes_sympy_uncut)
+        triangles)
     return data
 
-def dataset(seq: list, max_order: int, linear: bool):
+def dataset(seq: list, max_order: int, linear: bool, library: str):
     "Instant list -> (b, A) for equation discovery / LA system."
 
     if max_order <= 0:
         raise ValueError("max_order must be > 0. Otherwise needs to be implemented properly.")
-    data = grid_sympy(sp.Matrix(seq), max_order)
-    # print('order', max_order)
-    # print('data', data)
-    if linear:
+
+    max_degree = 1 if library in ('lin', 'nlin') else 2 if library in ('quad', 'nquad') else 3 if library in ('cub', 'ncub') else 'Unknown Library!!'
+    data = grid_sympy(sp.Matrix(seq), max_order, max_degree=max_degree)
+    print('order', max_order)
+    print('data', data)
+
+    if linear or library in ('lin', 'quad', 'cub'):
         data = data[:, sp.Matrix([0] + list(i for i in range(2, data.shape[1])))]
     m_limit = 3003
     # print('data', data)
@@ -132,7 +140,7 @@ VERBOSITY = 2  # dev scena
 # VERBOSITY = 1  # run scenario
 
 
-def truth2coeffs(truth: str):
+def truth2coeffs(truth: str) -> sp.Matrix:
     """Convert truth from first row of csv into list of coefficients"""
     replaced = truth.replace('{', '').replace('}', '')
     peeled = replaced[1:-2] if replaced[-2] == ',' else replaced[1:-1]
@@ -141,19 +149,24 @@ def truth2coeffs(truth: str):
     return check_coeffs
 
 
-def unnan(seq: list):
+def unnan(seq: list) -> sp.Matrix:
+    """Remove nan from sequence."""
+
+    # print(seq)
     seq = sp.Matrix(seq)
+    # print(seq)
     if seq.has(sp.nan):
         seq = seq[:list(seq).index(sp.nan), :]
+    seq = sp.Matrix([int(i) for i in seq])
+    # for i in seq[:14] + seq[-14:]:
+    #     print(type(i))
+    # 1/0
     return seq
 
 
-def unpack_seq(seq_id: str, csv: pd.DataFrame):
+def unpack_seq(seq_id: str, csv: pd.DataFrame) -> tuple[sp.Matrix, sp.Matrix, str]:
     "Unpack ground truth and terms of the sequence from given csv."
 
-    # seq = sp.Matrix(csv[seq_id][1:])
-    # if seq.has(sp.nan):
-    #     seq = seq[:list(seq).index(sp.nan), :]
     seq = unnan(csv[seq_id][1:])
     truth = csv[seq_id][0]
     coeffs = truth2coeffs(truth)
@@ -163,7 +176,7 @@ def unpack_seq(seq_id: str, csv: pd.DataFrame):
     return seq, coeffs, truth
 
 
-def solution_vs_truth(x: sp.Matrix, truth_coeffs: sp.Matrix):
+def solution_vs_truth(x: sp.Matrix, truth_coeffs: sp.Matrix) -> bool:
     "is_oeis/is_reconst, i.e. return True if solution is identical to the ground truth"
 
     nonzero_indices = [i for i in range(len(x)) if (x[i] != 0)]
@@ -177,7 +190,7 @@ def solution_vs_truth(x: sp.Matrix, truth_coeffs: sp.Matrix):
     return ed_coeffs == truth_coeffs
 
 
-def solution2str(x: sp.Matrix):
+def solution2str(x: sp.Matrix) -> str:
     verbose_eq = ['a(n)', 'n'] + [f"a(n-{i+1})" for i in range(len(x)-1)]
     verbose_eq = sp.Matrix([verbose_eq])
     if x==[]:
@@ -188,7 +201,7 @@ def solution2str(x: sp.Matrix):
     return eq
 
 
-def instant_solution_vs_truth(x: sp.Matrix, seq_id: str, csv: pd.DataFrame):
+def instant_solution_vs_truth(x: sp.Matrix, seq_id: str, csv: pd.DataFrame) -> bool:
     "Instant version of solution_vs_truth to avoid manual extraction of truth from csv."
 
     _, coeffs, _ = unpack_seq(seq_id, csv)
@@ -196,11 +209,13 @@ def instant_solution_vs_truth(x: sp.Matrix, seq_id: str, csv: pd.DataFrame):
 
 
 def exact_ed(seq_id: str, csv: pd.DataFrame, verbosity: int = VERBOSITY,
-             max_order: int = None, linear: bool = True, n_of_terms=10**16):
+             max_order: int = None, linear: bool = True, n_of_terms=10**16, library: str ='lin') -> tuple[sp.Matrix, str, str, str]:
     # max_order = 25
     # max_order = None
     header = 1 if linear else 0
 
+    if library == 'lin':
+        linear = True
     # print('in exact_ed')
     # POTENTIAL ERROR!!!!: WHEN NOT CONVERTING 3.0 INTO 3 FOR SOLVING DIOFANTINE
     if linear:
@@ -209,34 +224,19 @@ def exact_ed(seq_id: str, csv: pd.DataFrame, verbosity: int = VERBOSITY,
         if seq.has(sp.nan):
             seq = seq[:list(seq).index(sp.nan), :]
     else:
-        dfcont = csv[seq_id]
-        # print(type(header), type(n_of_terms))
-        slice = dfcont[header:(header + n_of_terms)]
-        # seq = sp.Matrix(list(slice))
-        seq = sp.Matrix(slice)
-        # 1/0
-        # seq = sp.Matrix(csv[seq_id][header:(header + n_of_terms)])
+        seq = unnan(list(csv[seq_id][header:(header + n_of_terms)]))
 
-    # print('after if in exact_ed')
-    # if linear:
-    #     # truth = '(-34,45,1, -35, 8)'
-    #     truth = csv[seq_id][0]
-    #     # print(f'truth:{truth}')
-    #     # coeffs = truth[1:-1].split(',')[:min(n_of_terms, len(seq))]
-    #     coeffs = truth2coeffs(truth)
 
+    # print(seq)
     max_order = sp.floor(seq.rows/2)-1 if max_order is None else max_order
-    # data = grid_sympy(seq, max_order)
-    # if linear:
-    #     data = data[:, sp.Matrix([0] + list(i for i in range(2, data.shape[1])))]
-    # b, A = dataset(seq, max_order, linear=linear)
-    b, A = dataset(list(seq), max_order, linear=linear)
+    b, A = dataset(list(seq), max_order, linear=linear, library=library)
+
     # print('order', max_order)
-    print(A.shape)
-    print(b.shape)
-    print(b)
-    print(A)
-    1/0
+    # print(A.shape)
+    # print(b.shape)
+    # print(b)
+    # print(A)
+    # 1/0
     # print('after dataset')
 
     # m_limit = 3003
@@ -260,41 +260,12 @@ def exact_ed(seq_id: str, csv: pd.DataFrame, verbosity: int = VERBOSITY,
     # print('after sanity check')
     if verbosity >= 3:
         print('x', x)
-    # verbose_eq = ['a(n)', 'n']
-    #
-    # for i in range(max_order):
-    #     verbose_eq += [f"a(n-{i+1})"]
-    # verbose_eq = sp.Matrix([verbose_eq])
-    # # print('--- csv to linear truth ok:', truth, coeffs)
-
-    # if linear:
-    #     truth = ['a(n) = '] + [f'{str(coeff)}*a(n - {n+1}) + ' for n, coeff in enumerate(coeffs)]
-    #     init_vals = [f'a({n}) = {seq[n]}, ' for n, _ in enumerate(coeffs[:len(seq)])]
-    #     # print(f'truth: {truth}')
-    #     truth = ''.join(truth)[:-3] + ',  \n' + ''.join(init_vals)[:-2]
-    #     if verbosity >= 2:
-    #         print(f'truth: {truth}')
-    #     # print(seq[:len(coeffs)])
 
     if len(x) > 0:
         x = x[0]
         if linear:
             x = sp.Matrix.vstack(sp.Matrix([0]), x)
     eq = solution2str(x)
-
-    # if x==[]:
-    #     if verbosity >= 2:
-    #         print('NO EQS FOUND!!!')
-    #     eq = "a(n) = NOT RECONSTRUCTED :-("
-    # else:
-    #     if verbosity >= 2:
-    #         print('We found an equation!!!:')
-    #     x = x[0]
-    #     if linear:
-    #         x = sp.Matrix.vstack(sp.Matrix([0]), x)
-    #     eq = solution2str(x)
-    #     if verbosity >= 2:
-    #         print('eq: ', eq)
 
     # print('x', x)
     if linear:
@@ -304,18 +275,20 @@ def exact_ed(seq_id: str, csv: pd.DataFrame, verbosity: int = VERBOSITY,
 
 
 def increasing_eed(seq_id: str, csv: pd.DataFrame, verbosity: int = VERBOSITY,
-                   max_order: int = None, linear: bool = True, n_of_terms=10 ** 16):
+                   max_order: int = None, linear: bool = True, n_of_terms=10 ** 16, library: str = 'lin') -> tuple[sp.Matrix, str, str, str]:
     """Perform exact_ed with increasing the *max_order* untill the equation that holds (with minimum order) is found."""
 
+    # verbosity = 2
     def eed_step(ed_output, order):
-        # print('summary', ed_output)
+        print('summary', ed_output)
+        print('eed_step', order, seq_id, 'calculating ...')
         if verbosity >= 2:
             print('eed_step', order, seq_id, 'calculating ...')
 
         # output = ed_output if ed_output[0] != [] else exact_ed(seq_id, csv, verbosity, order, linear, n_of_terms) + (False,)
         # # output = ed_output if ed_output[-1] else exact_ed(seq_id, csv, verbosity, order, linear, n_of_terms) + (False,)
         if not ed_output[-1]:
-            output = exact_ed(seq_id, csv, verbosity, order, linear, n_of_terms) + ( False,)
+            output = exact_ed(seq_id, csv, verbosity, order, linear, n_of_terms, library=library) + ( False,)
             # print(output[1:])
             if output[0] != []:
                 if len(output[0]) > 0 and output[0][-1] == 0 and order >= 2:
@@ -353,7 +326,7 @@ def increasing_eed(seq_id: str, csv: pd.DataFrame, verbosity: int = VERBOSITY,
 
     # start = ([], "a(n) = NOT RECONSTRUCTED :-(", "", "", False)
     start = ([], solution2str([]), "", "", False)
-    orders = range(1, max_order)
+    orders = range(1, max_order+1)
 
     eed = reduce(eed_step, orders, start)[:4]
     # for i in range(1, max_order):

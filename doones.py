@@ -31,12 +31,20 @@ warnings.simplefilter("ignore")
 #     from exact_ed import exact_ed, timer
 
 SINDy = True
-# SINDy = False
+SINDy = False
 if SINDy:
     from sindy_oeis import sindy, preprocess, heuristic, sindy_grid
 
 LINEAR = True
 LINEAR = False
+
+# only libraries allowed:
+LIBRARY = 'lin'
+LIBRARY = 'nlin'
+LIBRARY = 'nquad'
+LIBRARY = 'ncub'
+
+
 INCREASING_EED = True
 # print("IDEA: max ORDER for GRAMMAR = floor(DATASET ROWS (LEN(SEQ)))/2)-1")
 
@@ -72,10 +80,10 @@ n_of_terms_load = 100000
 
 
 VERBOSITY = 2  # dev scena
-# VERBOSITY = 1  # run scenario
+VERBOSITY = 1  # run scenario
 
 DEBUG = True
-DEBUG = False
+# DEBUG = False
 # BUGLIST ignores blacklisting (runs also blacklisted) !!!!!
 BUGLIST = True
 BUGLIST = False
@@ -92,8 +100,9 @@ if BUGLIST:
 #     print("Warning!!!!! buglist is used outside debug mode!!")
 #     print("Warning!!!!! buglist is used outside debug mode!!\n")
 
-MAX_ORDER = 20  # We care only for recursive equations with max 20 terms or order.
-# MAX_ORDER = 20  # We care only for recursive equations with max 20 terms or order.
+MAX_ORDER = 19  # We care only for recursive equations with max 20 terms or order.
+MAX_ORDER = 2
+# MAX_ORDER = 3
 # if DEBUG:
 #     MAX_ORDER = 5  # We care only for recursive equations with max 20 terms or order.
 # MAX_ORDER = 2
@@ -132,6 +141,7 @@ JOB_ID = "000000"
 # SEQ_ID = (True, 'A008685')
 # SEQ_ID = (False, 'A013833')
 SEQ_ID = (True, 'A000045')
+# SEQ_ID = (True, 'A000043')
 # SEQ_ID = (True, 'A000187')
 # ['A056457', 'A212593', 'A212594']
 
@@ -147,7 +157,7 @@ SEQ_ID = (True, 'A000045')
 # SEQ_ID = (True, 'A000045')
 # non_manuals =  ['23167_A169198.txt', '23917_A170320.txt', '03322_A016835.txt', '24141_A170544.txt', '24240_A170643.txt', '24001_A170404.txt', '24014_A170417.txt', '23207_A169238.txt', '22912_A168943.txt', '03330_A016844.txt', '23872_A170275.txt', '22983_A169014.txt', '24006_A170409.txt', '24211_A170614.txt', '15737_A105944.txt', '24053_A170456.txt', '23488_A169519.txt', '23306_A169337.txt', '22856_A168887.txt', '23049_A169080.txt', '23980_A170383.txt', '23742_A170145.txt', '23109_A169140.txt', '06659_A035798.txt', '23860_A170263.txt', '23800_A170203.txt', '23649_A170052.txt', '23219_A169250.txt', '23682_A170085.txt', '06706_A035871.txt', '23720_A170123.txt', '31181_A279282.txt', '23382_A169413.txt', '24034_A170437.txt', '24192_A170595.txt']
 # SEQ_ID = (True, 'A169198')
-SEQ_ID = (False, 'A169198')
+# SEQ_ID = (False, 'A169198')
 # SEQ_ID = (True, 'A024347')
 # SEQ_ID = (True, 'A010034')
 # SEQ_ID = (True, 'A000518')
@@ -395,6 +405,7 @@ else:
                 max_order_ = min(heuristic(len(seq)), max_order_)
                 output_string += f'Sindy will use max_order: {max_order_}\n'
                 # x = sindy(list(seq), max_order_, seq_len=seq_len, threshold=threshold)
+                # LIBRARY!!!
                 x, printout, x_avg = sindy_grid(seq, seq_id, csv, coeffs, max_order, seq_len)
                 output_string += printout
                 # x = sp.Matrix([0, 0, 0, 0])
@@ -419,10 +430,10 @@ else:
             # print('Going for exact ed')
             # print(' tle ', max_order_, linear, N_OF_TERMS_ED)
             if INCREASING_EED:
-                # x, eq, coeffs, truth = increasing_eed(seq_id, csv, VERBOSITY, max_order_,
-                #                                       linear=LINEAR, n_of_terms=N_OF_TERMS_ED)
-                x, eq, coeffs, truth = exact_ed(seq_id, csv, VERBOSITY, max_order_,
-                                                n_of_terms=N_OF_TERMS_ED, linear=LINEAR)
+                x, eq, coeffs, truth = increasing_eed(seq_id, csv, VERBOSITY, max_order_,
+                                                      linear=LINEAR, n_of_terms=N_OF_TERMS_ED, library=LIBRARY)
+                # x, eq, coeffs, truth = exact_ed(seq_id, csv, VERBOSITY, max_order_,
+                #                                 n_of_terms=N_OF_TERMS_ED, linear=LINEAR)
 
         # print('eq', eq, 'x', x)
         is_reconst = solution_vs_truth(x, coeffs) if LINEAR else ""

@@ -71,7 +71,7 @@ job_id = "sindymerged"  #
 
 job_id = "diocores77"
 job_id = "diocor-merge"  #
-job_id = "sindycore83"
+# job_id = "sindycore83"
 
 
 
@@ -378,12 +378,16 @@ from blacklist import blacklist, no_truth
 # blacklisted = [(task, i) for task, i in enumerate(all_ids) if not i in blacklist]
 not_blacklisted = [i for i in all_ids if not i in blacklist and not i in success_ids]
 # not_blacklisted = [i for n, i in enumerate(all_ids) if not i in blacklist and not i in success_ids and i]
-print(not_blacklisted[:10], len(not_blacklisted))
+print('jobs failed (unsuccessful):', not_blacklisted[:10], len(not_blacklisted))
 # not_missing_truth = [i for i in all_ids if not i in no_truth and not i in success_ids]
 # not_blacklisted_pairs = [(f"{task:0>5}", id_) for task, id_ in enumerate(all_ids)
 #                          if not id_ in blacklist and not id_ in success_ids]
 
 # jobs_failed_per_bin = [0 for _ in range(35)]
+failed_ids =  [all_ids_ref.index(id_) for id_ in not_blacklisted]
+print('ids of jobs failed (unsuccessful):', failed_ids)
+print(str(failed_ids).replace(' ', '').strip('[]'))
+print('ids of jobs failed (unsuccessful):', [all_ids_ref.index(id_) for id_ in not_blacklisted])
 not_blacklisted_pairs = [(f"{all_ids_ref.index(id_):0>5}", id_) for id_ in not_blacklisted]
 print(not_blacklisted_pairs[:10], len(not_blacklisted_pairs))
 print(not_blacklisted_pairs[:3100], len(not_blacklisted_pairs))
@@ -463,7 +467,7 @@ if CORES:
 # summary = reduce(for_summary, files[:], (0, 0, 0, 0, 0, 0, [], [0 for i in range(36)], [], [], [], ['start']))  # save all buggy ids
 summary = reduce(for_summary, sorted(files[:]), (0, 0, 0, 0, 0, 0, [], [0 for i in range(36)], [], [], [], ['start']))  # save all buggy ids
 print(summary)
-1/0
+# 1/0
 
 # corrected_sum = sum(summary[:4]) - sum(summary[4:])
 corrected_sum = sum(summary[:4]) - sum(summary[4:5])
