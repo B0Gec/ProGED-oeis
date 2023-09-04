@@ -72,11 +72,13 @@ job_id = "sindymerged"  #
 job_id = "diocores77"
 job_id = "diocor-merge"  #
 # job_id = "sindycore83"
+job_id = "dicor-cub"
+job_id = "dicor-cub19"
 
 
 
 print(job_id)
-CORES = True if job_id in ("diocores77", 'diocor-merge', 'sindycore83') else False
+CORES = True if job_id in ("diocores77", 'diocor-merge', 'sindycore83', 'dicor-cub', 'dicor-cub19') else False
 # CORES = True
 # CORES = False
 if CORES:
@@ -96,6 +98,8 @@ time_complexity_dict = {
     'diocores77': '25 mins',
     'diocor-merge': '25 mins',
     'sindycore83': '43 + mins',
+    'dicor-cub': 'from 2pm..14.20, i.e. 20mins',
+    'dicor-cub19': 'from 14.30 .. to 14:33, i.e. 20mins',
 }
 time_complexity_dict[job_id] = 'unknomn' if job_id not in time_complexity_dict else time_complexity_dict[job_id]
 time_complexity = time_complexity_dict[job_id]

@@ -69,8 +69,8 @@ def dataset(seq: list, max_order: int, linear: bool, library: str):
 
     max_degree = 1 if library in ('lin', 'nlin') else 2 if library in ('quad', 'nquad') else 3 if library in ('cub', 'ncub') else 'Unknown Library!!'
     data = grid_sympy(sp.Matrix(seq), max_order, max_degree=max_degree)
-    print('order', max_order)
-    print('data', data)
+    # print('order', max_order)
+    # print('data', data)
 
     if linear or library in ('lin', 'quad', 'cub'):
         data = data[:, sp.Matrix([0] + list(i for i in range(2, data.shape[1])))]

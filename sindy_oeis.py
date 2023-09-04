@@ -58,7 +58,7 @@ def heuristic(terms_avail):
     """Calculate/decide on max_order given the number of available terms (of size < 10**16)."""
     return round(terms_avail/2)
 
-def preprocess(seq):
+def preprocess(seq: sp.Matrix) -> tuple[sp.Matrix, bool]:
     """Filter in only small sized terms of the sequence."""
 
     biggie = list(map(lambda term: abs(term) >= 10**16, seq))
@@ -78,7 +78,7 @@ def preprocess(seq):
         return seq, fail
 
 def sindy(seq: Union[list, sp.Matrix], max_order: int, seq_len: int, threshold: float = 0.1,
-          ensemble: bool = False, library_ensemble: bool = False):
+          ensemble: bool = False, library_ensemble: bool = False, library: str = 'lin'):
     """Perform SINDy."""
 
     # Generate training data
@@ -97,7 +97,8 @@ def sindy(seq: Union[list, sp.Matrix], max_order: int, seq_len: int, threshold: 
     # print(f"{int(seq[-1]):.4e}")
     # 1/0
 
-    b, A = dataset(seq, max_order, linear=True)
+    linear = True if library in ('lin', 'quad', 'cub') else False
+    b, A = dataset(seq, max_order, linear=linear, library='lin')
     # b, A = dataset(seq, 19, linear=True)
     # b, A = dataset(sp.Matrix(seq), 2, linear=True)
     # 2-7, 9-14, 16-19 finds, 8,15 not
@@ -119,9 +120,10 @@ def sindy(seq: Union[list, sp.Matrix], max_order: int, seq_len: int, threshold: 
     #
     # print(data)
 
-
+    max_degree = 1 if library in ('lin', 'nlin') else 2 if library in ('quad', 'nquad') else 3 if library in ('cub', 'ncub') else 'Unknown Library!!'
     # poly_order = 8
     poly_order = 1
+    poly_order = max_degree
     # threshold = 0.1
 
     model = ps.SINDy(
@@ -175,10 +177,10 @@ def sindy_grid_search(seq, coeffs, truth, max_order: int, stepsize: int, evals: 
 
 
 def one_results(seq, seq_id, csv, coeffs, max_order: int, seq_len: int,
-                threshold: float, ensemble: bool, library_ensemble: bool):
+                threshold: float, library: str, ensemble: bool, library_ensemble: bool):
 
     # print(max_order, seq_len)
-    x = sindy(seq, max_order, seq_len, threshold, ensemble, library_ensemble)
+    x = sindy(seq, max_order, seq_len, threshold, ensemble, library_ensemble, library)
     is_reconst = solution_vs_truth(x, coeffs) if coeffs is None else ' - NaN - '
     is_check_verbose = check_eq_man(x, seq_id, csv, n_of_terms=10 ** 5)
     is_check = is_check_verbose[0]
@@ -232,7 +234,7 @@ def create_grid(seq, seq_id, csv, max_order: int, seq_len: int,
 
 
 def sindy_grid(seq, seq_id, csv, coeffs,
-               max_order: int, seq_len: int):
+               max_order: int, seq_len: int, library: str):
                # ths_bounds: tuple = (0, 0.9), ensemble_grid: tuple = (True, False, False),
                # order_pts: int = 20, len_pts: int = 20, threshold_pts: int = 20, grids: dict = None):
                # grids={'max_order': 20, 'seq_len': 70, 'threshold': (0, 0.9),
@@ -313,7 +315,7 @@ def sindy_grid(seq, seq_id, csv, coeffs,
             return {'ensemble': False, 'library_ensemble': True, }
 
     ongrid = list(map(
-        (lambda i: i + (one_results(seq, seq_id, csv, coeffs, i[0], i[1], i[2], **ens2dict(i[3]))[:3], )), grid))
+        (lambda i: i + (one_results(seq, seq_id, csv, coeffs, i[0], i[1], i[2], library, **ens2dict(i[3]))[:3], )), grid))
     # print(ongrid)
     printable = [(order, leng, thrs, ens, oneres[1], oneres[2]) for order, leng, thrs, ens, oneres in ongrid]
     printout += '\n'

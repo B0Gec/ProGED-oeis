@@ -31,7 +31,7 @@ warnings.simplefilter("ignore")
 #     from exact_ed import exact_ed, timer
 
 SINDy = True
-SINDy = False
+# SINDy = False
 if SINDy:
     from sindy_oeis import sindy, preprocess, heuristic, sindy_grid
 
@@ -102,10 +102,11 @@ if BUGLIST:
 
 MAX_ORDER = 19  # We care only for recursive equations with max 20 terms or order.
 MAX_ORDER = 2
-# MAX_ORDER = 3
+MAX_ORDER = 10
 # if DEBUG:
 #     MAX_ORDER = 5  # We care only for recursive equations with max 20 terms or order.
 # MAX_ORDER = 2
+
 THRESHOLD = 0.2  # For sindy - masking threshold.
 THRESHOLD = 0.1  # For sindy - masking threshold.
 # THRESHOLD = 0.08  # For sindy - masking threshold.
@@ -406,7 +407,7 @@ else:
                 output_string += f'Sindy will use max_order: {max_order_}\n'
                 # x = sindy(list(seq), max_order_, seq_len=seq_len, threshold=threshold)
                 # LIBRARY!!!
-                x, printout, x_avg = sindy_grid(seq, seq_id, csv, coeffs, max_order, seq_len)
+                x, printout, x_avg = sindy_grid(seq, seq_id, csv, coeffs, max_order, seq_len, library=LIBRARY)
                 output_string += printout
                 # x = sp.Matrix([0, 0, 0, 0])
 

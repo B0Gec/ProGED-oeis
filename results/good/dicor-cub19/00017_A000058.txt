@@ -1,0 +1,11 @@
+
+While total time consumed by now, scale:18/164, seq_id:A000058, order:19 took:
+ 201.9 seconds, i.e. 3.37 minutes or 0.056 hours.
+
+A000058: 
+a(n) = -a(n - 12) + a(n - 11) + a(n - 2)
+truth: 
+
+
+  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    
