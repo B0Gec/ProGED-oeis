@@ -61,10 +61,16 @@ def grid_sympy(seq: sp.MutableDenseMatrix, max_order: int, library: str):  # seq
     #     ntriangles = sp.Matrix.hstack(ntriangles, sp.Matrix([i**degree for i in range(1, seq.rows)]), triangle_grid(degree))
     triangles = sp.Matrix.hstack(*[triangle_grid(degree) for degree in range(1, max_degree+1)])
 
+    col_tri = sp.Matrix.hstack(n_cols, triangles)
+
+    # print('n_cols', n_cols.shape, n_cols)
+    # print('triangles', triangles.shape, triangles)
+    # print('an', seq.shape, seq)
     data = sp.Matrix.hstack(
         seq[1:,:],
-        n_cols,
-        triangles
+        # n_cols,
+        # triangles
+        col_tri
         )
         # sp.Matrix([i for i in range(1, seq.rows)]),
         # triangles)
@@ -281,7 +287,7 @@ def exact_ed(seq_id: str, csv: pd.DataFrame, verbosity: int = VERBOSITY,
             x = sp.Matrix.vstack(sp.Matrix([0]), x)
     eq = solution2str(x)
 
-    # print('x', x)
+    print('x', x)
     if linear:
         return x, eq, coeffs, truth
     else:
@@ -304,6 +310,7 @@ def increasing_eed(seq_id: str, csv: pd.DataFrame, verbosity: int = VERBOSITY,
         # # output = ed_output if ed_output[-1] else exact_ed(seq_id, csv, verbosity, order, linear, n_of_terms) + (False,)
         if not ed_output[-1]:
             output = exact_ed(seq_id, csv, verbosity, order, linear, n_of_terms, library=library) + ( False,)
+            print(output)
             # print(output[1:])
             if output[0] != []:
                 if len(output[0]) > 0 and output[0][-1] == 0 and order >= 2:
@@ -530,6 +537,7 @@ def check_eq_man(x: sp.Matrix, seq_id: str, csv: str,
     header = 1 if header else 0
     seq = unnan(csv[seq_id][header:n_of_terms])
     seq = sp.Matrix(list(reversed(seq[:])))
+    print(seq[-10:])
 
     # seq = sp.Matrix(csv[seq_id][header:])[:n_of_terms, :]
     # # Handle nans:
@@ -556,7 +564,7 @@ def check_eq_man(x: sp.Matrix, seq_id: str, csv: str,
 
     if len(x) != degree*n_present + degree*order:
         raise IndexError('Diofantos: library is not compatible with coefs\' length, i.e. len(x) != degree*n_present + degree*order')
-    print(degree, order, len(x))
+    # print(degree, order, len(x))
 
     def an(till_now: sp.Matrix, x: sp.Matrix) -> sp.Matrix:
         # print('till_now, x', till_now, x)
@@ -570,28 +578,30 @@ def check_eq_man(x: sp.Matrix, seq_id: str, csv: str,
         #     a += till_now[-d]**d
 
         # order = (len(coefs)-degree*n_present)//degree
-        print('inside')
+        # print('inside')
 
         coefs = sp.Matrix(coefs)
         a = 0
-        print('til_now:', till_now)
-        print('coefs:', coefs)
+        # print('til_now:', till_now)
+        # print('coefs:', coefs)
         # a = till_now[0]*coefs[-1]*n_present + till_now[-order:, :].dot(coefs[-(order+degree*n_present):-degree*n_present, :])
         # print('a:', a)
+
         for d in range(1, degree+1):
             # a.applyfunc(lambda x: x**d).transpose()*coefs[-order*d:-order*(d-1), :]
             # a = (a.multiply_elementwisel(
             # a += (till_now[-d])**d*coefs[-d]*n_present
             a += x[d-1]**d*n_present
-            print('a: pred', a)
+            # print('a: pred', a)
             # a += till_now[-(order*d+degree):-(order*(d-1)-degree), :].applyfunc( lambda x: x ** d).dot(coefs[-order * d:-order * (d - 1), :])
-            print(order, d, degree, n_present)
-            print(till_now[(order*(d-1)):(order*d), :], x[(order*(d-1)+degree*n_present):(order*(d)+degree*n_present), :])
+            # print(order, d, degree, n_present)
+            # print(till_now[(order*(d-1)):(order*d), :], x[(order*(d-1)+degree*n_present):(order*(d)+degree*n_present), :])
             a += till_now[:order, :].applyfunc( lambda x: x ** d).dot(x[(order*(d-1)+degree*n_present):(order*(d)+degree*n_present), :])
-            print(till_now[(order*(d-1)):(order*d), :])
+            # print(till_now[(order*(d-1)):(order*d), :])
             # 1/0
+
              # .applyfunc( lambda x: x ** d).dot(x[(order*(d-1)+degree*n_present):(order*(d)+degree*n_present), :]))
-            print('a:', a)
+            # print('a:', a)
             # print(till_now[-(order*d):-(order*(d-1)), :])
             # print(till_now[-(order*d):-(order*(d-1)+degree), :].applyfunc( lambda x: x ** d))
             # 1/0
@@ -602,10 +612,10 @@ def check_eq_man(x: sp.Matrix, seq_id: str, csv: str,
             #     a += till_now[-i]**i * till_now[-d+i]**(d-i)
             # a += till_now[-d]**d
 
-        print('a:', a)
+        # print('a:', a)
         # a = till_now [k]
         # out =  sp.Matrix([coefs[-1]*(till_now.rows-1)]) + till_now[-len(coefs[:-1]):, :].transpose()*sp.Matrix(coefs[:-1])
-        print(a)
+        # print(a)
         return sp.Matrix([a])
         # return (x[0] * till_now.rows + till_now[-len(x[1:]):, :].transpose() * x[1:, :])[0]
 
@@ -616,12 +626,12 @@ def check_eq_man(x: sp.Matrix, seq_id: str, csv: str,
 
     # reconst = sp.Matrix(reversed(seq[:max(order, min(oeis_friendly, len(seq)))]))  # init reconst
     # reconst = sp.Matrix(list(reversed(seq[:max(order, min(oeis_friendly, len(seq)))])))
-    print(order)
+    # print(order)
     reconst = seq[-max(order, min(oeis_friendly, len(seq))):, :]
     # reconst = list(seq[:max(order, min(oeis_friendly, len(seq)))])
-    print(type(reconst))
-    print(reconst)
-    print(len(reconst))
+    # print(type(reconst))
+    # print(reconst)
+    # print(len(reconst))
     #
     # print(order, degree, x, seq_id, library, reconst, seq)
     # 1/0
@@ -632,13 +642,18 @@ def check_eq_man(x: sp.Matrix, seq_id: str, csv: str,
         # reconst = reconst.col_join(sp.Matrix([an(reconst, x)]))
         # reconst = reconst.col_join(an(reconst, x))
         reconst = an(reconst, x).col_join(reconst)
-        print(i, list(reversed(reconst))[:20])
+        # print(i, list(reversed(reconst))[:20])
 
     # print(reconst)
-    print(seq)
+    # print(seq)
     # print(type(reversed(reconst[:])))
     # print(type(reversed(seq[:])))
     out = reconst == seq, list(reversed(reconst[:])), list(reversed(seq[:]))
+    print(len(reconst), len(seq))
+    print([(n, i) for n, i in enumerate(seq) if i != reconst[n]])
+    print(out[0])
+    print(out[1][:20])
+    print(out[2][:20])
     return out
 
 if __name__ == '__main__':

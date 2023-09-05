@@ -43,7 +43,7 @@ LIBRARY = 'lin'
 LIBRARY = 'nlin'
 LIBRARY = 'quad'
 # LIBRARY = 'nquad'
-# LIBRARY = 'ncub'
+LIBRARY = 'ncub'
 
 
 INCREASING_EED = True
@@ -103,7 +103,7 @@ if BUGLIST:
 
 MAX_ORDER = 19  # We care only for recursive equations with max 20 terms or order.
 MAX_ORDER = 2
-MAX_ORDER = 10
+# MAX_ORDER = 10
 # if DEBUG:
 #     MAX_ORDER = 5  # We care only for recursive equations with max 20 terms or order.
 # MAX_ORDER = 2
