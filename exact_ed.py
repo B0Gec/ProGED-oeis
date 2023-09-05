@@ -201,11 +201,17 @@ def solution_vs_truth(x: sp.Matrix, truth_coeffs: sp.Matrix) -> bool:
     return ed_coeffs == truth_coeffs
 
 
-def solution2str(x: sp.Matrix, degree: int = 1) -> str:
+def solution2str(x: sp.Matrix, library: str) -> str:
     "Convert solution to string."
-    order = (len(x) - 1) // degree
-    print(degree, order, len(x))
-    print([(i, i%order, i//order) for i in range(1+order+1, 1+order*degree+1)])
+
+    n_present = 1 if library in ('nlin', 'nquad', 'ncub') else 0
+    degree = 1 if library in ('lin', 'nlin') else 2 if library in ('quad', 'nquad') else 3 if library in ('cub', 'ncub') else 'Unknown Library!!'
+    order = (len(x) - degree*n_present)//degree
+    if len(x) != degree*n_present + degree*order:
+        raise IndexError('Diofantos: library is not compatible with coefs\' length, i.e. len(x) != degree*n_present + degree*order')
+
+    # print(degree, order, len(x))
+    # print([(i, i%order, i//order) for i in range(1+order+1, 1+order*degree+1)])
 
     verbose_eq = (['a(n)', 'n'] + [f'n^{degree}' for degree in range(2, degree+1)] + [f"a(n-{i})" for i in range(1, order + 1)]
         + sum([[f"a(n-{i})^{degree}" for i in range(1, order+1)] for degree in range(2, degree + 1)], []))
@@ -285,9 +291,9 @@ def exact_ed(seq_id: str, csv: pd.DataFrame, verbosity: int = VERBOSITY,
         x = x[0]
         if linear:
             x = sp.Matrix.vstack(sp.Matrix([0]), x)
-    eq = solution2str(x)
+    eq = solution2str(x, library)
 
-    print('x', x)
+    # print('x', x)
     if linear:
         return x, eq, coeffs, truth
     else:
@@ -301,8 +307,8 @@ def increasing_eed(seq_id: str, csv: pd.DataFrame, verbosity: int = VERBOSITY,
 
     # verbosity = 2
     def eed_step(ed_output, order):
-        print('summary', ed_output)
-        print('eed_step', order, seq_id, 'calculating ...')
+        # print('summary', ed_output)
+        # print('eed_step', order, seq_id, 'calculating ...')
         if verbosity >= 2:
             print('eed_step', order, seq_id, 'calculating ...')
 
@@ -310,7 +316,7 @@ def increasing_eed(seq_id: str, csv: pd.DataFrame, verbosity: int = VERBOSITY,
         # # output = ed_output if ed_output[-1] else exact_ed(seq_id, csv, verbosity, order, linear, n_of_terms) + (False,)
         if not ed_output[-1]:
             output = exact_ed(seq_id, csv, verbosity, order, linear, n_of_terms, library=library) + ( False,)
-            print(output)
+            # print(output)
             # print(output[1:])
             if output[0] != []:
                 if len(output[0]) > 0 and output[0][-1] == 0 and order >= 2:
@@ -321,7 +327,7 @@ def increasing_eed(seq_id: str, csv: pd.DataFrame, verbosity: int = VERBOSITY,
                     #     'I suspect that the equation is not correct for all terms (wrong for the first few).')
                     pass
 
-                is_check = check_eq_man(output[0], seq_id, csv, n_of_terms=10**5)[0]
+                is_check = check_eq_man(output[0], seq_id, csv, n_of_terms=10**5, library=library)[0]
                 if not is_check:
                     # output = [], "", "", "", False
                     output = ed_output[:2] + output[2:]
@@ -347,7 +353,7 @@ def increasing_eed(seq_id: str, csv: pd.DataFrame, verbosity: int = VERBOSITY,
         return output
 
     # start = ([], "a(n) = NOT RECONSTRUCTED :-(", "", "", False)
-    start = ([], solution2str([]), "", "", False)
+    start = ([], solution2str([], library=library), "", "", False)
     orders = range(start_order, max_order+1)
 
     eed = reduce(eed_step, orders, start)[:4]
@@ -504,7 +510,7 @@ def adaptive_leed(seq_id, csv, verbosity=VERBOSITY, max_order=20, linear=True, n
     return
 
 
-def check_truth(seq_id: str, csv_filename: str, oeis_friendly=False):
+def check_truth(seq_id: str, csv_filename: str, oeis_friendly=False, library: str = 'nquad'):
     'Check OEIS sequence\'s  website\'s supposed equation against the sequence terms.'
 
     csv = pd.read_csv(csv_filename, low_memory=False, usecols=[seq_id])
@@ -519,7 +525,7 @@ def check_truth(seq_id: str, csv_filename: str, oeis_friendly=False):
     x = truth2coeffs(truth).row_insert(0, sp.Matrix([0]))
     # x = sp.Matrix(list(int(i) for i in coeffs))
     # print(x)
-    is_check = check_eq_man(x, seq_id, csv, n_of_terms=10**5, oeis_friendly=oeis_friendly)
+    is_check = check_eq_man(x, seq_id, csv, n_of_terms=10**5, oeis_friendly=oeis_friendly, library=library)
     # print(is_check)
     # is_check = is_check[0]
     # check[]
@@ -537,7 +543,7 @@ def check_eq_man(x: sp.Matrix, seq_id: str, csv: str,
     header = 1 if header else 0
     seq = unnan(csv[seq_id][header:n_of_terms])
     seq = sp.Matrix(list(reversed(seq[:])))
-    print(seq[-10:])
+    # print(seq[-10:])
 
     # seq = sp.Matrix(csv[seq_id][header:])[:n_of_terms, :]
     # # Handle nans:
@@ -561,7 +567,6 @@ def check_eq_man(x: sp.Matrix, seq_id: str, csv: str,
     n_present = 1 if library in ('nlin', 'nquad', 'ncub') else 0
     degree = 1 if library in ('lin', 'nlin') else 2 if library in ('quad', 'nquad') else 3 if library in ('cub', 'ncub') else 'Unknown Library!!'
     order = (len(x) - degree*n_present)//degree
-
     if len(x) != degree*n_present + degree*order:
         raise IndexError('Diofantos: library is not compatible with coefs\' length, i.e. len(x) != degree*n_present + degree*order')
     # print(degree, order, len(x))
@@ -597,10 +602,12 @@ def check_eq_man(x: sp.Matrix, seq_id: str, csv: str,
             # print(order, d, degree, n_present)
             # print(till_now[(order*(d-1)):(order*d), :], x[(order*(d-1)+degree*n_present):(order*(d)+degree*n_present), :])
             a += till_now[:order, :].applyfunc( lambda x: x ** d).dot(x[(order*(d-1)+degree*n_present):(order*(d)+degree*n_present), :])
-            # print(till_now[(order*(d-1)):(order*d), :])
+            # print(till_now[:order, :])
+            # print(till_now[:order, :].applyfunc( lambda x: x ** d))
+            # print(x[(order*(d-1)+degree*n_present):(order*(d)+degree*n_present), :])
             # 1/0
 
-             # .applyfunc( lambda x: x ** d).dot(x[(order*(d-1)+degree*n_present):(order*(d)+degree*n_present), :]))
+            # .applyfunc( lambda x: x ** d).dot(x[(order*(d-1)+degree*n_present):(order*(d)+degree*n_present), :]))
             # print('a:', a)
             # print(till_now[-(order*d):-(order*(d-1)), :])
             # print(till_now[-(order*d):-(order*(d-1)+degree), :].applyfunc( lambda x: x ** d))
@@ -649,11 +656,11 @@ def check_eq_man(x: sp.Matrix, seq_id: str, csv: str,
     # print(type(reversed(reconst[:])))
     # print(type(reversed(seq[:])))
     out = reconst == seq, list(reversed(reconst[:])), list(reversed(seq[:]))
-    print(len(reconst), len(seq))
-    print([(n, i) for n, i in enumerate(seq) if i != reconst[n]])
-    print(out[0])
-    print(out[1][:20])
-    print(out[2][:20])
+    # print(len(reconst), len(seq))
+    # print([(n, i) for n, i in enumerate(seq) if i != reconst[n]])
+    # print(out[0])
+    # print(out[1][:20])
+    # print(out[2][:20])
     return out
 
 if __name__ == '__main__':
