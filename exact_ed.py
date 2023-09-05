@@ -166,9 +166,6 @@ def unnan(seq: list) -> sp.Matrix:
     if seq.has(sp.nan):
         seq = seq[:list(seq).index(sp.nan), :]
     seq = sp.Matrix([int(i) for i in seq])
-    # for i in seq[:14] + seq[-14:]:
-    #     print(type(i))
-    # 1/0
     return seq
 
 
@@ -524,56 +521,124 @@ def check_truth(seq_id: str, csv_filename: str, oeis_friendly=False):
 
 def check_eq_man(x: sp.Matrix, seq_id: str, csv: str,
                  n_of_terms: int = 500, header: bool = True,
-                 oeis_friendly=0) -> (bool, int):
+                 oeis_friendly=0, library: str = 'nlin') -> (bool, int):
     """Manually check if exact ED returns correct solution, i.e. recursive equation."""
     if not x:
     # if x==[]:
         return False, "no reconst", "no reconst"
     n_of_terms = max(n_of_terms, len(x))
     header = 1 if header else 0
-    seq = sp.Matrix(csv[seq_id][header:])[:n_of_terms, :]
-    # Handle nans:
-    if seq.has(sp.nan):
-        seq = seq[:list(seq).index(sp.nan), :]
+    seq = unnan(csv[seq_id][header:n_of_terms])
+    seq = sp.Matrix(list(reversed(seq[:])))
 
-    nonzero_indices = [i for i in range(len(x)) if (x[i] != 0)]
-    if nonzero_indices == []:
-        x = [0, 0]
-        # print(type(seq), type(seq[0, :]))
-        fake_reconst = seq[0, :] + sp.Matrix([1])
-    elif nonzero_indices == [0]:
-        x = [x[0]] + [0]
-        fake_reconst = seq[0, :] + sp.Matrix([1])
-    else:
-        x = x[:max(nonzero_indices) + 1]
-        fake_reconst = []
-    x = sp.Matrix(x)
+    # seq = sp.Matrix(csv[seq_id][header:])[:n_of_terms, :]
+    # # Handle nans:
+    # if seq.has(sp.nan):
+    #     seq = seq[:list(seq).index(sp.nan), :]
 
-    def an(till_now, x):
+    # # Why? In order to set the order of the recursion to the minimal and thus take as few first terms as possible:
+    # nonzero_indices = [i for i in range(len(x)) if (x[i] != 0)]
+    # if nonzero_indices == []:
+    #     x = [0, 0]
+    #     # print(type(seq), type(seq[0, :]))
+    #     fake_reconst = seq[0, :] + sp.Matrix([1])
+    # elif nonzero_indices == [0]:
+    #     x = [x[0]] + [0]
+    #     fake_reconst = seq[0, :] + sp.Matrix([1])
+    # else:
+    #     x = x[:max(nonzero_indices) + 1]
+    #     fake_reconst = []
+    # x = sp.Matrix(x)
+
+    n_present = 1 if library in ('nlin', 'nquad', 'ncub') else 0
+    degree = 1 if library in ('lin', 'nlin') else 2 if library in ('quad', 'nquad') else 3 if library in ('cub', 'ncub') else 'Unknown Library!!'
+    order = (len(x) - degree*n_present)//degree
+
+    if len(x) != degree*n_present + degree*order:
+        raise IndexError('Diofantos: library is not compatible with coefs\' length, i.e. len(x) != degree*n_present + degree*order')
+    print(degree, order, len(x))
+
+    def an(till_now: sp.Matrix, x: sp.Matrix) -> sp.Matrix:
         # print('till_now, x', till_now, x)
         # print(type(x), x[0])
         coefs = x[:]
         coefs.reverse()
         # print(type(coefs))
-        out =  sp.Matrix([coefs[-1]*till_now.rows]) + till_now[-len(coefs[:-1]):, :].transpose()*sp.Matrix(coefs[:-1])
-        return out
+        # out = sp.Matrix([coefs[-1]*till_now.rows]) + till_now[-len(coefs[:-1]):, :].transpose()*sp.Matrix(coefs[:-1])
+
+        # for d in range(1, degree+1):
+        #     a += till_now[-d]**d
+
+        # order = (len(coefs)-degree*n_present)//degree
+        print('inside')
+
+        coefs = sp.Matrix(coefs)
+        a = 0
+        print('til_now:', till_now)
+        print('coefs:', coefs)
+        # a = till_now[0]*coefs[-1]*n_present + till_now[-order:, :].dot(coefs[-(order+degree*n_present):-degree*n_present, :])
+        # print('a:', a)
+        for d in range(1, degree+1):
+            # a.applyfunc(lambda x: x**d).transpose()*coefs[-order*d:-order*(d-1), :]
+            # a = (a.multiply_elementwisel(
+            # a += (till_now[-d])**d*coefs[-d]*n_present
+            a += x[d-1]**d*n_present
+            print('a: pred', a)
+            # a += till_now[-(order*d+degree):-(order*(d-1)-degree), :].applyfunc( lambda x: x ** d).dot(coefs[-order * d:-order * (d - 1), :])
+            print(order, d, degree, n_present)
+            print(till_now[(order*(d-1)):(order*d), :], x[(order*(d-1)+degree*n_present):(order*(d)+degree*n_present), :])
+            a += till_now[:order, :].applyfunc( lambda x: x ** d).dot(x[(order*(d-1)+degree*n_present):(order*(d)+degree*n_present), :])
+            print(till_now[(order*(d-1)):(order*d), :])
+            # 1/0
+             # .applyfunc( lambda x: x ** d).dot(x[(order*(d-1)+degree*n_present):(order*(d)+degree*n_present), :]))
+            print('a:', a)
+            # print(till_now[-(order*d):-(order*(d-1)), :])
+            # print(till_now[-(order*d):-(order*(d-1)+degree), :].applyfunc( lambda x: x ** d))
+            # 1/0
+            # .transpose() * sp.Matrix(
+                # coefs[:-1]))
+
+            # for i in range(1, order+1):
+            #     a += till_now[-i]**i * till_now[-d+i]**(d-i)
+            # a += till_now[-d]**d
+
+        print('a:', a)
+        # a = till_now [k]
+        # out =  sp.Matrix([coefs[-1]*(till_now.rows-1)]) + till_now[-len(coefs[:-1]):, :].transpose()*sp.Matrix(coefs[:-1])
+        print(a)
+        return sp.Matrix([a])
         # return (x[0] * till_now.rows + till_now[-len(x[1:]):, :].transpose() * x[1:, :])[0]
 
-    if fake_reconst != []:
-        reconst = an(fake_reconst, x)
-    else:
-        reconst = seq[:max(len(x)-1, min(oeis_friendly, len(seq))), :]  # init reconst
+    # if fake_reconst != []:
+    #     reconst = an(fake_reconst, x)
+    # else:
+    #     reconst = seq[:max(order, min(oeis_friendly, len(seq))), :]  # init reconst
+
+    # reconst = sp.Matrix(reversed(seq[:max(order, min(oeis_friendly, len(seq)))]))  # init reconst
+    # reconst = sp.Matrix(list(reversed(seq[:max(order, min(oeis_friendly, len(seq)))])))
+    print(order)
+    reconst = seq[-max(order, min(oeis_friendly, len(seq))):, :]
+    # reconst = list(seq[:max(order, min(oeis_friendly, len(seq)))])
+    print(type(reconst))
+    print(reconst)
+    print(len(reconst))
+    #
+    # print(order, degree, x, seq_id, library, reconst, seq)
+    # 1/0
     # else:
     #     reconst = seq[:len(x)-1, :]  # init reconst
 
-    for i in range(len(seq) - len(reconst)):
+    for i in range(len(seq) - len(reconst) - 0):
         # reconst = reconst.col_join(sp.Matrix([an(reconst, x)]))
-        reconst = reconst.col_join(an(reconst, x))
-        # print(i, reconst)
+        # reconst = reconst.col_join(an(reconst, x))
+        reconst = an(reconst, x).col_join(reconst)
+        print(i, list(reversed(reconst))[:20])
 
     # print(reconst)
-    # print(seq)
-    out = reconst == seq, reconst, seq
+    print(seq)
+    # print(type(reversed(reconst[:])))
+    # print(type(reversed(seq[:])))
+    out = reconst == seq, list(reversed(reconst[:])), list(reversed(seq[:]))
     return out
 
 if __name__ == '__main__':
@@ -625,7 +690,24 @@ if __name__ == '__main__':
     #  'A157069']
     # ['A057524', 'A164009']
 
-    is_check = check_eq_man(x, id_, csv, oeis_friendly=34)
+    id_ = 'A000045'
+    x = sp.Matrix([0, 1, 1, 0, 0, 0, 0])
+    # x = sp.Matrix([1, 1])
+    x = sp.Matrix([0, 0, 1, 1, 0, 0, 0, 0, 0, 0])
+    # x = sp.Matrix([0, 0, 0, 1, 1, 0, 0, 0, 0])
+    # x = sp.Matrix([1, 1, 0, 0, 0, 0])
+    # is_check = check_eq_man(x, id_, csv, library='lin')
+    # is_check = check_eq_man(x, id_, csv, library='nlin')
+    is_check = check_eq_man(x, id_, csv, library='nquad')
+    # is_check = check_eq_man(x, id_, csv, library='ncub')
+    # is_check = check_eq_man(x, id_, csv, library='cub')
+    print(is_check[0])
+    print(is_check[1][:20])
+    print(is_check[2][:20])
+    # print([i[:20] for i in is_check[2]])
+    print('ehere')
+    1/0
+    # is_check = check_eq_man(x, id_, csv, oeis_friendly=34)
     print(is_check[0])
     print(list(is_check[1]))
     print(list(is_check[2]))
