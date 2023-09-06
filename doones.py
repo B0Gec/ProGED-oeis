@@ -35,15 +35,19 @@ SINDy = False
 if SINDy:
     from sindy_oeis import sindy, preprocess, heuristic, sindy_grid
 
-LINEAR = True
-LINEAR = False
+GROUND_TRUTH = True
+GROUND_TRUTH = False
 
 # only libraries allowed:
-LIBRARY = 'lin'
-LIBRARY = 'nlin'
-LIBRARY = 'quad'
-# LIBRARY = 'nquad'
-LIBRARY = 'ncub'
+# LIBRARY = 'lin'
+# LIBRARY = 'nlin'
+# LIBRARY = 'quad'
+# # LIBRARY = 'nquad'
+# LIBRARY = 'ncub'
+LIBRARIES = ['n', 'lin', 'nlin', 'quad', 'nquad', 'cub', 'ncub']
+LIBRARIES = ['ncub']
+# LIBRARIES = ['lin', 'nlin', 'quad', 'nquad', 'ncub']
+# LIBRARIES = LIBRARY
 
 
 INCREASING_EED = True
@@ -142,7 +146,8 @@ JOB_ID = "000000"
 # SEQ_ID = (True, 'A001343')
 # SEQ_ID = (True, 'A008685')
 # SEQ_ID = (False, 'A013833')
-SEQ_ID = (True, 'A000045')
+# SEQ_ID = (True, 'A000045')
+SEQ_ID = (False, 'A000045')
 # SEQ_ID = (True, 'A000043')
 # SEQ_ID = (True, 'A000187')
 # ['A056457', 'A212593', 'A212594']
@@ -164,6 +169,12 @@ SEQ_ID = (True, 'A000045')
 # SEQ_ID = (True, 'A010034')
 # SEQ_ID = (True, 'A000518')
 # SEQ_ID = (True, 'A055512')
+# SEQ_ID = (False, 'A000032')
+# SEQ_ID = (True, 'A000032')
+SEQ_ID = (True, 'A000045')
+SEQ_ID = (True, 'A000032')
+SEQ_ID = (False, 'A000290')
+# SEQ_ID = (True, 'A000290')
 # debug and sindy and buglist
 
 # DIOFANT_GRID = False
@@ -180,6 +191,7 @@ EXPERIMENT_ID = timestamp
 parser = argparse.ArgumentParser()
 parser.add_argument("--job_id", type=str, default=JOB_ID)
 parser.add_argument("--task_id", type=int, default=TASK_ID)
+parser.add_argument("--lib", type=str, default=None)
 parser.add_argument("-ss", type=int, default=-1)
 parser.add_argument("-to", type=int, default=-1)
 parser.add_argument("--order", type=int, default=MAX_ORDER)
@@ -194,8 +206,15 @@ args = parser.parse_args()
 
 job_id = args.job_id
 task_id = args.task_id
+# library = args.lib
+libraries = args.lib.split(',') if args.lib is not None else LIBRARIES
+# if library is None:
+#     library = libraries
 
-print('task_id', task_id)
+print('libraries', libraries)
+# 1/0
+
+# print('task_id', task_id)
 # task_id = remnants[task_id]
 # diofant_grid = True if args.diogrid == "True" else False
 
@@ -390,8 +409,8 @@ else:
         # try:
         if SINDy:
             print('Attempting SINDy for', seq_id)
-            # if LINEAR:
-            seq, coeffs, truth = unpack_seq(seq_id, csv) if LINEAR else unnan(csv[seq_id]), None, None
+            # if GROUND_TRUTH:
+            seq, coeffs, truth = unpack_seq(seq_id, csv) if GROUND_TRUTH else unnan(csv[seq_id]), None, None
             # else:
             #     seq, coeffs, truth = unnan(csv[seq_id]), None, None
 
@@ -409,7 +428,7 @@ else:
                 output_string += f'Sindy will use max_order: {max_order_}\n'
                 # x = sindy(list(seq), max_order_, seq_len=seq_len, threshold=threshold)
                 # LIBRARY!!!
-                x, printout, x_avg = sindy_grid(seq, seq_id, csv, coeffs, max_order, seq_len, library=LIBRARY)
+                x, printout, x_avg = sindy_grid(seq, seq_id, csv, coeffs, max_order, seq_len, library=libraries)
                 output_string += printout
                 # x = sp.Matrix([0, 0, 0, 0])
 
@@ -435,14 +454,16 @@ else:
             START_ORDER = 6
             START_ORDER = 1
             if INCREASING_EED:
-                x, eq, coeffs, truth = increasing_eed(seq_id, csv, VERBOSITY, max_order_,
-                                                      linear=LINEAR, n_of_terms=N_OF_TERMS_ED, library=LIBRARY, start_order=START_ORDER)
+                x, xlib, eq, coeffs, truth = increasing_eed(seq_id, csv, VERBOSITY, max_order_,
+                                                      ground_truth=GROUND_TRUTH, n_of_terms=N_OF_TERMS_ED,
+                                                      library=libraries, start_order=START_ORDER)
                 # x, eq, coeffs, truth = exact_ed(seq_id, csv, VERBOSITY, max_order_,
                 #                                 n_of_terms=N_OF_TERMS_ED, linear=LINEAR)
 
         # print('eq', eq, 'x', x)
-        is_reconst = solution_vs_truth(x, coeffs) if LINEAR else ""
-        is_check_verbose = check_eq_man(x, seq_id, csv, n_of_terms=10**5)
+        is_reconst = solution_vs_truth(x, coeffs) if GROUND_TRUTH else ""
+        is_check_verbose = check_eq_man(x, seq_id, csv, n_of_terms=10**5, library=xlib)
+        # print('here', x, xlib, eq, coeffs, truth)
         # print('manual check \n', is_check_verbose[1], '\n', is_check_verbose[2])
         is_check = is_check_verbose[0]
         # print(f"{is_reconst}!, reconstructed as in ground truth.")
@@ -477,7 +498,7 @@ else:
         # elif task_id in INCREASING_FREQS:
         #     print_results(results, verbosity=1)
         # # except Exception as RuntimeError
-        return seq_id, eq, truth, x, is_reconst, is_check, timing_print, output_string
+        return seq_id, eq, truth, x, xlib, is_reconst, is_check, timing_print, output_string
 
     # print('outer after', max_order)
 
@@ -492,15 +513,15 @@ else:
         _, timing_print = timer(now=start, text=f"While total time consumed by now, scale:{task_id + 1}/{n_of_seqs}, "
                                                 f"seq_id:{seq_id}, order:{max_order}")
     else:
-        seq_id, eq, truth, x, is_reconst, is_check, timing_print, output_string = \
+        seq_id, eq, truth, x, xlib, is_reconst, is_check, timing_print, output_string = \
             doone(task_id=task_id, seq_id=seq_id, linear=True)
     # results += [doone(task_id=task_id, seq_id=seq_id)]
     # results += [(seq_id, eq, truth, x, is_reconst, is_check)]
 
     # output_string = ""
     output_string += timing_print
-    output_string += f"\n\n{seq_id}: \n{eq}\n"
-    output_string += f"truth: \n{truth}\n\n"
+    output_string += f"\n\n{seq_id}: \n{eq}\nby library: {xlib}"
+    output_string += f"\ntruth: \n{truth}\n\n"
     output_string += f'{is_reconst}  -  checked against website ground truth.     \n'
     output_string += f'{is_check}  -  \"manual\" check if equation is correct.    \n'
 

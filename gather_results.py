@@ -74,12 +74,13 @@ job_id = "diocor-merge"  #
 # job_id = "sindycore83"
 job_id = "dicor-cub"
 job_id = "dicor-cub19"
+job_id = 'dicor-ncub19_95'
 
 
 
 print(job_id)
 CORES = True if job_id in ("diocores77", 'diocor-merge', 'sindycore83', 'dicor-cub', 'dicor-cub19') else False
-# CORES = True
+CORES = True
 # CORES = False
 if CORES:
     csv_cols = list(pd.read_csv('cores_test.csv').columns)
@@ -100,6 +101,7 @@ time_complexity_dict = {
     'sindycore83': '43 + mins',
     'dicor-cub': 'from 2pm..14.20, i.e. 20mins',
     'dicor-cub19': 'from 14.30 .. to 14:33, i.e. 20mins',
+    'dicor-ncub19_95': 'from 5.9. 17h .. to more than 6.9. 8:25 ... to ?, i.e. >half day',
 }
 time_complexity_dict[job_id] = 'unknomn' if job_id not in time_complexity_dict else time_complexity_dict[job_id]
 time_complexity = time_complexity_dict[job_id]
@@ -711,3 +713,13 @@ write_bugs = False
 # first 6 bugs: ['37100080/01230_A053833.txt', '37100079/00095_A166986.txt', '37100079/00278_A055649.txt']
 # 37256442/05365_A026471.txt', '37256442/05484_A027636.txt', '37256442/05778_A028253.txt', '37256442/05478_A027630.txt', '37256442/05367_A026474.txt', '37256442/05480_A027632.txt']
 
+# compare:
+ncub = ['00010_A000035.txt', '00009_A000032.txt', '00014_A000045.txt', '00017_A000058.txt', '00019_A000079.txt', '00030_A000129.txt', '00038_A000204.txt', '00041_A000225.txt', '00042_A000244.txt', '00048_A000302.txt', '00051_A000326.txt', '00057_A000583.txt', '00075_A001045.txt', '00088_A001333.txt', '00095_A001519.txt', '00100_A001906.txt', '00106_A002275.txt', '00111_A002530.txt', '00112_A002531.txt', '00114_A002620.txt', '00123_A004526.txt', '00130_A005408.txt', '00133_A005843.txt']
+dicores = ['00133_A005843.txt', '00009_A000032.txt', '00088_A001333.txt', '00095_A001519.txt', '00046_A000290.txt', '00047_A000292.txt', '00052_A000330.txt', '00010_A000035.txt', '00042_A000244.txt', '00111_A002530.txt', '00057_A000583.txt', '00075_A001045.txt', '00108_A002378.txt', '00123_A004526.txt', '00038_A000204.txt', '00056_A000578.txt', '00041_A000225.txt', '00019_A000079.txt', '00130_A005408.txt', '00100_A001906.txt', '00106_A002275.txt', '00051_A000326.txt', '00014_A000045.txt', '00114_A002620.txt', '00077_A001057.txt', '00112_A002531.txt', '00030_A000129.txt']
+print(sorted(ncub))
+print(sorted(dicores))
+print(len(ncub), len(dicores))
+print(sorted(list(set(ncub) & set(dicores))))
+print(sorted(list(set(ncub).symmetric_difference(set(dicores)))))
+print(sorted(list(set(ncub).difference(set(dicores)))))
+print(sorted(list(set(dicores).difference(set(ncub)))))

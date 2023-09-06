@@ -265,3 +265,22 @@ progress of debuging after party:
 2 new successes:    a043, a0302
 4 fails:           A000058, A000396, A002658, A006894
 tasks still running: 61, 67, 97, 131, 158,
+
+
+found in ncub:
+['00017_A000058.txt', '00048_A000302.txt']
+in linear:
+['00046_A000290.txt', '00047_A000292.txt', '00052_A000330.txt', '00056_A000578.txt', '00077_A001057.txt', '00108_A002378.txt']
+
+a290 n**2,
+a292 a(n) = n**2 + a(n - 2),
+A000330: a(n) = n**2 + a(n - 1) by library: ncub
+A000578: a(n) = n**3 by library: ncub
+A001057: a(n) = n + 2*a(n - 2)**2 - 2*a(n - 2) - 2*a(n - 1)**2 - a(n - 1) by library: ncub truth:
+A002378: a(n) = n**2 + n by library: ncub truth:
+
+
+
+
+
+

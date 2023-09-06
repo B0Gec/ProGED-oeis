@@ -8,6 +8,7 @@ import time
 import math
 # from typing import Union
 from functools import reduce
+from itertools import product
 
 
 # if os.getcwd()[-11:] == 'ProGED_oeis':
@@ -47,21 +48,25 @@ def grid_sympy(seq: sp.MutableDenseMatrix, max_order: int, library: str):  # seq
     # seq = seq[:shape[0]-1, :]
     # n = len(seq)
 
-    max_degree = 1 if library in ('lin', 'nlin') else 2 if library in ('quad', 'nquad') else 3 if library in ('cub', 'ncub') else 'Unknown Library!!'
-    n_cols = sp.Matrix.hstack(*[sp.Matrix([n**degree for n in range(1, seq.rows)]) for degree in range(1, max_degree+1)]) if library in ('nlin', 'nquad', 'ncub') else sp.Matrix()
+    n_degree, degree = lib2degrees(library)
+    # max_degree = 0 if library == 'n' else 1 if library in ('lin', 'nlin') else 2 if library in ('quad', 'nquad') else 3 if library in ('cub', 'ncub') else 'Unknown Library!!'
+    n_cols = sp.Matrix.hstack(*[sp.Matrix([n**degree for n in range(1, seq.rows)]) for degree in range(1, n_degree+1)])
     # ntriangles = triangle_grid(1)
 
-    def triangle_grid(max_degree):
+    def triangle_grid(degree):
         return sp.Matrix(seq.rows-1, max_order,
-                        (lambda i,j: (seq[max(i-j,0)]**max_degree)*(1 if i>=j else 0))
+                        (lambda i, j: (seq[max(i-j,0)]**degree)*(1 if i>=j else 0))
                         )
     # ntriangles = sp.Matrix.hstack(sp.Matrix([i for i in range(1, seq.rows)]), triangle_grid(1))
 
     # for degree in range(2, max_degree+1):
     #     ntriangles = sp.Matrix.hstack(ntriangles, sp.Matrix([i**degree for i in range(1, seq.rows)]), triangle_grid(degree))
-    triangles = sp.Matrix.hstack(*[triangle_grid(degree) for degree in range(1, max_degree+1)])
+    triangles = sp.Matrix.hstack(*[triangle_grid(degree) for degree in range(1, degree+1)])
 
-    col_tri = sp.Matrix.hstack(n_cols, triangles)
+    # print('n_cols', n_cols.shape, n_cols,)
+    # print('triangles', triangles.shape, triangles)
+
+    col_tri = n_cols if library == 'n' else sp.Matrix.hstack(n_cols, triangles)
 
     # print('n_cols', n_cols.shape, n_cols)
     # print('triangles', triangles.shape, triangles)
@@ -74,10 +79,12 @@ def grid_sympy(seq: sp.MutableDenseMatrix, max_order: int, library: str):  # seq
         )
         # sp.Matrix([i for i in range(1, seq.rows)]),
         # triangles)
+    # print('data', data.shape, data)
     return data
 
-def dataset(seq: list, max_order: int, linear: bool, library: str):
-    "Instant list -> (b, A) for equation discovery / LA system."
+
+def dataset(seq: list, max_order: int, library: str):
+    """Instant list -> (b, A) for equation discovery / LA system."""
 
     if max_order <= 0:
         raise ValueError("max_order must be > 0. Otherwise needs to be implemented properly.")
@@ -188,7 +195,7 @@ def unpack_seq(seq_id: str, csv: pd.DataFrame) -> tuple[sp.Matrix, sp.Matrix, st
 
 
 def solution_vs_truth(x: sp.Matrix, truth_coeffs: sp.Matrix) -> bool:
-    "is_oeis/is_reconst, i.e. return True if solution is identical to the ground truth"
+    """is_oeis/is_reconst, i.e. return True if solution is identical to the ground truth"""
 
     nonzero_indices = [i for i in range(len(x)) if (x[i] != 0)]
     if nonzero_indices == []:
@@ -201,27 +208,56 @@ def solution_vs_truth(x: sp.Matrix, truth_coeffs: sp.Matrix) -> bool:
     return ed_coeffs == truth_coeffs
 
 
-def solution2str(x: sp.Matrix, library: str) -> str:
-    "Convert solution to string."
+def lib2degrees(library: str) -> int:
+    # n_present = 1 if library in ('n', 'nlin', 'nquad', 'ncub') else 0
+    degree = 1 if library in ('lin', 'nlin') else 2 if library in ('quad', 'nquad') else 3 if library in ('n', 'cub', 'ncub') else 'Unknown Library!!'
+    n_degree = 0 if library in ('lin', 'quad', 'cub') else degree
+    degree = 0 if library == 'n' else degree
+    return n_degree, degree
 
-    n_present = 1 if library in ('nlin', 'nquad', 'ncub') else 0
-    degree = 1 if library in ('lin', 'nlin') else 2 if library in ('quad', 'nquad') else 3 if library in ('cub', 'ncub') else 'Unknown Library!!'
-    order = (len(x) - degree*n_present)//degree
-    if len(x) != degree*n_present + degree*order:
+
+def xlib2orders(x: sp.Matrix, library: str) -> tuple[int, int, int]:
+    """Calculate n_present, degree and order out of library string."""
+
+    # n_present = 1 if library in ('n', 'nlin', 'nquad', 'ncub') else 0
+    # degree = 1 if library in ('lin', 'nlin') else 2 if library in ('quad', 'nquad') else 3 if library in ('n', 'cub', 'ncub') else 'Unknown Library!!'
+    # n_present = lib2degree(library)[0]
+    n_degree = lib2degrees(library)[0]
+    degree = lib2degrees(library)[1]
+    # order = (len(x) - degree*n_present)//degree
+    order = 0 if degree == 0 else (len(x) - n_degree)//degree
+    # if len(x) != degree*n_present + degree*order:
+    if len(x) != n_degree + degree * order:
         raise IndexError('Diofantos: library is not compatible with coefs\' length, i.e. len(x) != degree*n_present + degree*order')
 
-    # print(degree, order, len(x))
-    # print([(i, i%order, i//order) for i in range(1+order+1, 1+order*degree+1)])
+    return  n_degree, degree, order
 
-    verbose_eq = (['a(n)', 'n'] + [f'n^{degree}' for degree in range(2, degree+1)] + [f"a(n-{i})" for i in range(1, order + 1)]
-        + sum([[f"a(n-{i})^{degree}" for i in range(1, order+1)] for degree in range(2, degree + 1)], []))
-    # print(verbose_eq)
-    # 1/0
 
-    verbose_eq = sp.Matrix([verbose_eq])
+def solution2str(x: sp.Matrix, library: str) -> str:
+    """Convert solution to string."""
+
     if x==[]:
         eq = "a(n) = NOT RECONSTRUCTED :-("
     else:
+        n_degree, degree, order = xlib2orders(x, library)
+        # print(n_degree, degree, order)
+        # n_present = 1 if library in ('n', 'nlin', 'nquad', 'ncub') else 0
+        # degree = 1 if library in ('lin', 'nlin') else 2 if library in ('quad', 'nquad') else 3 if library in ('n', 'cub', 'ncub') else 'Unknown Library!!'
+        # order = (len(x) - degree*n_present)//degree
+        # order = 0 if library == 'n' else order
+        # if len(x) != degree*n_present + degree*order:
+        #     raise IndexError('Diofantos: library is not compatible with coefs\' length, i.e. len(x) != degree*n_present + degree*order')
+
+        # print(degree, order, len(x))
+        # print([(i, i%order, i//order) for i in range(1+order+1, 1+order*degree+1)])
+
+        verbose_eq = (['a(n)'] + ['n']*(n_degree>0) + [f'n^{deg}' for deg in range(2, n_degree+1)] + [f"a(n-{i})" for i in range(1, order + 1)]
+            + sum([[f"a(n-{i})^{degree}" for i in range(1, order+1)] for degree in range(2, degree + 1)], []))
+        # print(verbose_eq)
+        # print('x', x)
+        # 1/0
+
+        verbose_eq = sp.Matrix([verbose_eq])
         expr = verbose_eq[:, 1:] * x
         eq = f"{verbose_eq[0]} = {expr[0]}"
     return eq
@@ -235,18 +271,19 @@ def instant_solution_vs_truth(x: sp.Matrix, seq_id: str, csv: pd.DataFrame) -> b
 
 
 def exact_ed(seq_id: str, csv: pd.DataFrame, verbosity: int = VERBOSITY,
-             max_order: int = None, linear: bool = True, n_of_terms=10**16, library: str ='lin') -> tuple[sp.Matrix, str, str, str]:
+             max_order: int = None, ground_truth: bool = True, n_of_terms=10**16,
+             library: str ='lin') -> tuple[sp.Matrix, str, str, str]:
     # max_order = 25
     # max_order = None
-    header = 1 if linear else 0
+    header = 1 if ground_truth else 0
 
-    if library == 'lin':
-        linear = True
+    # if library == 'lin':
+    #     linear = True
     # print('in exact_ed')
     # POTENTIAL ERROR!!!!: WHEN NOT CONVERTING 3.0 INTO 3 FOR SOLVING DIOFANTINE
-    if linear:
+    if ground_truth:
         seq, coeffs, truth = unpack_seq(seq_id, csv)
-        # Handle nans:
+        # Handle nans:  # prolly not needed any more:
         if seq.has(sp.nan):
             seq = seq[:list(seq).index(sp.nan), :]
     else:
@@ -255,7 +292,7 @@ def exact_ed(seq_id: str, csv: pd.DataFrame, verbosity: int = VERBOSITY,
 
     # print(seq)
     max_order = sp.floor(seq.rows/2)-1 if max_order is None else max_order
-    b, A = dataset(list(seq), max_order, linear=linear, library=library)
+    b, A = dataset(list(seq), max_order, library=library)
 
     # print('order', max_order)
     # print(A.shape)
@@ -289,37 +326,41 @@ def exact_ed(seq_id: str, csv: pd.DataFrame, verbosity: int = VERBOSITY,
 
     if len(x) > 0:
         x = x[0]
-        if linear:
-            x = sp.Matrix.vstack(sp.Matrix([0]), x)
+        # if linear:
+        #     x = sp.Matrix.vstack(sp.Matrix([0]), x)
+    # print(x, library)
     eq = solution2str(x, library)
 
     # print('x', x)
-    if linear:
+    if ground_truth:
         return x, eq, coeffs, truth
     else:
         return x, eq, "", ""
 
 
 def increasing_eed(seq_id: str, csv: pd.DataFrame, verbosity: int = VERBOSITY,
-                   max_order: int = None, linear: bool = True, n_of_terms=10 ** 16, library: str = 'lin',
-                   start_order: int = 1) -> tuple[sp.Matrix, str, str, str]:
+                   max_order: int = None, ground_truth: bool = True, n_of_terms=10 ** 16, library: list = ['lin'],
+                   start_order: int = 1) -> tuple[sp.Matrix, str, str, str, str]:
     """Perform exact_ed with increasing the *max_order* untill the equation that holds (with minimum order) is found."""
 
     # verbosity = 2
-    def eed_step(ed_output, order):
+    def eed_step(ed_output, order_lib):
+        order = order_lib[0]
+        lib = order_lib[1]
         # print('summary', ed_output)
         # print('eed_step', order, seq_id, 'calculating ...')
         if verbosity >= 2:
-            print('eed_step', order, seq_id, 'calculating ...')
+            print('eed_step', order_lib, seq_id, 'calculating ...')
 
         # output = ed_output if ed_output[0] != [] else exact_ed(seq_id, csv, verbosity, order, linear, n_of_terms) + (False,)
         # # output = ed_output if ed_output[-1] else exact_ed(seq_id, csv, verbosity, order, linear, n_of_terms) + (False,)
         if not ed_output[-1]:
-            output = exact_ed(seq_id, csv, verbosity, order, linear, n_of_terms, library=library) + ( False,)
+            x, eq, coefs, truth, _ = exact_ed(seq_id, csv, verbosity, order, ground_truth, n_of_terms, library=lib) + ( False,)
+            output = x, lib, eq, coefs, truth, _
             # print(output)
             # print(output[1:])
-            if output[0] != []:
-                if len(output[0]) > 0 and output[0][-1] == 0 and order >= 2:
+            if x != []:
+                if len(x) > 0 and x[-1] == 0 and order >= 2:
                     # print('Unlucky me!' + seq_id + ' The order is lower than maximum although it\'s increasing eed!'
                     #     'this indicates that the equation probably the equation found a loophole in'
                     #     'construction of dataset since it ignores first terms of the sequence.'
@@ -327,10 +368,10 @@ def increasing_eed(seq_id: str, csv: pd.DataFrame, verbosity: int = VERBOSITY,
                     #     'I suspect that the equation is not correct for all terms (wrong for the first few).')
                     pass
 
-                is_check = check_eq_man(output[0], seq_id, csv, n_of_terms=10**5, library=library)[0]
+                is_check = check_eq_man(x, seq_id, csv, n_of_terms=10**5, library=lib)[0]
                 if not is_check:
                     # output = [], "", "", "", False
-                    output = ed_output[:2] + output[2:]
+                    output = output[:-1] + (False,)
                 else:
                     output = output[:-1] + (True,)
                     # output = ed_output[:2] + output[2:-1] + (True,)
@@ -349,14 +390,17 @@ def increasing_eed(seq_id: str, csv: pd.DataFrame, verbosity: int = VERBOSITY,
         #
         # # if
 
+        # print('output', output)
         # print('after one step of order', order, output)
         return output
 
     # start = ([], "a(n) = NOT RECONSTRUCTED :-(", "", "", False)
-    start = ([], solution2str([], library=library), "", "", False)
+    # start = ([], 'n', solution2str([], library=library[0]), "", "", False)
+    start = ([], 'n', 'a(n) = ?', "", "", False)
     orders = range(start_order, max_order+1)
+    orders_lib = product(orders, library)
 
-    eed = reduce(eed_step, orders, start)[:4]
+    eed = reduce(eed_step, orders_lib, start)[:-1]
     # for i in range(1, max_order):
     #     if x != []:
     #         x = exact_ed()
@@ -448,66 +492,66 @@ def bisect(a, b, **eed) -> tuple[tuple]:
 # 1/0
 
 
-def adaptive_leed(seq_id, csv, verbosity=VERBOSITY, max_order=20, linear=True, n_of_terms=10**16, max_found=True):
-    """Adapted linear exact ED.
-    I.e. try exact_ed for different orders, since we want as simple
-    equations as possible (e.g. smallest order).
-
-     - max_found ... True if we already found equation of order _max_order_
-    """
-
-    b = None
-    if max_found:
-        x, coeffs, eq, truth = exact_ed(seq_id,
-                                        csv,
-                                        verbosity=verbosity,
-                                        max_order=max_order,
-                                        linear=linear,
-                                        n_of_terms=n_of_terms)
-        if x==[]:
-            return x, coeffs, eq, truth
-        elif not check_eq_man(x, seq_id, csv, n_of_terms=10**8):
-            return x, coeffs, eq, truth
-        else:
-            # I think wrong:
-            b = list(x[1:]).index(0) + 1  # b in bisection
-            eed_output = x, coeffs, ...
-
-
-    b = max_order if b is None else b
-
-    eed = {'seq_id': seq_id, 'csv': csv, 'verbosity': VERBOSITY, 'max_order': 20, 'linear': True, 'n_of_terms': 10 ** 16, 'max_found': True}
-    eed.pop('max_order')
-
-    a, b, exp_output = exp_search(max_order=b, **eed)
-    # if exp_output is None and not max_found:  # No equation found.
-    #     return exp_output
-    # elif exp_output is None:
-    #     return
-
-    # eed_output = eed_output if exp_output is None else exp_output
-
-    eed_output = exp_output
-
-    eed_output = bisect(a, b, eed_output=eed_output, **eed)
-
-
-    # for i in [i**2 for i in range(20)]
-
-
-    # seq = seq[:list(seq).index(sp.nan), :]
-
-    x, coeffs, eq, truth = eed_output
-
-    print('x:', x, x[1:])
-    ed_coeffs = [str(c) for c in x[1:] if c!=0]
-    print('ed_coeffs:', ed_coeffs)
-    print('coeffs:', coeffs)
-    print(coeffs == ed_coeffs)
-    print('eq:', eq)
-    print('truth:', truth)
-
-    return
+# def adaptive_leed(seq_id, csv, verbosity=VERBOSITY, max_order=20, linear=True, n_of_terms=10**16, max_found=True):
+#     """Adapted linear exact ED.
+#     I.e. try exact_ed for different orders, since we want as simple
+#     equations as possible (e.g. smallest order).
+#
+#      - max_found ... True if we already found equation of order _max_order_
+#     """
+#
+#     b = None
+#     if max_found:
+#         x, coeffs, eq, truth = exact_ed(seq_id,
+#                                         csv,
+#                                         verbosity=verbosity,
+#                                         max_order=max_order,
+#                                         linear=linear,
+#                                         n_of_terms=n_of_terms)
+#         if x==[]:
+#             return x, coeffs, eq, truth
+#         elif not check_eq_man(x, seq_id, csv, n_of_terms=10**8):
+#             return x, coeffs, eq, truth
+#         else:
+#             # I think wrong:
+#             b = list(x[1:]).index(0) + 1  # b in bisection
+#             eed_output = x, coeffs, ...
+#
+#
+#     b = max_order if b is None else b
+#
+#     eed = {'seq_id': seq_id, 'csv': csv, 'verbosity': VERBOSITY, 'max_order': 20, 'linear': True, 'n_of_terms': 10 ** 16, 'max_found': True}
+#     eed.pop('max_order')
+#
+#     a, b, exp_output = exp_search(max_order=b, **eed)
+#     # if exp_output is None and not max_found:  # No equation found.
+#     #     return exp_output
+#     # elif exp_output is None:
+#     #     return
+#
+#     # eed_output = eed_output if exp_output is None else exp_output
+#
+#     eed_output = exp_output
+#
+#     eed_output = bisect(a, b, eed_output=eed_output, **eed)
+#
+#
+#     # for i in [i**2 for i in range(20)]
+#
+#
+#     # seq = seq[:list(seq).index(sp.nan), :]
+#
+#     x, coeffs, eq, truth = eed_output
+#
+#     print('x:', x, x[1:])
+#     ed_coeffs = [str(c) for c in x[1:] if c!=0]
+#     print('ed_coeffs:', ed_coeffs)
+#     print('coeffs:', coeffs)
+#     print(coeffs == ed_coeffs)
+#     print('eq:', eq)
+#     print('truth:', truth)
+#
+#     return
 
 
 def check_truth(seq_id: str, csv_filename: str, oeis_friendly=False, library: str = 'nquad'):
@@ -564,18 +608,22 @@ def check_eq_man(x: sp.Matrix, seq_id: str, csv: str,
     #     fake_reconst = []
     # x = sp.Matrix(x)
 
-    n_present = 1 if library in ('nlin', 'nquad', 'ncub') else 0
-    degree = 1 if library in ('lin', 'nlin') else 2 if library in ('quad', 'nquad') else 3 if library in ('cub', 'ncub') else 'Unknown Library!!'
-    order = (len(x) - degree*n_present)//degree
-    if len(x) != degree*n_present + degree*order:
-        raise IndexError('Diofantos: library is not compatible with coefs\' length, i.e. len(x) != degree*n_present + degree*order')
-    # print(degree, order, len(x))
+    n_degree, degree, order = xlib2orders(x, library)
+    # n_present = 1 if library in ('n', 'nlin', 'nquad', 'ncub') else 0
+    # degree = 0 if library == 'n' else 1 if library in ('lin', 'nlin') else 2 if library in ('quad', 'nquad') else 3 if library in ('cub', 'ncub') else 'Unknown Library!!'
+    # order = (len(x) - degree*n_present)//degree
+    # order = 0 if library == 'n' else order
+    # if len(x) != degree*n_present + degree*order:
+    #     raise IndexError('Diofantos: library is not compatible with coefs\' length, i.e. len(x) != degree*n_present + degree*order')
+    # # print(degree, order, len(x))
+
+    # print(n_degree, degree, order, x, seq_id, library)
 
     def an(till_now: sp.Matrix, x: sp.Matrix) -> sp.Matrix:
         # print('till_now, x', till_now, x)
         # print(type(x), x[0])
-        coefs = x[:]
-        coefs.reverse()
+        # coefs = x[:]
+        # coefs.reverse()
         # print(type(coefs))
         # out = sp.Matrix([coefs[-1]*till_now.rows]) + till_now[-len(coefs[:-1]):, :].transpose()*sp.Matrix(coefs[:-1])
 
@@ -585,39 +633,48 @@ def check_eq_man(x: sp.Matrix, seq_id: str, csv: str,
         # order = (len(coefs)-degree*n_present)//degree
         # print('inside')
 
-        coefs = sp.Matrix(coefs)
+        # coefs = sp.Matrix(coefs)
         a = 0
         # print('til_now:', till_now)
-        # print('coefs:', coefs)
         # a = till_now[0]*coefs[-1]*n_present + till_now[-order:, :].dot(coefs[-(order+degree*n_present):-degree*n_present, :])
         # print('a:', a)
 
-        for d in range(1, degree+1):
-            # a.applyfunc(lambda x: x**d).transpose()*coefs[-order*d:-order*(d-1), :]
-            # a = (a.multiply_elementwisel(
-            # a += (till_now[-d])**d*coefs[-d]*n_present
-            a += x[d-1]**d*n_present
-            # print('a: pred', a)
-            # a += till_now[-(order*d+degree):-(order*(d-1)-degree), :].applyfunc( lambda x: x ** d).dot(coefs[-order * d:-order * (d - 1), :])
-            # print(order, d, degree, n_present)
-            # print(till_now[(order*(d-1)):(order*d), :], x[(order*(d-1)+degree*n_present):(order*(d)+degree*n_present), :])
-            a += till_now[:order, :].applyfunc( lambda x: x ** d).dot(x[(order*(d-1)+degree*n_present):(order*(d)+degree*n_present), :])
-            # print(till_now[:order, :])
-            # print(till_now[:order, :].applyfunc( lambda x: x ** d))
-            # print(x[(order*(d-1)+degree*n_present):(order*(d)+degree*n_present), :])
-            # 1/0
+        # print('tik pred')
+        a = sum(x[d - 1] * (till_now.rows+1)**d for d in range(1, n_degree+1))
+        # print('po n_degree sum()', a, 'n:', till_now.rows, )
+        # print('po n_degree sum()', a, 'n:', till_now.rows, )
 
-            # .applyfunc( lambda x: x ** d).dot(x[(order*(d-1)+degree*n_present):(order*(d)+degree*n_present), :]))
-            # print('a:', a)
-            # print(till_now[-(order*d):-(order*(d-1)), :])
-            # print(till_now[-(order*d):-(order*(d-1)+degree), :].applyfunc( lambda x: x ** d))
-            # 1/0
-            # .transpose() * sp.Matrix(
-                # coefs[:-1]))
+        # for d in range(1, degree+1):
+        a += sum(till_now[:order, :].applyfunc( lambda x: x ** d).dot(x[(order*(d-1)+n_degree):(order*(d)+n_degree), :]) for d in range(1, degree+1))
 
-            # for i in range(1, order+1):
-            #     a += till_now[-i]**i * till_now[-d+i]**(d-i)
-            # a += till_now[-d]**d
+        # print('po degree sum()', a)
+
+        # for d in range(1, degree+1):
+        #     # a.applyfunc(lambda x: x**d).transpose()*coefs[-order*d:-order*(d-1), :]
+        #     # a = (a.multiply_elementwisel(
+        #     # a += (till_now[-d])**d*coefs[-d]*n_present
+        #     # a += x[d-1]**d*n_present
+        #     # print('a: pred', a)
+        #     # a += till_now[-(order*d+degree):-(order*(d-1)-degree), :].applyfunc( lambda x: x ** d).dot(coefs[-order * d:-order * (d - 1), :])
+        # print(order, n_degree, degree)
+        #     # print(till_now[(order*(d-1)):(order*d), :], x[(order*(d-1)+degree*n_present):(order*(d)+degree*n_present), :])
+        #     a += till_now[:order, :].applyfunc( lambda x: x ** d).dot(x[(order*(d-1)+n_degree):(order*(d)+n_degree), :])
+        #     # print(till_now[:order, :])
+        #     # print(till_now[:order, :].applyfunc( lambda x: x ** d))
+        #     # print(x[(order*(d-1)+degree*n_present):(order*(d)+degree*n_present), :])
+        #     # 1/0
+        #
+        #     # .applyfunc( lambda x: x ** d).dot(x[(order*(d-1)+degree*n_present):(order*(d)+degree*n_present), :]))
+        #     # print('a:', a)
+        #     # print(till_now[-(order*d):-(order*(d-1)), :])
+        #     # print(till_now[-(order*d):-(order*(d-1)+degree), :].applyfunc( lambda x: x ** d))
+        #     # 1/0
+        #     # .transpose() * sp.Matrix(
+        #         # coefs[:-1]))
+        #
+        #     # for i in range(1, order+1):
+        #     #     a += till_now[-i]**i * till_now[-d+i]**(d-i)
+        #     # a += till_now[-d]**d
 
         # print('a:', a)
         # a = till_now [k]
@@ -635,17 +692,21 @@ def check_eq_man(x: sp.Matrix, seq_id: str, csv: str,
     # reconst = sp.Matrix(list(reversed(seq[:max(order, min(oeis_friendly, len(seq)))])))
     # print(order)
     reconst = seq[-max(order, min(oeis_friendly, len(seq))):, :]
+    # if [i for i in x[n_degree:] if i != 0] == []:
+    #     reconst = an(sp.Matrix([0 for i in reconst[:]]), x)
+        # reconst = sp.Matrix([])
+
     # reconst = list(seq[:max(order, min(oeis_friendly, len(seq)))])
     # print(type(reconst))
     # print(reconst)
     # print(len(reconst))
     #
-    # print(order, degree, x, seq_id, library, reconst, seq)
     # 1/0
     # else:
     #     reconst = seq[:len(x)-1, :]  # init reconst
+    # print('reconst:', reconst)
 
-    for i in range(len(seq) - len(reconst) - 0):
+    for i in range(len(seq) - len(reconst)):
         # reconst = reconst.col_join(sp.Matrix([an(reconst, x)]))
         # reconst = reconst.col_join(an(reconst, x))
         reconst = an(reconst, x).col_join(reconst)

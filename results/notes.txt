@@ -1,0 +1,92 @@
+here Matrix([[0], [0], [1], [1], [0], [0]]) nquad a(n) = a(n - 2) + a(n - 1)
+
+er one step of order 19 (Matrix([
+[0],
+[0],
+[1],
+[1],
+[0],
+[0]]), 'nquad', 'a(n) = a(n - 2) + a(n - 1)', '', '', True)
+
+
+_step (2, 'nquad') A000045 calculating ...
+Matrix([[0], [0], [1], [1], [0], [0]]) nquad
+nquad
+tik pred
+po n_degree sum() 1
+po degree sum() 3
+2 2 2
+tik pred
+po n_degree sum() 1
+po degree sum() 5
+2 2 2
+tik pred
+po n_degree sum() 1
+po degree sum() 9
+2 2 2
+tik pred
+po n_degree sum() 1
+po degree sum() 15
+2 2 2
+tik pred
+po n_degree sum() 1
+po degree sum() 25
+2 2 2
+tik pred
+po n_degree sum() 1
+po degree sum() 41
+2 2 2
+tik pred
+po n_degree sum() 1
+po degree sum() 67
+2 2 2
+tik pred
+po n_degree sum() 1
+po degree sum() 109
+2 2 2
+tik pred
+po n_degree sum() 1
+po degree sum() 177
+2 2 2
+tik pred
+po n_degree sum() 1
+po degree sum() 287
+2 2 2
+tik pred
+po n_degree sum() 1
+po degree sum() 465
+2 2 2
+tik pred
+po n_degree sum() 1
+po degree sum() 753
+2 2 2
+tik pred
+po n_degree sum() 1
+po degree sum() 1219
+2 2 2
+tik pred
+po n_degree sum() 1
+po degree sum() 1973
+2 2 2
+tik pred
+po n_degree sum() 1
+po degree sum() 3193
+2 2 2
+tik pred
+po n_degree sum() 1
+po degree sum() 5167
+2 2 2
+tik pred
+po n_degree sum() 1
+po degree sum() 8361
+2 2 2
+tik pred
+po n_degree sum() 1
+po degree sum() 13529
+2 2 2
+tik pred
+po n_degree sum() 1
+po degree sum() 21891
+2 2 2
+tik pred
+po n_degree sum() 1
