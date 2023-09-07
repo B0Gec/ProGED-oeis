@@ -232,6 +232,14 @@ def xlib2orders(x: sp.Matrix, library: str) -> tuple[int, int, int]:
 
     return  n_degree, degree, order
 
+def lib2verbose(library: str, order: int) -> list[str]:
+    """Convert library string into verbose equation."""
+
+    n_degree, degree = lib2degrees(library)
+    verbose_eq = (['a(n)'] + ['n']*(n_degree>0) + [f'n^{deg}' for deg in range(2, n_degree+1)] + [f"a(n-{i})" for i in range(1, order + 1)]
+        + sum([[f"a(n-{i})^{degree}" for i in range(1, order+1)] for degree in range(2, degree + 1)], []))
+    return verbose_eq
+
 
 def solution2str(x: sp.Matrix, library: str) -> str:
     """Convert solution to string."""
@@ -251,8 +259,9 @@ def solution2str(x: sp.Matrix, library: str) -> str:
         # print(degree, order, len(x))
         # print([(i, i%order, i//order) for i in range(1+order+1, 1+order*degree+1)])
 
-        verbose_eq = (['a(n)'] + ['n']*(n_degree>0) + [f'n^{deg}' for deg in range(2, n_degree+1)] + [f"a(n-{i})" for i in range(1, order + 1)]
-            + sum([[f"a(n-{i})^{degree}" for i in range(1, order+1)] for degree in range(2, degree + 1)], []))
+        verbose_eq = lib2verbose(library, order)
+        # verbose_eq = (['a(n)'] + ['n']*(n_degree>0) + [f'n^{deg}' for deg in range(2, n_degree+1)] + [f"a(n-{i})" for i in range(1, order + 1)]
+        #     + sum([[f"a(n-{i})^{degree}" for i in range(1, order+1)] for degree in range(2, degree + 1)], []))
         # print(verbose_eq)
         # print('x', x)
         # 1/0
