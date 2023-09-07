@@ -10,7 +10,7 @@ import numpy as np
 import pysindy as ps
 
 warnings.filterwarnings('ignore', module='pysindy')
-from exact_ed import grid_sympy, dataset, unpack_seq, truth2coeffs, solution_vs_truth, instant_solution_vs_truth, solution2str, check_eq_man
+from exact_ed import grid_sympy, dataset, unpack_seq, truth2coeffs, solution_vs_truth, instant_solution_vs_truth, solution2str, check_eq_man, lib2degrees
 
 import warnings
 warnings.filterwarnings("ignore")
@@ -58,10 +58,12 @@ def heuristic(terms_avail):
     """Calculate/decide on max_order given the number of available terms (of size < 10**16)."""
     return round(terms_avail/2)
 
-def preprocess(seq: sp.Matrix) -> tuple[sp.Matrix, bool]:
+def preprocess(seq: sp.Matrix, library: str) -> tuple[sp.Matrix, bool]:
     """Filter in only small sized terms of the sequence."""
 
-    biggie = list(map(lambda term: abs(term) >= 10**16, seq))
+    n_degree, degree = lib2degrees(library)
+    # biggie = list(map(lambda term: abs(term) >= 10**16, seq))
+    biggie = list(map(lambda term: abs(term**degree) >= 10**16, seq))
     fail = False
     if True in biggie:
         pos = biggie.index(True)
@@ -97,8 +99,7 @@ def sindy(seq: Union[list, sp.Matrix], max_order: int, seq_len: int, threshold: 
     # print(f"{int(seq[-1]):.4e}")
     # 1/0
 
-    linear = True if library in ('lin', 'quad', 'cub') else False
-    b, A = dataset(seq, max_order, linear=linear, library='lin')
+    b, A = dataset(seq, max_order, library=library)
     # b, A = dataset(seq, 19, linear=True)
     # b, A = dataset(sp.Matrix(seq), 2, linear=True)
     # 2-7, 9-14, 16-19 finds, 8,15 not
@@ -120,7 +121,9 @@ def sindy(seq: Union[list, sp.Matrix], max_order: int, seq_len: int, threshold: 
     #
     # print(data)
 
-    max_degree = 1 if library in ('lin', 'nlin') else 2 if library in ('quad', 'nquad') else 3 if library in ('cub', 'ncub') else 'Unknown Library!!'
+    # max_degree = 1 if library in ('lin', 'nlin') else 2 if library in ('quad', 'nquad') else 3 if library in ('cub', 'ncub') else 'Unknown Library!!'
+    _, max_degree = lib2degrees(library)
+
     # poly_order = 8
     poly_order = 1
     poly_order = max_degree
@@ -144,9 +147,11 @@ def sindy(seq: Union[list, sp.Matrix], max_order: int, seq_len: int, threshold: 
     model.coefficients()
     # print(model.coefficients())
     x = sp.Matrix([round(i) for i in model.coefficients()[0][1:]])
-    x = sp.Matrix.vstack(sp.Matrix([0]), x)
+    # x = sp.Matrix.vstack(sp.Matrix([0]), x)
 
-    # print(x)
+    # model.print()
+
+    print(x)
     return x
 
 
@@ -181,8 +186,9 @@ def one_results(seq, seq_id, csv, coeffs, max_order: int, seq_len: int,
 
     # print(max_order, seq_len)
     x = sindy(seq, max_order, seq_len, threshold, ensemble, library_ensemble, library)
-    is_reconst = solution_vs_truth(x, coeffs) if coeffs is None else ' - NaN - '
-    is_check_verbose = check_eq_man(x, seq_id, csv, n_of_terms=10 ** 5)
+    is_reconst = solution_vs_truth(x, coeffs) if coeffs is not None else ' - NaN - '
+    is_check_verbose = check_eq_man(x, seq_id, csv, n_of_terms=10 ** 5, library=library)
+    print('oner', x, library, is_check_verbose)
     is_check = is_check_verbose[0]
     summary = x, is_reconst, is_check, max_order
     # print()
@@ -270,16 +276,21 @@ def sindy_grid(seq, seq_id, csv, coeffs,
     grid2 = create_grid(seq, seq_id, csv, max_order, seq_len,
                        ths_bounds=(0, 0.9), ensemble_grid=(False, True, True),
                        order_pts=20, len_pts=1, threshold_pts=10)
-    # small_grid = create_grid(seq, seq_id, csv, coeffs, max_order, seq_len,
+    # small_grid = create_grid(seq, seq_id, csv, max_order, seq_len,
     #                    ths_bounds = (0, 0.9), ensemble_grid=(True, False, False),
-    #                    order_pts=2, len_pts=2, threshold_pts=3)
+    #                    # order_pts=20, len_pts=20, threshold_pts=18)
+    #                    order_pts = 2, len_pts = 2, threshold_pts = 3)
+
+    small_grid = create_grid(seq, seq_id, csv, max_order, seq_len, ths_bounds = (0, 0.9),
+                             ensemble_grid=(True, False, False),
+                           order_pts=3, len_pts=2, threshold_pts=3)
     # small_grid = create_grid(seq, seq_id, csv, coeffs, 4, seq_len,
     #                         ths_bounds = (0.1, 0.2), ensemble_grid=(False, False, True),
     #                         order_pts=3, len_pts=3, threshold_pts=3)
     grid = grid1 + grid2
     # grid = grid1
     # grid = grid2
-    # grid = small_grid
+    grid = small_grid
 
 
     # 2x2x3 = 12 + 2x1x3x2 = 12 ... = 24
@@ -316,7 +327,7 @@ def sindy_grid(seq, seq_id, csv, coeffs,
 
     ongrid = list(map(
         (lambda i: i + (one_results(seq, seq_id, csv, coeffs, i[0], i[1], i[2], library, **ens2dict(i[3]))[:3], )), grid))
-    # print(ongrid)
+    print(ongrid)
     printable = [(order, leng, thrs, ens, oneres[1], oneres[2]) for order, leng, thrs, ens, oneres in ongrid]
     printout += '\n'
     for i in range(round(len(printable)/5) + 1):
@@ -328,11 +339,23 @@ def sindy_grid(seq, seq_id, csv, coeffs,
         printout += f"\nNo configurations to test!\n"
         oeis, manually, fail = [], [], []
     else:
+        print(grid[0])
+        print(ongrid[0])
+        # for i in grid:
+        #     print(i)
         idx = len(grid[0])
+        print(idx)
+        print(ongrid[0][idx])
+        # print(grid[0][idx][1:3])
+        # 1/0
         oeis = [case[idx][0] for case in ongrid if case[idx][1:3] == (True, True)]
-        manually = [case[idx][0] for case in ongrid if case[idx][1:3] == (False, True)]
+        # manually = [case[idx][0] for case in ongrid if case[idx][1:3] == (False, True)]
+        manually = [case[idx][0] for case in ongrid if case[idx][2] == True and (not case[idx][0] in oeis)]
         # bug = [case[idx][0] for case in ongrid if case[idx][1:3] == (True, False)]
-        fail = [case[idx][0] for case in ongrid if case[idx][1:3] == (False, False)]
+        # fail = [case[idx][0] for case in ongrid if case[idx][1:3] == (False, False)]
+        fail = [case[idx][0] for case in ongrid if case[idx][2] == False]
+        # print(idx, oeis, manually)
+        # 1/0
 
     printout += "\n"
     printout += f"number of all configurations: {len(grid)}\n"
@@ -343,19 +366,57 @@ def sindy_grid(seq, seq_id, csv, coeffs,
     # sp.Matrix([round(i) for i in list(sum(ll, sp.Matrix([0, 0, 0])) / 3)])
 
     # print(xs)
-    if oeis != []:
-        x = oeis[0]
-    elif manually != []:
-        x = manually[0]
-    else:
-        x = []
-        # x = sp.Matrix([0, 0, 0, 0])
+    def selection_criteria(l: list) -> sp.Matrix:
+        """Choose solution of minimal "order", should I say complexity, i.e. lowest number of terms."""
+
+        if l == []:
+            return l
+        else:
+            # print('l', l)
+
+            # calculate complexity of given solution x (by counting number of non-zero terms):
+            def cmplx(x): return len([None for term in x if term != 0])
+            # complexities = [len([None for term in x if term != 0]) for x in l]
+            # min_compx = min(complexities)
+            # winners are those with minimal complexity:
+            winners = [x for x in l if cmplx(x) == min(map(cmplx, l))]
+            # if len(winners) > 1:
+            # winners = [x for x in winners if x[0] == min(map(lambda x: x[0], winners))]
+            # print('winners', winners)
+            # locations
+            locationss = [[n for n, i in enumerate(x) if i != 0] for x in winners]
+            # print('locationss', locationss)
+            # subwinners = [winners[n] for n, locs in enumerate(locationss) if sum(locs) == min(map(sum, locationss))]
+            subwinners = [(winners[n], locs) for n, locs in enumerate(locationss) if sum(locs) == min(map(sum, locationss))]
+            # map(lambda x: x[-1], [loc for i in locationss)
+            # print('subwinners', subwinners)
+            real_winner = subwinners[[locs[-1] for _, locs in subwinners].index(min([locs[-1] for _, locs in subwinners]))][0]
+
+
+            # print('real_winner', real_winner)
+            return real_winner
+
+    x = selection_criteria(oeis if oeis != [] else manually if manually != [] else [])
+    # print(x)
+    # print(selection_criteria(oeis+manually+fail))
+
+
+    # if oeis != []:
+    #     x = oeis[0]
+    # elif manually != []:
+    #     x = manually[0]
+    # else:
+    #     x = []
+    #     # x = sp.Matrix([0, 0, 0, 0])
     # print(x)
 
+    # print(ongrid[idx])
     xs = [case[idx][0] for case in ongrid]
     # print([len(x) for x in xs])
     max_len = max([len(x) for x in xs]) if xs != [] else 0
+    # print(max_len)
     xs = [sp.Matrix.vstack(x, sp.zeros(max_len-len(x), 1)) for x in xs]
+    # print(xs)
     # x_avg = sp.Matrix([round(i) for i in list(sum(xs, sp.Matrix([0, 0, 0])) / 3)])
     x_avg = sp.Matrix([round(i) for i in list(sum(xs, sp.zeros(max_len, 1)) / len(xs))]) if xs != [] else []
     # print('xs', xs)

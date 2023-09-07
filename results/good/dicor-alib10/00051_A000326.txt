@@ -1,0 +1,12 @@
+
+While total time consumed by now, scale:52/164, seq_id:A000326, order:10 took:
+ 2.0 seconds, i.e. 0.03 minutes or 0.001 hours.
+
+by library: nquad
+A000326: 
+a(n) = -6*n**2 + 11*n - 2*a(n - 2) + 7*a(n - 1)
+truth: 
+
+
+  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

@@ -1,0 +1,12 @@
+
+While total time consumed by now, scale:113/164, seq_id:A002531, order:10 took:
+ 18.2 seconds, i.e. 0.3 minutes or 0.005 hours.
+
+A002531: 
+a(n) = -a(n - 4) + 4*a(n - 2)
+by library: ncub
+truth: 
+
+
+  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

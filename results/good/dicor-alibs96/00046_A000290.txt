@@ -1,0 +1,12 @@
+
+While total time consumed by now, scale:47/164, seq_id:A000290, order:19 took:
+ 0.4 seconds, i.e. 0.01 minutes or 0.0 hours.
+
+A000290: 
+a(n) = n**2
+by library: n
+truth: 
+
+
+  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

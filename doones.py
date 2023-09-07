@@ -31,7 +31,7 @@ warnings.simplefilter("ignore")
 #     from exact_ed import exact_ed, timer
 
 SINDy = True
-SINDy = False
+# SINDy = False
 if SINDy:
     from sindy_oeis import sindy, preprocess, heuristic, sindy_grid
 
@@ -39,13 +39,14 @@ GROUND_TRUTH = True
 GROUND_TRUTH = False
 
 # only libraries allowed:
-# LIBRARY = 'lin'
-# LIBRARY = 'nlin'
+LIBRARY = 'lin'
+LIBRARY = 'nlin'
 # LIBRARY = 'quad'
 # # LIBRARY = 'nquad'
+# LIBRARY = 'cub'
 # LIBRARY = 'ncub'
 LIBRARIES = ['n', 'lin', 'nlin', 'quad', 'nquad', 'cub', 'ncub']
-LIBRARIES = ['ncub']
+# LIBRARIES = ['ncub']
 # LIBRARIES = ['lin', 'nlin', 'quad', 'nquad', 'ncub']
 # LIBRARIES = LIBRARY
 
@@ -88,7 +89,7 @@ VERBOSITY = 2  # dev scena
 VERBOSITY = 1  # run scenario
 
 DEBUG = True
-DEBUG = False
+# DEBUG = False
 # BUGLIST ignores blacklisting (runs also blacklisted) !!!!!
 BUGLIST = True
 BUGLIST = False
@@ -107,7 +108,7 @@ if BUGLIST:
 
 MAX_ORDER = 19  # We care only for recursive equations with max 20 terms or order.
 # MAX_ORDER = 2
-# MAX_ORDER = 10
+MAX_ORDER = 10
 # if DEBUG:
 #     MAX_ORDER = 5  # We care only for recursive equations with max 20 terms or order.
 # MAX_ORDER = 2
@@ -126,7 +127,7 @@ THRESHOLD = 0.1  # For sindy - masking threshold.
 N_OF_TERMS_ED = 200
 TASK_ID = 0
 # TASK_ID = 8
-# TASK_ID = 14
+TASK_ID = 14
 # TASK_ID = 187
 # TASK_ID = 5365  # A026471
 # TASK_ID = 191  # A026471
@@ -414,7 +415,7 @@ else:
             # else:
             #     seq, coeffs, truth = unnan(csv[seq_id]), None, None
 
-            seq, pre_fail = preprocess(seq)
+            seq, pre_fail = preprocess(seq, library=LIBRARY)
             seq_len = len(seq)
             if pre_fail:
                 output_string += f'Only huge terms in the sequence!!!\n\n'
@@ -428,19 +429,26 @@ else:
                 output_string += f'Sindy will use max_order: {max_order_}\n'
                 # x = sindy(list(seq), max_order_, seq_len=seq_len, threshold=threshold)
                 # LIBRARY!!!
-                x, printout, x_avg = sindy_grid(seq, seq_id, csv, coeffs, max_order, seq_len, library=libraries)
+                x, printout, x_avg = sindy_grid(seq, seq_id, csv, coeffs, max_order, seq_len, library=LIBRARY)
+                xlib = LIBRARY
+                print('x', x)
+                print('x_avg', x_avg)
+                print(check_eq_man(x, seq_id, csv, n_of_terms=10 ** 5, library=LIBRARY))
+                print(check_eq_man(x_avg, seq_id, csv, n_of_terms=10 ** 5, library=LIBRARY))
+                # 1/0
                 output_string += printout
                 # x = sp.Matrix([0, 0, 0, 0])
 
-                eq_avg = solution2str(x_avg)
+                eq_avg = solution2str(x_avg, LIBRARY)
                 # is_reconst_avg = solution_vs_truth(x, coeffs)
                 # is_check_avg = check_eq_man(x, seq_id, csv, n_of_terms=10 ** 5)[0]
                 is_reconst_avg = solution_vs_truth(x_avg, coeffs)
-                is_check_avg = check_eq_man(x_avg, seq_id, csv, n_of_terms=10 ** 5)[0]
+                # is_check_avg = check_eq_man(x_avg, seq_id, csv, n_of_terms=10 ** 5)[0]
+                is_check_avg = check_eq_man(x_avg, seq_id, csv, n_of_terms=10 ** 5, library=LIBRARY)[0]
                 output_string += f"\n\navg sindy: \n{eq_avg}\n"
                 output_string += f'{is_reconst_avg}  -  checked avg against website ground truth.     \n'
                 output_string += f'{is_check_avg}  -  \"manual\" check avg if equation is correct.    \n'
-            eq = solution2str(x)
+            eq = solution2str(x, LIBRARY)
 
 
 
@@ -520,7 +528,7 @@ else:
 
     # output_string = ""
     output_string += timing_print
-    output_string += f"\n\n{seq_id}: \n{eq}\nby library: {xlib}"
+    output_string += f"\n\nby library: {xlib}\n{seq_id}: \n{eq}"
     output_string += f"\ntruth: \n{truth}\n\n"
     output_string += f'{is_reconst}  -  checked against website ground truth.     \n'
     output_string += f'{is_check}  -  \"manual\" check if equation is correct.    \n'

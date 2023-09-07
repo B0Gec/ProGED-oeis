@@ -1,0 +1,12 @@
+
+While total time consumed by now, scale:113/164, seq_id:A002531, order:10 took:
+ 15.6 seconds, i.e. 0.26 minutes or 0.004 hours.
+
+by library: lin
+A002531: 
+a(n) = -a(n - 4) + 4*a(n - 2)
+truth: 
+
+
+  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

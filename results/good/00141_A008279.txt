@@ -1,0 +1,12 @@
+
+While total time consumed by now, scale:142/164, seq_id:A008279, order:19 took:
+ 4427.5 seconds, i.e. 73.79 minutes or 1.23 hours.
+
+A008279: 
+a(n) = NOT RECONSTRUCTED :-(
+by library: ncub
+truth: 
+
+
+  -  checked against website ground truth.     
+False  -  "manual" check if equation is correct.    

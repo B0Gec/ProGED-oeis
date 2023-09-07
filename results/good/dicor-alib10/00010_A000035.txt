@@ -1,0 +1,12 @@
+
+While total time consumed by now, scale:11/164, seq_id:A000035, order:10 took:
+ 1.3 seconds, i.e. 0.02 minutes or 0.0 hours.
+
+by library: lin
+A000035: 
+a(n) = a(n - 2)
+truth: 
+
+
+  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

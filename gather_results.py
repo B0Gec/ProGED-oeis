@@ -57,7 +57,7 @@ job_id = "sindygrid519_1"
 # # job_id = "incdio76"
 # # job_id = "blacklist76"
 # job_id = "incdio86"
-# job_id = "i86bugfix"
+# job_id = "i86/fix"
 job_id = "incdio74"  # 2023-07-04  ... I think this will be in final results.
 job_id = "sindyens75"  # 2023-07-04
 job_id = "sindydeb3"  # 2023-07-06
@@ -69,13 +69,16 @@ job_id = "sindydeb3-5"  #
 job_id = "sindydeb3-7"  # 2023-07-10
 job_id = "sindymerged"  #
 
-job_id = "diocores77"
-job_id = "diocor-merge"  #
-# job_id = "sindycore83"
-job_id = "dicor-cub"
-job_id = "dicor-cub19"
-job_id = 'dicor-ncub19_95'
-
+# job_id = "diocores77"
+# job_id = "diocor-merge"  #
+job_id = "sindycore83"
+# job_id = "dicor-cub"
+# job_id = "dicor-cub19"
+# job_id = 'dicor-ncub19_95'
+job_id = 'dicor-alibs96'  # bug since {eq}\nby lib{}\ntruth instead of {ed}\ntruth
+job_id = 'dicor-ncub10'  # max_order=10 only lib ncub  # bug since {eq}\nby lib{}\ntruth instead of {ed}\ntruth
+job_id = 'dicor-alib10'  # max_order=10 allibs
+#
 
 
 print(job_id)
@@ -102,6 +105,9 @@ time_complexity_dict = {
     'dicor-cub': 'from 2pm..14.20, i.e. 20mins',
     'dicor-cub19': 'from 14.30 .. to 14:33, i.e. 20mins',
     'dicor-ncub19_95': 'from 5.9. 17h .. to more than 6.9. 8:25 ... to ?, i.e. >half day',
+    'dicor-alibs96': '1day?',
+    'dicor-ncub10': 'from 9:24  to 9:58 (147 files (34 non_ids)) (2023-9-7) ... to ? for all files',
+    'dicor-alib10': 'from 9:56 (2023-9-7) to 10:30 or lets say 11:27 (excluding 11 jobs (known for bugs?)',
 }
 time_complexity_dict[job_id] = 'unknomn' if job_id not in time_complexity_dict else time_complexity_dict[job_id]
 time_complexity = time_complexity_dict[job_id]
@@ -134,7 +140,7 @@ True  -  "manual" check if equation is correct.
 VERBOSITY = 0
 # VERBOSITY = 1
 # VERBOSITY = 2
-def extract_file(fname, verbosity=VERBOSITY):
+def extract_file(fname, verbosity=VERBOSITY, job_id=job_id):
 
     if verbosity >= 1:
         print()
@@ -145,14 +151,18 @@ def extract_file(fname, verbosity=VERBOSITY):
     if verbosity >= 2:
         print(content)
 
-    eq = re.findall(r"A\d+:.*\n(.+)\ntruth:", content)
+
+    if job_id in ('dicor-ncub10', 'dicor-alibs96', ):
+        eq = re.findall(r"A\d+:.*\n(.+)\nby library:", content)  # uncomment only for alibs96 and ncub10
+    else:
+        eq = re.findall(r"A\d+:.*\n(.+)\ntruth:", content)
     re_all_stars = re.findall(r"scale:\d+/(\d+),", content)
     re_found = re.findall(r"NOT RECONSTRUCTED", content)
     eq = None if len(re_found) > 0 else eq[0]
     # avg = True
     avg = False
     added = 'avg ' if avg else ''
-    #re_reconst = re.findall(r"\n(\w{4,5}).+checked against website ground truth", content)
+    re_reconst = re.findall(r"\n(\w{4,5}).+checked against website ground truth", content)
     re_reconst = re.findall(r"\n(\w{4,5}).+" + f"checked {added}against website ground truth", content)
     re_manual = re.findall(r"\n(\w{4,5}).+" + f"\"manual\" check {added}if equation is correct", content)
 
@@ -577,36 +587,29 @@ printout = f"""
     \\FPeval{{\\perc{symbol}NotIsFound}}{{   round(100 * \\{symbol}notIsFound/\\{symbol}allSeqs:2)}}
 
     
-    \\begin{{table}}[h]
-    \\caption{{Table describing the (new/fresh) results of novel method experiments so far.}}
-    \\label{{tab:results_numbers{symbol}}}
+        \\begin{{table}}[h]
+    \\caption{{Table describing the {job_id} results of novel Diofantos method experiments so far.}}
+    \\label{{tab:dio.cores}}
        \\renewcommand{{\\arraystretch}}{{1.5}} \\begin{{center}}
-       \\begin{{tabular}}{{c|rrcc|c}} \\toprule \\centering
-    &                   \\textbf{{is\\_found}} &  & \\textbf{{not\\_is\\_found}} &  \\\\
-    \\textbf{{Validation}} & \\textbf{{identical}} & \\textbf{{nonidentical}} & \\textbf{{none (ed\\_fail)}}
-    & \\textbf{{error (jobs\\_fail)}} & $\\Sigma$  \\\\
+    \\begin{{tabular}}{{ll|cc|c}} \\toprule \\centering
+    &  \\textbf{{outputed}} &  & \\textbf{{not\\_outputed}} &  \\\\
+     \\textbf{{identical}} & \\textbf{{nonidentical}} & \\textbf{{error free (ed\\_fail)}} 
+    & \\textbf{{runtime error (jobs\\_fail)}} & $\\Sigma$ \\\\
         \\midrule
-        OK       & \\{symbol}isOeis & \\{symbol}nonId     &  $\\times$ & $\\times$ & \\{symbol}ok \\\\
-        not - OK & 0 & \\{symbol}nonMan &  $\\times$ & $\\times$   \\\\
-        \\midrule
-        $\\Sigma$ & \\{symbol}isOeis  &  \\{symbol}notOeis  &  \\{symbol}edFail
-        & \\{symbol}jobFail
-        &  \\{symbol}allSeqsc \\\\
+        ? (\\{symbol}isOeis) & \\{symbol}nonId  &  \\{symbol}edFail & \\{symbol}jobFail &  \\{symbol}allSeqsc \\\\
         \\bottomrule \\end{{tabular}} \\end{{center}}
     \\end{{table}}
 
-
 \\begin{{figure}}
     \\centering
-\\Tree[.$\\{symbol}allSeqs$ [.is\\_found [.$\\{symbol}isOeis$ ] 
-               [.$\\{symbol}notOeis$
-                    [.$\\{symbol}nonId$ ] 
-                    [.$\\{symbol}nonMan$ ]] ] 
-               [.not\\_is\\_found 
+\\Tree[.$\\{symbol}allSeqs$ [.outputed [.$\\{symbol}isOeis$ ] 
+                    [.$\\{symbol}nonId$ 
+                    ] ] 
+               [.not\\_outputed 
                     [.$\\{symbol}edFail$ ]
                     [.$\\{symbol}jobFail$ ]
                     ]] 
-    \\caption{{Tree explaining the process of grouping sequences into disjoint bins with tangible numbers.}}
+    \\caption{{Tree explaining the process of grouping sequences into disjoint bins with tangible numbers for {job_id}.}}
     \\label{{fig:explain_numbers{symbol}}}
 \\end{{figure}}
 
@@ -615,13 +618,13 @@ printout = f"""
     % \\pie[text=legend,
         \\pie[color={{ipsscblue, ipsscred, ipsscorange, ipsscyellow}}] 
         {{   \\perc{symbol}IsOeis/identical (\\{symbol}isOeis),
-            \\perc{symbol}NonId/ \\begin{{tabular}}{{c}} valid for   first \\\\ test terms  (\\{symbol}nonId) \\end{{tabular}} ,
-            \\perc{symbol}NonMan/invalid (\\{symbol}nonMan),
+            \\perc{symbol}NonId/ nonidentical (\\{symbol}nonId),
+            % \\perc{symbol}NonMan/invalid (\\{symbol}nonMan),
             \\perc{symbol}NotIsFound/no output (\\{symbol}notIsFound) 
             }}
     \\end{{tikzpicture}}
 
-    \\caption{{Summary of (fresh) results with pie chart.}}
+    \\caption{{Summary of (fresh) results with pie chart for {job_id}.}}
     \\label{{fig:explain_tree{symbol}}}
 \\end{{figure}}
 
@@ -715,7 +718,20 @@ write_bugs = False
 
 # compare:
 ncub = ['00010_A000035.txt', '00009_A000032.txt', '00014_A000045.txt', '00017_A000058.txt', '00019_A000079.txt', '00030_A000129.txt', '00038_A000204.txt', '00041_A000225.txt', '00042_A000244.txt', '00048_A000302.txt', '00051_A000326.txt', '00057_A000583.txt', '00075_A001045.txt', '00088_A001333.txt', '00095_A001519.txt', '00100_A001906.txt', '00106_A002275.txt', '00111_A002530.txt', '00112_A002531.txt', '00114_A002620.txt', '00123_A004526.txt', '00130_A005408.txt', '00133_A005843.txt']
+alibs = ['00009_A000032.txt', '00010_A000035.txt', '00014_A000045.txt', '00017_A000058.txt', '00019_A000079.txt',
+   '00029_A000124.txt', '00030_A000129.txt', '00038_A000204.txt', '00039_A000217.txt', '00041_A000225.txt',
+   '00042_A000244.txt', '00046_A000290.txt', '00047_A000292.txt', '00048_A000302.txt', '00051_A000326.txt',
+   '00052_A000330.txt', '00056_A000578.txt', '00057_A000583.txt', '00061_A000612.txt', '00067_A000798.txt',
+   '00075_A001045.txt', '00077_A001057.txt', '00088_A001333.txt', '00095_A001519.txt', '00097_A001699.txt',
+   '00100_A001906.txt', '00106_A002275.txt', '00108_A002378.txt', '00111_A002530.txt', '00112_A002531.txt',
+   '00114_A002620.txt', '00123_A004526.txt', '00130_A005408.txt', '00133_A005843.txt', '00158_A055512.txt']
+
+ncub10 =  ['00009_A000032.txt', '00010_A000035.txt', '00014_A000045.txt', '00017_A000058.txt', '00019_A000079.txt', '00029_A000124.txt', '00030_A000129.txt', '00038_A000204.txt', '00039_A000217.txt', '00041_A000225.txt', '00042_A000244.txt', '00046_A000290.txt', '00047_A000292.txt', '00048_A000302.txt', '00051_A000326.txt', '00052_A000330.txt', '00056_A000578.txt', '00057_A000583.txt', '00067_A000798.txt', '00075_A001045.txt', '00077_A001057.txt', '00088_A001333.txt', '00095_A001519.txt', '00097_A001699.txt', '00100_A001906.txt', '00106_A002275.txt', '00108_A002378.txt', '00111_A002530.txt', '00112_A002531.txt', '00114_A002620.txt', '00123_A004526.txt', '00130_A005408.txt', '00133_A005843.txt', '00158_A055512.txt']
+ncub = alibs
+ncub = ncub10
+
 dicores = ['00133_A005843.txt', '00009_A000032.txt', '00088_A001333.txt', '00095_A001519.txt', '00046_A000290.txt', '00047_A000292.txt', '00052_A000330.txt', '00010_A000035.txt', '00042_A000244.txt', '00111_A002530.txt', '00057_A000583.txt', '00075_A001045.txt', '00108_A002378.txt', '00123_A004526.txt', '00038_A000204.txt', '00056_A000578.txt', '00041_A000225.txt', '00019_A000079.txt', '00130_A005408.txt', '00100_A001906.txt', '00106_A002275.txt', '00051_A000326.txt', '00014_A000045.txt', '00114_A002620.txt', '00077_A001057.txt', '00112_A002531.txt', '00030_A000129.txt']
+dicores = alibs
 print(sorted(ncub))
 print(sorted(dicores))
 print(len(ncub), len(dicores))
