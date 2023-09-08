@@ -31,7 +31,7 @@ warnings.simplefilter("ignore")
 #     from exact_ed import exact_ed, timer
 
 SINDy = True
-# SINDy = False
+SINDy = False
 if SINDy:
     from sindy_oeis import sindy, preprocess, heuristic, sindy_grid
 

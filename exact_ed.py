@@ -1,6 +1,6 @@
 """Discover equation(s) on OEIS sequence to discover direct, recursive or even direct-recursive equation.
 """
-
+import itertools
 import os
 import sympy as sp
 import pandas as pd
@@ -42,6 +42,23 @@ def timer(now, text=f"\nScraping all (chosen) OEIS sequences"):
 
 # seq = sp.Matrix(csv[seq_id])
 # def grid_sympy(seq: sp.MutableDenseMatrix, nof_eqs: int = None):  # seq.shape=(N, 1)
+
+def poly_combinations(library: str, order: int):
+    """Return all combinations of variables in library up to order.
+    To avaid repetition in solution2str functiion."""
+
+    _, degree = lib2degrees(library)
+    basis = lib2stvars(library, order)
+
+    combins = itertools.combinations_with_replacement
+    combinations = sum([list(combins(basis, deg)) for deg in range(1, degree+1)], [])
+    print('combinations', combinations)
+    return combinations
+
+def solution_reference(library: str, order: int):
+    """Return reference solution for library and order."""
+    return ['a(n)', '1', ] + poly_combinations(library, order)
+
 def grid_sympy(seq: sp.MutableDenseMatrix, max_order: int, library: str):  # seq.shape=(N, 1)
     # seq = seq if nof_eqs is None else seq[:nof_eqs]
     # seq = seq[:nof_eqs, :]
@@ -49,37 +66,66 @@ def grid_sympy(seq: sp.MutableDenseMatrix, max_order: int, library: str):  # seq
     # n = len(seq)
 
     n_degree, degree = lib2degrees(library)
+    print('lib, order, n_deg, degree:', library, max_order, n_degree, degree)
     # max_degree = 0 if library == 'n' else 1 if library in ('lin', 'nlin') else 2 if library in ('quad', 'nquad') else 3 if library in ('cub', 'ncub') else 'Unknown Library!!'
     n_cols = sp.Matrix.hstack(*[sp.Matrix([n**degree for n in range(1, seq.rows)]) for degree in range(1, n_degree+1)])
+    # n_col = sp.Matrix([n for n in range(1, seq.rows)])
+    # print('n_col', n_col.shape, n_col)
     # ntriangles = triangle_grid(1)
+
 
     def triangle_grid(degree):
         return sp.Matrix(seq.rows-1, max_order,
                         (lambda i, j: (seq[max(i-j,0)]**degree)*(1 if i>=j else 0))
                         )
-    # ntriangles = sp.Matrix.hstack(sp.Matrix([i for i in range(1, seq.rows)]), triangle_grid(1))
+    ntriangle = sp.Matrix.hstack(sp.Matrix([i for i in range(1, seq.rows)]), triangle_grid(1))
+    print('ntriangle', ntriangle.shape, ntriangle)
+
+
+    basis = lib2stvars(library, max_order)
+    # print(basis)
+    triangle = {var: ntriangle[:, i] for i, var in enumerate(basis)}
+    # print('triangle', triangle)
+    #
+    # combins = itertools.combinations_with_replacement
+    # combinations = sum([list(combins(basis, deg)) for deg in range(1, degree+1)], [])
+    combinations = poly_combinations(library, max_order)
+    # print('combinations', combinations)
+    #
+    # def multiply(a, b):
+    #     return [i * j for i, j in zip(a, b)]
+    # def multiply(a: sp.Matrix, b: sp.Matrix) -> sp.Matrix:
+    #     return
+
+    def comb2act(comb: tuple, dic: dict) -> sp.Matrix: return dic[comb[0]] if len(comb) == 1 else dic[comb[0]].dot(comb2act(comb[1:], dic))
 
     # for degree in range(2, max_degree+1):
     #     ntriangles = sp.Matrix.hstack(ntriangles, sp.Matrix([i**degree for i in range(1, seq.rows)]), triangle_grid(degree))
-    triangles = sp.Matrix.hstack(*[triangle_grid(degree) for degree in range(1, degree+1)])
+    # triangles = sp.Matrix.hstack(*[triangle_grid(degree) for degree in range(1, degree+1)])
+    polys = sp.Matrix.hstack(*[comb2act(comb, triangle) for comb in combinations])
 
     # print('n_cols', n_cols.shape, n_cols,)
     # print('triangles', triangles.shape, triangles)
 
-    col_tri = n_cols if library == 'n' else sp.Matrix.hstack(n_cols, triangles)
+    # col_tri = n_cols if library == 'n' else sp.Matrix.hstack(n_cols, triangles)
 
     # print('n_cols', n_cols.shape, n_cols)
     # print('triangles', triangles.shape, triangles)
     # print('an', seq.shape, seq)
     data = sp.Matrix.hstack(
         seq[1:,:],
+        sp.Matrix([1 for i in range(1, seq.rows)]),  # constant term, i.e. C_0 in a_n = C_0 + C_1*n + C_2*n^2 + ...
         # n_cols,
         # triangles
-        col_tri
+        # col_tri
+        polys
         )
         # sp.Matrix([i for i in range(1, seq.rows)]),
         # triangles)
     # print('data', data.shape, data)
+
+    if data.cols-1 != solution_reference:
+        raise IndexError(f"Diofantos: Reference (indexing) of solution {solution_reference} is not compatible with data (with {data.cols-1} columns).")
     return data
 
 
@@ -236,13 +282,17 @@ def lib2verbose(library: str, order: int) -> list[str]:
     """Convert library string into verbose equation."""
 
     n_degree, degree = lib2degrees(library)
+
     verbose_eq = (['a(n)'] + ['n']*(n_degree>0) + [f'n^{deg}' for deg in range(2, n_degree+1)] + [f"a(n-{i})" for i in range(1, order + 1)]
         + sum([[f"a(n-{i})^{degree}" for i in range(1, order+1)] for degree in range(2, degree + 1)], []))
     return verbose_eq
 
 def lib2stvars(library: str, order: int) -> list[str]:
+    """Convert library string into sympy variables."""
 
-    return
+    n_degree, _ = lib2degrees(library)
+    basis = ['n'] * (n_degree > 0) + [f'a(n-{i})' for i in range(1, order + 1)]
+    return basis
 
 def solution2str(x: sp.Matrix, library: str) -> str:
     """Convert solution to string."""
@@ -263,6 +313,7 @@ def solution2str(x: sp.Matrix, library: str) -> str:
         # print([(i, i%order, i//order) for i in range(1+order+1, 1+order*degree+1)])
 
         verbose_eq = lib2verbose(library, order)
+        verbose_eq = solution_reference(library, order)
         # verbose_eq = (['a(n)'] + ['n']*(n_degree>0) + [f'n^{deg}' for deg in range(2, n_degree+1)] + [f"a(n-{i})" for i in range(1, order + 1)]
         #     + sum([[f"a(n-{i})^{degree}" for i in range(1, order+1)] for degree in range(2, degree + 1)], []))
         # print(verbose_eq)
