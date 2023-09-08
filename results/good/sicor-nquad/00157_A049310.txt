@@ -1,0 +1,31 @@
+
+Preprocessing sees only first 200 terms.
+Sindy threshold: 0.1
+Default setting for how many terms should sindy see: 200
+Sindy will use max_order: 10
+
+, (1, 102, 0.0, 0, ' - NaN - ', False), (1, 102, 0.45, 0, ' - NaN - ', False), (1, 102, 0.9, 0, ' - NaN - ', False), (4, 102, 0.0, 0, ' - NaN - ', False), (4, 102, 0.45, 0, ' - NaN - ', False), 
+, (4, 102, 0.9, 0, ' - NaN - ', False), (7, 102, 0.0, 0, ' - NaN - ', False), (7, 102, 0.45, 0, ' - NaN - ', False), (7, 102, 0.9, 0, ' - NaN - ', False), 
+, 
+
+number of all configurations: 9
+number of fully (true, true) successful configurations: 0
+number of partially only (false, true) successful configurations: 0
+number of total fail (false, false) configurations: 9
+
+
+avg sindy: 
+a(n) = -a(n - 4) - a(n - 2)
+False  -  checked avg against website ground truth.     
+False  -  "manual" check avg if equation is correct.    
+While total time consumed by now, scale:158/164, seq_id:A049310, order:10 took:
+ 1.7 seconds, i.e. 0.03 minutes or 0.0 hours.
+
+by library: nquad
+A049310: 
+a(n) = NOT RECONSTRUCTED :-(
+truth: 
+None
+
+  -  checked against website ground truth.     
+False  -  "manual" check if equation is correct.    

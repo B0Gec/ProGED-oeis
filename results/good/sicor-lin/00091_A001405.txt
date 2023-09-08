@@ -1,0 +1,31 @@
+
+Preprocessing sees only first 57 terms.
+Sindy threshold: 0.1
+Default setting for how many terms should sindy see: 57
+Sindy will use max_order: 10
+
+, (1, 30, 0.0, 0, ' - NaN - ', False), (1, 30, 0.45, 0, ' - NaN - ', False), (1, 30, 0.9, 0, ' - NaN - ', False), (4, 30, 0.0, 0, ' - NaN - ', False), (4, 30, 0.45, 0, ' - NaN - ', False), 
+, (4, 30, 0.9, 0, ' - NaN - ', False), (7, 30, 0.0, 0, ' - NaN - ', False), (7, 30, 0.45, 0, ' - NaN - ', False), (7, 30, 0.9, 0, ' - NaN - ', False), 
+, 
+
+number of all configurations: 9
+number of fully (true, true) successful configurations: 0
+number of partially only (false, true) successful configurations: 0
+number of total fail (false, false) configurations: 9
+
+
+avg sindy: 
+a(n) = -2*a(n - 7) + 9*a(n - 6) + 3*a(n - 5) - 13*a(n - 4) - 2*a(n - 3) + 5*a(n - 2) + a(n - 1)
+False  -  checked avg against website ground truth.     
+False  -  "manual" check avg if equation is correct.    
+While total time consumed by now, scale:92/164, seq_id:A001405, order:10 took:
+ 1.7 seconds, i.e. 0.03 minutes or 0.0 hours.
+
+by library: lin
+A001405: 
+a(n) = NOT RECONSTRUCTED :-(
+truth: 
+None
+
+  -  checked against website ground truth.     
+False  -  "manual" check if equation is correct.    

@@ -279,11 +279,11 @@ def sindy_grid(seq, seq_id, csv, coeffs,
     grid2 = create_grid(seq, seq_id, csv, max_order, seq_len,
                        ths_bounds=(0, 0.9), ensemble_grid=(False, True, True),
                        order_pts=20, len_pts=1, threshold_pts=10)
-    small_grid = create_grid(seq, seq_id, csv, max_order, seq_len,
-                       ths_bounds = (0, 0.9), ensemble_grid=(True, False, False),
-                       # order_pts=20, len_pts=20, threshold_pts=18)
-                       order_pts = 3, len_pts = 2, threshold_pts = 3)
-
+    # small_grid = create_grid(seq, seq_id, csv, max_order, seq_len,
+    #                    ths_bounds = (0, 0.9), ensemble_grid=(True, False, False),
+    #                    # order_pts=20, len_pts=20, threshold_pts=18)
+    #                    order_pts = 3, len_pts = 2, threshold_pts = 3)
+    #
     # small_grid = create_grid(seq, seq_id, csv, max_order, seq_len, ths_bounds = (0, 0.9),
     #                          ensemble_grid=(True, False, False),
     #                        order_pts=20, len_pts=10, threshold_pts=10)
@@ -293,7 +293,7 @@ def sindy_grid(seq, seq_id, csv, coeffs,
     grid = grid1 + grid2
     # grid = grid1
     # grid = grid2
-    grid = small_grid
+    # grid = small_grid
 
 
     # 2x2x3 = 12 + 2x1x3x2 = 12 ... = 24

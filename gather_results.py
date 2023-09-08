@@ -75,11 +75,16 @@ job_id = "sindycore83"
 # job_id = "dicor-cub"
 # job_id = "dicor-cub19"
 # job_id = 'dicor-ncub19_95'
-job_id = 'dicor-alibs96'  # bug since {eq}\nby lib{}\ntruth instead of {ed}\ntruth
-job_id = 'dicor-ncub10'  # max_order=10 only lib ncub  # bug since {eq}\nby lib{}\ntruth instead of {ed}\ntruth
-job_id = 'dicor-alib10'  # max_order=10 allibs
-#
-
+# job_id = 'dicor-alibs96'  # bug since {eq}\nby lib{}\ntruth instead of {ed}\ntruth
+# job_id = 'dicor-ncub10'  # max_order=10 only lib ncub  # bug since {eq}\nby lib{}\ntruth instead of {ed}\ntruth
+# job_id = 'dicor-alib10'  # max_order=10 allibs
+job_id = 'sicor-ncub'
+job_id = 'sicor-ncub2'
+# job_id = 'sicor-nquad'
+# job_id = 'sicor-quad'
+# job_id = 'sicor-n'
+# job_id = 'sicor-lin'
+# job_id = 'sicor-lin2'
 
 print(job_id)
 CORES = True if job_id in ("diocores77", 'diocor-merge', 'sindycore83', 'dicor-cub', 'dicor-cub19') else False
@@ -108,6 +113,12 @@ time_complexity_dict = {
     'dicor-alibs96': '1day?',
     'dicor-ncub10': 'from 9:24  to 9:58 (147 files (34 non_ids)) (2023-9-7) ... to ? for all files',
     'dicor-alib10': 'from 9:56 (2023-9-7) to 10:30 or lets say 11:27 (excluding 11 jobs (known for bugs?)',
+    'sicor-ncub': 'from 17:05 (2023-9-7) to ?',
+    'sicor-nquad': 'from 17:05 (2023-9-7) to ?',
+    'sicor-quad': 'from 17:20 (2023-9-7) to ?',
+    'sicor-n': 'from 17:20 (2023-9-7) to ?',
+    'sicor-lin': 'from 17:20 (2023-9-7) to ?',
+    'sicor-lin2': 'from 17:30 (2023-9-7) to ?',
 }
 time_complexity_dict[job_id] = 'unknomn' if job_id not in time_complexity_dict else time_complexity_dict[job_id]
 time_complexity = time_complexity_dict[job_id]

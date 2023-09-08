@@ -240,6 +240,9 @@ def lib2verbose(library: str, order: int) -> list[str]:
         + sum([[f"a(n-{i})^{degree}" for i in range(1, order+1)] for degree in range(2, degree + 1)], []))
     return verbose_eq
 
+def lib2stvars(library: str, order: int) -> list[str]:
+
+    return
 
 def solution2str(x: sp.Matrix, library: str) -> str:
     """Convert solution to string."""

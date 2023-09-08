@@ -1,0 +1,31 @@
+
+Preprocessing sees only first 19 terms.
+Sindy threshold: 0.1
+Default setting for how many terms should sindy see: 19
+Sindy will use max_order: 10
+
+, (1, 12, 0.0, 0, ' - NaN - ', True), (1, 12, 0.45, 0, ' - NaN - ', True), (1, 12, 0.9, 0, ' - NaN - ', True), (4, 12, 0.0, 0, ' - NaN - ', True), (4, 12, 0.45, 0, ' - NaN - ', True), 
+, (4, 12, 0.9, 0, ' - NaN - ', True), (7, 12, 0.0, 0, ' - NaN - ', True), (7, 12, 0.45, 0, ' - NaN - ', True), (7, 12, 0.9, 0, ' - NaN - ', True), 
+, 
+
+number of all configurations: 9
+number of fully (true, true) successful configurations: 0
+number of partially only (false, true) successful configurations: 9
+number of total fail (false, false) configurations: 0
+
+
+avg sindy: 
+a(n) = 64162069260813*n**3 - 1530483098870707*n**2 + 12132297678510887*n
+False  -  checked avg against website ground truth.     
+True  -  "manual" check avg if equation is correct.    
+While total time consumed by now, scale:68/164, seq_id:A000798, order:10 took:
+ 0.2 seconds, i.e. 0.0 minutes or 0.0 hours.
+
+by library: n
+A000798: 
+a(n) = 10576944870856*n**3 - 158559266767093*n**2 + 655043622679848*n
+truth: 
+None
+
+  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    
