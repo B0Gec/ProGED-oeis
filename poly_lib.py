@@ -57,4 +57,7 @@ print([comb2act(comb, dic) for comb in combs])
 
 # print(list(map(lambda p: p[0]+'*'+p[1], combins(basis, degree))))
 
+import pandas as pd
+df = pd.read_csv('cores_test.csv', index_col=0)
+print(df['A000045'])
 

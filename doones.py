@@ -46,7 +46,10 @@ LIBRARY = 'lin'
 # LIBRARY = 'cub'
 # LIBRARY = 'ncub'
 LIBRARIES = ['n', 'lin', 'nlin', 'quad', 'nquad', 'cub', 'ncub']
-LIBRARIES = ['ncub']
+# LIBRARIES = ['nlin']
+# LIBRARIES = ['ncub']
+# LIBRARIES = ['quad']
+# LIBRARIES = LIBRARIES[plus:plus+1]
 # LIBRARIES = ['lin', 'nlin', 'quad', 'nquad', 'ncub']
 # LIBRARIES = LIBRARY
 # library = LIBRARIES[0]
@@ -138,7 +141,7 @@ TASK_ID = 14
 
 
 JOB_ID = "000000"
-# SEQ_ID = (True, 'A153593')
+SEQ_ID = (True, 'A153593')
 # SEQ_ID = (True, 'A053833')
 # SEQ_ID = (True, 'A055649')
 # SEQ_ID = (True, 'A044941')
@@ -149,7 +152,7 @@ JOB_ID = "000000"
 # SEQ_ID = (True, 'A008685')
 # SEQ_ID = (False, 'A013833')
 # SEQ_ID = (True, 'A000045')
-SEQ_ID = (False, 'A000045')
+# SEQ_ID = (False, 'A000045')
 # SEQ_ID = (True, 'A000043')
 # SEQ_ID = (True, 'A000187')
 # ['A056457', 'A212593', 'A212594']
@@ -169,13 +172,13 @@ SEQ_ID = (False, 'A000045')
 # SEQ_ID = (False, 'A169198')
 # SEQ_ID = (True, 'A024347')
 # SEQ_ID = (True, 'A010034')
-# SEQ_ID = (True, 'A000518')
+# # SEQ_ID = (True, 'A000518')  # not in cores?
 # SEQ_ID = (True, 'A055512')
 # SEQ_ID = (False, 'A000032')
 # SEQ_ID = (True, 'A000032')
-SEQ_ID = (True, 'A000045')
-SEQ_ID = (True, 'A000032')
-SEQ_ID = (False, 'A000290')
+# SEQ_ID = (True, 'A000045')
+# SEQ_ID = (True, 'A000032')
+# SEQ_ID = (False, 'A000290')
 # SEQ_ID = (True, 'A000290')
 # debug and sindy and buglist
 
@@ -464,7 +467,7 @@ else:
             START_ORDER = 6
             START_ORDER = 1
             if INCREASING_EED:
-                x, xlib, eq, coeffs, truth = increasing_eed(seq_id, csv, VERBOSITY, max_order_,
+                x, (sol_ref, xlib), eq, coeffs, truth = increasing_eed(seq_id, csv, VERBOSITY, max_order_,
                                                       ground_truth=GROUND_TRUTH, n_of_terms=N_OF_TERMS_ED,
                                                       library=libraries, start_order=START_ORDER)
                 # x, eq, coeffs, truth = exact_ed(seq_id, csv, VERBOSITY, max_order_,
@@ -472,7 +475,8 @@ else:
 
         # print('eq', eq, 'x', x)
         is_reconst = solution_vs_truth(x, coeffs) if GROUND_TRUTH else ""
-        is_check_verbose = check_eq_man(x, seq_id, csv, n_of_terms=10**5, library=xlib)
+        is_check_verbose = check_eq_man(x, seq_id, csv, header=GROUND_TRUTH, n_of_terms=10**5, solution_ref=sol_ref)
+        # is_check_verbose = [False]
         # print('here', x, xlib, eq, coeffs, truth)
         # print('manual check \n', is_check_verbose[1], '\n', is_check_verbose[2])
         is_check = is_check_verbose[0]
