@@ -1,0 +1,12 @@
+
+While total time consumed by now, scale:48/164, seq_id:A000292, order:10 took:
+ 12.5 seconds, i.e. 0.21 minutes or 0.003 hours.
+
+by library: lin
+A000292: 
+a(n) = a(n - 3) - 3*a(n - 2) + 3*a(n - 1) + 1
+truth: 
+
+
+  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

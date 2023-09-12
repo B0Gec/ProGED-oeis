@@ -85,6 +85,7 @@ job_id = 'sicor-ncub2'
 # job_id = 'sicor-n'
 # job_id = 'sicor-lin'
 # job_id = 'sicor-lin2'
+job_id = 'dicor-comb'
 
 print(job_id)
 CORES = True if job_id in ("diocores77", 'diocor-merge', 'sindycore83', 'dicor-cub', 'dicor-cub19') else False
@@ -119,6 +120,7 @@ time_complexity_dict = {
     'sicor-n': 'from 17:20 (2023-9-7) to ?',
     'sicor-lin': 'from 17:20 (2023-9-7) to ?',
     'sicor-lin2': 'from 17:30 (2023-9-7) to ?',
+    'dicor-comb': 'from 18:27 (2023-9-11) to 18:28 (first file, first 33 files to 18:42, i.e. 15 mins) to 20:31 (34th file) to 13:35 (12.9)',
 }
 time_complexity_dict[job_id] = 'unknomn' if job_id not in time_complexity_dict else time_complexity_dict[job_id]
 time_complexity = time_complexity_dict[job_id]

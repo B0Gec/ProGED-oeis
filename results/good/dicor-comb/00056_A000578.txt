@@ -1,0 +1,12 @@
+
+While total time consumed by now, scale:57/164, seq_id:A000578, order:10 took:
+ 0.5 seconds, i.e. 0.01 minutes or 0.0 hours.
+
+by library: n
+A000578: 
+a(n) = n**3
+truth: 
+
+
+  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    
