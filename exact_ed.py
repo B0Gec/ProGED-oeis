@@ -58,7 +58,7 @@ def poly_combinations(library: str, order: int):
     # print('combinations inside poly_combinations()', combinations)
     return combinations
 
-def solution_reference(library: str, order: int):
+def solution_reference(library: str, order: int) -> list[str]:
     """Return reference solution for library and order."""
     # print((map(lambda comb: reduce((lambda i, s: i+'*'+s), comb[1:], comb[0]),  poly_combinations(library, order))))
     return ['1', ] + list(map(lambda comb: reduce((lambda i, s: i+'*'+s), comb[1:], comb[0]),  poly_combinations(library, order)))
@@ -68,7 +68,7 @@ multiply_eltw = lambda x,y: x.multiply_elementwise(y)
 def comb2act(comb: tuple, dic: dict, multiply=multiply_eltw) -> sp.Matrix: return dic[comb[0]] if len(comb) == 1 else multiply(dic[comb[0]], comb2act(comb[1:], dic))
 
 
-def grid_sympy(seq: sp.MutableDenseMatrix, max_order: int, library: str):  # seq.shape=(N, 1)
+def grid_sympy(seq: sp.MutableDenseMatrix, max_order: int, library: str) -> tuple[sp.Matrix, list[str]]:  # seq.shape=(N, 1)
     # seq = seq if nof_eqs is None else seq[:nof_eqs]
     # seq = seq[:nof_eqs, :]
     # seq = seq[:shape[0]-1, :]
@@ -155,7 +155,7 @@ def grid_sympy(seq: sp.MutableDenseMatrix, max_order: int, library: str):  # seq
     return data, sol_ref
 
 
-def dataset(seq: list, max_order: int, library: str):
+def dataset(seq: list, max_order: int, library: str) -> tuple[sp.Matrix, sp.Matrix, list[str]]:
     """Instant list -> (b, A) for equation discovery / LA system."""
 
     if max_order <= 0:
@@ -450,9 +450,9 @@ def exact_ed(seq_id: str, csv: pd.DataFrame, verbosity: int = VERBOSITY,
         return x, sol_ref, eq, "", ""
 
 
-def increasing_eed(seq_id: str, csv: pd.DataFrame, verbosity: int = VERBOSITY,
+def increasing_eed(exact_ed, seq_id: str, csv: pd.DataFrame, verbosity: int = VERBOSITY,
                    max_order: int = None, ground_truth: bool = True, n_of_terms=10 ** 16, library: list = ['lin'],
-                   start_order: int = 1) -> tuple[sp.Matrix, str, str, str, str]:
+                   start_order: int = 1, init: list = None, sindy: bool = False) -> tuple[sp.Matrix, str, str, str, str]:
     """Perform exact_ed with increasing the *max_order* untill the equation that holds (with minimum order) is found."""
 
     # verbosity = 2
@@ -467,7 +467,12 @@ def increasing_eed(seq_id: str, csv: pd.DataFrame, verbosity: int = VERBOSITY,
         # output = ed_output if ed_output[0] != [] else exact_ed(seq_id, csv, verbosity, order, linear, n_of_terms) + (False,)
         # # output = ed_output if ed_output[-1] else exact_ed(seq_id, csv, verbosity, order, linear, n_of_terms) + (False,)
         if not ed_output[-1]:
-            x, sol_ref, eq, coefs, truth, _ = exact_ed(seq_id, csv, verbosity, order, ground_truth, n_of_terms, library=lib) + ( False,)
+            if exact_ed.__name__ == 'sindy_grid':
+                x, sol_ref, eq, = exact_ed(seq, seq_id, csv, order, poly_degree=lib, library='nlin') + (False,)
+                lib = ('nlin', order, lib)
+            else:
+                x, sol_ref, eq, coefs, truth, _ = exact_ed(seq_id, csv, verbosity, order, ground_truth, n_of_terms, library=lib) + (False,)
+
             output = x, (sol_ref, lib), eq, coefs, truth, _
             # print(output)
             # print(output[1:])
@@ -509,7 +514,7 @@ def increasing_eed(seq_id: str, csv: pd.DataFrame, verbosity: int = VERBOSITY,
 
     # start = ([], "a(n) = NOT RECONSTRUCTED :-(", "", "", False)
     # start = ([], 'n', solution2str([], library=library[0]), "", "", False)
-    start = ([], (None, None) , 'n', 'a(n) = ?', "", "", False)
+    start = ([], (None, None) , 'n', 'a(n) = ?', "", "", False) if init is None else init
     orders = range(start_order, max_order+1)
     orders_lib = product(orders, library)
 

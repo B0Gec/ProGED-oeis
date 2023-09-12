@@ -10,7 +10,7 @@ import numpy as np
 import pysindy as ps
 
 warnings.filterwarnings('ignore', module='pysindy')
-from exact_ed import grid_sympy, dataset, unpack_seq, truth2coeffs, solution_vs_truth, instant_solution_vs_truth, solution2str, check_eq_man, lib2degrees, lib2verbose
+from exact_ed import grid_sympy, dataset, unpack_seq, truth2coeffs, solution_vs_truth, instant_solution_vs_truth, solution2str, check_eq_man, lib2degrees, lib2verbose, solution_reference
 
 import warnings
 warnings.filterwarnings("ignore")
@@ -58,29 +58,25 @@ def heuristic(terms_avail):
     """Calculate/decide on max_order given the number of available terms (of size < 10**16)."""
     return round(terms_avail/2)
 
-def preprocess(seq: sp.Matrix, library: str) -> tuple[sp.Matrix, bool]:
+def preprocess(seq: sp.Matrix, n_degree: int, degree: int) -> tuple[sp.Matrix, bool]:
     """Filter in only small sized terms of the sequence."""
 
-    n_degree, degree = lib2degrees(library)
-    # biggie = list(map(lambda term: abs(term) >= 10**16, seq))
-    biggie = list(map(lambda term: abs(term**degree) >= 10**16, seq))
-    fail = False
-    if True in biggie:
-        pos = biggie.index(True)
-        if pos <= 0:
-            print('Only huge terms in the sequence!!!')
-            fail = True
-            return [], fail
-        else:
-            if pos <= 2:
-                print('Only huge terms in the sequence!!!')
-                fail = True
-            return seq[:pos], fail
-    else:
-        return seq, fail
+    # n_degree, degree = lib2degrees(library)
+    # biggie = list(map(lambda term: abs(term**degree) >= 10**16, seq))
+    # biggie = [True] + [abs(term**degree) >= 10**16 for term in seq]
+    # biggie_n = [True] + [abs(n**degree) >= 10**16 for n in range(1, len(seq))]
+    biggie = [abs(term)**degree >= 10**16 or abs(n)**n_degree >=10**16 for n, term in enumerate(seq)] + [True]
+    locus = biggie.index(True)
 
-def sindy(seq: Union[list, sp.Matrix], max_order: int, seq_len: int, threshold: float = 0.1,
-          ensemble: bool = False, library_ensemble: bool = False, library: str = 'lin'):
+    fail = False
+    if locus <= 2:
+        print('Only huge terms in the sequence!!!')
+        fail = True
+    return seq[:locus], fail
+
+
+def sindy(seq: Union[list, sp.Matrix], max_order: int, poly_degree: int, threshold: float = 0.1,
+          ensemble: bool = False, library_ensemble: bool = False, library: str = 'nlin'):
     """Perform SINDy."""
 
     # Generate training data
@@ -91,7 +87,7 @@ def sindy(seq: Union[list, sp.Matrix], max_order: int, seq_len: int, threshold: 
     #        39088169, 63245986, 102334155]
 
     # print(len(ongrid))
-    seq = [int(i) for i in seq][:seq_len]
+    seq = [int(i) for i in seq]
     # print(type(seq), type(seq[-1]))
     # seq = seq[:90]
     # seq = seq[:70]
@@ -99,7 +95,12 @@ def sindy(seq: Union[list, sp.Matrix], max_order: int, seq_len: int, threshold: 
     # print(f"{int(seq[-1]):.4e}")
     # 1/0
 
-    b, A = dataset(seq, max_order, library=library)
+    b, A, sol_ref = dataset(seq, max_order, library=library)  # defaults to lib='nlin'
+    A, sol_ref = A[:, 1:], sol_ref[1:]  # to avoid combinations of constant term.
+
+    if library == 'n':
+        A, sol_ref = A[:, :1], sol_ref[:1]
+
     # b, A = dataset(seq, 19, linear=True)
     # b, A = dataset(sp.Matrix(seq), 2, linear=True)
     # 2-7, 9-14, 16-19 finds, 8,15 not
@@ -124,17 +125,18 @@ def sindy(seq: Union[list, sp.Matrix], max_order: int, seq_len: int, threshold: 
     # max_degree = 1 if library in ('lin', 'nlin') else 2 if library in ('quad', 'nquad') else 3 if library in ('cub', 'ncub') else 'Unknown Library!!'
     n_degree, max_degree = lib2degrees(library)
 
-    # poly_order = 8
-    poly_order = 1
+    # poly_degree = 8
+    # poly_degree = 1
     # poly_order = max_degree
     # threshold = 0.1
 
 
     model = ps.SINDy(
         optimizer=ps.STLSQ(threshold=threshold),
-        feature_library=ps.PolynomialLibrary(degree=poly_order),
+        feature_library=ps.PolynomialLibrary(degree=poly_degree),
         # feature_names=[f"a(n-{i+1})" for i in range(max_order-1)],  #
-        feature_names=lib2verbose(library, max_order)[1:],
+        # feature_names=lib2verbose(library, max_order)[1:],
+        feature_names=sol_ref,
         discrete_time=True,
     )
 
@@ -151,12 +153,17 @@ def sindy(seq: Union[list, sp.Matrix], max_order: int, seq_len: int, threshold: 
     x = sp.Matrix([round(i) for i in model.coefficients()[0][1:]])
     # x = sp.Matrix.vstack(sp.Matrix([0]), x)
 
-    # model.print()
+    lib_ref = 'nlin' if poly_degree == 1 else 'nquad' if poly_degree == 2 else 'ncub' if poly_degree == 3 else 'Unknown Library!!'
+    lib_ref = 'n' if library == 'n' else lib_ref
+    sol_ref = solution_reference(library=lib_ref, order=max_order)
+    print(sol_ref)
+    print('len(sol_ref):', len(sol_ref), 'len(lib_ref):', len(lib_ref))
 
-    # print(x)
+    model.print()
+
+    print(x)
     # 1/0
-    return x
-
+    return x, sol_ref
 
 
 def sindy_grid_search(seq, coeffs, truth, max_order: int, stepsize: int, evals: int):
@@ -184,16 +191,16 @@ def sindy_grid_search(seq, coeffs, truth, max_order: int, stepsize: int, evals: 
     return
 
 
-def one_results(seq, seq_id, csv, coeffs, max_order: int, seq_len: int,
+def one_results(seq, seq_id, csv, coeffs, max_order: int, poly_degree: int,
                 threshold: float, library: str, ensemble: bool, library_ensemble: bool):
 
     # print(max_order, seq_len)
-    x = sindy(seq, max_order, seq_len, threshold, ensemble, library_ensemble, library)
+    x, sol_ref = sindy(seq, max_order, poly_degree, threshold, ensemble, library_ensemble, library)
     is_reconst = solution_vs_truth(x, coeffs) if coeffs is not None else ' - NaN - '
     is_check_verbose = check_eq_man(x, seq_id, csv, n_of_terms=10 ** 5, library=library)
     # print('oner', x, library, is_check_verbose)
     is_check = is_check_verbose[0]
-    summary = x, is_reconst, is_check, max_order
+    summary = x, sol_ref, is_reconst, is_check, max_order
     # print()
     # print(summary)
     # print('one result !!!!!!!')
@@ -209,9 +216,9 @@ def sindy_grid_order(seq, seq_id, csv, coeffs, max_order: int, seq_len: int):
     return map(lambda order: one_results(seq, seq_id, csv, coeffs, order, seq_len), [i for i in range(1, max_order+1)])
 
 
-def create_grid(seq, seq_id, csv, max_order: int, seq_len: int,
+def create_grid(seq, seq_len: int,
                 ths_bounds: tuple = (0, 0.9), ensemble_grid: tuple = (True, False, False),
-                order_pts: int = 20, len_pts: int = 20, threshold_pts: int = 20):
+                len_pts: int = 20, threshold_pts: int = 20):
 
     seq_len = min(len(seq), seq_len)
 
@@ -227,23 +234,22 @@ def create_grid(seq, seq_id, csv, max_order: int, seq_len: int,
 
     # todo grid 20x20x20 (10h for experiment) where 20 for different values of (sindy's) threshold.
 
-    order_grid = equidist(1, max_order, order_pts)
+    # order_grid = equidist(1, max_order, order_pts)
     # print('ord', order_grid)
     terms_grid = equidist(4, seq_len, len_pts)
-    # print(terms_grid)
+    print(terms_grid)
     threshold_grid = np.linspace(ths_bounds[0], ths_bounds[1], threshold_pts)
     ensemble_grid = [i for i in range(len(ensemble_grid)) if ensemble_grid[i]]
-    # print(ensemble_grid)
+    print(ensemble_grid)
 
-    # subopt_grid = list(product(equidist(1, max_order, grid_order), equidist(4, seq_len, grid_len)))  # i.e.
-    subopt_grid = list(product(order_grid, terms_grid, threshold_grid, ensemble_grid))  # i.e.
-    # print(subopt_grid)
+    subopt_grid = list(product(terms_grid, threshold_grid, ensemble_grid))
+    print(subopt_grid)
     grid = [pair for pair in subopt_grid if (pair[1]-pair[0]) > 4]  # Avoids too short sequences vis-a-vis order.
     return grid
 
 
 def sindy_grid(seq, seq_id, csv, coeffs,
-               max_order: int, seq_len: int, library: str):
+               max_order: int, poly_degree: int, library: str):
                # ths_bounds: tuple = (0, 0.9), ensemble_grid: tuple = (True, False, False),
                # order_pts: int = 20, len_pts: int = 20, threshold_pts: int = 20, grids: dict = None):
                # grids={'max_order': 20, 'seq_len': 70, 'threshold': (0, 0.9),
@@ -262,7 +268,13 @@ def sindy_grid(seq, seq_id, csv, coeffs,
     # for i in range(2, 5):
     #     print(one_results(seq, seq_id, csv, coeffs, i), [i for i in range(3, 8)])
 
-    # todo: default seq_len depending on huge values of terms in seq!!!!.
+
+   # preproces:
+    n_degree, degree = poly_degree, poly_degree
+    if library == 'n':
+        n_degree, degree = 3, 0
+    seq, pre_fail = preprocess(seq, n_degree, degree)
+
 
     #plan:
     # 3 grids:
@@ -272,19 +284,20 @@ def sindy_grid(seq, seq_id, csv, coeffs,
     #            grid (ord=20,  ths=18, ens=1)
     #            grid (ord=20,  ths=18, ens=2)
 
-    grid1 = create_grid(seq, seq_id, csv, max_order, seq_len,
+    grid1 = create_grid(seq, len(seq),
                        ths_bounds = (0, 0.9), ensemble_grid=(True, False, False),
                        # order_pts=20, len_pts=20, threshold_pts=18)
-                       order_pts = 20, len_pts = 10, threshold_pts = 10)
-    grid2 = create_grid(seq, seq_id, csv, max_order, seq_len,
+                       len_pts = 10, threshold_pts=10)
+    grid2 = create_grid(seq, len(seq),
                        ths_bounds=(0, 0.9), ensemble_grid=(False, True, True),
-                       order_pts=20, len_pts=1, threshold_pts=10)
-    # small_grid = create_grid(seq, seq_id, csv, max_order, seq_len,
+                       len_pts=1, threshold_pts=10)
+
+    # small_grid = create_grid(seq, seq_id, csv, seq_len,
     #                    ths_bounds = (0, 0.9), ensemble_grid=(True, False, False),
     #                    # order_pts=20, len_pts=20, threshold_pts=18)
     #                    order_pts = 3, len_pts = 2, threshold_pts = 3)
-    #
-    # small_grid = create_grid(seq, seq_id, csv, max_order, seq_len, ths_bounds = (0, 0.9),
+
+    # small_grid = create_grid(seq, seq_id, csv, seq_len, ths_bounds = (0, 0.9),
     #                          ensemble_grid=(True, False, False),
     #                        order_pts=20, len_pts=10, threshold_pts=10)
     # small_grid = create_grid(seq, seq_id, csv, coeffs, 4, seq_len,
@@ -329,9 +342,9 @@ def sindy_grid(seq, seq_id, csv, coeffs,
             return {'ensemble': False, 'library_ensemble': True, }
 
     ongrid = list(map(
-        (lambda i: i + (one_results(seq, seq_id, csv, coeffs, i[0], i[1], i[2], library, **ens2dict(i[3]))[:3], )), grid))
+        (lambda i: i + (one_results(seq, seq_id, csv, coeffs, max_order, poly_degree, i[1], i[2], library, **ens2dict(i[3]))[:3], )), grid))
     # print(ongrid)
-    printable = [(order, leng, thrs, ens, oneres[1], oneres[2]) for order, leng, thrs, ens, oneres in ongrid]
+    printable = [(order, leng, thrs, ens, oneres[1], oneres[3]) for order, leng, thrs, ens, oneres in ongrid]
     printout += '\n'
     for i in range(round(len(printable)/5) + 1):
         printout += ', ' + "".join([f"{str(i): >22}, " for i in printable[5*i:5*(i+1)]]) + '\n'
@@ -340,7 +353,7 @@ def sindy_grid(seq, seq_id, csv, coeffs,
 
     if len(grid) == 0:
         printout += f"\nNo configurations to test!\n"
-        oeis, manually, fail = [], [], []
+        oeis, manually, fail, sol_ref = [], [], [], []
     else:
         # print(grid[0])
         # print(ongrid[0])
@@ -351,12 +364,13 @@ def sindy_grid(seq, seq_id, csv, coeffs,
         # print(ongrid[0][idx])
         # print(grid[0][idx][1:3])
         # 1/0
-        oeis = [case[idx][0] for case in ongrid if case[idx][1:3] == (True, True)]
+        sol_ref = ongrid[0][idx][1]
+        oeis = [case[idx][0] for case in ongrid if case[idx][2:4] == (True, True)]
         # manually = [case[idx][0] for case in ongrid if case[idx][1:3] == (False, True)]
-        manually = [case[idx][0] for case in ongrid if case[idx][2] == True and (not case[idx][0] in oeis)]
+        manually = [case[idx][0] for case in ongrid if case[idx][3] == True and (not case[idx][0] in oeis)]
         # bug = [case[idx][0] for case in ongrid if case[idx][1:3] == (True, False)]
         # fail = [case[idx][0] for case in ongrid if case[idx][1:3] == (False, False)]
-        fail = [case[idx][0] for case in ongrid if case[idx][2] == False]
+        fail = [case[idx][0] for case in ongrid if case[idx][3] == False]
         # print(idx, oeis, manually)
         # 1/0
 
@@ -395,7 +409,6 @@ def sindy_grid(seq, seq_id, csv, coeffs,
             # print('subwinners', subwinners)
             real_winner = subwinners[[locs[-1] for _, locs in subwinners].index(min([locs[-1] for _, locs in subwinners]))][0]
 
-
             # print('real_winner', real_winner)
             return real_winner
 
@@ -413,18 +426,18 @@ def sindy_grid(seq, seq_id, csv, coeffs,
     #     # x = sp.Matrix([0, 0, 0, 0])
     # print(x)
 
-    # print(ongrid[idx])
-    xs = [case[idx][0] for case in ongrid]
-    # print([len(x) for x in xs])
-    max_len = max([len(x) for x in xs]) if xs != [] else 0
-    # print(max_len)
-    xs = [sp.Matrix.vstack(x, sp.zeros(max_len-len(x), 1)) for x in xs]
-    # print(xs)
-    # x_avg = sp.Matrix([round(i) for i in list(sum(xs, sp.Matrix([0, 0, 0])) / 3)])
-    x_avg = sp.Matrix([round(i) for i in list(sum(xs, sp.zeros(max_len, 1)) / len(xs))]) if xs != [] else []
-    # print('xs', xs)
-    # print('x_avg', x_avg)
-
+    # # print(ongrid[idx])
+    # xs = [case[idx][0] for case in ongrid]
+    # # print([len(x) for x in xs])
+    # max_len = max([len(x) for x in xs]) if xs != [] else 0
+    # # print(max_len)
+    # xs = [sp.Matrix.vstack(x, sp.zeros(max_len-len(x), 1)) for x in xs]
+    # # print(xs)
+    # # x_avg = sp.Matrix([round(i) for i in list(sum(xs, sp.Matrix([0, 0, 0])) / 3)])
+    # x_avg = sp.Matrix([round(i) for i in list(sum(xs, sp.zeros(max_len, 1)) / len(xs))]) if xs != [] else []
+    # # print('xs', xs)
+    # # print('x_avg', x_avg)
+    #
 
     # [i for i in range(1, 20 + 1)]
     # x[i
@@ -436,8 +449,11 @@ def sindy_grid(seq, seq_id, csv, coeffs,
     # s = list(set([round(4 + i * (l - 4) / 20) for i in range(20)]));
     # len(s), s
 
+    eq = solution2str(x, sol_ref, None)
+
     # return map(lambda order: one_results(seq, seq_id, csv, coeffs, order, seq_len), [i for i in range(1, max_order+1)])
-    return x, printout, x_avg
+    # return x, printout, x_avg
+    return x, sol_ref, eq
 
 # todo + sindy ensemble (with different thresholds) x 2 versions (ensamble + library_ensemble)
 
