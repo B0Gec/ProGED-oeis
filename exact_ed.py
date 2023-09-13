@@ -325,7 +325,7 @@ def lib2stvars(library: str, order: int) -> list[str]:
     basis = ['n'] * (n_degree > 0) + [f'a(n-{i})' for i in range(1, order + 1)]
     return basis
 
-def solution2str(x: sp.Matrix, solution_ref: list[str], library: str) -> str:
+def solution2str(x: sp.Matrix, solution_ref: list[str], library: str = None) -> str:
     """Convert solution to string."""
 
     if x==[]:
@@ -468,8 +468,9 @@ def increasing_eed(exact_ed, seq_id: str, csv: pd.DataFrame, verbosity: int = VE
         # # output = ed_output if ed_output[-1] else exact_ed(seq_id, csv, verbosity, order, linear, n_of_terms) + (False,)
         if not ed_output[-1]:
             if exact_ed.__name__ == 'sindy_grid':
-                x, sol_ref, eq, = exact_ed(seq, seq_id, csv, order, poly_degree=lib, library='nlin') + (False,)
-                lib = ('nlin', order, lib)
+                # print('inc before call', lib, order, ed_output)
+                x, sol_ref, eq, _ = exact_ed(None, seq_id, csv, None, order, poly_degree=lib, library='nlin') + (False,)
+                lib, coefs, truth = ('nlin', order, lib), '', ''
             else:
                 x, sol_ref, eq, coefs, truth, _ = exact_ed(seq_id, csv, verbosity, order, ground_truth, n_of_terms, library=lib) + (False,)
 
@@ -742,7 +743,7 @@ def check_eq_man(x: sp.Matrix, seq_id: str, csv: str,
         # print([[o for o in orders if str(o) in var] for var, x_i in x_dict.items()])
         # print([max([0] + [o for o in orders if str(o) in var]) for var, x_i in x_dict.items()])
 
-        return max([max([0] + [o for o in orders if str(o) in var]) for var, _ in x_dict.items()]), x_dict
+        return max([0] + [max([0] + [o for o in orders if str(o) in var]) for var, _ in x_dict.items()]), x_dict
     order, x_dict = order(x, solution_ref)
 
     def stvar2term(stvar: str, till_now: sp.Matrix) -> int:
@@ -859,7 +860,9 @@ def check_eq_man(x: sp.Matrix, seq_id: str, csv: str,
     # reconst = sp.Matrix(reversed(seq[:max(order, min(oeis_friendly, len(seq)))]))  # init reconst
     # reconst = sp.Matrix(list(reversed(seq[:max(order, min(oeis_friendly, len(seq)))])))
     # print(order)
-    reconst = seq[-max(order, min(oeis_friendly, len(seq))):, :]
+
+    reconst = seq[-max(order, min(oeis_friendly, len(seq))):, :] if order != 0 else sp.Matrix([an(sp.Matrix([0]), x, solution_ref)])
+    # print('reconst', reconst)
     # if [i for i in x[n_degree:] if i != 0] == []:
     #     reconst = an(sp.Matrix([0 for i in reconst[:]]), x)
         # reconst = sp.Matrix([])
@@ -890,6 +893,11 @@ def check_eq_man(x: sp.Matrix, seq_id: str, csv: str,
     # print(out[0])
     # print(out[1][:20])
     # print(out[2][:20])
+
+    # if order == 0:
+    #     print('\n\norder 0!, ans:', out[0], out[1])
+    #     print('order 0!, ans:', out[2], '\n\n')
+    #     # 1/0
     return out
 
 if __name__ == '__main__':

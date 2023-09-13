@@ -93,7 +93,7 @@ VERBOSITY = 2  # dev scena
 VERBOSITY = 1  # run scenario
 
 DEBUG = True
-# DEBUG = False
+DEBUG = False
 # BUGLIST ignores blacklisting (runs also blacklisted) !!!!!
 BUGLIST = True
 BUGLIST = False
@@ -111,7 +111,8 @@ if BUGLIST:
 #     print("Warning!!!!! buglist is used outside debug mode!!\n")
 
 MAX_ORDER = 19  # We care only for recursive equations with max 20 terms or order.
-# MAX_ORDER = 2
+MAX_ORDER = 2
+MAX_ORDER = 5
 MAX_ORDER = 10
 # if DEBUG:
 #     MAX_ORDER = 5  # We care only for recursive equations with max 20 terms or order.
@@ -141,19 +142,19 @@ TASK_ID = 14
 
 
 JOB_ID = "000000"
-SEQ_ID = (True, 'A153593')
+# SEQ_ID = (True, 'A153593')
 # SEQ_ID = (True, 'A053833')
 # SEQ_ID = (True, 'A055649')
 # SEQ_ID = (True, 'A044941')
-# SEQ_ID = (False, 'A153593')
+# SEQ_ID = (True, 'A153593')
 # SEQ_ID = (True, 'A026471')
 # SEQ_ID = (True, 'A001306')
 # SEQ_ID = (True, 'A001343')
 # SEQ_ID = (True, 'A008685')
-# SEQ_ID = (False, 'A013833')
-SEQ_ID = (True, 'A000045')
+# SEQ_ID = (True, 'A013833')
+# SEQ_ID = (True, 'A000045')
 # SEQ_ID = (False, 'A000045')
-# SEQ_ID = (True, 'A000043')
+# SEQ_ID = (True, 'A000043')  # core
 # SEQ_ID = (True, 'A000187')
 # ['A056457', 'A212593', 'A212594']
 
@@ -169,14 +170,14 @@ SEQ_ID = (True, 'A000045')
 # SEQ_ID = (True, 'A000045')
 # non_manuals =  ['23167_A169198.txt', '23917_A170320.txt', '03322_A016835.txt', '24141_A170544.txt', '24240_A170643.txt', '24001_A170404.txt', '24014_A170417.txt', '23207_A169238.txt', '22912_A168943.txt', '03330_A016844.txt', '23872_A170275.txt', '22983_A169014.txt', '24006_A170409.txt', '24211_A170614.txt', '15737_A105944.txt', '24053_A170456.txt', '23488_A169519.txt', '23306_A169337.txt', '22856_A168887.txt', '23049_A169080.txt', '23980_A170383.txt', '23742_A170145.txt', '23109_A169140.txt', '06659_A035798.txt', '23860_A170263.txt', '23800_A170203.txt', '23649_A170052.txt', '23219_A169250.txt', '23682_A170085.txt', '06706_A035871.txt', '23720_A170123.txt', '31181_A279282.txt', '23382_A169413.txt', '24034_A170437.txt', '24192_A170595.txt']
 # SEQ_ID = (True, 'A169198')
-# SEQ_ID = (False, 'A169198')
 # SEQ_ID = (True, 'A024347')
 # SEQ_ID = (True, 'A010034')
 # # SEQ_ID = (True, 'A000518')  # not in cores?
+# cores:
 # SEQ_ID = (True, 'A055512')
 # SEQ_ID = (False, 'A000032')
 # SEQ_ID = (True, 'A000032')
-# SEQ_ID = (True, 'A000045')
+SEQ_ID = (True, 'A000045')
 # SEQ_ID = (True, 'A000032')
 # SEQ_ID = (False, 'A000290')
 # SEQ_ID = (True, 'A000290')
@@ -216,7 +217,7 @@ libraries = args.lib.split(',') if args.lib is not None else LIBRARIES
 # if library is None:
 #     library = libraries
 
-print('libraries', libraries)
+# print('libraries', libraries)
 # 1/0
 
 # print('task_id', task_id)
@@ -419,7 +420,7 @@ else:
             # else:
             #     seq, coeffs, truth = unnan(csv[seq_id]), None, None
 
-            library = libraries[0]
+            # library = libraries[0]
             # seq, pre_fail = preprocess(seq, library=library)
             # seq_len = len(seq)
             if False:
@@ -433,7 +434,7 @@ else:
                 init = (x, (sol_ref, ('nlib', 0, 3) ), eq, coeffs, truth, False if x == [] else True)
 
                 START_ORDER = 1
-                library = [1, 2, 3]  # poly degrees (look increasind_eed)
+                libraries = [1, 2, 3]  # poly degrees (look increasind_eed)
                 x, (sol_ref, (xlib, order, poly_deg)), eq, coeffs, truth = increasing_eed(sindy_grid, seq_id, csv, VERBOSITY, max_order_,
                                                                        ground_truth=GROUND_TRUTH,
                                                                        n_of_terms=N_OF_TERMS_ED,
@@ -449,7 +450,7 @@ else:
                 # x = sindy(list(seq), max_order_, seq_len=seq_len, threshold=threshold)
                 # LIBRARY!!!
                 # x, printout, x_avg = sindy_grid(seq, seq_id, csv, coeffs, max_order, seq_len, library=library)
-                xlib = library
+                # xlib = library
                 # print('x', x)
                 # print('x_avg', x_avg)
                 # print(check_eq_man(x, seq_id, csv, n_of_terms=10 ** 5, library=library))
@@ -467,8 +468,8 @@ else:
                 # output_string += f"\n\navg sindy: \n{eq_avg}\n"
                 # output_string += f'{is_reconst_avg}  -  checked avg against website ground truth.     \n'
                 # output_string += f'{is_check_avg}  -  \"manual\" check avg if equation is correct.    \n'
-            eq = solution2str(x, library)
-            xlib = f'{library} and poly_degree:{poly_degree} and max_order:{order}'
+            eq = solution2str(x, sol_ref)
+            xlib = f'{xlib} with poly_degree:{poly_deg} and max_order:{order}'
 
             # grid = sindy_grid(seq, seq_id, csv, coeffs, max_order=5, seq_len=30)
             # for max_order_item in grid:

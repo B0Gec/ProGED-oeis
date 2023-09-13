@@ -1,0 +1,12 @@
+
+While total time consumed by now, scale:85/164, seq_id:A001221, order:10 took:
+ 109928.3 seconds, i.e. 1832.14 minutes or 30.536 hours.
+
+by library: ncub
+A001221: 
+a(n) = NOT RECONSTRUCTED :-(
+truth: 
+
+
+  -  checked against website ground truth.     
+False  -  "manual" check if equation is correct.    
