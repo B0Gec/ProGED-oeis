@@ -132,7 +132,8 @@ THRESHOLD = 0.1  # For sindy - masking threshold.
 N_OF_TERMS_ED = 200
 TASK_ID = 0
 # TASK_ID = 8
-TASK_ID = 14
+# TASK_ID = 14
+TASK_ID = 17
 # TASK_ID = 187
 # TASK_ID = 5365  # A026471
 # TASK_ID = 191  # A026471
@@ -434,7 +435,9 @@ else:
                 init = (x, (sol_ref, ('nlib', 0, 3) ), eq, coeffs, truth, False if x == [] else True)
 
                 START_ORDER = 1
+                # START_ORDER = 6
                 libraries = [1, 2, 3]  # poly degrees (look increasind_eed)
+                # libraries = [3]  # poly degrees (look increasind_eed)
                 x, (sol_ref, (xlib, order, poly_deg)), eq, coeffs, truth = increasing_eed(sindy_grid, seq_id, csv, VERBOSITY, max_order_,
                                                                        ground_truth=GROUND_TRUTH,
                                                                        n_of_terms=N_OF_TERMS_ED,

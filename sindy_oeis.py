@@ -166,9 +166,9 @@ def sindy(seq: Union[list, sp.Matrix], max_order: int, poly_degree: int, thresho
     # print(sol_ref)
     # print('len(sol_ref):', len(sol_ref), 'lib_ref):', lib_ref)
 
-    # model.print()
+    model.print()
 
-    # print(x)
+    print(x)
     # 1/0
     return x, sol_ref
 
@@ -205,7 +205,8 @@ def one_results(seq, seq_id, csv, coeffs, max_order: int, poly_degree: int,
     x, sol_ref = sindy(seq, max_order, poly_degree, threshold, ensemble, library_ensemble, library)
     # print('after sindy')
     is_reconst = solution_vs_truth(x, coeffs) if coeffs is not None else ' - NaN - '
-    is_check_verbose = check_eq_man(x, seq_id, csv, n_of_terms=10 ** 5, library=library)
+    is_check_verbose = check_eq_man(x, seq_id, csv, n_of_terms=10 ** 5, solution_ref=sol_ref, library=library)
+
     # print('oner', x, library, is_check_verbose)
     is_check = is_check_verbose[0]
     summary = x, sol_ref, is_reconst, is_check
@@ -283,16 +284,17 @@ def sindy_grid(seq, seq_id, csv, coeffs,
     # print('in sindy_grid')
     if seq is None:
         seq = unnan(csv[seq_id])
+    print('\nraw unnaned', seq)
 
-               # preproces:
+        # preproces:
     n_degree, degree = poly_degree, poly_degree
     if library == 'n':
         n_degree, degree = 3, 1
     seq, pre_fail = preprocess(seq, n_degree, degree)
-    # print('preprocess',  pre_fail, seq)
+    print('\npreprocess',  pre_fail, seq)
 
 
-#plan:
+    #plan:
     # 3 grids:
     # 1) order x len x ths x ens:
     #            20*20*18 + 20*18*2 = 7920
@@ -318,7 +320,7 @@ def sindy_grid(seq, seq_id, csv, coeffs,
     # grid = grid2
     # grid = small_grid
     # print('grids', grid[:10])
-    # print('grids', grid)
+    print('grids', len(grid), grid)
     # 1/0
 
 

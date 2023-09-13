@@ -727,9 +727,12 @@ def check_eq_man(x: sp.Matrix, seq_id: str, csv: str,
     #     fake_reconst = []
     # x = sp.Matrix(x)
 
+    # print('sol_ref out', solution_ref)
 
     if solution_ref is None:
         n_degree, degree, order = xlib2orders(x, library)
+        raise(NotImplementedError('solution_ref is None when checking out the solution!!!'))
+        # print('n_degree, degree, order:', n_degree, degree, order)
         solution_ref = solution_reference(library, order)
 
     # solution_ref = solution_ref[1:]  # len(x) = len(sol_ref)
@@ -745,11 +748,16 @@ def check_eq_man(x: sp.Matrix, seq_id: str, csv: str,
 
         return max([0] + [max([0] + [o for o in orders if str(o) in var]) for var, _ in x_dict.items()]), x_dict
     order, x_dict = order(x, solution_ref)
+    # print('x', x)
+    # print('sol_ref', solution_ref)
+    # if order == 0:
+    #     1/0
 
     def stvar2term(stvar: str, till_now: sp.Matrix) -> int:
         if stvar == '1': return 1
         elif stvar == 'n': return till_now.rows + 1
         else:
+            # print('\n\nstvar!!!: ', stvar, order, x_dict, '\n\n')
             order_ = [i for i in range(100) if stvar == f'a(n-{i})'][0]
             # print('in stvar2term', order_, stvar, till_now, len(till_now))
             return till_now[order_-1]  # (order - 1) + 1 ... i.e. first 1 from list indexing, second 1 from constant term
@@ -894,6 +902,8 @@ def check_eq_man(x: sp.Matrix, seq_id: str, csv: str,
     # print(out[1][:20])
     # print(out[2][:20])
 
+    # if order == 0:
+    #     print('\n'*8, 'tle')
     # if order == 0:
     #     print('\n\norder 0!, ans:', out[0], out[1])
     #     print('order 0!, ans:', out[2], '\n\n')
