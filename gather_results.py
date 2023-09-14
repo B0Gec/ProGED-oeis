@@ -86,7 +86,7 @@ job_id = 'sicor-ncub2'
 # job_id = 'sicor-lin'
 # job_id = 'sicor-lin2'
 job_id = 'dicor-comb'
-job_id = 'sicor-comb'
+# job_id = 'sicor-comb'
 
 print(job_id)
 CORES = True if job_id in ("diocores77", 'diocor-merge', 'sindycore83', 'dicor-cub', 'dicor-cub19') else False
