@@ -166,9 +166,10 @@ def sindy(seq: Union[list, sp.Matrix], max_order: int, poly_degree: int, thresho
     # print(sol_ref)
     # print('len(sol_ref):', len(sol_ref), 'lib_ref):', lib_ref)
 
-    model.print()
+    if max_order == 3 and poly_degree == 1:
+        model.print()
+        print(x)
 
-    print(x)
     # 1/0
     return x, sol_ref
 
@@ -284,14 +285,14 @@ def sindy_grid(seq, seq_id, csv, coeffs,
     # print('in sindy_grid')
     if seq is None:
         seq = unnan(csv[seq_id])
-    print('\nraw unnaned', seq)
+    # print('\nraw unnaned', seq)
 
         # preproces:
     n_degree, degree = poly_degree, poly_degree
     if library == 'n':
         n_degree, degree = 3, 1
     seq, pre_fail = preprocess(seq, n_degree, degree)
-    print('\npreprocess',  pre_fail, seq)
+    # print('\npreprocess',  pre_fail, seq)
 
 
     #plan:
@@ -305,7 +306,7 @@ def sindy_grid(seq, seq_id, csv, coeffs,
     grid1 = create_grid(seq, max_order, len(seq),
                        ths_bounds = (0, 0.9), ensemble_grid=(True, False, False),
                        # order_pts=20, len_pts=20, threshold_pts=18)
-                       len_pts = 10, threshold_pts=10)
+                       len_pts = 20, threshold_pts=20)
     # print('grid1', grid1[:10])
     grid2 = create_grid(seq, max_order, len(seq),
                        ths_bounds=(0, 0.9), ensemble_grid=(False, True, True),
@@ -324,7 +325,7 @@ def sindy_grid(seq, seq_id, csv, coeffs,
     # 1/0
 
 
-# 2x2x3 = 12 + 2x1x3x2 = 12 ... = 24
+    # 2x2x3 = 12 + 2x1x3x2 = 12 ... = 24
 
     # if grid is none
     # grid = []
@@ -470,7 +471,7 @@ def sindy_grid(seq, seq_id, csv, coeffs,
     eq = solution2str(x, sol_ref, None)
 
     # print(printout)
-    # print(x, sol_ref, eq)
+    print(x, sol_ref, eq)
 
     # return map(lambda order: one_results(seq, seq_id, csv, coeffs, order, seq_len), [i for i in range(1, max_order+1)])
     # return x, printout, x_avg

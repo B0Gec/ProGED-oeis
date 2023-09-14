@@ -78,15 +78,15 @@ job_id = "sindycore83"
 # job_id = 'dicor-alibs96'  # bug since {eq}\nby lib{}\ntruth instead of {ed}\ntruth
 # job_id = 'dicor-ncub10'  # max_order=10 only lib ncub  # bug since {eq}\nby lib{}\ntruth instead of {ed}\ntruth
 # job_id = 'dicor-alib10'  # max_order=10 allibs
-job_id = 'sicor-ncub'
-job_id = 'sicor-ncub2'
-# job_id = 'sicor-nquad'
-# job_id = 'sicor-quad'
-# job_id = 'sicor-n'
-# job_id = 'sicor-lin'
-# job_id = 'sicor-lin2'
+# job_id = 'sicor-ncub'
+# job_id = 'sicor-ncub2'
+# # job_id = 'sicor-nquad'
+# # job_id = 'sicor-quad'
+# # job_id = 'sicor-n'
+# # job_id = 'sicor-lin'
+# # job_id = 'sicor-lin2'
 job_id = 'dicor-comb'
-# job_id = 'sicor-comb'
+# # job_id = 'sicor-comb'
 
 print(job_id)
 CORES = True if job_id in ("diocores77", 'diocor-merge', 'sindycore83', 'dicor-cub', 'dicor-cub19') else False
@@ -758,3 +758,29 @@ print(sorted(list(set(ncub) & set(dicores))))
 print(sorted(list(set(ncub).symmetric_difference(set(dicores)))))
 print(sorted(list(set(ncub).difference(set(dicores)))))
 print(sorted(list(set(dicores).difference(set(ncub)))))
+
+
+import numpy as np
+gt = pd.read_csv('gt1125.csv')
+gt_sin = gt['SINDy']
+gt_sin = gt['Diofantos [disco., outputed]']
+# print(gt)
+# print(gt.columns)
+# print(gt_sin[1], type(gt_sin[1]), )
+# print(gt_sin == np.nan)
+cat_name = 'cathegory (trivial [T]/exists [E]/hard [H])'  # x, h, v
+# print('cat', gt[cat_name][1], type(gt[cat_name][1]))
+discos = [(n, gt['sequence ID'][n], i) for n, i in enumerate(gt_sin) if isinstance(i, str) and 'yes' in i]
+discos = [(n, gt['sequence ID'][n], i) for n, i in enumerate(gt_sin) if isinstance(i, str)]
+# print('discos', [type(i) for n, id_, i in discos if not isinstance(i, str)])
+discos = [(n, gt['sequence ID'][n], i[:20]) for n, id_, i in discos if 'check' in i or 'fit' in i]
+# print('discos', discos)
+
+non_nans = [n for n, id_, yes in discos if not pd.isna(gt[cat_name][n])]
+# non_nans = [n for n, _ in enumerate(gt_sin) if not pd.isna(gt[cat_name][n])]
+trivials = [n  for n in non_nans if 'v' in gt[cat_name][n] or 'T' in gt[cat_name][n]]
+exists = [n  for n in non_nans if 'x' in gt[cat_name][n] or 'E' in gt[cat_name][n]]
+hards = [n  for n in non_nans if 'h' in gt[cat_name][n] or 'H' in gt[cat_name][n]]
+# print([[(n, gt['sequence ID'][n]) for n in i] for i in [trivials, exists, hards, ]])
+print(len(trivials), len(exists), len(hards))
+

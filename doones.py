@@ -93,7 +93,7 @@ VERBOSITY = 2  # dev scena
 VERBOSITY = 1  # run scenario
 
 DEBUG = True
-DEBUG = False
+# DEBUG = False
 # BUGLIST ignores blacklisting (runs also blacklisted) !!!!!
 BUGLIST = True
 BUGLIST = False
@@ -112,8 +112,9 @@ if BUGLIST:
 
 MAX_ORDER = 19  # We care only for recursive equations with max 20 terms or order.
 MAX_ORDER = 2
-MAX_ORDER = 5
-MAX_ORDER = 10
+MAX_ORDER = 4
+# MAX_ORDER = 5
+# MAX_ORDER = 10
 # if DEBUG:
 #     MAX_ORDER = 5  # We care only for recursive equations with max 20 terms or order.
 # MAX_ORDER = 2
@@ -182,6 +183,7 @@ SEQ_ID = (True, 'A000045')
 # SEQ_ID = (True, 'A000032')
 # SEQ_ID = (False, 'A000290')
 # SEQ_ID = (True, 'A000290')
+SEQ_ID = (True, 'A000124')
 # debug and sindy and buglist
 
 # DIOFANT_GRID = False

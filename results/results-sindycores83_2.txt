@@ -1,0 +1,245 @@
+sindycore83
+task_ids of jobs successful: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161, 162, 163]
+0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163
+jobs failed (unsuccessful): [] 0
+ids of jobs failed (unsuccessful): []
+
+ids of jobs failed (unsuccessful): []
+[] 0
+[] 0
+0 0
+1 0
+2 0
+3 0
+4 0
+5 0
+6 0
+7 0
+8 0
+9 0
+10 0
+11 0
+12 0
+13 0
+14 0
+15 0
+16 0
+17 0
+18 0
+19 0
+20 0
+21 0
+22 0
+23 0
+24 0
+25 0
+26 0
+27 0
+28 0
+29 0
+30 0
+31 0
+32 0
+33 0
+34 0
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+here i am
+" A000032 .. h .. a(n) = a(n - 2) + a(n - 1)",
+" A000035 .. h .. a(n) = a(n - 2)",
+" A000045 .. h .. a(n) = a(n - 2) + a(n - 1)",
+" A000079 .. h .. a(n) = 2*a(n - 1)",
+" A000124 .. h .. a(n) = a(n - 3) - 3*a(n - 2) + 3*a(n - 1)",
+" A000129 .. h .. a(n) = a(n - 2) + 2*a(n - 1)",
+" A000204 .. h .. a(n) = a(n - 2) + a(n - 1)",
+" A000217 .. h .. a(n) = a(n - 3) - 3*a(n - 2) + 3*a(n - 1)",
+" A000225 .. h .. a(n) = -2*a(n - 2) + 3*a(n - 1)",
+" A000244 .. h .. a(n) = 3*a(n - 1)",
+" A000290 .. h .. a(n) = a(n - 3) - 3*a(n - 2) + 3*a(n - 1)",
+" A000302 .. h .. a(n) = 4*a(n - 1)",
+" A000326 .. h .. a(n) = a(n - 3) - 3*a(n - 2) + 3*a(n - 1)",
+" A000330 .. h .. a(n) = -a(n - 4) + 4*a(n - 3) - 6*a(n - 2) + 4*a(n - 1)",
+" A000578 .. h .. a(n) = -a(n - 4) + 4*a(n - 3) - 6*a(n - 2) + 4*a(n - 1)",
+" A000583 .. h .. a(n) = a(n - 5) - 5*a(n - 4) + 10*a(n - 3) - 10*a(n - 2) + 5*a(n - 1)",
+" A001045 .. h .. a(n) = 2*a(n - 2) + a(n - 1)",
+" A001057 .. h .. a(n) = a(n - 3) + a(n - 2) - a(n - 1)",
+" A001333 .. h .. a(n) = a(n - 2) + 2*a(n - 1)",
+" A001519 .. h .. a(n) = -a(n - 2) + 3*a(n - 1)",
+" A001906 .. h .. a(n) = -a(n - 2) + 3*a(n - 1)",
+" A002275 .. h .. a(n) = -10*a(n - 2) + 11*a(n - 1)",
+" A002378 .. h .. a(n) = a(n - 3) - 3*a(n - 2) + 3*a(n - 1)",
+" A002530 .. h .. a(n) = -a(n - 4) + 4*a(n - 2)",
+" A002531 .. h .. a(n) = -a(n - 4) + 4*a(n - 2)",
+" A002620 .. h .. a(n) = a(n - 4) - 2*a(n - 3) + 2*a(n - 1)",
+" A004526 .. h .. a(n) = -a(n - 4) + 2*a(n - 2)",
+" A005408 .. h .. a(n) = -a(n - 2) + 2*a(n - 1)",
+" A005843 .. h .. a(n) = -a(n - 2) + 2*a(n - 1)",
+(0, 29, 0, 135, 0, 164, [], [164, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], ['00009_A000032.txt', '00010_A000035.txt', '00014_A000045.txt', '00019_A000079.txt', '00029_A000124.txt', '00030_A000129.txt', '00038_A000204.txt', '00039_A000217.txt', '00041_A000225.txt', '00042_A000244.txt', '00046_A000290.txt', '00048_A000302.txt', '00051_A000326.txt', '00052_A000330.txt', '00056_A000578.txt', '00057_A000583.txt', '00075_A001045.txt', '00077_A001057.txt', '00088_A001333.txt', '00095_A001519.txt', '00100_A001906.txt', '00106_A002275.txt', '00108_A002378.txt', '00111_A002530.txt', '00112_A002531.txt', '00114_A002620.txt', '00123_A004526.txt', '00130_A005408.txt', '00133_A005843.txt'], ['00000_A000001.txt', '00001_A000002.txt', '00002_A000005.txt', '00003_A000009.txt', '00004_A000010.txt', '00005_A000014.txt', '00006_A000019.txt', '00007_A000029.txt', '00008_A000031.txt', '00011_A000040.txt', '00012_A000041.txt', '00013_A000043.txt', '00015_A000048.txt', '00016_A000055.txt', '00017_A000058.txt', '00018_A000069.txt', '00020_A000081.txt', '00021_A000085.txt', '00022_A000088.txt', '00023_A000105.txt', '00024_A000108.txt', '00025_A000110.txt', '00026_A000111.txt', '00027_A000120.txt', '00028_A000123.txt', '00031_A000140.txt', '00032_A000142.txt', '00033_A000161.txt', '00034_A000166.txt', '00035_A000169.txt', '00036_A000182.txt', '00037_A000203.txt', '00040_A000219.txt', '00043_A000262.txt', '00044_A000272.txt', '00045_A000273.txt', '00047_A000292.txt', '00049_A000311.txt', '00050_A000312.txt', '00053_A000364.txt', '00054_A000396.txt', '00055_A000521.txt', '00058_A000593.txt', '00059_A000594.txt', '00060_A000602.txt', '00061_A000612.txt', '00062_A000670.txt', '00063_A000688.txt', '00064_A000720.txt', '00065_A000793.txt', '00066_A000796.txt', '00067_A000798.txt', '00068_A000959.txt', '00069_A000961.txt', '00070_A000984.txt', '00071_A001003.txt', '00072_A001006.txt', '00073_A001034.txt', '00074_A001037.txt', '00076_A001055.txt', '00078_A001065.txt', '00079_A001097.txt', '00080_A001113.txt', '00081_A001147.txt', '00082_A001157.txt', '00083_A001190.txt', '00084_A001221.txt', '00085_A001222.txt', '00086_A001227.txt', '00087_A001285.txt', '00089_A001349.txt', '00090_A001358.txt', '00091_A001405.txt', '00092_A001462.txt', '00093_A001481.txt', '00094_A001511.txt', '00096_A001615.txt', '00097_A001699.txt', '00098_A001700.txt', '00099_A001764.txt', '00101_A001969.txt', '00102_A002033.txt', '00103_A002083.txt', '00104_A002110.txt', '00105_A002113.txt', '00107_A002322.txt', '00109_A002426.txt', '00110_A002487.txt', '00113_A002572.txt', '00115_A002654.txt', '00116_A002658.txt', '00117_A002808.txt', '00118_A003136.txt', '00119_A003418.txt', '00120_A003484.txt', '00121_A004011.txt', '00122_A004018.txt', '00124_A005036.txt', '00125_A005100.txt', '00126_A005101.txt', '00127_A005117.txt', '00128_A005130.txt', '00129_A005230.txt', '00131_A005588.txt', '00132_A005811.txt', '00134_A006318.txt', '00135_A006530.txt', '00136_A006882.txt', '00137_A006894.txt', '00138_A007318.txt', '00139_A008275.txt', '00140_A008277.txt', '00141_A008279.txt', '00142_A008292.txt', '00143_A008683.txt', '00144_A010060.txt', '00145_A018252.txt', '00146_A020639.txt', '00147_A020652.txt', '00148_A020653.txt', '00149_A025487.txt', '00150_A027641.txt', '00151_A027642.txt', '00152_A035099.txt', '00153_A038566.txt', '00154_A038567.txt', '00155_A038568.txt', '00156_A038569.txt', '00157_A049310.txt', '00158_A055512.txt', '00159_A070939.txt', '00160_A074206.txt', '00161_A104725.txt', '00162_A226898.txt', '00163_A246655.txt'], [], [])
+164
+
+(0, 29, 0, 135, 0, 164, [], [164, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+all files:164, sum:164, corrected sum: 164
+
+Results: 
+0
+164
+164
+0
+
+        0 = 0.0 % ... (id_oeis) ... successfully found equations that are identical to the recursive equations written in OEIS (hereinafter - OEIS equation)
+       29 = 17.7 % ... (non_id) ... successfully found equations that are more complex than the OEIS equation 
+        0 = 0.0 % ... (non_manual) ... successfully found equations that do not apply to test cases 
+      135 = 82.3 % ... (fail) ... failure, no equation found. (but program finished smoothly, no runtime error)
+        0 = 0.0 % ... (reconst_non_manual) ... fail in program, specifically: reconstructed oeis and wrong on test cases.
+    ~~~~~~0 = 0.0 % ... (corrected_non_manual = non_manual ... reconst_non_manual) ... non_manuals taking bug in my code into the account.~~
+
+      164 ... (id_oeis + non_id + corrected_non_manual + fail) = sum ... of all files
+    
+    
+        0 = 0.0 % ... sequences with no ground truth -> missing jobs
+        0 = 0.0 % ... sequences with false ground truth -> missing jobs
+        0 = 0.0 % ... sequences with no or false ground truth -> all missing jobs by default
+      164 ... all sequences in our dataset
+    
+        0 = 0.0 % ... runtime errors = jobs failed
+      135 = 82.3 % ... all fails  <--- (look this) ---
+      164 ... all considered sequences, i.e. in our dataset - ignored
+    
+    _______________________________________________________
+    164 ... (id_oeis + non_id + corrected_non_manual + all_fails) ... under the line check if it sums up
+    164 ... (id_oeis + non_id + corrected_non_manual + ed_fails + ignored) ... under the line check if it sums up
+    164 ... (id_oeis + non_id + corrected_non_manual + ed_fails + ignored + jobs_fail) ... under the line check if it sums up
+    
+       29 = 17.7 % - official success (id_oeis + non_id)
+    
+      164 = avg is best ... I might be wrong ... 
+    
+    time complexity: 43 + mins
+    
+    
+    
+    ==========================================================
+
+    \newcommand{\allSeqs}{164}
+    \newcommand{\isOeis}{0}
+    \newcommand{\nonId}{29}
+    \newcommand{\nonMan}{0}
+    \newcommand{\edFail}{135}
+    \newcommand{\jobFail}{0}
+
+    \newcommand{\JJallSeqs}{164}
+    \newcommand{\JJisOeis}{0}
+    \newcommand{\JJnonId}{29}
+    \newcommand{\JJnonMan}{0}
+    \newcommand{\JJedFail}{135}
+    \newcommand{\JJjobFail}{0}
+
+    \FPeval{\JJok}{           clip(\JJisOeis+\JJnonId)}
+    \FPeval{\JJnotOeis}{      clip(\JJnonMan+\JJnonId)}
+    \FPeval{\JJnotIsFound}{   clip(\JJedFail+\JJjobFail)}
+    \FPeval{\JJisFound}{      clip(\JJisOeis+\JJnotOeis)}
+    \FPeval{\JJallSeqsc}{     clip(\JJisFound+\JJnotIsFound)}
+    
+    \FPeval{\percJJIsOeis}{       round(100 * \JJisOeis/\JJallSeqs:2)}
+    \FPeval{\percJJNonId}{        round(100 * \JJnonId/\JJallSeqs:2)}
+    \FPeval{\percJJNonMan}{       round(100 * \JJnonMan/\JJallSeqs:2)}
+    \FPeval{\percJJNotIsFound}{   round(100 * \JJnotIsFound/\JJallSeqs:2)}
+
+    
+        \begin{table}[h]
+    \caption{Table describing the sindycore83 results of novel Diofantos method experiments so far.}
+    \label{tab:dio.cores}
+       \renewcommand{\arraystretch}{1.5} \begin{center}
+    \begin{tabular}{ll|cc|c} \toprule \centering
+    &  \textbf{outputed} &  & \textbf{not\_outputed} &  \\
+     \textbf{identical} & \textbf{nonidentical} & \textbf{error free (ed\_fail)} 
+    & \textbf{runtime error (jobs\_fail)} & $\Sigma$ \\
+        \midrule
+        ? (\JJisOeis) & \JJnonId  &  \JJedFail & \JJjobFail &  \JJallSeqsc \\
+        \bottomrule \end{tabular} \end{center}
+    \end{table}
+
+\begin{figure}
+    \centering
+\Tree[.$\JJallSeqs$ [.outputed [.$\JJisOeis$ ] 
+                    [.$\JJnonId$ 
+                    ] ] 
+               [.not\_outputed 
+                    [.$\JJedFail$ ]
+                    [.$\JJjobFail$ ]
+                    ]] 
+    \caption{Tree explaining the process of grouping sequences into disjoint bins with tangible numbers for sindycore83.}
+    \label{fig:explain_numbersJJ}
+\end{figure}
+
+\begin{figure}
+    \begin{tikzpicture}
+    % \pie[text=legend,
+        \pie[color={ipsscblue, ipsscred, ipsscorange, ipsscyellow}] 
+        {   \percJJIsOeis/identical (\JJisOeis),
+            \percJJNonId/ nonidentical (\JJnonId),
+            % \percJJNonMan/invalid (\JJnonMan),
+            \percJJNotIsFound/no output (\JJnotIsFound) 
+            }
+    \end{tikzpicture}
+
+    \caption{Summary of (fresh) results with pie chart for sindycore83.}
+    \label{fig:explain_treeJJ}
+\end{figure}
+
+
+6
+first 6 bugs: []
+0
+job bins (task_id= 0, 1, ... 34): [164, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+zipped job bins (task_id= 0, 1, ... 34): [(0, 164), (1, 0), (2, 0), (3, 0), (4, 0), (5, 0), (6, 0), (7, 0), (8, 0), (9, 0), (10, 0), (11, 0), (12, 0), (13, 0), (14, 0), (15, 0), (16, 0), (17, 0), (18, 0), (19, 0), (20, 0), (21, 0), (22, 0), (23, 0), (24, 0), (25, 0), (26, 0), (27, 0), (28, 0), (29, 0), (30, 0), (31, 0), (32, 0), (33, 0), (34, 0), (35, 0)]
+check bins: 164 = 164 ?
+0 164
+1 0
+2 0
+3 0
+4 0
+5 0
+6 0
+7 0
+8 0
+9 0
+10 0
+11 0
+12 0
+13 0
+14 0
+15 0
+16 0
+17 0
+18 0
+19 0
+20 0
+21 0
+22 0
+23 0
+24 0
+25 0
+26 0
+27 0
+28 0
+29 0
+30 0
+31 0
+32 0
+33 0
+34 0
+35 0
+first 35 non_ids: ['00009_A000032.txt', '00010_A000035.txt', '00014_A000045.txt', '00019_A000079.txt', '00029_A000124.txt', '00030_A000129.txt', '00038_A000204.txt', '00039_A000217.txt', '00041_A000225.txt', '00042_A000244.txt', '00046_A000290.txt', '00048_A000302.txt', '00051_A000326.txt', '00052_A000330.txt', '00056_A000578.txt', '00057_A000583.txt', '00075_A001045.txt', '00077_A001057.txt', '00088_A001333.txt', '00095_A001519.txt', '00100_A001906.txt', '00106_A002275.txt', '00108_A002378.txt', '00111_A002530.txt', '00112_A002531.txt', '00114_A002620.txt', '00123_A004526.txt', '00130_A005408.txt', '00133_A005843.txt']
+29
+first 100 non_manuals: []
+first 100 ed_fails: ['00000_A000001.txt', '00001_A000002.txt', '00002_A000005.txt', '00003_A000009.txt', '00004_A000010.txt', '00005_A000014.txt', '00006_A000019.txt', '00007_A000029.txt', '00008_A000031.txt', '00011_A000040.txt', '00012_A000041.txt', '00013_A000043.txt', '00015_A000048.txt', '00016_A000055.txt', '00017_A000058.txt', '00018_A000069.txt', '00020_A000081.txt', '00021_A000085.txt', '00022_A000088.txt', '00023_A000105.txt', '00024_A000108.txt', '00025_A000110.txt', '00026_A000111.txt', '00027_A000120.txt', '00028_A000123.txt', '00031_A000140.txt', '00032_A000142.txt', '00033_A000161.txt', '00034_A000166.txt', '00035_A000169.txt', '00036_A000182.txt', '00037_A000203.txt', '00040_A000219.txt', '00043_A000262.txt', '00044_A000272.txt', '00045_A000273.txt', '00047_A000292.txt', '00049_A000311.txt', '00050_A000312.txt', '00053_A000364.txt', '00054_A000396.txt', '00055_A000521.txt', '00058_A000593.txt', '00059_A000594.txt', '00060_A000602.txt', '00061_A000612.txt', '00062_A000670.txt', '00063_A000688.txt', '00064_A000720.txt', '00065_A000793.txt', '00066_A000796.txt', '00067_A000798.txt', '00068_A000959.txt', '00069_A000961.txt', '00070_A000984.txt', '00071_A001003.txt', '00072_A001006.txt', '00073_A001034.txt', '00074_A001037.txt', '00076_A001055.txt', '00078_A001065.txt', '00079_A001097.txt', '00080_A001113.txt', '00081_A001147.txt', '00082_A001157.txt', '00083_A001190.txt', '00084_A001221.txt', '00085_A001222.txt', '00086_A001227.txt', '00087_A001285.txt', '00089_A001349.txt', '00090_A001358.txt', '00091_A001405.txt', '00092_A001462.txt', '00093_A001481.txt', '00094_A001511.txt', '00096_A001615.txt', '00097_A001699.txt', '00098_A001700.txt', '00099_A001764.txt', '00101_A001969.txt', '00102_A002033.txt', '00103_A002083.txt', '00104_A002110.txt', '00105_A002113.txt', '00107_A002322.txt', '00109_A002426.txt', '00110_A002487.txt', '00113_A002572.txt', '00115_A002654.txt', '00116_A002658.txt', '00117_A002808.txt', '00118_A003136.txt', '00119_A003418.txt', '00120_A003484.txt', '00121_A004011.txt', '00122_A004018.txt', '00124_A005036.txt', '00125_A005100.txt', '00126_A005101.txt']
+135
+first 100 true configs: []
+0
+['00009_A000032.txt', '00010_A000035.txt', '00014_A000045.txt', '00017_A000058.txt', '00019_A000079.txt', '00029_A000124.txt', '00030_A000129.txt', '00038_A000204.txt', '00039_A000217.txt', '00041_A000225.txt', '00042_A000244.txt', '00046_A000290.txt', '00047_A000292.txt', '00048_A000302.txt', '00051_A000326.txt', '00052_A000330.txt', '00056_A000578.txt', '00057_A000583.txt', '00067_A000798.txt', '00075_A001045.txt', '00077_A001057.txt', '00088_A001333.txt', '00095_A001519.txt', '00097_A001699.txt', '00100_A001906.txt', '00106_A002275.txt', '00108_A002378.txt', '00111_A002530.txt', '00112_A002531.txt', '00114_A002620.txt', '00123_A004526.txt', '00130_A005408.txt', '00133_A005843.txt', '00158_A055512.txt']
+['00009_A000032.txt', '00010_A000035.txt', '00014_A000045.txt', '00017_A000058.txt', '00019_A000079.txt', '00029_A000124.txt', '00030_A000129.txt', '00038_A000204.txt', '00039_A000217.txt', '00041_A000225.txt', '00042_A000244.txt', '00046_A000290.txt', '00047_A000292.txt', '00048_A000302.txt', '00051_A000326.txt', '00052_A000330.txt', '00056_A000578.txt', '00057_A000583.txt', '00061_A000612.txt', '00067_A000798.txt', '00075_A001045.txt', '00077_A001057.txt', '00088_A001333.txt', '00095_A001519.txt', '00097_A001699.txt', '00100_A001906.txt', '00106_A002275.txt', '00108_A002378.txt', '00111_A002530.txt', '00112_A002531.txt', '00114_A002620.txt', '00123_A004526.txt', '00130_A005408.txt', '00133_A005843.txt', '00158_A055512.txt']
+34 35
+['00009_A000032.txt', '00010_A000035.txt', '00014_A000045.txt', '00017_A000058.txt', '00019_A000079.txt', '00029_A000124.txt', '00030_A000129.txt', '00038_A000204.txt', '00039_A000217.txt', '00041_A000225.txt', '00042_A000244.txt', '00046_A000290.txt', '00047_A000292.txt', '00048_A000302.txt', '00051_A000326.txt', '00052_A000330.txt', '00056_A000578.txt', '00057_A000583.txt', '00067_A000798.txt', '00075_A001045.txt', '00077_A001057.txt', '00088_A001333.txt', '00095_A001519.txt', '00097_A001699.txt', '00100_A001906.txt', '00106_A002275.txt', '00108_A002378.txt', '00111_A002530.txt', '00112_A002531.txt', '00114_A002620.txt', '00123_A004526.txt', '00130_A005408.txt', '00133_A005843.txt', '00158_A055512.txt']
+['00061_A000612.txt']
+[]
+['00061_A000612.txt']
