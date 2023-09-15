@@ -87,6 +87,7 @@ job_id = "sindycore83"
 # # job_id = 'sicor-lin2'
 job_id = 'dicor-comb'
 # # job_id = 'sicor-comb'
+job_id = 'sicor-combalibs'
 
 print(job_id)
 CORES = True if job_id in ("diocores77", 'diocor-merge', 'sindycore83', 'dicor-cub', 'dicor-cub19') else False
@@ -123,6 +124,7 @@ time_complexity_dict = {
     'sicor-lin2': 'from 17:30 (2023-9-7) to ?',
     'dicor-comb': 'from 18:27 (2023-9-11) to 18:28 (first file, first 33 files to 18:42, i.e. 15 mins) to 20:31 (34th file) to 13:35 (12.9)',
     'sicor-comb': 'from 15:42 (2023-9-13) to 15:42 (first file, first 33 files to ?, i.e. ? mins) to ',
+    'sicor-combalibs': 'from 10:40? (2023-9-15) to 11:15 (first file, first 22 files to 11:22, i.e. ? mins) to ',
 }
 time_complexity_dict[job_id] = 'unknomn' if job_id not in time_complexity_dict else time_complexity_dict[job_id]
 time_complexity = time_complexity_dict[job_id]
@@ -381,9 +383,9 @@ if CORES:
 all_ids_ref = all_ids
 all_ids = all_ids[start:limited_runs]
 
-succsess_task_ids =  sorted([all_ids_ref.index(id_) for id_ in success_ids])
-print('task_ids of jobs successful:', succsess_task_ids)
-print(str(succsess_task_ids).replace(' ', '').strip('[]'))
+# succsess_task_ids =  sorted([all_ids_ref.index(id_) for id_ in success_ids])
+# print('task_ids of jobs successful:', succsess_task_ids)
+# print(str(succsess_task_ids).replace(' ', '').strip('[]'))
 
 # print('all_ids', all_ids[:10])
 # renaming = [(job_dir + file, job_dir + all_ids.index(str(file[cut[2]:cut[3]])) + file[cut[0]:cut[1]]) for file in files]
@@ -663,6 +665,10 @@ for n, i in enumerate(job_bins):
     print(n, i)
 
 print(f'first {n} non_ids:', non_id_list[:n])
+non_id_task_ids = ','.join([str(int(fname[:5])) for fname in non_id_list])
+print('task_ids of non_ids:', non_id_task_ids)
+# print(str(succsess_task_ids).replace(' ', '').strip('[]'))
+
 print(len(non_id_list))
 n = 100
 print(f'first {n} non_manuals:', sorted(non_manual_list[:n]))

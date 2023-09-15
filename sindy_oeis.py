@@ -58,6 +58,7 @@ def heuristic(terms_avail):
     """Calculate/decide on max_order given the number of available terms (of size < 10**16)."""
     return round(terms_avail/2)
 
+
 def preprocess(seq: sp.Matrix, n_degree: int, degree: int) -> tuple[sp.Matrix, bool]:
     """Filter in only small sized terms of the sequence."""
 
@@ -78,7 +79,7 @@ def preprocess(seq: sp.Matrix, n_degree: int, degree: int) -> tuple[sp.Matrix, b
     return seq[:locus], fail
 
 
-def sindy(seq: Union[list, sp.Matrix], max_order: int, poly_degree: int, threshold: float = 0.1,
+def sindy(seq: Union[list, sp.Matrix], max_order: int, threshold: float = 0.1,
           ensemble: bool = False, library_ensemble: bool = False, library: str = 'nlin'):
     """Perform SINDy."""
 
@@ -99,10 +100,13 @@ def sindy(seq: Union[list, sp.Matrix], max_order: int, poly_degree: int, thresho
     # print(f"{int(seq[-1]):.4e}")
     # 1/0
 
-    b, A, sol_ref = dataset(seq, max_order, library=library)  # defaults to lib='nlin'
+    baslib = 'n' if library == 'n' else 'nlin' if library[0] == 'n' else 'lin'
+
+    b, A, sol_ref = dataset(seq, max_order, library=baslib)  # defaults to lib='nlin' or 'lin'
     A, sol_ref = A[:, 1:], sol_ref[1:]  # to avoid combinations of constant term.
 
     if library == 'n':
+        baslib = 'n'
         A, sol_ref = A[:, :1], sol_ref[:1]
 
     # print(A, b)
@@ -129,7 +133,9 @@ def sindy(seq: Union[list, sp.Matrix], max_order: int, poly_degree: int, thresho
     # print(data)
 
     # max_degree = 1 if library in ('lin', 'nlin') else 2 if library in ('quad', 'nquad') else 3 if library in ('cub', 'ncub') else 'Unknown Library!!'
-    n_degree, max_degree = lib2degrees(library)
+    n_degree, poly_degree = lib2degrees(library)
+    if library == 'n':
+        poly_degree = 3
 
     # poly_degree = 8
     # poly_degree = 1
@@ -160,15 +166,16 @@ def sindy(seq: Union[list, sp.Matrix], max_order: int, poly_degree: int, thresho
     x = sp.Matrix([round(i) for i in model.coefficients()[0]])
     # x = sp.Matrix.vstack(sp.Matrix([0]), x)
 
-    lib_ref = 'nlin' if poly_degree == 1 else 'nquad' if poly_degree == 2 else 'ncub' if poly_degree == 3 else 'Unknown Library!!'
-    lib_ref = 'n' if library == 'n' else lib_ref
-    sol_ref = solution_reference(library=lib_ref, order=max_order)
+    # lib_ref = 'nlin' if poly_degree == 1 else 'nquad' if poly_degree == 2 else 'ncub' if poly_degree == 3 else 'Unknown Library!!'
+    # lib_ref = 'n' if library == 'n' else lib_ref
+    # lib_ref = library
+    sol_ref = solution_reference(library=library, order=max_order)
     # print(sol_ref)
     # print('len(sol_ref):', len(sol_ref), 'lib_ref):', lib_ref)
 
-    if max_order == 3 and poly_degree == 1:
-        model.print()
-        print(x)
+    # if max_order == 3 and poly_degree == 1:
+    #     model.print()
+    #     print(x)
 
     # 1/0
     return x, sol_ref
@@ -199,11 +206,11 @@ def sindy_grid_search(seq, coeffs, truth, max_order: int, stepsize: int, evals: 
     return
 
 
-def one_results(seq, seq_id, csv, coeffs, max_order: int, poly_degree: int,
+def one_results(seq, seq_id, csv, coeffs, max_order: int,
                 threshold: float, library: str, ensemble: bool, library_ensemble: bool):
 
-    # print(max_order, seq_len)
-    x, sol_ref = sindy(seq, max_order, poly_degree, threshold, ensemble, library_ensemble, library)
+    # print('one res:', max_order, threshold, library, ensemble, library_ensemble)
+    x, sol_ref = sindy(seq, max_order, threshold, ensemble, library_ensemble, library)
     # print('after sindy')
     is_reconst = solution_vs_truth(x, coeffs) if coeffs is not None else ' - NaN - '
     is_check_verbose = check_eq_man(x, seq_id, csv, n_of_terms=10 ** 5, solution_ref=sol_ref, library=library)
@@ -262,7 +269,7 @@ def create_grid(seq, order: int, seq_len: int,
 
 
 def sindy_grid(seq, seq_id, csv, coeffs,
-               max_order: int, poly_degree: int, library: str):
+               max_order: int, library: str):
                # ths_bounds: tuple = (0, 0.9), ensemble_grid: tuple = (True, False, False),
                # order_pts: int = 20, len_pts: int = 20, threshold_pts: int = 20, grids: dict = None):
                # grids={'max_order': 20, 'seq_len': 70, 'threshold': (0, 0.9),
@@ -288,7 +295,7 @@ def sindy_grid(seq, seq_id, csv, coeffs,
     # print('\nraw unnaned', seq)
 
         # preproces:
-    n_degree, degree = poly_degree, poly_degree
+    n_degree, degree = lib2degrees(library)
     if library == 'n':
         n_degree, degree = 3, 1
     seq, pre_fail = preprocess(seq, n_degree, degree)
@@ -321,7 +328,7 @@ def sindy_grid(seq, seq_id, csv, coeffs,
     # grid = grid2
     # grid = small_grid
     # print('grids', grid[:10])
-    print('grids', len(grid), grid)
+    # print('grids', len(grid), grid)
     # 1/0
 
 
@@ -359,9 +366,9 @@ def sindy_grid(seq, seq_id, csv, coeffs,
 
     # print('before ongrid in sindy_grid')
     ongrid = list(map(
-        (lambda i: i + (one_results(seq[:i[0]], seq_id, csv, coeffs, max_order, poly_degree, i[1], library, **ens2dict(i[2]))[:4], )), grid))
+        (lambda i: i + (one_results(seq[:i[0]], seq_id, csv, coeffs, max_order, i[1], library, **ens2dict(i[2]))[:4], )), grid))
     # print(ongrid)
-    printable = [(max_order, poly_degree, leng, thrs, ens, oneres[2]) for leng, thrs, ens, oneres in ongrid]
+    printable = [(max_order, leng, thrs, ens, oneres[2]) for leng, thrs, ens, oneres in ongrid]
     printout += '\n'
     for i in range(round(len(printable)/5) + 1):
         printout += ', ' + "".join([f"{str(i): >22}, " for i in printable[5*i:5*(i+1)]]) + '\n'
@@ -471,7 +478,7 @@ def sindy_grid(seq, seq_id, csv, coeffs,
     eq = solution2str(x, sol_ref, None)
 
     # print(printout)
-    print(x, sol_ref, eq)
+    # print(x, sol_ref, eq)
 
     # return map(lambda order: one_results(seq, seq_id, csv, coeffs, order, seq_len), [i for i in range(1, max_order+1)])
     # return x, printout, x_avg

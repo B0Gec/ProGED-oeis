@@ -46,6 +46,7 @@ LIBRARY = 'lin'
 # LIBRARY = 'cub'
 # LIBRARY = 'ncub'
 LIBRARIES = ['n', 'lin', 'nlin', 'quad', 'nquad', 'cub', 'ncub']
+LIBRARIES = ['lin', 'nlin', 'quad', 'nquad', 'cub', 'ncub']
 # LIBRARIES = ['nlin']
 # LIBRARIES = ['ncub']
 # LIBRARIES = ['quad']
@@ -93,7 +94,7 @@ VERBOSITY = 2  # dev scena
 VERBOSITY = 1  # run scenario
 
 DEBUG = True
-# DEBUG = False
+DEBUG = False
 # BUGLIST ignores blacklisting (runs also blacklisted) !!!!!
 BUGLIST = True
 BUGLIST = False
@@ -111,10 +112,10 @@ if BUGLIST:
 #     print("Warning!!!!! buglist is used outside debug mode!!\n")
 
 MAX_ORDER = 19  # We care only for recursive equations with max 20 terms or order.
-MAX_ORDER = 2
-MAX_ORDER = 4
+# MAX_ORDER = 2
+# MAX_ORDER = 4
 # MAX_ORDER = 5
-# MAX_ORDER = 10
+MAX_ORDER = 10
 # if DEBUG:
 #     MAX_ORDER = 5  # We care only for recursive equations with max 20 terms or order.
 # MAX_ORDER = 2
@@ -433,18 +434,21 @@ else:
             else:
 
                 # lib
-                x, sol_ref, eq = sindy_grid(seq, seq_id, csv, coeffs, max_order_, poly_degree=3, library='n')
-                init = (x, (sol_ref, ('nlib', 0, 3) ), eq, coeffs, truth, False if x == [] else True)
+                x, sol_ref, eq = sindy_grid(seq, seq_id, csv, coeffs, max_order_, library='n')
+                init = (x, (sol_ref, ('n', 0) ), eq, coeffs, truth, False if x == [] else True)
 
                 START_ORDER = 1
                 # START_ORDER = 6
-                libraries = [1, 2, 3]  # poly degrees (look increasind_eed)
+                # START_ORDER = 10
+                # libraries = [1, 2, 3]  # poly degrees (look increasind_eed)
+                # libraries = [1,]  # poly degrees (look increasind_eed)
                 # libraries = [3]  # poly degrees (look increasind_eed)
-                x, (sol_ref, (xlib, order, poly_deg)), eq, coeffs, truth = increasing_eed(sindy_grid, seq_id, csv, VERBOSITY, max_order_,
+                x, (sol_ref, (xlib, order)), eq, coeffs, truth = increasing_eed(sindy_grid, seq_id, csv, VERBOSITY, max_order_,
                                                                        ground_truth=GROUND_TRUTH,
                                                                        n_of_terms=N_OF_TERMS_ED,
                                                                        library=libraries, start_order=START_ORDER,
                                                                        init=init)
+                                                                       # init = None)
 
                 output_string += f'Preprocessing sees only first {len(seq)} terms.\n'
 
@@ -474,7 +478,7 @@ else:
                 # output_string += f'{is_reconst_avg}  -  checked avg against website ground truth.     \n'
                 # output_string += f'{is_check_avg}  -  \"manual\" check avg if equation is correct.    \n'
             eq = solution2str(x, sol_ref)
-            xlib = f'{xlib} with poly_degree:{poly_deg} and max_order:{order}'
+            xlib = f'{xlib} with and max_order:{order}'
 
             # grid = sindy_grid(seq, seq_id, csv, coeffs, max_order=5, seq_len=30)
             # for max_order_item in grid:

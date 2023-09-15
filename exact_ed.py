@@ -49,6 +49,7 @@ def poly_combinations(library: str, order: int):
 
     n_degree, degree = lib2degrees(library)
     basis = lib2stvars(library, order)
+    # print('base', basis, library)
 
     combins = itertools.combinations_with_replacement
     if library == 'n':
@@ -322,6 +323,7 @@ def lib2stvars(library: str, order: int) -> list[str]:
     """Convert library string into sympy variables."""
 
     n_degree, _ = lib2degrees(library)
+    # print('n_degree', n_degree)
     basis = ['n'] * (n_degree > 0) + [f'a(n-{i})' for i in range(1, order + 1)]
     return basis
 
@@ -469,8 +471,8 @@ def increasing_eed(exact_ed, seq_id: str, csv: pd.DataFrame, verbosity: int = VE
         if not ed_output[-1]:
             if exact_ed.__name__ == 'sindy_grid':
                 # print('inc before call', lib, order, ed_output)
-                x, sol_ref, eq, _ = exact_ed(None, seq_id, csv, None, order, poly_degree=lib, library='nlin') + (False,)
-                lib, coefs, truth = ('nlin', order, lib), '', ''
+                x, sol_ref, eq, _ = exact_ed(None, seq_id, csv, None, order, library=lib) + (False,)
+                lib, coefs, truth = (lib, order), '', ''
             else:
                 x, sol_ref, eq, coefs, truth, _ = exact_ed(seq_id, csv, verbosity, order, ground_truth, n_of_terms, library=lib) + (False,)
 
@@ -486,6 +488,7 @@ def increasing_eed(exact_ed, seq_id: str, csv: pd.DataFrame, verbosity: int = VE
                     #     'I suspect that the equation is not correct for all terms (wrong for the first few).')
                     pass
 
+                # print('inc eed: x vs sol_ref ', len(x), len(sol_ref), x, sol_ref)
                 is_check = check_eq_man(x, seq_id, csv, header=ground_truth, n_of_terms=10**5, solution_ref=sol_ref, library=None)[0]
                 # is_check = True
                 if not is_check:
@@ -738,6 +741,10 @@ def check_eq_man(x: sp.Matrix, seq_id: str, csv: str,
     # solution_ref = solution_ref[1:]  # len(x) = len(sol_ref)
 
     def order(x: sp.Matrix, solution_ref: list[str]) -> (int, dict):
+        # print(order, x)
+        if len(x) != len(solution_ref):
+            print(x, solution_ref)
+            raise ValueError('Diofantos\' debug: len(x) != len(solution_ref)')
         orders = [i for i in range(1, 100)]
         x_dict = {var: x[i] for i, var in enumerate(solution_ref) if int(x[i]) != 0}
         # print(x_dict)
