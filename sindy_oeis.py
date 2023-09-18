@@ -83,7 +83,7 @@ def sindy(seq: Union[list, sp.Matrix], max_order: int, threshold: float = 0.1,
           ensemble: bool = False, library_ensemble: bool = False, library: str = 'nlin'):
     """Perform SINDy."""
 
-    # print('seq len, order, poly deg, lib', len(seq), max_order, poly_degree, library)
+    print('seq len, order, lib', len(seq), max_order,  library)
     # Generate training data
     # seq = [0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987,
     #        1597, 2584, 4181, 6765, 10946, 17711, 28657, 46368, 75025,
@@ -152,6 +152,7 @@ def sindy(seq: Union[list, sp.Matrix], max_order: int, threshold: float = 0.1,
         discrete_time=True,
     )
 
+    print('before fit')
 
     # # model.fit(x_train, t=dt)
     # model.fit(x_train, t=dt, x_dot=dot_x)
@@ -159,7 +160,8 @@ def sindy(seq: Union[list, sp.Matrix], max_order: int, threshold: float = 0.1,
     # model.fit(A, x_dot=b, ensemble=True)
     # model.fit(A, x_dot=b, library_ensemble=True)
     model.fit(A, x_dot=b, ensemble=ensemble, library_ensemble=library_ensemble)
-    # model.print()
+    print('after fit')
+    model.print()
     model.coefficients()
     # print(model.coefficients())
     # x = sp.Matrix([round(i) for i in model.coefficients()[0][1:]])
@@ -175,7 +177,7 @@ def sindy(seq: Union[list, sp.Matrix], max_order: int, threshold: float = 0.1,
 
     # if max_order == 3 and poly_degree == 1:
     #     model.print()
-    #     print(x)
+    print(x)
 
     # 1/0
     return x, sol_ref
@@ -211,16 +213,18 @@ def one_results(seq, seq_id, csv, coeffs, max_order: int,
 
     # print('one res:', max_order, threshold, library, ensemble, library_ensemble)
     x, sol_ref = sindy(seq, max_order, threshold, ensemble, library_ensemble, library)
-    # print('after sindy')
+    print('after sindy')
     is_reconst = solution_vs_truth(x, coeffs) if coeffs is not None else ' - NaN - '
+    print('before check')
     is_check_verbose = check_eq_man(x, seq_id, csv, n_of_terms=10 ** 5, solution_ref=sol_ref, library=library)
+    print('after check')
 
     # print('oner', x, library, is_check_verbose)
     is_check = is_check_verbose[0]
     summary = x, sol_ref, is_reconst, is_check
     # print()
     # print(summary)
-    # print('one result !!!!!!!')
+    print('one result !!!!!!!')
     # print(max_order, seq_len)
     return summary
 

@@ -14,7 +14,7 @@ length_col_name = 'length (# available seq members leq 200)'
 
 newcols = ['sequence ID', 'URL', length_col_name, 'cathegory (trivial/exists/none)', 'ground truth', 'Diofantos', 'SINDy']
 outdf = pd.DataFrame(columns=newcols, index=None , data={'sequence ID': ids, 'URL': urls, length_col_name: n_of_terms})
-outdf.to_csv('ground_truth2.csv', index=None)
-print(outdf)
+# outdf.to_csv('ground_truth2.csv', index=None)
+# print(outdf)
 
 print(urls[0])

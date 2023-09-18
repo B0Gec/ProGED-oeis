@@ -754,28 +754,38 @@ def check_eq_man(x: sp.Matrix, seq_id: str, csv: str,
         # print([max([0] + [o for o in orders if str(o) in var]) for var, x_i in x_dict.items()])
 
         return max([0] + [max([0] + [o for o in orders if str(o) in var]) for var, _ in x_dict.items()]), x_dict
-    order, x_dict = order(x, solution_ref)
+    order_, x_dict = order(x, solution_ref)
+    print('order, x_dict', order_, x_dict)
     # print('x', x)
     # print('sol_ref', solution_ref)
     # if order == 0:
     #     1/0
 
     def stvar2term(stvar: str, till_now: sp.Matrix) -> int:
+        print('in stvar2term', stvar)
         if stvar == '1': return 1
         elif stvar == 'n': return till_now.rows + 1
         else:
             # print('\n\nstvar!!!: ', stvar, order, x_dict, '\n\n')
             order_ = [i for i in range(100) if stvar == f'a(n-{i})'][0]
             # print('in stvar2term', order_, stvar, till_now, len(till_now))
-            return till_now[order_-1]  # (order - 1) + 1 ... i.e. first 1 from list indexing, second 1 from constant term
+            ret = till_now[order_-1]
+            print('endof stvar2term', stvar)
+            return ret  # (order - 1) + 1 ... i.e. first 1 from list indexing, second 1 from constant term
 
     def var2term(var: str, till_now: sp.Matrix) -> int:
         comb = var.split('*')
         # comb2act(comb, x_dict, lambda x,y: x*y)
         def updateit(current, elt):
             # print('in updateit', current, elt, var, till_now, solution_ref)
-            return current*stvar2term(elt, till_now)
-        return reduce(updateit, comb, 1)
+            print('in updateit in', till_now.shape[0])
+            print('\ncurent magnitude', len(str(current)), '\n')
+            ret = current*stvar2term(elt, till_now)
+            # print(ret)
+            return ret
+        ret = reduce(updateit, comb, 1)
+        print('returned var2term')
+        return ret
 
 
         # remnants = {stvar: stvar for i in range(len(x)) if x[i] != 0}
@@ -794,76 +804,22 @@ def check_eq_man(x: sp.Matrix, seq_id: str, csv: str,
     def an(till_now: sp.Matrix, x: sp.Matrix, sol_ref) -> sp.Matrix:
 
         # print('till_now, x', till_now, x)
+        # print('till_now, x', till_now.shape[0], x)
+        if till_now.shape[0] > 300:
+            raise RecursionError('Diofantos: Recursion limit reached. Try to increase it.')
         # print(type(x), x[0])
-        # coefs = x[:]
-        # coefs.reverse()
-        # print(type(coefs))
-        # out = sp.Matrix([coefs[-1]*till_now.rows]) + till_now[-len(coefs[:-1]):, :].transpose()*sp.Matrix(coefs[:-1])
+        print('inside')
 
-        # for d in range(1, degree+1):
-        #     a += till_now[-d]**d
+        print('before anext')
+        # anext = sp.Matrix([sum([x_i*var2term(var, till_now) for var, x_i in x_dict.items()])])
+        ane = []
+        for var, x_i in x_dict.items():
+            print('var, x_i:', var, x_i)
 
-        # order = (len(coefs)-degree*n_present)//degree
-        # print('inside')
-
-        # # coefs = sp.Matrix(coefs)
-        # a = 0
-        # # print('til_now:', till_now)
-        # # a = till_now[0]*coefs[-1]*n_present + till_now[-order:, :].dot(coefs[-(order+degree*n_present):-degree*n_present, :])
-        # # print('a:', a)
-        #
-        # # print('tik pred')
-        # a = sum(x[d - 1] * (till_now.rows+1)**d for d in range(1, n_degree+1))
-        # # print('po n_degree sum()', a, 'n:', till_now.rows, )
-        # # print('po n_degree sum()', a, 'n:', till_now.rows, )
-        #
-        # # for d in range(1, degree+1):
-        # a += sum(till_now[:order, :].applyfunc( lambda x: x ** d).dot(x[(order*(d-1)+n_degree):(order*(d)+n_degree), :]) for d in range(1, degree+1))
-        #
-        # print('po degree sum()', a)
-
-        # for d in range(1, degree+1):
-        #     # a.applyfunc(lambda x: x**d).transpose()*coefs[-order*d:-order*(d-1), :]
-        #     # a = (a.multiply_elementwisel(
-        #     # a += (till_now[-d])**d*coefs[-d]*n_present
-        #     # a += x[d-1]**d*n_present
-        #     # print('a: pred', a)
-        #     # a += till_now[-(order*d+degree):-(order*(d-1)-degree), :].applyfunc( lambda x: x ** d).dot(coefs[-order * d:-order * (d - 1), :])
-        # print(order, n_degree, degree)
-        #     # print(till_now[(order*(d-1)):(order*d), :], x[(order*(d-1)+degree*n_present):(order*(d)+degree*n_present), :])
-        #     a += till_now[:order, :].applyfunc( lambda x: x ** d).dot(x[(order*(d-1)+n_degree):(order*(d)+n_degree), :])
-        #     # print(till_now[:order, :])
-        #     # print(till_now[:order, :].applyfunc( lambda x: x ** d))
-        #     # print(x[(order*(d-1)+degree*n_present):(order*(d)+degree*n_present), :])
-        #     # 1/0
-        #
-        #     # .applyfunc( lambda x: x ** d).dot(x[(order*(d-1)+degree*n_present):(order*(d)+degree*n_present), :]))
-        #     # print('a:', a)
-        #     # print(till_now[-(order*d):-(order*(d-1)), :])
-        #     # print(till_now[-(order*d):-(order*(d-1)+degree), :].applyfunc( lambda x: x ** d))
-        #     # 1/0
-        #     # .transpose() * sp.Matrix(
-        #         # coefs[:-1]))
-        #
-        #     # for i in range(1, order+1):
-        #     #     a += till_now[-i]**i * till_now[-d+i]**(d-i)
-        #     # a += till_now[-d]**d
-
-        # print('a:', a)
-        # a = till_now [k]
-        # out =  sp.Matrix([coefs[-1]*(till_now.rows-1)]) + till_now[-len(coefs[:-1]):, :].transpose()*sp.Matrix(coefs[:-1])
-        # print(a)
-        # return sp.Matrix([a])
-
-        # return (x[0] * till_now.rows + till_now[-len(x[1:]):, :].transpose() * x[1:, :])[0]
-        # print(sol_ref)
-        # anext = 0
-        # for i, term in enumerate(sol_ref):
-        #     if term == '1':
-        #         anext += 1*x[i]
-        #     # elif term == 'n':
-
-        anext = sp.Matrix([sum([x_i*var2term(var, till_now) for var, x_i in x_dict.items()])])
+            ane += [x_i*var2term(var, till_now)]
+        anext = sp.Matrix([sum(ane)])
+        # anext = sp.Matrix([sum([x_i * var2term(var, till_now)
+        print('after anext')
         # print(anext)
         return anext
 
@@ -876,7 +832,7 @@ def check_eq_man(x: sp.Matrix, seq_id: str, csv: str,
     # reconst = sp.Matrix(list(reversed(seq[:max(order, min(oeis_friendly, len(seq)))])))
     # print(order)
 
-    reconst = seq[-max(order, min(oeis_friendly, len(seq))):, :] if order != 0 else sp.Matrix([an(sp.Matrix([0]), x, solution_ref)])
+    reconst = seq[-max(order_, min(oeis_friendly, len(seq))):, :] if order_ != 0 else sp.Matrix([an(sp.Matrix([0]), x, solution_ref)])
     # print('reconst', reconst)
     # if [i for i in x[n_degree:] if i != 0] == []:
     #     reconst = an(sp.Matrix([0 for i in reconst[:]]), x)

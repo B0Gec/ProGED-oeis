@@ -49,7 +49,7 @@ LIBRARIES = ['n', 'lin', 'nlin', 'quad', 'nquad', 'cub', 'ncub']
 LIBRARIES = ['lin', 'nlin', 'quad', 'nquad', 'cub', 'ncub']
 # LIBRARIES = ['nlin']
 # LIBRARIES = ['ncub']
-# LIBRARIES = ['quad']
+LIBRARIES = ['nquad']
 # LIBRARIES = LIBRARIES[plus:plus+1]
 # LIBRARIES = ['lin', 'nlin', 'quad', 'nquad', 'ncub']
 # LIBRARIES = LIBRARY
@@ -94,7 +94,7 @@ VERBOSITY = 2  # dev scena
 VERBOSITY = 1  # run scenario
 
 DEBUG = True
-DEBUG = False
+# DEBUG = False
 # BUGLIST ignores blacklisting (runs also blacklisted) !!!!!
 BUGLIST = True
 BUGLIST = False
@@ -135,7 +135,7 @@ N_OF_TERMS_ED = 200
 TASK_ID = 0
 # TASK_ID = 8
 # TASK_ID = 14
-TASK_ID = 17
+# TASK_ID = 17
 # TASK_ID = 187
 # TASK_ID = 5365  # A026471
 # TASK_ID = 191  # A026471
@@ -184,7 +184,7 @@ SEQ_ID = (True, 'A000045')
 # SEQ_ID = (True, 'A000032')
 # SEQ_ID = (False, 'A000290')
 # SEQ_ID = (True, 'A000290')
-SEQ_ID = (True, 'A000124')
+# SEQ_ID = (True, 'A000124')
 # debug and sindy and buglist
 
 # DIOFANT_GRID = False
@@ -434,8 +434,8 @@ else:
             else:
 
                 # lib
-                x, sol_ref, eq = sindy_grid(seq, seq_id, csv, coeffs, max_order_, library='n')
-                init = (x, (sol_ref, ('n', 0) ), eq, coeffs, truth, False if x == [] else True)
+                # x, sol_ref, eq = sindy_grid(seq, seq_id, csv, coeffs, max_order_, library='n')
+                # init = (x, (sol_ref, ('n', 0) ), eq, coeffs, truth, False if x == [] else True)
 
                 START_ORDER = 1
                 # START_ORDER = 6
@@ -447,8 +447,8 @@ else:
                                                                        ground_truth=GROUND_TRUTH,
                                                                        n_of_terms=N_OF_TERMS_ED,
                                                                        library=libraries, start_order=START_ORDER,
-                                                                       init=init)
-                                                                       # init = None)
+                                                                       # init=init)
+                                                                       init = None)
 
                 output_string += f'Preprocessing sees only first {len(seq)} terms.\n'
 

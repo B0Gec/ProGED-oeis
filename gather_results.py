@@ -86,8 +86,8 @@ job_id = "sindycore83"
 # # job_id = 'sicor-lin'
 # # job_id = 'sicor-lin2'
 job_id = 'dicor-comb'
-# # job_id = 'sicor-comb'
-job_id = 'sicor-combalibs'
+# job_id = 'sicor-comb'
+# job_id = 'sicor-combalibs'
 
 print(job_id)
 CORES = True if job_id in ("diocores77", 'diocor-merge', 'sindycore83', 'dicor-cub', 'dicor-cub19') else False
@@ -767,26 +767,56 @@ print(sorted(list(set(dicores).difference(set(ncub)))))
 
 
 import numpy as np
-gt = pd.read_csv('gt1125.csv')
+# gt = pd.read_csv('gt1125.csv')
+gt = pd.read_csv('ground_truth - ground_truth918_3.csv')
 gt_sin = gt['SINDy']
-gt_sin = gt['Diofantos [disco., outputed]']
-# print(gt)
-# print(gt.columns)
+# gt_sin = gt['Diofantos [disco., outputed]']
+print(gt)
+print(gt.columns)
+print(gt_sin[112], gt[gt.columns[0]][112])
+# 1/0
+
 # print(gt_sin[1], type(gt_sin[1]), )
 # print(gt_sin == np.nan)
 cat_name = 'cathegory (trivial [T]/exists [E]/hard [H])'  # x, h, v
-# print('cat', gt[cat_name][1], type(gt[cat_name][1]))
-discos = [(n, gt['sequence ID'][n], i) for n, i in enumerate(gt_sin) if isinstance(i, str) and 'yes' in i]
-discos = [(n, gt['sequence ID'][n], i) for n, i in enumerate(gt_sin) if isinstance(i, str)]
+print('cat', gt[cat_name][1], type(gt[cat_name][1]))
+seqid_name = 'Unnamed: 0'
+discos = [(n, gt[seqid_name][n], i) for n, i in enumerate(gt_sin) if isinstance(i, str) and 'yes' in i]
+# discos = [(n, gt[seqid_name][n], i) for n, i in enumerate(gt_sin) if isinstance(i, str)]
+print('discos', discos)
 # print('discos', [type(i) for n, id_, i in discos if not isinstance(i, str)])
-discos = [(n, gt['sequence ID'][n], i[:20]) for n, id_, i in discos if 'check' in i or 'fit' in i]
+# 1/0
+overfits = [(n, gt[seqid_name][n], i) for n, i in enumerate(gt_sin) if isinstance(i, str) and 'fit' in i]
+# discos = overfits
+# discos = [(n, gt[seqid_name][n], i[:20]) for n, id_, i in discos if 'check' in i or 'fit' in i]
 # print('discos', discos)
 
-non_nans = [n for n, id_, yes in discos if not pd.isna(gt[cat_name][n])]
+# non_nans = [n for n, id_, yes in discos if not pd.isna(gt[cat_name][n])]
 # non_nans = [n for n, _ in enumerate(gt_sin) if not pd.isna(gt[cat_name][n])]
+non_nans = [n for n, _, _ in discos]
 trivials = [n  for n in non_nans if 'v' in gt[cat_name][n] or 'T' in gt[cat_name][n]]
 exists = [n  for n in non_nans if 'x' in gt[cat_name][n] or 'E' in gt[cat_name][n]]
 hards = [n  for n in non_nans if 'h' in gt[cat_name][n] or 'H' in gt[cat_name][n]]
 # print([[(n, gt['sequence ID'][n]) for n in i] for i in [trivials, exists, hards, ]])
 print(len(trivials), len(exists), len(hards))
+print(sorted([gt[seqid_name][n] for n in trivials+exists+hards]))
+# 1/0
+
+# \section{method} matrix of fibonacci form:
+a = [int(i) for i in pd.read_csv('cores_test.csv')['A000045']]
+print(a)
+# start, end = 5, 10
+start, end = 5, 9
+o = [print(f'{a[n]:<2} = c0 . {n}^3 + c1 . {a[n-1]:<3} + c2 . {a[n-2]*a[n-3]} + c_3 . {a[n-2]} + c4 . {n*a[n-5]**2}') for n in range(start, end)]
+
+p = [print(f'{a[n]:<2} & = c_0 \cdot {n}^3 + c_1 \cdot {a[n-1]:<3} + c_2 \cdot {a[n-2]*a[n-3]:<3} + c_3 \cdot {a[n-2]} + c_4 \cdot {n}\cdot{a[n-5]:<3}^2 \\\\ ') for n in list(range(start+1, end)) + [14]]
+print(a[5:15], a[14-2], a[14-3], a[14-2]*a[14-3])
+
+m = [print( f'{n:<2}^3 &  {a[n - 1]:<3} &  {a[n - 2] * a[n - 3]:<3} &  {a[n - 2]} &  {n}\cdot{a[n - 5]:<3}^2 \\\\ ')
+     for n in list(range(start + 1, end)) + [14]]
+# 6^3 & 5  & 6 & 1^2  &  \\
+#  7^3 & 8  & 15 & 1^2   \\
+#  8^3 & 13 & 40 & 2^2   \\
+#  & \vdots  & &  \\
+#  14^3 & 233 & 89\cdot144 & 34^2  \\
 
