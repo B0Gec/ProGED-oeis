@@ -1,0 +1,15 @@
+
+Preprocessing sees only first 200 terms.
+Sindy threshold: 0.1
+Sindy will use max_order: 10
+While total time consumed by now, scale:54/164, seq_id:A000364, order:10 took:
+ 169.2 seconds, i.e. 2.82 minutes or 0.047 hours.
+
+by library: nlin with and max_order:10
+A000364: 
+a(n) = NOT RECONSTRUCTED :-(
+truth: 
+
+
+  -  checked against website ground truth.     
+False  -  "manual" check if equation is correct.    

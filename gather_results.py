@@ -83,11 +83,12 @@ job_id = "sindycore83"
 # # job_id = 'sicor-nquad'
 # # job_id = 'sicor-quad'
 # # job_id = 'sicor-n'
-# # job_id = 'sicor-lin'
-# # job_id = 'sicor-lin2'
-job_id = 'dicor-comb'
+job_id = 'sicor-lin'
+# job_id = 'sicor-lin2'
+# job_id = 'dicor-comb'
 # job_id = 'sicor-comb'
 # job_id = 'sicor-combalibs'
+job_id = 'sicor-lin3'
 
 print(job_id)
 CORES = True if job_id in ("diocores77", 'diocor-merge', 'sindycore83', 'dicor-cub', 'dicor-cub19') else False
@@ -125,6 +126,7 @@ time_complexity_dict = {
     'dicor-comb': 'from 18:27 (2023-9-11) to 18:28 (first file, first 33 files to 18:42, i.e. 15 mins) to 20:31 (34th file) to 13:35 (12.9)',
     'sicor-comb': 'from 15:42 (2023-9-13) to 15:42 (first file, first 33 files to ?, i.e. ? mins) to ',
     'sicor-combalibs': 'from 10:40? (2023-9-15) to 11:15 (first file, first 22 files to 11:22, i.e. ? mins) to ',
+    'sicor-lin3': 'legit from 9:31 (2023-9-19) to 9:42 (29 reconstructions 22 files to ?, i.e. ? mins) to 9:56',
 }
 time_complexity_dict[job_id] = 'unknomn' if job_id not in time_complexity_dict else time_complexity_dict[job_id]
 time_complexity = time_complexity_dict[job_id]

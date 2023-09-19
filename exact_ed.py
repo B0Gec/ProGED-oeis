@@ -462,7 +462,7 @@ def increasing_eed(exact_ed, seq_id: str, csv: pd.DataFrame, verbosity: int = VE
         order = order_lib[0]
         lib = order_lib[1]
         # print('summary', ed_output)
-        # print('eed_step', order, seq_id, 'calculating ...')
+        print('eed_step', order, seq_id, 'calculating ...')
         if verbosity >= 2:
             print('eed_step', order_lib, seq_id, 'calculating ...')
 
@@ -743,7 +743,7 @@ def check_eq_man(x: sp.Matrix, seq_id: str, csv: str,
     def order(x: sp.Matrix, solution_ref: list[str]) -> (int, dict):
         # print(order, x)
         if len(x) != len(solution_ref):
-            print(x, solution_ref)
+            # print(x, solution_ref)
             raise ValueError('Diofantos\' debug: len(x) != len(solution_ref)')
         orders = [i for i in range(1, 100)]
         x_dict = {var: x[i] for i, var in enumerate(solution_ref) if int(x[i]) != 0}
@@ -755,14 +755,14 @@ def check_eq_man(x: sp.Matrix, seq_id: str, csv: str,
 
         return max([0] + [max([0] + [o for o in orders if str(o) in var]) for var, _ in x_dict.items()]), x_dict
     order_, x_dict = order(x, solution_ref)
-    print('order, x_dict', order_, x_dict)
+    # print('order, x_dict', order_, x_dict)
     # print('x', x)
     # print('sol_ref', solution_ref)
     # if order == 0:
     #     1/0
 
     def stvar2term(stvar: str, till_now: sp.Matrix) -> int:
-        print('in stvar2term', stvar)
+        # print('in stvar2term', stvar)
         if stvar == '1': return 1
         elif stvar == 'n': return till_now.rows + 1
         else:
@@ -770,7 +770,7 @@ def check_eq_man(x: sp.Matrix, seq_id: str, csv: str,
             order_ = [i for i in range(100) if stvar == f'a(n-{i})'][0]
             # print('in stvar2term', order_, stvar, till_now, len(till_now))
             ret = till_now[order_-1]
-            print('endof stvar2term', stvar)
+            # print('endof stvar2term', stvar)
             return ret  # (order - 1) + 1 ... i.e. first 1 from list indexing, second 1 from constant term
 
     def var2term(var: str, till_now: sp.Matrix) -> int:
@@ -778,13 +778,13 @@ def check_eq_man(x: sp.Matrix, seq_id: str, csv: str,
         # comb2act(comb, x_dict, lambda x,y: x*y)
         def updateit(current, elt):
             # print('in updateit', current, elt, var, till_now, solution_ref)
-            print('in updateit in', till_now.shape[0])
-            print('\ncurent magnitude', len(str(current)), '\n')
+            # print('in updateit in', till_now.shape[0])
+            # print('\ncurent magnitude', len(str(current)), '\n')
             ret = current*stvar2term(elt, till_now)
             # print(ret)
             return ret
         ret = reduce(updateit, comb, 1)
-        print('returned var2term')
+        # print('returned var2term')
         return ret
 
 
@@ -808,18 +808,18 @@ def check_eq_man(x: sp.Matrix, seq_id: str, csv: str,
         if till_now.shape[0] > 300:
             raise RecursionError('Diofantos: Recursion limit reached. Try to increase it.')
         # print(type(x), x[0])
-        print('inside')
+        # print('inside')
 
-        print('before anext')
+        # print('before anext')
         # anext = sp.Matrix([sum([x_i*var2term(var, till_now) for var, x_i in x_dict.items()])])
         ane = []
         for var, x_i in x_dict.items():
-            print('var, x_i:', var, x_i)
+            # print('var, x_i:', var, x_i)
 
             ane += [x_i*var2term(var, till_now)]
         anext = sp.Matrix([sum(ane)])
         # anext = sp.Matrix([sum([x_i * var2term(var, till_now)
-        print('after anext')
+        # print('after anext')
         # print(anext)
         return anext
 
