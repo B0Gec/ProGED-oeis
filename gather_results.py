@@ -54,41 +54,41 @@ job_id = "37683622"  # seems like for false_truth list creation
 # job_id = "38095692"
 # job_id = "sindy512135"
 job_id = "sindygrid519_1"
-# # job_id = "incdio76"
-# # job_id = "blacklist76"
+# job_id = "incdio76"
+# job_id = "blacklist76"
 # job_id = "incdio86"
 # job_id = "i86/fix"
 job_id = "incdio74"  # 2023-07-04  ... I think this will be in final results.
-job_id = "sindyens75"  # 2023-07-04
-job_id = "sindydeb3"  # 2023-07-06
-# job_id = "sindydeb3-1"  #
-# job_id = "sindydeb3-2"  #
-job_id = "sindydeb3-3"  #
-job_id = "sindydeb3-4"  #
-job_id = "sindydeb3-5"  #
-job_id = "sindydeb3-7"  # 2023-07-10
+# job_id = "sindyens75"  # 2023-07-04
+# job_id = "sindydeb3"  # 2023-07-06
+# # job_id = "sindydeb3-1"  #
+# # job_id = "sindydeb3-2"  #
+# job_id = "sindydeb3-3"  #
+# job_id = "sindydeb3-4"  #
+# job_id = "sindydeb3-5"  #
+# job_id = "sindydeb3-7"  # 2023-07-10
 job_id = "sindymerged"  #
 
-# job_id = "diocores77"
-# job_id = "diocor-merge"  #
-job_id = "sindycore83"
-# job_id = "dicor-cub"
-# job_id = "dicor-cub19"
-# job_id = 'dicor-ncub19_95'
-# job_id = 'dicor-alibs96'  # bug since {eq}\nby lib{}\ntruth instead of {ed}\ntruth
-# job_id = 'dicor-ncub10'  # max_order=10 only lib ncub  # bug since {eq}\nby lib{}\ntruth instead of {ed}\ntruth
-# job_id = 'dicor-alib10'  # max_order=10 allibs
-# job_id = 'sicor-ncub'
-# job_id = 'sicor-ncub2'
-# # job_id = 'sicor-nquad'
-# # job_id = 'sicor-quad'
-# # job_id = 'sicor-n'
-job_id = 'sicor-lin'
-# job_id = 'sicor-lin2'
-# job_id = 'dicor-comb'
-# job_id = 'sicor-comb'
-# job_id = 'sicor-combalibs'
-job_id = 'sicor-lin3'
+# # job_id = "diocores77"
+# # job_id = "diocor-merge"  #
+# job_id = "sindycore83"
+# # job_id = "dicor-cub"
+# # job_id = "dicor-cub19"
+# # job_id = 'dicor-ncub19_95'
+# # job_id = 'dicor-alibs96'  # bug since {eq}\nby lib{}\ntruth instead of {ed}\ntruth
+# # job_id = 'dicor-ncub10'  # max_order=10 only lib ncub  # bug since {eq}\nby lib{}\ntruth instead of {ed}\ntruth
+# # job_id = 'dicor-alib10'  # max_order=10 allibs
+# # job_id = 'sicor-ncub'
+# # job_id = 'sicor-ncub2'
+# # # job_id = 'sicor-nquad'
+# # # job_id = 'sicor-quad'
+# # # job_id = 'sicor-n'
+# job_id = 'sicor-lin'
+# # job_id = 'sicor-lin2'
+# # job_id = 'dicor-comb'
+# # job_id = 'sicor-comb'
+# # job_id = 'sicor-combalibs'
+# job_id = 'sicor-lin3'
 
 print(job_id)
 CORES = True if job_id in ("diocores77", 'diocor-merge', 'sindycore83', 'dicor-cub', 'dicor-cub19') else False
@@ -100,13 +100,13 @@ if CORES:
     # 1/0
 
 time_complexity_dict = {
-    'incdio74': '2h (+ 20h+ for 9 sequences)',
+    'incdio74': '2h 30min (+ 20h+ for 9 sequences)',
     'sindyens75': '? ... still running',
-    'sindydeb3': '? ... still running',
-    'sindydeb3-1': '? ... still running',
-    'sindydeb3-2': '? ... still running',
-    'sindydeb3-3': '? ... still running',
-    'sindydeb3-4': '? ... still running',
+    'sindydeb3': ' batch 1: 6.7.2023 from: 10.10 to 15:25 (5h 15min) ... still running',
+    'sindydeb3-1': 'batch 2: 6.7. from 14.30 to 17:51 (3h 20min) ... still running',
+    'sindydeb3-2': 'batch 3: 7.7. from 09.45 to 11:53 (2h 10min) ... still running',
+    'sindydeb3-3': 'batch 4: 7.7. from 11:37 to 11:37 (0mins) ... still running',
+    'sindydeb3-4': 'batch 5: 7.7. from 11:47 to 23:26 (11h 45min) ... still running',
     'sindymerged': '? ... still running',
     'diocores77': '25 mins',
     'diocor-merge': '25 mins',
@@ -771,6 +771,7 @@ print(sorted(list(set(dicores).difference(set(ncub)))))
 import numpy as np
 # gt = pd.read_csv('gt1125.csv')
 gt = pd.read_csv('ground_truth - ground_truth918_3.csv')
+gt = pd.read_csv('gt919.csv')
 gt_sin = gt['SINDy']
 # gt_sin = gt['Diofantos [disco., outputed]']
 print(gt)
@@ -821,4 +822,31 @@ m = [print( f'{n:<2}^3 &  {a[n - 1]:<3} &  {a[n - 2] * a[n - 3]:<3} &  {a[n - 2]
 #  8^3 & 13 & 40 & 2^2   \\
 #  & \vdots  & &  \\
 #  14^3 & 233 & 89\cdot144 & 34^2  \\
+
+
+# result analysis 2955 equations
+seqid = 'A000045'
+# dflin = pd.read_csv('linear_database_full.csv', low_memory=False)
+dflin = pd.read_csv('linear_database_full.csv')
+# print(dflin)  # for seq len = 200
+seq = ed_fail_list[1][6:(6+7)]
+print(dflin['A322829'][0])
+# 1/0
+# print(seq)
+# print('ed_fail', ed_fail)
+print('before dlfin')
+# coefs = dflin['A000045'][0]
+# print(coefs, len(coefs.strip('(').strip(')').split(',')), type(coefs))
+# ed_fail_list = ['A000045', 'A001045']
+ed_fail_list = non_id_list
+seqs = [(seq, len(dflin[seq[6:(6+7)]][0].strip('(').strip(')').split(','))) for seq in ed_fail_list]
+print('\n'*4)
+biggie = [(seq, o) for seq, o in seqs if o > 19]
+# biggie = [(seq, o) for seq, o in seqs if o >= 20]
+print('biggie', biggie)
+print('biggie len', len(biggie))
+# print('seqs', seqs)
+print('len seqs', len(seqs))
+print('eof')
+
 

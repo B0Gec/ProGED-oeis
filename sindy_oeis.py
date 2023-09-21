@@ -317,8 +317,9 @@ def sindy_grid(seq, seq_id, csv, coeffs,
     grid1 = create_grid(seq, max_order, len(seq),
                        ths_bounds = (0, 0.9), ensemble_grid=(True, False, False),
                        # order_pts=20, len_pts=20, threshold_pts=18)
-                       len_pts = 20, threshold_pts=20)
-    # print('grid1', grid1[:10])
+                       # len_pts = 20, threshold_pts=20)
+                       len_pts = 10, threshold_pts = 20)
+               # print('grid1', grid1[:10])
     grid2 = create_grid(seq, max_order, len(seq),
                        ths_bounds=(0, 0.9), ensemble_grid=(False, True, True),
                        len_pts=1, threshold_pts=10)
