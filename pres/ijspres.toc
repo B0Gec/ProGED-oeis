@@ -1,0 +1,4 @@
+\babel@toc {slovene}{}
+\beamer@sectionintoc {1}{Equation discovery}{3}{0}{1}
+\beamer@sectionintoc {2}{Probabilistic grammars}{26}{0}{2}
+\beamer@sectionintoc {3}{Integer sequences}{63}{0}{3}
