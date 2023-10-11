@@ -22,8 +22,7 @@ date
 
 cd oeis/
 #singularity exec ../pg.sif python3 doones.py --job_id $SLURM_ARRAY_JOB_ID \
-singularity exec ../oeis.sif python3 doones.py \
-        --task_id $(($1*1000 + $SLURM_ARRAY_TASK_ID)) --exper_id $2
+singularity exec ../oeis.sif python3 doones.py --task_id $(($1*1000 + $SLURM_ARRAY_TASK_ID)) --exper_id $2
 
 date
 

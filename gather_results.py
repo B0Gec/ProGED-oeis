@@ -67,7 +67,7 @@ job_id = "incdio74"  # 2023-07-04  ... I think this will be in final results.
 # job_id = "sindydeb3-4"  #
 # job_id = "sindydeb3-5"  #
 # job_id = "sindydeb3-7"  # 2023-07-10
-job_id = "sindymerged"  #
+# job_id = "sindymerged"  #
 
 # # job_id = "diocores77"
 # # job_id = "diocor-merge"  #
@@ -218,7 +218,27 @@ def extract_file(fname, verbosity=VERBOSITY, job_id=job_id):
         print('we_found:', we_found)
 
     if we_found:
-        print('"', fname[-7-4: -4], f'.. h .. {eq}",')
+        raw = [('00843_A006148.txt', 36), ('01791_A011853.txt', 50), ('01846_A011927.txt', 21), ('01854_A011937.txt', 31),
+         ('01856_A011939.txt', 33), ('06614_A035609.txt', 20), ('06658_A035797.txt', 24), ('06659_A035798.txt', 26),
+         ('06669_A035808.txt', 46), ('06670_A035809.txt', 48), ('06681_A035846.txt', 20), ('06682_A035847.txt', 21),
+         ('06683_A035848.txt', 22), ('06684_A035849.txt', 23), ('06685_A035850.txt', 24), ('06686_A035851.txt', 25),
+         ('06687_A035852.txt', 26), ('06688_A035853.txt', 27), ('06689_A035854.txt', 28), ('06690_A035855.txt', 29),
+         ('06691_A035856.txt', 30), ('06692_A035857.txt', 31), ('06693_A035858.txt', 32), ('06694_A035859.txt', 33),
+         ('06695_A035860.txt', 34), ('06696_A035861.txt', 35), ('06697_A035862.txt', 36), ('06698_A035863.txt', 37),
+         ('06699_A035864.txt', 38), ('06700_A035865.txt', 39), ('06701_A035866.txt', 40), ('06702_A035867.txt', 41),
+         ('06703_A035868.txt', 42), ('06704_A035869.txt', 43), ('06705_A035870.txt', 44), ('06706_A035871.txt', 45),
+         ('06707_A035872.txt', 46), ('06708_A035873.txt', 47), ('06709_A035874.txt', 48), ('06710_A035875.txt', 49),
+         ('06711_A035876.txt', 50), ('09451_A042601.txt', 34), ('09509_A042665.txt', 80), ('10980_A054472.txt', 21),
+         ('11410_A059598.txt', 30), ('11785_A063654.txt', 32), ('12969_A078475.txt', 36), ('13084_A079984.txt', 20),
+         ('14298_A092069.txt', 42), ('14299_A092070.txt', 24), ('14345_A092508.txt', 25), ('15854_A107244.txt', 22),
+         ('15855_A107245.txt', 29), ('16953_A118576.txt', 23), ('17037_A120215.txt', 45), ('17049_A120409.txt', 22),
+         ('17050_A120410.txt', 29), ('18122_A131676.txt', 22), ('20175_A156713.txt', 22), ('29120_A249181.txt', 21),
+         ('31604_A288917.txt', 25), ('33324_A322829.txt', 21), ('34252_A352591.txt', 20)]
+        # non_idbigs = [i[-7-4:-4] for i, n in raw]
+        non_idbigs = [i for i, n in raw]
+        if fname[-7-4-6:] in non_idbigs:
+            print('"', fname[-7-4: -4], f'.. h .. {eq}",')
+        # print(fname[-7-4-6:], non_idbigs)
 
     def truefalse(the_list):
         if black_check and the_list == []:
@@ -506,7 +526,7 @@ if CORES:
 # summary = reduce(for_summary, files[:], (0, 0, 0, 0, 0, 0, [], [0 for i in range(36)], [], [], [], ['start']))  # save all buggy ids
 summary = reduce(for_summary, sorted(files[:]), (0, 0, 0, 0, 0, 0, [], [0 for i in range(36)], [], [], [], ['start']))  # save all buggy ids
 print(summary)
-# 1/0
+1/0
 
 # corrected_sum = sum(summary[:4]) - sum(summary[4:])
 corrected_sum = sum(summary[:4]) - sum(summary[4:5])
@@ -771,7 +791,8 @@ print(sorted(list(set(dicores).difference(set(ncub)))))
 import numpy as np
 # gt = pd.read_csv('gt1125.csv')
 gt = pd.read_csv('ground_truth - ground_truth918_3.csv')
-gt = pd.read_csv('gt919.csv')
+gt = pd.read_csv('ground_truth - ground_truth922.csv')
+# gt = pd.read_csv('gt919.csv')
 gt_sin = gt['SINDy']
 # gt_sin = gt['Diofantos [disco., outputed]']
 print(gt)
@@ -785,7 +806,12 @@ cat_name = 'cathegory (trivial [T]/exists [E]/hard [H])'  # x, h, v
 print('cat', gt[cat_name][1], type(gt[cat_name][1]))
 seqid_name = 'Unnamed: 0'
 discos = [(n, gt[seqid_name][n], i) for n, i in enumerate(gt_sin) if isinstance(i, str) and 'yes' in i]
-# discos = [(n, gt[seqid_name][n], i) for n, i in enumerate(gt_sin) if isinstance(i, str)]
+teh = [(n, gt[cat_name][n], i) for n, i in enumerate(gt[cat_name]) if isinstance(i, str)]
+tehn = [n for n, _, _ in teh]
+missing = [(n, gt[seqid_name][n], i) for n, i in enumerate(gt[cat_name]) if n not in tehn]
+print('missing', missing)
+# 1/0
+discos = teh
 print('discos', discos)
 # print('discos', [type(i) for n, id_, i in discos if not isinstance(i, str)])
 # 1/0
@@ -838,15 +864,20 @@ print('before dlfin')
 # coefs = dflin['A000045'][0]
 # print(coefs, len(coefs.strip('(').strip(')').split(',')), type(coefs))
 # ed_fail_list = ['A000045', 'A001045']
-ed_fail_list = non_id_list
-seqs = [(seq, len(dflin[seq[6:(6+7)]][0].strip('(').strip(')').split(','))) for seq in ed_fail_list]
+# ed_fail_list = non_id_list
+ed_fails_ords = [(seq, len(dflin[seq[6:(6+7)]][0].strip('(').strip(')').split(','))) for seq in ed_fail_list]
+non_id_ords = [(seq, len(dflin[seq[6:(6+7)]][0].strip('(').strip(')').split(','))) for seq in non_id_list]
 print('\n'*4)
-biggie = [(seq, o) for seq, o in seqs if o > 19]
+small_fails = [(seq, o) for seq, o in ed_fails_ords if o <= 19]
+big_non_ids = [(seq, o) for seq, o in non_id_ords if o > 19]
 # biggie = [(seq, o) for seq, o in seqs if o >= 20]
-print('biggie', biggie)
-print('biggie len', len(biggie))
+print('biggie fail', small_fails)
+print('biggie fail len', len(small_fails))
+print('biggie non_id', big_non_ids)
+print('biggie non_ids len', len(big_non_ids))
 # print('seqs', seqs)
-print('len seqs', len(seqs))
+print('len fails', len(ed_fails_ords))
+print('len non ids', len(non_id_ords))
 print('eof')
 
 
