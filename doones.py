@@ -30,31 +30,15 @@ warnings.simplefilter("ignore")
 # else:
 #     from exact_ed import exact_ed, timer
 
-SINDy = True
-# SINDy = False
+# SINDy = True
+SINDy = False
+SINDy_default = True
 if SINDy:
     from sindy_oeis import sindy, preprocess, heuristic, sindy_grid
 
 GROUND_TRUTH = True
 GROUND_TRUTH = False
 
-# only libraries allowed:
-LIBRARY = 'lin'
-# LIBRARY = 'nlin'
-# LIBRARY = 'quad'
-# # LIBRARY = 'nquad'
-# LIBRARY = 'cub'
-# LIBRARY = 'ncub'
-LIBRARIES = ['n', 'lin', 'nlin', 'quad', 'nquad', 'cub', 'ncub']
-LIBRARIES = ['lin', 'nlin', 'quad', 'nquad', 'cub', 'ncub']
-LIBRARIES = ['lin', 'nlin']
-# LIBRARIES = ['nlin']
-# LIBRARIES = ['ncub']
-# LIBRARIES = ['nquad']
-# LIBRARIES = LIBRARIES[plus:plus+1]
-# LIBRARIES = ['lin', 'nlin', 'quad', 'nquad', 'ncub']
-# LIBRARIES = LIBRARY
-# library = LIBRARIES[0]
 
 
 INCREASING_EED = True
@@ -95,12 +79,13 @@ VERBOSITY = 2  # dev scena
 VERBOSITY = 1  # run scenario
 
 DEBUG = True
-DEBUG = False
+# DEBUG = False
 # BUGLIST ignores blacklisting (runs also blacklisted) !!!!!
-BUGLIST = True
+# BUGLIST = True
 BUGLIST = False
 BUGLIST_BLACKLISTING = True
 # BUGLIST ignores blacklisted sequences !!!!!
+
 CORELIST = True  # have to scrape core sequences!
 # CORELIST = False
 if BUGLIST:
@@ -112,16 +97,40 @@ if BUGLIST:
 #     print("Warning!!!!! buglist is used outside debug mode!!")
 #     print("Warning!!!!! buglist is used outside debug mode!!\n")
 
-MAX_ORDER = 19  # We care only for recursive equations with max 20 terms or order.
-# MAX_ORDER = 2
-# MAX_ORDER = 4
-# MAX_ORDER = 5
-MAX_ORDER = 10
+# only libraries allowed:
+# LIBRARY = 'lin'
+library = 'n' if CORELIST else 'non'
+d_max = 3 if CORELIST else 1
+
+
+# LIBRARY = 'nlin'
+# LIBRARY = 'quad'
+# # LIBRARY = 'nquad'
+# LIBRARY = 'cub'
+# LIBRARY = 'ncub'
+# LIBRARIES = ['n', 'lin', 'nlin', 'quad', 'nquad', 'cub', 'ncub']
+# LIBRARIES = ['lin', 'nlin', 'quad', 'nquad', 'cub', 'ncub']
+# LIBRARIES = ['lin', 'nlin']
+# LIBRARIES = ['nlin']
+# LIBRARIES = ['ncub']
+# LIBRARIES = ['nquad']
+# LIBRARIES = LIBRARIES[plus:plus+1]
+# LIBRARIES = ['lin', 'nlin', 'quad', 'nquad', 'ncub']
+# LIBRARIES = LIBRARY
+# library = LIBRARIES[0]
+
+if not CORELIST:
+    MAX_ORDER = 20  # We care only for recursive equations with max 20 terms or order.
+else:
+    # MAX_ORDER = 2
+    # MAX_ORDER = 4
+    # MAX_ORDER = 5
+    MAX_ORDER = 10
 # if DEBUG:
 #     MAX_ORDER = 5  # We care only for recursive equations with max 20 terms or order.
 # MAX_ORDER = 2
 
-THRESHOLD = 0.2  # For sindy - masking threshold.
+# THRESHOLD = 0.2  # For sindy - masking threshold.
 THRESHOLD = 0.1  # For sindy - masking threshold.
 # THRESHOLD = 0.08  # For sindy - masking threshold.
 # THRESHOLD = 0.05  # For sindy - masking threshold.
@@ -135,7 +144,7 @@ THRESHOLD = 0.1  # For sindy - masking threshold.
 N_OF_TERMS_ED = 200
 TASK_ID = 0
 # TASK_ID = 8
-TASK_ID = 14
+# TASK_ID = 14
 # TASK_ID = 17
 # TASK_ID = 187
 # TASK_ID = 5365  # A026471
@@ -218,7 +227,7 @@ args = parser.parse_args()
 job_id = args.job_id
 task_id = args.task_id
 # library = args.lib
-libraries = args.lib.split(',') if args.lib is not None else LIBRARIES
+# libraries = args.lib.split(',') if args.lib is not None else LIBRARIES
 # if library is None:
 #     library = libraries
 
@@ -257,7 +266,7 @@ csv_filename = 'linear_database_full.csv'
 if CORELIST:
     blacklist = []
     # from core_nice_nomore import cores
-    csv_filename = 'cores.csv'
+    # csv_filename = 'cores.csv'
     csv_filename = 'cores_test.csv'
     # Explained cores, how I got them: back at the time they were scraped.
     # specs: only first 100 terms, 150 sequences
@@ -291,6 +300,8 @@ if not fail:
     else:
         fail = (not BUGLIST and list(csv.columns)[task_id] in blacklist) or fail
     seq_id = list(csv.columns)[task_id] if not SEQ_ID[0] or not DEBUG else SEQ_ID[1]
+    print('seq_id', seq_id)
+    print('seq_id', BUGLIST)
     if BUGLIST:
         if isinstance(buglist[task_id], str):
             seq_id = buglist[task_id]
@@ -318,6 +329,7 @@ if fail:
           'the task was already performed in the past.')
 else:
     print()
+    print('CORELIST', CORELIST, 'SINDy', SINDy)
     # csv = pd.read_csv(csv_filename, low_memory=False, nrows=0)
     # print(csv.columns[:100])
     csv = pd.read_csv(csv_filename, low_memory=False, usecols=[seq_id])[:n_of_terms_load]
@@ -447,7 +459,7 @@ else:
                 x, (sol_ref, (xlib, order)), eq, coeffs, truth = increasing_eed(sindy_grid, seq_id, csv, VERBOSITY, max_order_,
                                                                        ground_truth=GROUND_TRUTH,
                                                                        n_of_terms=N_OF_TERMS_ED,
-                                                                       library=libraries, start_order=START_ORDER,
+                                                                       library=library, start_order=START_ORDER,
                                                                        # init=init)
                                                                        init = None)
 
@@ -489,11 +501,14 @@ else:
             # print('Going for exact ed')
             # print(' tle ', max_order_, linear, N_OF_TERMS_ED)
             START_ORDER = 6
-            START_ORDER = 1
+            START_ORDER = 0  #
             if INCREASING_EED:
-                x, (sol_ref, xlib), eq, coeffs, truth = increasing_eed(exact_ed, seq_id, csv, VERBOSITY, max_order_,
-                                                      ground_truth=GROUND_TRUTH, n_of_terms=N_OF_TERMS_ED,
-                                                      library=libraries, start_order=START_ORDER)
+                x, (sol_ref, xlib), eq, coeffs, truth = increasing_eed(exact_ed, seq_id, csv, VERBOSITY, d_max,
+                                                                       max_order_,
+                                                      ground_truth=GROUND_TRUTH,
+                                                       # n_of_terms=N_OF_TERMS_ED,
+                                                      library=library,
+                                                      start_order=START_ORDER)
                 # x, eq, coeffs, truth = exact_ed(seq_id, csv, VERBOSITY, max_order_,
                 #                                 n_of_terms=N_OF_TERMS_ED, linear=LINEAR)
 

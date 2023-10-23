@@ -80,7 +80,10 @@ def preprocess(seq: sp.Matrix, n_degree: int, degree: int) -> tuple[sp.Matrix, b
 
 
 def sindy(seq: Union[list, sp.Matrix], max_order: int, threshold: float = 0.1,
-          ensemble: bool = False, library_ensemble: bool = False, library: str = 'nlin'):
+          ensemble: bool = False, library_ensemble: bool = False,
+          d_max: int = None,
+          library: str = None,
+          ):
     """Perform SINDy."""
 
     # print('seq len, order, lib', len(seq), max_order,  library)

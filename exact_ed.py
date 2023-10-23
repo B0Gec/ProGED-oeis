@@ -43,33 +43,38 @@ def timer(now, text=f"\nScraping all (chosen) OEIS sequences"):
 # seq = sp.Matrix(csv[seq_id])
 # def grid_sympy(seq: sp.MutableDenseMatrix, nof_eqs: int = None):  # seq.shape=(N, 1)
 
-def poly_combinations(library: str, order: int):
+def poly_combinations(library: str, d_max: int, order: int):
     """Return all combinations of variables in library up to order.
-    To avaid repetition in solution2str functiion."""
+    To avaid repetition in solution2str functiion.
 
-    n_degree, degree = lib2degrees(library)
+    Example:
+        library = 'n', d_max = 2, order = 1 -> ['n', 'a(n-1)', 'n*n', 'n*a(n-1)', 'a(n-1)*a(n-1)']
+    """
+
+    # n_degree, degree = lib2degrees(library)
+    # basis = lib2stvars(library, order)
     basis = lib2stvars(library, order)
     # print('base', basis, library)
 
     combins = itertools.combinations_with_replacement
-    if library == 'n':
-        basis, degree = ['n'], n_degree
+    # if library == 'n':
+    #     basis, degree = ['n'], n_degree
     # print('lib', library, basis)
-    combinations = sum([list(combins(basis, deg)) for deg in range(1, degree+1)], [])
+    combinations = sum([list(combins(basis, deg)) for deg in range(1, d_max+1)], [])
     # print('combinations inside poly_combinations()', combinations)
     return combinations
 
-def solution_reference(library: str, order: int) -> list[str]:
+def solution_reference(library: str, d_max: int, order: int) -> list[str]:
     """Return reference solution for library and order."""
     # print((map(lambda comb: reduce((lambda i, s: i+'*'+s), comb[1:], comb[0]),  poly_combinations(library, order))))
-    return ['1', ] + list(map(lambda comb: reduce((lambda i, s: i+'*'+s), comb[1:], comb[0]),  poly_combinations(library, order)))
+    return ['1', ] + list(map(lambda comb: reduce((lambda i, s: i+'*'+s), comb[1:], comb[0]),  poly_combinations(library, d_max, order)))
 
 
 multiply_eltw = lambda x,y: x.multiply_elementwise(y)
 def comb2act(comb: tuple, dic: dict, multiply=multiply_eltw) -> sp.Matrix: return dic[comb[0]] if len(comb) == 1 else multiply(dic[comb[0]], comb2act(comb[1:], dic))
 
 
-def grid_sympy(seq: sp.MutableDenseMatrix, max_order: int, library: str) -> tuple[sp.Matrix, list[str]]:  # seq.shape=(N, 1)
+def grid_sympy(seq: sp.MutableDenseMatrix, d_max: int, max_order: int, library: str) -> tuple[sp.Matrix, list[str]]:  # seq.shape=(N, 1)
     # seq = seq if nof_eqs is None else seq[:nof_eqs]
     # seq = seq[:nof_eqs, :]
     # seq = seq[:shape[0]-1, :]
@@ -92,15 +97,16 @@ def grid_sympy(seq: sp.MutableDenseMatrix, max_order: int, library: str) -> tupl
     basis = lib2stvars(library, max_order)
     # print(basis)
 
-    n_col = sp.Matrix([i for i in range(1, seq.rows)]) if 'n' in basis else sp.Matrix([])
+    # n_col = sp.Matrix([i for i in range(1, seq.rows)]) if 'n' in basis else sp.Matrix([])
+    n_col = sp.Matrix([i for i in range(1, seq.rows)])  # In the end basis determines members of final dataset.
     ntriangle = sp.Matrix.hstack(n_col, triangle_grid(1))
     # print('ntriangle', ntriangle.shape, ntriangle)
     triangle = {var: ntriangle[:, i] for i, var in enumerate(basis)}
     # print('triangle', triangle.keys())
-    #
+
     # combins = itertools.combinations_with_replacement
     # combinations = sum([list(combins(basis, deg)) for deg in range(1, degree+1)], [])
-    combinations = poly_combinations(library, max_order)
+    combinations = poly_combinations(library, d_max, max_order)
     # print('combinations', combinations)
     #
     # def multiply(a, b):
@@ -148,21 +154,21 @@ def grid_sympy(seq: sp.MutableDenseMatrix, max_order: int, library: str) -> tupl
         # triangles)
     # print('data', data.shape, data)
 
-    sol_ref = solution_reference(library, max_order)
+    sol_ref = solution_reference(library, d_max, max_order)
     # print('sol ref', sol_ref)
 
-    if data.cols-1 != len(solution_reference(library, max_order)):
-        raise IndexError(f"Diofantos: Reference (indexing) of solution {solution_reference(library, max_order)} is not compatible with data (with {data.cols-1} columns).")
+    if data.cols-1 != len(solution_reference(library, d_max, max_order)):
+        raise IndexError(f"Diofantos: Reference (indexing) of solution {solution_reference(library, d_max, max_order)} is not compatible with data (with {data.cols-1} columns).")
     return data, sol_ref
 
 
-def dataset(seq: list, max_order: int, library: str) -> tuple[sp.Matrix, sp.Matrix, list[str]]:
+def dataset(seq: list, d_max: int, max_order: int, library: str) -> tuple[sp.Matrix, sp.Matrix, list[str]]:
     """Instant list -> (b, A) for equation discovery / LA system."""
 
-    if max_order <= 0:
+    if max_order < 0:
         raise ValueError("max_order must be > 0. Otherwise needs to be implemented properly.")
 
-    data, sol_ref = grid_sympy(sp.Matrix(seq), max_order, library=library)
+    data, sol_ref = grid_sympy(sp.Matrix(seq), d_max, max_order, library=library)
     # print('order', max_order)
     # print('data', data)
 
@@ -172,8 +178,8 @@ def dataset(seq: list, max_order: int, library: str) -> tuple[sp.Matrix, sp.Matr
     # print('data', data)
     # b = data[max_order:(max_order + m_limit), 0]
     # A = data[max_order:(max_order + m_limit), 1:]
-    b = data[max_order-1:(max_order + m_limit), 0]
-    A = data[max_order-1:(max_order + m_limit), 1:]
+    b = data[max(0, max_order-1):(max_order + m_limit), 0]
+    A = data[max(0, max_order-1):(max_order + m_limit), 1:]
     return b, A, sol_ref
 
 
@@ -322,9 +328,10 @@ def lib2verbose(library: str, order: int) -> list[str]:
 def lib2stvars(library: str, order: int) -> list[str]:
     """Convert library string into sympy variables."""
 
-    n_degree, _ = lib2degrees(library)
+    # n_degree, _ = lib2degrees(library)
     # print('n_degree', n_degree)
-    basis = ['n'] * (n_degree > 0) + [f'a(n-{i})' for i in range(1, order + 1)]
+    # basis = ['n'] * (n_degree > 0) + [f'a(n-{i})' for i in range(1, order + 1)]
+    basis = ['n'] * (library=='n') + [f'a(n-{i})' for i in range(1, order + 1)]
     return basis
 
 def solution2str(x: sp.Matrix, solution_ref: list[str], library: str = None) -> str:
@@ -382,7 +389,7 @@ def instant_solution_vs_truth(x: sp.Matrix, seq_id: str, csv: pd.DataFrame) -> b
 
 
 def exact_ed(seq_id: str, csv: pd.DataFrame, verbosity: int = VERBOSITY,
-             max_order: int = None, ground_truth: bool = True, n_of_terms=10**16,
+             d_max: int = None, max_order: int = None, ground_truth: bool = True, n_of_terms=10**16,
              library: str ='lin') -> tuple[sp.Matrix, str, str, str]:
     # max_order = 25
     # max_order = None
@@ -403,7 +410,7 @@ def exact_ed(seq_id: str, csv: pd.DataFrame, verbosity: int = VERBOSITY,
 
     # print(seq)
     max_order = sp.floor(seq.rows/2)-1 if max_order is None else max_order
-    b, A, sol_ref = dataset(list(seq), max_order, library=library)
+    b, A, sol_ref = dataset(list(seq), d_max, max_order, library=library)
 
     # print('order', max_order)
     # print(A.shape)
@@ -453,7 +460,7 @@ def exact_ed(seq_id: str, csv: pd.DataFrame, verbosity: int = VERBOSITY,
 
 
 def increasing_eed(exact_ed, seq_id: str, csv: pd.DataFrame, verbosity: int = VERBOSITY,
-                   max_order: int = None, ground_truth: bool = True, n_of_terms=10 ** 16, library: list = ['lin'],
+                   d_max: int = None, max_order: int = None, ground_truth: bool = True, n_of_terms=10 ** 16, library: list = ['lin'],
                    start_order: int = 1, init: list = None, sindy: bool = False) -> tuple[sp.Matrix, str, str, str, str]:
     """Perform exact_ed with increasing the *max_order* untill the equation that holds (with minimum order) is found."""
 
@@ -471,10 +478,10 @@ def increasing_eed(exact_ed, seq_id: str, csv: pd.DataFrame, verbosity: int = VE
         if not ed_output[-1]:
             if exact_ed.__name__ == 'sindy_grid':
                 # print('inc before call', lib, order, ed_output)
-                x, sol_ref, eq, _ = exact_ed(None, seq_id, csv, None, order, library=lib) + (False,)
+                x, sol_ref, eq, _ = exact_ed(None, seq_id, csv, None, d_max, order, library=lib) + (False,)
                 lib, coefs, truth = (lib, order), '', ''
             else:
-                x, sol_ref, eq, coefs, truth, _ = exact_ed(seq_id, csv, verbosity, order, ground_truth, n_of_terms, library=lib) + (False,)
+                x, sol_ref, eq, coefs, truth, _ = exact_ed(seq_id, csv, verbosity, d_max, order, ground_truth, n_of_terms, library=lib) + (False,)
 
             output = x, (sol_ref, lib), eq, coefs, truth, _
             # print(output)
