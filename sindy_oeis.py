@@ -59,14 +59,21 @@ def heuristic(terms_avail):
     return round(terms_avail/2)
 
 
-def preprocess(seq: sp.Matrix, n_degree: int, degree: int) -> tuple[sp.Matrix, bool]:
+def preprocess(seq: sp.Matrix, d_max: int) -> tuple[sp.Matrix, bool]:
     """Filter in only small sized terms of the sequence."""
 
     # n_degree, degree = lib2degrees(library)
     # biggie = list(map(lambda term: abs(term**degree) >= 10**16, seq))
     # biggie = [True] + [abs(term**degree) >= 10**16 for term in seq]
     # biggie_n = [True] + [abs(n**degree) >= 10**16 for n in range(1, len(seq))]
-    biggie = [abs(term)**degree >= 10**16 or abs(n)**n_degree >=10**16 for n, term in enumerate(seq)] + [True]
+    # biggie = [abs(term)**degree >= 10**16 or abs(n)**n_degree >=10**16 for n, term in enumerate(seq)] + [True]
+    print(seq)
+
+    # avoid calculating cubes of huge numbers by doing first round:
+    first_round = [abs(term) >= 10**16 for term in seq] + [True]
+    locus = first_round.index(True)
+    seq = seq[:locus]
+    biggie = [abs(term)**d_max >= 10**16 for term in seq] + [True]
     # print('biggie', biggie)
     # print('max preproc', max([max(abs(term)**degree, abs(n)**n_degree) for n, term in enumerate(seq)]))
     locus = biggie.index(True)
@@ -79,9 +86,8 @@ def preprocess(seq: sp.Matrix, n_degree: int, degree: int) -> tuple[sp.Matrix, b
     return seq[:locus], fail
 
 
-def sindy(seq: Union[list, sp.Matrix], max_order: int, threshold: float = 0.1,
+def sindy(seq: Union[list, sp.Matrix], d_max: int, max_order: int, threshold: float = 0.1,
           ensemble: bool = False, library_ensemble: bool = False,
-          d_max: int = None,
           library: str = None,
           ):
     """Perform SINDy."""
@@ -105,12 +111,13 @@ def sindy(seq: Union[list, sp.Matrix], max_order: int, threshold: float = 0.1,
 
     baslib = 'n' if library == 'n' else 'nlin' if library[0] == 'n' else 'lin'
 
-    b, A, sol_ref = dataset(seq, max_order, library=baslib)  # defaults to lib='nlin' or 'lin'
+    # b, A, sol_ref = dataset(seq, max_order, library=baslib)  # defaults to lib='nlin' or 'lin'
+    b, A, sol_ref = dataset(seq, d_max, max_order, library=library)  # defaults to lib='nlin' or 'lin'
     A, sol_ref = A[:, 1:], sol_ref[1:]  # to avoid combinations of constant term.
 
-    if library == 'n':
-        baslib = 'n'
-        A, sol_ref = A[:, :1], sol_ref[:1]
+    # if library == 'n':
+    #     baslib = 'n'
+    #     A, sol_ref = A[:, :1], sol_ref[:1]
 
     # print(A, b)
     # print('max', max(A), max(b))
@@ -136,15 +143,17 @@ def sindy(seq: Union[list, sp.Matrix], max_order: int, threshold: float = 0.1,
     # print(data)
 
     # max_degree = 1 if library in ('lin', 'nlin') else 2 if library in ('quad', 'nquad') else 3 if library in ('cub', 'ncub') else 'Unknown Library!!'
-    n_degree, poly_degree = lib2degrees(library)
-    if library == 'n':
-        poly_degree = 3
+    # n_degree, poly_degree = lib2degrees(library)
+    # if library == 'n':
+    #     poly_degree = 3
 
     # poly_degree = 8
     # poly_degree = 1
+    poly_degree = d_max
     # poly_order = max_degree
     # threshold = 0.1
 
+    print('threshold', threshold)
 
     model = ps.SINDy(
         optimizer=ps.STLSQ(threshold=threshold),
@@ -174,7 +183,7 @@ def sindy(seq: Union[list, sp.Matrix], max_order: int, threshold: float = 0.1,
     # lib_ref = 'nlin' if poly_degree == 1 else 'nquad' if poly_degree == 2 else 'ncub' if poly_degree == 3 else 'Unknown Library!!'
     # lib_ref = 'n' if library == 'n' else lib_ref
     # lib_ref = library
-    sol_ref = solution_reference(library=library, order=max_order)
+    sol_ref = solution_reference(library=library, d_max=d_max, order=max_order)
     # print(sol_ref)
     # print('len(sol_ref):', len(sol_ref), 'lib_ref):', lib_ref)
 
@@ -211,11 +220,27 @@ def sindy_grid_search(seq, coeffs, truth, max_order: int, stepsize: int, evals: 
     return
 
 
-def one_results(seq, seq_id, csv, coeffs, max_order: int,
-                threshold: float, library: str, ensemble: bool, library_ensemble: bool):
+def one_results(seq, seq_id, csv, coeffs, d_max: int, max_order: int,
+                threshold: float, library: str, ensemble: bool, library_ensemble: bool = None):
 
+    if library_ensemble is None:
+        library_ensemble = ensemble
     # print('one res:', max_order, threshold, library, ensemble, library_ensemble)
-    x, sol_ref = sindy(seq, max_order, threshold, ensemble, library_ensemble, library)
+
+    # print('in one_res')
+    if seq is None:
+        seq = unnan(csv[seq_id])
+        # print('\nraw unnaned', seq)
+
+        # preproces:
+        seq, pre_fail = preprocess(seq, d_max)
+
+        if pre_fail:
+
+            return [], [], False, "Preprocessing failed!"
+
+
+    x, sol_ref = sindy(seq, d_max, max_order, threshold, ensemble, library_ensemble, library)
     # print('after sindy')
     is_reconst = solution_vs_truth(x, coeffs) if coeffs is not None else ' - NaN - '
     # print('before check')
@@ -224,7 +249,12 @@ def one_results(seq, seq_id, csv, coeffs, max_order: int,
 
     # print('oner', x, library, is_check_verbose)
     is_check = is_check_verbose[0]
-    summary = x, sol_ref, is_reconst, is_check
+
+    eq = solution2str(x, sol_ref, None)
+    x = [] if not is_check else x
+
+    # summary = x, sol_ref, is_reconst, is_check, eq
+    summary = x, sol_ref, is_reconst, eq
     # print()
     # print(summary)
     # print('one result !!!!!!!')

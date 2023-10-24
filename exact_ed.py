@@ -95,7 +95,7 @@ def grid_sympy(seq: sp.MutableDenseMatrix, d_max: int, max_order: int, library: 
                         )
 
     basis = lib2stvars(library, max_order)
-    # print(basis)
+    print(basis)
 
     # n_col = sp.Matrix([i for i in range(1, seq.rows)]) if 'n' in basis else sp.Matrix([])
     n_col = sp.Matrix([i for i in range(1, seq.rows)])  # In the end basis determines members of final dataset.
@@ -460,30 +460,39 @@ def exact_ed(seq_id: str, csv: pd.DataFrame, verbosity: int = VERBOSITY,
 
 
 def increasing_eed(exact_ed, seq_id: str, csv: pd.DataFrame, verbosity: int = VERBOSITY,
-                   d_max: int = None, max_order: int = None, ground_truth: bool = True, n_of_terms=10 ** 16, library: list = ['lin'],
-                   start_order: int = 1, init: list = None, sindy: bool = False) -> tuple[sp.Matrix, str, str, str, str]:
+                   d_max: int = None, max_order: int = None, ground_truth: bool = True, n_of_terms=10 ** 16, library: 'str' = None,
+                   start_order: int = 1, init: list = None, sindy_hidden: list = None) -> tuple[sp.Matrix, str, str, str, str]:
     """Perform exact_ed with increasing the *max_order* untill the equation that holds (with minimum order) is found."""
 
     # verbosity = 2
-    def eed_step(ed_output, order_lib):
-        order = order_lib[0]
-        lib = order_lib[1]
+    def eed_step(ed_output, deg_order):
+        print('deg_order', deg_order)
+        d_max = deg_order[0]
+        order = deg_order[1]
+        threshold, ensemble = None, None if len(deg_order) == 2 else deg_order[2:]
+        print('threshold, ensemble', threshold, ensemble)
         # print('summary', ed_output)
-        print('eed_step', order, seq_id, 'calculating ...')
+        print('eed_step', f'd_max, order: {d_max, order}', seq_id, 'calculating ...')
         if verbosity >= 2:
-            print('eed_step', order_lib, seq_id, 'calculating ...')
+            print('eed_step', deg_order, seq_id, 'calculating ...')
 
         # output = ed_output if ed_output[0] != [] else exact_ed(seq_id, csv, verbosity, order, linear, n_of_terms) + (False,)
         # # output = ed_output if ed_output[-1] else exact_ed(seq_id, csv, verbosity, order, linear, n_of_terms) + (False,)
         if not ed_output[-1]:
-            if exact_ed.__name__ == 'sindy_grid':
+            if exact_ed.__name__ == 'one_results':
                 # print('inc before call', lib, order, ed_output)
-                x, sol_ref, eq, _ = exact_ed(None, seq_id, csv, None, d_max, order, library=lib) + (False,)
-                lib, coefs, truth = (lib, order), '', ''
-            else:
-                x, sol_ref, eq, coefs, truth, _ = exact_ed(seq_id, csv, verbosity, d_max, order, ground_truth, n_of_terms, library=lib) + (False,)
+                seq = sindy_hidden[d_max-1]
 
-            output = x, (sol_ref, lib), eq, coefs, truth, _
+                x, sol_ref, is_reconst, eq = exact_ed(seq, seq_id, csv, None, d_max, order, library=library, threshold=threshold, ensemble=ensemble) + (False,)
+
+                # def one_results(seq, seq_id, csv, coeffs, d_max: int, max_order: int,
+                #                 threshold: float, library: str, ensemble: bool, library_ensemble: bool = None):
+
+                coefs, truth = '', ''
+            else:
+                x, sol_ref, eq, coefs, truth, _ = exact_ed(seq_id, csv, verbosity, d_max, order, ground_truth, n_of_terms, library=library) + (False,)
+
+            output = x, (sol_ref, d_max, order), eq, coefs, truth, _
             # print(output)
             # print(output[1:])
             if x != []:
@@ -496,8 +505,8 @@ def increasing_eed(exact_ed, seq_id: str, csv: pd.DataFrame, verbosity: int = VE
                     pass
 
                 # print('inc eed: x vs sol_ref ', len(x), len(sol_ref), x, sol_ref)
-                is_check = check_eq_man(x, seq_id, csv, header=ground_truth, n_of_terms=10**5, solution_ref=sol_ref, library=None)[0]
-                # is_check = True
+                # is_check = check_eq_man(x, seq_id, csv, header=ground_truth, n_of_terms=10**5, solution_ref=sol_ref, library=None)[0]
+                is_check = True
                 if not is_check:
                     # output = [], "", "", "", False
                     output = output[:-1] + (False,)
@@ -519,17 +528,25 @@ def increasing_eed(exact_ed, seq_id: str, csv: pd.DataFrame, verbosity: int = VE
         #
         # # if
 
-        # print('output', output)
+        print('output', output)
         # print('after one step of order', order, output)
         return output
 
     # start = ([], "a(n) = NOT RECONSTRUCTED :-(", "", "", False)
     # start = ([], 'n', solution2str([], library=library[0]), "", "", False)
-    start = ([], (None, None) , 'n', 'a(n) = ?', "", "", False) if init is None else init
-    orders = range(start_order, max_order+1)
-    orders_lib = product(orders, library)
+    start = ([], (None, None, None) , 'a(n) = ?', "", "", False) if init is None else init
+    # print(len(start), start)
+    d_maxs, orders = range(1, d_max+1), range(start_order, max_order+1)
+    deg_orders = product(d_maxs, orders)
+    if exact_ed.__name__ == 'one_results':
+        deg_orders = product(d_maxs, orders, [i*0.1 for i in range(11)], [False, True])
 
-    eed = reduce(eed_step, orders_lib, start)[:-1]
+    a = list(deg_orders)
+    # print('deg_orders', list(deg_orders))
+
+    eed = reduce(eed_step, deg_orders, start)[:-1]
+    # print('after reduce')
+
     # for i in range(1, max_order):
     #     if x != []:
     #         x = exact_ed()
