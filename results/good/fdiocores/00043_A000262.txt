@@ -1,0 +1,12 @@
+
+While total time consumed by now, scale:44/164, seq_id:A000262, order:10 took:
+ 34333.4 seconds, i.e. 572.22 minutes or 9.537 hours.
+
+by degree: 3 and order: 2. 
+A000262: 
+a(n) = -n**2*a(n - 2) + 3*n*a(n - 2) + 2*n*a(n - 1) - 2*a(n - 2) - a(n - 1)
+truth: 
+
+
+  -  checked against website ground truth.     
+False  -  "manual" check if equation is correct.    

@@ -90,8 +90,11 @@ job_id = "incdio74"  # 2023-07-04  ... I think this will be in final results.
 # # job_id = 'sicor-combalibs'
 # job_id = 'sicor-lin3'
 
+# new "final?" results:
+job_id = 'fdiocores'
+
 print(job_id)
-CORES = True if job_id in ("diocores77", 'diocor-merge', 'sindycore83', 'dicor-cub', 'dicor-cub19') else False
+CORES = True if job_id in ("diocores77", 'diocor-merge', 'sindycore83', 'dicor-cub', 'dicor-cub19', 'fdiocores') else False
 CORES = True
 # CORES = False
 if CORES:
@@ -526,7 +529,7 @@ if CORES:
 # summary = reduce(for_summary, files[:], (0, 0, 0, 0, 0, 0, [], [0 for i in range(36)], [], [], [], ['start']))  # save all buggy ids
 summary = reduce(for_summary, sorted(files[:]), (0, 0, 0, 0, 0, 0, [], [0 for i in range(36)], [], [], [], ['start']))  # save all buggy ids
 print(summary)
-1/0
+# 1/0
 
 # corrected_sum = sum(summary[:4]) - sum(summary[4:])
 corrected_sum = sum(summary[:4]) - sum(summary[4:5])
@@ -865,19 +868,20 @@ print('before dlfin')
 # print(coefs, len(coefs.strip('(').strip(')').split(',')), type(coefs))
 # ed_fail_list = ['A000045', 'A001045']
 # ed_fail_list = non_id_list
-ed_fails_ords = [(seq, len(dflin[seq[6:(6+7)]][0].strip('(').strip(')').split(','))) for seq in ed_fail_list]
-non_id_ords = [(seq, len(dflin[seq[6:(6+7)]][0].strip('(').strip(')').split(','))) for seq in non_id_list]
-print('\n'*4)
-small_fails = [(seq, o) for seq, o in ed_fails_ords if o <= 19]
-big_non_ids = [(seq, o) for seq, o in non_id_ords if o > 19]
-# biggie = [(seq, o) for seq, o in seqs if o >= 20]
-print('biggie fail', small_fails)
-print('biggie fail len', len(small_fails))
-print('biggie non_id', big_non_ids)
-print('biggie non_ids len', len(big_non_ids))
-# print('seqs', seqs)
-print('len fails', len(ed_fails_ords))
-print('len non ids', len(non_id_ords))
-print('eof')
+# ed_fails_ords = [(seq, len(dflin[seq[6:(6+7)]][0].strip('(').strip(')').split(','))) for seq in ed_fail_list]
+# non_id_ords = [(seq, len(dflin[seq[6:(6+7)]][0].strip('(').strip(')').split(','))) for seq in non_id_list]
+# print('\n'*4)
 
+# small_fails = [(seq, o) for seq, o in ed_fails_ords if o <= 19]
+# big_non_ids = [(seq, o) for seq, o in non_id_ords if o > 19]
+# # biggie = [(seq, o) for seq, o in seqs if o >= 20]
+# print('biggie fail', small_fails)
+# print('biggie fail len', len(small_fails))
+# print('biggie non_id', big_non_ids)
+# print('biggie non_ids len', len(big_non_ids))
+# # print('seqs', seqs)
+# print('len fails', len(ed_fails_ords))
+# print('len non ids', len(non_id_ords))
+# print('eof')
+#
 

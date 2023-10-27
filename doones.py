@@ -31,7 +31,7 @@ warnings.simplefilter("ignore")
 #     from exact_ed import exact_ed, timer
 
 SINDy = True
-SINDy = False
+# SINDy = False
 SINDy_default = True
 if SINDy:
     from sindy_oeis import sindy, preprocess, heuristic, sindy_grid, one_results
@@ -263,7 +263,8 @@ has_titles = 1
 # # mabye slow:
 now = time.perf_counter()
 # # a bit faster maybe:
-csv_filename = 'linear_database_full.csv'
+# csv_filename = 'linear_database_full.csv'
+csv_filename = 'linear_database_clean.csv'
 if CORELIST:
     blacklist = []
     # from core_nice_nomore import cores

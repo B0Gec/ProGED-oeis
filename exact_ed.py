@@ -95,7 +95,7 @@ def grid_sympy(seq: sp.MutableDenseMatrix, d_max: int, max_order: int, library: 
                         )
 
     basis = lib2stvars(library, max_order)
-    print(basis)
+    # print(basis)
 
     # n_col = sp.Matrix([i for i in range(1, seq.rows)]) if 'n' in basis else sp.Matrix([])
     n_col = sp.Matrix([i for i in range(1, seq.rows)])  # In the end basis determines members of final dataset.
@@ -466,13 +466,15 @@ def increasing_eed(exact_ed, seq_id: str, csv: pd.DataFrame, verbosity: int = VE
 
     # verbosity = 2
     def eed_step(ed_output, deg_order):
-        print('deg_order', deg_order)
+        # print('deg_order', deg_order)
         d_max = deg_order[0]
         order = deg_order[1]
-        threshold, ensemble = None, None if len(deg_order) == 2 else deg_order[2:]
+        print('deg_order', deg_order, len(deg_order), deg_order[2:])
+        threshold, ensemble = (None, None) if len(deg_order) == 2 else deg_order[2:]
         print('threshold, ensemble', threshold, ensemble)
+
         # print('summary', ed_output)
-        print('eed_step', f'd_max, order: {d_max, order}', seq_id, 'calculating ...')
+        # print('eed_step', f'd_max, order: {d_max, order}', seq_id, 'calculating ...')
         if verbosity >= 2:
             print('eed_step', deg_order, seq_id, 'calculating ...')
 
@@ -483,7 +485,7 @@ def increasing_eed(exact_ed, seq_id: str, csv: pd.DataFrame, verbosity: int = VE
                 # print('inc before call', lib, order, ed_output)
                 seq = sindy_hidden[d_max-1]
 
-                x, sol_ref, is_reconst, eq = exact_ed(seq, seq_id, csv, None, d_max, order, library=library, threshold=threshold, ensemble=ensemble) + (False,)
+                x, sol_ref, is_reconst, eq, _ = exact_ed(seq, seq_id, csv, None, d_max, order, library=library, threshold=threshold, ensemble=ensemble) + (False,)
 
                 # def one_results(seq, seq_id, csv, coeffs, d_max: int, max_order: int,
                 #                 threshold: float, library: str, ensemble: bool, library_ensemble: bool = None):
@@ -505,8 +507,8 @@ def increasing_eed(exact_ed, seq_id: str, csv: pd.DataFrame, verbosity: int = VE
                     pass
 
                 # print('inc eed: x vs sol_ref ', len(x), len(sol_ref), x, sol_ref)
-                # is_check = check_eq_man(x, seq_id, csv, header=ground_truth, n_of_terms=10**5, solution_ref=sol_ref, library=None)[0]
-                is_check = True
+                is_check = check_eq_man(x, seq_id, csv, header=ground_truth, n_of_terms=10**5, solution_ref=sol_ref, library=None)[0]
+                # is_check = True
                 if not is_check:
                     # output = [], "", "", "", False
                     output = output[:-1] + (False,)
@@ -528,7 +530,7 @@ def increasing_eed(exact_ed, seq_id: str, csv: pd.DataFrame, verbosity: int = VE
         #
         # # if
 
-        print('output', output)
+        # print('output', output)
         # print('after one step of order', order, output)
         return output
 
@@ -537,11 +539,12 @@ def increasing_eed(exact_ed, seq_id: str, csv: pd.DataFrame, verbosity: int = VE
     start = ([], (None, None, None) , 'a(n) = ?', "", "", False) if init is None else init
     # print(len(start), start)
     d_maxs, orders = range(1, d_max+1), range(start_order, max_order+1)
-    deg_orders = product(d_maxs, orders)
+    deg_orders = list(product(d_maxs, orders))
+    # deg_orders = product(d_maxs, orders)
     if exact_ed.__name__ == 'one_results':
         deg_orders = product(d_maxs, orders, [i*0.1 for i in range(11)], [False, True])
 
-    a = list(deg_orders)
+    # a = list(deg_orders)
     # print('deg_orders', list(deg_orders))
 
     eed = reduce(eed_step, deg_orders, start)[:-1]
@@ -733,7 +736,8 @@ def check_eq_man(x: sp.Matrix, seq_id: str, csv: str,
     header = 1 if header else 0
     seq = unnan(csv[seq_id][header:n_of_terms])
     seq = sp.Matrix(list(reversed(seq[:])))
-    # print(seq[-10:])
+    print(seq[-10:])
+    # 1/0
 
     # seq = sp.Matrix(csv[seq_id][header:])[:n_of_terms, :]
     # # Handle nans:
@@ -769,8 +773,10 @@ def check_eq_man(x: sp.Matrix, seq_id: str, csv: str,
         if len(x) != len(solution_ref):
             # print(x, solution_ref)
             raise ValueError('Diofantos\' debug: len(x) != len(solution_ref)')
-        orders = [i for i in range(1, 100)]
+        orders = [i for i in range(1, len(x))]
+        # nonzero solution dict:
         x_dict = {var: x[i] for i, var in enumerate(solution_ref) if int(x[i]) != 0}
+
         # print(x_dict)
         # print([(x_i, var) for x_i, var in x_dict.items()])
         # print('sec22')
@@ -785,17 +791,19 @@ def check_eq_man(x: sp.Matrix, seq_id: str, csv: str,
     # if order == 0:
     #     1/0
 
+
     def stvar2term(stvar: str, till_now: sp.Matrix) -> int:
         # print('in stvar2term', stvar)
         if stvar == '1': return 1
-        elif stvar == 'n': return till_now.rows + 1
+        elif stvar == 'n': return till_now.rows
         else:
             # print('\n\nstvar!!!: ', stvar, order, x_dict, '\n\n')
-            order_ = [i for i in range(100) if stvar == f'a(n-{i})'][0]
+            order2 = ([i for i in range(order_) if stvar == f'a(n-{i})'] + [0])[0]
             # print('in stvar2term', order_, stvar, till_now, len(till_now))
-            ret = till_now[order_-1]
+            ret = till_now[order2-1]
             # print('endof stvar2term', stvar)
             return ret  # (order - 1) + 1 ... i.e. first 1 from list indexing, second 1 from constant term
+
 
     def var2term(var: str, till_now: sp.Matrix) -> int:
         comb = var.split('*')
@@ -807,6 +815,7 @@ def check_eq_man(x: sp.Matrix, seq_id: str, csv: str,
             ret = current*stvar2term(elt, till_now)
             # print(ret)
             return ret
+
         ret = reduce(updateit, comb, 1)
         # print('returned var2term')
         return ret
@@ -825,7 +834,7 @@ def check_eq_man(x: sp.Matrix, seq_id: str, csv: str,
 
     # print(n_degree, degree, order, x, seq_id, library)
 
-    def an(till_now: sp.Matrix, x: sp.Matrix, sol_ref) -> sp.Matrix:
+    def an(till_now: sp.Matrix) -> sp.Matrix:
 
         # print('till_now, x', till_now, x)
         # print('till_now, x', till_now.shape[0], x)
@@ -838,13 +847,18 @@ def check_eq_man(x: sp.Matrix, seq_id: str, csv: str,
         # anext = sp.Matrix([sum([x_i*var2term(var, till_now) for var, x_i in x_dict.items()])])
         ane = []
         for var, x_i in x_dict.items():
-            # print('var, x_i:', var, x_i)
+            if len(till_now) < 10:
+                print('var, x_i:', var, x_i, 'var2term(var, till_now)', var2term(var, till_now))
 
             ane += [x_i*var2term(var, till_now)]
+
         anext = sp.Matrix([sum(ane)])
         # anext = sp.Matrix([sum([x_i * var2term(var, till_now)
-        # print('after anext')
-        # print(anext)
+
+        if len(till_now) < 10:
+            print('after anext')
+            print(anext)
+        # 1/0
         return anext
 
     # if fake_reconst != []:
@@ -856,8 +870,12 @@ def check_eq_man(x: sp.Matrix, seq_id: str, csv: str,
     # reconst = sp.Matrix(list(reversed(seq[:max(order, min(oeis_friendly, len(seq)))])))
     # print(order)
 
-    reconst = seq[-max(order_, min(oeis_friendly, len(seq))):, :] if order_ != 0 else sp.Matrix([an(sp.Matrix([0]), x, solution_ref)])
-    # print('reconst', reconst)
+    print(oeis_friendly, len(seq), order_, list(reversed(list(seq)))[:5])
+
+    reconst = seq[-max(order_, min(oeis_friendly, len(seq))):, :] if order_ != 0 else sp.Matrix([an(sp.Matrix([0]))])
+
+
+    print('reconst', reconst)
     # if [i for i in x[n_degree:] if i != 0] == []:
     #     reconst = an(sp.Matrix([0 for i in reconst[:]]), x)
         # reconst = sp.Matrix([])
@@ -867,17 +885,21 @@ def check_eq_man(x: sp.Matrix, seq_id: str, csv: str,
     # print(reconst)
     # print(len(reconst))
     #
-    # 1/0
-    # else:
-    #     reconst = seq[:len(x)-1, :]  # init reconst
-    # print('reconst:', reconst)
+    # # 1/0
+    # # else:
+    # #     reconst = seq[:len(x)-1, :]  # init reconst
+    # # print('reconst:', reconst)
+    # print('reconst', reconst)
 
+    print(-1, list(reversed(reconst))[:20])
     for i in range(len(seq) - len(reconst)):
         # reconst = reconst.col_join(sp.Matrix([an(reconst, x)]))
         # reconst = reconst.col_join(an(reconst, x))
-        reconst = an(reconst, x, solution_ref).col_join(reconst)
-        # print(i, list(reversed(reconst))[:20])
+        reconst = an(reconst).col_join(reconst)
+        if i < 10:
+            print(i, list(reversed(reconst))[:20])
 
+    # 1/0
     # print(reconst)
     # print(seq)
     # print(type(reversed(reconst[:])))

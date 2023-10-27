@@ -1,0 +1,12 @@
+
+While total time consumed by now, scale:133/164, seq_id:A005811, order:10 took:
+ 42385.3 seconds, i.e. 706.42 minutes or 11.774 hours.
+
+by degree: 3 and order: 10. 
+A005811: 
+a(n) = NOT RECONSTRUCTED :-(
+truth: 
+
+
+  -  checked against website ground truth.     
+False  -  "manual" check if equation is correct.    
