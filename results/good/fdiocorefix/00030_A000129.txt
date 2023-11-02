@@ -1,0 +1,12 @@
+
+While total time consumed by now, scale:31/164, seq_id:A000129, order:10 took:
+ 1.1 seconds, i.e. 0.02 minutes or 0.0 hours.
+
+by degree: 1 and order: 2. 
+A000129: 
+a(n) = a(n - 2) + 2*a(n - 1)
+truth: 
+
+
+  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

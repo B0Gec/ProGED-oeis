@@ -30,14 +30,12 @@ warnings.simplefilter("ignore")
 # else:
 #     from exact_ed import exact_ed, timer
 
-SINDy = True
-# SINDy = False
+# SINDy = True
+SINDy = False
 SINDy_default = True
 if SINDy:
     from sindy_oeis import sindy, preprocess, heuristic, sindy_grid, one_results
 
-GROUND_TRUTH = True
-GROUND_TRUTH = False
 
 
 
@@ -86,11 +84,13 @@ BUGLIST = False
 BUGLIST_BLACKLISTING = True
 # BUGLIST ignores blacklisted sequences !!!!!
 
-CORELIST = True  # have to scrape core sequences!
-# CORELIST = False
+# CORELIST = True  # have to scrape core sequences!
+CORELIST = False
 if BUGLIST:
     from buglist import buglist
 
+GROUND_TRUTH = True
+GROUND_TRUTH = False
 
 # if not DEBUG and BUGLIST:
 #     print("\nWarning!!!!! buglist is used outside debug mode!!")
@@ -121,11 +121,15 @@ d_max = 3 if CORELIST else 1
 
 if not CORELIST:
     MAX_ORDER = 20  # We care only for recursive equations with max 20 terms or order.
+    GROUND_TRUTH = True
+    START_ORDER = 1
 else:
     # MAX_ORDER = 2
-    # MAX_ORDER = 4
+    MAX_ORDER = 4
     # MAX_ORDER = 5
     MAX_ORDER = 10
+    GROUND_TRUTH = False
+    START_ORDER = 0
 # if DEBUG:
 #     MAX_ORDER = 5  # We care only for recursive equations with max 20 terms or order.
 # MAX_ORDER = 2
@@ -192,6 +196,7 @@ SEQ_ID = (False, 'A000045')
 # SEQ_ID = (False, 'A000032')
 # SEQ_ID = (True, 'A000032')
 SEQ_ID = (True, 'A000045')
+# SEQ_ID = (True, 'A000085')
 # SEQ_ID = (True, 'A000032')
 # SEQ_ID = (False, 'A000290')
 # SEQ_ID = (True, 'A000290')
@@ -302,8 +307,8 @@ if not fail:
     else:
         fail = (not BUGLIST and list(csv.columns)[task_id] in blacklist) or fail
     seq_id = list(csv.columns)[task_id] if not SEQ_ID[0] or not DEBUG else SEQ_ID[1]
-    print('seq_id', seq_id)
-    print('seq_id', BUGLIST)
+    # print('seq_id', seq_id)
+    # print('seq_id', BUGLIST)
     if BUGLIST:
         if isinstance(buglist[task_id], str):
             seq_id = buglist[task_id]
@@ -320,7 +325,7 @@ if not fail:
     out_dir_base = f"results{sep}"
     # out_dir = out_dir_base + f"{experiment_id}{sep}{job_id}{sep}"
     out_dir = out_dir_base + f"{experiment_id}{sep}"
-    print('seq_id', seq_id)
+    # print('seq_id', seq_id)
 
     if not DEBUG and not experiment_id == timestamp:
         os.makedirs(out_dir, exist_ok=True)
@@ -332,7 +337,8 @@ if fail:
           'the task was already performed in the past.')
 else:
     print()
-    print('CORELIST', CORELIST, 'SINDy', SINDy)
+    print('CORELIST', CORELIST, 'SINDy', SINDy, 'GROUND_TRUTH', GROUND_TRUTH)
+    print('Library:', library, 'max_order', max_order, 'threshold:', threshold)
     # csv = pd.read_csv(csv_filename, low_memory=False, nrows=0)
     # print(csv.columns[:100])
     csv = pd.read_csv(csv_filename, low_memory=False, usecols=[seq_id])[:n_of_terms_load]
@@ -357,7 +363,7 @@ else:
     #
     # saved_seqs = re.findall(r'A\d{6}', text)
 
-    print('seq_id bef print_res', seq_id)
+    # print('seq_id bef print_res', seq_id)
 
     def print_results(results, verbosity=2):
 
@@ -425,7 +431,7 @@ else:
 
     results = []
 
-    print('seq_id', seq_id)
+    # print('seq_id', seq_id)
 
     def doone(task_id: int, seq_id: str, linear: bool, now=now):
         if VERBOSITY>=2:
@@ -458,8 +464,8 @@ else:
                 # x, sol_ref, eq = sindy_grid(seq, seq_id, csv, coeffs, max_order_, library='n')
                 # init = (x, (sol_ref, ('n', 0) ), eq, coeffs, truth, False if x == [] else True)
 
-                START_ORDER = 1
-                START_ORDER = 0
+                # START_ORDER = 1
+                # START_ORDER = 0
                 # START_ORDER = 6
                 # START_ORDER = 10
                 # libraries = [1, 2, 3]  # poly degrees (look increasind_eed)
@@ -509,8 +515,8 @@ else:
         else:
             # print('Going for exact ed')
             # print(' tle ', max_order_, linear, N_OF_TERMS_ED)
-            START_ORDER = 6
-            START_ORDER = 0  #
+            # START_ORDER = 6
+
             if INCREASING_EED:
                 x, (sol_ref, deg_used, order_used), eq, coeffs, truth = increasing_eed(exact_ed, seq_id, csv, VERBOSITY, d_max,
                                                                        max_order_,

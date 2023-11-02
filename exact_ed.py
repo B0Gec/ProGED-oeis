@@ -98,16 +98,18 @@ def grid_sympy(seq: sp.MutableDenseMatrix, d_max: int, max_order: int, library: 
     # print(basis)
 
     # n_col = sp.Matrix([i for i in range(1, seq.rows)]) if 'n' in basis else sp.Matrix([])
-    n_col = sp.Matrix([i for i in range(1, seq.rows)])  # In the end basis determines members of final dataset.
+    n_col = sp.Matrix([i for i in range(0, seq.rows+1)])  # In the end basis determines members of final dataset.
+    print(n_col.__repr__(), triangle_grid(1).__repr__())
+
     ntriangle = sp.Matrix.hstack(n_col, triangle_grid(1))
-    # print('ntriangle', ntriangle.shape, ntriangle)
+    print('ntriangle', ntriangle.shape, ntriangle)
     triangle = {var: ntriangle[:, i] for i, var in enumerate(basis)}
     # print('triangle', triangle.keys())
 
     # combins = itertools.combinations_with_replacement
     # combinations = sum([list(combins(basis, deg)) for deg in range(1, degree+1)], [])
     combinations = poly_combinations(library, d_max, max_order)
-    # print('combinations', combinations)
+    print('combinations', combinations)
     #
     # def multiply(a, b):
     #     return [i * j for i, j in zip(a, b)]
@@ -119,7 +121,7 @@ def grid_sympy(seq: sp.MutableDenseMatrix, d_max: int, max_order: int, library: 
     #     ntriangles = sp.Matrix.hstack(ntriangles, sp.Matrix([i**degree for i in range(1, seq.rows)]), triangle_grid(degree))
     # triangles = sp.Matrix.hstack(*[triangle_grid(degree) for degree in range(1, degree+1)])
     polys = sp.Matrix.hstack(*[comb2act(comb, triangle, multiply_eltw) for comb in combinations])
-    # print('polys', polys.shape, polys)
+    print('polys', polys.shape, polys)
     # 1/0
 
     # middle = triangle['n']
@@ -144,7 +146,7 @@ def grid_sympy(seq: sp.MutableDenseMatrix, d_max: int, max_order: int, library: 
     # print('an', seq.shape, seq)
     data = sp.Matrix.hstack(
         seq[1:,:],
-        sp.Matrix([1 for _ in range(1, seq.rows)]),  # constant term, i.e. C_0 in a_n = C_0 + C_1*n + C_2*n^2 + ...
+        sp.Matrix([1 for _ in range(0, seq.rows+1)]),  # constant term, i.e. C_0 in a_n = C_0 + C_1*n + C_2*n^2 + ...
         # n_cols,
         # triangles
         # col_tri
@@ -169,8 +171,11 @@ def dataset(seq: list, d_max: int, max_order: int, library: str) -> tuple[sp.Mat
         raise ValueError("max_order must be > 0. Otherwise needs to be implemented properly.")
 
     data, sol_ref = grid_sympy(sp.Matrix(seq), d_max, max_order, library=library)
-    # print('order', max_order)
-    # print('data', data)
+    print('order', max_order)
+    print('data', data)
+    print('data.shape', data.shape)
+    print(str(data), data.__repr__())
+    1/0
 
     # if linear or library in ('lin', 'quad', 'cub'):
     #     data = data[:, sp.Matrix([0] + list(i for i in range(2, data.shape[1])))]
@@ -469,9 +474,9 @@ def increasing_eed(exact_ed, seq_id: str, csv: pd.DataFrame, verbosity: int = VE
         # print('deg_order', deg_order)
         d_max = deg_order[0]
         order = deg_order[1]
-        print('deg_order', deg_order, len(deg_order), deg_order[2:])
+        # print('deg_order', deg_order, len(deg_order), deg_order[2:])
         threshold, ensemble = (None, None) if len(deg_order) == 2 else deg_order[2:]
-        print('threshold, ensemble', threshold, ensemble)
+        # print('threshold, ensemble', threshold, ensemble)
 
         # print('summary', ed_output)
         # print('eed_step', f'd_max, order: {d_max, order}', seq_id, 'calculating ...')
@@ -493,11 +498,13 @@ def increasing_eed(exact_ed, seq_id: str, csv: pd.DataFrame, verbosity: int = VE
                 coefs, truth = '', ''
             else:
                 x, sol_ref, eq, coefs, truth, _ = exact_ed(seq_id, csv, verbosity, d_max, order, ground_truth, n_of_terms, library=library) + (False,)
+                print('after exact')
 
             output = x, (sol_ref, d_max, order), eq, coefs, truth, _
             # print(output)
             # print(output[1:])
             if x != []:
+                print('nonempty x')
                 if len(x) > 0 and x[-1] == 0 and order >= 2:
                     # print('Unlucky me!' + seq_id + ' The order is lower than maximum although it\'s increasing eed!'
                     #     'this indicates that the equation probably the equation found a loophole in'
@@ -508,6 +515,7 @@ def increasing_eed(exact_ed, seq_id: str, csv: pd.DataFrame, verbosity: int = VE
 
                 # print('inc eed: x vs sol_ref ', len(x), len(sol_ref), x, sol_ref)
                 is_check = check_eq_man(x, seq_id, csv, header=ground_truth, n_of_terms=10**5, solution_ref=sol_ref, library=None)[0]
+                print('after check x')
                 # is_check = True
                 if not is_check:
                     # output = [], "", "", "", False
@@ -733,8 +741,11 @@ def check_eq_man(x: sp.Matrix, seq_id: str, csv: str,
     # if x==[]:
         return False, "no reconst", "no reconst"
     n_of_terms = max(n_of_terms, len(x))
+    # print('header', header)
     header = 1 if header else 0
+    # print('header', header)
     seq = unnan(csv[seq_id][header:n_of_terms])
+    # print('seq', seq)
     seq = sp.Matrix(list(reversed(seq[:])))
     print(seq[-10:])
     # 1/0
@@ -798,10 +809,11 @@ def check_eq_man(x: sp.Matrix, seq_id: str, csv: str,
         elif stvar == 'n': return till_now.rows
         else:
             # print('\n\nstvar!!!: ', stvar, order, x_dict, '\n\n')
-            order2 = ([i for i in range(order_) if stvar == f'a(n-{i})'] + [0])[0]
-            # print('in stvar2term', order_, stvar, till_now, len(till_now))
+            order2 = ([i for i in range(order_+1) if stvar == f'a(n-{i})'] + [0])[0]
+            # print('in stvar2term', order_, order2, stvar, till_now, len(till_now))
             ret = till_now[order2-1]
-            # print('endof stvar2term', stvar)
+            # print(order2 - 1)
+            # print('endof stvar2term', stvar, 'result', ret, 'defy', till_now[1])
             return ret  # (order - 1) + 1 ... i.e. first 1 from list indexing, second 1 from constant term
 
 
@@ -845,19 +857,19 @@ def check_eq_man(x: sp.Matrix, seq_id: str, csv: str,
 
         # print('before anext')
         # anext = sp.Matrix([sum([x_i*var2term(var, till_now) for var, x_i in x_dict.items()])])
-        ane = []
+        ane = 0
         for var, x_i in x_dict.items():
-            if len(till_now) < 10:
-                print('var, x_i:', var, x_i, 'var2term(var, till_now)', var2term(var, till_now))
+            # if len(till_now) < 10:
+            #     print('var, x_i:', var, x_i, 'var2term(var, till_now)', var2term(var, till_now))
+            ane += x_i*var2term(var, till_now)
 
-            ane += [x_i*var2term(var, till_now)]
-
-        anext = sp.Matrix([sum(ane)])
+        anext = sp.Matrix([ane])
+        # anext = sp.Matrix([sum(ane)])
         # anext = sp.Matrix([sum([x_i * var2term(var, till_now)
 
-        if len(till_now) < 10:
-            print('after anext')
-            print(anext)
+        # if len(till_now) < 10:
+        #     print('after anext')
+        #     print(anext)
         # 1/0
         return anext
 
@@ -870,12 +882,12 @@ def check_eq_man(x: sp.Matrix, seq_id: str, csv: str,
     # reconst = sp.Matrix(list(reversed(seq[:max(order, min(oeis_friendly, len(seq)))])))
     # print(order)
 
-    print(oeis_friendly, len(seq), order_, list(reversed(list(seq)))[:5])
+    # print(oeis_friendly, len(seq), order_, list(reversed(list(seq)))[:5])
 
     reconst = seq[-max(order_, min(oeis_friendly, len(seq))):, :] if order_ != 0 else sp.Matrix([an(sp.Matrix([0]))])
 
 
-    print('reconst', reconst)
+    # print('reconst', reconst)
     # if [i for i in x[n_degree:] if i != 0] == []:
     #     reconst = an(sp.Matrix([0 for i in reconst[:]]), x)
         # reconst = sp.Matrix([])
@@ -891,13 +903,13 @@ def check_eq_man(x: sp.Matrix, seq_id: str, csv: str,
     # # print('reconst:', reconst)
     # print('reconst', reconst)
 
-    print(-1, list(reversed(reconst))[:20])
+    # print(-1, list(reversed(reconst))[:20])
     for i in range(len(seq) - len(reconst)):
         # reconst = reconst.col_join(sp.Matrix([an(reconst, x)]))
         # reconst = reconst.col_join(an(reconst, x))
         reconst = an(reconst).col_join(reconst)
-        if i < 10:
-            print(i, list(reversed(reconst))[:20])
+        # if i < 10:
+        #     print(i, list(reversed(reconst))[:20])
 
     # 1/0
     # print(reconst)

@@ -5,10 +5,10 @@ Diofantos is a Python package for the discovery of algebraic and differential eq
 # Apptainer/Singularity container:
 - Results from paper can be reproduced by running the doones.py file from python from the Singularity container obtained 
   from the Singularity Hub in the following way:
--  apptainer remote add --no-login SylabsCloud cloud.sycloud.io
-- singularity remote use SylabsCloud
-- singularity pull library://bogec/diofantos/oeis:latest
-- run e.g.: ~/ProGED_oeis$ singularity exec oeis_latest.sif python3 doones.py --task_id 13 --exper_id reproduced_experiment
+- `apptainer remote add --no-login SylabsCloud cloud.sycloud.io`
+- `singularity remote use SylabsCloud`
+- `singularity pull library://bogec/diofantos/oeis:latest`
+- run e.g.: `~/ProGED_oeis$ singularity exec oeis_latest.sif python3 doones.py --task_id 13 --exper_id reproduced_experiment`
 
 
 ProGED discovers physical laws in data, expressed in the form of equations. 

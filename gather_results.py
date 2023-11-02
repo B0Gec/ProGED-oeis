@@ -92,9 +92,10 @@ job_id = "incdio74"  # 2023-07-04  ... I think this will be in final results.
 
 # new "final?" results:
 job_id = 'fdiocores'
+job_id = 'fdiocorefix'
 
 print(job_id)
-CORES = True if job_id in ("diocores77", 'diocor-merge', 'sindycore83', 'dicor-cub', 'dicor-cub19', 'fdiocores') else False
+CORES = True if job_id in ("diocores77", 'diocor-merge', 'sindycore83', 'dicor-cub', 'dicor-cub19', 'fdiocores', 'fdiocorefix') else False
 CORES = True
 # CORES = False
 if CORES:
