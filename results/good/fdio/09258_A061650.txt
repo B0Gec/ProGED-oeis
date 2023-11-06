@@ -1,0 +1,13 @@
+
+While total time consumed by now, scale:9259/27927, seq_id:A061650, order:20 took:
+ 0.4 seconds, i.e. 0.01 minutes or 0.0 hours.
+
+by degree: 1 and order: 2. 
+A061650: 
+a(n) = -400*a(n - 2) + 40*a(n - 1)
+truth: 
+a(n) = 40*a(n - 1) + -400*a(n - 2),  
+a(0) = 1, a(1) = 40
+
+True  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

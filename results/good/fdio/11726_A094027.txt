@@ -1,0 +1,13 @@
+
+While total time consumed by now, scale:11727/27927, seq_id:A094027, order:20 took:
+ 3.5 seconds, i.e. 0.06 minutes or 0.001 hours.
+
+by degree: 1 and order: 16. 
+A094027: 
+a(n) = -2*a(n - 16) - a(n - 15) + a(n - 14) + 100*a(n - 2) + 1
+truth: 
+a(n) = 0*a(n - 1) + 101*a(n - 2) + 0*a(n - 3) + -100*a(n - 4),  
+a(0) = 0, a(1) = 1, a(2) = 100, a(3) = 101
+
+False  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

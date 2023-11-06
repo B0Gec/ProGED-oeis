@@ -1,0 +1,13 @@
+
+While total time consumed by now, scale:9953/27927, seq_id:A074561, order:20 took:
+ 1.0 seconds, i.e. 0.02 minutes or 0.0 hours.
+
+by degree: 1 and order: 3. 
+A074561: 
+a(n) = 120*a(n - 3) - 74*a(n - 2) + 15*a(n - 1)
+truth: 
+a(n) = 15*a(n - 1) + -74*a(n - 2) + 120*a(n - 3),  
+a(0) = 3, a(1) = 15, a(2) = 77
+
+True  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

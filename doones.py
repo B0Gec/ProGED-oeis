@@ -67,8 +67,10 @@ REMNANTS = False
 
 
 MODE = 'black_check'  # try only unsuccessful
-MODE = 'doone'
+# MODE = 'doone'
 # MODE = 'diofant grid'
+if MODE == 'black_check':
+    blacklist = no_truth
 
 n_of_terms_load = 100000
 
@@ -76,8 +78,8 @@ n_of_terms_load = 100000
 VERBOSITY = 2  # dev scena
 VERBOSITY = 1  # run scenario
 
-DEBUG = True
-# DEBUG = False
+# DEBUG = True
+DEBUG = False
 # BUGLIST ignores blacklisting (runs also blacklisted) !!!!!
 # BUGLIST = True
 BUGLIST = False
@@ -201,7 +203,15 @@ SEQ_ID = (True, 'A000045')
 # SEQ_ID = (False, 'A000290')
 # SEQ_ID = (True, 'A000290')
 # SEQ_ID = (True, 'A000124')
+SEQ_ID = (True, 'A025938')
 # debug and sindy and buglist
+
+SEQ_ID = (True, 'A074515')
+SEQ_ID = (True, 'A074517')
+SEQ_ID = (True, 'A091881')
+
+
+# first 100 non_manuals: ['04132_A025938.txt', '09906_A074515.txt', '09908_A074517.txt', '11571_A091881.txt', '11572_A091883.txt', '11827_A094944.txt', '11939_A097068.txt', '13516_A114480.txt', '13922_A120465.txt', '13939_A120689.txt']
 
 # DIOFANT_GRID = False
 
@@ -516,6 +526,7 @@ else:
             # print('Going for exact ed')
             # print(' tle ', max_order_, linear, N_OF_TERMS_ED)
             # START_ORDER = 6
+            # START_ORDER = 20
 
             if INCREASING_EED:
                 x, (sol_ref, deg_used, order_used), eq, coeffs, truth = increasing_eed(exact_ed, seq_id, csv, VERBOSITY, d_max,
@@ -590,7 +601,7 @@ else:
 
     # output_string = ""
     output_string += timing_print
-    output_string += f"\n\nby degree: {deg_used} and order: {order_used}. \n{seq_id}: \n{eq}"
+    output_string += f"\n\nby degree: {deg_used} and order: {order_used}. \n{seq_id}: \n{eq}" if not MODE == 'black_check' else ""
     output_string += f"\ntruth: \n{truth}\n\n"
     output_string += f'{is_reconst}  -  checked against website ground truth.     \n'
     output_string += f'{is_check}  -  \"manual\" check if equation is correct.    \n'

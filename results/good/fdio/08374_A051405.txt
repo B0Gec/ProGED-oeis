@@ -1,0 +1,13 @@
+
+While total time consumed by now, scale:8375/27927, seq_id:A051405, order:20 took:
+ 6.6 seconds, i.e. 0.11 minutes or 0.002 hours.
+
+by degree: 1 and order: 18. 
+A051405: 
+a(n) = -7*a(n - 18) + 6*a(n - 17) - 9*a(n - 16) + a(n - 15) - 27*a(n - 2) + 12*a(n - 1) + 4
+truth: 
+a(n) = 13*a(n - 1) + -39*a(n - 2) + 27*a(n - 3),  
+a(0) = 2, a(1) = 10, a(2) = 70
+
+False  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

@@ -1,0 +1,13 @@
+
+While total time consumed by now, scale:13144/27927, seq_id:A109021, order:20 took:
+ 5.8 seconds, i.e. 0.1 minutes or 0.002 hours.
+
+by degree: 1 and order: 20. 
+A109021: 
+a(n) = NOT RECONSTRUCTED :-(
+truth: 
+a(n) = 11*a(n - 1) + -31*a(n - 2) + 21*a(n - 3),  
+a(0) = 0, a(1) = 0, a(2) = 8
+
+False  -  checked against website ground truth.     
+False  -  "manual" check if equation is correct.    

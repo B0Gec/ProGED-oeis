@@ -55,48 +55,52 @@ job_id = "37683622"  # seems like for false_truth list creation
 # job_id = "sindy512135"
 job_id = "sindygrid519_1"
 # job_id = "incdio76"
-# job_id = "blacklist76"
-# job_id = "incdio86"
-# job_id = "i86/fix"
-job_id = "incdio74"  # 2023-07-04  ... I think this will be in final results.
-# job_id = "sindyens75"  # 2023-07-04
-# job_id = "sindydeb3"  # 2023-07-06
-# # job_id = "sindydeb3-1"  #
-# # job_id = "sindydeb3-2"  #
-# job_id = "sindydeb3-3"  #
-# job_id = "sindydeb3-4"  #
-# job_id = "sindydeb3-5"  #
-# job_id = "sindydeb3-7"  # 2023-07-10
-# job_id = "sindymerged"  #
-
-# # job_id = "diocores77"
-# # job_id = "diocor-merge"  #
-# job_id = "sindycore83"
-# # job_id = "dicor-cub"
-# # job_id = "dicor-cub19"
-# # job_id = 'dicor-ncub19_95'
-# # job_id = 'dicor-alibs96'  # bug since {eq}\nby lib{}\ntruth instead of {ed}\ntruth
-# # job_id = 'dicor-ncub10'  # max_order=10 only lib ncub  # bug since {eq}\nby lib{}\ntruth instead of {ed}\ntruth
-# # job_id = 'dicor-alib10'  # max_order=10 allibs
-# # job_id = 'sicor-ncub'
-# # job_id = 'sicor-ncub2'
-# # # job_id = 'sicor-nquad'
-# # # job_id = 'sicor-quad'
-# # # job_id = 'sicor-n'
-# job_id = 'sicor-lin'
-# # job_id = 'sicor-lin2'
-# # job_id = 'dicor-comb'
-# # job_id = 'sicor-comb'
-# # job_id = 'sicor-combalibs'
-# job_id = 'sicor-lin3'
-
-# new "final?" results:
-job_id = 'fdiocores'
-job_id = 'fdiocorefix'
-
+job_id = "blacklist76"
+# # job_id = "incdio86"
+# # job_id = "i86/fix"
+# job_id = "incdio74"  # 2023-07-04  ... I think this will be in final results.
+# # job_id = "sindyens75"  # 2023-07-04
+# # job_id = "sindydeb3"  # 2023-07-06
+# # # job_id = "sindydeb3-1"  #
+# # # job_id = "sindydeb3-2"  #
+# # job_id = "sindydeb3-3"  #
+# # job_id = "sindydeb3-4"  #
+# # job_id = "sindydeb3-5"  #
+# # job_id = "sindydeb3-7"  # 2023-07-10
+# # job_id = "sindymerged"  #
+#
+# # # job_id = "diocores77"
+# # # job_id = "diocor-merge"  #
+# # job_id = "sindycore83"
+# # # job_id = "dicor-cub"
+# # # job_id = "dicor-cub19"
+# # # job_id = 'dicor-ncub19_95'
+# # # job_id = 'dicor-alibs96'  # bug since {eq}\nby lib{}\ntruth instead of {ed}\ntruth
+# # # job_id = 'dicor-ncub10'  # max_order=10 only lib ncub  # bug since {eq}\nby lib{}\ntruth instead of {ed}\ntruth
+# # # job_id = 'dicor-alib10'  # max_order=10 allibs
+# # # job_id = 'sicor-ncub'
+# # # job_id = 'sicor-ncub2'
+# # # # job_id = 'sicor-nquad'
+# # # # job_id = 'sicor-quad'
+# # # # job_id = 'sicor-n'
+# # job_id = 'sicor-lin'
+# # # job_id = 'sicor-lin2'
+# # # job_id = 'dicor-comb'
+# # # job_id = 'sicor-comb'
+# # # job_id = 'sicor-combalibs'
+# # job_id = 'sicor-lin3'
+#
+# # new "final?" results:
+# job_id = 'fdiocores'
+# job_id = 'fdiocorefix'
+# job_id = 'fdiocorefix2'
+#
+# job_id = 'fdio'
+#
 print(job_id)
-CORES = True if job_id in ("diocores77", 'diocor-merge', 'sindycore83', 'dicor-cub', 'dicor-cub19', 'fdiocores', 'fdiocorefix') else False
-CORES = True
+CORES = True if job_id in ("diocores77", 'diocor-merge', 'sindycore83', 'dicor-cub', 'dicor-cub19',
+                           'fdiocores', 'fdiocorefix', 'fdiocorefix2') else False
+# CORES = True
 # CORES = False
 if CORES:
     csv_cols = list(pd.read_csv('cores_test.csv').columns)
@@ -448,12 +452,12 @@ print('jobs failed (unsuccessful):', not_blacklisted[:10], len(not_blacklisted))
 
 # jobs_failed_per_bin = [0 for _ in range(35)]
 failed_ids =  [all_ids_ref.index(id_) for id_ in not_blacklisted]
-print('ids of jobs failed (unsuccessful):', failed_ids)
-print(str(failed_ids).replace(' ', '').strip('[]'))
-print('ids of jobs failed (unsuccessful):', [all_ids_ref.index(id_) for id_ in not_blacklisted])
+# print('ids of jobs failed (unsuccessful):', failed_ids)
+# print(str(failed_ids).replace(' ', '').strip('[]'))
+# print('ids of jobs failed (unsuccessful):', [all_ids_ref.index(id_) for id_ in not_blacklisted])
 not_blacklisted_pairs = [(f"{all_ids_ref.index(id_):0>5}", id_) for id_ in not_blacklisted]
 print(not_blacklisted_pairs[:10], len(not_blacklisted_pairs))
-print(not_blacklisted_pairs[:3100], len(not_blacklisted_pairs))
+# print(not_blacklisted_pairs[:3100], len(not_blacklisted_pairs))
 
 def failed_bins(agg, pair):
     agg[int(pair[0])//1000] += 1
@@ -529,7 +533,7 @@ if CORES:
 # summary = reduce(for_summary, files, (0, 0, 0, 0, 0,))
 # summary = reduce(for_summary, files[:], (0, 0, 0, 0, 0, 0, [], [0 for i in range(36)], [], [], [], ['start']))  # save all buggy ids
 summary = reduce(for_summary, sorted(files[:]), (0, 0, 0, 0, 0, 0, [], [0 for i in range(36)], [], [], [], ['start']))  # save all buggy ids
-print(summary)
+# print(summary)
 # 1/0
 
 # corrected_sum = sum(summary[:4]) - sum(summary[4:])
@@ -679,6 +683,7 @@ printout = f"""
 
 
 print(printout)
+1/0
 
 n = 6
 print(n)
@@ -698,6 +703,7 @@ print('task_ids of non_ids:', non_id_task_ids)
 print(len(non_id_list))
 n = 100
 print(f'first {n} non_manuals:', sorted(non_manual_list[:n]))
+1/0
 # print(f'all non_manuals:', non_manual_list)
 # check if new false_truth blacklist contains all old false_truths:  # experiment job_id = "blacklist76"
 false_non_man = [i[6:6+7] for i in non_manual_list]

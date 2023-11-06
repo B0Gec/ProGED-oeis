@@ -97,19 +97,19 @@ def grid_sympy(seq: sp.MutableDenseMatrix, d_max: int, max_order: int, library: 
     basis = lib2stvars(library, max_order)
     # print(basis)
 
-    # n_col = sp.Matrix([i for i in range(1, seq.rows)]) if 'n' in basis else sp.Matrix([])
-    n_col = sp.Matrix([i for i in range(0, seq.rows+1)])  # In the end basis determines members of final dataset.
-    print(n_col.__repr__(), triangle_grid(1).__repr__())
+    n_col = sp.Matrix([i for i in range(1, seq.rows)]) if 'n' in basis else sp.Matrix([])
+    # n_col = sp.Matrix([i for i in range(0, seq.rows-1)])
+    # print('ncol, triangle grid(1)', n_col.__repr__(), triangle_grid(1).__repr__())
 
     ntriangle = sp.Matrix.hstack(n_col, triangle_grid(1))
-    print('ntriangle', ntriangle.shape, ntriangle)
+    # print('ntriangle', ntriangle.shape, ntriangle.__repr__())
     triangle = {var: ntriangle[:, i] for i, var in enumerate(basis)}
     # print('triangle', triangle.keys())
 
     # combins = itertools.combinations_with_replacement
     # combinations = sum([list(combins(basis, deg)) for deg in range(1, degree+1)], [])
     combinations = poly_combinations(library, d_max, max_order)
-    print('combinations', combinations)
+    # print('combinations', combinations)
     #
     # def multiply(a, b):
     #     return [i * j for i, j in zip(a, b)]
@@ -121,7 +121,7 @@ def grid_sympy(seq: sp.MutableDenseMatrix, d_max: int, max_order: int, library: 
     #     ntriangles = sp.Matrix.hstack(ntriangles, sp.Matrix([i**degree for i in range(1, seq.rows)]), triangle_grid(degree))
     # triangles = sp.Matrix.hstack(*[triangle_grid(degree) for degree in range(1, degree+1)])
     polys = sp.Matrix.hstack(*[comb2act(comb, triangle, multiply_eltw) for comb in combinations])
-    print('polys', polys.shape, polys)
+    # print('polys', polys.shape, polys.__repr__())
     # 1/0
 
     # middle = triangle['n']
@@ -146,7 +146,7 @@ def grid_sympy(seq: sp.MutableDenseMatrix, d_max: int, max_order: int, library: 
     # print('an', seq.shape, seq)
     data = sp.Matrix.hstack(
         seq[1:,:],
-        sp.Matrix([1 for _ in range(0, seq.rows+1)]),  # constant term, i.e. C_0 in a_n = C_0 + C_1*n + C_2*n^2 + ...
+        sp.Matrix([1 for _ in range(seq.rows-1)]),  # constant term, i.e. C_0 in a_n = C_0 + C_1*n + C_2*n^2 + ...
         # n_cols,
         # triangles
         # col_tri
@@ -171,11 +171,11 @@ def dataset(seq: list, d_max: int, max_order: int, library: str) -> tuple[sp.Mat
         raise ValueError("max_order must be > 0. Otherwise needs to be implemented properly.")
 
     data, sol_ref = grid_sympy(sp.Matrix(seq), d_max, max_order, library=library)
-    print('order', max_order)
-    print('data', data)
-    print('data.shape', data.shape)
-    print(str(data), data.__repr__())
-    1/0
+    # print('order', max_order)
+    # print('data', data)
+    # print('data.shape', data.shape)
+    # print(str(data), data.__repr__())
+    # 1/0
 
     # if linear or library in ('lin', 'quad', 'cub'):
     #     data = data[:, sp.Matrix([0] + list(i for i in range(2, data.shape[1])))]
@@ -183,6 +183,8 @@ def dataset(seq: list, d_max: int, max_order: int, library: str) -> tuple[sp.Mat
     # print('data', data)
     # b = data[max_order:(max_order + m_limit), 0]
     # A = data[max_order:(max_order + m_limit), 1:]
+    if data.shape[0] <= max_order-1:
+        raise ValueError(f"max_order ({max_order}) must be < data.nrows ({data.shape[0]}). Otherwise trivial matrix produces trivial solution.")
     b = data[max(0, max_order-1):(max_order + m_limit), 0]
     A = data[max(0, max_order-1):(max_order + m_limit), 1:]
     return b, A, sol_ref
@@ -279,13 +281,16 @@ def unpack_seq(seq_id: str, csv: pd.DataFrame) -> tuple[sp.Matrix, sp.Matrix, st
 
 
 def solution_vs_truth(x: sp.Matrix, truth_coeffs: sp.Matrix) -> bool:
-    """is_oeis/is_reconst, i.e. return True if solution is identical to the ground truth"""
+    """is_oeis/is_reconst, i.e. return True if solution is identical to the ground truth
+    Since Diofantos is in this case executed only with 'non' library, the solution is always
+    of the form [c0, c1, ...] corresponding to variables [1, a(n-1), a(n-2), ...].
+    """
 
     nonzero_indices = [i for i in range(len(x)) if (x[i] != 0)]
     if nonzero_indices == []:
         ed_coeffs = []
     elif x[0] != 0:
-        ed_coeffs = "containing non-recursive n-term"
+        ed_coeffs = "equation containing a constant term => non_id (return false)"
     else:
         order = nonzero_indices[-1]
         ed_coeffs = x[1:1 + order, :]
@@ -415,32 +420,40 @@ def exact_ed(seq_id: str, csv: pd.DataFrame, verbosity: int = VERBOSITY,
 
     # print(seq)
     max_order = sp.floor(seq.rows/2)-1 if max_order is None else max_order
-    b, A, sol_ref = dataset(list(seq), d_max, max_order, library=library)
 
-    # print('order', max_order)
-    # print(A.shape)
-    # print(b.shape)
-    # print(b)
-    # print(A)
-    # 1/0
-    # print('after dataset')
+    # avoid trivial (empty) system of equations:
+    if seq.rows-1 < max_order:
+        x, sol_ref = [], []
+    else:
+        b, A, sol_ref = dataset(list(seq), d_max, max_order, library=library)
 
-    # m_limit = 3003
-    # b = data[max_order:(max_order + m_limit), 0]
-    # A = data[max_order:(max_order + m_limit), 1:]
-    # b = max_order + m_limit
-    # A = sp.Matrix(
-    #     [[3, 0],
-    #      [0, 3],
-    #      [1, 0]])
-    # b = sp.Matrix([6, 9, 2])
+        # print('order', max_order)
+        # print(A.shape)
+        # print(b.shape)
+        # print(b.__repr__())
+        # print(A.__repr__())
+        # # print(b)
+        # # print(A)
+        # # 1/0
+        # # print('after dataset')
 
-    if verbosity >= 3:
-        print('A, b', A.__repr__(), b.__repr__())
-        # print('A[:4][:4] :', A[:6, :6].__repr__(), '\n', A[:, -2].__repr__())
-        print('A, b  shapes', A.shape, b.shape)
+        # m_limit = 3003
+        # b = data[max_order:(max_order + m_limit), 0]
+        # A = data[max_order:(max_order + m_limit), 1:]
+        # b = max_order + m_limit
+        # A = sp.Matrix(
+        #     [[3, 0],
+        #      [0, 3],
+        #      [1, 0]])
+        # b = sp.Matrix([6, 9, 2])
 
-    x = diophantine_solve(A, b)
+        if verbosity >= 3:
+            print('A, b', A.__repr__(), b.__repr__())
+            # print('A[:4][:4] :', A[:6, :6].__repr__(), '\n', A[:, -2].__repr__())
+            print('A, b  shapes', A.shape, b.shape)
+
+        x = diophantine_solve(A, b)
+    # print(x)
     # print(A*x[0])
     # print('inside exact_ed')
     # print(A)
@@ -456,6 +469,7 @@ def exact_ed(seq_id: str, csv: pd.DataFrame, verbosity: int = VERBOSITY,
         #     x = sp.Matrix.vstack(sp.Matrix([0]), x)
     # print(x, library)
     eq = solution2str(x, solution_ref=sol_ref, library=None)
+    # print(eq)
 
     # print('x', x)
     if ground_truth:
@@ -490,21 +504,25 @@ def increasing_eed(exact_ed, seq_id: str, csv: pd.DataFrame, verbosity: int = VE
                 # print('inc before call', lib, order, ed_output)
                 seq = sindy_hidden[d_max-1]
 
-                x, sol_ref, is_reconst, eq, _ = exact_ed(seq, seq_id, csv, None, d_max, order, library=library, threshold=threshold, ensemble=ensemble) + (False,)
+                x, sol_ref, is_reconst, eq, _ = exact_ed(seq, seq_id, csv, None, d_max, order, library=library,
+                                                         threshold=threshold, ensemble=ensemble) + (False,)
+
 
                 # def one_results(seq, seq_id, csv, coeffs, d_max: int, max_order: int,
                 #                 threshold: float, library: str, ensemble: bool, library_ensemble: bool = None):
 
                 coefs, truth = '', ''
             else:
-                x, sol_ref, eq, coefs, truth, _ = exact_ed(seq_id, csv, verbosity, d_max, order, ground_truth, n_of_terms, library=library) + (False,)
-                print('after exact')
+                x, sol_ref, eq, coefs, truth, _ = exact_ed(seq_id, csv, verbosity, d_max, order, ground_truth,
+                                                           n_of_terms, library=library) + (False,)
+
+            # print('after exact')
 
             output = x, (sol_ref, d_max, order), eq, coefs, truth, _
             # print(output)
             # print(output[1:])
             if x != []:
-                print('nonempty x')
+                # print('nonempty x')
                 if len(x) > 0 and x[-1] == 0 and order >= 2:
                     # print('Unlucky me!' + seq_id + ' The order is lower than maximum although it\'s increasing eed!'
                     #     'this indicates that the equation probably the equation found a loophole in'
@@ -514,14 +532,18 @@ def increasing_eed(exact_ed, seq_id: str, csv: pd.DataFrame, verbosity: int = VE
                     pass
 
                 # print('inc eed: x vs sol_ref ', len(x), len(sol_ref), x, sol_ref)
-                is_check = check_eq_man(x, seq_id, csv, header=ground_truth, n_of_terms=10**5, solution_ref=sol_ref, library=None)[0]
-                print('after check x')
+                is_check = check_eq_man(x, seq_id, csv, header=ground_truth, n_of_terms=10**5, solution_ref=sol_ref,
+                                        library=None)[0]
+                # print('after check x')
+
                 # is_check = True
                 if not is_check:
                     # output = [], "", "", "", False
-                    output = output[:-1] + (False,)
+                    output = ed_output[:-1] + (False,)
+                    # print('diofantos failed: non_manual!')
                 else:
                     output = output[:-1] + (True,)
+                    # print('is_check', is_check, 'i.e. found equation!')
                     # output = ed_output[:2] + output[2:-1] + (True,)
             else:
                 # output = ([],) + (output[1:])
@@ -726,14 +748,16 @@ def check_truth(seq_id: str, csv_filename: str, oeis_friendly=False, library: st
     x = truth2coeffs(truth).row_insert(0, sp.Matrix([0]))
     # x = sp.Matrix(list(int(i) for i in coeffs))
     # print(x)
-    is_check = check_eq_man(x, seq_id, csv, n_of_terms=10**5, oeis_friendly=oeis_friendly, library=library)
+    sol_ref = solution_reference(library='non', d_max=1, order=x.rows-1)
+    is_check = check_eq_man(x, seq_id, csv, n_of_terms=10**5, oeis_friendly=oeis_friendly,
+                            solution_ref=sol_ref)
     # print(is_check)
     # is_check = is_check[0]
     # check[]
     return is_check, truth
 
 
-def check_eq_man(x: sp.Matrix, seq_id: str, csv: str,
+def check_eq_man(x: sp.Matrix, seq_id: str, csv: pd.DataFrame,
                  n_of_terms: int = 500, header: bool = True,
                  oeis_friendly=0, solution_ref: list[str] = None, library: str = None) -> (bool, int):
     """Manually check if exact ED returns correct solution, i.e. recursive equation."""
@@ -747,7 +771,7 @@ def check_eq_man(x: sp.Matrix, seq_id: str, csv: str,
     seq = unnan(csv[seq_id][header:n_of_terms])
     # print('seq', seq)
     seq = sp.Matrix(list(reversed(seq[:])))
-    print(seq[-10:])
+    # print(seq[-10:])
     # 1/0
 
     # seq = sp.Matrix(csv[seq_id][header:])[:n_of_terms, :]
@@ -784,7 +808,7 @@ def check_eq_man(x: sp.Matrix, seq_id: str, csv: str,
         if len(x) != len(solution_ref):
             # print(x, solution_ref)
             raise ValueError('Diofantos\' debug: len(x) != len(solution_ref)')
-        orders = [i for i in range(1, len(x))]
+        orders = [i for i in range(1, len(x)+1)]
         # nonzero solution dict:
         x_dict = {var: x[i] for i, var in enumerate(solution_ref) if int(x[i]) != 0}
 
@@ -793,10 +817,14 @@ def check_eq_man(x: sp.Matrix, seq_id: str, csv: str,
         # print('sec22')
         # print([[o for o in orders if str(o) in var] for var, x_i in x_dict.items()])
         # print([max([0] + [o for o in orders if str(o) in var]) for var, x_i in x_dict.items()])
+        # print(solution_ref)
+        # oo = [0] + [([0] + [o for o in orders], '2' in 'a(n-2)', var, _) for var, _ in x_dict.items()]
+        # print(oo)
 
         return max([0] + [max([0] + [o for o in orders if str(o) in var]) for var, _ in x_dict.items()]), x_dict
     order_, x_dict = order(x, solution_ref)
     # print('order, x_dict', order_, x_dict)
+    # 1/0
     # print('x', x)
     # print('sol_ref', solution_ref)
     # if order == 0:
@@ -859,17 +887,18 @@ def check_eq_man(x: sp.Matrix, seq_id: str, csv: str,
         # anext = sp.Matrix([sum([x_i*var2term(var, till_now) for var, x_i in x_dict.items()])])
         ane = 0
         for var, x_i in x_dict.items():
-            # if len(till_now) < 10:
-            #     print('var, x_i:', var, x_i, 'var2term(var, till_now)', var2term(var, till_now))
+            # if len(till_now) > 16:
+                # print('len(till_now)', len(till_now))
+                # print('var, x_i:', var, x_i, 'var2term(var, till_now)', var2term(var, till_now))
             ane += x_i*var2term(var, till_now)
 
         anext = sp.Matrix([ane])
         # anext = sp.Matrix([sum(ane)])
         # anext = sp.Matrix([sum([x_i * var2term(var, till_now)
 
-        # if len(till_now) < 10:
-        #     print('after anext')
-        #     print(anext)
+        # if len(till_now) > 10:
+            # print('after anext')
+            # print(anext)
         # 1/0
         return anext
 
@@ -884,10 +913,16 @@ def check_eq_man(x: sp.Matrix, seq_id: str, csv: str,
 
     # print(oeis_friendly, len(seq), order_, list(reversed(list(seq)))[:5])
 
-    reconst = seq[-max(order_, min(oeis_friendly, len(seq))):, :] if order_ != 0 else sp.Matrix([an(sp.Matrix([0]))])
+    # print(order_, oeis_friendly, len(seq))
+    # print(max(order_, min(oeis_friendly, len(seq))))
+    # print(seq[-2:, :])
+    # 1/0
+
+    reconst = seq[-max(order_, min(oeis_friendly, len(seq))):, :] if order_ != 0 else sp.Matrix([an(sp.Matrix([]))])
 
 
     # print('reconst', reconst)
+    # 1/0
     # if [i for i in x[n_degree:] if i != 0] == []:
     #     reconst = an(sp.Matrix([0 for i in reconst[:]]), x)
         # reconst = sp.Matrix([])
@@ -908,8 +943,9 @@ def check_eq_man(x: sp.Matrix, seq_id: str, csv: str,
         # reconst = reconst.col_join(sp.Matrix([an(reconst, x)]))
         # reconst = reconst.col_join(an(reconst, x))
         reconst = an(reconst).col_join(reconst)
-        # if i < 10:
+        # if i > 10:
         #     print(i, list(reversed(reconst))[:20])
+        #     # 1/0
 
     # 1/0
     # print(reconst)

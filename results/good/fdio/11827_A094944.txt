@@ -1,0 +1,13 @@
+
+While total time consumed by now, scale:11828/27927, seq_id:A094944, order:20 took:
+ 8.6 seconds, i.e. 0.14 minutes or 0.002 hours.
+
+by degree: 1 and order: 20. 
+A094944: 
+a(n) = 0
+truth: 
+a(n) = 3*a(n - 1) + 21*a(n - 2) + 49*a(n - 3),  
+a(0) = 1, a(1) = 17, a(2) = 121
+
+False  -  checked against website ground truth.     
+False  -  "manual" check if equation is correct.    
