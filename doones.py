@@ -30,7 +30,7 @@ warnings.simplefilter("ignore")
 # else:
 #     from exact_ed import exact_ed, timer
 
-SINDy = True
+# SINDy = True
 SINDy = False
 SINDy_default = True
 if SINDy:
@@ -78,8 +78,8 @@ n_of_terms_load = 100000
 VERBOSITY = 2  # dev scena
 VERBOSITY = 1  # run scenario
 
-DEBUG = True
-# DEBUG = False
+# DEBUG = True
+DEBUG = False
 # BUGLIST ignores blacklisting (runs also blacklisted) !!!!!
 # BUGLIST = True
 BUGLIST = False
@@ -284,7 +284,8 @@ has_titles = 1
 now = time.perf_counter()
 # # a bit faster maybe:
 # csv_filename = 'linear_database_full.csv'
-csv_filename = 'linear_database_clean2.csv'
+# csv_filename = 'linear_database_clean2.csv'
+csv_filename = 'linear_database_bl.csv'
 
 if CORELIST:
     blacklist = []

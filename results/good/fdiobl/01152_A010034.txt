@@ -1,0 +1,13 @@
+
+While total time consumed by now, scale:1153/27926, seq_id:A010034, order:20 took:
+ 0.2 seconds, i.e. 0.0 minutes or 0.0 hours.
+
+by degree: 1 and order: 1. 
+A010034: 
+a(n) = a(n - 1) + 8936582237915716659950962253358945635793453256935559
+truth: 
+a(n) = 2*a(n - 1) + -1*a(n - 2),  
+a(0) = 8424432925592889329288197322308900672459420460792433, a(1) = 17361015163508605989239159575667846308252873717727992
+
+False  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

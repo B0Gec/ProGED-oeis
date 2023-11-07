@@ -1,0 +1,13 @@
+
+While total time consumed by now, scale:1550/27926, seq_id:A013837, order:20 took:
+ 0.3 seconds, i.e. 0.0 minutes or 0.0 hours.
+
+by degree: 1 and order: 1. 
+A013837: 
+a(n) = 3125*a(n - 1)
+truth: 
+a(n) = 3125*a(n - 1),  
+a(0) = 625
+
+True  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

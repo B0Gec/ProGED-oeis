@@ -1,0 +1,13 @@
+
+While total time consumed by now, scale:1524/27926, seq_id:A013811, order:20 took:
+ 0.2 seconds, i.e. 0.0 minutes or 0.0 hours.
+
+by degree: 1 and order: 1. 
+A013811: 
+a(n) = 130321*a(n - 1)
+truth: 
+a(n) = 130321*a(n - 1),  
+a(0) = 6859
+
+True  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    
