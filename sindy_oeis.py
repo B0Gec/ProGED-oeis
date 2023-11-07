@@ -67,7 +67,7 @@ def preprocess(seq: sp.Matrix, d_max: int) -> tuple[sp.Matrix, bool]:
     # biggie = [True] + [abs(term**degree) >= 10**16 for term in seq]
     # biggie_n = [True] + [abs(n**degree) >= 10**16 for n in range(1, len(seq))]
     # biggie = [abs(term)**degree >= 10**16 or abs(n)**n_degree >=10**16 for n, term in enumerate(seq)] + [True]
-    print(seq)
+    # print(seq)
 
     # avoid calculating cubes of huge numbers by doing first round:
     first_round = [abs(term) >= 10**16 for term in seq] + [True]
@@ -109,12 +109,17 @@ def sindy(seq: Union[list, sp.Matrix], d_max: int, max_order: int, threshold: fl
     # print(f"{int(seq[-1]):.4e}")
     # 1/0
 
-    baslib = 'n' if library == 'n' else 'nlin' if library[0] == 'n' else 'lin'
+    # baslib = 'n' if library == 'n' else 'nlin' if library[0] == 'n' else 'lin'
 
     # b, A, sol_ref = dataset(seq, max_order, library=baslib)  # defaults to lib='nlin' or 'lin'
-    b, A, sol_ref = dataset(seq, d_max, max_order, library=library)  # defaults to lib='nlin' or 'lin'
-    A, sol_ref = A[:, 1:], sol_ref[1:]  # to avoid combinations of constant term.
+    b, A, sindy_features = dataset(seq, 1, max_order, library=library)  # defaults to lib='nlin' or 'lin'
+    A, sindy_features = A[:, 1:], sindy_features[1:]  # to avoid combinations of constant term.
+    sol_ref = solution_reference(library=library, d_max=d_max, order=max_order)
+    # print(sol_ref)
 
+    # print(b.shape, A.shape)
+    # print(A.shape)
+    # print(sindy_features)
     # if library == 'n':
     #     baslib = 'n'
     #     A, sol_ref = A[:, :1], sol_ref[:1]
@@ -125,6 +130,7 @@ def sindy(seq: Union[list, sp.Matrix], d_max: int, max_order: int, threshold: fl
     # b, A = dataset(sp.Matrix(seq), 2, linear=True)
     # 2-7, 9-14, 16-19 finds, 8,15 not
     b, A = np.array(b, dtype=int), np.array(A, dtype=int)
+
     # print(b, A)
     # 1/0
     # data = grid_sympy(sp.Matrix(seq), max_order)
@@ -153,14 +159,14 @@ def sindy(seq: Union[list, sp.Matrix], d_max: int, max_order: int, threshold: fl
     # poly_order = max_degree
     # threshold = 0.1
 
-    print('threshold', threshold)
+    # print('threshold', threshold, 'degree', poly_degree, 'order', max_order, 'ensemble', ensemble)
 
     model = ps.SINDy(
         optimizer=ps.STLSQ(threshold=threshold),
         feature_library=ps.PolynomialLibrary(degree=poly_degree),
         # feature_names=[f"a(n-{i+1})" for i in range(max_order-1)],  #
         # feature_names=lib2verbose(library, max_order)[1:],
-        feature_names=sol_ref,
+        feature_names=sindy_features,
         discrete_time=True,
     )
 
@@ -173,18 +179,20 @@ def sindy(seq: Union[list, sp.Matrix], d_max: int, max_order: int, threshold: fl
     # model.fit(A, x_dot=b, library_ensemble=True)
     model.fit(A, x_dot=b, ensemble=ensemble, library_ensemble=library_ensemble)
     # print('after fit')
+
     # model.print()
     model.coefficients()
     # print(model.coefficients())
     # x = sp.Matrix([round(i) for i in model.coefficients()[0][1:]])
     x = sp.Matrix([round(i) for i in model.coefficients()[0]])
     # x = sp.Matrix.vstack(sp.Matrix([0]), x)
+    # print(x)
+    # print(len(x))
 
     # lib_ref = 'nlin' if poly_degree == 1 else 'nquad' if poly_degree == 2 else 'ncub' if poly_degree == 3 else 'Unknown Library!!'
     # lib_ref = 'n' if library == 'n' else lib_ref
     # lib_ref = library
-    sol_ref = solution_reference(library=library, d_max=d_max, order=max_order)
-    # print(sol_ref)
+    # 1/0
     # print('len(sol_ref):', len(sol_ref), 'lib_ref):', lib_ref)
 
     # if max_order == 3 and poly_degree == 1:

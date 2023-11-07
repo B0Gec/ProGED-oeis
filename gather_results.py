@@ -93,13 +93,20 @@ job_id = "blacklist76"
 # # new "final?" results:
 # job_id = 'fdiocores'
 # job_id = 'fdiocorefix'
-# job_id = 'fdiocorefix2'
+job_id = 'fdiocorefix2'
 #
-# job_id = 'fdio'
+job_id = 'fdio'
+job_id = 'fdiobl'
 #
+# job_id = 'blacklist'
+
+# job_id = 'sicor116'
+
+
 print(job_id)
+
 CORES = True if job_id in ("diocores77", 'diocor-merge', 'sindycore83', 'dicor-cub', 'dicor-cub19',
-                           'fdiocores', 'fdiocorefix', 'fdiocorefix2') else False
+                           'fdiocores', 'fdiocorefix', 'fdiocorefix2', 'sicor116') else False
 # CORES = True
 # CORES = False
 if CORES:
@@ -185,7 +192,7 @@ def extract_file(fname, verbosity=VERBOSITY, job_id=job_id):
         eq = re.findall(r"A\d+:.*\n(.+)\ntruth:", content)
     re_all_stars = re.findall(r"scale:\d+/(\d+),", content)
     re_found = re.findall(r"NOT RECONSTRUCTED", content)
-    eq = None if len(re_found) > 0 else eq[0]
+    eq = None if len(re_found) > 0 or len(eq) == 0 else eq[0]
     # avg = True
     avg = False
     added = 'avg ' if avg else ''
@@ -224,29 +231,6 @@ def extract_file(fname, verbosity=VERBOSITY, job_id=job_id):
     we_found = re_found == []
     if verbosity >= 1:
         print('we_found:', we_found)
-
-    if we_found:
-        raw = [('00843_A006148.txt', 36), ('01791_A011853.txt', 50), ('01846_A011927.txt', 21), ('01854_A011937.txt', 31),
-         ('01856_A011939.txt', 33), ('06614_A035609.txt', 20), ('06658_A035797.txt', 24), ('06659_A035798.txt', 26),
-         ('06669_A035808.txt', 46), ('06670_A035809.txt', 48), ('06681_A035846.txt', 20), ('06682_A035847.txt', 21),
-         ('06683_A035848.txt', 22), ('06684_A035849.txt', 23), ('06685_A035850.txt', 24), ('06686_A035851.txt', 25),
-         ('06687_A035852.txt', 26), ('06688_A035853.txt', 27), ('06689_A035854.txt', 28), ('06690_A035855.txt', 29),
-         ('06691_A035856.txt', 30), ('06692_A035857.txt', 31), ('06693_A035858.txt', 32), ('06694_A035859.txt', 33),
-         ('06695_A035860.txt', 34), ('06696_A035861.txt', 35), ('06697_A035862.txt', 36), ('06698_A035863.txt', 37),
-         ('06699_A035864.txt', 38), ('06700_A035865.txt', 39), ('06701_A035866.txt', 40), ('06702_A035867.txt', 41),
-         ('06703_A035868.txt', 42), ('06704_A035869.txt', 43), ('06705_A035870.txt', 44), ('06706_A035871.txt', 45),
-         ('06707_A035872.txt', 46), ('06708_A035873.txt', 47), ('06709_A035874.txt', 48), ('06710_A035875.txt', 49),
-         ('06711_A035876.txt', 50), ('09451_A042601.txt', 34), ('09509_A042665.txt', 80), ('10980_A054472.txt', 21),
-         ('11410_A059598.txt', 30), ('11785_A063654.txt', 32), ('12969_A078475.txt', 36), ('13084_A079984.txt', 20),
-         ('14298_A092069.txt', 42), ('14299_A092070.txt', 24), ('14345_A092508.txt', 25), ('15854_A107244.txt', 22),
-         ('15855_A107245.txt', 29), ('16953_A118576.txt', 23), ('17037_A120215.txt', 45), ('17049_A120409.txt', 22),
-         ('17050_A120410.txt', 29), ('18122_A131676.txt', 22), ('20175_A156713.txt', 22), ('29120_A249181.txt', 21),
-         ('31604_A288917.txt', 25), ('33324_A322829.txt', 21), ('34252_A352591.txt', 20)]
-        # non_idbigs = [i[-7-4:-4] for i, n in raw]
-        non_idbigs = [i for i, n in raw]
-        if fname[-7-4-6:] in non_idbigs:
-            print('"', fname[-7-4: -4], f'.. h .. {eq}",')
-        # print(fname[-7-4-6:], non_idbigs)
 
     def truefalse(the_list):
         if black_check and the_list == []:
@@ -683,7 +667,7 @@ printout = f"""
 
 
 print(printout)
-1/0
+# 1/0
 
 n = 6
 print(n)
@@ -697,19 +681,23 @@ for n, i in enumerate(job_bins):
 
 print(f'first {n} non_ids:', non_id_list[:n])
 non_id_task_ids = ','.join([str(int(fname[:5])) for fname in non_id_list])
-print('task_ids of non_ids:', non_id_task_ids)
+print('task_ids of non_ids:', non_id_task_ids[:100], '...')
 # print(str(succsess_task_ids).replace(' ', '').strip('[]'))
 
 print(len(non_id_list))
-n = 100
+n = 1700
 print(f'first {n} non_manuals:', sorted(non_manual_list[:n]))
 1/0
+
 # print(f'all non_manuals:', non_manual_list)
 # check if new false_truth blacklist contains all old false_truths:  # experiment job_id = "blacklist76"
 false_non_man = [i[6:6+7] for i in non_manual_list]
 # print(false_non_man)
 # print(false_non_man[0], len(false_non_man), false_non_man[:6], false_truth_list[:6], len(false_truth_list))
-# print([i for i in false_truth_list if i not in false_non_man], 'sanity')
+print('sanity', sorted([i for i in false_truth_list if i not in false_non_man]))
+print('new', [i for i in false_non_man if i not in false_truth_list])
+1/0
+
 # print(len(non_manual_list))
 print(f'first {n} ed_fails:', ed_fail_list[:n])
 print(len(ed_fail_list))

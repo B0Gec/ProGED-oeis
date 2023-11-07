@@ -5,3 +5,5 @@ ProGED_oeis/examples/oeis/linear_database_full.csv filter=lfs diff=lfs merge=lfs
 ProGED_oeis/examples/oeis/linear_database_parts_v2/linear_database_fullv2.csv filter=lfs diff=lfs merge=lfs -text
 linear_database_full.csv filter=lfs diff=lfs merge=lfs -text
 linear_database_clean.csv filter=lfs diff=lfs merge=lfs -text
+linear_database_clean2.csv filter=lfs diff=lfs merge=lfs -text
+linear_database_newbl.csv filter=lfs diff=lfs merge=lfs -text

@@ -30,7 +30,7 @@ warnings.simplefilter("ignore")
 # else:
 #     from exact_ed import exact_ed, timer
 
-# SINDy = True
+SINDy = True
 SINDy = False
 SINDy_default = True
 if SINDy:
@@ -66,8 +66,8 @@ REMNANTS = False
 #     from successful import successful_list
 
 
-MODE = 'black_check'  # try only unsuccessful
-# MODE = 'doone'
+# MODE = 'black_check'  # try only unsuccessful
+MODE = 'doone'
 # MODE = 'diofant grid'
 if MODE == 'black_check':
     blacklist = no_truth
@@ -78,8 +78,8 @@ n_of_terms_load = 100000
 VERBOSITY = 2  # dev scena
 VERBOSITY = 1  # run scenario
 
-# DEBUG = True
-DEBUG = False
+DEBUG = True
+# DEBUG = False
 # BUGLIST ignores blacklisting (runs also blacklisted) !!!!!
 # BUGLIST = True
 BUGLIST = False
@@ -132,6 +132,7 @@ else:
     MAX_ORDER = 10
     GROUND_TRUTH = False
     START_ORDER = 0
+# START_ORDER = 3
 # if DEBUG:
 #     MAX_ORDER = 5  # We care only for recursive equations with max 20 terms or order.
 # MAX_ORDER = 2
@@ -203,12 +204,16 @@ SEQ_ID = (True, 'A000045')
 # SEQ_ID = (False, 'A000290')
 # SEQ_ID = (True, 'A000290')
 # SEQ_ID = (True, 'A000124')
-SEQ_ID = (True, 'A025938')
-# debug and sindy and buglist
+# SEQ_ID = (True, 'A025938')
+# # debug and sindy and buglist
+#
+# SEQ_ID = (True, 'A074515')
+# SEQ_ID = (True, 'A074517')
+# SEQ_ID = (True, 'A091881')
+SEQ_ID = (True, 'A000009')
+# first 100 non_manuals: ['00003_A000009.txt', '00012_A000041.txt', '00013_A000043.txt', '00021_A000085.txt', '00023_A000105.txt', '00028_A000123.txt', '00029_A000124.txt', '00039_A000217.txt', '00046_A000290.txt', '00047_A000292.txt', '00051_A000326.txt', '00052_A000330.txt', '00056_A000578.txt', '00058_A000593.txt', '00065_A000793.txt', '00073_A001034.txt', '00078_A001065.txt', '00082_A001157.txt', '00107_A002322.txt', '00108_A002378.txt', '00114_A002620.txt', '00121_A004011.txt', '00135_A006530.txt', '00136_A006882.txt', '00149_A025487.txt']
+SEQ_ID = (True, 'A003082')
 
-SEQ_ID = (True, 'A074515')
-SEQ_ID = (True, 'A074517')
-SEQ_ID = (True, 'A091881')
 
 
 # first 100 non_manuals: ['04132_A025938.txt', '09906_A074515.txt', '09908_A074517.txt', '11571_A091881.txt', '11572_A091883.txt', '11827_A094944.txt', '11939_A097068.txt', '13516_A114480.txt', '13922_A120465.txt', '13939_A120689.txt']
@@ -279,7 +284,8 @@ has_titles = 1
 now = time.perf_counter()
 # # a bit faster maybe:
 # csv_filename = 'linear_database_full.csv'
-csv_filename = 'linear_database_clean.csv'
+csv_filename = 'linear_database_clean2.csv'
+
 if CORELIST:
     blacklist = []
     # from core_nice_nomore import cores

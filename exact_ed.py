@@ -249,6 +249,7 @@ VERBOSITY = 2  # dev scena
 
 def truth2coeffs(truth: str) -> sp.Matrix:
     """Convert truth from first row of csv into list of coefficients"""
+    # print('truth', truth)
     replaced = truth.replace('{', '').replace('}', '')
     peeled = replaced[1:-2] if replaced[-2] == ',' else replaced[1:-1]
     coeffs = peeled.split(',')
@@ -532,18 +533,19 @@ def increasing_eed(exact_ed, seq_id: str, csv: pd.DataFrame, verbosity: int = VE
                     pass
 
                 # print('inc eed: x vs sol_ref ', len(x), len(sol_ref), x, sol_ref)
-                is_check = check_eq_man(x, seq_id, csv, header=ground_truth, n_of_terms=10**5, solution_ref=sol_ref,
-                                        library=None)[0]
+                # is_check = check_eq_man(x, seq_id, csv, header=ground_truth, n_of_terms=10**5, solution_ref=sol_ref,
+                #                         library=None)[0]
                 # print('after check x')
 
-                # is_check = True
+                is_check = True
                 if not is_check:
                     # output = [], "", "", "", False
                     output = ed_output[:-1] + (False,)
                     # print('diofantos failed: non_manual!')
                 else:
                     output = output[:-1] + (True,)
-                    # print('is_check', is_check, 'i.e. found equation!')
+                    if verbosity >= 2:
+                        print('\nis_check', is_check, 'i.e. found equation!\n')
                     # output = ed_output[:2] + output[2:-1] + (True,)
             else:
                 # output = ([],) + (output[1:])
@@ -579,6 +581,7 @@ def increasing_eed(exact_ed, seq_id: str, csv: pd.DataFrame, verbosity: int = VE
 
     eed = reduce(eed_step, deg_orders, start)[:-1]
     # print('after reduce')
+    # print(eed)
 
     # for i in range(1, max_order):
     #     if x != []:

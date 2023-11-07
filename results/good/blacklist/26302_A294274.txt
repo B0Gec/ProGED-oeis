@@ -1,0 +1,7 @@
+While total time consumed by now, scale:26303/27926, seq_id:A294274, order:20 took:
+ 1.1 seconds, i.e. 0.02 minutes or 0.0 hours.
+truth: 
+(1,8,-8,-28,28,56,-56,-70,70,56,-56,-28,28,8,-8,-1,1)
+
+<empty>  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    
