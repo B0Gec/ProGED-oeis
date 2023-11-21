@@ -113,6 +113,8 @@ def sindy(seq: Union[list, sp.Matrix], d_max: int, max_order: int, threshold: fl
 
     # b, A, sol_ref = dataset(seq, max_order, library=baslib)  # defaults to lib='nlin' or 'lin'
     b, A, sindy_features = dataset(seq, 1, max_order, library=library)  # defaults to lib='nlin' or 'lin'
+    if sindy_features == []:
+        return [], []
     A, sindy_features = A[:, 1:], sindy_features[1:]  # to avoid combinations of constant term.
     sol_ref = solution_reference(library=library, d_max=d_max, order=max_order)
     # print(sol_ref)
@@ -228,7 +230,7 @@ def sindy_grid_search(seq, coeffs, truth, max_order: int, stepsize: int, evals: 
     return
 
 
-def one_results(seq, seq_id, csv, coeffs, d_max: int, max_order: int,
+def one_results(seq, seq_id, csv, coeffs, d_max: int, max_order: int, ground_truth: bool,
                 threshold: float, library: str, ensemble: bool, library_ensemble: bool = None):
 
     if library_ensemble is None:
@@ -244,7 +246,6 @@ def one_results(seq, seq_id, csv, coeffs, d_max: int, max_order: int,
         seq, pre_fail = preprocess(seq, d_max)
 
         if pre_fail:
-
             return [], [], False, "Preprocessing failed!"
 
 
@@ -252,14 +253,15 @@ def one_results(seq, seq_id, csv, coeffs, d_max: int, max_order: int,
     # print('after sindy')
     is_reconst = solution_vs_truth(x, coeffs) if coeffs is not None else ' - NaN - '
     # print('before check')
-    is_check_verbose = check_eq_man(x, seq_id, csv, n_of_terms=10 ** 5, solution_ref=sol_ref, library=library)
+    is_check_verbose = check_eq_man(x, seq_id, csv, header=ground_truth, n_of_terms=10 ** 5, solution_ref=sol_ref, library=library)
     # print('after check')
 
     # print('oner', x, library, is_check_verbose)
+    # print('is_check:\n', is_check_verbose[1], '\n', is_check_verbose[2])
     is_check = is_check_verbose[0]
 
-    eq = solution2str(x, sol_ref, None)
     x = [] if not is_check else x
+    eq = solution2str(x, sol_ref, None)
 
     # summary = x, sol_ref, is_reconst, is_check, eq
     summary = x, sol_ref, is_reconst, eq

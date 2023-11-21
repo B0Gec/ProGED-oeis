@@ -170,6 +170,10 @@ def dataset(seq: list, d_max: int, max_order: int, library: str) -> tuple[sp.Mat
     if max_order < 0:
         raise ValueError("max_order must be > 0. Otherwise needs to be implemented properly.")
 
+    # avoid trivial (empty) system of equations:
+    if len(seq)-1 < max_order:
+        return sp.Matrix(), sp.Matrix(), []
+
     data, sol_ref = grid_sympy(sp.Matrix(seq), d_max, max_order, library=library)
     # print('order', max_order)
     # print('data', data)
@@ -422,13 +426,12 @@ def exact_ed(seq_id: str, csv: pd.DataFrame, verbosity: int = VERBOSITY,
     # print(seq)
     max_order = sp.floor(seq.rows/2)-1 if max_order is None else max_order
 
-    # avoid trivial (empty) system of equations:
-    if seq.rows-1 < max_order:
-        x, sol_ref = [], []
+    b, A, sol_ref = dataset(list(seq), d_max, max_order, library=library)
+    if sol_ref == []:
+        x = []
     else:
-        b, A, sol_ref = dataset(list(seq), d_max, max_order, library=library)
 
-        # print('order', max_order)
+        # # print('order', max_order)
         # print(A.shape)
         # print(b.shape)
         # print(b.__repr__())
@@ -455,7 +458,8 @@ def exact_ed(seq_id: str, csv: pd.DataFrame, verbosity: int = VERBOSITY,
 
         x = diophantine_solve(A, b)
     # print(x)
-    # print(A*x[0])
+    # if x != []:
+    #     print(A*x[0])
     # print('inside exact_ed')
     # print(A)
     # print(x)
@@ -505,8 +509,8 @@ def increasing_eed(exact_ed, seq_id: str, csv: pd.DataFrame, verbosity: int = VE
                 # print('inc before call', lib, order, ed_output)
                 seq = sindy_hidden[d_max-1]
 
-                x, sol_ref, is_reconst, eq, _ = exact_ed(seq, seq_id, csv, None, d_max, order, library=library,
-                                                         threshold=threshold, ensemble=ensemble) + (False,)
+                x, sol_ref, is_reconst, eq, _ = exact_ed(seq, seq_id, csv, None, d_max, order, ground_truth=ground_truth,
+                                                         library=library, threshold=threshold, ensemble=ensemble) + (False,)
 
 
                 # def one_results(seq, seq_id, csv, coeffs, d_max: int, max_order: int,
@@ -533,11 +537,14 @@ def increasing_eed(exact_ed, seq_id: str, csv: pd.DataFrame, verbosity: int = VE
                     pass
 
                 # print('inc eed: x vs sol_ref ', len(x), len(sol_ref), x, sol_ref)
-                # is_check = check_eq_man(x, seq_id, csv, header=ground_truth, n_of_terms=10**5, solution_ref=sol_ref,
-                #                         library=None)[0]
-                # print('after check x')
 
                 is_check = True
+                if sol_order(x, sol_ref)[0] < order:
+                    is_check = False
+                #     is_check = check_eq_man(x, seq_id, csv, header=ground_truth, n_of_terms=10**5, solution_ref=sol_ref,
+                #                             library=None)[0]
+                # print('after check x')
+
                 if not is_check:
                     # output = [], "", "", "", False
                     output = ed_output[:-1] + (False,)
@@ -571,6 +578,7 @@ def increasing_eed(exact_ed, seq_id: str, csv: pd.DataFrame, verbosity: int = VE
     start = ([], (None, None, None) , 'a(n) = ?', "", "", False) if init is None else init
     # print(len(start), start)
     d_maxs, orders = range(1, d_max+1), range(start_order, max_order+1)
+    # d_maxs, orders = range(3, d_max+1), range(9, max_order+1)
     deg_orders = list(product(d_maxs, orders))
     # deg_orders = product(d_maxs, orders)
     if exact_ed.__name__ == 'one_results':
@@ -760,6 +768,27 @@ def check_truth(seq_id: str, csv_filename: str, oeis_friendly=False, library: st
     return is_check, truth
 
 
+def sol_order(x: sp.Matrix, solution_ref: list[str]) -> (int, dict):
+    # print(order, x)
+    if len(x) != len(solution_ref):
+        # print(x, solution_ref)
+        raise ValueError('Diofantos\' debug: len(x) != len(solution_ref)')
+    orders = [i for i in range(1, len(x)+1)]
+    # nonzero solution dict:
+    x_dict = {var: x[i] for i, var in enumerate(solution_ref) if int(x[i]) != 0}
+
+    # print(x_dict)
+    # print([(x_i, var) for x_i, var in x_dict.items()])
+    # print('sec22')
+    # print([[o for o in orders if str(o) in var] for var, x_i in x_dict.items()])
+    # print([max([0] + [o for o in orders if str(o) in var]) for var, x_i in x_dict.items()])
+    # print(solution_ref)
+    # oo = [0] + [([0] + [o for o in orders], '2' in 'a(n-2)', var, _) for var, _ in x_dict.items()]
+    # print(oo)
+
+    return max([0] + [max([0] + [o for o in orders if str(o) in var]) for var, _ in x_dict.items()]), x_dict
+
+
 def check_eq_man(x: sp.Matrix, seq_id: str, csv: pd.DataFrame,
                  n_of_terms: int = 500, header: bool = True,
                  oeis_friendly=0, solution_ref: list[str] = None, library: str = None) -> (bool, int):
@@ -806,26 +835,7 @@ def check_eq_man(x: sp.Matrix, seq_id: str, csv: pd.DataFrame,
 
     # solution_ref = solution_ref[1:]  # len(x) = len(sol_ref)
 
-    def order(x: sp.Matrix, solution_ref: list[str]) -> (int, dict):
-        # print(order, x)
-        if len(x) != len(solution_ref):
-            # print(x, solution_ref)
-            raise ValueError('Diofantos\' debug: len(x) != len(solution_ref)')
-        orders = [i for i in range(1, len(x)+1)]
-        # nonzero solution dict:
-        x_dict = {var: x[i] for i, var in enumerate(solution_ref) if int(x[i]) != 0}
-
-        # print(x_dict)
-        # print([(x_i, var) for x_i, var in x_dict.items()])
-        # print('sec22')
-        # print([[o for o in orders if str(o) in var] for var, x_i in x_dict.items()])
-        # print([max([0] + [o for o in orders if str(o) in var]) for var, x_i in x_dict.items()])
-        # print(solution_ref)
-        # oo = [0] + [([0] + [o for o in orders], '2' in 'a(n-2)', var, _) for var, _ in x_dict.items()]
-        # print(oo)
-
-        return max([0] + [max([0] + [o for o in orders if str(o) in var]) for var, _ in x_dict.items()]), x_dict
-    order_, x_dict = order(x, solution_ref)
+    order_, x_dict = sol_order(x, solution_ref)
     # print('order, x_dict', order_, x_dict)
     # 1/0
     # print('x', x)

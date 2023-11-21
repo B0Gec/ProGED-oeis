@@ -1,0 +1,17 @@
+
+Preprocessing sees only first 101 terms.
+Sindy threshold: 0.1
+Sindy will use max_order: 10
+While total time consumed by now, scale:33/164, seq_id:A000142, order:10 took:
+ 82.7 seconds, i.e. 1.38 minutes or 0.023 hours.
+CORELIST True, SINDy True, GROUND_TRUTH False
+Library: n, max_order 10, threshold: 0.1
+
+by degree: 2 and order: 1. 
+A000142: 
+a(n) = n*a(n - 1)
+truth: 
+None
+
+  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

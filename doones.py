@@ -80,6 +80,7 @@ VERBOSITY = 1  # run scenario
 
 # DEBUG = True
 DEBUG = False
+
 # BUGLIST ignores blacklisting (runs also blacklisted) !!!!!
 # BUGLIST = True
 BUGLIST = False
@@ -172,7 +173,7 @@ JOB_ID = "000000"
 # SEQ_ID = (True, 'A001343')
 # SEQ_ID = (True, 'A008685')
 # SEQ_ID = (True, 'A013833')
-# SEQ_ID = (True, 'A000045')
+SEQ_ID = (True, 'A000045')
 # SEQ_ID = (False, 'A000045')
 # SEQ_ID = (True, 'A000043')  # core
 # SEQ_ID = (True, 'A000187')
@@ -199,7 +200,9 @@ SEQ_ID = (False, 'A000045')
 # SEQ_ID = (False, 'A000032')
 # SEQ_ID = (True, 'A000032')
 SEQ_ID = (True, 'A000045')
-# SEQ_ID = (True, 'A000085')
+SEQ_ID = (True, 'A000085')
+# SEQ_ID = (True, 'A000578')
+# SEQ_ID = (True, 'A002620')
 # SEQ_ID = (True, 'A000032')
 # SEQ_ID = (False, 'A000290')
 # SEQ_ID = (True, 'A000290')
@@ -210,10 +213,22 @@ SEQ_ID = (True, 'A000045')
 # SEQ_ID = (True, 'A074515')
 # SEQ_ID = (True, 'A074517')
 # SEQ_ID = (True, 'A091881')
-SEQ_ID = (True, 'A000009')
+# SEQ_ID = (True, 'A000009')
 # first 100 non_manuals: ['00003_A000009.txt', '00012_A000041.txt', '00013_A000043.txt', '00021_A000085.txt', '00023_A000105.txt', '00028_A000123.txt', '00029_A000124.txt', '00039_A000217.txt', '00046_A000290.txt', '00047_A000292.txt', '00051_A000326.txt', '00052_A000330.txt', '00056_A000578.txt', '00058_A000593.txt', '00065_A000793.txt', '00073_A001034.txt', '00078_A001065.txt', '00082_A001157.txt', '00107_A002322.txt', '00108_A002378.txt', '00114_A002620.txt', '00121_A004011.txt', '00135_A006530.txt', '00136_A006882.txt', '00149_A025487.txt']
-SEQ_ID = (True, 'A003082')
+# SEQ_ID = (True, 'A003082')
+# SEQ_ID = (True, 'A000041')
 
+# SEQ_ID = (True, 'A168838')
+
+SEQ_ID = (True, 'A000044')
+
+SEQ_ID = (True, 'A000073')
+SEQ_ID = (True, 'A000078')
+
+# SEQ_ID = (True, 'A000100')
+
+SEQ_ID = (True, 'A005588')
+SEQ_ID = (True, 'A000004')
 
 
 # first 100 non_manuals: ['04132_A025938.txt', '09906_A074515.txt', '09908_A074517.txt', '11571_A091881.txt', '11572_A091883.txt', '11827_A094944.txt', '11939_A097068.txt', '13516_A114480.txt', '13922_A120465.txt', '13939_A120689.txt']
@@ -285,7 +300,7 @@ now = time.perf_counter()
 # # a bit faster maybe:
 # csv_filename = 'linear_database_full.csv'
 # csv_filename = 'linear_database_clean2.csv'
-csv_filename = 'linear_database_bl.csv'
+csv_filename = 'linear_database_newbl.csv'
 
 if CORELIST:
     blacklist = []
@@ -463,10 +478,9 @@ else:
             # if GROUND_TRUTH:
             # print(csv, seq_id)
             # print(csv[seq_id])
-            seq, coeffs, truth = unpack_seq(seq_id, csv) if GROUND_TRUTH else unnan(csv[seq_id]), None, None
-            # else:
-            #     seq, coeffs, truth = unnan(csv[seq_id]), None, None
+            seq, coeffs, truth = unpack_seq(seq_id, csv) if GROUND_TRUTH else (unnan(csv[seq_id]), None, None)
 
+            # seq = seq[:40, :]
             # library = libraries[0]
             # seqs, pre_fail = preprocess(seq, library=library)
             preseqs = [preprocess(seq, degree)[0] for degree in range(1, d_max+1)]
@@ -484,7 +498,7 @@ else:
                 # START_ORDER = 1
                 # START_ORDER = 0
                 # START_ORDER = 6
-                # START_ORDER = 10
+                # START_ORDER = 13
                 # libraries = [1, 2, 3]  # poly degrees (look increasind_eed)
                 # libraries = [1,]  # poly degrees (look increasind_eed)
                 # libraries = [3]  # poly degrees (look increasind_eed)
@@ -505,7 +519,9 @@ else:
                 # LIBRARY!!!
                 # x, printout, x_avg = sindy_grid(seq, seq_id, csv, coeffs, max_order, seq_len, library=library)
                 # xlib = library
-                # print('x', x)
+                print('x', x)
+                print('eq', eq)
+
                 # print('x_avg', x_avg)
                 # print(check_eq_man(x, seq_id, csv, n_of_terms=10 ** 5, library=library))
                 # print(check_eq_man(x_avg, seq_id, csv, n_of_terms=10 ** 5, library=library))
@@ -550,8 +566,10 @@ else:
         print('deg_used', deg_used, 'order', order_used)
         is_reconst = solution_vs_truth(x, coeffs) if GROUND_TRUTH else ""
         is_check_verbose = check_eq_man(x, seq_id, csv, header=GROUND_TRUTH, n_of_terms=10**5, solution_ref=sol_ref)
+        # is_check_verbose = check_eq_man(x, seq_id, csv, n_of_terms=10 ** 5, solution_ref=sol_ref, library=library)
         # is_check_verbose = [False]
         # print('here', x, xlib, eq, coeffs, truth)
+        # print([len(preseq) for preseq in preseqs])
         # print('manual check \n', is_check_verbose[1], '\n', is_check_verbose[2])
         is_check = is_check_verbose[0]
         # print(f"{is_reconst}!, reconstructed as in ground truth.")
@@ -608,6 +626,8 @@ else:
 
     # output_string = ""
     output_string += timing_print
+    output_string += f'\nCORELIST {CORELIST}, SINDy {SINDy}, GROUND_TRUTH {GROUND_TRUTH}'
+    output_string += f'\nLibrary: {library}, max_order {max_order}, threshold: {threshold}'
     output_string += f"\n\nby degree: {deg_used} and order: {order_used}. \n{seq_id}: \n{eq}" if not MODE == 'black_check' else ""
     output_string += f"\ntruth: \n{truth}\n\n"
     output_string += f'{is_reconst}  -  checked against website ground truth.     \n'

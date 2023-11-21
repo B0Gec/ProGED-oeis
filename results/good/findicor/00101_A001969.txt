@@ -1,0 +1,14 @@
+
+While total time consumed by now, scale:102/164, seq_id:A001969, order:10 took:
+ 31663.4 seconds, i.e. 527.72 minutes or 8.795 hours.
+CORELIST True, SINDy False, GROUND_TRUTH False
+Library: n, max_order 10, threshold: 0.1
+
+by degree: 3 and order: 10. 
+A001969: 
+a(n) = NOT RECONSTRUCTED :-(
+truth: 
+
+
+  -  checked against website ground truth.     
+False  -  "manual" check if equation is correct.    

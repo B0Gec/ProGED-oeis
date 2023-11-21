@@ -45,11 +45,16 @@ def ok_coefs(seq_id: str, csv: pd.DataFrame):
     # replaced = truth
     peeled = replaced[1:-2] if replaced[-2] == ',' else replaced[1:-1]
     coeffs = peeled.split(',')
-    if coeffs == ['']:
+    if coeffs == ['']:  # 663
+        # return False
+        return True
+    # elif '...' in truth or '"' in truth or '.' in truth:
+    elif '...' in truth:
         return False
-    elif '...' in truth or '"' in truth or '.' in truth:
-        print(truth)
-        return False
+    # elif '"' in truth or '.' in truth:
+    #     print(truth)
+    #     return False
+
     # if '"' in truth:
     #     return False
     # elif seq_id in ('A025858', 'A246175', 'A025924'):
@@ -59,6 +64,7 @@ def ok_coefs(seq_id: str, csv: pd.DataFrame):
         # elif seq_id in ('A029252', 'A356621'):
         # return False
     else:
+        return True
         try:
             # try:
             #     if len(peeled) >= 1:
@@ -83,6 +89,7 @@ no_truth = [i for i in csv if not ok_coefs(i, csv)]
 
 print('no_truth:')
 print(no_truth[:10], len(no_truth))
+1/0
 output_string = f'no_truth = {no_truth}'
 
 # writo new files:

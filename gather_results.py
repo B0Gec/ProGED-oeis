@@ -88,25 +88,39 @@ job_id = "blacklist76"
 # # # job_id = 'dicor-comb'
 # # # job_id = 'sicor-comb'
 # # # job_id = 'sicor-combalibs'
-# # job_id = 'sicor-lin3'
-#
-# # new "final?" results:
-# job_id = 'fdiocores'
-# job_id = 'fdiocorefix'
-job_id = 'fdiocorefix2'
-#
-job_id = 'fdio'
-job_id = 'fdiobl'
-#
-# job_id = 'blacklist'
+job_id = 'sicor-lin3'
 
-# job_id = 'sicor116'
+# # # new "final?" results:
+# # job_id = 'fdiocores'
+# # job_id = 'fdiocorefix'
+# job_id = 'fdiocorefix2'
+#
+# job_id = 'fdio'
+# job_id = 'fdiobl'
+# job_id = 'fdionewbl'
+# # job_id = 'fdiocorr'
+job_id = 'dicorrep'
 
+
+# job_id = 'blacklist'  # 27237 non_ids
+
+#
+# # # job_id = 'sicor116'
+# # # job_id = 'sicor9'
+job_id = 'sicor9fix2'
+# #
+job_id = 'silin'
+
+# job_id = 'sicor1114'
+
+# job_id = 'dilin'
+job_id = 'findicor'
 
 print(job_id)
 
 CORES = True if job_id in ("diocores77", 'diocor-merge', 'sindycore83', 'dicor-cub', 'dicor-cub19',
-                           'fdiocores', 'fdiocorefix', 'fdiocorefix2', 'sicor116') else False
+                           'fdiocores', 'fdiocorefix', 'fdiocorefix2', 'sicor116', 'dicorrep', 'sicor9fix2', 'sicor1114',
+                           'findicor') else False
 # CORES = True
 # CORES = False
 if CORES:
@@ -245,6 +259,11 @@ def extract_file(fname, verbosity=VERBOSITY, job_id=job_id):
             return 1 if string == 'True' else 0
     is_reconst, is_check = tuple(map(truefalse, [re_reconst, re_manual]))
 
+    PRINT_EQS = True
+    if PRINT_EQS:
+        if is_check and CORES:
+            print('\'', fname[-11:-4], ':', eq, '\',')
+
     # re_manual =
     # we_found, is_reconst, is_check, = not (re_found == []), bool(re_reconst[0]), bool(re_manual[0]),
 
@@ -355,7 +374,7 @@ def for_summary(aggregated: tuple, fname: str):
         print('to_add:', to_add)
         print('aggregated:', aggregated)
         if sum(to_add[:4]) - sum(to_add[4:]) > 1:
-           print(' --- --- look here --- --- ')
+           print(' --- --- look here -s- --- ')
            raise ArithmeticError
         # if sum(to_add[:4]) > 1:
         #     print(reconst_non_manual)
@@ -679,7 +698,8 @@ print(f'check bins: {len(files)} = {sum(job_bins)} ?')
 for n, i in enumerate(job_bins):
     print(n, i)
 
-print(f'first {n} non_ids:', non_id_list[:n])
+m = 165
+print(f'first {m} non_ids:', non_id_list[:m])
 non_id_task_ids = ','.join([str(int(fname[:5])) for fname in non_id_list])
 print('task_ids of non_ids:', non_id_task_ids[:100], '...')
 # print(str(succsess_task_ids).replace(' ', '').strip('[]'))
@@ -687,16 +707,16 @@ print('task_ids of non_ids:', non_id_task_ids[:100], '...')
 print(len(non_id_list))
 n = 1700
 print(f'first {n} non_manuals:', sorted(non_manual_list[:n]))
-1/0
+# 1/0
 
 # print(f'all non_manuals:', non_manual_list)
 # check if new false_truth blacklist contains all old false_truths:  # experiment job_id = "blacklist76"
 false_non_man = [i[6:6+7] for i in non_manual_list]
 # print(false_non_man)
 # print(false_non_man[0], len(false_non_man), false_non_man[:6], false_truth_list[:6], len(false_truth_list))
-print('sanity', sorted([i for i in false_truth_list if i not in false_non_man]))
-print('new', [i for i in false_non_man if i not in false_truth_list])
-1/0
+# print('sanity', sorted([i for i in false_truth_list if i not in false_non_man]))
+# print('new', [i for i in false_non_man if i not in false_truth_list])
+# 1/0
 
 # print(len(non_manual_list))
 print(f'first {n} ed_fails:', ed_fail_list[:n])
@@ -771,7 +791,7 @@ alibs = ['00009_A000032.txt', '00010_A000035.txt', '00014_A000045.txt', '00017_A
    '00100_A001906.txt', '00106_A002275.txt', '00108_A002378.txt', '00111_A002530.txt', '00112_A002531.txt',
    '00114_A002620.txt', '00123_A004526.txt', '00130_A005408.txt', '00133_A005843.txt', '00158_A055512.txt']
 
-ncub10 =  ['00009_A000032.txt', '00010_A000035.txt', '00014_A000045.txt', '00017_A000058.txt', '00019_A000079.txt', '00029_A000124.txt', '00030_A000129.txt', '00038_A000204.txt', '00039_A000217.txt', '00041_A000225.txt', '00042_A000244.txt', '00046_A000290.txt', '00047_A000292.txt', '00048_A000302.txt', '00051_A000326.txt', '00052_A000330.txt', '00056_A000578.txt', '00057_A000583.txt', '00067_A000798.txt', '00075_A001045.txt', '00077_A001057.txt', '00088_A001333.txt', '00095_A001519.txt', '00097_A001699.txt', '00100_A001906.txt', '00106_A002275.txt', '00108_A002378.txt', '00111_A002530.txt', '00112_A002531.txt', '00114_A002620.txt', '00123_A004526.txt', '00130_A005408.txt', '00133_A005843.txt', '00158_A055512.txt']
+ncub10 = ['00009_A000032.txt', '00010_A000035.txt', '00014_A000045.txt', '00017_A000058.txt', '00019_A000079.txt', '00029_A000124.txt', '00030_A000129.txt', '00038_A000204.txt', '00039_A000217.txt', '00041_A000225.txt', '00042_A000244.txt', '00046_A000290.txt', '00047_A000292.txt', '00048_A000302.txt', '00051_A000326.txt', '00052_A000330.txt', '00056_A000578.txt', '00057_A000583.txt', '00067_A000798.txt', '00075_A001045.txt', '00077_A001057.txt', '00088_A001333.txt', '00095_A001519.txt', '00097_A001699.txt', '00100_A001906.txt', '00106_A002275.txt', '00108_A002378.txt', '00111_A002530.txt', '00112_A002531.txt', '00114_A002620.txt', '00123_A004526.txt', '00130_A005408.txt', '00133_A005843.txt', '00158_A055512.txt']
 ncub = alibs
 ncub = ncub10
 
@@ -847,6 +867,7 @@ m = [print( f'{n:<2}^3 &  {a[n - 1]:<3} &  {a[n - 2] * a[n - 3]:<3} &  {a[n - 2]
 #  & \vdots  & &  \\
 #  14^3 & 233 & 89\cdot144 & 34^2  \\
 
+1/0
 
 # result analysis 2955 equations
 seqid = 'A000045'
@@ -880,3 +901,4 @@ print('before dlfin')
 # print('eof')
 #
 
+# first 165 non_ids: ['00009_A000032.txt', '00010_A000035.txt', '00014_A000045.txt', '00017_A000058.txt', '00019_A000079.txt', '00021_A000085.txt', '00029_A000124.txt', '00030_A000129.txt', '00032_A000142.txt', '00034_A000166.txt', '00038_A000204.txt', '00039_A000217.txt', '00041_A000225.txt', '00042_A000244.txt', '00046_A000290.txt', '00047_A000292.txt', '00048_A000302.txt', '00051_A000326.txt', '00052_A000330.txt', '00054_A000396.txt', '00056_A000578.txt', '00057_A000583.txt', '00061_A000612.txt', '00067_A000798.txt', '00075_A001045.txt', '00077_A001057.txt', '00081_A001147.txt', '00088_A001333.txt', '00095_A001519.txt', '00097_A001699.txt', '00100_A001906.txt', '00106_A002275.txt', '00108_A002378.txt', '00111_A002530.txt', '00112_A002531.txt', '00114_A002620.txt', '00123_A004526.txt', '00130_A005408.txt', '00131_A005588.txt', '00133_A005843.txt', '00136_A006882.txt', '00158_A055512.txt']

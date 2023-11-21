@@ -1,0 +1,14 @@
+
+While total time consumed by now, scale:44/164, seq_id:A000262, order:10 took:
+ 34649.1 seconds, i.e. 577.49 minutes or 9.625 hours.
+CORELIST True, SINDy False, GROUND_TRUTH False
+Library: n, max_order 10, threshold: 0.1
+
+by degree: 3 and order: 2. 
+A000262: 
+a(n) = -n**2*a(n - 2) + 3*n*a(n - 2) + 2*n*a(n - 1) - 2*a(n - 2) - a(n - 1)
+truth: 
+
+
+  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    
