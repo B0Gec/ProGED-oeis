@@ -1,0 +1,39 @@
+#!/bin/bash
+##SBATCH --job-name=core_array
+##SBATCH --partition=long
+##SBATCH --time=14-00:00:00
+#SBATCH --time=03:00:00  # enough for Diofantos
+#SBATCH --time=06:00:00
+#SBATCH --time=10:00:00
+#SBATCH --time=2-00:00:00
+#SBATCH --mem-per-cpu=5GB
+##SBATCH --cpus-per-task=1
+#SBATCH --array=0-1000  # 1001 is upper limit
+##SBATCH --array=0-2
+#SBATCH --array=0-999
+#SBATCH --array=0-1
+#SBATCH --array=0-164
+#SBATCH --array=13,17
+#SBATCH --array=48,54,61,67,97,116,131,137,158
+#SBATCH --array=61,67,97,116,131,137,158
+#SBATCH --array=97
+#SBATCH --array=0-164
+#SBATCH --array=0-999
+#SBATCH --array=0-1
+##SBATCH --array=0-150
+#SBATCH --output=./joeis%x%A.out
+
+
+
+array=( 17745 17746 17748 17749 17750 17751 )
+
+echo $((1000+$SLURM_ARRAY_TASK_ID))
+
+echo index of element $SLURM_ARRAY_TASK_ID , array element: ${array[$(($SLURM_ARRAY_TASK_ID))]}
+
+
+
+#singularity exec ../oeis.sif python3 doones.py \
+#        --task_id ${array[$((1000+$SLURM_ARRAY_TASK_ID))]} --exper_id $SLURM_JOB_NAME 
+#--lib $2
+

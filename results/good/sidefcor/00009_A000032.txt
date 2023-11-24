@@ -1,0 +1,14 @@
+
+While total time consumed by now, scale:10/164, seq_id:A000032, order:10 took:
+ 1.2 seconds, i.e. 0.02 minutes or 0.0 hours.
+CORELIST True, SINDy False, GROUND_TRUTH False, SINDy_default True
+Library: n, max_order 10, threshold: 0.1
+
+by degree: 1 and order: 2. 
+A000032: 
+a(n) = a(n - 2) + a(n - 1)
+truth: 
+
+
+  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

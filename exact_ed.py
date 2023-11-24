@@ -539,7 +539,8 @@ def increasing_eed(exact_ed, seq_id: str, csv: pd.DataFrame, verbosity: int = VE
                 # print('inc eed: x vs sol_ref ', len(x), len(sol_ref), x, sol_ref)
 
                 is_check = True
-                if sol_order(x, sol_ref)[0] < order:
+                if sol_order(x, sol_ref)[0] < order and not exact_ed.__name__ == 'one_results':
+                    # print('in check')
                     is_check = False
                 #     is_check = check_eq_man(x, seq_id, csv, header=ground_truth, n_of_terms=10**5, solution_ref=sol_ref,
                 #                             library=None)[0]
@@ -582,7 +583,10 @@ def increasing_eed(exact_ed, seq_id: str, csv: pd.DataFrame, verbosity: int = VE
     deg_orders = list(product(d_maxs, orders))
     # deg_orders = product(d_maxs, orders)
     if exact_ed.__name__ == 'one_results':
-        deg_orders = product(d_maxs, orders, [i*0.1 for i in range(11)], [False, True])
+        # deg_orders = product(d_maxs, orders, [i*0.1 for i in range(11)], [False, True])
+        # default SINDy:
+        deg_orders = product(d_maxs, orders, [0.1], [False])
+
 
     # a = list(deg_orders)
     # print('deg_orders', list(deg_orders))

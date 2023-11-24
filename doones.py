@@ -30,8 +30,8 @@ warnings.simplefilter("ignore")
 # else:
 #     from exact_ed import exact_ed, timer
 
-# SINDy = True
-SINDy = False
+SINDy = True
+# SINDy = False
 SINDy_default = True
 if SINDy:
     from sindy_oeis import sindy, preprocess, heuristic, sindy_grid, one_results
@@ -87,8 +87,8 @@ BUGLIST = False
 BUGLIST_BLACKLISTING = True
 # BUGLIST ignores blacklisted sequences !!!!!
 
-# CORELIST = True  # have to scrape core sequences!
-CORELIST = False
+CORELIST = True  # have to scrape core sequences!
+# CORELIST = False
 if BUGLIST:
     from buglist import buglist
 
@@ -626,7 +626,7 @@ else:
 
     # output_string = ""
     output_string += timing_print
-    output_string += f'\nCORELIST {CORELIST}, SINDy {SINDy}, GROUND_TRUTH {GROUND_TRUTH}'
+    output_string += f'\nCORELIST {CORELIST}, SINDy {SINDy}, GROUND_TRUTH {GROUND_TRUTH}, SINDy_default {SINDy_default}'
     output_string += f'\nLibrary: {library}, max_order {max_order}, threshold: {threshold}'
     output_string += f"\n\nby degree: {deg_used} and order: {order_used}. \n{seq_id}: \n{eq}" if not MODE == 'black_check' else ""
     output_string += f"\ntruth: \n{truth}\n\n"

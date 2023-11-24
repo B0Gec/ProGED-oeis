@@ -109,18 +109,26 @@ job_id = 'dicorrep'
 # # # job_id = 'sicor9'
 job_id = 'sicor9fix2'
 # #
-job_id = 'silin'
+# job_id = 'silin'
+#
+job_id = 'sicor1114'
 
-# job_id = 'sicor1114'
-
-# job_id = 'dilin'
+# # job_id = 'dilin'
 job_id = 'findicor'
+#
+#
+# # job_id = 'sideflin'  # fail: not even sindy
+# # job_id = 'sidefcor'  # fail: not even sindy
+#
+# job_id = 'sdlin'
+# # job_id = 'sdcor'  # fail: not core
+# job_id = 'sdcor2'
 
 print(job_id)
 
 CORES = True if job_id in ("diocores77", 'diocor-merge', 'sindycore83', 'dicor-cub', 'dicor-cub19',
                            'fdiocores', 'fdiocorefix', 'fdiocorefix2', 'sicor116', 'dicorrep', 'sicor9fix2', 'sicor1114',
-                           'findicor') else False
+                           'findicor', 'sdcor2') else False
 # CORES = True
 # CORES = False
 if CORES:
@@ -262,7 +270,7 @@ def extract_file(fname, verbosity=VERBOSITY, job_id=job_id):
     PRINT_EQS = True
     if PRINT_EQS:
         if is_check and CORES:
-            print('\'', fname[-11:-4], ':', eq, '\',')
+            print('\'', is_check, fname[-11:-4], ':', eq, '\',')
 
     # re_manual =
     # we_found, is_reconst, is_check, = not (re_found == []), bool(re_reconst[0]), bool(re_manual[0]),
