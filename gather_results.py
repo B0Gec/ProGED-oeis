@@ -109,17 +109,17 @@ job_id = 'dicorrep'
 # # # job_id = 'sicor9'
 job_id = 'sicor9fix2'
 # #
-# job_id = 'silin'
+job_id = 'silin'
 #
-job_id = 'sicor1114'
+# job_id = 'sicor1114'
 
-# # job_id = 'dilin'
-job_id = 'findicor'
+# job_id = 'dilin'
+# job_id = 'findicor'
 #
 #
 # # job_id = 'sideflin'  # fail: not even sindy
 # # job_id = 'sidefcor'  # fail: not even sindy
-#
+
 # job_id = 'sdlin'
 # # job_id = 'sdcor'  # fail: not core
 # job_id = 'sdcor2'
