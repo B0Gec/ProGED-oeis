@@ -1,0 +1,20 @@
+new results (documented 22.12.2023):
+
+sylvester a58: diof overfit .. sindy no
+
+A262:
+Diof:
+yes; a(n) =  -n**2*a(n - 2) + 3*n*a(n - 2) + 2*n*a(n - 1) - 2*a(n - 2) - a(n - 1)
+Sindy:
+no.
+
+A396 : diof overfit .. sindy no
+
+a612 overfit, sindy no.
+
+a798 overfit, sindy no.
+
+a1699 overfit, sindy no.
+
+a5588 overfit, sind no
+a55512 overfit. sind no.

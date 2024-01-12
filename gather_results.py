@@ -33,6 +33,7 @@ import pandas as pd
 
 from blacklist import no_truth, false_truth
 false_truth_list = false_truth
+from exact_ed import truth2coeffs
 
 # fname = 'results/good/01234567/34500_A000032.txt'
 base_dir = "results/good/"
@@ -109,7 +110,8 @@ job_id = 'dicorrep'
 # # # job_id = 'sicor9'
 job_id = 'sicor9fix2'
 # #
-job_id = 'silin'
+job_id = 'fakesilin'
+# job_id = 'silin'
 #
 # job_id = 'sicor1114'
 
@@ -192,6 +194,60 @@ True  -  "manual" check if equation is correct.
 """
 
 
+# b) Comlexity comparison:
+#   load csv:
+
+if job_id in ('fakesilin'):
+    csv_filename = 'linear_database_newbl.csv'
+    csv = pd.read_csv(csv_filename, low_memory=False)
+
+def str_eq2orders(eq: str):
+    # a(n) = a(n - 2) + a(n - 1)
+    # orders = [int(i) for i in re.findall(r"(-?\d*)\*a\(n - (\d+)\)", eq)]
+    # Next line stores pairs of coefficients and orders in a list.
+    coeff_orders = [(int(coef) if coef != '' else 0, int(order))
+              for coef, order in re.findall(r"(-?\d*)\*?a\(n - (\d+)\)", eq)]
+    nonzero_coeff_orders = [i for i in coeff_orders if i[0] != 0]
+    # print(nonzero_coeff_orders)
+
+    intercept = re.findall(r"\d+", re.sub(r"(-?\d*)\*?a\(n - (\d+)\)", '', eq))
+    if len(intercept) > 1:
+        print(intercept)
+        raise ValueError("Diofantos' programer: more than one intercept!")
+    else:
+        intercept = int(intercept[0]) if intercept != [] else 0
+    # print(orders)
+    return nonzero_coeff_orders, intercept
+
+print(str_eq2orders( 'a(n) = a(n - 2) + a(n - 1)' ))
+print(str_eq2orders( 'a(n) = 5 + 15*a(n - 2) + -3*a(n - 1)' ))
+print(str_eq2orders( 'a(n) = ( 1)' ))
+# 1/0
+
+def maxorder_cx(eq: str):
+    return max([i[1] for i in str_eq2orders(eq)[0]], default=0)
+
+def nonzeros_cx(eq: str):
+    nonzero_coeff_orders = str_eq2orders(eq)
+    return len(nonzero_coeff_orders[0]) + (abs(nonzero_coeff_orders[1]) > 0)*0.5
+
+def coeffs2nonzeros_cx(coeffs: str):
+    nonzeros = [i for i in coeffs if abs(i) > 0]
+    # [int(i) for i in re.findall(r"a\(n - (\d+)\)", eq)]
+    return len(nonzeros)
+
+print(maxorder_cx( 'a(n) = 0' ))
+print(nonzeros_cx( 'a(n) = 0' ))
+print(nonzeros_cx( 'a(n) = -3' ))
+
+
+print(maxorder_cx( 'a(n) = a(n - 2) + a(n - 1)' ))
+print(nonzeros_cx( 'a(n) = a(n - 2) + a(n - 1)' ))
+print(coeffs2nonzeros_cx([0, -1, 0, -23, 8,  1, 0]))
+
+
+# 1/0
+
 
 VERBOSITY = 0
 # VERBOSITY = 1
@@ -215,6 +271,35 @@ def extract_file(fname, verbosity=VERBOSITY, job_id=job_id):
     re_all_stars = re.findall(r"scale:\d+/(\d+),", content)
     re_found = re.findall(r"NOT RECONSTRUCTED", content)
     eq = None if len(re_found) > 0 or len(eq) == 0 else eq[0]
+
+    print(eq)
+    print(type(eq))
+    # 1/0
+    # print(fname)
+    # print(fname[-11:-4])
+    # print(fname[-17:-12])
+
+    task_id = int(fname[-17:-12])
+    seq_id = fname[-11:-4]
+    truth = csv[seq_id][0]
+    coeffs = truth2coeffs(truth)
+    print('tle')
+    print(truth)
+    print(type(truth))
+    print(type(coeffs[0]))
+
+    complexity_diff_maxorder = maxorder_cx(eq) - len(truth2coeffs(truth))
+    complexity_diff_nonzeros = nonzeros_cx(eq) - coeffs2nonzeros_cx(coeffs)
+    print('\ncx\n')
+    print(complexity_diff_maxorder)
+    print(complexity_diff_nonzeros)
+    # 1/0
+
+    print('task and seqid:', task_id, seq_id)
+    if task_id > 10:
+        print('seqid:', task_id, seq_id)
+        1/0
+
     # avg = True
     avg = False
     added = 'avg ' if avg else ''
@@ -454,31 +539,33 @@ from blacklist import blacklist, no_truth
 # print(len(blacklist), len(set(blacklist)))
 # not_blacklisted = [(task, i) for task, i in unsuccessful if not i in blacklist]
 # blacklisted = [(task, i) for task, i in enumerate(all_ids) if not i in blacklist]
-not_blacklisted = [i for i in all_ids if not i in blacklist and not i in success_ids]
-# not_blacklisted = [i for n, i in enumerate(all_ids) if not i in blacklist and not i in success_ids and i]
-print('jobs failed (unsuccessful):', not_blacklisted[:10], len(not_blacklisted))
-# not_missing_truth = [i for i in all_ids if not i in no_truth and not i in success_ids]
-# not_blacklisted_pairs = [(f"{task:0>5}", id_) for task, id_ in enumerate(all_ids)
-#                          if not id_ in blacklist and not id_ in success_ids]
 
-# jobs_failed_per_bin = [0 for _ in range(35)]
-failed_ids =  [all_ids_ref.index(id_) for id_ in not_blacklisted]
-# print('ids of jobs failed (unsuccessful):', failed_ids)
-# print(str(failed_ids).replace(' ', '').strip('[]'))
-# print('ids of jobs failed (unsuccessful):', [all_ids_ref.index(id_) for id_ in not_blacklisted])
-not_blacklisted_pairs = [(f"{all_ids_ref.index(id_):0>5}", id_) for id_ in not_blacklisted]
-print(not_blacklisted_pairs[:10], len(not_blacklisted_pairs))
-# print(not_blacklisted_pairs[:3100], len(not_blacklisted_pairs))
 
-def failed_bins(agg, pair):
-    agg[int(pair[0])//1000] += 1
-    return agg
+# not_blacklisted = [i for i in all_ids if not i in blacklist and not i in success_ids]
+# # not_blacklisted = [i for n, i in enumerate(all_ids) if not i in blacklist and not i in success_ids and i]
+# print('jobs failed (unsuccessful):', not_blacklisted[:10], len(not_blacklisted))
+# # not_missing_truth = [i for i in all_ids if not i in no_truth and not i in success_ids]
+# # not_blacklisted_pairs = [(f"{task:0>5}", id_) for task, id_ in enumerate(all_ids)
+# #                          if not id_ in blacklist and not id_ in success_ids]
 
-bins_failed = reduce(failed_bins, not_blacklisted_pairs, [0 for _ in range(35)])
-for n, jobs in enumerate(bins_failed):
-    print(n, jobs)
-
-print(bins_failed)
+# # jobs_failed_per_bin = [0 for _ in range(35)]
+# failed_ids = [all_ids_ref.index(id_) for id_ in not_blacklisted]
+# # print('ids of jobs failed (unsuccessful):', failed_ids)
+# # print(str(failed_ids).replace(' ', '').strip('[]'))
+# # print('ids of jobs failed (unsuccessful):', [all_ids_ref.index(id_) for id_ in not_blacklisted])
+# not_blacklisted_pairs = [(f"{all_ids_ref.index(id_):0>5}", id_) for id_ in not_blacklisted]
+# print(not_blacklisted_pairs[:10], len(not_blacklisted_pairs))
+# # print(not_blacklisted_pairs[:3100], len(not_blacklisted_pairs))
+#
+# def failed_bins(agg, pair):
+#     agg[int(pair[0])//1000] += 1
+#     return agg
+#
+# bins_failed = reduce(failed_bins, not_blacklisted_pairs, [0 for _ in range(35)])
+# for n, jobs in enumerate(bins_failed):
+#     print(n, jobs)
+#
+# print(bins_failed)
 print('here i am')
 # 1/0
 # ['A044941', 'A053833', 'A055649'] 3
@@ -545,7 +632,7 @@ if CORES:
 # summary = reduce(for_summary, files[:], (0, 0, 0, 0, 0, 0, [], [0 for i in range(36)], [], [], [], ['start']))  # save all buggy ids
 summary = reduce(for_summary, sorted(files[:]), (0, 0, 0, 0, 0, 0, [], [0 for i in range(36)], [], [], [], ['start']))  # save all buggy ids
 # print(summary)
-# 1/0
+1/0
 
 # corrected_sum = sum(summary[:4]) - sum(summary[4:])
 corrected_sum = sum(summary[:4]) - sum(summary[4:5])
@@ -910,3 +997,6 @@ print('before dlfin')
 #
 
 # first 165 non_ids: ['00009_A000032.txt', '00010_A000035.txt', '00014_A000045.txt', '00017_A000058.txt', '00019_A000079.txt', '00021_A000085.txt', '00029_A000124.txt', '00030_A000129.txt', '00032_A000142.txt', '00034_A000166.txt', '00038_A000204.txt', '00039_A000217.txt', '00041_A000225.txt', '00042_A000244.txt', '00046_A000290.txt', '00047_A000292.txt', '00048_A000302.txt', '00051_A000326.txt', '00052_A000330.txt', '00054_A000396.txt', '00056_A000578.txt', '00057_A000583.txt', '00061_A000612.txt', '00067_A000798.txt', '00075_A001045.txt', '00077_A001057.txt', '00081_A001147.txt', '00088_A001333.txt', '00095_A001519.txt', '00097_A001699.txt', '00100_A001906.txt', '00106_A002275.txt', '00108_A002378.txt', '00111_A002530.txt', '00112_A002531.txt', '00114_A002620.txt', '00123_A004526.txt', '00130_A005408.txt', '00131_A005588.txt', '00133_A005843.txt', '00136_A006882.txt', '00158_A055512.txt']
+
+# id -> order, n_nonzero(eq)  gt_order, n_nonzero(gt).
+
