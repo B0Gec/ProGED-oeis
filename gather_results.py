@@ -111,7 +111,7 @@ job_id = 'dicorrep'
 job_id = 'sicor9fix2'
 # #
 job_id = 'fakesilin'
-# job_id = 'silin'
+job_id = 'silin'
 #
 # job_id = 'sicor1114'
 
@@ -205,7 +205,7 @@ def str_eq2orders(eq: str):
     # a(n) = a(n - 2) + a(n - 1)
     # orders = [int(i) for i in re.findall(r"(-?\d*)\*a\(n - (\d+)\)", eq)]
     # Next line stores pairs of coefficients and orders in a list.
-    coeff_orders = [(int(coef) if coef != '' else 0, int(order))
+    coeff_orders = [(int(coef) if coef != '' else 1, int(order))
               for coef, order in re.findall(r"(-?\d*)\*?a\(n - (\d+)\)", eq)]
     nonzero_coeff_orders = [i for i in coeff_orders if i[0] != 0]
     # print(nonzero_coeff_orders)
@@ -235,6 +235,8 @@ def coeffs2nonzeros_cx(coeffs: str):
     nonzeros = [i for i in coeffs if abs(i) > 0]
     # [int(i) for i in re.findall(r"a\(n - (\d+)\)", eq)]
     return len(nonzeros)
+
+### print(maxorder_cx( None ))  ## shouldn't happen scenario
 
 print(maxorder_cx( 'a(n) = 0' ))
 print(nonzeros_cx( 'a(n) = 0' ))
@@ -271,34 +273,6 @@ def extract_file(fname, verbosity=VERBOSITY, job_id=job_id):
     re_all_stars = re.findall(r"scale:\d+/(\d+),", content)
     re_found = re.findall(r"NOT RECONSTRUCTED", content)
     eq = None if len(re_found) > 0 or len(eq) == 0 else eq[0]
-
-    print(eq)
-    print(type(eq))
-    # 1/0
-    # print(fname)
-    # print(fname[-11:-4])
-    # print(fname[-17:-12])
-
-    task_id = int(fname[-17:-12])
-    seq_id = fname[-11:-4]
-    truth = csv[seq_id][0]
-    coeffs = truth2coeffs(truth)
-    print('tle')
-    print(truth)
-    print(type(truth))
-    print(type(coeffs[0]))
-
-    complexity_diff_maxorder = maxorder_cx(eq) - len(truth2coeffs(truth))
-    complexity_diff_nonzeros = nonzeros_cx(eq) - coeffs2nonzeros_cx(coeffs)
-    print('\ncx\n')
-    print(complexity_diff_maxorder)
-    print(complexity_diff_nonzeros)
-    # 1/0
-
-    print('task and seqid:', task_id, seq_id)
-    if task_id > 10:
-        print('seqid:', task_id, seq_id)
-        1/0
 
     # avg = True
     avg = False
@@ -352,6 +326,31 @@ def extract_file(fname, verbosity=VERBOSITY, job_id=job_id):
             return 1 if string == 'True' else 0
     is_reconst, is_check = tuple(map(truefalse, [re_reconst, re_manual]))
 
+    ## < = > complexity analysis:
+    if is_check:
+        print(eq)
+        task_id = int(fname[-17:-12])
+        seq_id = fname[-11:-4]
+        truth = csv[seq_id][0]
+        coeffs = truth2coeffs(truth)
+
+        complexity_diff_maxorder = maxorder_cx(eq) - len(truth2coeffs(truth))
+        complexity_diff_nonzeros = nonzeros_cx(eq) - coeffs2nonzeros_cx(coeffs)
+        # print('task and seqid:', task_id, seq_id)
+        if task_id > 10:
+        # if task_id > 1:
+            print('seqid:', task_id, seq_id)
+            1 / 0
+
+        cx_order_winner = 'max_order<' if complexity_diff_maxorder < 0 else 'max_order=' if complexity_diff_maxorder == 0 \
+            else 'max_order>'
+        cx_nonzero_winner = 'nonzero<' if complexity_diff_nonzeros < 0 else 'nonzero=' if complexity_diff_nonzeros == 0 \
+            else 'nonzero>'
+    else:
+        cx_order_winner = 'max_order_fail'
+        cx_nonzero_winner = 'nonzero_fail'
+
+
     PRINT_EQS = True
     if PRINT_EQS:
         if is_check and CORES:
@@ -375,7 +374,7 @@ def extract_file(fname, verbosity=VERBOSITY, job_id=job_id):
 
     f.close()
 
-    return we_found, is_reconst, is_check, n_of_seqs, avg_is_best, confs, eq
+    return we_found, is_reconst, is_check, n_of_seqs, avg_is_best, confs, eq, cx_order_winner, cx_nonzero_winner
 
 # print(os.getcwd())
 # print(os.listdir())
@@ -414,7 +413,8 @@ debug = True
 def for_summary(aggregated: tuple, fname: str):
 
     # now -> f, m, i, o
-    we_found, is_reconst, is_checked, _, avg_is_best, trueconfs, eq = extract_file(job_dir + fname)
+    we_found, is_reconst, is_checked, _, avg_is_best, trueconfs, eq, cx_order_winner, cx_nonzero_winner,  \
+        = extract_file(job_dir + fname)
 
     id_oeis = is_reconst
     non_id = not is_reconst and is_checked
@@ -426,7 +426,7 @@ def for_summary(aggregated: tuple, fname: str):
     # non_manual = we_found and not is_checked
 
 
-    buglist, job_bins, non_id_list, ed_fail_list, non_manual_list, agg_confs = aggregated[-6:]
+    buglist, job_bins, non_id_list, ed_fail_list, non_manual_list, agg_confs, cx_order, cx_nonzero = aggregated[-8:]
     if debug:
         if reconst_non_manual:
             buglist += [fname]
@@ -455,7 +455,8 @@ def for_summary(aggregated: tuple, fname: str):
     # print(new_confs)
     # print(len(new_confs))
 
-
+    cx_order[cx_order_winner] += 1
+    cx_nonzero[cx_nonzero_winner] += 1
 
     # summand = [f, m, i, o]
     to_add = (id_oeis, non_id, non_manual, fail, reconst_non_manual, avg_is_best)
@@ -477,9 +478,10 @@ def for_summary(aggregated: tuple, fname: str):
 
 
 
-    zipped = zip(aggregated[:-2], to_add)
+    zipped = zip(aggregated[:-4], to_add)
     counters = tuple(map(lambda x: x[0] + x[1], zipped))
-    return counters + (buglist, job_bins, non_id_list, ed_fail_list, non_manual_list, new_confs)
+    return (counters + (buglist, job_bins, non_id_list, ed_fail_list, non_manual_list, new_confs)
+            + (cx_order, cx_nonzero))
 
 # # Hierarhical:
 # files_subdir = [list(map(lambda x: f'{subdir}{os.sep}{x}',
@@ -608,7 +610,8 @@ files_debug = files[0:scale]
 files = files_debug
 # print(files)
 
-_a, _b, _, n_of_seqs, avg_is_best, true_confs, eq = extract_file(job_dir + files[0])
+_a, _b, _, n_of_seqs, avg_is_best, true_confs, eq, cx_order_winner, cx_nonzero_winner \
+    = extract_file(job_dir + files[0], verbosity=1)
 if CORES:
     n_of_seqs = 164
 # print(n_of_seqs)
@@ -630,8 +633,10 @@ if CORES:
 
 # summary = reduce(for_summary, files, (0, 0, 0, 0, 0,))
 # summary = reduce(for_summary, files[:], (0, 0, 0, 0, 0, 0, [], [0 for i in range(36)], [], [], [], ['start']))  # save all buggy ids
-summary = reduce(for_summary, sorted(files[:]), (0, 0, 0, 0, 0, 0, [], [0 for i in range(36)], [], [], [], ['start']))  # save all buggy ids
-# print(summary)
+summary = reduce(for_summary, sorted(files[:]), (0, 0, 0, 0, 0, 0, [], [0 for i in range(36)], [], [], [], ['start'],
+                  {'max_order<': 0, 'max_order=': 0, 'max_order>': 0, 'max_order_fail': 0},
+                  {'nonzero<': 0, 'nonzero=': 0, 'nonzero>': 0, 'nonzero_fail': 0}))  # save all buggy ids
+print(summary)
 1/0
 
 # corrected_sum = sum(summary[:4]) - sum(summary[4:])
