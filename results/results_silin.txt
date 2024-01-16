@@ -246,3 +246,7 @@ discos [(0, 'hard', 'hard'), (1, 'hard', 'hard'), (2, 'hard', 'hard'), (3, 'hard
 7 ^3 &  8   &  15  &  5 &  7\cdot1  ^2 \\ 
 8 ^3 &  13  &  40  &  8 &  8\cdot2  ^2 \\ 
 14^3 &  233 &  12816 &  144 &  14\cdot34 ^2 \\ 
+
+afterwath 16.1.2024:
+ {'max_order<': 12226, 'max_order=': 6493, 'max_order>': 321, 'max_order_fail': 8196},
+     {'nonzero<': 10353, 'nonzero=': 6579, 'nonzero>': 2108, 'nonzero_fail': 8196})

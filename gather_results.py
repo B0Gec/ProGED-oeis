@@ -115,7 +115,7 @@ job_id = 'silin'
 #
 # job_id = 'sicor1114'
 
-# job_id = 'dilin'
+job_id = 'dilin'
 # job_id = 'findicor'
 #
 #
@@ -123,9 +123,9 @@ job_id = 'silin'
 # # job_id = 'sidefcor'  # fail: not even sindy
 
 # job_id = 'sdlin'
-# # job_id = 'sdcor'  # fail: not core
-# job_id = 'sdcor2'
-
+# # # job_id = 'sdcor'  # fail: not core
+# # job_id = 'sdcor2'
+#
 print(job_id)
 
 CORES = True if job_id in ("diocores77", 'diocor-merge', 'sindycore83', 'dicor-cub', 'dicor-cub19',
@@ -197,18 +197,17 @@ True  -  "manual" check if equation is correct.
 # b) Comlexity comparison:
 #   load csv:
 
-if job_id in ('fakesilin'):
+if job_id in ('fakesilin', 'silin', 'dilin', 'sdlin'):
     csv_filename = 'linear_database_newbl.csv'
     csv = pd.read_csv(csv_filename, low_memory=False)
 
 def str_eq2orders(eq: str):
     # a(n) = a(n - 2) + a(n - 1)
-    # orders = [int(i) for i in re.findall(r"(-?\d*)\*a\(n - (\d+)\)", eq)]
     # Next line stores pairs of coefficients and orders in a list.
-    coeff_orders = [(int(coef) if coef != '' else 1, int(order))
+    # print(eq)
+    coeff_orders = [(int(coef) if coef not in ('', '-') else 1, int(order))
               for coef, order in re.findall(r"(-?\d*)\*?a\(n - (\d+)\)", eq)]
     nonzero_coeff_orders = [i for i in coeff_orders if i[0] != 0]
-    # print(nonzero_coeff_orders)
 
     intercept = re.findall(r"\d+", re.sub(r"(-?\d*)\*?a\(n - (\d+)\)", '', eq))
     if len(intercept) > 1:
@@ -216,12 +215,15 @@ def str_eq2orders(eq: str):
         raise ValueError("Diofantos' programer: more than one intercept!")
     else:
         intercept = int(intercept[0]) if intercept != [] else 0
-    # print(orders)
     return nonzero_coeff_orders, intercept
 
 print(str_eq2orders( 'a(n) = a(n - 2) + a(n - 1)' ))
 print(str_eq2orders( 'a(n) = 5 + 15*a(n - 2) + -3*a(n - 1)' ))
 print(str_eq2orders( 'a(n) = ( 1)' ))
+# print(str_eq2orders('a(n) = -a(n - 18) + a(n - 17) + a(n - 16) - a(n - 15) + a(n - 13) - a(n - 12) - a(n - 11) + a(n - 10) + a(n - 8) - a(n - 7) - a(n - 6) + a(n - 5) - a(n - 3) + a(n - 2) + a(n - 1) + 1'))
+print(str_eq2orders('a(n) =  a(n - 17) + a(n - 16) - a(n - 15) + a(n - 13) - a(n - 12) - a(n - 11) + a(n - 10) + a(n - 8) - a(n - 7) - a(n - 6) + a(n - 5) - a(n - 3) + a(n - 2) + a(n - 1) + 1'))
+print(str_eq2orders('a(n) = -a(n - 18) '))  # coefs = [1] in this case (not -1) for simplicity
+
 # 1/0
 
 def maxorder_cx(eq: str):
@@ -328,7 +330,7 @@ def extract_file(fname, verbosity=VERBOSITY, job_id=job_id):
 
     ## < = > complexity analysis:
     if is_check:
-        print(eq)
+        # print(eq)
         task_id = int(fname[-17:-12])
         seq_id = fname[-11:-4]
         truth = csv[seq_id][0]
@@ -337,7 +339,7 @@ def extract_file(fname, verbosity=VERBOSITY, job_id=job_id):
         complexity_diff_maxorder = maxorder_cx(eq) - len(truth2coeffs(truth))
         complexity_diff_nonzeros = nonzeros_cx(eq) - coeffs2nonzeros_cx(coeffs)
         # print('task and seqid:', task_id, seq_id)
-        if task_id > 10:
+        if task_id > 100000:
         # if task_id > 1:
             print('seqid:', task_id, seq_id)
             1 / 0
@@ -637,7 +639,7 @@ summary = reduce(for_summary, sorted(files[:]), (0, 0, 0, 0, 0, 0, [], [0 for i 
                   {'max_order<': 0, 'max_order=': 0, 'max_order>': 0, 'max_order_fail': 0},
                   {'nonzero<': 0, 'nonzero=': 0, 'nonzero>': 0, 'nonzero_fail': 0}))  # save all buggy ids
 print(summary)
-1/0
+# 1/0
 
 # corrected_sum = sum(summary[:4]) - sum(summary[4:])
 corrected_sum = sum(summary[:4]) - sum(summary[4:5])
@@ -667,7 +669,7 @@ print(n_of_seqs)
 print(jobs_fail)
 
 id_oeis, non_id, non_manual, ed_fail, reconst_non_manual, avg_is_best, buglist, \
-    job_bins, non_id_list, ed_fail_list, non_manual_list, trueconfs = summary
+    job_bins, non_id_list, ed_fail_list, non_manual_list, trueconfs, max_order_cxs, nonzeros_cxs  = summary
 corrected_non_manual = non_manual - reconst_non_manual
 all_fails = ed_fail + jobs_fail
 
@@ -679,6 +681,19 @@ my_alphabet = [i for i in string.ascii_uppercase if i not in forbidden]
 # my_alphabet = ['G']
 random_symbol = random.choice(my_alphabet)
 symbol = random_symbol + random_symbol
+
+cx_sym_dict = {'dilin': 'di', 'sdlin': 'sd', 'silin': 'si' }
+# lil' hack to show off
+# complexity_symbol = 'di' if job_id == 'dilin' else 'si' if jobid == 'silin' else 'sd' if job_id == 'sdlin' else 'None'
+complexity_symbol = cx_sym_dict.get(job_id, 'None')
+# print(cx_sym_dict)
+# print(complexity_symbol)
+rename = {'<': 'Less', '=': 'Equl', '>': 'More', 'l': 'Fail'}
+
+print('\nComplexities:')
+print(''.join([f'\\newcommand{{\\{complexity_symbol}MaxCx{rename[ky[-1]]}}}{{{val}}}\n' for ky, val in max_order_cxs.items()]))
+print(''.join([f'\\newcommand{{\\{complexity_symbol}NonzeroCx{rename[ky[-1]]}}}{{{val}}}\n' for ky, val in nonzeros_cxs.items()]))
+# 1/0
 
 printout = f"""
     {id_oeis: >5} = {id_oeis/n_of_seqs*100:0.3} % ... (id_oeis) ... successfully found equations that are identical to the recursive equations written in OEIS (hereinafter - OEIS equation)
@@ -786,7 +801,7 @@ printout = f"""
 
 
 print(printout)
-# 1/0
+1/0
 
 n = 6
 print(n)
