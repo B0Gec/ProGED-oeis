@@ -112,11 +112,11 @@ job_id = 'sicor9fix2'
 # #
 job_id = 'fakesilin'
 job_id = 'silin'
-#
-# job_id = 'sicor1114'
 
+# # job_id = 'sicor1114'
+#
 job_id = 'dilin'
-# job_id = 'findicor'
+# # job_id = 'findicor'
 #
 #
 # # job_id = 'sideflin'  # fail: not even sindy
@@ -125,7 +125,7 @@ job_id = 'dilin'
 # job_id = 'sdlin'
 # # # job_id = 'sdcor'  # fail: not core
 # # job_id = 'sdcor2'
-#
+
 print(job_id)
 
 CORES = True if job_id in ("diocores77", 'diocor-merge', 'sindycore83', 'dicor-cub', 'dicor-cub19',
@@ -243,6 +243,9 @@ def coeffs2nonzeros_cx(coeffs: str):
 print(maxorder_cx( 'a(n) = 0' ))
 print(nonzeros_cx( 'a(n) = 0' ))
 print(nonzeros_cx( 'a(n) = -3' ))
+print(nonzeros_cx( 'a(n) = 1*a(n - 1) + 0*a(n - 2) + 0*a(n - 3) + 1*a(n - 4) + -1*a(n - 5) + 0*a(n - 6) + 0*a(n - 7) + 0*a(n - 8) + 0*a(n - 9) + 0*a(n - 10) + 0*a(n - 11) + 0*a(n - 12) + 0*a(n - 13) + 0*a(n - 14) + 0*a(n - 15) + 1*a(n - 16) + -1*a(n - 17) + 0*a(n - 18) + 0*a(n - 19) + -1*a(n - 20) + 1*a(n - 21) ' ))
+# 1/0
+
 
 
 print(maxorder_cx( 'a(n) = a(n - 2) + a(n - 1)' ))
@@ -329,12 +332,12 @@ def extract_file(fname, verbosity=VERBOSITY, job_id=job_id):
     is_reconst, is_check = tuple(map(truefalse, [re_reconst, re_manual]))
 
     ## < = > complexity analysis:
+    task_id = int(fname[-17:-12])
+    seq_id = fname[-11:-4]
+    truth = csv[seq_id][0]
+    coeffs = truth2coeffs(truth)
     if is_check:
         # print(eq)
-        task_id = int(fname[-17:-12])
-        seq_id = fname[-11:-4]
-        truth = csv[seq_id][0]
-        coeffs = truth2coeffs(truth)
 
         complexity_diff_maxorder = maxorder_cx(eq) - len(truth2coeffs(truth))
         complexity_diff_nonzeros = nonzeros_cx(eq) - coeffs2nonzeros_cx(coeffs)
@@ -348,8 +351,15 @@ def extract_file(fname, verbosity=VERBOSITY, job_id=job_id):
             else 'max_order>'
         cx_nonzero_winner = 'nonzero<' if complexity_diff_nonzeros < 0 else 'nonzero=' if complexity_diff_nonzeros == 0 \
             else 'nonzero>'
+        if cx_order_winner == 'max_order<':
+            nonzeros = [abs(i) for i in coeffs if abs(i) > 0]
+            if max(nonzeros) > 1000:
+                print(seq_id, 'task_id:', task_id)
+                print(coeffs)
+            if task_id > 10000:
+                1/0
     else:
-        cx_order_winner = 'max_order_fail'
+        cx_order_winner = 'order_fail<=' if len(truth2coeffs(truth)) <= 20 else 'order_fail>'
         cx_nonzero_winner = 'nonzero_fail'
 
 
@@ -636,7 +646,7 @@ if CORES:
 # summary = reduce(for_summary, files, (0, 0, 0, 0, 0,))
 # summary = reduce(for_summary, files[:], (0, 0, 0, 0, 0, 0, [], [0 for i in range(36)], [], [], [], ['start']))  # save all buggy ids
 summary = reduce(for_summary, sorted(files[:]), (0, 0, 0, 0, 0, 0, [], [0 for i in range(36)], [], [], [], ['start'],
-                  {'max_order<': 0, 'max_order=': 0, 'max_order>': 0, 'max_order_fail': 0},
+                  {'max_order<': 0, 'max_order=': 0, 'max_order>': 0, 'order_fail<=': 0, 'order_fail>': 0},
                   {'nonzero<': 0, 'nonzero=': 0, 'nonzero>': 0, 'nonzero_fail': 0}))  # save all buggy ids
 print(summary)
 # 1/0
@@ -693,6 +703,13 @@ rename = {'<': 'Less', '=': 'Equl', '>': 'More', 'l': 'Fail'}
 print('\nComplexities:')
 print(''.join([f'\\newcommand{{\\{complexity_symbol}MaxCx{rename[ky[-1]]}}}{{{val}}}\n' for ky, val in max_order_cxs.items()]))
 print(''.join([f'\\newcommand{{\\{complexity_symbol}NonzeroCx{rename[ky[-1]]}}}{{{val}}}\n' for ky, val in nonzeros_cxs.items()]))
+print([(ky, val) for ky, val in nonzeros_cxs.items() if 'ail' not in ky])  #
+max_total = sum([val for ky, val in max_order_cxs.items() if 'ail' not in ky])
+nonzeros_total = sum([val for ky, val in nonzeros_cxs.items() if 'ail' not in ky])
+print(''.join([f'\\newcommand{{\\{complexity_symbol}MaxCxPcg{rename[ky[-1]]}}}{{{val/max_total}}}\n' for ky, val
+               in max_order_cxs.items() if 'ail' not in ky]))
+print(''.join([f'\\newcommand{{\\{complexity_symbol}NonzeroCxPcg{rename[ky[-1]]}}}{{{val/nonzeros_total}}}\n' for ky, val
+               in nonzeros_cxs.items() if 'ail' not in ky]))
 # 1/0
 
 printout = f"""
