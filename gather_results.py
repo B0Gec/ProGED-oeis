@@ -113,18 +113,17 @@ job_id = 'sicor9fix2'
 job_id = 'fakesilin'
 job_id = 'silin'
 
-# # job_id = 'sicor1114'
+job_id = 'sicor1114'
 #
-job_id = 'dilin'
-# # job_id = 'findicor'
+# job_id = 'dilin'
+# job_id = 'findicor'
 #
+# # # job_id = 'sideflin'  # fail: not even sindy
+# # # job_id = 'sidefcor'  # fail: not even sindy
 #
-# # job_id = 'sideflin'  # fail: not even sindy
-# # job_id = 'sidefcor'  # fail: not even sindy
-
-# job_id = 'sdlin'
-# # # job_id = 'sdcor'  # fail: not core
-# # job_id = 'sdcor2'
+# # job_id = 'sdlin'
+# # # # job_id = 'sdcor'  # fail: not core
+# job_id = 'sdcor2'
 
 print(job_id)
 
@@ -200,6 +199,13 @@ True  -  "manual" check if equation is correct.
 if job_id in ('fakesilin', 'silin', 'dilin', 'sdlin'):
     csv_filename = 'linear_database_newbl.csv'
     csv = pd.read_csv(csv_filename, low_memory=False)
+
+# seq_id = 'A000004'
+# truth = csv[seq_id][0]
+# coeffs = truth2coeffs(truth)
+# print('order truth A4', len(truth2coeffs(truth)))
+# print([i for i in csv.columns], 'colnames')
+# 1/0
 
 def str_eq2orders(eq: str):
     # a(n) = a(n - 2) + a(n - 1)
@@ -331,36 +337,43 @@ def extract_file(fname, verbosity=VERBOSITY, job_id=job_id):
             return 1 if string == 'True' else 0
     is_reconst, is_check = tuple(map(truefalse, [re_reconst, re_manual]))
 
+    cx_order_winner = 'order_fail>'
+    cx_nonzero_winner = 'nonzero_fail'
     ## < = > complexity analysis:
-    task_id = int(fname[-17:-12])
-    seq_id = fname[-11:-4]
-    truth = csv[seq_id][0]
-    coeffs = truth2coeffs(truth)
-    if is_check:
-        # print(eq)
+    if not CORES:
+        task_id = int(fname[-17:-12])
+        seq_id = fname[-11:-4]
+        truth = csv[seq_id][0]
+        coeffs = truth2coeffs(truth)
+        if is_check:
+            # print(eq)
 
-        complexity_diff_maxorder = maxorder_cx(eq) - len(truth2coeffs(truth))
-        complexity_diff_nonzeros = nonzeros_cx(eq) - coeffs2nonzeros_cx(coeffs)
-        # print('task and seqid:', task_id, seq_id)
-        if task_id > 100000:
-        # if task_id > 1:
-            print('seqid:', task_id, seq_id)
-            1 / 0
+            complexity_diff_maxorder = maxorder_cx(eq) - len(truth2coeffs(truth))
+            complexity_diff_nonzeros = nonzeros_cx(eq) - coeffs2nonzeros_cx(coeffs)
+            # print('task and seqid:', task_id, seq_id)
+            if task_id > 100000:
+            # if task_id > 1:
+                print('seqid:', task_id, seq_id)
+                1 / 0
 
-        cx_order_winner = 'max_order<' if complexity_diff_maxorder < 0 else 'max_order=' if complexity_diff_maxorder == 0 \
-            else 'max_order>'
-        cx_nonzero_winner = 'nonzero<' if complexity_diff_nonzeros < 0 else 'nonzero=' if complexity_diff_nonzeros == 0 \
-            else 'nonzero>'
-        if cx_order_winner == 'max_order<':
-            nonzeros = [abs(i) for i in coeffs if abs(i) > 0]
-            if max(nonzeros) > 1000:
-                print(seq_id, 'task_id:', task_id)
-                print(coeffs)
-            if task_id > 10000:
-                1/0
-    else:
-        cx_order_winner = 'order_fail<=' if len(truth2coeffs(truth)) <= 20 else 'order_fail>'
-        cx_nonzero_winner = 'nonzero_fail'
+            cx_order_winner = 'max_order<' if complexity_diff_maxorder < 0 else 'max_order=' if complexity_diff_maxorder == 0 \
+                else 'max_order>'
+            cx_nonzero_winner = 'nonzero<' if complexity_diff_nonzeros < 0 else 'nonzero=' if complexity_diff_nonzeros == 0 \
+                else 'nonzero>'
+            if cx_order_winner == 'max_order<':
+                nonzeros_truth = [abs(i) for i in coeffs if abs(i) > 0]
+                nonzeros = [xy[0] for xy in str_eq2orders(eq)[0]]
+                if nonzeros != [] and len(nonzeros) > 0 and max(nonzeros) - max(nonzeros_truth) > 10 and min(nonzeros) > 1 and complexity_diff_nonzeros > -100:
+                    print(seq_id, 'task_id:', task_id)
+                    print()
+                    print('disco:', nonzeros)
+                    print('truth:', coeffs)
+                    print(min(nonzeros))
+                if task_id > 100000:
+                    1/0
+        else:
+            cx_order_winner = 'order_fail<=' if len(truth2coeffs(truth)) <= 20 else 'order_fail>'
+            cx_nonzero_winner = 'nonzero_fail'
 
 
     PRINT_EQS = True
@@ -438,7 +451,8 @@ def for_summary(aggregated: tuple, fname: str):
     # non_manual = we_found and not is_checked
 
 
-    buglist, job_bins, non_id_list, ed_fail_list, non_manual_list, agg_confs, cx_order, cx_nonzero = aggregated[-8:]
+    buglist, job_bins, id_oeis_list, non_id_list, ed_fail_list, non_manual_list, agg_confs, cx_order, cx_nonzero \
+        = aggregated[-9:]
     if debug:
         if reconst_non_manual:
             buglist += [fname]
@@ -446,6 +460,8 @@ def for_summary(aggregated: tuple, fname: str):
             # raise IndexError("Bug in code!")
         if black_check and non_manual:
             buglist += [fname]
+        if id_oeis:
+            id_oeis_list += [fname]
         if non_id:
             non_id_list += [fname]
         if fail:
@@ -492,7 +508,7 @@ def for_summary(aggregated: tuple, fname: str):
 
     zipped = zip(aggregated[:-4], to_add)
     counters = tuple(map(lambda x: x[0] + x[1], zipped))
-    return (counters + (buglist, job_bins, non_id_list, ed_fail_list, non_manual_list, new_confs)
+    return (counters + (buglist, job_bins, id_oeis_list, non_id_list, ed_fail_list, non_manual_list, new_confs)
             + (cx_order, cx_nonzero))
 
 # # Hierarhical:
@@ -645,7 +661,7 @@ if CORES:
 
 # summary = reduce(for_summary, files, (0, 0, 0, 0, 0,))
 # summary = reduce(for_summary, files[:], (0, 0, 0, 0, 0, 0, [], [0 for i in range(36)], [], [], [], ['start']))  # save all buggy ids
-summary = reduce(for_summary, sorted(files[:]), (0, 0, 0, 0, 0, 0, [], [0 for i in range(36)], [], [], [], ['start'],
+summary = reduce(for_summary, sorted(files[:]), (0, 0, 0, 0, 0, 0, [], [0 for i in range(36)], [], [], [], [], ['start'],
                   {'max_order<': 0, 'max_order=': 0, 'max_order>': 0, 'order_fail<=': 0, 'order_fail>': 0},
                   {'nonzero<': 0, 'nonzero=': 0, 'nonzero>': 0, 'nonzero_fail': 0}))  # save all buggy ids
 print(summary)
@@ -668,6 +684,7 @@ no_truth, false_truth = len(no_truth), len(false_truth)
 if CORES:
     no_truth, false_truth = 0, 0
 ignored = no_truth + false_truth
+ignored = 0  # new csv without blacklist
 print(ignored)
 
 # all_seqs = 34371
@@ -676,10 +693,10 @@ print(n_of_seqs_db)
 n_of_seqs = n_of_seqs - ignored
 jobs_fail = n_of_seqs - len(files)  # or corrected_sum.
 print(n_of_seqs)
-print(jobs_fail)
+print('job_fails:', jobs_fail)
 
 id_oeis, non_id, non_manual, ed_fail, reconst_non_manual, avg_is_best, buglist, \
-    job_bins, non_id_list, ed_fail_list, non_manual_list, trueconfs, max_order_cxs, nonzeros_cxs  = summary
+    job_bins, id_oeis_list, non_id_list, ed_fail_list, non_manual_list, trueconfs, max_order_cxs, nonzeros_cxs  = summary
 corrected_non_manual = non_manual - reconst_non_manual
 all_fails = ed_fail + jobs_fail
 
@@ -818,7 +835,7 @@ printout = f"""
 
 
 print(printout)
-1/0
+# 1/0
 
 n = 6
 print(n)
@@ -848,6 +865,28 @@ false_non_man = [i[6:6+7] for i in non_manual_list]
 # print(false_non_man[0], len(false_non_man), false_non_man[:6], false_truth_list[:6], len(false_truth_list))
 # print('sanity', sorted([i for i in false_truth_list if i not in false_non_man]))
 # print('new', [i for i in false_non_man if i not in false_truth_list])
+# 1/0
+
+print(len(non_id_list), len(ed_fail_list), len(id_oeis_list), 'len non_id_list, ed_fail_list, id_oeis')
+print(len(non_id_list), len(ed_fail_list), len(id_oeis_list),
+      len(non_id_list)+ len(ed_fail_list)+ len(id_oeis_list), 'len non_id_list, ed_fail_list, id_oeis, sum')
+print(len(non_id_list), len(ed_fail_list), len(id_oeis_list), 'len non_id_list, ed_fail_list, id_oeis')
+
+success_ids = [fname[6:(6+7)] for fname in non_id_list+id_oeis_list]
+print(success_ids[:10])
+print([i for i in csv.columns], 'colnames')
+fails = [i for i in csv.columns if i not in success_ids]
+
+
+print([fname[6:(6+7)] for fname in non_id_list][:10], [i for i in csv.columns[:10]] )
+print(len(fails))
+# a = [csv[seq_id][0] for seq_id in fails]
+failess = [ 1 for seq_id in fails if len(truth2coeffs(csv[seq_id][0])) <= 20 ]
+failmore = [ 1 for seq_id in fails if len(truth2coeffs(csv[seq_id][0])) > 20 ]
+print("sum(failess), sum(failmore), sum(failess) + sum(failmore)", sum(failess), sum(failmore), sum(failess) + sum(failmore))
+
+# cx_order_winner = 'order_fail<=' if len(truth2coeffs(truth)) <= 20 else 'order_fail>'
+print()
 # 1/0
 
 # print(len(non_manual_list))
