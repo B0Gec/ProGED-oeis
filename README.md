@@ -1,6 +1,6 @@
 
 
-# For Diofantos see the `oeis` branch.
+# For Diofantos see the [`oeis` branch](https://github.com/B0Gec/ProGED-oeis/tree/oeis).
 
 
 
