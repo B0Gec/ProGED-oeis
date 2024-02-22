@@ -1,3 +1,13 @@
+
+
+# For Diofantos see the `oeis` branch.
+
+
+
+
+
+
+
 # **Pro**babilistic **G**enerative **E**quation **D**iscovery
 
 ProGED discovers physical laws in data, expressed in the form of equations. 
