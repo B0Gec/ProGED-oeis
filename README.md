@@ -1,6 +1,6 @@
 # Diofantos
 
-Diofantos is a Python package for the discovery of algebraic and differential equations from data.
+Diofantos is an algorithm implemented in Python for the discovery of exact equations from integer sequences.
 
 # Apptainer/Singularity container:
 - Results from paper can be reproduced by running the doones.py file from python from the Singularity container obtained 
