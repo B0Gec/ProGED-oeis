@@ -15,7 +15,7 @@ Diofantos is an algorithm implemented in Python for the discovery of exact equat
 - database of _core_ sequences: `cores_test.csv`
 - script for running Diofantos and SINDy-based approaches: `doones.py`
 - Diofantos code: `exact_ed.py`
-- SINDy based: `sindy_oeis.py`
+- SINDy based approaches: `sindy_oeis.py`
 - Results: directories `results` and `results_oeis`
 <!-- %from paper. --> 
 
@@ -24,7 +24,7 @@ Diofantos is an algorithm implemented in Python for the discovery of exact equat
 their combinations up to degree *d*.
 
 # Dependencies
-- Diophantine
+- [Diophantine](https://pypi.org/project/Diophantine/)
 - numpy
 - scipy
 - sympy
