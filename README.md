@@ -2,7 +2,7 @@
 
 Diofantos is an algorithm implemented in Python for the discovery of exact equations from integer sequences.
 
-# Apptainer/Singularity container:
+## Apptainer/Singularity container:
 - Results from paper can be reproduced by running the doones.py file from python from the Singularity container obtained 
   from the Singularity Hub in the following way:
 - `apptainer remote add --no-login SylabsCloud cloud.sycloud.io`
@@ -10,7 +10,7 @@ Diofantos is an algorithm implemented in Python for the discovery of exact equat
 - `singularity pull library://bogec/diofantos/oeis:latest`
 - run e.g.: `~/ProGED_oeis$ singularity exec oeis_latest.sif python3 doones.py --task_id 13 --exper_id reproduced_experiment`
 
-# Experiments
+## Experiments
 - database of _linrec_ sequences: `linear_database_newbl.csv`
 - database of _core_ sequences: `cores_test.csv`
 - script for running Diofantos and SINDy-based approaches: `doones.py`
@@ -19,18 +19,18 @@ Diofantos is an algorithm implemented in Python for the discovery of exact equat
 - Results: directories `results` and `results_oeis`
 <!-- %from paper. --> 
 
-# Features
+## Features
 - algebraic equations with variables `n`, `a(n-k)` for all *k* up to chosen order and
 their combinations up to degree *d*.
 
-# Dependencies
+## Dependencies
 - [Diophantine](https://pypi.org/project/Diophantine/)
 - numpy
 - scipy
 - sympy
 - pytest (optional)
 
-<!-- # Setup -->
+<!-- ## Setup -->
 <!-- You can install the package directly from the git repository: -->
 <!-- ```python3 -->
 <!-- pip install git+https://github.com/brencej/ProGED -->
