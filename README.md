@@ -30,6 +30,12 @@ their combinations up to degree *d*.
 - sympy
 - pytest (optional)
 
+# Usage examples of script `doones.py` in first version (26.2.2024)
+- Diofantos for Fibonacci sequence in _core_ database:
+     `python doones.py --task_id 14 --exper_id output_dir`
+
+
+
 <!-- ## Setup -->
 <!-- You can install the package directly from the git repository: -->
 <!-- ```python3 -->
