@@ -15,7 +15,7 @@ print("SINDytuned       = " + str(SINDytuned + 8196))
 Diofantos       = 13097 + 9209 + 2455
 SINDydefault    = 9853  + 5716 + 1931
 SINDytuned      = 10353 + 6579 + 2108
-print("Diofantos       = ", Diofantos + 2475)
+print("Diofantos       = ", Diofantos + 2475
 print("SINDydefault       = " + str(SINDydefault + 9736))
 print("SINDytuned       = " + str(SINDytuned + 8196))
 
