@@ -574,6 +574,8 @@ def increasing_eed(exact_ed, seq_id: str, csv: pd.DataFrame, verbosity: int = VE
         # print('after one step of order', order, output)
         return output
 
+    # print(exact_ed.__name__)
+    # 1/0
     # start = ([], "a(n) = NOT RECONSTRUCTED :-(", "", "", False)
     # start = ([], 'n', solution2str([], library=library[0]), "", "", False)
     start = ([], (None, None, None) , 'a(n) = ?', "", "", False) if init is None else init
