@@ -46,7 +46,8 @@ if METHOD == 'SINDy':
 if METHOD == 'Mavi':
     sys.path.append('../monomial-agnostic-vanishing-ideal')
     from mavi.vanishing_ideal import VanishingIdeal
-    from mavi_oeis import one_results
+    # from mavi_oeis import one_results
+    from mavi_oeis import domavi
 
 
 
@@ -161,7 +162,8 @@ THRESHOLD = 0.1  # For sindy - masking threshold.
 # SEQ_LEN_SINDY = 70
 # SEQ_LEN_SINDY = 4
 
-N_OF_TERMS_ED = 200
+N_OF_TERMS_ED = 200 # before mavi
+N_OF_TERMS_ED = 20  # mavi
 TASK_ID = 0
 # TASK_ID = 8
 # TASK_ID = 14
@@ -525,9 +527,25 @@ else:
                 # libraries = [3]  # poly degrees (look increasind_eed)
 
                 # print('before')
-                # if METHOD == 'Mavi':
-                #     one_results = mavi_one_result
-                x, (sol_ref, deg_used, order_used), eq, _, _ = increasing_eed(one_results, seq_id, csv, VERBOSITY,
+                if METHOD == 'Mavi':
+                    # one_results = mavi_one_result
+                    # x, (sol_ref, deg_used, order_used), eq, _, _ = mavi_one_result(one_results, seq_id, csv, d_max, max_order_)
+
+                    # library = 'n'  # mavi always uses linear dataset
+                    d_max_lib = 1  # create linear dataset
+                    d_max_mavi = d_max
+                    # x = []
+                    # x = [sp.Matrix([0])]
+                    # sol_ref = []
+                    # sol_ref = ['1']
+                    ORDER_USED = 2
+                    x, (sol_ref, deg_used, order_used), eq, _, _ = [], ([], d_max_mavi, ORDER_USED), '', '', ''
+                    eq = domavi(seq_id, csv, VERBOSITY, d_max_lib=d_max_lib,
+                              d_max_mavi=d_max_mavi, max_order=max_order_, ground_truth=GROUND_TRUTH,
+                              n_of_terms=N_OF_TERMS_ED, library=library,
+                              start_order=START_ORDER, init = None, sindy_hidden=preseqs)
+                else:
+                    x, (sol_ref, deg_used, order_used), eq, _, _ = increasing_eed(one_results, seq_id, csv, VERBOSITY,
                                                                               d_max, max_order_, ground_truth=GROUND_TRUTH,
                                                                               n_of_terms=N_OF_TERMS_ED, library=library,
                                                                               start_order=START_ORDER, init = None, sindy_hidden=preseqs)

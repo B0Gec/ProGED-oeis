@@ -67,6 +67,7 @@ def poly_combinations(library: str, d_max: int, order: int):
 def solution_reference(library: str, d_max: int, order: int) -> list[str]:
     """Return reference solution for library and order."""
     # print((map(lambda comb: reduce((lambda i, s: i+'*'+s), comb[1:], comb[0]),  poly_combinations(library, order))))
+    # trivial sol_ref = ['1'] ? (didn't check) of trivial solution x = [1] ?
     return ['1', ] + list(map(lambda comb: reduce((lambda i, s: i+'*'+s), comb[1:], comb[0]),  poly_combinations(library, d_max, order)))
 
 
