@@ -1,0 +1,9 @@
+glej mavicore0-resultst-some: opazanja
+
+1) lower number of terms (will prevent miscroscopic values of constants)
+2) constants in ratio (mean we discovered integer equation - i.e. something)
+3) sometimes output is mix of 2 equations. Which should mavi choose - something to research
+
+4) I think not robust to big coefficients, i.e. if an = 3*a(n-1) is ground truth it is already risky to trust mavi
+    research: more settings, like 0.1 to research best choice of this hyperparameter for such cases.
+5) for now 50% worse than sindy or diof

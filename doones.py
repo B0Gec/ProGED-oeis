@@ -91,8 +91,8 @@ N_OF_TERMS_LOAD = 20
 VERBOSITY = 2  # dev scena
 VERBOSITY = 1  # run scenario
 
-DEBUG = True
-# DEBUG = False
+# DEBUG = True
+DEBUG = False
 
 # BUGLIST ignores blacklisting (runs also blacklisted) !!!!!
 # BUGLIST = True
@@ -164,6 +164,7 @@ THRESHOLD = 0.1  # For sindy - masking threshold.
 
 N_OF_TERMS_ED = 200 # before mavi
 N_OF_TERMS_ED = 20  # mavi
+N_OF_TERMS_ED = 7  # mavi
 TASK_ID = 0
 # TASK_ID = 8
 # TASK_ID = 14
@@ -359,7 +360,7 @@ if not fail:
     else:
         fail = (not BUGLIST and list(csv.columns)[task_id] in blacklist) or fail
     seq_id = list(csv.columns)[task_id] if not SEQ_ID[0] or not DEBUG else SEQ_ID[1]
-    # print('seq_id', seq_id)
+    print('seq_id', seq_id)
     # print('seq_id', BUGLIST)
     if BUGLIST:
         if isinstance(buglist[task_id], str):
@@ -497,7 +498,7 @@ else:
 
         # try:
         if SINDy:
-            print('Attempting SINDy for', seq_id)
+            print('Attempting SINDy (or Mavi) for', seq_id)
             # if GROUND_TRUTH:
             # print(csv, seq_id)
             # print(csv[seq_id])
@@ -528,27 +529,39 @@ else:
 
                 # print('before')
                 if METHOD == 'Mavi':
+                    print('Attempting Mavi for', seq_id)
                     # one_results = mavi_one_result
                     # x, (sol_ref, deg_used, order_used), eq, _, _ = mavi_one_result(one_results, seq_id, csv, d_max, max_order_)
 
                     # library = 'n'  # mavi always uses linear dataset
                     d_max_lib = 1  # create linear dataset
                     d_max_mavi = d_max
+                    d_max_mavi = 2
+                    max_order_ = 2
                     # x = []
                     # x = [sp.Matrix([0])]
                     # sol_ref = []
                     # sol_ref = ['1']
                     ORDER_USED = 2
                     x, (sol_ref, deg_used, order_used), eq, _, _ = [], ([], d_max_mavi, ORDER_USED), '', '', ''
-                    eq = domavi(seq_id, csv, VERBOSITY, d_max_lib=d_max_lib,
+
+                    eqs = domavi(seq_id, csv, VERBOSITY, d_max_lib=d_max_lib,
                               d_max_mavi=d_max_mavi, max_order=max_order_, ground_truth=GROUND_TRUTH,
                               n_of_terms=N_OF_TERMS_ED, library=library,
                               start_order=START_ORDER, init = None, sindy_hidden=preseqs)
+                    eq = eqs[0] if len(eqs) > 0 else 'no equation found :-(';
+
+                    printout = '\nPrinting all equations mavi has found:\n'
+                    for n, e in enumerate(eqs):
+                        printout += f'poly #{n}\n'
+                        printout += f'{e}\n\n'
+
                 else:
+                    print('Attempting SINDy for', seq_id)
                     x, (sol_ref, deg_used, order_used), eq, _, _ = increasing_eed(one_results, seq_id, csv, VERBOSITY,
-                                                                              d_max, max_order_, ground_truth=GROUND_TRUTH,
-                                                                              n_of_terms=N_OF_TERMS_ED, library=library,
-                                                                              start_order=START_ORDER, init = None, sindy_hidden=preseqs)
+                                                          d_max, max_order_, ground_truth=GROUND_TRUTH,
+                                                          n_of_terms=N_OF_TERMS_ED, library=library,
+                                                          start_order=START_ORDER, init = None, sindy_hidden=preseqs)
 
                 output_string += f'Preprocessing sees only first {len(seq)} terms.\n'
 
@@ -567,7 +580,7 @@ else:
                 # print(check_eq_man(x, seq_id, csv, n_of_terms=10 ** 5, library=library))
                 # print(check_eq_man(x_avg, seq_id, csv, n_of_terms=10 ** 5, library=library))
                 # 1/0
-                # output_string += printout
+                output_string += printout
                 # x = sp.Matrix([0, 0, 0, 0])
 
                 # eq_avg = solution2str(x_avg, library)
@@ -689,6 +702,7 @@ else:
         print(seq_id, f' done and written! (to {out_fname})')
     else:
         # print(output_string)
+        print('seems no file was created by this [doone.py] file')
         pass
 
     print(seq_id, ' done!')

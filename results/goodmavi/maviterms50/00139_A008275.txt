@@ -1,0 +1,60 @@
+
+Preprocessing sees only first 20 terms.
+Sindy threshold: 0.1
+Sindy will use max_order: 2
+
+Printing all equations mavi has found:
+poly #0
+           2                                                                              2                                                                2                                       2                   
+- 0.12⋅a(n)  + 0.01⋅a(n)⋅a(n-1) + 0.09⋅a(n)⋅a(n-2) - 0.01⋅a(n)⋅n - 0.21⋅a(n) - 0.14⋅a(n-1)  - 0.1⋅a(n-1)⋅a(n-2) + 0.04⋅a(n-1)⋅n - 0.13⋅a(n-1) - 0.13⋅a(n-2)  + 0.01⋅a(n-2)⋅n - 0.15⋅a(n-2) - 0.12⋅n  + 1.24⋅n - 1.5 = 0
+
+poly #1
+         2                                                                                 2                                                                 2                                       2                    
+0.02⋅a(n)  - 0.02⋅a(n)⋅a(n-1) + 0.06⋅a(n)⋅a(n-2) + 0.009⋅a(n)⋅n + 0.44⋅a(n) - 0.0003⋅a(n-1)  + 0.08⋅a(n-1)⋅a(n-2) + 0.05⋅a(n-1)⋅n + 0.13⋅a(n-1) - 0.02⋅a(n-2)  - 0.19⋅a(n-2)⋅n + 1.17⋅a(n-2) - 0.03⋅n  + 0.75⋅n - 2.39 = 0
+
+poly #2
+           2                                                                              2                                                                 2                                       2                    
+- 0.05⋅a(n)  + 0.03⋅a(n)⋅a(n-1) + 0.08⋅a(n)⋅a(n-2) + 0.12⋅a(n)⋅n - 0.51⋅a(n) + 0.05⋅a(n-1)  - 0.07⋅a(n-1)⋅a(n-2) + 0.06⋅a(n-1)⋅n + 0.21⋅a(n-1) + 0.14⋅a(n-2)  + 0.05⋅a(n-2)⋅n - 0.16⋅a(n-2) + 0.15⋅n  - 1.25⋅n + 2.29 = 0
+
+poly #3
+         2                                                                              2                                                                2                                      2                    
+0.03⋅a(n)  + 0.17⋅a(n)⋅a(n-1) + 0.06⋅a(n)⋅a(n-2) + 0.17⋅a(n)⋅n - 0.68⋅a(n) + 0.04⋅a(n-1)  + 0.13⋅a(n-1)⋅a(n-2) - 0.14⋅a(n-1)⋅n + 0.6⋅a(n-1) - 0.01⋅a(n-2)  - 0.15⋅a(n-2)⋅n + 0.74⋅a(n-2) + 0.1⋅n  - 0.72⋅n + 1.43 = 0
+
+poly #4
+         2                                                                              2                                                                 2                                       2                    
+0.07⋅a(n)  + 0.24⋅a(n)⋅a(n-1) + 0.07⋅a(n)⋅a(n-2) + 0.13⋅a(n)⋅n - 0.59⋅a(n) + 0.01⋅a(n-1)  - 0.16⋅a(n-1)⋅a(n-2) + 0.27⋅a(n-1)⋅n - 0.67⋅a(n-1) - 0.08⋅a(n-2)  + 0.25⋅a(n-2)⋅n - 0.47⋅a(n-2) + 0.23⋅n  - 1.58⋅n + 2.43 = 0
+
+poly #5
+           2                                                                              2                                                                 2                                       2                    
+- 0.05⋅a(n)  - 0.15⋅a(n)⋅a(n-1) + 0.11⋅a(n)⋅a(n-2) - 0.28⋅a(n)⋅n + 1.04⋅a(n) - 0.15⋅a(n-1)  - 0.11⋅a(n-1)⋅a(n-2) - 0.39⋅a(n-1)⋅n + 1.62⋅a(n-1) - 0.08⋅a(n-2)  + 0.02⋅a(n-2)⋅n + 0.25⋅a(n-2) - 0.33⋅n  + 1.98⋅n - 2.67 = 0
+
+poly #6
+         2                                                                               2                                                                2                                       2                    
+0.07⋅a(n)  - 0.007⋅a(n)⋅a(n-1) - 0.13⋅a(n)⋅a(n-2) + 0.12⋅a(n)⋅n - 0.36⋅a(n) - 0.14⋅a(n-1)  + 0.003⋅a(n-1)⋅a(n-2) + 0.12⋅a(n-1)⋅n - 0.7⋅a(n-1) + 0.2⋅a(n-2)  - 0.03⋅a(n-2)⋅n + 0.17⋅a(n-2) - 0.06⋅n  + 0.61⋅n - 1.41 = 0
+
+poly #7
+           2                                                                              2                                                                 2                                       2                    
+- 0.04⋅a(n)  + 0.03⋅a(n)⋅a(n-1) - 0.19⋅a(n)⋅a(n-2) - 0.21⋅a(n)⋅n + 0.58⋅a(n) - 0.03⋅a(n-1)  - 0.25⋅a(n-1)⋅a(n-2) - 0.21⋅a(n-1)⋅n + 0.77⋅a(n-1) + 0.02⋅a(n-2)  - 0.33⋅a(n-2)⋅n + 1.38⋅a(n-2) - 0.19⋅n  + 1.32⋅n - 2.36 = 0
+
+poly #8
+         2                                                                            2                                                                 2                                      2                   
+0.09⋅a(n)  - 0.03⋅a(n)⋅a(n-1) - 0.11⋅a(n)⋅a(n-2) + 0.3⋅a(n)⋅n - 1.1⋅a(n) - 0.06⋅a(n-1)  - 0.28⋅a(n-1)⋅a(n-2) - 0.04⋅a(n-1)⋅n + 0.21⋅a(n-1) - 0.16⋅a(n-2)  - 0.35⋅a(n-2)⋅n + 1.21⋅a(n-2) + 0.1⋅n  - 0.6⋅n + 0.86 = 0
+
+poly #9
+         2                                                                              2                                                                2                                       2                    
+0.03⋅a(n)  + 0.21⋅a(n)⋅a(n-1) + 0.11⋅a(n)⋅a(n-2) + 0.08⋅a(n)⋅n - 0.29⋅a(n) + 0.23⋅a(n-1)  + 0.05⋅a(n-1)⋅a(n-2) + 0.3⋅a(n-1)⋅n - 1.07⋅a(n-1) - 0.03⋅a(n-2)  + 0.04⋅a(n-2)⋅n - 0.03⋅a(n-2) - 0.15⋅n  + 1.13⋅n - 2.09 = 0
+
+While total time consumed by now, scale:140/164, seq_id:A008275, order:10 took:
+ 2.2 seconds, i.e. 0.04 minutes or 0.001 hours.
+CORELIST: True, METHOD: Mavi, SINDy: True (True also in case of MAVI), GROUND_TRUTH: False, SINDy_default: True, DEBUG: False
+Library: n, max_order 10, threshold: 0.1
+
+by degree: 2 and order: 2. 
+A008275: 
+           2                                                                              2                                                                2                                       2                   
+- 0.12⋅a(n)  + 0.01⋅a(n)⋅a(n-1) + 0.09⋅a(n)⋅a(n-2) - 0.01⋅a(n)⋅n - 0.21⋅a(n) - 0.14⋅a(n-1)  - 0.1⋅a(n-1)⋅a(n-2) + 0.04⋅a(n-1)⋅n - 0.13⋅a(n-1) - 0.13⋅a(n-2)  + 0.01⋅a(n-2)⋅n - 0.15⋅a(n-2) - 0.12⋅n  + 1.24⋅n - 1.5 = 0
+truth: 
+None
+
+  -  checked against website ground truth.     
+False  -  "manual" check if equation is correct.    

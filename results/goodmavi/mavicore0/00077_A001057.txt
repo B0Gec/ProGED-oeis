@@ -1,0 +1,37 @@
+
+Preprocessing sees only first 20 terms.
+Sindy threshold: 0.1
+Sindy will use max_order: 2
+
+poly #0
+0.41⋅a(n) + 0.82⋅a(n-1) + 0.41⋅a(n-2) - 0.41 = 0
+
+poly #1
+            2                                                                               2                                                  2                                       2                     
+- 0.002⋅a(n)  + 0.02⋅a(n)⋅a(n-1) - 0.03⋅a(n)⋅a(n-2) - 0.05⋅a(n)⋅n + 0.06⋅a(n) - 0.008⋅a(n-1)  + 0.02⋅a(n-1)⋅a(n-2) - 0.04⋅a(n-1) - 0.004⋅a(n-2)  + 0.05⋅a(n-2)⋅n + 0.01⋅a(n-2) + 0.02⋅n  - 0.02⋅n - 0.009 = 0
+
+poly #2
+         2                                                                              2                                                 2                                         2                    
+0.03⋅a(n)  - 0.01⋅a(n)⋅a(n-1) - 0.04⋅a(n)⋅a(n-2) - 0.04⋅a(n)⋅n + 0.04⋅a(n) + 0.01⋅a(n-1)  - 0.03⋅a(n-1)⋅a(n-2) - 0.02⋅a(n-1) + 0.05⋅a(n-2)  + 0.04⋅a(n-2)⋅n - 0.0009⋅a(n-2) - 0.02⋅n  + 0.04⋅n - 0.05 = 0
+
+poly #3
+           2                                                                                 2                                                  2                                        2                    
+- 0.39⋅a(n)  - 0.08⋅a(n)⋅a(n-1) + 0.94⋅a(n)⋅a(n-2) - 0.01⋅a(n)⋅n - 0.007⋅a(n) - 0.0005⋅a(n-1)  + 0.08⋅a(n-1)⋅a(n-2) - 0.008⋅a(n-1) - 0.55⋅a(n-2)  + 0.01⋅a(n-2)⋅n + 0.02⋅a(n-2) + 0.001⋅n  - 0.12⋅n + 0.53 = 0
+
+poly #4
+         2                                                                               2                                                   2                                         2                    
+0.57⋅a(n)  + 0.03⋅a(n)⋅a(n-1) - 1.2⋅a(n)⋅a(n-2) - 0.002⋅a(n)⋅n + 0.01⋅a(n) + 0.002⋅a(n-1)  - 0.04⋅a(n-1)⋅a(n-2) - 0.0002⋅a(n-1) + 0.64⋅a(n-2)  + 0.002⋅a(n-2)⋅n - 0.01⋅a(n-2) - 0.004⋅n  + 0.06⋅n - 0.63 = 0
+
+While total time consumed by now, scale:78/164, seq_id:A001057, order:10 took:
+ 1.0 seconds, i.e. 0.02 minutes or 0.0 hours.
+CORELIST: True, METHOD: Mavi, SINDy: True (True also in case of MAVI), GROUND_TRUTH: False, SINDy_default: True, DEBUG: False
+Library: n, max_order 10, threshold: 0.1
+
+by degree: 2 and order: 2. 
+A001057: 
+0.41⋅a(n) + 0.82⋅a(n-1) + 0.41⋅a(n-2) - 0.41 = 0
+truth: 
+None
+
+  -  checked against website ground truth.     
+False  -  "manual" check if equation is correct.    

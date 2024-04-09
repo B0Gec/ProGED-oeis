@@ -1,0 +1,42 @@
+
+Preprocessing sees only first 20 terms.
+Sindy threshold: 0.1
+Sindy will use max_order: 2
+
+Printing all equations mavi has found:
+poly #0
+0.5⋅a(n) + 0.5⋅a(n-1) + 0.5⋅a(n-2) - 0.5⋅n - 0.5 = 0
+
+poly #1
+         2                                                                              2                                                 2                      2                    
+0.17⋅a(n)  - 0.25⋅a(n)⋅a(n-1) - 0.25⋅a(n)⋅a(n-2) - 0.14⋅a(n)⋅n + 0.62⋅a(n) - 0.21⋅a(n-1)  + 0.67⋅a(n-1)⋅a(n-2) + 0.14⋅a(n-1) - 0.21⋅a(n-2)  + 0.1⋅a(n-2) - 0.07⋅n  + 0.86⋅n - 2.23 = 0
+
+poly #2
+         2                                                                              2                                                 2                       2                    
+0.42⋅a(n)  - 0.36⋅a(n)⋅a(n-1) - 0.36⋅a(n)⋅a(n-2) + 0.14⋅a(n)⋅n - 1.17⋅a(n) + 0.32⋅a(n-1)  - 0.28⋅a(n-1)⋅a(n-2) - 0.14⋅a(n-1) + 0.32⋅a(n-2)  + 0.49⋅a(n-2) + 0.07⋅n  - 0.81⋅n + 1.98 = 0
+
+poly #3
+           2                                                                           2                                                2                       2                    
+- 0.06⋅a(n)  - 0.1⋅a(n)⋅a(n-1) - 0.1⋅a(n)⋅a(n-2) - 0.3⋅a(n)⋅n + 1.73⋅a(n) + 0.13⋅a(n-1)  - 0.17⋅a(n-1)⋅a(n-2) + 0.3⋅a(n-1) + 0.13⋅a(n-2)  - 0.21⋅a(n-2) - 0.15⋅n  + 1.83⋅n - 5.31 = 0
+
+poly #4
+                                                              2                                            2                                                 
+-0.63⋅a(n)⋅a(n-1) + 0.63⋅a(n)⋅a(n-2) + 0.63⋅a(n) + 0.29⋅a(n-1)  - 0.05⋅a(n-1)⋅n + 0.33⋅a(n-1) - 0.29⋅a(n-2)  + 0.05⋅a(n-2)⋅n - 0.9⋅a(n-2) + 0.05⋅n - 0.61 = 0
+
+poly #5
+                                                            2                                           2                                                  
+0.16⋅a(n)⋅a(n-1) - 0.16⋅a(n)⋅a(n-2) - 0.16⋅a(n) + 0.1⋅a(n-1)  + 0.35⋅a(n-1)⋅n - 2.13⋅a(n-1) - 0.1⋅a(n-2)  - 0.35⋅a(n-2)⋅n + 1.94⋅a(n-2) - 0.35⋅n + 2.03 = 0
+
+While total time consumed by now, scale:133/164, seq_id:A005811, order:10 took:
+ 1.3 seconds, i.e. 0.02 minutes or 0.0 hours.
+CORELIST: True, METHOD: Mavi, SINDy: True (True also in case of MAVI), GROUND_TRUTH: False, SINDy_default: True, DEBUG: False
+Library: n, max_order 10, threshold: 0.1
+
+by degree: 2 and order: 2. 
+A005811: 
+0.5⋅a(n) + 0.5⋅a(n-1) + 0.5⋅a(n-2) - 0.5⋅n - 0.5 = 0
+truth: 
+None
+
+  -  checked against website ground truth.     
+False  -  "manual" check if equation is correct.    

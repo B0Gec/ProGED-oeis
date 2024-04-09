@@ -1,0 +1,14 @@
+doone:
+# not DEBUG case:
+dry run:
+# py doone.py --task_id=14 # core or ? for linear
+output file:
+# py doone.py --task_id=14 --esper_id=funame 
+
+bash:
+# sbatch --job-name=mavicore --task_id=14"
+
+# copy pull from cluster:
+#scp doone.py usern@cluster:/path/on/cluster
+#rsync -ruv usern@cluster:/path/on/cluster /path/on/local # will create directory 'cluster' inside dir 'local'
+

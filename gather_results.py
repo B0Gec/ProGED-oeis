@@ -34,9 +34,11 @@ import pandas as pd
 from blacklist import no_truth, false_truth
 false_truth_list = false_truth
 from exact_ed import truth2coeffs
+from results.sicor_fix_proc import success_eqs
 
 # fname = 'results/good/01234567/34500_A000032.txt'
-base_dir = "results/good/"
+# base_dir = "results/good/"
+base_dir = "results/goodmavi/"
 # job_id = "01234567"
 # job_id = "36765084"  # old format
 job_id = "36781342"  # 17.3. waiting 2 jobs  # to check
@@ -125,11 +127,15 @@ job_id = 'sicor1114'
 # # # # job_id = 'sdcor'  # fail: not core
 # job_id = 'sdcor2'
 
+# mavi:
+job_id = 'mavicore0'
+job_id = 'maviterms50'
+
 print(job_id)
 
 CORES = True if job_id in ("diocores77", 'diocor-merge', 'sindycore83', 'dicor-cub', 'dicor-cub19',
                            'fdiocores', 'fdiocorefix', 'fdiocorefix2', 'sicor116', 'dicorrep', 'sicor9fix2', 'sicor1114',
-                           'findicor', 'sdcor2') else False
+                           'findicor', 'sdcor2', 'mavicore0', 'maviterms50') else False
 # CORES = True
 # CORES = False
 if CORES:
@@ -405,14 +411,67 @@ def extract_file(fname, verbosity=VERBOSITY, job_id=job_id):
 # print(os.listdir())
 # print('extract', extract_file(fname))
 
-# def for_loop(dir: str):
-#     for seq_file in os.listdir(dir):
-#         # is = extract_file(seq_file)
-#         # seq_id, eq, truth, x, is_reconst, is_check, timing_print = extract_file(seq_file)
-#         # ts =
-#         # all = oeis + checked + manual
-#
-#     return vars
+# mavi simple loop:
+ndigits = 5
+if base_dir == 'results/goodmavi/':
+    ndigits = 3
+def for_loop(dir: str):
+    print('in dir loop')
+
+    count = 0
+    eqs = dict()
+    for fname in sorted(os.listdir(dir)):
+        # print('fname', fname)
+        # print(f'task id: {fname[2:5]}, sequence id: {fname[6:6+7]}')
+        printout = ''
+        printout2 = f'{fname[2:5]} {fname[6:6+7]}'
+
+        key = f'{fname[5-ndigits:5]} {fname[6:6+7]}'
+        file_path = f'{job_dir}{fname}'
+        # print('fname path', file_path)
+        # 1/0
+        with open(file_path, 'r') as f:
+            content = f.read()
+            # print(content)
+
+        # 1/0
+        # f = open(fname, 'r')
+        # content = f.read()
+        # f.close()
+        # is = extract_file(seq_file)
+        # seq_id, eq, truth, x, is_reconst, is_check, timing_print = extract_file(seq_file)
+
+        eq = re.findall(r"A\d+:.*((\n.+)+)\ntruth:", content)[0][0]
+        # print()
+        # print(len(eq))
+        # count += len(eq)
+        re.findall(r"A\d+:.*\n(.+)\ntruth:", content)
+        re_all_stars = re.findall(r"scale:\d+/(\d+),", content)
+        re_found = re.findall(r"NOT RECONSTRUCTED", content)
+        # print('--- - - - - - -- - - - - - ---- - - - - - -- - - - - - -')
+
+        printout += f'{eq[1:]} ' + printout2 + '\n'
+        eqs[key] = printout
+        # print()
+
+    print('count', count)
+    print('end funct')
+    return eqs
+
+# jor
+eqs = for_loop(job_dir)
+# print(success_eqs)
+print()
+# 1/0
+for n, seq_id, eq in success_eqs:
+    print('task_id:', n[5-ndigits:], 'seq_id:', seq_id)
+    print('disco:', eq)
+    print('mavi:\n', eqs[f'{n[5-ndigits:]} {seq_id}'])
+
+print('after loop')
+
+1/0
+
 
 
 from functools import reduce

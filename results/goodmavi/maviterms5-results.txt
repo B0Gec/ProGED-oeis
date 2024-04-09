@@ -1,0 +1,194 @@
+
+better than 20 terms:
+
+a35
+a124 could argue
+a129 clean
+a326 clean
+task_id: 100 seq_id: A001906
+task_id: 095 seq_id: A001519
+task_id: 108 seq_id: A002378
+
+skor:
+a79 se vedno ne
+a290 maybe after rounding we would get it (differs from gt by a missing constant)
+a302 mix 2h, skoraj ena (ce odmislimo en clen :D)
+task_id: 106 seq_id: A002275  (veliki coeficienti i.e. 10 , dobili dodaten clen an-2)
+
+
+to low values:
+task_id: 081 seq_id: A001147
+task_id: 088 seq_id: A001333
+
+
+
+raw-almost:
+
+task_id: 009 seq_id: A000032
+disco:  a(n) = a(n - 2) + a(n - 1)
+mavi: 0.58⋅a(n) - 0.58⋅a(n-1) - 0.58⋅a(n-2) = 0 009 A000032
+
+task_id: 010 seq_id: A000035
+disco:  a(n) = 1 - a(n - 1),
+mavi: 0.71⋅a(n-1) + 0.71⋅a(n-2) - 0.71 = 0 010 A000035
+an-1 = 1 - an-2 tj. an = 1- an-1 aka. gt
+
+task_id: 014 seq_id: A000045
+disco:  a(n) = a(n - 2) + a(n - 1),
+mavi: -0.58⋅a(n) + 0.58⋅a(n-1) + 0.58⋅a(n-2) = 0 014 A000045
+
+task_id: 019 seq_id: A000079
+disco:  a(n) = 2*a(n - 1),
+mavi: 0.49⋅a(n) - 0.78⋅a(n-1) - 0.39⋅a(n-2) = 0 019 A000079
+an = 2 an-1 + an-2
+
+task_id: 021 seq_id: A000085
+disco:  a(n) = n*a(n - 2) - a(n - 2) + a(n - 1),
+mavi:
+         2                                                                              2                                                                2                                       2
+0.03⋅a(n)  - 0.14⋅a(n)⋅a(n-1) - 0.01⋅a(n)⋅a(n-2) - 0.19⋅a(n)⋅n + 0.62⋅a(n) + 0.18⋅a(n-1)  + 0.03⋅a(n-1)⋅a(n-2) + 0.53⋅a(n-1)⋅n - 1.8⋅a(n-1) - 0.01⋅a(n-2)  - 0.01⋅a(n-2)⋅n - 0.31⋅a(n-2) + 0.21⋅n  - 1.06⋅n + 1.9 = 0 021 A000085
+
+task_id: 029 seq_id: A000124
+disco:  a(n) = n + a(n - 1),
+mavi: -0.57⋅a(n) + 0.52⋅a(n-1) + 0.06⋅a(n-2) + 0.63⋅n - 0.06 = 0 029 A000124
+an = an-1 + n
+
+task_id: 030 seq_id: A000129
+disco:  a(n) = a(n - 2) + 2*a(n - 1),
+mavi: -0.41⋅a(n) + 0.82⋅a(n-1) + 0.41⋅a(n-2) = 0 030 A000129
+
+task_id: 032 seq_id: A000142
+disco:  a(n) = n*a(n - 1),
+mavi:
+             2                                                                                   2                                                                   2                                         2
+- 2.0e-5⋅a(n)  + 0.001⋅a(n)⋅a(n-1) + 0.0002⋅a(n)⋅a(n-2) + 0.003⋅a(n)⋅n + 0.08⋅a(n) - 0.008⋅a(n-1)  - 0.005⋅a(n-1)⋅a(n-2) - 0.01⋅a(n-1)⋅n - 0.4⋅a(n-1) - 0.0007⋅a(n-2)  - 0.005⋅a(n-2)⋅n + 0.31⋅a(n-2) - 0.006⋅n  + 0.16⋅n - 0.33 = 0 032 A000142
+  + 0.001⋅a(n)⋅a(n-1) + 0.0002⋅a(n)⋅a(n-2) + 0.003⋅a(n)⋅n + 0.08⋅a(n) - 0.005⋅a(n-1)⋅a(n-2) - 0.01⋅a(n-1)⋅n - 0.4⋅a(n-1)  - 0.005⋅a(n-2)⋅n + 0.31⋅a(n-2)   + 0.16⋅n - 0.33 = 0 032 A000142
+  -0.4a(n-1) + 0.3 a(n-2) - 0.3 + 0.16*n
+  an = a(n-2) - 1 ... not gt
+
+task_id: 034 seq_id: A000166
+disco:  a(n) = n*a(n - 2) + n*a(n - 1) - a(n - 2) - a(n - 1),
+mavi:           2                                                                                 2                                                                  2                                        2
+0.001⋅a(n)  - 0.009⋅a(n)⋅a(n-1) - 0.003⋅a(n)⋅a(n-2) - 0.007⋅a(n)⋅n + 0.15⋅a(n) + 0.01⋅a(n-1)  + 0.01⋅a(n-1)⋅a(n-2) + 0.01⋅a(n-1)⋅n - 0.53⋅a(n-1) + 0.002⋅a(n-2)  + 0.02⋅a(n-2)⋅n - 0.44⋅a(n-2) + 0.003⋅n  - 0.03⋅n + 0.31 = 0 034 A000166
+
+task_id: 038 seq_id: A000204
+disco:  a(n) = a(n - 2) + a(n - 1),
+mavi: -0.58⋅a(n) + 0.58⋅a(n-1) + 0.58⋅a(n-2) = 0 038 A000204
+
+task_id: 039 seq_id: A000217
+disco:  a(n) = n + a(n - 1),
+mavi: -0.58⋅a(n) + 0.56⋅a(n-1) + 0.01⋅a(n-2) + 0.59⋅n - 0.01 = 0 039 A000217
+
+task_id: 041 seq_id: A000225
+disco:  a(n) = 2*a(n - 1) + 1,
+mavi: 0.49⋅a(n) - 0.78⋅a(n-1) - 0.39⋅a(n-2) - 0.68 = 0 041 A000225
+an = 1.6 an-1 + 0.8 a(n-2) + 1.39
+rounded to an = 2 an-1 + an-2 + 2 and almost but not an = an-1 + 2*a(n-2) + 2
+
+task_id: 042 seq_id: A000244
+disco:  a(n) = 3*a(n - 1),
+mavi: 0.33⋅a(n) - 0.88⋅a(n-1) - 0.35⋅a(n-2) = 0 042 A000244
+
+task_id: 046 seq_id: A000290
+disco:  a(n) = 2*n + a(n - 1) - 1,
+mavi: 0.46⋅a(n) - 0.62⋅a(n-1) + 0.16⋅a(n-2) - 0.61⋅n - 0.004 = 0 046 A000290
+an = 1.4 an-1 + 1.5 n
+
+task_id: 047 seq_id: A000292
+disco:  a(n) = n - a(n - 2) + 2*a(n - 1),
+mavi: -0.38⋅a(n) + 0.76⋅a(n-1) - 0.38⋅a(n-2) + 0.38⋅n = 0 047 A000292
+an = 2 an-1 - an-2 + n
+
+task_id: 048 seq_id: A000302
+disco:  a(n) = 4*a(n - 1),
+mavi: 0.25⋅a(n) - 0.94⋅a(n-1) - 0.23⋅a(n-2) = 0 048 A000302
+an = 4 * an-1 + an-2
+vs gt an = 4*an-1       or      an = 5an-1 - 4an-2
+
+task_id: 051 seq_id: A000326
+disco:  a(n) = 3*n + a(n - 1) - 2,
+mavi: -0.31⋅a(n) + 0.32⋅a(n-1) - 0.01⋅a(n-2) + 0.89⋅n - 0.56 = 0 051 A000326
+an = an-1  + 3 n - 2
+
+task_id: 052 seq_id: A000330
+disco:  a(n) = 2*n - a(n - 2) + 2*a(n - 1) - 1,
+mavi: 0.32⋅a(n) - 0.63⋅a(n-1) + 0.32⋅a(n-2) - 0.63⋅n + 0.32 = 0 052 A000330
+
+task_id: 056 seq_id: A000578
+disco:  a(n) = 6*n - a(n - 2) + 2*a(n - 1) - 6,
+mavi: -0.15⋅a(n) + 0.31⋅a(n-1) - 0.15⋅a(n-2) + 0.93⋅n - 0.93 = 0 056 A000578
+
+task_id: 057 seq_id: A000583
+disco:  a(n) = 24*n + a(n - 3) - 3*a(n - 2) + 3*a(n - 1) - 36,
+mavi:              2                                                                                      2                                                                         2                                           2
+- 0.0005⋅a(n)  + 0.0006⋅a(n)⋅a(n-1) + 0.0003⋅a(n)⋅a(n-2) - 9.0e-5⋅a(n)⋅n + 0.02⋅a(n) + 7.0e-5⋅a(n-1)  - 0.0003⋅a(n-1)⋅a(n-2) - 2.0e-5⋅a(n-1)⋅n + 6.0e-5⋅a(n-1) - 0.0002⋅a(n-2)  + 4.0e-6⋅a(n-2)⋅n + 0.72⋅a(n-2) - 4.0e-7⋅n  + 0.05⋅n - 0.33 = 0 057 A000583
+
+task_id: 075 seq_id: A001045
+disco:  a(n) = 2*a(n - 2) + a(n - 1),
+mavi: -0.41⋅a(n) + 0.41⋅a(n-1) + 0.82⋅a(n-2) = 0 075 A001045
+
+task_id: 077 seq_id: A001057
+disco:  a(n) = -a(n - 2) - 2*a(n - 1) + 1,
+mavi: -0.41⋅a(n) - 0.82⋅a(n-1) - 0.41⋅a(n-2) + 0.41 = 0 077 A001057
+
+task_id: 081 seq_id: A001147
+disco:  a(n) = 2*n*a(n - 1) - a(n - 1),
+mavi:              2                                                                                      2                                                                       2                                           2
+- 1.0e-5⋅a(n)  + 0.0001⋅a(n)⋅a(n-1) + 4.0e-5⋅a(n)⋅a(n-2) + 2.0e-5⋅a(n)⋅n - 0.03⋅a(n) + 3.0e-5⋅a(n-1)  + 1.0e-5⋅a(n-1)⋅a(n-2) + 6.0e-6⋅a(n-1)⋅n + 0.34⋅a(n-1) + 1.0e-6⋅a(n-2)  + 1.0e-6⋅a(n-2)⋅n - 0.39⋅a(n-2) - 5.0e-7⋅n  - 0.27⋅n + 0.69 = 0 081 A001147
+
+task_id: 088 seq_id: A001333
+disco:  a(n) = a(n - 2) + 2*a(n - 1),
+mavi: -0.41⋅a(n) + 0.82⋅a(n-1) + 0.41⋅a(n-2) = 0 088 A001333
+
+task_id: 095 seq_id: A001519
+disco:  a(n) = -a(n - 2) + 3*a(n - 1),
+mavi: 0.3⋅a(n) - 0.9⋅a(n-1) + 0.3⋅a(n-2) = 0 095 A001519
+an = + 3 an-1 - an-2
+
+task_id: 100 seq_id: A001906
+disco:  a(n) = -a(n - 2) + 3*a(n - 1),
+mavi: 0.3⋅a(n) - 0.9⋅a(n-1) + 0.3⋅a(n-2) = 0 100 A001906
+an = 3 an-1 - an-2
+
+task_id: 106 seq_id: A002275
+disco:  a(n) = 10*a(n - 1) + 1,
+mavi: -0.1⋅a(n) + 0.99⋅a(n-1) + 0.08⋅a(n-2) + 7.0e-9⋅n + 0.11 = 0 106 A002275
+an = 10 an-1 + 1 an-2 + 1
+
+task_id: 108 seq_id: A002378
+disco:  a(n) = 2*n + a(n - 1),
+mavi: -0.42⋅a(n) + 0.45⋅a(n-1) - 0.03⋅a(n-2) + 0.79⋅n + 0.06 = 0 108 A002378
+an = an-1 + 2n
+
+task_id: 111 seq_id: A002530
+disco:  a(n) = -a(n - 4) + 4*a(n - 2),
+mavi:          2                                                                              2                                                                  2                                       2
+0.03⋅a(n)  - 0.06⋅a(n)⋅a(n-1) + 0.18⋅a(n)⋅a(n-2) - 0.08⋅a(n)⋅n - 0.44⋅a(n) + 0.04⋅a(n-1)  - 0.006⋅a(n-1)⋅a(n-2) + 0.06⋅a(n-1)⋅n - 0.41⋅a(n-1) - 0.25⋅a(n-2)  - 0.12⋅a(n-2)⋅n + 0.39⋅a(n-2) + 0.15⋅n  + 0.18⋅n - 0.08 = 0 111 A002530
+
+task_id: 112 seq_id: A002531
+disco:  a(n) = -a(n - 4) + 4*a(n - 2),
+mavi:          2                                                                              2                                                                 2                                       2
+0.05⋅a(n)  - 0.17⋅a(n)⋅a(n-1) + 0.04⋅a(n)⋅a(n-2) - 0.08⋅a(n)⋅n + 0.03⋅a(n) + 0.15⋅a(n-1)  - 0.03⋅a(n-1)⋅a(n-2) - 0.01⋅a(n-1)⋅n + 0.26⋅a(n-1) - 0.15⋅a(n-2)  + 0.37⋅a(n-2)⋅n - 1.21⋅a(n-2) - 0.04⋅n  + 0.18⋅n + 0.37 = 0 112 A002531
+
+task_id: 114 seq_id: A002620
+disco:  a(n) = n + a(n - 2) - 1,
+mavi: -0.58⋅a(n) + 0.58⋅a(n-2) + 0.58⋅n - 0.58 = 0 114 A002620
+
+task_id: 123 seq_id: A004526
+disco:  a(n) = n - a(n - 1) - 1,
+mavi: -0.77⋅a(n) - 0.32⋅a(n-1) + 0.45⋅a(n-2) + 0.32⋅n + 0.13 = 0 123 A004526
+
+task_id: 130 seq_id: A005408
+disco:  a(n) = 2*n + 1,
+mavi: -0.79⋅a(n) + 0.43⋅a(n-1) + 0.43⋅a(n-2) - 0.13⋅n + 2.49 = 0 130 A005408
+
+task_id: 133 seq_id: A005843
+disco:  a(n) = 2*n,
+mavi: -0.62⋅a(n) + 0.61⋅a(n-1) + 0.23⋅a(n-2) - 0.45⋅n + 2.14 = 0 133 A005843
+
+task_id: 136 seq_id: A006882
+disco:  a(n) = n*a(n - 2),
+mavi:              2                                                                              2                                                               2                                       2
+- 0.0007⋅a(n)  + 0.01⋅a(n)⋅a(n-1) - 0.04⋅a(n)⋅a(n-2) - 0.01⋅a(n)⋅n + 0.32⋅a(n) - 0.09⋅a(n-1)  + 0.06⋅a(n-1)⋅a(n-2) + 0.2⋅a(n-1)⋅n - 0.27⋅a(n-1) + 0.1⋅a(n-2)  - 0.06⋅a(n-2)⋅n - 0.66⋅a(n-2) - 0.31⋅n  + 0.99⋅n - 0.72 = 0 136 A006882
+
+after loop

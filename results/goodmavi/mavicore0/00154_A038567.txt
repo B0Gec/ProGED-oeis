@@ -1,0 +1,27 @@
+
+Preprocessing sees only first 20 terms.
+Sindy threshold: 0.1
+Sindy will use max_order: 2
+
+poly #0
+         2                                             2                                                 2                  
+0.68⋅a(n)  - 1.36⋅a(n)⋅a(n-1) - 0.68⋅a(n) + 0.41⋅a(n-1)  + 0.55⋅a(n-1)⋅a(n-2) + 0.96⋅a(n-1) - 0.28⋅a(n-2)  - 0.28⋅a(n-2) = 0
+
+poly #1
+        2                                           2                                                 2                  
+0.2⋅a(n)  - 0.4⋅a(n)⋅a(n-1) - 0.2⋅a(n) + 0.86⋅a(n-1)  - 1.31⋅a(n-1)⋅a(n-2) - 0.45⋅a(n-1) + 0.66⋅a(n-2)  + 0.66⋅a(n-2) = 0
+
+While total time consumed by now, scale:155/164, seq_id:A038567, order:10 took:
+ 1.1 seconds, i.e. 0.02 minutes or 0.0 hours.
+CORELIST: True, METHOD: Mavi, SINDy: True (True also in case of MAVI), GROUND_TRUTH: False, SINDy_default: True, DEBUG: False
+Library: n, max_order 10, threshold: 0.1
+
+by degree: 2 and order: 2. 
+A038567: 
+         2                                             2                                                 2                  
+0.68⋅a(n)  - 1.36⋅a(n)⋅a(n-1) - 0.68⋅a(n) + 0.41⋅a(n-1)  + 0.55⋅a(n-1)⋅a(n-2) + 0.96⋅a(n-1) - 0.28⋅a(n-2)  - 0.28⋅a(n-2) = 0
+truth: 
+None
+
+  -  checked against website ground truth.     
+False  -  "manual" check if equation is correct.    
