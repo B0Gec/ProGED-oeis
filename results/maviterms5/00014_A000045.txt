@@ -1,0 +1,37 @@
+
+Preprocessing sees only first 20 terms.
+Sindy threshold: 0.1
+Sindy will use max_order: 2
+
+Printing all equations mavi has found:
+poly #0
+-0.75⋅a(n) + 0.1⋅a(n-1) + 0.1⋅a(n-2) + 0.65⋅n - 0.65 = 0
+
+poly #1
+-0.2⋅a(n) + 0.62⋅a(n-1) + 0.62⋅a(n-2) - 0.43⋅n + 0.43 = 0
+
+poly #2
+           2                                                                             2                                                                 2                                       2                   
+- 0.09⋅a(n)  - 0.07⋅a(n)⋅a(n-1) - 0.11⋅a(n)⋅a(n-2) - 0.19⋅a(n)⋅n + 1.1⋅a(n) - 0.07⋅a(n-1)  + 0.07⋅a(n-1)⋅a(n-2) - 0.07⋅a(n-1)⋅n + 1.07⋅a(n-1) - 0.09⋅a(n-2)  - 0.11⋅a(n-2)⋅n + 0.03⋅a(n-2) - 0.09⋅n  + 1.1⋅n - 3.22 = 0
+
+poly #3
+          2                                                                              2                                                                2                                        2                    
+0.007⋅a(n)  + 0.34⋅a(n)⋅a(n-1) - 0.32⋅a(n)⋅a(n-2) + 0.01⋅a(n)⋅n - 0.41⋅a(n) + 0.22⋅a(n-1)  - 0.1⋅a(n-1)⋅a(n-2) + 0.34⋅a(n-1)⋅n - 2.27⋅a(n-1) - 0.11⋅a(n-2)  - 0.32⋅a(n-2)⋅n + 1.86⋅a(n-2) + 0.007⋅n  - 0.41⋅n + 2.22 = 0
+
+poly #4
+         2                                                                               2                                                                  2                                       2                    
+0.02⋅a(n)  - 0.003⋅a(n)⋅a(n-1) + 0.04⋅a(n)⋅a(n-2) + 0.04⋅a(n)⋅n - 0.19⋅a(n) + 0.72⋅a(n-1)  - 1.45⋅a(n-1)⋅a(n-2) - 0.003⋅a(n-1)⋅n - 0.81⋅a(n-1) + 0.75⋅a(n-2)  + 0.04⋅a(n-2)⋅n + 0.62⋅a(n-2) + 0.02⋅n  - 0.19⋅n + 0.52 = 0
+
+While total time consumed by now, scale:15/164, seq_id:A000045, order:10 took:
+ 0.5 seconds, i.e. 0.01 minutes or 0.0 hours.
+CORELIST: True, METHOD: Mavi, SINDy: True (True also in case of MAVI), GROUND_TRUTH: False, SINDy_default: True, DEBUG: False
+Library: n, max_order 10, threshold: 0.1
+
+by degree: 2 and order: 2. 
+A000045: 
+-0.75⋅a(n) + 0.1⋅a(n-1) + 0.1⋅a(n-2) + 0.65⋅n - 0.65 = 0
+truth: 
+None
+
+  -  checked against website ground truth.     
+False  -  "manual" check if equation is correct.    

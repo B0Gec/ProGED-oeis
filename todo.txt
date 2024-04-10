@@ -5,5 +5,13 @@
 - try poly library + term n
 
 
+# 2024-05-01
+- mavi directions:
+    - benchmarking: 
+        - on nyugen
+        -  ode-strogatz
+        -  on feynman
+    - compare with manual julia or older versions
+
 
 
