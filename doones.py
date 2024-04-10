@@ -300,6 +300,8 @@ PARALLEL = args.paral
 VERBOSITY = args.verb if not DEBUG else 2
 experiment_id = args.exper_id
 
+n_of_terms_ed = args.n_of_terms
+
 # N_OF_TERMS_ED = 2*max_order  # Use only first n_of_terms_ed of the given sequence.
 # N_OF_TERMS_ED = None
 
@@ -392,6 +394,7 @@ else:
     print()
     settings_memo = (f'\nCORELIST: {CORELIST}, METHOD: {METHOD}, SINDy: {SINDy} (True also in case of MAVI), '
                      f'GROUND_TRUTH: {GROUND_TRUTH}, SINDy_default: {SINDy_default}, DEBUG: {DEBUG}')
+    settings_memo += f'\nn_of_terms_ed: {n_of_terms_ed}, N_OF_TERMS_ED: {N_OF_TERMS_ED}, '
     print(settings_memo)
     # print('CORELIST', CORELIST, 'SINDy', SINDy, 'GROUND_TRUTH', GROUND_TRUTH)
     print('Library:', library, 'max_order', max_order, 'threshold:', threshold)
@@ -537,17 +540,18 @@ else:
                     d_max_lib = 1  # create linear dataset
                     d_max_mavi = d_max
                     d_max_mavi = 2
-                    max_order_ = 2
+                    # max_order_ = 2
+
                     # x = []
                     # x = [sp.Matrix([0])]
                     # sol_ref = []
                     # sol_ref = ['1']
-                    ORDER_USED = 2
-                    x, (sol_ref, deg_used, order_used), eq, _, _ = [], ([], d_max_mavi, ORDER_USED), '', '', ''
+                    # ORDER_USED = 2
+                    x, (sol_ref, deg_used, order_used), eq, _, _ = [], ([], d_max_mavi, max_order_), '', '', ''
 
                     eqs = domavi(seq_id, csv, VERBOSITY, d_max_lib=d_max_lib,
                               d_max_mavi=d_max_mavi, max_order=max_order_, ground_truth=GROUND_TRUTH,
-                              n_of_terms=N_OF_TERMS_ED, library=library,
+                              n_of_terms=n_of_terms_ed, library=library,
                               start_order=START_ORDER, init = None, sindy_hidden=preseqs)
                     eq = eqs[0] if len(eqs) > 0 else 'no equation found :-(';
 
@@ -644,7 +648,7 @@ else:
         if VERBOSITY>=2:
             now = timer(now=now, text=f"Exact ED for {task_id+1}-th sequence of {n_of_seqs} in "
                                       f"experiment set with id {seq_id} for first "
-                                      f"{N_OF_TERMS_ED} terms with max order {max_order} "
+                                      f"{n_of_terms_ed} terms with max order {max_order} "
                                       f"while double checking against first {len(csv[seq_id])-1} terms.")
             timing_print = now[1]
         elif VERBOSITY >= 1:

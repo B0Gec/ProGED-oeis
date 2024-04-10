@@ -1,24 +1,5 @@
 
-better than 20 terms:
-
-a35
-a124 could argue
-a129 clean
-a326 clean
-task_id: 100 seq_id: A001906
-task_id: 095 seq_id: A001519
-task_id: 108 seq_id: A002378
-
-skor:
-a79 se vedno ne
-a290 maybe after rounding we would get it (differs from gt by a missing constant)
-a302 mix 2h, skoraj ena (ce odmislimo en clen :D)
-task_id: 106 seq_id: A002275  (veliki coeficienti i.e. 10 , dobili dodaten clen an-2)
-
-
-to low values:
-task_id: 081 seq_id: A001147
-task_id: 088 seq_id: A001333
+I think 7 terms only
 
 
 
@@ -162,12 +143,14 @@ an = an-1 + 2n
 
 task_id: 111 seq_id: A002530
 disco:  a(n) = -a(n - 4) + 4*a(n - 2),
-mavi:          2                                                                              2                                                                  2                                       2
+mavi:
+         2                                                                              2                                                                  2                                       2
 0.03⋅a(n)  - 0.06⋅a(n)⋅a(n-1) + 0.18⋅a(n)⋅a(n-2) - 0.08⋅a(n)⋅n - 0.44⋅a(n) + 0.04⋅a(n-1)  - 0.006⋅a(n-1)⋅a(n-2) + 0.06⋅a(n-1)⋅n - 0.41⋅a(n-1) - 0.25⋅a(n-2)  - 0.12⋅a(n-2)⋅n + 0.39⋅a(n-2) + 0.15⋅n  + 0.18⋅n - 0.08 = 0 111 A002530
 
 task_id: 112 seq_id: A002531
 disco:  a(n) = -a(n - 4) + 4*a(n - 2),
-mavi:          2                                                                              2                                                                 2                                       2
+mavi:
+         2                                                                              2                                                                 2                                       2
 0.05⋅a(n)  - 0.17⋅a(n)⋅a(n-1) + 0.04⋅a(n)⋅a(n-2) - 0.08⋅a(n)⋅n + 0.03⋅a(n) + 0.15⋅a(n-1)  - 0.03⋅a(n-1)⋅a(n-2) - 0.01⋅a(n-1)⋅n + 0.26⋅a(n-1) - 0.15⋅a(n-2)  + 0.37⋅a(n-2)⋅n - 1.21⋅a(n-2) - 0.04⋅n  + 0.18⋅n + 0.37 = 0 112 A002531
 
 task_id: 114 seq_id: A002620
@@ -177,6 +160,7 @@ mavi: -0.58⋅a(n) + 0.58⋅a(n-2) + 0.58⋅n - 0.58 = 0 114 A002620
 task_id: 123 seq_id: A004526
 disco:  a(n) = n - a(n - 1) - 1,
 mavi: -0.77⋅a(n) - 0.32⋅a(n-1) + 0.45⋅a(n-2) + 0.32⋅n + 0.13 = 0 123 A004526
+an = -1/2 an-1 + 1/2 an-2 + 1/2 n + 1/4
 
 task_id: 130 seq_id: A005408
 disco:  a(n) = 2*n + 1,

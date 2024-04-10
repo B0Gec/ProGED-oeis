@@ -129,7 +129,7 @@ job_id = 'sicor1114'
 
 # mavi:
 job_id = 'mavicore0'
-job_id = 'maviterms50'
+# job_id = 'maviterms50'
 
 print(job_id)
 

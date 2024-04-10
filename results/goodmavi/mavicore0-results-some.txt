@@ -1,4 +1,5 @@
 
+
 notes about summary:
 
 Opažanje0:
@@ -11,33 +12,102 @@ if solution has coefficient in certain ratio this is a good sign of equation bei
     ratio and constants seem random, probable the weird term is incorrect or we did not reconstruct anything.
 
 
+ocena: 20/33-ih rekontruiranih
+
+20 terms included:
 
 todo: less terms since very low size of constants values
 for:
 task_id: 021 seq_id: A000085
 task_id: 030 seq_id: A000129
 task_id: 032 seq_id: A000142
-vsi do (brez) 38
+task_id: 034
 task_id: 042 seq_id: A000244
-task_id: 048 seq_id: A000302
+task_id: 081 seq_id: A001147
 
 
  odkriti sprve (20 terms):
-a32,
-a45 fibo
-aa79 skoraj
-a124 skor
-a129 could argue
-a204 (a209?) 38
-A000217
-A000225
+                    a32,
+                    a45 fibo
+                    aa79 skoraj
+                    a124 skor
+                    a129 could argue
+                    a204  38
+                    A000217
+                    A000225
 task_id: 046 seq_id: A000290  not really, skor:
 task_id: 047 seq_id: A000292
 task_id: 052 seq_id: A000330
-A000578 clean
-A000583 almost ... (needed order 3)
+                     A000578 clean
+                     A000583 almost ... (needed order 3)
 task_id: 075 seq_id: A001045 clean
 task_id: 077 seq_id: A001057
 task_id: 114 seq_id: A002620
+task_id: 123 seq_id: A004526 .. skoraj, ce uzamemo dovolj visok treshold (vecji od polovice najmanjsega)
 
 
+neodkriti:
+task_id: 010 seq_id: A000035
+task_id: 048 seq_id: A000302 vendar skoraj
+task_id: 051 seq_id: A000326
+task_id: 133 seq_id: A005843  .. almost if ignoring 4xtimes lower values and  one wrong (constant) term
+
+
+
+
+
+
+
+
+==================================
+only 7 terms included:
+
+better than 20 terms:
+
+                    a35
+                    a124 could argue
+                    a129 clean
+                    a326 clean
+task_id: 088 seq_id: A001333
+task_id: 095 seq_id: A001519
+task_id: 100 seq_id: A001906
+task_id: 108 seq_id: A002378
+
+skor:
+                    a79 se vedno ne
+                    a290 maybe after rounding we would get it (differs from gt by a missing constant)
+                    a302 mix 2h, skoraj ena (ce odmislimo en clen :D)
+task_id: 106 seq_id: A002275  (veliki coeficienti i.e. 10 , dobili dodaten clen an-2)
+
+
+to low values:
+task_id: 081 seq_id: A001147
+
+
+no :
+
+task_id: 136 seq_id: A006882    terms 3
+        21          a85 se vedno ne.?
+        42          a244
+task_id: 111 seq_id: A002530 (no order 4 avail)
+task_id: 112 seq_id: A002531 (no order 4 avail)
+task_id: 130 seq_id: A005408 (use better library i.e. n) bested by order=0 .. see below
+
+
+
+
+
+
+==================================
+
+order=0:
+
+cleanly:
+task_id: 130 seq_id: A005408
+    eq 0.45⋅a(n) - 0.89⋅n - 0.45 = 0
+task_id: 133 seq_id: A005843:
+    eq 0.45⋅a(n) - 0.89⋅n = 0
+
+
+todo:
+a1147

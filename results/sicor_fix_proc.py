@@ -86,5 +86,62 @@ success_eqs = [
     ('00136', 'A006882', ' a(n) = n*a(n - 2),'),
     ]
 
+import re
+
+eq = '- 0.0007⋅a(n)  + 0.01⋅a(n)⋅a(n-1) - 0.04⋅a(n)⋅a(n-2) - 0.01⋅a(n)⋅n + 0.32⋅a(n) - 0.09⋅a(n-1)  + 0.06⋅a(n-1)⋅a(n-2) + 0.2⋅a(n-1)⋅n - 0.27⋅a(n-1) + 0.1⋅a(n-2)  - 0.06⋅a(n-2)⋅n - 0.66⋅a(n-2) - 0.31⋅n  + 0.99⋅n - 0.72 = 0 136 A006882'
+def trim(eq, n):
+    # re.sub(f'0.{n*'0'}', r'\d+(⋅n|⋅a\(n-\d+\))', ' ', eq)
+    s = re.sub(r'\d+(⋅n|⋅a)', ' ', eq)
+    # s = re.sub(f'(0.{n*"0"}\d+(⋅n|⋅a\(n(-\d+)*\))+)', f'\g<1>|', eq)
+    s = re.sub(f'(0.{n*"0"}\d+(⋅n|⋅a\(n(-\d+)*\))+)', f' '*15, eq)
+    print(s)
+    s = re.sub(f'(0.{n*"0"}\d+(⋅n|⋅a\(n(-\d+)*\))+)', f' ', eq)
+    print(s)
+    
+
+    return s
+
+trim(eq, 2)
+trim(eq, 1)
+
+ # 0.32⋅a(n)  + 0.2⋅a(n-1)⋅n - 0.27⋅a(n-1) + 0.1⋅a(n-2) - 0.66⋅a(n-2) - 0.31⋅n  + 0.99⋅n - 0.72 = 0
+# 0.32⋅a(n)  + 0.2⋅a(n-1)⋅n - 0.27⋅a(n-1) + 0.1⋅a(n-2) - 0.66⋅a(n-2) - 0.31⋅n  + 0.99⋅n - 0.72 = 0
+
+# eq 0.04⋅a(n) - 0.12⋅a(n-1) + 0.12⋅a(n-2) - 0.04⋅a(n-3) - 0.98⋅n + 1.47 = 0
+eq = '-    + 0.01⋅a(n)⋅a(n-1) - 0.04⋅a(n)⋅a(n-2) - 0.01⋅a(n)⋅n + 0.32⋅a(n) - 0.09⋅a(n-1)  + 0.06⋅a(n-1)⋅a(n-2) + 0.2⋅a(n-1)⋅n - 0.27⋅a(n-1) + 0.1⋅a(n-2)  - 0.06⋅a(n-2)⋅n - 0.66⋅a(n-2) - 0.31⋅n  + 0.99⋅n - 0.72 = 0 136 A006882'
+# eq = eq[:25]
+
+print(eq)
+# normalize an to 1:
+# keys = re.findall(r'[-+]* *\d+\.\d+(⋅n|⋅a\(n(-\d+)*\))+', f' ', eq)
+# keys = re.findall(r'([+-]? ?\d+\.\d+)[^ ]+[i[(⋅n|⋅a\(n(-\d+)?\))+', eq)
+keys = re.findall(r'([+-]? ?\d+\.\d+)([^ ]* )', eq)
+
+# eq = 'aaaa'
+# keys = re.findall(r'(a)*', eq)
+print(keys)
+1/0
+
+print('eq', 'keys')
+print(eq)
+print(keys)
+# bat_regex = re.compile(r'Bat(wo)+man')
+# bat_regexa = re.compile(r'(a)+')
+# # mo2 = bat_regex.search('The Adventures of Batwowowoman')
+#
+# # mo2 = bat_regex.search('The Adventures of Batwowowoman')
+# mo2 = bat_regex.search(eq)
+# listi = bat_regexa.findall(eq)
+# print(listi, 'lista')
+# print(mo2.group(), 'search')
+
+1/0
+
+print(keys)
+# 1/0
+for i in keys:
+    print(i[1])
+
+# [('- 0.0007', '⋅a(n)', ''), ('+ 0.01', '⋅a(n-1)', '-1'), ('- 0.04', '⋅a(n-2)', '-2'), ('- 0.01', '⋅n', ''), ('+ 0.32', '⋅a(n)', ''), ('- 0.09', '⋅a(n-1)', '-1'), ('+ 0.06', '⋅a(n-2)', '-2'), ('+ 0.2', '⋅n', '-1'), ('- 0.27', '⋅a(n-1)', '-1'), ('+ 0.1', '⋅a(n-2)', '-2'), ('- 0.06', '⋅n', '-2'), ('- 0.66', '⋅a(n-2)', '-2'), ('- 0.31', '⋅n', ''), ('+ 0.99', '⋅n', '')]
 
 
