@@ -39,7 +39,7 @@ task_id: 046 seq_id: A000290  not really, skor:
 task_id: 047 seq_id: A000292
 task_id: 052 seq_id: A000330
                      A000578 clean
-                     A000583 almost ... (needed order 3)
+                     A000583 almost ... (needed order 3 - really done)
 task_id: 075 seq_id: A001045 clean
 task_id: 077 seq_id: A001057
 task_id: 114 seq_id: A002620
@@ -107,6 +107,12 @@ task_id: 130 seq_id: A005408
     eq 0.45⋅a(n) - 0.89⋅n - 0.45 = 0
 task_id: 133 seq_id: A005843:
     eq 0.45⋅a(n) - 0.89⋅n = 0
+
+order=3:
+                     A000583 almost
+1.0⋅a(n) = + 3.0⋅a(n-1) -3.0⋅a(n-2) + 1.0⋅a(n-3) + 24.5⋅n -36.75
+
+
 
 
 todo:
