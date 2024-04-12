@@ -2,6 +2,8 @@
 
 from typing import Union
 import sys
+import re
+import math
 
 import pandas as pd
 import sympy as sp
@@ -14,7 +16,8 @@ from exact_ed import solution2str, check_eq_man, solution_reference, dataset, li
 
 sys.path.append('../monomial-agnostic-vanishing-ideal')
 from mavi.vanishing_ideal import VanishingIdeal
-from mavi.mavi_eed_utils import simpl_disp
+# from mavi.mavi_eed_utils import simpl_disp
+from mavi_simplify import round_expr, divide_expr, simpl_disp, anform
 
 
 # def one_results():
@@ -29,7 +32,7 @@ def one_results(seq, seq_id, csv, coeffs, d_max: int, max_order: int, ground_tru
 def domavi(seq_id, csv, verbosity,
            d_max_lib, d_max_mavi, max_order, ground_truth,
            n_of_terms, library,
-           start_order, init, sindy_hidden, print_digits=2, print_epsilon=1e-10) -> list[sp.logic.boolalg.Boolean]:
+           start_order, init, sindy_hidden, print_digits=2, print_epsilon=1e-05) -> list[sp.logic.boolalg.Boolean]:
     """
     Simple function to put inside of doone.py without checking for correctness, only displaying.
 
@@ -64,11 +67,39 @@ def domavi(seq_id, csv, verbosity,
     #     print(g)
         # print(simpl_disp(g, verbosity=0, num_digits=2, epsilon=1e-10)[0])
         # display(mu.simpl_disp(g, verbosity=0, num_digits=2, epsilon=1e-10)[0])
-    return [sp.pretty(simpl_disp(sp.expand(g), verbosity=0, num_digits=print_digits, epsilon=print_epsilon)[0], num_columns=400) for i, g in enumerate(G)]
+    eqs = [sp.pretty(simpl_disp(sp.expand(g), verbosity=0, num_digits=print_digits, epsilon=print_epsilon)[0],
+                     num_columns=400) for i, g in enumerate(G)]
+
+    chosen = 2
+    print('eqs0 non divided:\n', eqs[chosen], '\n'*4)
+    for i in eqs:
+        print(i)
+    # print('eqs0 non divided:\'', eqs, '\n'*4)
+    divisor = 0.58
+    divisor = 1
+    # divisor = 0.24
+    eqs_div = [sp.pretty(divide_expr(simpl_disp(sp.expand(g), verbosity=0, num_digits=print_digits, epsilon=print_epsilon)[0],
+                                 print_digits, divisor=divisor), num_columns=400) for i, g in enumerate(G)]
+
+    print(eqs)
+    # 1/0
+    # print(['a(n)' in i for i in eqs])
+    # print('\nall eqs:\n')
+    # for i in eqs:
+    #     print(i)
+    # print('\n end of all eqs:\n')
+    # readable_eqs = [anform(eq, rounding=print_digits) for eq in eqs[0:]]
+    readable_eq = anform(eqs[chosen], rounding=print_digits) if len(eqs) > 0 else 'No eq'
+
+    # print(eqs)
+    print('eqs0 divided:\n', eqs[chosen])
+    print('\nan form (linear display):\n', readable_eq, '\n'*4)
+    # print('eqs1:', readable_eqs[0])
+    return eqs, readable_eq
+    # return eqs
 
 
 # def mavi_simplify(G)
-
 
 # def mavi2sindy(seq: Union[list, sp.Matrix], d_max: int, max_order: int, threshold: float = 0.1,
 #           ensemble: bool = False, library_ensemble: bool = False,

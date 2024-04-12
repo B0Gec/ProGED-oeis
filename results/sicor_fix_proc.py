@@ -112,63 +112,58 @@ eq = '-0.32⋅a(n)  + 0.2⋅a(n-1)⋅n - 0.27⋅a(n-1) + 0.1⋅a(n-2) - 0.66⋅a
 # eq = eq[:25]
 
 eq = ' 0.04⋅a(n) - 0.12⋅a(n-1) + 0.12⋅a(n-2) - 0.04⋅a(n-3) - 0.98⋅n + 1.47 = 0 '
+eq = '0.07⋅a(n) + 0.09⋅a(n-1) + 0.15⋅a(n-2) - 0.06⋅a(n-3) + 0.07⋅a(n-4) - 0.98⋅n + 3.24 = 0'
+
 
 
 
 print(eq)
-# normalize an to 1:
-# keys = re.findall(r'[-+]* *\d+\.\d+(⋅n|⋅a\(n(-\d+)*\))+', f' ', eq)
-# keys = re.findall(r'([+-]? ?\d+\.\d+)[^ ]+[i[(⋅n|⋅a\(n(-\d+)?\))+', eq)
-keys = re.findall(r'([+-]? ?\d+\.\d+)([^ ]* )', eq)
 
-# print(keys)
-# # 1/0
-# print('keys:')
-# for i in keys:
-#     print(i[0], i[1])
+# def anform(eq: str):
+#     """Convert string of outputed equation into more readable one by puting all non- a(n) terms
+#     on the rhs and dividing all coefficients by a(n)'s coefficient.
+#     """
+#
+#     # normalize an to 1:
+#     # keys = re.findall(r'[-+]* *\d+\.\d+(⋅n|⋅a\(n(-\d+)*\))+', f' ', eq)
+#     # keys = re.findall(r'([+-]? ?\d+\.\d+)[^ ]+[i[(⋅n|⋅a\(n(-\d+)?\))+', eq)
+#     keys = re.findall(r'([+-]? ?\d+\.\d+)([^ ]* )', eq)
+#
+#     # pairs = [(float(c[2:]) if (c[0] == '+') else float(c[0]+c[2:]), ai) for c, ai in keys]
+#     pairs = [(float(c) if (not c[0] in '+-') else float(c[0]+c[2:]), ai) for c, ai in keys]
+#     # print('floated:')
+#     # for i in pairs:
+#     #     print(i[0], i[1])
+#     an_index = [i[1][1:-1] for i in pairs].index('a(n)')
+#     div = pairs[[i[1][1:-1] for i in pairs].index('a(n)')][0]
+#
+#     print()
+#     print('div pairs')
+#     div_pairs = [ (round(i[0]/div, 2), i[1]) for i in pairs]
+#     for i in div_pairs:
+#         # print(float(i[0][2:]), i[1])
+#         print(i[0], i[1])
+#
+#     # negate if needed:
+#     c, an = div_pairs[an_index]
+#     # c = an_pair[0]
+#     if c > 0:  # negate all terms
+#         # div_pairs = [((-1)*i[0], i[1]) for i in div_pairs if i[1][1:-1] != 'a(n)']
+#         div_pairs = [((-1)*i[0], i[1]) for i in div_pairs]
+#         # c = (-1)*c  # no need for c anymore since in memory
+#
+#     # lhs = f'{(-1)* c if c >= 0 else c}{an_pair[1]}'
+#     lhs = f'{c}{an}= '
+#     # print()
+#     # print('lhs:', lhs)
+#
+#     eq = lhs + ''.join([ '+ '*(c>0) + f'{c}{ai}' for c, ai in div_pairs if ai[1:-1] != 'a(n)'])
+#     return eq
 
-# pairs = [(float(c[2:]) if (c[0] == '+') else float(c[0]+c[2:]), ai) for c, ai in keys]
-pairs = [(float(c) if (not c[0] in '+-') else float(c[0]+c[2:]), ai) for c, ai in keys]
-# print('floated:')
-# for i in pairs:
-#     print(i[0], i[1])
-
-# 1/0
-an_index = [i[1][1:-1] for i in pairs].index('a(n)')
-div = pairs[[i[1][1:-1] for i in pairs].index('a(n)')][0]
-# print('div', div)
-# div = (-1)**(div >= 0) * div
-# print('div', div)
-# 1/0
-# div = [i[1][1:] for i in keys]
-# print('div', len(div)
-# f -1 -> true1, 1 -> -1
-
-print()
-print('div pairs')
-div_pairs = [ (round(i[0]/div, 2), i[1]) for i in pairs]
-for i in div_pairs:
-    # print(float(i[0][2:]), i[1])
-    print(i[0], i[1])
-
-# negate if needed:
-c, an = div_pairs[an_index]
-# c = an_pair[0]
-if c > 0:  # negate all terms
-    # div_pairs = [((-1)*i[0], i[1]) for i in div_pairs if i[1][1:-1] != 'a(n)']
-    div_pairs = [((-1)*i[0], i[1]) for i in div_pairs]
-    # c = (-1)*c  # no need for c anymore since in memory
-
-# lhs = f'{(-1)* c if c >= 0 else c}{an_pair[1]}'
-lhs = f'{c}{an}= '
-print()
-print('lhs:', lhs)
-
-eq = lhs + ''.join([ '+ '*(c>0) + f'{c}{ai}' for c, ai in div_pairs if ai[1:-1] != 'a(n)'])
+# from mavi_oeis import anform
 
 print()
-print(eq)
-print(div)
+# print(anform(eq))
 
 # [('- 0.0007', '⋅a(n)', ''), ('+ 0.01', '⋅a(n-1)', '-1'), ('- 0.04', '⋅a(n-2)', '-2'), ('- 0.01', '⋅n', ''), ('+ 0.32', '⋅a(n)', ''), ('- 0.09', '⋅a(n-1)', '-1'), ('+ 0.06', '⋅a(n-2)', '-2'), ('+ 0.2', '⋅n', '-1'), ('- 0.27', '⋅a(n-1)', '-1'), ('+ 0.1', '⋅a(n-2)', '-2'), ('- 0.06', '⋅n', '-2'), ('- 0.66', '⋅a(n-2)', '-2'), ('- 0.31', '⋅n', ''), ('+ 0.99', '⋅n', '')]
 

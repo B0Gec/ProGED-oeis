@@ -118,6 +118,11 @@ GROUND_TRUTH = False
 library = 'n' if CORELIST else 'non'
 d_max = 3 if CORELIST else 1
 
+# mavi testing:
+d_max = 1
+d_max = 2
+# library = 'non'
+
 
 # LIBRARY = 'nlin'
 # LIBRARY = 'quad'
@@ -135,6 +140,8 @@ d_max = 3 if CORELIST else 1
 # LIBRARIES = LIBRARY
 # library = LIBRARIES[0]
 
+round_off = 1e-05
+
 if not CORELIST:
     MAX_ORDER = 20  # We care only for recursive equations with max 20 terms or order.
     GROUND_TRUTH = True
@@ -143,13 +150,16 @@ else:
     # MAX_ORDER = 2
     MAX_ORDER = 4
     # MAX_ORDER = 5
-    MAX_ORDER = 10
+    # MAX_ORDER = 10
+    # MAX_ORDER = 2  # mavi
     GROUND_TRUTH = False
     START_ORDER = 0
 # START_ORDER = 3
 # if DEBUG:
 #     MAX_ORDER = 5  # We care only for recursive equations with max 20 terms or order.
-# MAX_ORDER = 2
+
+# mavi:
+MAX_ORDER = 1  # mavi
 
 # THRESHOLD = 0.2  # For sindy - masking threshold.
 THRESHOLD = 0.1  # For sindy - masking threshold.
@@ -165,10 +175,19 @@ THRESHOLD = 0.1  # For sindy - masking threshold.
 N_OF_TERMS_ED = 200 # before mavi
 N_OF_TERMS_ED = 20  # mavi
 N_OF_TERMS_ED = 7  # mavi
+N_OF_TERMS_ED = 14  # mavi
+N_OF_TERMS_ED = 11  # mavi good simple for a142
+N_OF_TERMS_ED = 9  # mavi good simple
+# N_OF_TERMS_ED = 3  # mavi
+# N_OF_TERMS_ED = 5  # mavi
 TASK_ID = 0
-# TASK_ID = 8
-# TASK_ID = 14
-# TASK_ID = 17
+TASK_ID = 8
+TASK_ID = 10
+# TASK_ID = 14  # fibo at cores
+# # TASK_ID = 17
+TASK_ID = 32
+# TASK_ID = 111
+# TASK_ID = 112
 # TASK_ID = 187
 # TASK_ID = 5365  # A026471
 # TASK_ID = 191  # A026471
@@ -539,7 +558,7 @@ else:
                     # library = 'n'  # mavi always uses linear dataset
                     d_max_lib = 1  # create linear dataset
                     d_max_mavi = d_max
-                    d_max_mavi = 2
+                    # d_max_mavi = 2
                     # max_order_ = 2
 
                     # x = []
@@ -552,7 +571,8 @@ else:
                     eqs = domavi(seq_id, csv, VERBOSITY, d_max_lib=d_max_lib,
                               d_max_mavi=d_max_mavi, max_order=max_order_, ground_truth=GROUND_TRUTH,
                               n_of_terms=n_of_terms_ed, library=library,
-                              start_order=START_ORDER, init = None, sindy_hidden=preseqs)
+                              start_order=START_ORDER, init = None, sindy_hidden=preseqs,
+                              print_epsilon=round_off)
                     eq = eqs[0] if len(eqs) > 0 else 'no equation found :-(';
 
                     printout = '\nPrinting all equations mavi has found:\n'
