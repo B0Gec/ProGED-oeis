@@ -8,3 +8,10 @@ glej mavicore0-resultst-some: opazanja
     research: more settings, like 0.1 to research best choice of this hyperparameter for such cases.
 5) for now 50% worse than sindy or diof
 6) maybe swaped n and 1 columns. - check it
+
+
+todo:
+- check if n and 1 are swaped
+- alpha hyper-parameter
+- nquyen, dynobench
+- exact from pirncipals, manually .

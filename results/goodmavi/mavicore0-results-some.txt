@@ -19,9 +19,9 @@ ocena: 20/33-ih rekontruiranih
 todo: less terms since very low size of constants values
 for:
 task_id: 021 seq_id: A000085    still (remains uncracked)
-task_id: 030 seq_id: A000129  (clean with less terms)
+task_id: 030 seq_id: A000129  (clean with less terms below)
 task_id: 032 seq_id: A000142
-task_id: 034
+task_id: 034            a166
 task_id: 042 seq_id: A000244
 task_id: 081 seq_id: A001147    still
 
@@ -29,7 +29,7 @@ task_id: 081 seq_id: A001147    still
  odkriti sprve (20 terms):
                     a32,
                     a45 fibo
-                    aa79 skoraj
+                    aa79 skoraj  # cracked later
                     a124 skor
                     a129 could argue
                     a204  38
@@ -74,7 +74,7 @@ task_id: 100 seq_id: A001906
 task_id: 108 seq_id: A002378
 
 skor:
-                    a79 se vedno ne
+                    a79 se vedno ne     # cracked later
                     a290 maybe after rounding we would get it (differs from gt by a missing constant)
                     a302 mix 2h, skoraj ena (ce odmislimo en clen :D)
 task_id: 106 seq_id: A002275  (veliki coeficienti i.e. 10 , dobili dodaten clen an-2)
@@ -86,24 +86,34 @@ task_id: 081 seq_id: A001147
 
 no :
 
-        21          a85 se vedno ne.?
-        42          a244
+        21          a85 se vedno ne.?  ... deg2, ord 2, many terms.
+task_id: 032 seq_id: A000142               deg 2, ord 1, one terms.
+        34          a166                    deg2, ord 2, many terms.
+        42          a244    bested below
+task_id: 081 seq_id: A001147    still
 task_id: 111 seq_id: A002530 (no order 4 avail)  # bested see below
 task_id: 112 seq_id: A002531 (no order 4 avail)  # bested see below
 task_id: 130 seq_id: A005408 (use better library i.e. n) bested by order=0 .. see below
-task_id: 136 seq_id: A006882    terms 3
+task_id: 136 seq_id: A006882    results in 3 terms? (terms 3)  ... equation similar to a142
 
 
 
 
 
 
-==================================
+
+=============== custom ===================
 bested by order different settings (order, max_degree?, ...).
+
+deg 2 order 1 lib no 'n' 8 terms:
+                    A000079  (clean, but no an = n^2 equation)
+ 1.0⋅a(n) = + 1.98⋅a(n-1)
 
 deg_used 1 order 1:
                     A000035  clean
  2.96⋅a(n) = -2.96⋅a(n-1) + 2.96⋅1
+                    A000244  clearly 8 terms
+ 1.0⋅a(n) = + 2.97⋅a(n-1)
 order=3:
                      A000583 cleanly
 1.0⋅a(n) = + 3.0⋅a(n-1) -3.0⋅a(n-2) + 1.0⋅a(n-3) + 24.5⋅n -36.75
@@ -126,6 +136,7 @@ task_id: 133 seq_id: A005843:
 
 
 
+
 seem like hard to crack: # e.g. used most taylored settings (lib, order, max_degree, ...)
 todo:
 a1147
@@ -134,3 +145,6 @@ a85
 
 a142
   2⋅a(n) =  + 3⋅a(n-1)⋅n -4⋅a(n-1)  -3⋅n -2000⋅1
+    deg 2, ord 1 6 terms:
+ 1.0⋅a(n) = + 1.45⋅a(n)⋅a(n-1) + 4.63⋅a(n-1) -3.45⋅a(n-1) -18.18⋅1
+

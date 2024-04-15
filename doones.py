@@ -121,7 +121,7 @@ d_max = 3 if CORELIST else 1
 # mavi testing:
 d_max = 1
 d_max = 2
-# library = 'non'
+library = 'non'
 
 
 # LIBRARY = 'nlin'
@@ -140,7 +140,10 @@ d_max = 2
 # LIBRARIES = LIBRARY
 # library = LIBRARIES[0]
 
-round_off = 1e-05
+# mavi settings:
+ROUND_OFF = 1e-05
+ROUND_OFF = 1e-04
+DIVISOR = 1.0
 
 if not CORELIST:
     MAX_ORDER = 20  # We care only for recursive equations with max 20 terms or order.
@@ -295,6 +298,8 @@ parser.add_argument("--paral", type=int, default=2)
 parser.add_argument("--verb", type=int, default=VERBOSITY)
 parser.add_argument("--n_of_terms", type=int, default=N_OF_TERMS_ED)
 parser.add_argument("--exper_id", type=str, default=EXPERIMENT_ID)
+parser.add_argument("--divisor", type=float, default=DIVISOR)
+parser.add_argument("--roundoff", type=float, default=ROUND_OFF)
 # parser.add_argument("--diogrid", type=str, default=DIOFANT_GRID)
 args = parser.parse_args()
 
@@ -324,6 +329,8 @@ n_of_terms_ed = args.n_of_terms
 # N_OF_TERMS_ED = 2*max_order  # Use only first n_of_terms_ed of the given sequence.
 # N_OF_TERMS_ED = None
 
+divisor = args.divisor
+round_off = args.roundoff
 
 flags_dict = {argument.split("=")[0]: argument.split("=")[1]
               for argument in sys.argv[1:] if len(argument.split("=")) > 1}
@@ -572,7 +579,7 @@ else:
                               d_max_mavi=d_max_mavi, max_order=max_order_, ground_truth=GROUND_TRUTH,
                               n_of_terms=n_of_terms_ed, library=library,
                               start_order=START_ORDER, init = None, sindy_hidden=preseqs,
-                              print_epsilon=round_off)
+                              print_epsilon=round_off, divisor=divisor)
                     eq = eqs[0] if len(eqs) > 0 else 'no equation found :-(';
 
                     printout = '\nPrinting all equations mavi has found:\n'

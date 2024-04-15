@@ -1,0 +1,11 @@
+# 2d
+
+# 1pt ... (x-x0, y-y0)
+
+# 2pt ... (x-x0, y-y1)
+
+union: f1, ... fn ;   g1, ... gm
+result:    f1*g1, ... f1*gm, ... fn*g1, ... fn*gm
+
+# 1pt ... (x-x0, y-y0) ;  2pt ... (x-x0, y-y1)
+
