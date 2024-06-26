@@ -125,10 +125,35 @@ def anform(eq: str, rounding=2):
     # print('eq  an form:\n', eq)
     return eq
 
+def divide(eq: str, div: float):
+    print(eq)
+
+    keys = re.findall(r'([+\-]? ?\d*\.?\d*e?[+-]?\d?\d?)⋅?([na][^ ]* )', eq)
+    forgotten_constant = re.findall(r'([+\-]? ?\d\d*\.?\d*e?[+-]?\d?\d?) ', eq)
+    # print('forgotten_constant', forgotten_constant)
+    forgotten = [(forgotten_constant[0], '1')] if forgotten_constant else []
+    keys += forgotten
+    # 1/0
+
+    # keys = re.findall(r'(.+⋅)([na][^ ]* )', eq)
+    # keys = re.findall(r'([+\- ][+\-]? ?\d*\.?\d*e?[+\-]?\d?\d?)⋅?([na][^ ]* )', eq)
+    # keys = re.findall(r'a\(n\)', eq)
+    # print(keys)
+    # 1/0
+
+    # f = lambda c: '1' if c in ('', '+ ') else '- 1' if c in ('-', '- ') else c
+    # keys = [(f(c), ai) for c, ai in keys]
+    for k in keys:
+        print(k)
+    1/0
+
+    pairs = [(float(c.replace(' ', '')), ai) for c, ai in keys]
+    return
 
 if __name__ == '__main__':
     eq = '0.24⋅a(n) - 0.94⋅a(n - 2) + 0.24⋅a(n - 4) = 0'
     print(eq)
-    print('anform:\n', anform(eq, rounding=2))
+    # print('anform:\n', anform(eq, rounding=2))
+    print('divide:\n', divide(eq, div=0.24))
 
 

@@ -1,0 +1,6 @@
+26.2. 
+    - first Diofantos version tag on Github.
+2.2
+    - paper done.
+16.1. 
+    - paper almost done.

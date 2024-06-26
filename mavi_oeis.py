@@ -300,6 +300,15 @@ def domavi(seq_id, csv, verbosity,
 
 # if run as standalone:
 if __name__ == '__main__':
+
+    from mavi_oeis import anform
+
+    eq = """
+        0.01⋅a(n) - 0.004⋅a(n - 3) - 0.02⋅a(n - 1) + 0.02 = 0
+        """
+    print(anform(eq, 0.01))
+    1/0
+
     seq_id = 'A000045'
     csv_filename = 'cores_test.csv'
     # N_OF_TERMS_LOAD = 10 ** 5
@@ -332,3 +341,4 @@ if __name__ == '__main__':
         # print(sp.pretty(e, num_columns=300))
         # sp.pprint(i)
         print()
+

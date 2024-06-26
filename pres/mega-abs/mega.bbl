@@ -1,0 +1,73 @@
+\newcommand{\etalchar}[1]{$^{#1}$}
+\begin{thebibliography}{DVB{\etalchar{+}}21}
+
+\bibitem[CKV23a]{MLsing}
+Tom Coates, Alexander~M. Kasprzyk, and Sara Veneziale.
+\newblock Machine learning detects terminal singularities.
+\newblock In {\em Thirty-seventh Conference on Neural Information Processing
+  Systems}, 2023.
+
+\bibitem[CKV23b]{MLfano}
+Tom Coates, Alexander~M. Kasprzyk, and Sara~and Veneziale.
+\newblock Machine learning the dimension of a fano variety.
+\newblock {\em Nature comunications}, 14:2041--1723, 9 2023.
+
+\bibitem[DVB{\etalchar{+}}21]{guided-AI}
+Alex Davies, Petar Veličković, Lars Buesing, Sam Blackwell, Daniel Zheng,
+  Nenad Tomašev, Richard Tanburn, Peter Battaglia, Charles Blundell, András
+  Juhász, Marc Lackenby, Geordie Williamson, Demis Hassabis, and Pushmeet
+  Kohli.
+\newblock Advancing mathematics by guiding human intuition with ai.
+\newblock {\em Nature}, 600:70--74, 12 2021.
+
+\bibitem[Gec]{Diofantos}
+Boštjan Gec.
+\newblock Exact equation discovery for integer sequences.
+\newblock GitHub repository.
+
+\bibitem[HKPP09]{aviPokutta2009}
+Daniel Heldt, Martin Kreuzer, Sebastian Pokutta, and Hennie Poulisse.
+\newblock Approximate computation of zero-dimensional polynomial ideals.
+\newblock {\em Journal of Symbolic Computation}, 44(11):1566--1591, 2009.
+\newblock In Memoriam Karin Gatermann.
+
+\bibitem[HL19]{Calabi-fibrations}
+Yang-Hui He and Seung-Joo Lee.
+\newblock Distinguishing elliptic fibrations with {AI}.
+\newblock {\em Physics Letters B}, 798:134889, nov 2019.
+
+\bibitem[HL21]{Calabi-4-folds}
+Yang-Hui He and Andre Lukas.
+\newblock Machine learning calabi-yau four-folds.
+\newblock {\em Physics Letters B}, 815:136139, apr 2021.
+
+\bibitem[HLOP22]{murmurations}
+Yang-Hui He, Kyu-Hwan Lee, Thomas Oliver, and Alexey Pozdnyakov.
+\newblock Murmurations of elliptic curves, 2022.
+
+\bibitem[KH23]{kera2023monomialagnostic}
+Hiroshi Kera and Yoshihiko Hasegawa.
+\newblock Monomial-agnostic computation of vanishing ideals, 2023.
+
+\bibitem[KKB20]{sindyPI}
+Kadierdan Kaheman, J.~Nathan Kutz, and Steven~L. Brunton.
+\newblock Sindy-pi: a robust algorithm for parallel implicit sparse
+  identification of nonlinear dynamics.
+\newblock {\em Proceedings of the Royal Society A: Mathematical, Physical and
+  Engineering Sciences}, 476(2242):20200279, 2020.
+
+\bibitem[LLS{\etalchar{+}}13]{vca}
+Roi Livni, David Lehavi, Sagi Schein, Hila Nachliely, Shai Shalev-Shwartz, and
+  Amir Globerson.
+\newblock Vanishing component analysis.
+\newblock In Sanjoy Dasgupta and David McAllester, editors, {\em Proceedings of
+  the 30th International Conference on Machine Learning}, volume~28 of {\em
+  Proceedings of Machine Learning Research}, pages 597--605, Atlanta, Georgia,
+  USA, 17--19 Jun 2013. PMLR.
+
+\bibitem[Sha13]{Shafarevich}
+Igor~R. Shafarevich.
+\newblock {\em Basic Algebraic Geometry 1}.
+\newblock Springer Berlin,, Heidelberg, third edition, 2013.
+
+\end{thebibliography}

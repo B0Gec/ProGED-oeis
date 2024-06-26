@@ -292,6 +292,7 @@ parser.add_argument("--lib", type=str, default=None)
 parser.add_argument("-ss", type=int, default=-1)
 parser.add_argument("-to", type=int, default=-1)
 parser.add_argument("--order", type=int, default=MAX_ORDER)
+parser.add_argument("--deg", type=int, default=d_max)
 parser.add_argument("--threshold", type=int, default=THRESHOLD)
 # parser.add_argument("--seq_len", type=int, default=SEQ_LEN_SINDY)
 parser.add_argument("--paral", type=int, default=2)
@@ -305,7 +306,7 @@ args = parser.parse_args()
 
 job_id = args.job_id
 task_id = args.task_id
-# library = args.lib
+library = args.lib
 # libraries = args.lib.split(',') if args.lib is not None else LIBRARIES
 # if library is None:
 #     library = libraries
@@ -318,6 +319,7 @@ task_id = args.task_id
 # diofant_grid = True if args.diogrid == "True" else False
 
 max_order = args.order
+d_max = args.deg
 threshold = args.threshold
 # seq_len = args.seq_len
 PARALLEL = args.paral
@@ -420,10 +422,11 @@ else:
     print()
     settings_memo = (f'\nCORELIST: {CORELIST}, METHOD: {METHOD}, SINDy: {SINDy} (True also in case of MAVI), '
                      f'GROUND_TRUTH: {GROUND_TRUTH}, SINDy_default: {SINDy_default}, DEBUG: {DEBUG}')
-    settings_memo += f'\nn_of_terms_ed: {n_of_terms_ed}, N_OF_TERMS_ED: {N_OF_TERMS_ED}, '
+    settings_memo += f'\nn_of_terms_ed: {n_of_terms_ed}, N_OF_TERMS_ED: {N_OF_TERMS_ED}'
+    settings_memo += f'\nLibrary: {library}, max_order {max_order}, max_degree: {d_max}, threshold: {threshold}, '
     print(settings_memo)
     # print('CORELIST', CORELIST, 'SINDy', SINDy, 'GROUND_TRUTH', GROUND_TRUTH)
-    print('Library:', library, 'max_order', max_order, 'threshold:', threshold)
+    # print('Library:', library, 'max_order', max_order, 'threshold:', threshold)
     # csv = pd.read_csv(csv_filename, low_memory=False, nrows=0)
     # print(csv.columns[:100])
     csv = pd.read_csv(csv_filename, low_memory=False, usecols=[seq_id])[:N_OF_TERMS_LOAD]

@@ -168,3 +168,58 @@ print()
 # [('- 0.0007', '⋅a(n)', ''), ('+ 0.01', '⋅a(n-1)', '-1'), ('- 0.04', '⋅a(n-2)', '-2'), ('- 0.01', '⋅n', ''), ('+ 0.32', '⋅a(n)', ''), ('- 0.09', '⋅a(n-1)', '-1'), ('+ 0.06', '⋅a(n-2)', '-2'), ('+ 0.2', '⋅n', '-1'), ('- 0.27', '⋅a(n-1)', '-1'), ('+ 0.1', '⋅a(n-2)', '-2'), ('- 0.06', '⋅n', '-2'), ('- 0.66', '⋅a(n-2)', '-2'), ('- 0.31', '⋅n', ''), ('+ 0.99', '⋅n', '')]
 
 
+
+# print first 20 terms of chosen sequences for mega abstract:
+import pandas as pd
+import math
+
+ids_selection = [
+    "A000058",
+    "A000085",
+    "A000142",
+    "A000166",
+    "A000244",
+    "A000262",
+    "A001147",
+    "A006882",
+    ]
+no_disco = ids_selection
+
+csv_filename = '../cores_test.csv'
+# csv = pd.read_csv(csv_filename, low_memory=False, usecols=[seq_id])[:N_OF_TERMS_LOAD]
+N_OF_TERMS_LOAD = 20
+ids2 = [i[0] for i in eqs]
+ids_selection = ids2
+csv = pd.read_csv(csv_filename, low_memory=False, usecols=ids_selection)[:N_OF_TERMS_LOAD]
+csv_no_disco = pd.read_csv(csv_filename, low_memory=False, usecols=no_disco)[:N_OF_TERMS_LOAD]
+print(csv.head(20))
+
+for i in ids_selection:
+    print(i)
+    print(csv[i])
+    print()
+
+# print(csv.iloc[:, :20])
+avoid = no_disco
+avoid += [ids_selection[1]]
+trivial = ['A002275']
+trivial += ['A001057']
+trivial += ['A000035']
+trivial += ['A000302']
+avoid += trivial
+
+
+
+print('here i ')
+# print(math.log(min([max(abs(float(n)) for n in csv[i] if n is not None) for i in ids_selection]), 10))
+print(math.log(max([max(abs(float(n)) for n in csv[i] if n is not None) for i in ids_selection if i not in avoid]), 10))
+print(math.log(min([max(abs(float(n)) for n in csv[i] if n is not None) for i in ids_selection if i not in avoid]), 10))
+# print(math.log(max([max(abs(float(n)) for n in csv_no_disco[i] if n is not None) for i in no_disco]), 10))
+# print(math.log(min([max(abs(float(n)) for n in csv_no_disco[i] if n is not None) for i in no_disco]), 10))
+# print(ids2[1])
+
+# print(csv[ids_selection[1]])
+
+# 8.8
+print([(max(abs(float(n)) for n in csv[i] if n is not None), i) for i in ids_selection if i not in avoid])
+print([(math.log(max(abs(float(n)) for n in csv[i] if n is not None), 10), i) for i in ids_selection if i not in avoid])

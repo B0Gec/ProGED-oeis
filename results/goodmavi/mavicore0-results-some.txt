@@ -33,8 +33,8 @@ task_id: 081 seq_id: A001147    still
                     a124 skor
                     a129 could argue
                     a204  38
-                    A000217
-                    A000225
+                    A000217  (also 10 terms with library of deg 1 ord 1)
+                    A000225 (also 10 terms with library of deg 1 ord 1)
 task_id: 046 seq_id: A000290  not really, skor:
 task_id: 047 seq_id: A000292
 task_id: 052 seq_id: A000330
@@ -75,9 +75,9 @@ task_id: 108 seq_id: A002378
 
 skor:
                     a79 se vedno ne     # cracked later
-                    a290 maybe after rounding we would get it (differs from gt by a missing constant)
+                    a290 maybe after rounding we would get it (differs from gt by a missing constant) (true that: 5 terms and sutable settings)
                     a302 mix 2h, skoraj ena (ce odmislimo en clen :D)
-task_id: 106 seq_id: A002275  (veliki coeficienti i.e. 10 , dobili dodaten clen an-2)
+task_id: 106 seq_id: A002275  (veliki coeficienti i.e. 10 , dobili dodaten clen an-2) (custom cleanly disco)
 
 
 to low values:
@@ -123,6 +123,10 @@ order=4:
                     A002531  clean
  1.0⋅a(n) = + 3.92⋅a(n-2) -1.0⋅a(n-4)
 
+task_id: 123 seq_id: A004526 clean:
+ 1.0⋅a(n) = -1.0⋅a(n-1) + 1.0⋅n -1.0⋅1
+
+
 order=0:
 
 cleanly:
@@ -139,6 +143,14 @@ task_id: 133 seq_id: A005843:
 
 seem like hard to crack: # e.g. used most taylored settings (lib, order, max_degree, ...)
 todo:
+task_id: 017 seq_id: A000058
+task_id: 021 seq_id: A000085
+task_id: 032 seq_id: A000142
+task_id: 034            a166
+task_id: 043 seq_id: A000262:
+task_id: 081 seq_id: A001147
+task_id: 136 seq_id: A006882
+
 a1147
 a85
 136   a0006882
@@ -148,3 +160,81 @@ a142
     deg 2, ord 1 6 terms:
  1.0⋅a(n) = + 1.45⋅a(n)⋅a(n-1) + 4.63⋅a(n-1) -3.45⋅a(n-1) -18.18⋅1
 
+
+a262:
+          2                                             2
+0.002⋅a(n)  - 0.03⋅a(n)⋅a(n-1) + 0.02⋅a(n) + 0.09⋅a(n-1)  - 0.12⋅a(n-1) + 0.04 = 0
+
+Attempting Mavi for A000058
+                                              2
+-0.0009⋅a(n)⋅a(n-1) + 0.01⋅a(n) - 0.004⋅a(n-1)  - 0.02⋅a(n-1) + 0.02 = 0
+                                            2
+-0.004⋅a(n)⋅a(n-1) - 0.05⋅a(n) + 0.08⋅a(n-1)  - 0.18⋅a(n-1) + 0.18 = 0
+['                                              2                         \n-0.0009⋅a(n)⋅a(n-1) + 0.01⋅a(n) - 0.004⋅a(n-1)  - 0.02⋅a(n-1) + 0.02 = 0', '                                            2                         \n-0.004⋅a(n)⋅a(n-1) - 0.05⋅a(n) + 0.08⋅a(n-1)  - 0.18⋅a(n-1) + 0.18 = 0']
+
+
+an form (linear display):
+ 1.0⋅a(n) = + 0.09⋅a(n)⋅a(n-1) + 2.0⋅a(n-1) + 0.4⋅a(n-1) -200.0⋅1
+
+
+
+
+Further analyze failures (MEGA abstract):
+== ===================
+
+all deg >= 2
+  017 A000058  a(n+1) = a(n)^2 - a(n) + 1
+  no terms
+00021 A000085  a(n) = n*a(n - 2) - a(n - 2) + a(n - 1),
+00032 A000142  a(n) = n*a(n - 1),
+00034 A000166  a(n) = n*a(n - 2) + n*a(n - 1) - a(n - 2) - a(n - 1),
+00042 A000244  a(n) = 3*a(n - 1),
+  043 A000262  a(n) = -n**2*a(n - 2) + 3*n*a(n - 2) + 2*n*a(n - 1) - 2*a(n - 2) - a(n - 1)
+  deg 3
+ 081  A001147 a(n) = a(n-1)*(2*n-1)
+ 136  A006882 a(n) = n*a(n - 2)
+
+
+
+34 diofantos/sindy successes:
+
+
+00009 A000032  a(n) = a(n - 2) + a(n - 1)
+00010 A000035  a(n) = 1 - a(n - 1),
+00014 A000045  a(n) = a(n - 2) + a(n - 1),
+  017 A000058  a(n+1) = a(n)^2 - a(n) + 1
+00019 A000079  a(n) = 2*a(n - 1),
+00021 A000085  a(n) = n*a(n - 2) - a(n - 2) + a(n - 1),
+00029 A000124  a(n) = n + a(n - 1),
+00030 A000129  a(n) = a(n - 2) + 2*a(n - 1),
+00032 A000142  a(n) = n*a(n - 1),
+00034 A000166  a(n) = n*a(n - 2) + n*a(n - 1) - a(n - 2) - a(n - 1),
+00038 A000204  a(n) = a(n - 2) + a(n - 1),
+00039 A000217  a(n) = n + a(n - 1),
+00041 A000225  a(n) = 2*a(n - 1) + 1,
+00042 A000244  a(n) = 3*a(n - 1),
+  043 A000262  a(n) = -n**2*a(n - 2) + 3*n*a(n - 2) + 2*n*a(n - 1) - 2*a(n - 2) - a(n - 1)
+00046 A000290  a(n) = 2*n + a(n - 1) - 1,
+00047 A000292  a(n) = n - a(n - 2) + 2*a(n - 1),
+00048 A000302  a(n) = 4*a(n - 1),
+00051 A000326  a(n) = 3*n + a(n - 1) - 2,
+00052 A000330  a(n) = 2*n - a(n - 2) + 2*a(n - 1) - 1,
+00056 A000578  a(n) = 6*n - a(n - 2) + 2*a(n - 1) - 6,
+00057 A000583  a(n) = 24*n + a(n - 3) - 3*a(n - 2) + 3*a(n - 1) - 36,
+00075 A001045  a(n) = 2*a(n - 2) + a(n - 1),
+00077 A001057  a(n) = -a(n - 2) - 2*a(n - 1) + 1,
+00081 A001147  a(n) = 2*n*a(n - 1) - a(n - 1),
+00088 A001333  a(n) = a(n - 2) + 2*a(n - 1),
+00095 A001519  a(n) = -a(n - 2) + 3*a(n - 1),
+00100 A001906  a(n) = -a(n - 2) + 3*a(n - 1),
+00106 A002275  a(n) = 10*a(n - 1) + 1,
+00108 A002378  a(n) = 2*n + a(n - 1),
+00111 A002530  a(n) = -a(n - 4) + 4*a(n - 2),
+00112 A002531  a(n) = -a(n - 4) + 4*a(n - 2),
+00114 A002620  a(n) = n + a(n - 2) - 1,
+00123 A004526  a(n) = n - a(n - 1) - 1,
+00130 A005408  a(n) = 2*n + 1,
+00133 A005843  a(n) = 2*n,
+00136 A006882  a(n) = n*a(n - 2),
+
+MAVI failures:
