@@ -214,7 +214,7 @@ def domavi(seq_id, csv, verbosity,
 #     # poly_order = max_degree
 #     # threshold = 0.1
 #
-#     # print('threshold', threshold, 'degree', poly_degree, 'order', max_order, 'ensemble', ensemble)
+     # print('threshold', threshold, 'degree', poly_degree, 'order', max_order, 'ensemble', ensemble)
 #
 #     model = ps.SINDy(
 #         optimizer=ps.STLSQ(threshold=threshold),
@@ -301,19 +301,22 @@ def domavi(seq_id, csv, verbosity,
 # if run as standalone:
 if __name__ == '__main__':
 
+    import matplotlib.pyplot as plt
     from mavi_oeis import anform
 
     eq = """
         0.01⋅a(n) - 0.004⋅a(n - 3) - 0.02⋅a(n - 1) + 0.02 = 0
         """
-    print(anform(eq, 0.01))
-    1/0
+    # print(anform(eq, 0.01))
+    # 1/0
 
     seq_id = 'A000045'
+    seq_id = 'A000079'
     csv_filename = 'cores_test.csv'
     # N_OF_TERMS_LOAD = 10 ** 5
     N_OF_TERMS_LOAD = 20
     N_OF_TERMS_LOAD = 10
+    # N_OF_TERMS_LOAD = 2
     csv = pd.read_csv(csv_filename, low_memory=False, usecols=[seq_id])[:N_OF_TERMS_LOAD]
 
     from IPython.display import display, display_latex
@@ -328,11 +331,85 @@ if __name__ == '__main__':
     # print(seq)
     # # 1/0
 
-    eqs = domavi(seq_id, [], verbosity=0, d_max_lib=1,
-                d_max_mavi = 2, max_order = 2, ground_truth = False,
-                n_of_terms = N_OF_TERMS_LOAD, library = 'n',
-                start_order = None, init = None, sindy_hidden = [seq])
+    # eqs = domavi(seq_id, [], verbosity=0, d_max_lib=1,
+    #             d_max_mavi = 2, max_order = 2, ground_truth = False,
+    #             n_of_terms = N_OF_TERMS_LOAD, library = 'n',
+    #             start_order = None, init = None, sindy_hidden = [seq])
     print()
+
+    seq = seq[:N_OF_TERMS_LOAD]
+    # seq, coeffs, truth = unpack_seq(seq_id, csv)
+
+    seq = [float(i) for i in seq]
+    # print(f"{int(seq[-1]):.4e}")
+    # 1/0
+    print(seq)
+
+    d_max_mavi = 3
+    max_order = 1
+    print_digits = 2
+    print_epsilon = 1e-01
+    divisor = 1
+    divisor = 0.45
+    # b, A, sol_ref = dataset(list(seq), d_max=d_max_lib, max_order=max_order, library='n')
+    b, A, sol_ref = dataset(list(seq), d_max=1, max_order=max_order, library='n')
+    # ignore the constant 1 column (mavi auto. deals with constants)
+    A, sol_ref = A[:, 1:], sol_ref[1:]
+    data = np.concatenate((b, A), axis=1)
+    data = data.astype('float')
+
+    vi = VanishingIdeal()
+    vi.fit(data, 0.01, method="grad", max_degree=d_max_mavi)
+    vi.plot(data, target="vanishing", splitshow=True)
+    # plt.show()
+
+
+    data_symb_list = ['a(n)'] + sol_ref
+    X_symb = np.array([sp.symbols(', '.join(data_symb_list))])
+
+    G = vi.evaluate(X_symb, target='vanishing')  # (1, 6) array
+    G = np.ravel(G)
+    # for i, g in enumerate(G):
+    #     g = sp.expand(g)
+    #     print(g)
+    # print(simpl_disp(g, verbosity=0, num_digits=2, epsilon=1e-10)[0])
+    # display(mu.simpl_disp(g, verbosity=0, num_digits=2, epsilon=1e-10)[0])
+    eqs = [sp.pretty(simpl_disp(sp.expand(g), verbosity=0, num_digits=print_digits, epsilon=print_epsilon)[0],
+                     num_columns=400) for i, g in enumerate(G)]
+
+    chosen = 0
+    # print('eqs0 non divided:\n', eqs[chosen], '\n'*4)
+    # for i in eqs:
+    #     print(i)
+    # print('eqs0 non divided:\'', eqs, '\n'*4)
+    # divisor = 0.58
+    # divisor = 1
+    # # divisor = 0.24
+    # divisor = -0.45
+    # divisor = 0.09
+    # divisor = 0.09
+    eqs_div = [sp.pretty(divide_expr(simpl_disp(sp.expand(g), verbosity=0, num_digits=print_digits, epsilon=print_epsilon)[0],
+                                     print_digits, divisor=divisor), num_columns=400) for i, g in enumerate(G)]
+
+    # print(eqs)
+    eqs = eqs_div
+    # 1/0
+    # print(['a(n)' in i for i in eqs])
+    # print('\nall eqs:\n')
+    # for i in eqs:
+    #     print(i)
+    # print('\n end of all eqs:\n')
+    # readable_eqs = [anform(eq, rounding=print_digits) for eq in eqs[0:]]
+    if len(eqs) > 0:
+        readable_eq = anform(eqs[chosen], rounding=print_digits) if len(eqs) > 0 else 'No eq'
+
+        # print(eqs)
+        # print('eqs0 divided:\n', eqs[chosen])
+        print('\nan form (linear display):\n', readable_eq, '\n'*4)
+        1/0
+    else:
+        print('no eqs:\n', eqs)
+
     for n, e in enumerate(eqs):
         print(f'poly #{n}')
         print(e)
