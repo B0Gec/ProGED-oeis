@@ -838,7 +838,7 @@ def check_eq_man(x: sp.Matrix, seq_id: str, csv: pd.DataFrame,
         n_degree, degree, order = xlib2orders(x, library)
         raise(NotImplementedError('solution_ref is None when checking out the solution!!!'))
         # print('n_degree, degree, order:', n_degree, degree, order)
-        solution_ref = solution_reference(library, order)
+        solution_ref = solution_reference(library, degree, order)
 
     # solution_ref = solution_ref[1:]  # len(x) = len(sol_ref)
 
@@ -1042,16 +1042,25 @@ if __name__ == '__main__':
     x = sp.Matrix([0, 0, 1, 1, 0, 0, 0, 0, 0, 0])
     # x = sp.Matrix([0, 0, 0, 1, 1, 0, 0, 0, 0])
     # x = sp.Matrix([1, 1, 0, 0, 0, 0])
-    # is_check = check_eq_man(x, id_, csv, library='lin')
+    # New discovery: A078475:
+    id_ = 'A078475'
+    # a(n) = -9 * a(n - 2) - 36 * a(n - 4) - 84 * a(n - 6) - 126 * a(n - 8) - 126 * a(n - 10) - 84 * a(n - 12) - 36 * a(n - 14) - 9 * a(n - 16) - a(n - 18)
+    # [-9, -36, -84, -126, -126, -84, -36, -9, -1]
+    x = sp.Matrix([0, 0, -9, 0, -36, 0, -84, 0, -126, 0, -126, 0, -84, 0, -36, 0, -9, 0, -1])
+    # Idea of even simpler equation is not working:
+    # x = sp.Matrix([0, -9, -36, -84, -126, -126, -84, -36, -9, -1])
+    print(x)
+    is_check = check_eq_man(x, id_, csv, library='lin')
     # is_check = check_eq_man(x, id_, csv, library='nlin')
-    is_check = check_eq_man(x, id_, csv, library='nquad')
+    # is_check = check_eq_man(x, id_, csv, library='nquad')
     # is_check = check_eq_man(x, id_, csv, library='ncub')
     # is_check = check_eq_man(x, id_, csv, library='cub')
     print(is_check[0])
-    print(is_check[1][:20])
-    print(is_check[2][:20])
+    # print(is_check[1][:20])
+    # print(is_check[2][:20])
     # print([i[:20] for i in is_check[2]])
     print('ehere')
+    print('solution2str', solution2str(x, ['1'] + [f'a(n-{i+1})' for i in range(len(x)-1)]))
     1/0
     # is_check = check_eq_man(x, id_, csv, oeis_friendly=34)
     print(is_check[0])
