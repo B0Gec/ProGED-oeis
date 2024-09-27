@@ -33,6 +33,7 @@ warnings.simplefilter("ignore")
 METHOD = 'Diofantos'
 METHOD = 'SINDy'
 METHOD = 'Mavi'
+METHOD = 'MB'
 SINDy = True if METHOD in ('SINDy', 'Mavi') else False
 # SINDy = False
 SINDy_default = True
@@ -49,6 +50,9 @@ if METHOD == 'Mavi':
     # from mavi_oeis import one_results
     from mavi_oeis import domavi
 
+if METHOD == 'MB':
+    # sys.path.append('../monomial-agnostic-vanishing-ideal')
+    from mb_wrap import mb
 
 
 INCREASING_EED = True
@@ -632,6 +636,9 @@ else:
             # grid = sindy_grid(seq, seq_id, csv, coeffs, max_order=5, seq_len=30)
             # for max_order_item in grid:
             #     print(max_order_item[0:])
+
+        elif METHOD == 'MB':
+            print()
 
         else:
             # print('Going for exact ed')

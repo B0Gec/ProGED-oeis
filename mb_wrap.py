@@ -4,8 +4,6 @@ from cocoa_location import cocoa_location
 import re
 
 # def mb_oeis(points, )
-EXECUTE_CMD = False
-# EXECUTE_CMD = True
 
 
 # most common polynomial variables indeterminates:
@@ -26,7 +24,7 @@ def vars_str(dim, visual='djus'):
     return vars_dict[visual]
 
 
-def mb(points: list):
+def mb(points: list, execute_cmd=False):
     """Runs 5 lines of cocoa code with given points and returns the ideal
         It makes sure the numper of variables is appropriate.
         Cocoa code:
@@ -64,8 +62,9 @@ def mb(points: list):
 
     # b) execute cocoa file
     command = f"cd ../{cocoa_location[2:]}; echo \"{cocoa_code}\" | ./CoCoAInterpreter"
-    # print(command)
-    if EXECUTE_CMD:
+    print(command)
+    print()
+    if execute_cmd:
         print("Executing LINUX command for real...")
         p = subprocess.Popen(command, stdout=subprocess.PIPE, shell=True)
         (output, err) = p.communicate()
@@ -84,6 +83,7 @@ def mb(points: list):
     return
 
 print(mb([[0, 0], [1, 1], [2, 4], [3, 9], [4, 16], [5, 25], [6, 36], [7, 49], [8, 64], [9, 81]]))
+# print(mb([[0, 0], [1, 1], [2, 4], [3, 9], [4, 16], [5, 25], [6, 36], [7, 49], [8, 64], [9, 81]], execute_cmd=True))
 
 
 
