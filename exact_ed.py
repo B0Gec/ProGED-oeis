@@ -423,7 +423,6 @@ def exact_ed(seq_id: str, csv: pd.DataFrame, verbosity: int = VERBOSITY,
     else:
         seq = unnan(list(csv[seq_id][header:(header + n_of_terms)]))
 
-
     # print(seq)
     max_order = sp.floor(seq.rows/2)-1 if max_order is None else max_order
 

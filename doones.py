@@ -9,6 +9,8 @@ import time
 import sympy as sp
 import pandas as pd
 import argparse
+
+from ProGED_oeis.examples.oeis.proles_new import n_of_terms_ed
 # import random  # for performing diofant grid
 
 
@@ -21,6 +23,8 @@ from exact_ed import exact_ed, increasing_eed, timer, check_eq_man, check_truth,
 
 
 import warnings
+
+
 warnings.simplefilter("ignore")
 # # warnings.filterwarnings("ignore", category=UserWarning, message='UserWarning: Sparsity parameter is too big (0.9) and eliminated all coefficients')
 # # warnings.filterwarnings("ignore", message='UserWarning: Sparsity parameter is too big (0.9) and eliminated all coefficients')
@@ -52,7 +56,8 @@ if METHOD == 'Mavi':
 
 if METHOD == 'MB':
     # sys.path.append('../monomial-agnostic-vanishing-ideal')
-    from mb_wrap import mb
+    # from mb_wrap import mb
+    from mb_oeis import increasing_mb
 
 
 INCREASING_EED = True
@@ -638,7 +643,10 @@ else:
             #     print(max_order_item[0:])
 
         elif METHOD == 'MB':
-            print()
+            n_more_terms = 10
+            print('Attempting MB for', seq_id)
+            print(f'with only first order + {n_more_terms} terms, ')
+            increasing_mb(seq_id, csv, max_order_, n_more_terms, library=library, n_of_terms=N_OF_TERMS_ED)
 
         else:
             # print('Going for exact ed')

@@ -9,22 +9,34 @@ import re
 # most common polynomial variables indeterminates:
 vars_default = 'x, y, z, t, u, v, w, a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t'.split(', ')
 # # print(vars_lib)
-def vars_str(dim, visual='djus'):
+def vars_str(dim, var_names='djus'):
+    """
+    Returns list of strings of variable names.
+
+    Args:
+        - dim: int, number of variables
+        - var_names:
+            - str, one of ['djus', 'num', 'oeis']
+            - or list of strings, variable names, e.g. ['a_n', 'n', 'a_n_1']
+    """
     vars_dict = {
         # 'djus': ",".join(vars_default[:dim]), # [the uss]ual suspects
         # 'num': ",".join([f'x_{i}' for i in range(dim)]),
         # 'oeis': ",".join([f'a_{{n-{i}}}' for i in range(dim)]),
         'djus': vars_default[:dim], # [the uss]ual suspects
         'num':  [f'x_{i}' for i in range(dim)],
-        'oeis': [f'a_{{n-{i}}}' for i in range(dim)],
+        'oeis': [f'a_n_{i}' for i in range(dim)],
         }
 
     vars_dict = { key: ",".join(vars) for key, vars in vars_dict.items()}
     # print(vars_dict)
-    return vars_dict[visual]
+    vars_list =  vars_dict[var_names] if isinstance(var_names, str) else ",".join(var_names)
+    if "{" in "".join(vars_list) or "}" in "".join(vars_list):
+        raise ValueError('Variable names must not contain "{" or "}"!!')
+    return vars_list
 
 
-def mb(points: list, execute_cmd=False):
+def mb(points: list, execute_cmd=False, var_names='djus'):
     """Runs 5 lines of cocoa code with given points and returns the ideal
         It makes sure the numper of variables is appropriate.
         Cocoa code:
@@ -45,10 +57,12 @@ def mb(points: list, execute_cmd=False):
 
     # [f"x_{i}" for i in range(dim)]
     # vars = ",".join([f"x_{i}" for i in range(dim)])
-    vars = vars_str(dim, 'djus')
-    # print(vars)
+    # vars = vars_str(dim, 'djus')
+    vars = vars_str(dim, var_names)
+    print(vars)
+    # 1/0
 
-    points
+    # points
     # use P ::= QQ[x,y];
     cocoa_code = f"use P ::= QQ[{vars}];"
     cocoa_code += f"Points := mat({points});"
@@ -69,21 +83,23 @@ def mb(points: list, execute_cmd=False):
         p = subprocess.Popen(command, stdout=subprocess.PIPE, shell=True)
         (output, err) = p.communicate()
         p_status = p.wait()
-        # print("Command output: \n", output.decode())
 
         # b) extract output ignoring logo
-        cocoa_res = re.findall(r'ideal.*\n', output.decode())[0][:-1]
-        print(cocoa_res)
+        cocoa_res = re.findall(r'ideal.*\n', output.decode())
+        if len(cocoa_res) == 0:
+            print("Unexpected output, full output: \n", output.decode())
+            raise ValueError('Unexpected output from CoCoAInterpreter!!')
+        else:
+            cocoa_res = cocoa_res[0][:-1]
+            print(cocoa_res)
 
-        first_generator = cocoa_res[6:].split(',')[0]
-        print(first_generator)
-        return first_generator, cocoa_res
+            first_generator = cocoa_res[6:].split(',')[0]
+            print(first_generator)
+            return first_generator, cocoa_res
     print("NOT Executing LINUX command for real... just simulating command")
 
     return
 
-print(mb([[0, 0], [1, 1], [2, 4], [3, 9], [4, 16], [5, 25], [6, 36], [7, 49], [8, 64], [9, 81]]))
-# print(mb([[0, 0], [1, 1], [2, 4], [3, 9], [4, 16], [5, 25], [6, 36], [7, 49], [8, 64], [9, 81]], execute_cmd=True))
 
 
 
@@ -112,3 +128,9 @@ def mb_wrap_old(filename = 'runable.cocoa5', file_dir = 'julia/mb/'):
 
     first_generator = cocoa_res[6:].split(',')[0]
     print(first_generator)
+
+
+if __name__ == '__main__':
+    print(mb([[0, 0], [1, 1], [2, 4], [3, 9], [4, 16], [5, 25], [6, 36], [7, 49], [8, 64], [9, 81]]))
+    # print(mb([[0, 0], [1, 1], [2, 4], [3, 9], [4, 16], [5, 25], [6, 36], [7, 49], [8, 64], [9, 81]], execute_cmd=True))
+    pass
