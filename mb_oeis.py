@@ -25,7 +25,7 @@ from mb_wrap import mb
 # from mavi_simplify import round_expr, divide_expr, simpl_disp, anform
 #
 
-def increasing_mb(seq_id, csv, max_order, n_more_terms, n_of_terms):
+def increasing_mb(seq_id, csv, max_order, n_more_terms, library, n_of_terms=10**6):
     """
     Run a for loop of increasing order where I run Moeller-Buchberger algorithm on a given sequence.
     """
@@ -34,11 +34,10 @@ def increasing_mb(seq_id, csv, max_order, n_more_terms, n_of_terms):
     print(seq)
 
     for order in range(0, max_order + 1):
-        ideal, ref = one_mb(seq, order)
+        ideal, ref = one_mb(seq, order, n_more_terms, library, n_of_terms)
 
-        def one_mstb(seq_id, csv, order, n_more_terms, library='n', n_of_terms=200) -> tuple:
-
-            print(f'order: {order}, all generators: \n)')
+        #def one_mstb(seq_id, csv, order, n_more_terms, library='n', n_of_terms=200) -> tuple:
+        print(f'order: {order}, all generators: \n')
         print(ideal)
         # booly = check_eq_man(eq, seq_id, csv, header=False, n_of_terms=10 ** 5, solution_ref=ref, library='n')
         # if bolly
