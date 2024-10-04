@@ -10,7 +10,7 @@ import sympy as sp
 import pandas as pd
 import argparse
 
-from ProGED_oeis.examples.oeis.proles_new import n_of_terms_ed
+# from ProGED_oeis.examples.oeis.proles_new import n_of_terms_ed
 # import random  # for performing diofant grid
 
 
@@ -33,6 +33,9 @@ warnings.simplefilter("ignore")
 # from task2job import task2job
 # else:
 #     from exact_ed import exact_ed, timer
+
+EXECUTE_REAL = False
+EXECUTE_REAL = True
 
 METHOD = 'Diofantos'
 METHOD = 'SINDy'
@@ -130,7 +133,7 @@ d_max = 3 if CORELIST else 1
 # mavi testing:
 d_max = 1
 d_max = 2
-library = 'non'
+# library = 'non'
 
 
 # LIBRARY = 'nlin'
@@ -171,7 +174,7 @@ else:
 #     MAX_ORDER = 5  # We care only for recursive equations with max 20 terms or order.
 
 # mavi:
-MAX_ORDER = 1  # mavi
+# MAX_ORDER = 1  # mavi
 
 # THRESHOLD = 0.2  # For sindy - masking threshold.
 THRESHOLD = 0.1  # For sindy - masking threshold.
@@ -297,7 +300,7 @@ EXPERIMENT_ID = timestamp
 parser = argparse.ArgumentParser()
 parser.add_argument("--job_id", type=str, default=JOB_ID)
 parser.add_argument("--task_id", type=int, default=TASK_ID)
-parser.add_argument("--lib", type=str, default=None)
+parser.add_argument("--lib", type=str, default=library)
 parser.add_argument("-ss", type=int, default=-1)
 parser.add_argument("-to", type=int, default=-1)
 parser.add_argument("--order", type=int, default=MAX_ORDER)
@@ -646,7 +649,13 @@ else:
             n_more_terms = 10
             print('Attempting MB for', seq_id)
             print(f'with only first order + {n_more_terms} terms, ')
-            increasing_mb(seq_id, csv, max_order_, n_more_terms, library=library, n_of_terms=N_OF_TERMS_ED)
+            print(f'args:', seq_id, max_order_, n_more_terms, EXECUTE_REAL, library, N_OF_TERMS_ED)
+            # 1/0
+            # first_generator, sol_ref, ideal_ = increasing_mb
+            increasing_mb(seq_id, csv, max_order_, n_more_terms, execute=EXECUTE_REAL, library=library, n_of_terms=N_OF_TERMS_ED)
+            deg_used, order_used = 'unknown_mb', 'unknown_mb'
+            # eq, x = first_generator, [], 'unknown_mb'
+            eq, x, sol_ref, truth = 'unknown_mb', [], 'unknown_mb', 'unknown_mb'
 
         else:
             # print('Going for exact ed')

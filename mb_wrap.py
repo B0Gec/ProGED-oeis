@@ -106,6 +106,7 @@ def mb(points: list, execute_cmd=False, var_names='djus', verbosity=0):
             # print('equation:\n', first_generator)
             return first_generator, cocoa_res
     print("NOT Executing LINUX command for real... just simulating command")
+    raise ValueError('Not executing command for real!!')
 
     return
 

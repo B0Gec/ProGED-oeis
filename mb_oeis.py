@@ -15,7 +15,7 @@ import matplotlib.pyplot as plt
 # TAKELESSTERMS = True  # take less terms than 200, to make MB faster and maybe even more precise.
 
 from sindy_oeis import preprocess, solution_vs_truth
-from exact_ed import solution2str, check_eq_man, solution_reference, dataset, lib2degrees, lib2verbose
+from exact_ed import solution2str, check_eq_man, solution_reference, dataset, lib2degrees, lib2verbose, unnan
 from mb_wrap import mb
 
 
@@ -25,7 +25,7 @@ from mb_wrap import mb
 # from mavi_simplify import round_expr, divide_expr, simpl_disp, anform
 #
 
-def increasing_mb(seq_id, csv, max_order, n_more_terms, library, n_of_terms=10**6):
+def increasing_mb(seq_id, csv, max_order, n_more_terms, execute, library, n_of_terms=10**6):
     """
     Run a for loop of increasing order where I run Moeller-Buchberger algorithm on a given sequence.
     """
@@ -35,7 +35,7 @@ def increasing_mb(seq_id, csv, max_order, n_more_terms, library, n_of_terms=10**
 
     for order in range(0, max_order + 1):
         print(f'order: {order}')
-        first_generator, ref, ideal = one_mb(seq, order, n_more_terms, library, n_of_terms)
+        first_generator, ref, ideal = one_mb(seq, order, n_more_terms, execute, library, n_of_terms)
 
         #def one_mstb(seq_id, csv, order, n_more_terms, library='n', n_of_terms=200) -> tuple:
         # print(f'all generators:')
@@ -44,10 +44,11 @@ def increasing_mb(seq_id, csv, max_order, n_more_terms, library, n_of_terms=10**
         # if bolly
         #     break
 
-    return ideal, ref
+    # return ideal, ref
+    return
 
 
-def one_mb(seq, order, n_more_terms, library='n', n_of_terms=200) -> tuple:
+def one_mb(seq, order, n_more_terms, execute, library='n', n_of_terms=200) -> tuple:
     """
     A/one mb (Moeller-Buchberger) algorithm, i.e. one run of MB algorithm (for one given recursion order).
     Simple function to put inside increase_mb without checking for correctness, only displaying.
@@ -62,9 +63,9 @@ def one_mb(seq, order, n_more_terms, library='n', n_of_terms=200) -> tuple:
     """
 
     print('\n', '-'*order, '----one_mb-start----')
-    # take max_order + n_more_terms terms from given sequence terms
+    # take max_order * 2 + n_more_terms terms from given sequence terms
     # if TAKELESSTERMS:
-    seq = seq[:order + n_more_terms]
+    seq = seq[:2*order + n_more_terms]
     # print(seq)
 
     # seq = sindy_hidden[d_max_lib - 1]
@@ -101,7 +102,7 @@ def one_mb(seq, order, n_more_terms, library='n', n_of_terms=200) -> tuple:
     # print(mb(points=data.tolist(), execute_cmd=True, var_names='oeis'))
     # print(mb(points=data.tolist(), execute_cmd=True, var_names=var_names))
     # print(mb(points=data.tolist(), execute_cmd=False, var_names=vars_cocoa))
-    first_generator, ideal = mb(points=data.tolist(), execute_cmd=True, var_names=vars_cocoa)
+    first_generator, ideal = mb(points=data.tolist(), execute_cmd=execute, var_names=vars_cocoa)
 
     # change e.g. a_n_1 to a(n-1). (i.e. apply the inverse)
     for key in sol_ref_inverse:
