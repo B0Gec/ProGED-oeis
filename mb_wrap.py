@@ -1,5 +1,7 @@
 import os
 import subprocess
+
+# from ProGED_oeis.examples.oeis.csv_plot import verbosity
 from cocoa_location import cocoa_location
 import re
 
@@ -36,7 +38,7 @@ def vars_str(dim, var_names='djus'):
     return vars_list
 
 
-def mb(points: list, execute_cmd=False, var_names='djus'):
+def mb(points: list, execute_cmd=False, var_names='djus', verbosity=0):
     """Runs 5 lines of cocoa code with given points and returns the ideal
         It makes sure the numper of variables is appropriate.
         Cocoa code:
@@ -49,17 +51,22 @@ def mb(points: list, execute_cmd=False, var_names='djus'):
     Console command:
         echo "Points := ... IdealOfPoints;I;" | ./CocoAInterpter
     """
+
     # print(points)
     dims = [len(p) for p in points]
     if len(set(dims)) != 1:
         raise ValueError('All points must have the same number of dimensions!!')
     dim = dims[0]
+    # check type of points:
+    if not all([isinstance(p, list) for p in points]) or not isinstance(points, list):
+        raise ValueError('Points must be a list of lists!!')
 
     # [f"x_{i}" for i in range(dim)]
     # vars = ",".join([f"x_{i}" for i in range(dim)])
     # vars = vars_str(dim, 'djus')
     vars = vars_str(dim, var_names)
-    print(vars)
+    if verbosity > 0:
+        print('vars:', vars)
     # 1/0
 
     # points
@@ -67,7 +74,8 @@ def mb(points: list, execute_cmd=False, var_names='djus'):
     cocoa_code = f"use P ::= QQ[{vars}];"
     cocoa_code += f"Points := mat({points});"
     cocoa_code += "I := IdealOfPoints(P, Points);I;"
-    print('cocoa_code pretty printed:', cocoa_code.replace(';', ';\n'))
+    if verbosity > 0:
+        print('cocoa_code pretty printed:\n', cocoa_code.replace(';', ';\n'))
     # print('cocoa_code oneliner:\n', cocoa_code)
 
     # a) set location of cocoa file that will be executed by cocoa interpreter
@@ -76,6 +84,7 @@ def mb(points: list, execute_cmd=False, var_names='djus'):
 
     # b) execute cocoa file
     command = f"cd ../{cocoa_location[2:]}; echo \"{cocoa_code}\" | ./CoCoAInterpreter"
+
     print(command)
     print()
     if execute_cmd:
@@ -91,10 +100,10 @@ def mb(points: list, execute_cmd=False, var_names='djus'):
             raise ValueError('Unexpected output from CoCoAInterpreter!!')
         else:
             cocoa_res = cocoa_res[0][:-1]
-            print(cocoa_res)
+            print('output:', cocoa_res)
 
             first_generator = cocoa_res[6:].split(',')[0]
-            print(first_generator)
+            # print('equation:\n', first_generator)
             return first_generator, cocoa_res
     print("NOT Executing LINUX command for real... just simulating command")
 

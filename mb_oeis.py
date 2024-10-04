@@ -31,14 +31,15 @@ def increasing_mb(seq_id, csv, max_order, n_more_terms, library, n_of_terms=10**
     """
 
     seq = unnan(csv[seq_id])[:n_of_terms]
-    print(seq)
+    print('seq:', seq)
 
     for order in range(0, max_order + 1):
-        ideal, ref = one_mb(seq, order, n_more_terms, library, n_of_terms)
+        print(f'order: {order}')
+        first_generator, ref, ideal = one_mb(seq, order, n_more_terms, library, n_of_terms)
 
         #def one_mstb(seq_id, csv, order, n_more_terms, library='n', n_of_terms=200) -> tuple:
-        print(f'order: {order}, all generators: \n')
-        print(ideal)
+        # print(f'all generators:')
+        # print(ideal)
         # booly = check_eq_man(eq, seq_id, csv, header=False, n_of_terms=10 ** 5, solution_ref=ref, library='n')
         # if bolly
         #     break
@@ -60,10 +61,11 @@ def one_mb(seq, order, n_more_terms, library='n', n_of_terms=200) -> tuple:
     Returns: list of generators produced by MB algorithm.
     """
 
+    print('\n', '-'*order, '----one_mb-start----')
     # take max_order + n_more_terms terms from given sequence terms
     # if TAKELESSTERMS:
     seq = seq[:order + n_more_terms]
-    print(seq)
+    # print(seq)
 
     # seq = sindy_hidden[d_max_lib - 1]
     # # print(n_of_terms, seq)
@@ -74,7 +76,7 @@ def one_mb(seq, order, n_more_terms, library='n', n_of_terms=200) -> tuple:
     # # print(f"{int(seq[-1]):.4e}")
     # # 1/0
 
-    print(order)
+    # print(order)
 
     # b, A, sol_ref = dataset(list(seq), d_max=d_max_lib, max_order=max_order, library='n')
     b, A, sol_ref = dataset(list(seq), d_max=1, max_order=order, library=library)
@@ -85,29 +87,30 @@ def one_mb(seq, order, n_more_terms, library='n', n_of_terms=200) -> tuple:
 
     # How we would like to print variables:
     sol_ref = solution_reference(library, d_max=1, order=order)
-    print(sol_ref)
+    # print(sol_ref)
 
     # Bijection mapping: printing like a(n-1) vs. cocoa: a_n_1:
     sol_ref_inverse = {var.replace('(', '_').replace('-', '_').replace(')', ''): var
                        for var in sol_ref[2:]}
     vars_cocoa = ['a_n', 'n'] + list(sol_ref_inverse.keys())
     sol_ref_inverse['a_n'] = 'a(n)'  # to avoid a(n)_2 situation by first replacing a_n
-    print(vars_cocoa)
-    print(sol_ref_inverse)
+    # print(vars_cocoa)
+    # print(sol_ref_inverse)
 
     # print(mb(points=data.tolist(), execute_cmd=False, visual='djus'))
     # print(mb(points=data.tolist(), execute_cmd=True, var_names='oeis'))
     # print(mb(points=data.tolist(), execute_cmd=True, var_names=var_names))
     # print(mb(points=data.tolist(), execute_cmd=False, var_names=vars_cocoa))
     first_generator, ideal = mb(points=data.tolist(), execute_cmd=True, var_names=vars_cocoa)
-    # change e.g. a_n_1 to a(n-1). (i.e. apply the inverse)
 
+    # change e.g. a_n_1 to a(n-1). (i.e. apply the inverse)
     for key in sol_ref_inverse:
         ideal = ideal.replace(key, sol_ref_inverse[key])
         first_generator = first_generator.replace(key, sol_ref_inverse[key])
-    print(ideal)
-    print(first_generator)
-    return ideal, ['a(n)'] + sol_ref[1:]
+    # print('output:\n', ideal)
+    print('equation:', first_generator)
+    print('\n', '-'*order, '----one_mb-end----\n')
+    return first_generator, ['a(n)'] + sol_ref[1:], ideal
 
 
 # if run as standalone:
@@ -126,7 +129,7 @@ if __name__ == '__main__':
     seq_id = 'A000079'
     csv_filename = 'cores_test.csv'
     N_OF_TERMS_LOAD = 10 ** 5
-    # N_OF_TERMS_LOAD = 20
+    N_OF_TERMS_LOAD = 20
     # N_OF_TERMS_LOAD = 10
     # N_OF_TERMS_LOAD = 2
     csv = pd.read_csv(csv_filename, low_memory=False, usecols=[seq_id])[:N_OF_TERMS_LOAD]
@@ -145,93 +148,12 @@ if __name__ == '__main__':
     # # 1/0
 
 
-    eqs = one_mb(seq_id, csv, verbosity=0, d_max_lib=1,
-                d_max_mavi = 2, order = 1, ground_truth = False,
-                n_of_terms = N_OF_TERMS_LOAD, library = 'n',
-                start_order = None, init = None, sindy_hidden = [seq])
+    print('before onemb')
+    res = one_mb(seq, order=1, n_more_terms=10, library='n', n_of_terms=200)
+    print(res)
+    # 1/0
+    print('after error')
+
+    increasing_mb(seq_id, csv, max_order=2, n_more_terms=10, library='n', n_of_terms=2000)
 
     1/0
-    print()
-
-    seq = seq[:N_OF_TERMS_LOAD]
-    # seq, coeffs, truth = unpack_seq(seq_id, csv)
-
-    seq = [float(i) for i in seq]
-    # print(f"{int(seq[-1]):.4e}")
-    # 1/0
-    print(seq)
-
-    d_max_mavi = 3
-    max_order = 1
-    print_digits = 2
-    print_epsilon = 1e-01
-    divisor = 1
-    divisor = 0.45
-    # b, A, sol_ref = dataset(list(seq), d_max=d_max_lib, max_order=max_order, library='n')
-    b, A, sol_ref = dataset(list(seq), d_max=1, max_order=max_order, library='n')
-    # ignore the constant 1 column (mavi auto. deals with constants)
-    A, sol_ref = A[:, 1:], sol_ref[1:]
-    data = np.concatenate((b, A), axis=1)
-    data = data.astype('float')
-
-    vi = VanishingIdeal()
-    vi.fit(data, 0.01, method="grad", max_degree=d_max_mavi)
-    vi.plot(data, target="vanishing", splitshow=True)
-    # plt.show()
-
-
-    data_symb_list = ['a(n)'] + sol_ref
-    X_symb = np.array([sp.symbols(', '.join(data_symb_list))])
-
-    G = vi.evaluate(X_symb, target='vanishing')  # (1, 6) array
-    G = np.ravel(G)
-    # for i, g in enumerate(G):
-    #     g = sp.expand(g)
-    #     print(g)
-    # print(simpl_disp(g, verbosity=0, num_digits=2, epsilon=1e-10)[0])
-    # display(mu.simpl_disp(g, verbosity=0, num_digits=2, epsilon=1e-10)[0])
-    eqs = [sp.pretty(simpl_disp(sp.expand(g), verbosity=0, num_digits=print_digits, epsilon=print_epsilon)[0],
-                     num_columns=400) for i, g in enumerate(G)]
-
-    chosen = 0
-    # print('eqs0 non divided:\n', eqs[chosen], '\n'*4)
-    # for i in eqs:
-    #     print(i)
-    # print('eqs0 non divided:\'', eqs, '\n'*4)
-    # divisor = 0.58
-    # divisor = 1
-    # # divisor = 0.24
-    # divisor = -0.45
-    # divisor = 0.09
-    # divisor = 0.09
-    eqs_div = [sp.pretty(divide_expr(simpl_disp(sp.expand(g), verbosity=0, num_digits=print_digits, epsilon=print_epsilon)[0],
-                                     print_digits, divisor=divisor), num_columns=400) for i, g in enumerate(G)]
-
-    # print(eqs)
-    eqs = eqs_div
-    # 1/0
-    # print(['a(n)' in i for i in eqs])
-    # print('\nall eqs:\n')
-    # for i in eqs:
-    #     print(i)
-    # print('\n end of all eqs:\n')
-    # readable_eqs = [anform(eq, rounding=print_digits) for eq in eqs[0:]]
-    if len(eqs) > 0:
-        readable_eq = anform(eqs[chosen], rounding=print_digits) if len(eqs) > 0 else 'No eq'
-
-        # print(eqs)
-        # print('eqs0 divided:\n', eqs[chosen])
-        print('\nan form (linear display):\n', readable_eq, '\n'*4)
-        1/0
-    else:
-        print('no eqs:\n', eqs)
-
-    for n, e in enumerate(eqs):
-        print(f'poly #{n}')
-        print(e)
-        # print(sp.latex(i))
-        # print('polatex')
-        # print(sp.pretty(e, num_columns=300))
-        # sp.pprint(i)
-        print()
-
