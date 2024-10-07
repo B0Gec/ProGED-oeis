@@ -98,6 +98,7 @@ if MODE == 'black_check':
 
 N_OF_TERMS_LOAD = 100000
 N_OF_TERMS_LOAD = 20
+N_OF_TERMS_LOAD = 200
 
 
 VERBOSITY = 2  # dev scena
@@ -188,11 +189,11 @@ THRESHOLD = 0.1  # For sindy - masking threshold.
 # SEQ_LEN_SINDY = 4
 
 N_OF_TERMS_ED = 200 # before mavi
-N_OF_TERMS_ED = 20  # mavi
-N_OF_TERMS_ED = 7  # mavi
-N_OF_TERMS_ED = 14  # mavi
-N_OF_TERMS_ED = 11  # mavi good simple for a142
-N_OF_TERMS_ED = 9  # mavi good simple
+# N_OF_TERMS_ED = 20  # mavi
+# N_OF_TERMS_ED = 7  # mavi
+# N_OF_TERMS_ED = 14  # mavi
+# N_OF_TERMS_ED = 11  # mavi good simple for a142
+# N_OF_TERMS_ED = 9  # mavi good simple
 # N_OF_TERMS_ED = 3  # mavi
 # N_OF_TERMS_ED = 5  # mavi
 TASK_ID = 0
@@ -646,16 +647,16 @@ else:
             #     print(max_order_item[0:])
 
         elif METHOD == 'MB':
-            n_more_terms = 10
+            n_more_terms = 1000
             print('Attempting MB for', seq_id)
             print(f'with only first order + {n_more_terms} terms, ')
             print(f'args:', seq_id, max_order_, n_more_terms, EXECUTE_REAL, library, N_OF_TERMS_ED)
             # 1/0
             # first_generator, sol_ref, ideal_ = increasing_mb
-            increasing_mb(seq_id, csv, max_order_, n_more_terms, execute=EXECUTE_REAL, library=library, n_of_terms=N_OF_TERMS_ED)
+            mbprintout = increasing_mb(seq_id, csv, max_order_, n_more_terms, execute=EXECUTE_REAL, library=library, n_of_terms=N_OF_TERMS_ED)
             deg_used, order_used = 'unknown_mb', 'unknown_mb'
             # eq, x = first_generator, [], 'unknown_mb'
-            eq, x, sol_ref, truth = 'unknown_mb', [], 'unknown_mb', 'unknown_mb'
+            eq, x, sol_ref, truth = mbprintout, [], 'unknown_mb', 'unknown_mb'
 
         else:
             # print('Going for exact ed')

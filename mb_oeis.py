@@ -25,16 +25,38 @@ from mb_wrap import mb
 # from mavi_simplify import round_expr, divide_expr, simpl_disp, anform
 #
 
+def external_prettyprint(ideal, sol_ref= [f'a(n-{i})' for i in range(1, 16)]) -> str:
+    """ a_n_1 -> a(n-1)
+        function intended for external use only, no script uses this function.
+    """
+
+    # Bijection mapping: printing like a(n-1) vs. cocoa: a_n_1:
+    sol_ref_inverse = {var.replace('(', '_').replace('-', '_').replace(')', ''): var
+                       for var in sol_ref}
+    sol_ref_inverse['a_n'] = 'a(n)'  # to avoid a(n)_2 situation by first replacing a_n
+
+    # change e.g. a_n_1 to a(n-1). (i.e. apply the inverse)
+    for key in sol_ref_inverse:
+        ideal = ideal.replace(key, sol_ref_inverse[key])
+    return ideal
+
 def increasing_mb(seq_id, csv, max_order, n_more_terms, execute, library, n_of_terms=10**6):
     """
     Run a for loop of increasing order where I run Moeller-Buchberger algorithm on a given sequence.
     """
 
+    printout = ''
+    print(n_of_terms)
+    print(csv[seq_id])
     seq = unnan(csv[seq_id])[:n_of_terms]
-    print('seq:', seq)
-
+    echo = f'seq: {seq}'
+    printout += echo + '\n'
+    print(echo)
+    # 1/0
     for order in range(0, max_order + 1):
-        print(f'order: {order}')
+        echo = f'order: {order}'
+        printout += echo + '\n'
+        print(echo)
         first_generator, ref, ideal = one_mb(seq, order, n_more_terms, execute, library, n_of_terms)
 
         #def one_mstb(seq_id, csv, order, n_more_terms, library='n', n_of_terms=200) -> tuple:
@@ -45,7 +67,9 @@ def increasing_mb(seq_id, csv, max_order, n_more_terms, execute, library, n_of_t
         #     break
 
     # return ideal, ref
-    return
+        printout += f'ideal: {ideal}\nequation: {first_generator}\n'
+
+    return printout
 
 
 def one_mb(seq, order, n_more_terms, execute, library='n', n_of_terms=200) -> tuple:
@@ -117,6 +141,13 @@ def one_mb(seq, order, n_more_terms, execute, library='n', n_of_terms=200) -> tu
 # if run as standalone:
 if __name__ == '__main__':
 
+    outpt = 'a_n*a_n_1 +a_n*a_n_2 -a_n_1*a_n_3 -a_n_2*a_n_3 -3*a_n +3*a_n_3'
+    outpt = 'a_n_1 * a_n_2 + a_n_1 * a_n_3 - a_n_2 * a_n_4 - a_n_3 * a_n_4 - 3 * a_n_1 + 3 * a_n_4'
+    outpt = 'a_n * a_n_1 + a_n * a_n_2 + a_n_1 * a_n_2 - 3 * a_n - 3 * a_n_1 - 3 * a_n_2 + 7'
+
+    # print(external_prettyprint(outpt, sol_ref= ['a(n-1)', 'a(n-2)', 'a(n-3)', 'a(n-4)', 'a(n-5)']))
+    # 1/0
+    
     # import matplotlib.pyplot as plt
     # from mavi_oeis import anform
 
