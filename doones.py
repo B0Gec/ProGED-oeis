@@ -100,6 +100,7 @@ N_OF_TERMS_LOAD = 100000
 N_OF_TERMS_LOAD = 20
 N_OF_TERMS_LOAD = 200
 
+N_MORE_TERMS = 10
 
 VERBOSITY = 2  # dev scena
 VERBOSITY = 1  # run scenario
@@ -284,6 +285,8 @@ SEQ_ID = (True, 'A000045')
 # if DEBUG:
 #     SEQ_ID = (True, 'A000045')
 
+# TARGETED_CORES = ['A02', 'a32', 'a35', 'a45', 'a58', 'a79', 'a85', 'a108', 'a124', # a129, a142, a166, a169, a204, a217, a225, a244, a262, a290, a292, a302, a312, a326, a330, a578, a583, a984, a1003, a1006, a1045, a1057, a1147, a1333, a1405, a1519, a1700, a1764, a1906, a2275, a2378, a2426, a2530, a2531, a2620, a2658, a4526, a5408, a5811, a5843, a6318, a6882, a6894, ]
+
 
 # first 100 non_manuals: ['04132_A025938.txt', '09906_A074515.txt', '09908_A074517.txt', '11571_A091881.txt', '11572_A091883.txt', '11827_A094944.txt', '11939_A097068.txt', '13516_A114480.txt', '13922_A120465.txt', '13939_A120689.txt']
 
@@ -437,6 +440,8 @@ else:
                      f'GROUND_TRUTH: {GROUND_TRUTH}, SINDy_default: {SINDy_default}, DEBUG: {DEBUG}')
     settings_memo += f'\nn_of_terms_ed: {n_of_terms_ed}, N_OF_TERMS_ED: {N_OF_TERMS_ED}'
     settings_memo += f'\nLibrary: {library}, max_order {max_order}, max_degree: {d_max}, threshold: {threshold}, '
+    if METHOD == 'MB':
+        settings_memo += f'\nn_more_terms: {N_MORE_TERMS}'
     print(settings_memo)
     # print('CORELIST', CORELIST, 'SINDy', SINDy, 'GROUND_TRUTH', GROUND_TRUTH)
     # print('Library:', library, 'max_order', max_order, 'threshold:', threshold)
@@ -647,13 +652,13 @@ else:
             #     print(max_order_item[0:])
 
         elif METHOD == 'MB':
-            n_more_terms = 1000
+            N_MORE_TERMS = 3
             print('Attempting MB for', seq_id)
-            print(f'with only first order + {n_more_terms} terms, ')
-            print(f'args:', seq_id, max_order_, n_more_terms, EXECUTE_REAL, library, N_OF_TERMS_ED)
+            print(f'with only first order + {N_MORE_TERMS} terms, ')
+            print(f'args:', seq_id, max_order_, N_MORE_TERMS, EXECUTE_REAL, library, N_OF_TERMS_ED)
             # 1/0
             # first_generator, sol_ref, ideal_ = increasing_mb
-            mbprintout = increasing_mb(seq_id, csv, max_order_, n_more_terms, execute=EXECUTE_REAL, library=library, n_of_terms=N_OF_TERMS_ED)
+            mbprintout = increasing_mb(seq_id, csv, max_order_, N_MORE_TERMS, execute=EXECUTE_REAL, library=library, n_of_terms=N_OF_TERMS_ED)
             deg_used, order_used = 'unknown_mb', 'unknown_mb'
             # eq, x = first_generator, [], 'unknown_mb'
             eq, x, sol_ref, truth = mbprintout, [], 'unknown_mb', 'unknown_mb'
@@ -742,6 +747,8 @@ else:
     # output_string += f'\nCORELIST: {CORELIST}, SINDy: {SINDy}, GROUND_TRUTH: {GROUND_TRUTH}, SINDy_default: {SINDy_default}, DEBUG: {DEBUG}'
     output_string += settings_memo
     output_string += f'\nLibrary: {library}, max_order {max_order}, threshold: {threshold}'
+    if METHOD == 'MB':
+        output_string += f'\nn_more_terms: {N_MORE_TERMS}'
     output_string += f"\n\nby degree: {deg_used} and order: {order_used}. \n{seq_id}: \n{eq}" if not MODE == 'black_check' else ""
     output_string += f"\ntruth: \n{truth}\n\n"
     output_string += f'{is_reconst}  -  checked against website ground truth.     \n'
