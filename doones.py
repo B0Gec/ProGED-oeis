@@ -314,12 +314,14 @@ parser.add_argument("--threshold", type=int, default=THRESHOLD)
 parser.add_argument("--paral", type=int, default=2)
 parser.add_argument("--verb", type=int, default=VERBOSITY)
 parser.add_argument("--n_of_terms", type=int, default=N_OF_TERMS_ED)
+parser.add_argument("--n_more_terms", type=int, default=N_MORE_TERMS)
 parser.add_argument("--exper_id", type=str, default=EXPERIMENT_ID)
 parser.add_argument("--divisor", type=float, default=DIVISOR)
 parser.add_argument("--roundoff", type=float, default=ROUND_OFF)
 # parser.add_argument("--diogrid", type=str, default=DIOFANT_GRID)
 args = parser.parse_args()
 
+n_more_terms = args.n_more_terms
 job_id = args.job_id
 task_id = args.task_id
 library = args.lib
@@ -441,7 +443,7 @@ else:
     settings_memo += f'\nn_of_terms_ed: {n_of_terms_ed}, N_OF_TERMS_ED: {N_OF_TERMS_ED}'
     settings_memo += f'\nLibrary: {library}, max_order {max_order}, max_degree: {d_max}, threshold: {threshold}, '
     if METHOD == 'MB':
-        settings_memo += f'\nn_more_terms: {N_MORE_TERMS}'
+        settings_memo += f'\nn_more_terms: {n_more_terms}'
     print(settings_memo)
     # print('CORELIST', CORELIST, 'SINDy', SINDy, 'GROUND_TRUTH', GROUND_TRUTH)
     # print('Library:', library, 'max_order', max_order, 'threshold:', threshold)
@@ -652,13 +654,12 @@ else:
             #     print(max_order_item[0:])
 
         elif METHOD == 'MB':
-            N_MORE_TERMS = 3
             print('Attempting MB for', seq_id)
-            print(f'with only first order + {N_MORE_TERMS} terms, ')
-            print(f'args:', seq_id, max_order_, N_MORE_TERMS, EXECUTE_REAL, library, N_OF_TERMS_ED)
+            print(f'with only first order + {n_more_terms} terms, ')
+            print(f'args:', seq_id, max_order_, n_more_terms, EXECUTE_REAL, library, N_OF_TERMS_ED)
             # 1/0
             # first_generator, sol_ref, ideal_ = increasing_mb
-            mbprintout = increasing_mb(seq_id, csv, max_order_, N_MORE_TERMS, execute=EXECUTE_REAL, library=library, n_of_terms=N_OF_TERMS_ED)
+            mbprintout = increasing_mb(seq_id, csv, max_order_, n_more_terms, execute=EXECUTE_REAL, library=library, n_of_terms=N_OF_TERMS_ED)
             deg_used, order_used = 'unknown_mb', 'unknown_mb'
             # eq, x = first_generator, [], 'unknown_mb'
             eq, x, sol_ref, truth = mbprintout, [], 'unknown_mb', 'unknown_mb'
@@ -748,7 +749,7 @@ else:
     output_string += settings_memo
     output_string += f'\nLibrary: {library}, max_order {max_order}, threshold: {threshold}'
     if METHOD == 'MB':
-        output_string += f'\nn_more_terms: {N_MORE_TERMS}'
+        output_string += f'\nn_more_terms: {n_more_terms}'
     output_string += f"\n\nby degree: {deg_used} and order: {order_used}. \n{seq_id}: \n{eq}" if not MODE == 'black_check' else ""
     output_string += f"\ntruth: \n{truth}\n\n"
     output_string += f'{is_reconst}  -  checked against website ground truth.     \n'
