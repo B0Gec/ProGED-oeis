@@ -1,0 +1,34 @@
+
+While total time consumed by now, scale:11/164, seq_id:A000035, order:4 took:
+ 6.1 seconds, i.e. 0.1 minutes or 0.002 hours.
+CORELIST: True, METHOD: MB, SINDy: False (True also in case of MAVI), GROUND_TRUTH: False, SINDy_default: True, DEBUG: False
+n_of_terms_ed: 200, N_OF_TERMS_ED: 200
+Library: n, max_order 4, max_degree: 2, threshold: 0.1, 
+n_more_terms: 10
+Library: n, max_order 4, threshold: 0.1
+n_more_terms: 10
+
+by degree: unknown_mb and order: unknown_mb. 
+A000035: 
+seq: [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1]
+order: 0
+ideal: ideal(a(n)^2 -a(n),  n^5 -10*a(n)*n^3 -25*n^4 +150*a(n)*n^2 +240*n^3 -695*a(n)*n -1100*n^2 +975*a(n) +2384*n -1920,  a(n)*n^4 -20*a(n)*n^3 -n^4 +140*a(n)*n^2 +20*n^3 -400*a(n)*n -140*n^2 +384*a(n) +400*n -384)
+equation: a(n)^2 -a(n)
+order: 1
+ideal: ideal(a(n) +a(n-1) -1,  a(n-1)^2 -a(n-1),  n^5*a(n-1) -30*n^4*a(n-1) +340*n^3*a(n-1) -1800*n^2*a(n-1) +4384*n*a(n-1) -3840*a(n-1),  n^6 -36*n^5 +15*n^4*a(n-1) +505*n^4 -360*n^3*a(n-1) -3480*n^3 +3045*n^2*a(n-1) +12139*n^2 -10620*n*a(n-1) -19524*n +12645*a(n-1) +10395)
+equation: a(n) +a(n-1) -1
+order: 2
+ideal: ideal(a(n-1) +a(n-2) -1,  a(n) -a(n-2),  a(n-2)^2 -a(n-2),  n^6 -6*n^5*a(n-2) -42*n^5 +225*n^4*a(n-2) +700*n^4 -3240*n^3*a(n-2) -5880*n^3 +22275*n^2*a(n-2) +25984*n^2 -72624*n*a(n-2) -56448*n +89055*a(n-2) +46080)
+equation: a(n-1) +a(n-2) -1
+order: 3
+ideal: ideal(a(n-2) +a(n-3) -1,  a(n-1) -a(n-3),  a(n) +a(n-3) -1,  a(n-3)^2 -a(n-3),  n^6*a(n-3) -54*n^5*a(n-3) +1180*n^4*a(n-3) -13320*n^3*a(n-3) +81664*n^2*a(n-3) -256896*n*a(n-3) +322560*a(n-3),  n^7 -63*n^6 +21*n^5*a(n-3) +1645*n^5 -945*n^4*a(n-3) -22995*n^4 +16485*n^3*a(n-3) +185059*n^3 -138915*n^2*a(n-3) -852957*n^2 +563409*n*a(n-3) +2071215*n -876015*a(n-3) -2027025)
+equation: a(n-2) +a(n-3) -1
+order: 4
+ideal: ideal(a(n-3) +a(n-4) -1,  a(n-2) -a(n-4),  a(n-1) +a(n-4) -1,  a(n) -a(n-4),  a(n-4)^2 -a(n-4),  n^7 -7*n^6*a(n-4) -70*n^6 +441*n^5*a(n-4) +2044*n^5 -11305*n^4*a(n-4) -32200*n^4 +150675*n^3*a(n-4) +294784*n^3 -1099063*n^2*a(n-4) -1563520*n^2 +4150839*n*a(n-4) +4432896*n -6325515*a(n-4) -5160960)
+equation: a(n-3) +a(n-4) -1
+
+truth: 
+unknown_mb
+
+  -  checked against website ground truth.     
+False  -  "manual" check if equation is correct.    

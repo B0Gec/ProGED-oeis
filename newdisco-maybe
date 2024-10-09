@@ -4,3 +4,7 @@ for 10000 terms
 
 for first look check_quick
 
+jachobstal a1045:
+a(n)^2 -4*a(n)*a(n-1) +4*a(n-1)^2 -1
+not really that amazing discovery it seems. Maybe I'll submit it latter.
+
