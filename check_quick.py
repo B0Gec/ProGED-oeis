@@ -1,4 +1,5 @@
 """ A quick 'manual' check if equation is correct, witout solution reference"""
+import sys
 
 import pandas as pd
 import numpy as np
@@ -39,21 +40,44 @@ csv_filename = 'cores_test.csv'
 # overflow_terms = 35
 #
 
+# sys.set_int_max_str_digits(85301)
+# sys.set_int_max_str_digits(185301)
+
 n_of_terms = 12000
 n_of_terms = 12
 n_of_terms = 15
 # n_of_terms = 16
+# n_of_terms = 19
+# n_of_terms = 20
 csv = pd.read_csv(csv_filename, low_memory=False, usecols=[seq_id])[:n_of_terms]
 seq = unnan(csv[seq_id])
 # seq = seq_full[:overflow_terms]
 # seq = seq_full
+print(len(seq))
 
 from functools import lru_cache
 @lru_cache(maxsize=None)
 def a(n): return 1 if n <= 1 else a(n-1) * (a(n-1) + a(n-2) + a(n-1)//a(n-2))
-seq = [ a(n) for n in range(n_of_terms)]
+seqc1 = [ a(n) for n in range(n_of_terms) ]
+# print(seq)
+def a(n): return 1 if n <= 1 else 2*a(n-1)*sum([a(i) for i in range(n-1)]) + a(n-1)**2
+# print([a(i) for i in range(4)])
+seqc2 = [ a(n) for n in range(n_of_terms) ]
 print(seq)
+print(len(seq))
+print([seq[n] - i for n,i in enumerate(seq)])
+print([seqc1[n] - i for n,i in enumerate(seq)])
+print([seqc2[n] - i for n,i in enumerate(seq)])
+print([seqc2[n] - i for n,i in enumerate(seqc1)])
+seq = seqc2
+
 # 1/0
+# a(n+1) = 2*a(n)*(a(0) + ... + a(n-1)) + a(n)^2.
+# a(0) = 1
+# a(1) = 1
+# a(1+1) = 2*a(1)*a(0) + a(1)^2 = 2 + 1 = 3
+# a(2+1) = 2*a(2)*(a(0) + ... + a(1)) + a(2)^2 = 2*3*(1+1) + 9 = 6*2 + 9 = 21
+
 
 a_zero = seq[0:4]
 # # fibo:

@@ -6,6 +6,14 @@ for first look check_quick
 
 jachobstal a1045:
 a(n)^2 -4*a(n)*a(n-1) +4*a(n-1)^2 -1
+
+
+a**2 -4ab + 4b**2 - 1
+(a-2b)**2 = a^2 +4b2 -4ab - 1
+(a-2b)**2 = a^2 +4b2 -4ab - 1
+(a-1)(a+1) = a2 - 1
+((a-2b)-1)((a-2b)+1) = 0
+(a-2b-1)(a-2b+1) = 0
 not really that amazing discovery it seems. Maybe I'll submit it latter.
 
 a1600
