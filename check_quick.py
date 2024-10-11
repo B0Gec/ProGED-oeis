@@ -15,7 +15,11 @@ seq_id = 'A000984'
 seq_id = 'A001045'
 seq_id = 'A001462'
 seq_id = 'A001699'
+seq_id = 'A002808'
+seq_id = 'A004018'
+seq_id = 'A006318'
 
+print(f'checking out {seq_id} !!!!!!!')
 print('CHANGE seq_id !!!!!!!')
 
 def notation(eq):
@@ -23,53 +27,55 @@ def notation(eq):
     eq = eq.replace('a(n)', 'an').replace('^', '**')
     return eq
 eq = """
-# a(n-2)^3 -a(n-1)^2 -3*a(n-1)*a(n-2) -2*a(n-2)^2 +a(n) -2*a(n-1) +4*a(n-2),
+a(n)*n -6*n*a(n-1) +n*a(n-2) +a(n) +3*a(n-1) -2*a(n-2)
 """
-print(notation(eq))
+# print(notation(eq))
 # 1/0
+
 
 
 csv_filename = 'linear_database_newbl.csv'
 csv_filename = 'cores_test.csv'
 
-# # # # # checkall:
-# from saved_new_bfile10000 import bseqs
-# seq_full = bseqs[seq_id][1:]
-# overflow_terms = 250
-# overflow_terms = 550
-# overflow_terms = 35
-#
+# # # # checkall:
+from saved_new_bfile10000 import bseqs
+seq_full = bseqs[seq_id][1:]
+overflow_terms = 250
+overflow_terms = 550
+overflow_terms = 35
+
 
 # sys.set_int_max_str_digits(85301)
 # sys.set_int_max_str_digits(185301)
 
 n_of_terms = 12000
-n_of_terms = 12
-n_of_terms = 15
+# n_of_terms = 12
+# n_of_terms = 15
 # n_of_terms = 16
 # n_of_terms = 19
 # n_of_terms = 20
 csv = pd.read_csv(csv_filename, low_memory=False, usecols=[seq_id])[:n_of_terms]
 seq = unnan(csv[seq_id])
 # seq = seq_full[:overflow_terms]
-# seq = seq_full
+seq = seq_full
 print(len(seq))
 
-from functools import lru_cache
-@lru_cache(maxsize=None)
-def a(n): return 1 if n <= 1 else a(n-1) * (a(n-1) + a(n-2) + a(n-1)//a(n-2))
-seqc1 = [ a(n) for n in range(n_of_terms) ]
+# # a1699
+# from functools import lru_cache
+# @lru_cache(maxsize=None)
+# def a(n): return 1 if n <= 1 else a(n-1) * (a(n-1) + a(n-2) + a(n-1)//a(n-2))
+# seqc1 = [ a(n) for n in range(n_of_terms) ]
+# # print(seq)
+# def a(n): return 1 if n <= 1 else 2*a(n-1)*sum([a(i) for i in range(n-1)]) + a(n-1)**2
+# # print([a(i) for i in range(4)])
+# seqc2 = [ a(n) for n in range(n_of_terms) ]
 # print(seq)
-def a(n): return 1 if n <= 1 else 2*a(n-1)*sum([a(i) for i in range(n-1)]) + a(n-1)**2
-# print([a(i) for i in range(4)])
-seqc2 = [ a(n) for n in range(n_of_terms) ]
-print(seq)
-print(len(seq))
-print([seq[n] - i for n,i in enumerate(seq)])
-print([seqc1[n] - i for n,i in enumerate(seq)])
-print([seqc2[n] - i for n,i in enumerate(seq)])
-print([seqc2[n] - i for n,i in enumerate(seqc1)])
-seq = seqc2
+# print(len(seq))
+# print([seq[n] - i for n,i in enumerate(seq)])
+# print([seqc1[n] - i for n,i in enumerate(seq)])
+# print([seqc2[n] - i for n,i in enumerate(seq)])
+# print([seqc2[n] - i for n,i in enumerate(seqc1)])
+# seq = seqc2
 
 # 1/0
 # a(n+1) = 2*a(n)*(a(0) + ... + a(n-1)) + a(n)^2.
@@ -159,8 +165,35 @@ def an(n, an_1, an_2):
     # print(n, an_1, res)
     return anxt
 a_zero = seq[0:2]
+
+# a2808
+def an(n, an_1, an_2):
+    # res = an_2**3 -an_1**2 -3*an_1*an_2 -2*an_2**2 +an -2*an_1 +4*an_2
+    anxt = 3*n -an_2 +6
+    # equation: a(n) =3*n -a(n-2) +6
+    # print(n, an_1, res)
+    return anxt
+
+# a4018
+def an(n, an):
+    res = an * (an * (n - 5) - 4 * n + 20)
+    # print(n, an_1, res)
+    return res
+a_zero = seq[0:0]
+
+# a6318
+def an(n, an, an_1, an_2):
+    res = an*n -6*n*an_1 +n*an_2 +an +3*an_1 -2*an_2
+    # print(n, an_1, res)
+    return res
+a_zero = seq[0:2]
+
+
+
+
 RECONSTRUCTING = False
-RECONSTRUCTING = True
+# RECONSTRUCTING = True
+if RECONSTRUCTING: print('\nRECONSTRUCTING !!!\n')
 
 
 
@@ -173,6 +206,7 @@ def f_implicit(seq, a_zero, an=an):
         # a.append(an(n, seq[n]))
         # a.append(an(n, seq[n], seq[n-1]))
         a.append(an(n, seq[n], seq[n-1], seq[n-2]))
+        # a.append(an(n, seq[n]))
         # print(an(n, seq[n], seq[n-1]))
         # print(n, seq[n], seq[n-1], a )
     return a
@@ -193,11 +227,13 @@ a = reconstruct(seq, a_zero) if RECONSTRUCTING else f_implicit(seq, a_zero)
 print(a)
 print('\ndiffs')
 
-# print([i == a[n] for n,i in enumerate(seq)].index(False))
-print([i - a[n] for n,i in enumerate(seq)])
-print((np.array([i - a[n] for n,i in enumerate(seq)]) == 0).all())
-# print((np.array([i for i in a[azero_len:]]) == 0))
-# print((np.array([i for i in a[azero_len:]]) == 0).all())
+if RECONSTRUCTING:
+    # print([i == a[n] for n,i in enumerate(seq)].index(False))
+    print([i - a[n] for n,i in enumerate(seq)])
+    print((np.array([i - a[n] for n,i in enumerate(seq)]) == 0).all())
+else:
+    print((np.array([i for i in a[azero_len:]]) == 0))
+    print((np.array([i for i in a[azero_len:]]) == 0).all())
 
 print(len(seq))
 
