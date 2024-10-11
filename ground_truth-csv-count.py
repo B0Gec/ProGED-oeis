@@ -15,19 +15,23 @@ print(len(mb))
 
 ss_l = [i for i in mb if i == 's']
 # syesscoma = [i for i in mb if (i == 's' or ('yes' in str(i)) or str(i)[:2] == 's,')]
-count_l = [i for i in mb if (i == 's' or ('yes' in str(i)) or str(i)[:2] == 's,')]
+count_l = [i for i in mb if (i == 's' or ('yes' in str(i)) or str(i)[:2] == 's,' or 'a(n) = n*(n+1)*(2*n+1)/6' in str(i)[:25] or str(i) == 'n')]  # 'n' = a2426
 print(count_l)
 ss = len(ss_l)
 count = len(count_l)
 nany = mb[0]
 nans_l = [ i for i in mb if pd.isna(i) ]
 nos_l = [ i for i in mb if i == 'no' ]
-no_in = [ i for i in mb if 'no' in str(i) ]
+no_in = [ i for i in mb if 'no' in str(i).lower() ]
 maybe = [ i for i in mb if 'maybe' in str(i) ]
 specify = [ i for i in mb if 'a(n) = -1*(a(n-2)^3 -2*' in str(i)[:25] ]
-print(specify)
+specify += [ i for i in mb if 'a(n) * a(n-1) + a(n) * a(n-2) ' in str(i)[:30] ]
+for i in specify:
+    print('spec', i)
 
-print(mb[116])
+print(mb[111])
+# print(mb[116])
+# print(mb[1])
 
 # 1/0
 nans = len(nans_l)
