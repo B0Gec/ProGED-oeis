@@ -18,6 +18,7 @@ seq_id = 'A001699'
 seq_id = 'A002808'
 seq_id = 'A004018'
 seq_id = 'A006318'
+seq_id = 'A002658'
 
 print(f'checking out {seq_id} !!!!!!!')
 print('CHANGE seq_id !!!!!!!')
@@ -27,9 +28,9 @@ def notation(eq):
     eq = eq.replace('a(n)', 'an').replace('^', '**')
     return eq
 eq = """
-a(n)*n -6*n*a(n-1) +n*a(n-2) +a(n) +3*a(n-1) -2*a(n-2)
+ a(n-2)^3 -2*a(n-1)^2 -6*a(n-1)*a(n-2) -4*a(n-2)^2 +4*a(n) -8*a(n-1) +11*a(n-2)
 """
-# print(notation(eq))
+print(notation(eq))
 # 1/0
 
 
@@ -188,7 +189,12 @@ def an(n, an, an_1, an_2):
     return res
 a_zero = seq[0:2]
 
-
+# a6318
+def an(n, an, an_1, an_2):
+    res = an_2 ** 3 - 2 * an_1 ** 2 - 6 * an_1 * an_2 - 4 * an_2 ** 2 + 4 * an - 8 * an_1 + 11 * an_2
+    # print(n, an_1, res)
+    return res
+a_zero = seq[0:2]
 
 
 RECONSTRUCTING = False
