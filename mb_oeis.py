@@ -1,6 +1,10 @@
 """
 file with domb (do moeller-buchberger) to replace increase_one in doone.py
+
+Settings expeperiences from 14.10.2024:
+    -  first experiments on core were run at 2*order + n_more_terms, where n_more_terms = 10.
 """
+
 
 from typing import Union
 import sys
@@ -57,6 +61,7 @@ def increasing_mb(seq_id, csv, max_order, n_more_terms, execute, library, n_of_t
         echo = f'order: {order}'
         printout += echo + '\n'
         print(echo)
+        print('14.10.2024 hardcoded 200 terms for MB instead of 2*order + n_more_terms')
         first_generator, ref, ideal = one_mb(seq, order, n_more_terms, execute, library, n_of_terms)
 
         #def one_mstb(seq_id, csv, order, n_more_terms, library='n', n_of_terms=200) -> tuple:
@@ -89,7 +94,8 @@ def one_mb(seq, order, n_more_terms, execute, library='n', n_of_terms=200) -> tu
     print('\n', '-'*order, '----one_mb-start----')
     # take max_order * 2 + n_more_terms terms from given sequence terms
     # if TAKELESSTERMS:
-    seq = seq[:2*order + n_more_terms]
+    # seq = seq[:2*order + n_more_terms]
+    seq = seq[:n_of_terms]
     # print(seq)
 
     # seq = sindy_hidden[d_max_lib - 1]
@@ -181,11 +187,11 @@ if __name__ == '__main__':
 
 
     print('before onemb')
-    res = one_mb(seq, order=1, n_more_terms=10, library='n', n_of_terms=200)
+    res = one_mb(seq, order=1, n_more_terms=10, execute=True, library='n', n_of_terms=200)
     print(res)
     # 1/0
     print('after error')
 
-    increasing_mb(seq_id, csv, max_order=2, n_more_terms=10, library='n', n_of_terms=2000)
+    # increasing_mb(seq_id, csv, max_order=2, n_more_terms=10, library='n', n_of_terms=2000)
 
     1/0

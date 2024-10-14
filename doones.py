@@ -189,7 +189,8 @@ THRESHOLD = 0.1  # For sindy - masking threshold.
 # SEQ_LEN_SINDY = 70
 # SEQ_LEN_SINDY = 4
 
-N_OF_TERMS_ED = 200 # before mavi
+# N_OF_TERMS_ED = 200 # before mavi
+N_OF_TERMS_ED = 200  # MB
 # N_OF_TERMS_ED = 20  # mavi
 # N_OF_TERMS_ED = 7  # mavi
 # N_OF_TERMS_ED = 14  # mavi
@@ -656,10 +657,10 @@ else:
         elif METHOD == 'MB':
             print('Attempting MB for', seq_id)
             print(f'with only first order + {n_more_terms} terms, ')
-            print(f'args:', seq_id, max_order_, n_more_terms, EXECUTE_REAL, library, N_OF_TERMS_ED)
+            print(f'args:', seq_id, max_order_, n_more_terms, EXECUTE_REAL, library, n_of_terms_ed)
             # 1/0
             # first_generator, sol_ref, ideal_ = increasing_mb
-            mbprintout = increasing_mb(seq_id, csv, max_order_, n_more_terms, execute=EXECUTE_REAL, library=library, n_of_terms=N_OF_TERMS_ED)
+            mbprintout = increasing_mb(seq_id, csv, max_order_, n_more_terms, execute=EXECUTE_REAL, library=library, n_of_terms=n_of_terms_ed)
             deg_used, order_used = 'unknown_mb', 'unknown_mb'
             # eq, x = first_generator, [], 'unknown_mb'
             eq, x, sol_ref, truth = mbprintout, [], 'unknown_mb', 'unknown_mb'
