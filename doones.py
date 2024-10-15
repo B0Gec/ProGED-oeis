@@ -39,8 +39,8 @@ EXECUTE_REAL = True
 
 METHOD = 'Diofantos'
 METHOD = 'SINDy'
-METHOD = 'Mavi'
-METHOD = 'MB'
+# METHOD = 'Mavi'
+# METHOD = 'MB'
 SINDy = True if METHOD in ('SINDy', 'Mavi') else False
 # SINDy = False
 SINDy_default = True
@@ -104,6 +104,7 @@ N_MORE_TERMS = 10
 
 VERBOSITY = 2  # dev scena
 VERBOSITY = 1  # run scenario
+# VERBOSITY = 3  # dev scenario
 
 # DEBUG = True
 DEBUG = False
@@ -612,6 +613,7 @@ else:
                         printout += f'{e}\n\n'
 
                 else:
+                    printout = ''
                     print('Attempting SINDy for', seq_id)
                     x, (sol_ref, deg_used, order_used), eq, _, _ = increasing_eed(one_results, seq_id, csv, VERBOSITY,
                                                           d_max, max_order_, ground_truth=GROUND_TRUTH,

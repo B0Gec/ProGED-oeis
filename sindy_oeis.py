@@ -102,11 +102,7 @@ def sindy(seq: Union[list, sp.Matrix], d_max: int, max_order: int, threshold: fl
 
     # print(len(ongrid))
     seq = [int(i) for i in seq]
-    # print(type(seq), type(seq[-1]))
-    # seq = seq[:90]
-    # seq = seq[:70]
-    # seq = seq[:30]
-    # print(f"{int(seq[-1]):.4e}")
+    seq = seq[:2*max_order+10]  # Hardcoded for experiments with same length as in Moeller-Buchberger.
     # 1/0
 
     # baslib = 'n' if library == 'n' else 'nlin' if library[0] == 'n' else 'lin'

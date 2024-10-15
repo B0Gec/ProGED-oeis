@@ -186,6 +186,7 @@ ids_selection = [
 no_disco = ids_selection
 
 csv_filename = '../cores_test.csv'
+csv_filename = 'cores_test.csv'
 # csv = pd.read_csv(csv_filename, low_memory=False, usecols=[seq_id])[:N_OF_TERMS_LOAD]
 N_OF_TERMS_LOAD = 20
 ids2 = [i[0] for i in eqs]

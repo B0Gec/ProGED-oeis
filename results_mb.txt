@@ -15,6 +15,9 @@ targeted_taskids = [1, 9, 10, 14, 17, 19, 21, 24, 29, 7, 32, 34, 35, 38, 39, 41,
 # look ground_truth.csv gdrive file.
 
 
+max_order = 4, n_more_terms = 10, n_of_terms = 2*order + 10.
+
+
 
 
 

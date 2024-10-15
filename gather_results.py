@@ -34,11 +34,13 @@ import pandas as pd
 from blacklist import no_truth, false_truth
 false_truth_list = false_truth
 from exact_ed import truth2coeffs
-from results.sicor_fix_proc import success_eqs
+# from results.sicor_fix_proc import success_eqs
 
 # fname = 'results/good/01234567/34500_A000032.txt'
 # base_dir = "results/good/"
-base_dir = "results/goodmavi/"
+# base_dir = "results/goodmavi/"
+base_dir = "results/goodmb/"
+
 # job_id = "01234567"
 # job_id = "36765084"  # old format
 job_id = "36781342"  # 17.3. waiting 2 jobs  # to check
@@ -131,11 +133,15 @@ job_id = 'sicor1114'
 job_id = 'mavicore0'
 # job_id = 'maviterms50'
 
+# 15.10.2024
+job_id = 'dicor-atMb'
+
 print(job_id)
+# 1/0
 
 CORES = True if job_id in ("diocores77", 'diocor-merge', 'sindycore83', 'dicor-cub', 'dicor-cub19',
                            'fdiocores', 'fdiocorefix', 'fdiocorefix2', 'sicor116', 'dicorrep', 'sicor9fix2', 'sicor1114',
-                           'findicor', 'sdcor2', 'mavicore0', 'maviterms50') else False
+                           'findicor', 'sdcor2', 'mavicore0', 'maviterms50', 'dicor-atMb') else False
 # CORES = True
 # CORES = False
 if CORES:
@@ -229,12 +235,13 @@ def str_eq2orders(eq: str):
         intercept = int(intercept[0]) if intercept != [] else 0
     return nonzero_coeff_orders, intercept
 
-print(str_eq2orders( 'a(n) = a(n - 2) + a(n - 1)' ))
-print(str_eq2orders( 'a(n) = 5 + 15*a(n - 2) + -3*a(n - 1)' ))
-print(str_eq2orders( 'a(n) = ( 1)' ))
-# print(str_eq2orders('a(n) = -a(n - 18) + a(n - 17) + a(n - 16) - a(n - 15) + a(n - 13) - a(n - 12) - a(n - 11) + a(n - 10) + a(n - 8) - a(n - 7) - a(n - 6) + a(n - 5) - a(n - 3) + a(n - 2) + a(n - 1) + 1'))
-print(str_eq2orders('a(n) =  a(n - 17) + a(n - 16) - a(n - 15) + a(n - 13) - a(n - 12) - a(n - 11) + a(n - 10) + a(n - 8) - a(n - 7) - a(n - 6) + a(n - 5) - a(n - 3) + a(n - 2) + a(n - 1) + 1'))
-print(str_eq2orders('a(n) = -a(n - 18) '))  # coefs = [1] in this case (not -1) for simplicity
+# a) testing string of equation -> orders:
+# print(str_eq2orders( 'a(n) = a(n - 2) + a(n - 1)' ))
+# print(str_eq2orders( 'a(n) = 5 + 15*a(n - 2) + -3*a(n - 1)' ))
+# print(str_eq2orders( 'a(n) = ( 1)' ))
+# # print(str_eq2orders('a(n) = -a(n - 18) + a(n - 17) + a(n - 16) - a(n - 15) + a(n - 13) - a(n - 12) - a(n - 11) + a(n - 10) + a(n - 8) - a(n - 7) - a(n - 6) + a(n - 5) - a(n - 3) + a(n - 2) + a(n - 1) + 1'))
+# print(str_eq2orders('a(n) =  a(n - 17) + a(n - 16) - a(n - 15) + a(n - 13) - a(n - 12) - a(n - 11) + a(n - 10) + a(n - 8) - a(n - 7) - a(n - 6) + a(n - 5) - a(n - 3) + a(n - 2) + a(n - 1) + 1'))
+# print(str_eq2orders('a(n) = -a(n - 18) '))  # coefs = [1] in this case (not -1) for simplicity
 
 # 1/0
 
@@ -252,18 +259,17 @@ def coeffs2nonzeros_cx(coeffs: str):
 
 ### print(maxorder_cx( None ))  ## shouldn't happen scenario
 
-print(maxorder_cx( 'a(n) = 0' ))
-print(nonzeros_cx( 'a(n) = 0' ))
-print(nonzeros_cx( 'a(n) = -3' ))
-print(nonzeros_cx( 'a(n) = 1*a(n - 1) + 0*a(n - 2) + 0*a(n - 3) + 1*a(n - 4) + -1*a(n - 5) + 0*a(n - 6) + 0*a(n - 7) + 0*a(n - 8) + 0*a(n - 9) + 0*a(n - 10) + 0*a(n - 11) + 0*a(n - 12) + 0*a(n - 13) + 0*a(n - 14) + 0*a(n - 15) + 1*a(n - 16) + -1*a(n - 17) + 0*a(n - 18) + 0*a(n - 19) + -1*a(n - 20) + 1*a(n - 21) ' ))
-# 1/0
-
-
-
-print(maxorder_cx( 'a(n) = a(n - 2) + a(n - 1)' ))
-print(nonzeros_cx( 'a(n) = a(n - 2) + a(n - 1)' ))
-print(coeffs2nonzeros_cx([0, -1, 0, -23, 8,  1, 0]))
-
+# print(maxorder_cx( 'a(n) = 0' ))
+# print(nonzeros_cx( 'a(n) = 0' ))
+# print(nonzeros_cx( 'a(n) = -3' ))
+# print(nonzeros_cx( 'a(n) = 1*a(n - 1) + 0*a(n - 2) + 0*a(n - 3) + 1*a(n - 4) + -1*a(n - 5) + 0*a(n - 6) + 0*a(n - 7) + 0*a(n - 8) + 0*a(n - 9) + 0*a(n - 10) + 0*a(n - 11) + 0*a(n - 12) + 0*a(n - 13) + 0*a(n - 14) + 0*a(n - 15) + 1*a(n - 16) + -1*a(n - 17) + 0*a(n - 18) + 0*a(n - 19) + -1*a(n - 20) + 1*a(n - 21) ' ))
+# # 1/0
+#
+#
+# print(maxorder_cx( 'a(n) = a(n - 2) + a(n - 1)' ))
+# print(nonzeros_cx( 'a(n) = a(n - 2) + a(n - 1)' ))
+# print(coeffs2nonzeros_cx([0, -1, 0, -23, 8,  1, 0]))
+#
 
 # 1/0
 
@@ -460,17 +466,24 @@ def for_loop(dir: str):
 
 # jor
 eqs = for_loop(job_dir)
-# print(success_eqs)
-print()
+for eq in eqs:
+    print(eq)
 # 1/0
-for n, seq_id, eq in success_eqs:
-    print('task_id:', n[5-ndigits:], 'seq_id:', seq_id)
-    print('disco:', eq)
-    print('mavi:\n', eqs[f'{n[5-ndigits:]} {seq_id}'])
 
-print('after loop')
 
-1/0
+#
+# # print(success_eqs)
+# print()
+# # 1/0
+# for n, seq_id, eq in success_eqs:
+#     print('task_id:', n[5-ndigits:], 'seq_id:', seq_id)
+#     print('disco:', eq)
+#     # print('mavi:\n', eqs[f'{n[5-ndigits:]} {seq_id}'])
+#     print()
+#
+# print('after loop')
+
+# 1/0
 
 
 
@@ -715,7 +728,6 @@ if CORES:
 # print(len(mia_task_ids), len(no_truth), mia_task_ids == no_truth, no_truth[0], mia_task_ids[0])
 # print(len(mia_ids), len(no_truth), mia_ids == no_truth, no_truth[0], mia_ids[0])
 # 1/0
-#
 
 
 # summary = reduce(for_summary, files, (0, 0, 0, 0, 0,))
@@ -777,15 +789,15 @@ complexity_symbol = cx_sym_dict.get(job_id, 'None')
 rename = {'<': 'Less', '=': 'Equl', '>': 'More', 'l': 'Fail'}
 
 print('\nComplexities:')
-print(''.join([f'\\newcommand{{\\{complexity_symbol}MaxCx{rename[ky[-1]]}}}{{{val}}}\n' for ky, val in max_order_cxs.items()]))
-print(''.join([f'\\newcommand{{\\{complexity_symbol}NonzeroCx{rename[ky[-1]]}}}{{{val}}}\n' for ky, val in nonzeros_cxs.items()]))
-print([(ky, val) for ky, val in nonzeros_cxs.items() if 'ail' not in ky])  #
-max_total = sum([val for ky, val in max_order_cxs.items() if 'ail' not in ky])
-nonzeros_total = sum([val for ky, val in nonzeros_cxs.items() if 'ail' not in ky])
-print(''.join([f'\\newcommand{{\\{complexity_symbol}MaxCxPcg{rename[ky[-1]]}}}{{{val/max_total}}}\n' for ky, val
-               in max_order_cxs.items() if 'ail' not in ky]))
-print(''.join([f'\\newcommand{{\\{complexity_symbol}NonzeroCxPcg{rename[ky[-1]]}}}{{{val/nonzeros_total}}}\n' for ky, val
-               in nonzeros_cxs.items() if 'ail' not in ky]))
+# print(''.join([f'\\newcommand{{\\{complexity_symbol}MaxCx{rename[ky[-1]]}}}{{{val}}}\n' for ky, val in max_order_cxs.items()]))
+# print(''.join([f'\\newcommand{{\\{complexity_symbol}NonzeroCx{rename[ky[-1]]}}}{{{val}}}\n' for ky, val in nonzeros_cxs.items()]))
+# print([(ky, val) for ky, val in nonzeros_cxs.items() if 'ail' not in ky])  #
+# max_total = sum([val for ky, val in max_order_cxs.items() if 'ail' not in ky])
+# nonzeros_total = sum([val for ky, val in nonzeros_cxs.items() if 'ail' not in ky])
+# print(''.join([f'\\newcommand{{\\{complexity_symbol}MaxCxPcg{rename[ky[-1]]}}}{{{val/max_total}}}\n' for ky, val
+#                in max_order_cxs.items() if 'ail' not in ky]))
+# print(''.join([f'\\newcommand{{\\{complexity_symbol}NonzeroCxPcg{rename[ky[-1]]}}}{{{val/nonzeros_total}}}\n' for ky, val
+#                in nonzeros_cxs.items() if 'ail' not in ky]))
 # 1/0
 
 printout = f"""
@@ -906,6 +918,18 @@ print(f'check bins: {len(files)} = {sum(job_bins)} ?')
 for n, i in enumerate(job_bins):
     print(n, i)
 
+if CORES:
+    # print(files)
+    print('\nPrinting all failed jobs:')
+    cores = [(task, id_) for task, id_ in enumerate(all_ids)]
+    print('  Firstly, all cores:', len(cores), cores)
+    job_fails = [(task, i) for task, i in cores if f'{task:0>5}_{i}.txt' not in files]
+    print(f'  E voila, job fails: {len(job_fails)} {job_fails}')
+    fail_tasks = ','.join([str(task) for task, i in job_fails])
+    print(f'  Finally, sbatch list of fails: \n{fail_tasks}\n')
+    1/0
+
+
 m = 165
 print(f'first {m} non_ids:', non_id_list[:m])
 non_id_task_ids = ','.join([str(int(fname[:5])) for fname in non_id_list])
@@ -926,10 +950,8 @@ false_non_man = [i[6:6+7] for i in non_manual_list]
 # print('new', [i for i in false_non_man if i not in false_truth_list])
 # 1/0
 
-print(len(non_id_list), len(ed_fail_list), len(id_oeis_list), 'len non_id_list, ed_fail_list, id_oeis')
 print(len(non_id_list), len(ed_fail_list), len(id_oeis_list),
       len(non_id_list)+ len(ed_fail_list)+ len(id_oeis_list), 'len non_id_list, ed_fail_list, id_oeis, sum')
-print(len(non_id_list), len(ed_fail_list), len(id_oeis_list), 'len non_id_list, ed_fail_list, id_oeis')
 
 success_ids = [fname[6:(6+7)] for fname in non_id_list+id_oeis_list]
 print(success_ids[:10])

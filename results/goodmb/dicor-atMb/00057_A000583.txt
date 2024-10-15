@@ -1,0 +1,16 @@
+
+While total time consumed by now, scale:58/164, seq_id:A000583, order:4 took:
+ 0.5 seconds, i.e. 0.01 minutes or 0.0 hours.
+CORELIST: True, METHOD: Diofantos, SINDy: False (True also in case of MAVI), GROUND_TRUTH: False, SINDy_default: True, DEBUG: False
+n_of_terms_ed: 200, N_OF_TERMS_ED: 200
+Library: n, max_order 4, max_degree: 2, threshold: 0.1, 
+Library: n, max_order 4, threshold: 0.1
+
+by degree: 1 and order: 3. 
+A000583: 
+a(n) = 24*n + a(n - 3) - 3*a(n - 2) + 3*a(n - 1) - 36
+truth: 
+
+
+  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

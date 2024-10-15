@@ -16,6 +16,7 @@ seqsonly =  len([i for i in csv[csv.columns[0]] if not pd.isna(i)])
 print( 'all sequence rows:', seqsonly)
 mb = mb[0:seqsonly]
 print(len(mb))
+# all_ids = [(csv.iloc[n, 0], i) for n, i in enumerate(mb)]
 
 ss_l = [i for i in mb if i == 's']
 # syesscoma = [i for i in mb if (i == 's' or ('yes' in str(i)) or str(i)[:2] == 's,')]
@@ -58,16 +59,55 @@ maybes = len(maybe)
 specific = len(specify)
 print(count)
 # print('ss:', ss)
+
+print()
 print('captured:', count)
 print('nans:', nans, 'nos:', nos, '(no in)s:', no_ins, 'maybes:', maybes)
 print('non nans and nos:', len(mb) - nans - nos)
 print('non nans and no ins:', len(mb) - nans - no_ins)
 print('reduced', len(mb) - nans - no_ins - maybes - specific)
 if count == (len(mb) - nans - no_ins - maybes - specific):
-    print(f'Counts match, so discovered equations for {method} seems to be: {count}')
+    print(f'\n  Counts match, so discovered equations for {method} seems to be: {count}\n')
 
 print(f'results from mbcore0 show 45 successes out of {len(mb)} core sequences for MB method with '
       f'10 n_more_terms and an input having n_of_terms = 2*order + 10.')
+
+
+# len(mb)
+# print(mb)
+trivials, exists, hards = tuple([(csv.iloc[n, 0]) for n, _ in enumerate(mb) if
+            any([word in str(csv['cathegory (trivial [T]/exists [E]/hard [H])'][n]) for word in cat]) ]
+            for cat in [('v', 'T'), ('x', 'E'), ('h', 'H', 'nan')])
+# discos = [n for n, i in enumerate(mb) if 'yes' in str(i)]
+print(len(count_l), count_l)
+discos = [[i for i, _ in count_l if i in cat] for cat in [trivials, exists, hards]]
+print('by cat:', [len(i) for i in discos], discos)
+print('hard:', discos[2])
+
+print()
+print('trivials:', trivials)
+print('exists:', hards)
+print('hards:', hards)
+# 1/0
+print(f'  trivials:', len(trivials), f'\n  exists:', len(exists), f'\n  hards:', len(hards))
+print('sum check', len(trivials) + len(exists) + len(hards),  len(mb))
+# print([csv['cathegory (trivial [T]/exists [E]/hard [H])'][n] for n, i in enumerate(mb) if csv['cathegory (trivial [T]/exists [E]/hard [H])'][n] not in trivials + exists + hards])
+# print([y for n, i in enumerate(mb) if (y := (csv.iloc[n, 0], i)) not in trivials + exists + hards])
+
+# print()
+# for n, i in enumerate(mb):
+#     print(n, csv.iloc[n, 0], (y:=csv['cathegory (trivial [T]/exists [E]/hard [H])'][n], str(y)), )
+
+1/0
+
+
+
+
+# trivials = [n  for n in non_nans if 'v' in gt[cat_name][n] or 'T' in gt[cat_name][n]]
+# exists = [n  for n in non_nans if 'x' in gt[cat_name][n] or 'E' in gt[cat_name][n]]
+# hards = [n  for n in non_nans if 'h' in gt[cat_name][n] or 'H' in gt[cat_name][n]]
+#
+1/0
 
 from results_mb import seq_task_ids
 
@@ -79,6 +119,7 @@ count_ids = [i for i, _ in count_l]
 # print(idss)
 # 1/0
 
+print()
 # print(ids)
 untargeted = [i for i in count_ids if i not in ids]
 fails_targeted = [i for i in ids if i not in count_ids]

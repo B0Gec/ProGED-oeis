@@ -1,0 +1,16 @@
+
+While total time consumed by now, scale:131/164, seq_id:A005408, order:4 took:
+ 0.2 seconds, i.e. 0.0 minutes or 0.0 hours.
+CORELIST: True, METHOD: Diofantos, SINDy: False (True also in case of MAVI), GROUND_TRUTH: False, SINDy_default: True, DEBUG: False
+n_of_terms_ed: 200, N_OF_TERMS_ED: 200
+Library: n, max_order 4, max_degree: 2, threshold: 0.1, 
+Library: n, max_order 4, threshold: 0.1
+
+by degree: 1 and order: 0. 
+A005408: 
+a(n) = 2*n + 1
+truth: 
+
+
+  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    
