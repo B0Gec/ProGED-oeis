@@ -1,0 +1,19 @@
+
+Preprocessing sees only first 200 terms.
+Sindy threshold: 0.1
+Sindy will use max_order: 4
+While total time consumed by now, scale:34/164, seq_id:A000161, order:4 took:
+ 0.9 seconds, i.e. 0.02 minutes or 0.0 hours.
+CORELIST: True, METHOD: SINDy, SINDy: True (True also in case of MAVI), GROUND_TRUTH: False, SINDy_default: True, DEBUG: False
+n_of_terms_ed: 200, N_OF_TERMS_ED: 200
+Library: n, max_order 4, max_degree: 2, threshold: 0.1, 
+Library: n, max_order 4, threshold: 0.1
+
+by degree: 2 and order: 4. 
+A000161: 
+a(n) = NOT RECONSTRUCTED :-(
+truth: 
+None
+
+  -  checked against website ground truth.     
+False  -  "manual" check if equation is correct.    

@@ -135,13 +135,14 @@ job_id = 'mavicore0'
 
 # 15.10.2024
 job_id = 'dicor-atMb'
+job_id = 'sicor-atMb'
 
 print(job_id)
 # 1/0
 
 CORES = True if job_id in ("diocores77", 'diocor-merge', 'sindycore83', 'dicor-cub', 'dicor-cub19',
                            'fdiocores', 'fdiocorefix', 'fdiocorefix2', 'sicor116', 'dicorrep', 'sicor9fix2', 'sicor1114',
-                           'findicor', 'sdcor2', 'mavicore0', 'maviterms50', 'dicor-atMb') else False
+                           'findicor', 'sdcor2', 'mavicore0', 'maviterms50', 'dicor-atMb', 'sicor-atMb') else False
 # CORES = True
 # CORES = False
 if CORES:
