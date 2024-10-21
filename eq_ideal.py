@@ -1,48 +1,32 @@
 import re
 
-def ideal_to_eqs(ideal: str, complexity: int = 10, verbosity=1) -> list:
-    """
-    Function to convert ideal to parsimony equations, which can be checked for correctness.
 
-    Args:
-        - ideal (list): list of generators produced by MB algorithm.
-
-    Returns: list of equations, as candidates for equations discovery task.
+def bitsize_summand(summand: str):
+    """Returns the sum of number of digits of the numerator and denomumerator,
+    e.g. '+(-1200/4345)*n*a(n-2)(' \-> 4+4 = 8
     """
 
-    generators_string = ideal[6:]
-    if verbosity > 0:
-        print('generators_string')
-        print(generators_string)
-        print(generators_string.replace(' ', ''))
-    # gens = generators_string.replace(' ', '').split(',')
-    gens = generators_string.split(',')
+    # print('in bitsizef_summand')
+    # summand = ['a(n)', '-2*a(n-1)', 'n^4', '+(-7/16875)*a(n-1)^4', '-93090916800*n^2*a(n-1)', 'tm2*a' ][5]
+    # print(summand)
+    coef = re.findall(r'^\+?\-?\(?\-?(\d+)/?(\d*)\)?', summand)
+    if coef == []:
+        #     # if re.findall(r'[a-zA-Z]', coef[0]) == []: return 0 else: raise ValueError('Variable have strange name or bug in code!!!.')
+        bits = 0
+    # elif:
+    else:
+        # return coef[0]
+        nom, denom = coef[0]
+        bits = len(nom) + len(denom)
 
-    eqs = []
-    for gen in gens:
-        if 'j' in gen:
-            raise ValueError('Repair split(\',  \'), since split from ideal to generator failed!!!.')
-        print(f'gen:{gen}')
-        summands = [i for i in gen.split(' ')]
-        summands = [j for j in [i.replace(' ', '') for i in summands] if j != '']  # clean-up empty strings.
+    # print(coef)
+    # print('return:', bits)
+    # print('punchline')
 
-        if verbosity > 0:
-            for sumand in summands:
-                print('   ', sumand)
-            print(len(summands))
-        if len(summands) <= complexity:
-            eqs += [summands]
+    return bits
 
-    print(gens)
-    eqs = sorted(eqs, key=lambda x: len(x))
 
-    # eqs = gens
-    for i, eq in enumerate(eqs):
-        print(f'len(eq {i}): {len(eq)}, eq {i}: {eq}')
-
-    return eqs
-
-def bitsizef(equation: list[str]):
+def bitsize(equation: list[str]):
     """Function determining the "bitsize" of an equation.
         e.g. ['(1200/4345)*n*a(n-2)', 'a(n-1)'] \-> (4+4 + 0)/2 = 4
 
@@ -55,59 +39,67 @@ def bitsizef(equation: list[str]):
 
     """
 
-    print('in bitsizef')
+    # print('in bitsizef')
 
-    def bitsize_summand(summand: str):
-        """Returns the sum of number of digits of the numerator and denomumerator,
-        e.g. '+(-1200/4345)*n*a(n-2)(' \-> 4+4 = 8
-        """
-
-        print('in bitsizef_summand')
-        summand = ['a(n)', '-2*a(n-1)', 'n^4', '+(-7/16875)*a(n-1)^4', '-93090916800*n^2*a(n-1)', 'tm2*a' ][5]
-        print(summand)
-        coef = re.findall(r'^\+?\-?\(?\-?(\d+)/?(\d*)\)?', summand)
-        if coef == []:
-        #     # if re.findall(r'[a-zA-Z]', coef[0]) == []: return 0 else: raise ValueError('Variable have strange name or bug in code!!!.')
-            bits = 0
-        # elif:
-        else:
-            # return coef[0]
-            nom, denom = coef[0]
-            bits = len(nom)+len(denom)
-
-        print(coef)
-        print('return:', bits)
-        print('punchline')
-
-        1/0
-        coefficient, monomial = summand.split('*')
-
-        def bitsize_coefficient(coefficient: str):
-            """Function determining the "bitsize" of a coefficient.
-                e.g. '1200/4345' \-> (4+4)/2 = 4
-
-            Args:
-                - coefficient (str): string, representing the coefficient.
-
-            Returns: int, representing the "bitsize" of the coefficient.
-                I.e. bitsize(coefficient) := (magnitude(nominator) + magnitude(denominator))/2.
-
-            """
-
-            nominator, denominator = coefficient.split('/')
-            return (len(nominator) + len(denominator))
-
-        coefficient, monomial = summand.split('*')
-        return (bitsize_coefficient(coefficient) + len(monomial))/2
-
-
-    print(bitsize_summand(equation[1]))
-    1/0
+    # print(bitsize_summand(equation[1]))
     bsize = sum([bitsize_summand(summand) for summand in equation])
+    # print('eq:', equation)
+    # print(f'returning bitsizef({equation}):\n', bsize)
+    # for i in equation:
+    #     print('  ', i, bitsize_summand(i))
+
+    return bsize
 
 
+def ideal_to_eqs(ideal: str, complexity: int = 10, top_n: int = 10, verbosity=1) -> list:
+    """
+    Function to convert ideal to parsimony equations, which can be checked for correctness.
 
-    return
+    Args:
+        - ideal (list): list of generators produced by MB algorithm.
+
+    Returns: list of equations, as candidates for equations discovery task.
+    """
+
+    generators_string = ideal[6:]
+    if verbosity >= 2:
+        print('generators_string')
+        print(generators_string)
+        print(generators_string.replace(' ', ''))
+    # gens = generators_string.replace(' ', '').split(',')
+    gens = generators_string.split(',')
+
+    eqs = []
+    for gen in gens:
+        if 'j' in gen:
+            raise ValueError('Repair split(\',  \'), since split from ideal to generator failed!!!.')
+        # print(f'gen:{gen}')
+        summands = [i for i in gen.split(' ')]
+        summands = [j for j in [i.replace(' ', '') for i in summands] if j != '']  # clean-up empty strings.
+
+        if verbosity >=2:
+            for sumand in summands:
+                print('   ', sumand)
+            print(len(summands))
+        if len(summands) <= complexity:
+            eqs += [summands]
+
+    # print(gens)
+    # print('len(eqs):', len(eqs))
+    eqs0 = sorted(eqs, key=lambda x: (bitsize(x), len(x)))[:top_n//2]
+    # print('len(eqs0):', len(eqs0))
+    # eqs = eqs0 + [i for i in sorted(eqs, key=lambda x: (len(x), bitsize(x))) if i not in eqs0][:top_n//2]
+    eqs1 = [i for i in sorted(eqs, key=lambda x: (len(x), bitsize(x))) if i not in eqs0][:top_n//2]
+    # print('len(eqs1):', len(eqs1))
+    eqs = eqs0 + eqs1
+
+    # eqs = gens
+    if verbosity >= 1:
+        for i, eq in enumerate(eqs):
+            print(f'len(eq {i}): {len(eq)}, eq {i}: {eq}')
+
+    return eqs
+
 
 
 if __name__ == '__main__':
@@ -160,10 +152,12 @@ if __name__ == '__main__':
 
     print('po res')
     print(ideal)
-    eqs = ideal_to_eqs(ideal, complexity=16)
+    eqs = ideal_to_eqs(ideal, complexity=16, top_n=10, verbosity=0)
+    for eq in eqs:
+        print(f'  len(eq): {len(eq)}, bitsize: {bitsize(eq)}, eq: {eq}')
     print('eqs:', eqs)
-    bitsize = bitsizef(eqs[1])
-    print(bitsize)
+    bitsize_ = bitsize(eqs[1])
+    print(bitsize_)
     1/0
 
     print('\n ------ after eqs ------')
