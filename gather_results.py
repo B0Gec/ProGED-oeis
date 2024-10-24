@@ -37,9 +37,9 @@ from exact_ed import truth2coeffs
 # from results.sicor_fix_proc import success_eqs
 
 # fname = 'results/good/01234567/34500_A000032.txt'
-# base_dir = "results/good/"
+base_dir = "results/good/"
 # base_dir = "results/goodmavi/"
-base_dir = "results/goodmb/"
+# base_dir = "results/goodmb/"
 
 # job_id = "01234567"
 # job_id = "36765084"  # old format
@@ -120,7 +120,7 @@ job_id = 'silin'
 job_id = 'sicor1114'
 #
 # job_id = 'dilin'
-# job_id = 'findicor'
+job_id = 'findicor'
 #
 # # # job_id = 'sideflin'  # fail: not even sindy
 # # # job_id = 'sidefcor'  # fail: not even sindy
@@ -129,13 +129,13 @@ job_id = 'sicor1114'
 # # # # job_id = 'sdcor'  # fail: not core
 # job_id = 'sdcor2'
 
-# mavi:
-job_id = 'mavicore0'
-# job_id = 'maviterms50'
-
-# 15.10.2024
-job_id = 'dicor-atMb'
-job_id = 'sicor-atMb'
+# # mavi:
+# job_id = 'mavicore0'
+# # job_id = 'maviterms50'
+#
+# # 15.10.2024
+# job_id = 'dicor-atMb'
+# job_id = 'sicor-atMb'
 
 print(job_id)
 # 1/0
@@ -143,6 +143,7 @@ print(job_id)
 CORES = True if job_id in ("diocores77", 'diocor-merge', 'sindycore83', 'dicor-cub', 'dicor-cub19',
                            'fdiocores', 'fdiocorefix', 'fdiocorefix2', 'sicor116', 'dicorrep', 'sicor9fix2', 'sicor1114',
                            'findicor', 'sdcor2', 'mavicore0', 'maviterms50', 'dicor-atMb', 'sicor-atMb') else False
+
 # CORES = True
 # CORES = False
 if CORES:
@@ -209,16 +210,20 @@ True  -  "manual" check if equation is correct.
 # b) Comlexity comparison:
 #   load csv:
 
-if job_id in ('fakesilin', 'silin', 'dilin', 'sdlin'):
-    csv_filename = 'linear_database_newbl.csv'
-    csv = pd.read_csv(csv_filename, low_memory=False)
+# if job_id in ('fakesilin', 'silin', 'dilin', 'sdlin'):
+csv_filename = 'linear_database_newbl.csv'
+csv = pd.read_csv(csv_filename, low_memory=False, nrows=0)
+# csv = pd.read_csv(csv_filename, low_memory=False)
 
+# 1/0
 # seq_id = 'A000004'
 # truth = csv[seq_id][0]
 # coeffs = truth2coeffs(truth)
 # print('order truth A4', len(truth2coeffs(truth)))
-# print([i for i in csv.columns], 'colnames')
-# 1/0
+colnames = [i for i in csv.columns]
+# print(csv.head())
+all_ids = colnames
+
 
 def str_eq2orders(eq: str):
     # a(n) = a(n - 2) + a(n - 1)
@@ -607,6 +612,10 @@ start = 10000
 start = 0
 limited_runs = 123456
 from all_ids import all_ids
+
+# csv = pd.read_csv(csv_filename, low_memory=False, nrows=0)
+
+
 if CORES:
     all_ids = csv_cols
 all_ids_ref = all_ids
