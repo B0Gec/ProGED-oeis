@@ -46,14 +46,19 @@ print(len(match_cores))
 print(match_cores)
 
 mcores = [i for i in match_cores]
+urb_cores = [re.sub(r'A0{1,6}', 'A', i) for i in mcores]
+print(len(urb_cores))
+print(urb_cores)
+# print(101)
+# 1/0
 print('mcores'.replace(r'A0+', '334'))
-1/0
 
-for i in match_cores:
-    # progs = re.findall(f'{i}.*\n.+', content)
-    progs = re.findall('A000', content)
+for i in urb_cores:
+    progs = re.findall(f'({i}).*\n(.+)', content)[0]
+    # progs = re.findall('A000', content)
     print(progs)
 
+new = [i for i in idsix if i not in core_ids]
 # 14168 is the number!!!
 print(14168 + 13819)
 
