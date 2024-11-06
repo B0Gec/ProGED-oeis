@@ -796,6 +796,18 @@ def sol_order(x: sp.Matrix, solution_ref: list[str]) -> (int, dict):
     return max([0] + [max([0] + [o for o in orders if str(o) in var]) for var, _ in x_dict.items()]), x_dict
 
 
+def check_eq_man_dasco(x: sp.Matrix, seq: str, csv: pd.DataFrame, n_input, n_pred, tau):
+
+    seq_pred = check_eq_man(n_input, n_pred, tau, seq[:n_input], tau)
+    # diff = max([abs((an - seq[n])/seq[n]) for n, an in enumerate(seq_pred[n_input: n_input+n_pred]]) if n !=0]
+    return diff < tau
+
+# 4 cases: (n_input, n_pred) pairs: (15, 1), (15, 10), (25, 1), (25, 10)
+# tau = 10^(-10)
+# print([check_eq_man_dasco(i) for i in [(15, 1), (15, 10), (25, 1), (25, 10)]])
+
+# in doones import check_eq_man_dasco and print it.
+
 def check_eq_man(x: sp.Matrix, seq_id: str, csv: pd.DataFrame,
                  n_of_terms: int = 500, header: bool = True,
                  oeis_friendly=0, solution_ref: list[str] = None, library: str = None) -> (bool, int):

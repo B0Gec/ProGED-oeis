@@ -6,7 +6,8 @@ import re
 
 import pandas as pd
 
-datafile = 'julia/urb/solutions'
+datafile = 'julia/urb-and-dasco/solutions'
+datafile = 'julia/urb-and-dasco/OEIS_easy.txt'
 
 ids = ''
 with open(datafile, 'r') as f:
@@ -30,22 +31,27 @@ core_ids = [i for i in cores.columns]
 print('core_ids', core_ids[:10])
 
 from opponent_match import match
-print(len(match))
+# print(len(match))
 print(len(all_ids))
 # 1/0
-# match =    [i for i in all_ids if i in idsix]
-# not_match = [i for i in idsix if i not in all_ids]
-# print(len(match))
-# print(len(not_match))
+match =    [i for i in all_ids if i in idsix]
+not_match = [i for i in idsix if i not in all_ids]
+print(len(match))
+print(len(not_match))
 # print(not_match[:20])
-# print(match)
+print(match[:20])
 # print(not_match)
+# 14168 is the number!!!
+print(14168 + 13819, 'for urb')
+print(2342+ 7658, 'for dasco', 'btw: 80 in cores')
+1/0
 
 
 match_cores = [i for i in core_ids if i in idsix]
 # not_match = [i for i in idsix if i not in all_ids]
 print(len(match_cores))
 print(match_cores)
+1/0
 
 mcores = [i for i in match_cores]
 urb_cores = [re.sub(r'A0{1,6}', 'A', i) for i in mcores]
@@ -62,11 +68,9 @@ for i in urb_cores:
     # print()
 
 new = [i for i in idsix if i not in core_ids]
-# 14168 is the number!!!
-print(14168 + 13819)
 
 
-1/0
+# 1/0
 print('diof and mb vs urb')
 # MB reconstructed by cat: [4, 41, 0] [['A001057', 'A004526', 'A005408', 'A005843'], ['A000032', 'A000035', 'A000045', 'A000058', 'A000079', 'A000085', 'A000108', 'A000124', 'A000129', 'A000142', 'A000166', 'A000204', 'A000217', 'A000225', 'A000244', 'A000290', 'A000292', 'A000302', 'A000326', 'A000330', 'A000578', 'A000583', 'A000984', 'A001003', 'A001006', 'A001045', 'A001147', 'A001333', 'A001405', 'A001519', 'A001700', 'A001906', 'A002275', 'A002378', 'A002426', 'A002530', 'A002531', 'A002620', 'A006318', 'A006882', 'A006894'], []]
 mb_recs = ['A001057', 'A004526', 'A005408', 'A005843', 'A000032', 'A000035', 'A000045', 'A000058', 'A000079', 'A000085', 'A000108', 'A000124', 'A000129', 'A000142', 'A000166', 'A000204', 'A000217', 'A000225', 'A000244', 'A000290', 'A000292', 'A000302', 'A000326', 'A000330', 'A000578', 'A000583', 'A000984', 'A001003', 'A001006', 'A001045', 'A001147', 'A001333', 'A001405', 'A001519', 'A001700', 'A001906', 'A002275', 'A002378', 'A002426', 'A002530', 'A002531', 'A002620', 'A006318', 'A006882', 'A006894']
@@ -101,4 +105,11 @@ mb_is_better = [i for i in mb_recs if i not in mcores]
 print(len(mb_is_better))
 print(mb_is_better)
 
+
+# check largest number of terms in urb results.
+
+for i in urb_cores:
+    progs = re.findall(f'({i}):(.*)\n(.+)', content)[0]
+    print(f'{progs[0]}: {progs[1]}\n{progs[2]}')
+    print()
 
