@@ -114,13 +114,13 @@ job_id = 'dicorrep'
 # # # job_id = 'sicor9'
 job_id = 'sicor9fix2'
 # #
-job_id = 'fakesilin'
+# job_id = 'fakesilin'
 job_id = 'silin'
 
-job_id = 'sicor1114'
+# job_id = 'sicor1114'
 #
 # job_id = 'dilin'
-job_id = 'findicor'
+# job_id = 'findicor'
 
 # # # job_id = 'sideflin'  # fail: not even sindy
 # # # job_id = 'sidefcor'  # fail: not even sindy
@@ -212,8 +212,11 @@ True  -  "manual" check if equation is correct.
 
 # if job_id in ('fakesilin', 'silin', 'dilin', 'sdlin'):
 csv_filename = 'linear_database_newbl.csv'
-csv = pd.read_csv(csv_filename, low_memory=False, nrows=0)
-# csv = pd.read_csv(csv_filename, low_memory=False)
+if not CORES and job_id in ('dilin', 'silin'):
+    csv = pd.read_csv(csv_filename, low_memory=False)
+else:
+    csv = pd.read_csv(csv_filename, low_memory=False, nrows=0)
+
 
 # 1/0
 # seq_id = 'A000004'
@@ -369,7 +372,8 @@ def extract_file(fname, verbosity=VERBOSITY, job_id=job_id):
             complexity_diff_maxorder = maxorder_cx(eq) - len(truth2coeffs(truth))
             complexity_diff_nonzeros = nonzeros_cx(eq) - coeffs2nonzeros_cx(coeffs)
             # print('task and seqid:', task_id, seq_id)
-            if task_id > 100000:
+            task_limit = 900000
+            if task_id > task_limit:
             # if task_id > 1:
                 print('seqid:', task_id, seq_id)
                 1 / 0
@@ -382,12 +386,13 @@ def extract_file(fname, verbosity=VERBOSITY, job_id=job_id):
                 nonzeros_truth = [abs(i) for i in coeffs if abs(i) > 0]
                 nonzeros = [xy[0] for xy in str_eq2orders(eq)[0]]
                 if nonzeros != [] and len(nonzeros) > 0 and max(nonzeros) - max(nonzeros_truth) > 10 and min(nonzeros) > 1 and complexity_diff_nonzeros > -100:
-                    print(seq_id, 'task_id:', task_id)
-                    print()
-                    print('disco:', nonzeros)
-                    print('truth:', coeffs)
-                    print(min(nonzeros))
-                if task_id > 100000:
+                    # print(seq_id, 'task_id:', task_id)
+                    # print(min(nonzeros))
+                    # print(f'task_id: {task_id}, seq_id:, {seq_id},  diff: {complexity_diff_maxorder}, truth: {truth},')
+                    # print('disco:', nonzeros)
+                    pass
+
+                if task_id > task_limit:
                     1/0
         else:
             cx_order_winner = 'order_fail<=' if len(truth2coeffs(truth)) <= 20 else 'order_fail>'
@@ -472,8 +477,8 @@ def for_loop(dir: str):
 
 # jor
 eqs = for_loop(job_dir)
-for eq in eqs:
-    print(eq)
+# for eq in eqs:
+#     print(eq)
 # 1/0
 
 
@@ -548,6 +553,11 @@ def for_summary(aggregated: tuple, fname: str):
             non_manual_list += [fname]
 
     task_id = int(fname[:5])
+    if task_id <100000:
+        if cx_order_winner in ('max_order<', 'max_order='):
+            # print(f'task_id: {task_id}, fname: {fname}, cx_order_winner: {cx_order_winner}, eq: {eq}')
+            print(f'filename: {fname}, {fname[6:13]}: {eq}')
+
     # Fail analysis:
     # a. 34 bins for jobs
     job_bins[task_id//1000] += 1
@@ -745,8 +755,9 @@ if CORES:
 summary = reduce(for_summary, sorted(files[:]), (0, 0, 0, 0, 0, 0, [], [0 for i in range(36)], [], [], [], [], ['start'],
                   {'max_order<': 0, 'max_order=': 0, 'max_order>': 0, 'order_fail<=': 0, 'order_fail>': 0},
                   {'nonzero<': 0, 'nonzero=': 0, 'nonzero>': 0, 'nonzero_fail': 0}))  # save all buggy ids
-print(summary)
+print(summary[8][:10])
 # 1/0
+# print(summary)
 
 # corrected_sum = sum(summary[:4]) - sum(summary[4:])
 corrected_sum = sum(summary[:4]) - sum(summary[4:5])
@@ -778,6 +789,8 @@ print('job_fails:', jobs_fail)
 
 id_oeis, non_id, non_manual, ed_fail, reconst_non_manual, avg_is_best, buglist, \
     job_bins, id_oeis_list, non_id_list, ed_fail_list, non_manual_list, trueconfs, max_order_cxs, nonzeros_cxs  = summary
+print(max_order_cxs, nonzeros_cxs)
+1/0
 corrected_non_manual = non_manual - reconst_non_manual
 all_fails = ed_fail + jobs_fail
 
