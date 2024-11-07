@@ -117,9 +117,9 @@ job_id = 'sicor9fix2'
 # job_id = 'fakesilin'
 job_id = 'silin'
 
-# job_id = 'sicor1114'
-#
-# job_id = 'dilin'
+job_id = 'sicor1114'
+
+job_id = 'dilin'
 # job_id = 'findicor'
 
 # # # job_id = 'sideflin'  # fail: not even sindy
@@ -369,6 +369,7 @@ def extract_file(fname, verbosity=VERBOSITY, job_id=job_id):
         if is_check:
             # print(eq)
 
+            reconst_order = maxorder_cx(eq)
             complexity_diff_maxorder = maxorder_cx(eq) - len(truth2coeffs(truth))
             complexity_diff_nonzeros = nonzeros_cx(eq) - coeffs2nonzeros_cx(coeffs)
             # print('task and seqid:', task_id, seq_id)
@@ -397,6 +398,7 @@ def extract_file(fname, verbosity=VERBOSITY, job_id=job_id):
         else:
             cx_order_winner = 'order_fail<=' if len(truth2coeffs(truth)) <= 20 else 'order_fail>'
             cx_nonzero_winner = 'nonzero_fail'
+            reconst_order = -1
 
 
     PRINT_EQS = True
@@ -422,7 +424,7 @@ def extract_file(fname, verbosity=VERBOSITY, job_id=job_id):
 
     f.close()
 
-    return we_found, is_reconst, is_check, n_of_seqs, avg_is_best, confs, eq, cx_order_winner, cx_nonzero_winner
+    return we_found, is_reconst, is_check, n_of_seqs, avg_is_best, confs, eq, cx_order_winner, cx_nonzero_winner, reconst_order
 
 # print(os.getcwd())
 # print(os.listdir())
@@ -521,7 +523,7 @@ debug = True
 def for_summary(aggregated: tuple, fname: str):
 
     # now -> f, m, i, o
-    we_found, is_reconst, is_checked, _, avg_is_best, trueconfs, eq, cx_order_winner, cx_nonzero_winner,  \
+    we_found, is_reconst, is_checked, _, avg_is_best, trueconfs, eq, cx_order_winner, cx_nonzero_winner, reconst_order  \
         = extract_file(job_dir + fname)
 
     id_oeis = is_reconst
@@ -534,8 +536,8 @@ def for_summary(aggregated: tuple, fname: str):
     # non_manual = we_found and not is_checked
 
 
-    buglist, job_bins, id_oeis_list, non_id_list, ed_fail_list, non_manual_list, agg_confs, cx_order, cx_nonzero \
-        = aggregated[-9:]
+    buglist, job_bins, id_oeis_list, non_id_list, ed_fail_list, non_manual_list, agg_confs, cx_order, cx_nonzero, cx_dict \
+        = aggregated[-10:]
     if debug:
         if reconst_non_manual:
             buglist += [fname]
@@ -554,9 +556,14 @@ def for_summary(aggregated: tuple, fname: str):
 
     task_id = int(fname[:5])
     if task_id <100000:
+        print_eqs = False
+        # print(reconst_order)
         if cx_order_winner in ('max_order<', 'max_order='):
             # print(f'task_id: {task_id}, fname: {fname}, cx_order_winner: {cx_order_winner}, eq: {eq}')
-            print(f'filename: {fname}, {fname[6:13]}: {eq}')
+            if print_eqs:
+                print(f'filename: {fname}, {fname[6:13]}: {eq}')
+            cx_dict[str(reconst_order)][0] += 1
+            cx_dict[str(reconst_order)][1] += [fname[6:13]]
 
     # Fail analysis:
     # a. 34 bins for jobs
@@ -597,7 +604,7 @@ def for_summary(aggregated: tuple, fname: str):
     zipped = zip(aggregated[:-4], to_add)
     counters = tuple(map(lambda x: x[0] + x[1], zipped))
     return (counters + (buglist, job_bins, id_oeis_list, non_id_list, ed_fail_list, non_manual_list, new_confs)
-            + (cx_order, cx_nonzero))
+            + (cx_order, cx_nonzero, cx_dict))
 
 # # Hierarhical:
 # files_subdir = [list(map(lambda x: f'{subdir}{os.sep}{x}',
@@ -724,13 +731,14 @@ print('here i am')
 
 
 scale = 40
+scale = 240
 scale = 4000
 scale = 50100
 files_debug = files[0:scale]
 files = files_debug
 # print(files)
 
-_a, _b, _, n_of_seqs, avg_is_best, true_confs, eq, cx_order_winner, cx_nonzero_winner \
+_a, _b, _, n_of_seqs, avg_is_best, true_confs, eq, cx_order_winner, cx_nonzero_winner, reconst_order \
     = extract_file(job_dir + files[0], verbosity=1)
 if CORES:
     n_of_seqs = 164
@@ -749,14 +757,23 @@ if CORES:
 # print(len(mia_ids), len(no_truth), mia_ids == no_truth, no_truth[0], mia_ids[0])
 # 1/0
 
-
+init_cx_dict = {f'{i}': [0, []] for i in range(1, 21)}
 # summary = reduce(for_summary, files, (0, 0, 0, 0, 0,))
 # summary = reduce(for_summary, files[:], (0, 0, 0, 0, 0, 0, [], [0 for i in range(36)], [], [], [], ['start']))  # save all buggy ids
 summary = reduce(for_summary, sorted(files[:]), (0, 0, 0, 0, 0, 0, [], [0 for i in range(36)], [], [], [], [], ['start'],
                   {'max_order<': 0, 'max_order=': 0, 'max_order>': 0, 'order_fail<=': 0, 'order_fail>': 0},
-                  {'nonzero<': 0, 'nonzero=': 0, 'nonzero>': 0, 'nonzero_fail': 0}))  # save all buggy ids
+                  {'nonzero<': 0, 'nonzero=': 0, 'nonzero>': 0, 'nonzero_fail': 0},   # save all buggy ids
+                  init_cx_dict))
+
 print(summary[8][:10])
-# 1/0
+print(summary[-3])
+cx_dict = summary[-1]
+print(cx_dict)
+cx_dict_sizes = [(key, value[0]) for key, value in cx_dict.items()]
+print(cx_dict_sizes)
+# print([(cx_dict[key][0], len(cx_dict[key][1]))  for key in cx_dict])
+print(sum([cx_dict[key][0] for key in cx_dict]))
+1/0
 # print(summary)
 
 # corrected_sum = sum(summary[:4]) - sum(summary[4:])
@@ -767,6 +784,7 @@ print()
 print(str(summary)[:1*10**2])
 print(f'all files:{len(files)}, sum:{sum(summary[:4])}, corrected sum: {corrected_sum}')
 # print(f((1,2,3,4,), 'c'))
+1/0
 
 print()
 print(f'Results: ')
@@ -788,8 +806,9 @@ print(n_of_seqs)
 print('job_fails:', jobs_fail)
 
 id_oeis, non_id, non_manual, ed_fail, reconst_non_manual, avg_is_best, buglist, \
-    job_bins, id_oeis_list, non_id_list, ed_fail_list, non_manual_list, trueconfs, max_order_cxs, nonzeros_cxs  = summary
+    job_bins, id_oeis_list, non_id_list, ed_fail_list, non_manual_list, trueconfs, max_order_cxs, nonzeros_cxs, cx_dict  = summary
 print(max_order_cxs, nonzeros_cxs)
+print(cx_dict)
 1/0
 corrected_non_manual = non_manual - reconst_non_manual
 all_fails = ed_fail + jobs_fail
