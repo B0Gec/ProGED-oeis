@@ -558,7 +558,8 @@ def for_summary(aggregated: tuple, fname: str):
     if task_id <100000:
         print_eqs = False
         # print(reconst_order)
-        if cx_order_winner in ('max_order<', 'max_order='):
+        # if cx_order_winner in ('max_order<', 'max_order='):
+        if cx_order_winner == 'max_order<':
             # print(f'task_id: {task_id}, fname: {fname}, cx_order_winner: {cx_order_winner}, eq: {eq}')
             if print_eqs:
                 print(f'filename: {fname}, {fname[6:13]}: {eq}')
@@ -732,7 +733,7 @@ print('here i am')
 
 scale = 40
 scale = 240
-scale = 4000
+# scale = 4000
 scale = 50100
 files_debug = files[0:scale]
 files = files_debug

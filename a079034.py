@@ -11,4 +11,10 @@ non_manuals = ['23167_A169198.txt', '23917_A170320.txt', '03322_A016835.txt', '2
 sindy_non_manuals = ['05101_A024347.txt', '25707_A188270.txt', '29660_A257293.txt', '32300_A294799.txt', '04581_A021502.txt', '18476_A134465.txt', '27737_A219531.txt', '19050_A140674.txt', '02145_A014084.txt', '17002_A119284.txt', '01790_A011851.txt', '19582_A151626.txt', '30408_A267207.txt', '11353_A058331.txt', '01812_A011879.txt', '12684_A077415.txt', '06545_A034265.txt', '09627_A042791.txt', '32681_A302710.txt', '19335_A144930.txt', '00831_A006096.txt', '22715_A168746.txt', '06210_A029378.txt', '06350_A031878.txt', '19866_A154223.txt', '09608_A042772.txt', '28975_A246640.txt', '03322_A016835.txt', '00670_A005023.txt', '04936_A023470.txt', '22035_A166443.txt', '32291_A294767.txt', '20072_A155648.txt', '28785_A242971.txt', '08631_A041653.txt']
 
 
+import pandas as pd
+csv_filename = 'linear_database_newbl.csv'
+# csv = pd.read_csv(csv_filename, low_memory=False, nrows=0)
+csv = pd.read_csv(csv_filename, low_memory=False, usecols=['A189743'])
+print(csv)
+
 
