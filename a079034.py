@@ -14,7 +14,9 @@ sindy_non_manuals = ['05101_A024347.txt', '25707_A188270.txt', '29660_A257293.tx
 import pandas as pd
 csv_filename = 'linear_database_newbl.csv'
 # csv = pd.read_csv(csv_filename, low_memory=False, nrows=0)
-csv = pd.read_csv(csv_filename, low_memory=False, usecols=['A189743'])
-print(csv)
+# csv = pd.read_csv(csv_filename, low_memory=False, usecols=['A189743'])
+# csv = pd.read_csv(csv_filename, low_memory=False, usecols=['A016821'])
+csv = pd.read_csv(csv_filename, low_memory=False, usecols=['A017615'])
+print(csv[:30])
 
 

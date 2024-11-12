@@ -37,8 +37,13 @@ warnings.simplefilter("ignore")
 EXECUTE_REAL = False
 EXECUTE_REAL = True
 
+OEISformer = True
+if OEISformer:
+    from loadtrans import csv_input, task_to_seq_id
+    N_INPUT = 15
+
 METHOD = 'Diofantos'
-METHOD = 'SINDy'
+# METHOD = 'SINDy'
 # METHOD = 'Mavi'
 # METHOD = 'MB'
 SINDy = True if METHOD in ('SINDy', 'Mavi') else False
@@ -410,6 +415,8 @@ if not fail:
     else:
         fail = (not BUGLIST and list(csv.columns)[task_id] in blacklist) or fail
     seq_id = list(csv.columns)[task_id] if not SEQ_ID[0] or not DEBUG else SEQ_ID[1]
+    if OEISformer:
+        seq_id = task_to_seq_id(task_id)
     print('seq_id', seq_id)
     # print('seq_id', BUGLIST)
     if BUGLIST:
@@ -451,7 +458,10 @@ else:
     # print('Library:', library, 'max_order', max_order, 'threshold:', threshold)
     # csv = pd.read_csv(csv_filename, low_memory=False, nrows=0)
     # print(csv.columns[:100])
-    csv = pd.read_csv(csv_filename, low_memory=False, usecols=[seq_id])[:N_OF_TERMS_LOAD]
+    if not OEISformer:
+        csv = pd.read_csv(csv_filename, low_memory=False, usecols=[seq_id])[:N_OF_TERMS_LOAD]
+    else:
+        csv = csv_input(seq_id, N_INPUT)
     # nans are checked by every function separately since exact_ed needs also ground truth
 
     csv.head()

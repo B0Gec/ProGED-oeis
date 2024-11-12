@@ -7,7 +7,7 @@ import re
 import pandas as pd
 
 datafile = 'julia/urb-and-dasco/solutions'
-datafile = 'julia/urb-and-dasco/OEIS_easy.txt'
+# datafile = 'julia/urb-and-dasco/OEIS_easy.txt'
 
 ids = ''
 with open(datafile, 'r') as f:
@@ -44,8 +44,15 @@ print(match[:20])
 # 14168 is the number!!!
 print(14168 + 13819, 'for urb')
 print(2342+ 7658, 'for dasco', 'btw: 80 in cores')
-1/0
+# 1/0
 
+not_linrec_not_cores = [i for i in not_match if i not in core_ids]
+print('not_linrec_not_cores:', len(not_linrec_not_cores))
+print('in cores and linrec:', len([i for i in core_ids if i in all_ids]))
+
+# linrec = 14168, not_linrec_core = 21, rest should = 27987-14189
+not_linrec_cores = [i for i in not_match if i in core_ids]
+print('notst', len(not_linrec_cores))
 
 match_cores = [i for i in core_ids if i in idsix]
 # not_match = [i for i in idsix if i not in all_ids]

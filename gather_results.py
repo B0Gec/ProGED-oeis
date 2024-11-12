@@ -367,7 +367,14 @@ def extract_file(fname, verbosity=VERBOSITY, job_id=job_id):
         truth = csv[seq_id][0]
         coeffs = truth2coeffs(truth)
         if is_check:
-            # print(eq)
+            print('reconstructed:', eq)
+            print(maxorder_cx(eq))
+            print(nonzeros_cx(eq))
+            print()
+            print('gourd truth', truth)
+            print(len(truth2coeffs(truth)))
+            print(coeffs2nonzeros_cx(coeffs))
+            print()
 
             reconst_order = maxorder_cx(eq)
             complexity_diff_maxorder = maxorder_cx(eq) - len(truth2coeffs(truth))
@@ -557,14 +564,18 @@ def for_summary(aggregated: tuple, fname: str):
     task_id = int(fname[:5])
     if task_id <100000:
         print_eqs = False
+        print_eqs = True
         # print(reconst_order)
         # if cx_order_winner in ('max_order<', 'max_order='):
         if cx_order_winner == 'max_order<':
             # print(f'task_id: {task_id}, fname: {fname}, cx_order_winner: {cx_order_winner}, eq: {eq}')
-            if print_eqs:
-                print(f'filename: {fname}, {fname[6:13]}: {eq}')
+            # if print_eqs:
+            #     print(f'filename: {fname}, {fname[6:13]}: {eq}')
             cx_dict[str(reconst_order)][0] += 1
             cx_dict[str(reconst_order)][1] += [fname[6:13]]
+        if cx_nonzero_winner == 'nonzero<':
+            if print_eqs:
+                print(f'filename: {fname}, {fname[6:13]}: {eq}')
 
     # Fail analysis:
     # a. 34 bins for jobs
@@ -732,9 +743,9 @@ print('here i am')
 
 
 scale = 40
-scale = 240
+# scale = 240
 # scale = 4000
-scale = 50100
+# scale = 50100
 files_debug = files[0:scale]
 files = files_debug
 # print(files)
@@ -768,6 +779,7 @@ summary = reduce(for_summary, sorted(files[:]), (0, 0, 0, 0, 0, 0, [], [0 for i 
 
 print(summary[8][:10])
 print(summary[-3])
+print(summary[-2])
 cx_dict = summary[-1]
 print(cx_dict)
 cx_dict_sizes = [(key, value[0]) for key, value in cx_dict.items()]

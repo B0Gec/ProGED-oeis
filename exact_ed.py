@@ -422,9 +422,9 @@ def exact_ed(seq_id: str, csv: pd.DataFrame, verbosity: int = VERBOSITY,
             seq = seq[:list(seq).index(sp.nan), :]
     else:
         seq = unnan(list(csv[seq_id][header:(header + n_of_terms)]))
-    seq = seq[:2*max_order+10]  # Hardcoded for experiments with same length as in Moeller-Buchberger.
+    # seq = seq[:2*max_order+10]  # Hardcoded for experiments with same length as in Moeller-Buchberger.
 
-    # print(seq)
+    print(seq)
     max_order = sp.floor(seq.rows/2)-1 if max_order is None else max_order
 
     b, A, sol_ref = dataset(list(seq), d_max, max_order, library=library)
