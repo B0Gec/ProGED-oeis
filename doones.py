@@ -18,7 +18,7 @@ import argparse
 
 # if os.getcwd()[-11:] == 'ProGED_oeis':
 #     from ProGED.examples.oeis.scraping.downloading.download import bfile2list
-from exact_ed import exact_ed, increasing_eed, timer, check_eq_man, check_truth, unnan, unpack_seq, solution_vs_truth, solution2str
+from exact_ed import exact_ed, increasing_eed, timer, check_eq_man, check_truth, check_eq_dasco, unnan, unpack_seq, solution_vs_truth, solution2str
 
 
 
@@ -39,8 +39,10 @@ EXECUTE_REAL = True
 
 OEISformer = True
 if OEISformer:
-    from loadtrans import csv_input, task_to_seq_id
+    from loadtrans import csv_input, csv_zerows
     N_INPUT = 15
+    N_INPUT = 25
+    print(f'OEISformer: True, n_input: {N_INPUT}, special input database used.')
 
 METHOD = 'Diofantos'
 # METHOD = 'SINDy'
@@ -138,10 +140,10 @@ GROUND_TRUTH = False
 library = 'n' if CORELIST else 'non'
 d_max = 3 if CORELIST else 1
 
-# mavi testing:
-d_max = 1
-d_max = 2
-# library = 'non'
+# # mavi testing:
+# d_max = 1
+# d_max = 2
+# # library = 'non'
 
 
 # LIBRARY = 'nlin'
@@ -170,9 +172,10 @@ if not CORELIST:
     GROUND_TRUTH = True
     START_ORDER = 1
 else:
+    MAX_ORDER = 1
     # MAX_ORDER = 2
-    MAX_ORDER = 4
-    # MAX_ORDER = 5
+    # MAX_ORDER = 4
+    # # MAX_ORDER = 5
     # MAX_ORDER = 10
     # MAX_ORDER = 2  # mavi
     GROUND_TRUTH = False
@@ -218,6 +221,7 @@ TASK_ID = 32
 # TASK_ID = 2000
 # unsucc [11221, 27122, 27123]
 # TASK_ID = 11221
+TASK_ID = 26
 
 
 JOB_ID = "000000"
@@ -400,10 +404,13 @@ fail = (BUGLIST and task_id >= len(buglist)) or fail
 # 1/0
 
 csv = pd.read_csv(csv_filename, low_memory=False, nrows=0)
+if OEISformer:
+    CORELIST = False
+    csv = csv_zerows
 n_of_seqs = len(list(csv.columns))
 # print(csv.columns[:100])
+print(n_of_seqs)
 # 1/0
-# print(n_of_seqs)
 
 # if diofant_grid:
 #     task_id = random.randint(0, n_of_seqs)
@@ -415,8 +422,6 @@ if not fail:
     else:
         fail = (not BUGLIST and list(csv.columns)[task_id] in blacklist) or fail
     seq_id = list(csv.columns)[task_id] if not SEQ_ID[0] or not DEBUG else SEQ_ID[1]
-    if OEISformer:
-        seq_id = task_to_seq_id(task_id)
     print('seq_id', seq_id)
     # print('seq_id', BUGLIST)
     if BUGLIST:
@@ -448,7 +453,7 @@ if fail:
 else:
     print()
     settings_memo = (f'\nCORELIST: {CORELIST}, METHOD: {METHOD}, SINDy: {SINDy} (True also in case of MAVI), '
-                     f'GROUND_TRUTH: {GROUND_TRUTH}, SINDy_default: {SINDy_default}, DEBUG: {DEBUG}')
+                     f'GROUND_TRUTH: {GROUND_TRUTH}, SINDy_default: {SINDy_default}, DEBUG: {DEBUG}, OEISformer: {OEISformer}')
     settings_memo += f'\nn_of_terms_ed: {n_of_terms_ed}, N_OF_TERMS_ED: {N_OF_TERMS_ED}'
     settings_memo += f'\nLibrary: {library}, max_order {max_order}, max_degree: {d_max}, threshold: {threshold}, '
     if METHOD == 'MB':
@@ -698,6 +703,9 @@ else:
         print('deg_used', deg_used, 'order', order_used)
         is_reconst = solution_vs_truth(x, coeffs) if GROUND_TRUTH else ""
         is_check_verbose = check_eq_man(x, seq_id, csv, header=GROUND_TRUTH, n_of_terms=10**5, solution_ref=sol_ref)
+        if OEISformer:
+            is_check_dasco = check_eq_dasco(x, seq_id, csv, solution_ref=sol_ref, n_input=N_INPUT)
+            print('is_check_dasco', is_check_dasco)
         # is_check_verbose = check_eq_man(x, seq_id, csv, n_of_terms=10 ** 5, solution_ref=sol_ref, library=library)
         # is_check_verbose = [False]
         # print('here', x, xlib, eq, coeffs, truth)

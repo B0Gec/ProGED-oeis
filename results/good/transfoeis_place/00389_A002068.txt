@@ -1,0 +1,16 @@
+
+While total time consumed by now, scale:390/10000, seq_id:A002068, order:10 took:
+ 15.6 seconds, i.e. 0.26 minutes or 0.004 hours.
+CORELIST: False, METHOD: Diofantos, SINDy: False (True also in case of MAVI), GROUND_TRUTH: False, SINDy_default: True, DEBUG: False, OEISformer: True
+n_of_terms_ed: 200, N_OF_TERMS_ED: 200
+Library: n, max_order 10, max_degree: 3, threshold: 0.1, 
+Library: n, max_order 10, threshold: 0.1
+
+by degree: 2 and order: 5. 
+A002068: 
+a(n) = -84851*n**2 + 157731*n*a(n - 5) - 121731*n*a(n - 4) - 25651*n*a(n - 3) - 147355*n*a(n - 2) + 176919*n*a(n - 1) + 417262*n + 8759*a(n - 5)**2 + 70051*a(n - 5)*a(n - 4) - 35196*a(n - 5)*a(n - 3) - 69999*a(n - 5)*a(n - 2) - 69226*a(n - 5)*a(n - 1) - 168309*a(n - 5) + 12362*a(n - 4)**2 - 49603*a(n - 4)*a(n - 3) - 12490*a(n - 4)*a(n - 2) + 38498*a(n - 4)*a(n - 1) + 513169*a(n - 4) + 86401*a(n - 3)**2 + 9278*a(n - 3)*a(n - 2) - 28551*a(n - 3)*a(n - 1) - 268748*a(n - 3) + 56200*a(n - 2)**2 + 23291*a(n - 2)*a(n - 1) + 277851*a(n - 2) - 33209*a(n - 1)**2 - 683261*a(n - 1) + 467146
+truth: 
+
+
+  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

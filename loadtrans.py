@@ -16,19 +16,17 @@ with open('julia/urb-and-dasco/OEIS_easy.txt', 'r') as f:
     content = f.read()
     pairs = re.findall(r'(A\d{6}) ,([-\d,]+),\n', content)
 
-csv_task_ids = [i[0] for i in pairs]
+csv_zerows = pd.DataFrame({i[0]:[] for i in pairs})
+# print(csv_zerows)
 dic = {i[0]: [int(j) for j in i[1].split(',')] for i in pairs}
 
-print(csv_task_ids[:3])
+# print(csv_task_ids[:3])
 # print(len(dic['A000466']))
 # print([min((y:= [len(i) for i in dic.values()])), max(y)])
 # print(dic['A000466'])
 # print(pairs[:3])
 # print(els[:3])
 print(f'{len(pairs)} sequences ...             found in OEISformer database')
-
-def task_to_seq_id(task_id):
-    return csv_task_ids[task_id]
 
 def trans_input(seq_id, n_input):
     if n_input not in (15, 25):
@@ -57,7 +55,7 @@ def trans_output(seq_id, n_input, n_pred):
 
 
 
-input = trans_input('A000466', 15)
+# input = trans_input('A000466', 15)
 # output = trans_output('A000466', 15, 1)
 # print(len(input), input)
 # print(make_csv('A000045', input))

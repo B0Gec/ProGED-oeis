@@ -137,12 +137,14 @@ job_id = 'dilin'
 # job_id = 'dicor-atMb'
 # job_id = 'sicor-atMb'
 
+job_id = 'transfoeis_place'
+
 print(job_id)
 # 1/0
 
 CORES = True if job_id in ("diocores77", 'diocor-merge', 'sindycore83', 'dicor-cub', 'dicor-cub19',
                            'fdiocores', 'fdiocorefix', 'fdiocorefix2', 'sicor116', 'dicorrep', 'sicor9fix2', 'sicor1114',
-                           'findicor', 'sdcor2', 'mavicore0', 'maviterms50', 'dicor-atMb', 'sicor-atMb') else False
+                           'findicor', 'sdcor2', 'mavicore0', 'maviterms50', 'dicor-atMb', 'sicor-atMb', 'transfoeis_place') else False
 
 # CORES = True
 # CORES = False
@@ -360,6 +362,7 @@ def extract_file(fname, verbosity=VERBOSITY, job_id=job_id):
 
     cx_order_winner = 'order_fail>'
     cx_nonzero_winner = 'nonzero_fail'
+    reconst_order = -1
     ## < = > complexity analysis:
     if not CORES:
         task_id = int(fname[-17:-12])
@@ -406,7 +409,6 @@ def extract_file(fname, verbosity=VERBOSITY, job_id=job_id):
             cx_order_winner = 'order_fail<=' if len(truth2coeffs(truth)) <= 20 else 'order_fail>'
             cx_nonzero_winner = 'nonzero_fail'
             reconst_order = -1
-
 
     PRINT_EQS = True
     if PRINT_EQS:
@@ -743,8 +745,8 @@ print('here i am')
 
 
 scale = 40
-# scale = 240
-# scale = 4000
+scale = 240
+scale = 4000
 # scale = 50100
 files_debug = files[0:scale]
 files = files_debug
@@ -797,7 +799,7 @@ print()
 print(str(summary)[:1*10**2])
 print(f'all files:{len(files)}, sum:{sum(summary[:4])}, corrected sum: {corrected_sum}')
 # print(f((1,2,3,4,), 'c'))
-1/0
+# 1/0
 
 print()
 print(f'Results: ')
@@ -822,7 +824,7 @@ id_oeis, non_id, non_manual, ed_fail, reconst_non_manual, avg_is_best, buglist, 
     job_bins, id_oeis_list, non_id_list, ed_fail_list, non_manual_list, trueconfs, max_order_cxs, nonzeros_cxs, cx_dict  = summary
 print(max_order_cxs, nonzeros_cxs)
 print(cx_dict)
-1/0
+# 1/0
 corrected_non_manual = non_manual - reconst_non_manual
 all_fails = ed_fail + jobs_fail
 
@@ -982,7 +984,7 @@ if CORES:
     print(f'  E voila, job fails: {len(job_fails)} {job_fails}')
     fail_tasks = ','.join([str(task) for task, i in job_fails])
     print(f'  Finally, sbatch list of fails: \n{fail_tasks}\n')
-    1/0
+    # 1/0
 
 
 m = 165
@@ -994,7 +996,7 @@ print('task_ids of non_ids:', non_id_task_ids[:100], '...')
 print(len(non_id_list))
 n = 1700
 print(f'first {n} non_manuals:', sorted(non_manual_list[:n]))
-# 1/0
+1/0
 
 # print(f'all non_manuals:', non_manual_list)
 # check if new false_truth blacklist contains all old false_truths:  # experiment job_id = "blacklist76"

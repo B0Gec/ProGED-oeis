@@ -424,7 +424,7 @@ def exact_ed(seq_id: str, csv: pd.DataFrame, verbosity: int = VERBOSITY,
         seq = unnan(list(csv[seq_id][header:(header + n_of_terms)]))
     # seq = seq[:2*max_order+10]  # Hardcoded for experiments with same length as in Moeller-Buchberger.
 
-    print(seq)
+    # print(seq)
     max_order = sp.floor(seq.rows/2)-1 if max_order is None else max_order
 
     b, A, sol_ref = dataset(list(seq), d_max, max_order, library=library)
@@ -796,11 +796,38 @@ def sol_order(x: sp.Matrix, solution_ref: list[str]) -> (int, dict):
     return max([0] + [max([0] + [o for o in orders if str(o) in var]) for var, _ in x_dict.items()]), x_dict
 
 
-def check_eq_man_dasco(x: sp.Matrix, seq: str, csv: pd.DataFrame, n_input, n_pred, tau):
+def check_eq_dasco(x, seq_id, csv, solution_ref, n_input):
 
-    seq_pred = check_eq_man(n_input, n_pred, tau, seq[:n_input], tau)
+    from loadtrans import trans_input, trans_output
+    tau = 10 ** (-10)
+    seq = trans_input(seq_id, n_input) + trans_output(seq_id, n_input, n_pred=10)
+    csv = pd.DataFrame({seq_id: seq})
+    print(csv)
+    # print(list(csv[seq_id]))
+    # csv[seq_id] += [trans_output(seq_id, n_input, n_pred=10)]
+    # print(trans_output(seq_id, n_input, n_pred=10))
+    # 1/0
+
+    is_check_verbose = check_eq_man(x, seq_id, csv, header=False, n_of_terms=10 ** 5, solution_ref=solution_ref)
+    print(is_check_verbose)
+    seq_pred = is_check_verbose[1]
+    # seq_pred = check_eq_man(x, seq_id, csv, header=False, oeis_friendly=0,
+    #                         solution_ref: list[str] = None, library: str = None)
+    quick_check = (seq_pred[:n_input+1] == seq[:n_input+1], seq_pred == seq)
+    print(seq_pred)
+    print(quick_check)
+    # 1/0
+
+    seq, seq_pred = seq[n_input:], seq_pred[n_input:]
     # diff = max([abs((an - seq[n])/seq[n]) for n, an in enumerate(seq_pred[n_input: n_input+n_pred]]) if n !=0]
-    return diff < tau
+    # is_check = False if
+    n_pred = 10
+    # diff = max([abs((seq_pred[i] - seq[i])/seq[i]) if seq[i] != 0 else math.inf for i in range(1, n_pred) ])
+    print(seq, seq_pred)
+    diff = [i  for i in range(1, n_pred)]
+    print(diff)
+    # return diff < tau
+    return
 
 # 4 cases: (n_input, n_pred) pairs: (15, 1), (15, 10), (25, 1), (25, 10)
 # tau = 10^(-10)
