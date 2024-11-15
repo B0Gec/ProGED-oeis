@@ -7,6 +7,8 @@ For Diofantos paper:
 - Pell eg
 add of det.
 """
+import numpy as np
+
 
 # 1.) Creation
 ############
@@ -47,6 +49,9 @@ add of det.
 def wheel(n):
     return n, n+1, 2*n, 3, n
 
+
+dir_path = 'real-bench/'
+
 def create_wheel():
     # wh_output = 'n, |V(W_n)|, |E(W_n)|, \delta(W_n), \Delta(W_n)\n'  # errors in sympy (sp.Matrix(E(W_n)))
     wh_output = 'n, V(W_n), Edges(W_n), delta(W_n), Delta(W_n)\n'
@@ -54,7 +59,6 @@ def create_wheel():
         wh_output += str(wheel(i))[1:-1] + '\n'
 
     print(wh_output)
-    dir_path = 'real-bench/'
     WRITE = False
     # WRITE = True
     if WRITE:
@@ -65,48 +69,29 @@ def create_wheel():
 # create_wheel()
 # 1/0
 
-# 2.) Evaluation
-################
-import pandas as pd
-import sympy as sp
+import re
 
+def create_pitagora():
+    with open(dir_path + 'pitagora-triplets.csv', 'r') as f:
+        content = f.read()
+        # pairs = re.findall(r'(\d{1,3}) ,(\d{1,3}) ,(\d{1,3}).*\n', content)
+        pairs = re.findall(r'(\d{1,3}), (\d{1,3}), (\d{1,3}).*\n', content)
 
-# def Diofantos_csv
-from exact_ed import diofantos, grid_sympy
+    # print(pairs[:13])
+    pitagora_out = 'a, b, c, c^2\n'
+    for triplet in pairs:
+        # print(triplet)
+        a, b, c = triplet
+        # print(a, b, c)
+        # print(int(a)**2 + int(b)**2, int(c)**2)
+        pitagora_out += f'{a}, {b}, {c}, {int(c)**2}\n'
+    print(pitagora_out)
 
-csv = pd.read_csv('real-bench/wheel.csv')
-# print(csv.head())
-vars = list(csv.columns)
-y = vars[-1]
-obs_vars = vars[:-1]
-y, obs_vars = 'Delta(W_n)', ['n', 'V(W_n)', 'Edges(W_n)', 'delta(W_n)']
-print('vars!!!!', y, obs_vars)
-print()
-print(sp.Matrix([y]))
-y = 'V(W_n)'
-print(sp.Matrix([y]))
-for v in obs_vars:
-    print(sp.Matrix([v]))
-1/0
+    WRITE = False
+    # WRITE = True
+    if WRITE:
+        with open(dir_path+'real_world_bench_ds1.csv', 'w') as f:
+            f.write(pitagora_out + '\n')
+    return
 
-M = csv.to_numpy()
-# print(M.shape)
-# print(M)
-M = sp.Matrix(csv.to_numpy())
-scale = 4
-M = M[:scale, :]
-print(M)
-print(M.__repr__())
-print('start')
-
-# print(grid_sympy(sp.Matrix([[2], [ 4], [6],[ 8]]), d_max=2, max_order=3, library='n', vars_obs=a))
-print(grid_sympy(None, d_max=2, max_order=None, library=None, M=M, vars_obs=obs_vars))
-print('out')
-# 1/0
-
-# print(M)
-print(diofantos(M, 1, obs_vars))
-# print(csv)
-1/0
-
-
+create_pitagora()

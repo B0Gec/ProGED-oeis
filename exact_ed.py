@@ -24,43 +24,32 @@ def diofantos(M: sp.Matrix, d_max: int, var_names: list[str] = None) -> (sp.Matr
         - M: matrix of observations of the variables V = {x_1, x_2, ..., x_p, y}; the last column
          of M corresponds to the target variable y
         - d_max: The maximal degree d_max of the non-linear terms
+        - var_names: names of observed variables, e.g. ['x_1', 'x_2', 'y']
     """
 
-    print("in Diofantos")
-    # print(M, d_max)
     default_var_names = [f'x_{i}' for i in range(1, M.shape[1])] + ['y']
     vars_observed = default_var_names if var_names is None else var_names
+    non_target_vars, target_var = vars_observed[:-1], vars_observed[-1]
 
     # b, A = M[:, -1], M[:, :-1]
-    # b, A, sol_ref = dataset(None, d_max, None, None, M=M, vars_obs=vars_observed)
-
-    data, sol_ref = grid_sympy(seq=None, d_max=d_max, max_order=None, library=None, M=M, vars_obs=vars_observed)
-    b = data[:, 0]
-    A = data[:, 1:]
-    verbosity = 3
+    data, sol_ref = grid_sympy(seq=None, d_max=d_max, max_order=None, library=None, M=M, vars_obs=non_target_vars)
+    b, A = data[:, 0], data[:, 1:]
+    verbosity = 2
     if verbosity >= 3:
         print('A, b', A.__repr__(), b.__repr__())
-        # print('A[:4][:4] :', A[:6, :6].__repr__(), '\n', A[:, -2].__repr__())
+        print('A[:4][:4] :', A[:6, :6].__repr__(), '\n', A[:, -2].__repr__())
         print('A, b  shapes', A.shape, b.shape)
-
-    print('in diofa')
-    # 1/0
 
     x = diophantine_solve(A, b)
     if verbosity >= 3:
         print('x', x)
-
     if len(x) > 0:
         x = x[0]
         # if linear:
         #     x = sp.Matrix.vstack(sp.Matrix([0]), x)
-    print('x', x)
-    # eq = solution2str(x, solution_ref=sol_ref, library=None)
-    print(sp.Matrix([f'x_{i}' for i in range(1, A.shape[1]+1)]))
-    print(sp.Matrix([f'x_{i}' for i in range(1, A.shape[1]+1)]).transpose())
-    print((sp.Matrix([f'x_{i}' for i in range(1, A.shape[1]+1)]).transpose()*x)[0])
-    # eq = 'y = ' + str((sp.Matrix([f'x_{i}' for i in range(1, A.shape[1]+1)]).transpose()*x)[0])
+    # print('x', x)
     eq = solution2str(x, solution_ref=sol_ref, library=None)
+    eq = target_var + eq[4:]
     return x, eq
 
 def timer(now, text=f"\nScraping all (chosen) OEIS sequences"):
@@ -140,6 +129,10 @@ def grid_sympy(seq: sp.MutableDenseMatrix, d_max: int, max_order: int, library: 
     Alternatively prepare possibly higher degree data for Diofantos.
         - M is the matrix of observations of the variables V = {x_1, x_2, ..., x_p, y}
         - vars_obs = e.g. [y, x_1, x_2, ..., x_p]
+
+    Notes for Diofantos:  (tl;dr: len(vars_obs) + 1 = M.cols)
+        - M includes target variable y in the last column. It outputs it in the first though.
+        - vars_obs does NOT include target variable y
     """
 
     # seq = seq if nof_eqs is None else seq[:nof_eqs]
@@ -162,10 +155,6 @@ def grid_sympy(seq: sp.MutableDenseMatrix, d_max: int, max_order: int, library: 
                         )
 
     # Changed on 15.11.2024 to take care of general Diofantos:
-    # M = sp.Matrix([
-    #     [1, 2, 0, 0],
-    #     [2, 4, 2, 0],
-    #     [3, 6, 4, 2]])
     basis = lib2stvars(library, max_order) if M is None else vars_obs
     # print(basis)
 
@@ -186,7 +175,7 @@ def grid_sympy(seq: sp.MutableDenseMatrix, d_max: int, max_order: int, library: 
     # combinations = sum([list(combins(basis, deg)) for deg in range(1, degree+1)], [])
     # Updated to take care of Diofantos:
     combinations = poly_combinations(library, d_max, max_order, basis)
-    print('combinations', combinations)
+    # print('combinations', combinations)
     #
     # def multiply(a, b):
     #     return [i * j for i, j in zip(a, b)]
@@ -231,6 +220,8 @@ def grid_sympy(seq: sp.MutableDenseMatrix, d_max: int, max_order: int, library: 
             polys
             )
     else:
+        if len(vars_obs)+1 != M.cols:  # +1 for the target variable
+            raise IndexError(f"Diofantos: Number of observed variables ({len(vars_obs)}) is not compatible with data ({M.cols}).")
         data = sp.Matrix.hstack( M[:, -1],
             sp.Matrix([1 for _ in range(M.rows)]),  # constant term, i.e. C_0 in a_n = C_0 + C_1*n + C_2*n^2 + ...
             polys)
@@ -240,6 +231,7 @@ def grid_sympy(seq: sp.MutableDenseMatrix, d_max: int, max_order: int, library: 
 
     sol_ref = solution_reference(library, d_max, max_order, basis)
     # print('sol ref', sol_ref)
+    # 1/0
 
     if data.cols-1 != len(solution_reference(library, d_max, max_order, basis)):
         raise IndexError(f"Diofantos: Reference (indexing) of solution {solution_reference(library, d_max, max_order, basis)} is not compatible with data (with {data.cols-1} columns).")
