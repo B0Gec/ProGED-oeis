@@ -78,13 +78,13 @@ def create_pitagora():
         pairs = re.findall(r'(\d{1,3}), (\d{1,3}), (\d{1,3}).*\n', content)
 
     # print(pairs[:13])
-    pitagora_out = 'a, b, c, c^2\n'
+    pitagora_out = 'a, b, c^2\n'
     for triplet in pairs:
         # print(triplet)
         a, b, c = triplet
         # print(a, b, c)
         # print(int(a)**2 + int(b)**2, int(c)**2)
-        pitagora_out += f'{a}, {b}, {c}, {int(c)**2}\n'
+        pitagora_out += f'{a}, {b}, {int(c)**2}\n'
     print(pitagora_out)
 
     WRITE = False
@@ -94,4 +94,114 @@ def create_pitagora():
             f.write(pitagora_out + '\n')
     return
 
-create_pitagora()
+# create_pitagora()
+
+import random
+
+def create_det(n):
+    from sympy import randMatrix
+    a = randMatrix(n, n, 0, 10)
+    b = randMatrix(n, n, 0, 10)
+    alf = random.randint(0, 10)
+    # print('A', a.__repr__())
+    # print('B', b.__repr__())
+    # print()
+    # print('alf', alf)
+    # print()
+    # print('alf*A', (alf*a).__repr__())
+    # print()
+    # print('A*B', (a*b).__repr__())
+    # print()
+    # print('detA, detB, det(A*B)', a.det(), b.det(), (a*b).det())
+    # print()
+    # print('detA*detB, det(A*B)', a.det()*b.det(), (a*b).det())
+    # print(f'{a.__repr__()}, {b.__repr__()}, {(a*b).__repr__()}, {alf}, {alf*a.__repr__()},  {a.det()}, {b.det()}, {(a*b).det()}, {(alf*a).det()}, {a.det()*b.det()}')
+    big_example = f'{a}, {b}, {(a*b)}, {alf}, {alf*a},  {a.det()}, {b.det()}, {(a*b).det()}, {(alf*a).det()}, {a.det()*b.det()}'
+    # print(f'{a.__repr__()}, {b.__repr__()}, {(a*b).__repr__()}, {alf}, {alf*a.__repr__()},  {a.det()}, {b.det()}, {(a*b).det()}, {(alf*a).det()}, {a.det()*b.det()}')
+    row = f'{a.det()}, {b.det()}, {(a*b).det()}, {alf}, {(alf*a).det()}'
+    return big_example, row
+
+create_det(2)
+
+def create_dets(dim, rows):
+    big_title = f'A, B, A*B, alf, alf*A, detA, detB, det(A*B), det(alf*A), detA*detB'
+    title = f'detA, detB, detA*B, alpha, det_alpha*A_'
+
+    big_det_output = big_title + '\n'
+    det_output = title + '\n'
+    for i in range(rows):
+        big_row, row = create_det(dim)
+        big_det_output += big_row + '\n'
+        det_output += row + '\n'
+
+    # for i in range(rows):
+    #     det_output += create_det(dim)[1] + '\n'
+
+    print(big_det_output, '\n')
+    print(det_output, '\n')
+
+    WRITE = False
+    # WRITE = True
+    if WRITE:
+        with open(dir_path+'det_explicit.csv', 'w') as f:
+            f.write(big_det_output + '\n')
+        with open(dir_path+'real_world_bench_ds3.csv', 'w') as f:
+            f.write(det_output + '\n')
+
+    return
+
+# create_dets(2, 100)
+
+
+def create_tr(dim):
+    from sympy import randMatrix
+    a = randMatrix(dim, dim, 0, 10)
+    b = randMatrix(dim, dim, 0, 10)
+    # print('A', a.__repr__())
+    # print('B', b.__repr__())
+    # print()
+    # print( a.trace())
+    # print('trA, trB, tr(A*B)', a.trace(), b.trace(), (a*b).trace(), (b*a).trace())
+    # print('a*b', (a*b).__repr__())
+    # print('b*a', (b*a).__repr__())
+    # print('tr(A+B)', (a+b).trace())
+    # print()
+    # 1/0
+    # print()
+    # print('detA*detB, det(A*B)', a.det()*b.det(), (a*b).det())
+    # print(f'{a.__repr__()}, {b.__repr__()}, {(a*b).__repr__()}, {alf}, {alf*a.__repr__()},  {a.det()}, {b.det()}, {(a*b).det()}, {(alf*a).det()}, {a.det()*b.det()}')
+    big_example = f'{a}, {b}, {(a+b)}, {(a*b)}, {(b*a)}, {a.trace()}, {b.trace()}, {(a+b).trace()}, {(a*b).trace()}, {(b*a).trace()}'
+    # print(f'{a.__repr__()}, {b.__repr__()}, {(a*b).__repr__()}, {alf}, {alf*a.__repr__()},  {a.det()}, {b.det()}, {(a*b).det()}, {(alf*a).det()}, {a.det()*b.det()}')
+    row = f'{a.trace()}, {b.trace()}, {(a+b).trace()}, {(a*b).trace()}, {(b*a).trace()}'
+    return big_example, row
+
+# create_tr(2)
+
+def create_trs(dim, rows):
+    big_title = f'A, B, A+B, A*B, B*A, trA, trB, trA+B, trA*B, trB*A'
+    title = f'trA, trB, trA+B, trA*B, trB*A'
+
+    big_det_output = big_title + '\n'
+    det_output = title + '\n'
+    for i in range(rows):
+        big_row, row = create_tr(dim)
+        big_det_output += big_row + '\n'
+        det_output += row + '\n'
+
+    # for i in range(rows):
+    #     det_output += create_det(dim)[1] + '\n'
+
+    print(big_det_output, '\n')
+    print(det_output, '\n')
+
+    WRITE = False
+    # WRITE = True
+    if WRITE:
+        with open(dir_path+'tr_explicit.csv', 'w') as f:
+            f.write(big_det_output + '\n')
+        with open(dir_path+'real_world_bench_ds4.csv', 'w') as f:
+            f.write(det_output + '\n')
+
+    return
+
+# create_trs(3, 100)
