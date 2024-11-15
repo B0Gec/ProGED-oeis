@@ -19,7 +19,7 @@ from diophantine_solver import diophantine_solve
 
 # print("IDEA: max ORDER for GRAMMAR = floor(DATASET ROWS (LEN(SEQ)))/2)-1")
 
-def diofantos(M: sp.Matrix, d_max: int) -> (sp.Matrix, str):
+def diofantos(M: sp.Matrix, d_max: int, var_names: list[str] = None) -> (sp.Matrix, str):
     """ Diofantos algorithm for discovery of exact integer equations.
         - M: matrix of observations of the variables V = {x_1, x_2, ..., x_p, y}; the last column
          of M corresponds to the target variable y
@@ -28,16 +28,23 @@ def diofantos(M: sp.Matrix, d_max: int) -> (sp.Matrix, str):
 
     print("in Diofantos")
     # print(M, d_max)
+    default_var_names = [f'x_{i}' for i in range(1, M.shape[1])] + ['y']
+    vars_observed = default_var_names if var_names is None else var_names
 
-    scale = 10
-    M = M[:scale, :]
-    # b, A, sol_ref = dataset(list(seq), d_max, max_order, library=library)
-    b, A = M[:, -1], M[:, :-1]
+    # b, A = M[:, -1], M[:, :-1]
+    # b, A, sol_ref = dataset(None, d_max, None, None, M=M, vars_obs=vars_observed)
+
+    data, sol_ref = grid_sympy(seq=None, d_max=d_max, max_order=None, library=None, M=M, vars_obs=vars_observed)
+    b = data[:, 0]
+    A = data[:, 1:]
     verbosity = 3
     if verbosity >= 3:
         print('A, b', A.__repr__(), b.__repr__())
         # print('A[:4][:4] :', A[:6, :6].__repr__(), '\n', A[:, -2].__repr__())
         print('A, b  shapes', A.shape, b.shape)
+
+    print('in diofa')
+    # 1/0
 
     x = diophantine_solve(A, b)
     if verbosity >= 3:
@@ -47,8 +54,13 @@ def diofantos(M: sp.Matrix, d_max: int) -> (sp.Matrix, str):
         x = x[0]
         # if linear:
         #     x = sp.Matrix.vstack(sp.Matrix([0]), x)
+    print('x', x)
     # eq = solution2str(x, solution_ref=sol_ref, library=None)
-    eq = 'y = ' + x*sp.Matrix([f'x_{i}' for i in range(1, A.shape[1]+1)]).transpose()
+    print(sp.Matrix([f'x_{i}' for i in range(1, A.shape[1]+1)]))
+    print(sp.Matrix([f'x_{i}' for i in range(1, A.shape[1]+1)]).transpose())
+    print((sp.Matrix([f'x_{i}' for i in range(1, A.shape[1]+1)]).transpose()*x)[0])
+    # eq = 'y = ' + str((sp.Matrix([f'x_{i}' for i in range(1, A.shape[1]+1)]).transpose()*x)[0])
+    eq = solution2str(x, solution_ref=sol_ref, library=None)
     return x, eq
 
 def timer(now, text=f"\nScraping all (chosen) OEIS sequences"):
@@ -75,17 +87,19 @@ def timer(now, text=f"\nScraping all (chosen) OEIS sequences"):
 # seq = sp.Matrix(csv[seq_id])
 # def grid_sympy(seq: sp.MutableDenseMatrix, nof_eqs: int = None):  # seq.shape=(N, 1)
 
-def poly_combinations(library: str, d_max: int, order: int):
+def poly_combinations(library: str, d_max: int, order: int, obs_vars: list[str] = None) -> list[tuple]:
     """Return all combinations of variables in library up to order.
-    To avaid repetition in solution2str functiion.
+    To avaid repetition in solution2str function.
 
     Example:
         library = 'n', d_max = 2, order = 1 -> ['n', 'a(n-1)', 'n*n', 'n*a(n-1)', 'a(n-1)*a(n-1)']
+          d_max = 2, obs_vars = ['x_1', 'x_2'] -> ['x_1', 'x_2', 'x_1*x_2']
     """
 
     # n_degree, degree = lib2degrees(library)
     # basis = lib2stvars(library, order)
-    basis = lib2stvars(library, order)
+    # Updated, took care of Diofantos:
+    basis = lib2stvars(library, order) if obs_vars is None else obs_vars
     # print('base', basis, library)
 
     combins = itertools.combinations_with_replacement
@@ -96,18 +110,38 @@ def poly_combinations(library: str, d_max: int, order: int):
     # print('combinations inside poly_combinations()', combinations)
     return combinations
 
-def solution_reference(library: str, d_max: int, order: int) -> list[str]:
+def solution_reference(library: str, d_max: int, order: int, obs_vars: list[str] = None) -> list[str]:
     """Return reference solution for library and order."""
     # print((map(lambda comb: reduce((lambda i, s: i+'*'+s), comb[1:], comb[0]),  poly_combinations(library, order))))
     # trivial sol_ref = ['1'] ? (didn't check) of trivial solution x = [1] ?
-    return ['1', ] + list(map(lambda comb: reduce((lambda i, s: i+'*'+s), comb[1:], comb[0]),  poly_combinations(library, d_max, order)))
+    return ['1', ] + list(map(lambda comb: reduce((lambda i, s: i+'*'+s), comb[1:], comb[0]),  poly_combinations(library, d_max, order, obs_vars)))
 
 
 multiply_eltw = lambda x,y: x.multiply_elementwise(y)
-def comb2act(comb: tuple, dic: dict, multiply=multiply_eltw) -> sp.Matrix: return dic[comb[0]] if len(comb) == 1 else multiply(dic[comb[0]], comb2act(comb[1:], dic))
+def comb2act(comb: tuple, dic: dict, multiply=multiply_eltw) -> sp.Matrix:
+    """Calculate compination of colunms for Diofantos.
+        I.e. ('n', 'a(n-1)'), {n: [1, 2], a(n-1)': [3 5]}  \-> [1*3, 2*5]
+
+    Input:
+        - comb: combination to compute
+        - dic: dictionary of columns keyed by their names
+        - multiply: By default multiply elementwise two columns.
+    Output:
+        - new column as a combination of others
+    """
+
+    return dic[comb[0]] if len(comb) == 1 else multiply(dic[comb[0]], comb2act(comb[1:], dic))
 
 
-def grid_sympy(seq: sp.MutableDenseMatrix, d_max: int, max_order: int, library: str) -> tuple[sp.Matrix, list[str]]:  # seq.shape=(N, 1)
+def grid_sympy(seq: sp.MutableDenseMatrix, d_max: int, max_order: int, library: str,
+               M: sp.Matrix = None, vars_obs: list[str] = None) -> tuple[sp.Matrix, list[str]]:  # seq.shape=(N, 1)
+    """Convert sequence into matrix for equation discovery / LA system.
+
+    Alternatively prepare possibly higher degree data for Diofantos.
+        - M is the matrix of observations of the variables V = {x_1, x_2, ..., x_p, y}
+        - vars_obs = e.g. [y, x_1, x_2, ..., x_p]
+    """
+
     # seq = seq if nof_eqs is None else seq[:nof_eqs]
     # seq = seq[:nof_eqs, :]
     # seq = seq[:shape[0]-1, :]
@@ -127,22 +161,32 @@ def grid_sympy(seq: sp.MutableDenseMatrix, d_max: int, max_order: int, library: 
                         (lambda i, j: (seq[max(i-j,0)]**degree)*(1 if i>=j else 0))
                         )
 
-    basis = lib2stvars(library, max_order)
+    # Changed on 15.11.2024 to take care of general Diofantos:
+    # M = sp.Matrix([
+    #     [1, 2, 0, 0],
+    #     [2, 4, 2, 0],
+    #     [3, 6, 4, 2]])
+    basis = lib2stvars(library, max_order) if M is None else vars_obs
     # print(basis)
 
-    n_col = sp.Matrix([i for i in range(1, seq.rows)]) if 'n' in basis else sp.Matrix([])
-    # n_col = sp.Matrix([i for i in range(0, seq.rows-1)])
-    # print('ncol, triangle grid(1)', n_col.__repr__(), triangle_grid(1).__repr__())
 
-    ntriangle = sp.Matrix.hstack(n_col, triangle_grid(1))
-    # print('ntriangle', ntriangle.shape, ntriangle.__repr__())
-    triangle = {var: ntriangle[:, i] for i, var in enumerate(basis)}
+    # Updated to take care of Diofantos:
+    if M is None:
+        n_col = sp.Matrix([i for i in range(1, seq.rows)]) if 'n' in basis else sp.Matrix([])
+        # n_col = sp.Matrix([i for i in range(0, seq.rows-1)])
+        # print('ncol, triangle grid(1)', n_col.__repr__(), triangle_grid(1).__repr__())
+        ntriangle = sp.Matrix.hstack(n_col, triangle_grid(1))
+        # print('ntriangle', ntriangle.shape, ntriangle.__repr__())
+    # Updated to take care of Diofantos:
+    triangle = {var: ntriangle[:, i] for i, var in enumerate(basis)} if M is None else {var: M[:, i] for i, var in enumerate(vars_obs)}
     # print('triangle', triangle.keys())
+    # print('triangle', triangle)
 
     # combins = itertools.combinations_with_replacement
     # combinations = sum([list(combins(basis, deg)) for deg in range(1, degree+1)], [])
-    combinations = poly_combinations(library, d_max, max_order)
-    # print('combinations', combinations)
+    # Updated to take care of Diofantos:
+    combinations = poly_combinations(library, d_max, max_order, basis)
+    print('combinations', combinations)
     #
     # def multiply(a, b):
     #     return [i * j for i, j in zip(a, b)]
@@ -177,23 +221,28 @@ def grid_sympy(seq: sp.MutableDenseMatrix, d_max: int, max_order: int, library: 
     # print('n_cols', n_cols.shape, n_cols)
     # print('triangles', triangles.shape, triangles)
     # print('an', seq.shape, seq)
-    data = sp.Matrix.hstack(
-        seq[1:,:],
-        sp.Matrix([1 for _ in range(seq.rows-1)]),  # constant term, i.e. C_0 in a_n = C_0 + C_1*n + C_2*n^2 + ...
-        # n_cols,
-        # triangles
-        # col_tri
-        polys
-        )
+    if M is None:
+        data = sp.Matrix.hstack(
+            seq[1:,:],
+            sp.Matrix([1 for _ in range(seq.rows-1)]),  # constant term, i.e. C_0 in a_n = C_0 + C_1*n + C_2*n^2 + ...
+            # n_cols,
+            # triangles
+            # col_tri
+            polys
+            )
+    else:
+        data = sp.Matrix.hstack( M[:, -1],
+            sp.Matrix([1 for _ in range(M.rows)]),  # constant term, i.e. C_0 in a_n = C_0 + C_1*n + C_2*n^2 + ...
+            polys)
         # sp.Matrix([i for i in range(1, seq.rows)]),
-        # triangles)
+            # triangles)
     # print('data', data.shape, data)
 
-    sol_ref = solution_reference(library, d_max, max_order)
+    sol_ref = solution_reference(library, d_max, max_order, basis)
     # print('sol ref', sol_ref)
 
-    if data.cols-1 != len(solution_reference(library, d_max, max_order)):
-        raise IndexError(f"Diofantos: Reference (indexing) of solution {solution_reference(library, d_max, max_order)} is not compatible with data (with {data.cols-1} columns).")
+    if data.cols-1 != len(solution_reference(library, d_max, max_order, basis)):
+        raise IndexError(f"Diofantos: Reference (indexing) of solution {solution_reference(library, d_max, max_order, basis)} is not compatible with data (with {data.cols-1} columns).")
     return data, sol_ref
 
 
@@ -1075,8 +1124,9 @@ if __name__ == '__main__':
     # from proged times:
     # has_titles = 1
     # csv = pd.read_csv('oeis_selection.csv')[has_titles:]
+
     csv = pd.read_csv('real-bench/wheel.csv')
-    print(csv.head())
+    # print(csv.head())
     vars = list(csv.columns)
     # print(vars)
     M = csv.to_numpy()
