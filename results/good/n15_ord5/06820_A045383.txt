@@ -1,0 +1,18 @@
+
+dasco's acc_1, acc_10: False, False is stored in is_reconst and is_check
+n_input: 15
+While total time consumed by now, scale:6821/10000, seq_id:A045383, order:5 took:
+ 4.7 seconds, i.e. 0.08 minutes or 0.001 hours.
+CORELIST: False, METHOD: Diofantos, SINDy: False (True also in case of MAVI), GROUND_TRUTH: False, SINDy_default: True, DEBUG: False, OEISformer: True
+n_of_terms_ed: 200, N_OF_TERMS_ED: 200
+Library: n, max_order 5, max_degree: 3, threshold: 0.1, 
+Library: n, max_order 5, threshold: 0.1
+
+by degree: 2 and order: 4. 
+A045383: 
+a(n) = -91*n**2 + 124*n*a(n - 4) - 19*n*a(n - 3) - 296*n*a(n - 2) + 241*n*a(n - 1) - 219*n - 86*a(n - 4)**2 + 235*a(n - 4)*a(n - 3) - 62*a(n - 4)*a(n - 2) - 26*a(n - 4)*a(n - 1) - 35*a(n - 4) - 174*a(n - 3)**2 + 158*a(n - 3)*a(n - 2) - 17*a(n - 3)*a(n - 1) - 90*a(n - 3) - 91*a(n - 2)**2 + 92*a(n - 2)*a(n - 1) - 252*a(n - 2) - 30*a(n - 1)**2 + 11*a(n - 1) - 158
+truth: 
+
+
+False  -  checked against website ground truth.     
+False  -  "manual" check if equation is correct.    

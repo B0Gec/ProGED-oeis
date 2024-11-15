@@ -41,7 +41,7 @@ OEISformer = True
 if OEISformer:
     from loadtrans import csv_input, csv_zerows
     N_INPUT = 15
-    N_INPUT = 25
+    # N_INPUT = 25
     print(f'OEISformer: True, n_input: {N_INPUT}, special input database used.')
 
 METHOD = 'Diofantos'
@@ -126,6 +126,7 @@ CORELIST = True  # have to scrape core sequences!
 # CORELIST = False
 if BUGLIST:
     from buglist import buglist
+REAL_WORLD_BENCH = True
 
 GROUND_TRUTH = True
 GROUND_TRUTH = False
@@ -176,7 +177,8 @@ else:
     # MAX_ORDER = 2
     # MAX_ORDER = 4
     # # MAX_ORDER = 5
-    # MAX_ORDER = 10
+    MAX_ORDER = 10
+    MAX_ORDER = 5
     # MAX_ORDER = 2  # mavi
     GROUND_TRUTH = False
     START_ORDER = 0
@@ -222,6 +224,8 @@ TASK_ID = 32
 # unsucc [11221, 27122, 27123]
 # TASK_ID = 11221
 TASK_ID = 26
+TASK_ID = 2
+TASK_ID = 7
 
 
 JOB_ID = "000000"
@@ -703,15 +707,15 @@ else:
         print('deg_used', deg_used, 'order', order_used)
         is_reconst = solution_vs_truth(x, coeffs) if GROUND_TRUTH else ""
         is_check_verbose = check_eq_man(x, seq_id, csv, header=GROUND_TRUTH, n_of_terms=10**5, solution_ref=sol_ref)
-        if OEISformer:
-            is_check_dasco = check_eq_dasco(x, seq_id, csv, solution_ref=sol_ref, n_input=N_INPUT)
-            print('is_check_dasco', is_check_dasco)
-        # is_check_verbose = check_eq_man(x, seq_id, csv, n_of_terms=10 ** 5, solution_ref=sol_ref, library=library)
-        # is_check_verbose = [False]
-        # print('here', x, xlib, eq, coeffs, truth)
-        # print([len(preseq) for preseq in preseqs])
-        # print('manual check \n', is_check_verbose[1], '\n', is_check_verbose[2])
         is_check = is_check_verbose[0]
+        if OEISformer:
+            acc_1, acc_10 = check_eq_dasco(x, seq_id, csv, solution_ref=sol_ref, n_input=N_INPUT)
+            is_reconst = acc_10
+            is_check = acc_1
+            dasco_result = f'dasco\'s acc_1, acc_10: {acc_1}, {acc_10} is stored in is_reconst and is_check\n'
+            output_string += dasco_result
+            output_string += f'n_input: {N_INPUT}\n'
+            print(dasco_result)
         # print(f"{is_reconst}!, reconstructed as in ground truth.")
         # print(f"{is_check}!, \"manually\" checked if the equation holds for all terms.")
         # print('second check: ', check_truth(seq_id, csv_filename)[0][0])

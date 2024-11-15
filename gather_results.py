@@ -138,13 +138,18 @@ job_id = 'dilin'
 # job_id = 'sicor-atMb'
 
 job_id = 'transfoeis_place'
+job_id = 'transfoeis_acc'
+job_id = 'transfoeis_acc2'
+job_id = 'n15_acc'
+# job_id = 'n15_ord5'
 
 print(job_id)
 # 1/0
 
 CORES = True if job_id in ("diocores77", 'diocor-merge', 'sindycore83', 'dicor-cub', 'dicor-cub19',
                            'fdiocores', 'fdiocorefix', 'fdiocorefix2', 'sicor116', 'dicorrep', 'sicor9fix2', 'sicor1114',
-                           'findicor', 'sdcor2', 'mavicore0', 'maviterms50', 'dicor-atMb', 'sicor-atMb', 'transfoeis_place') else False
+                           'findicor', 'sdcor2', 'mavicore0', 'maviterms50', 'dicor-atMb', 'sicor-atMb',
+                           'transfoeis_place') else False
 
 # CORES = True
 # CORES = False
@@ -364,7 +369,8 @@ def extract_file(fname, verbosity=VERBOSITY, job_id=job_id):
     cx_nonzero_winner = 'nonzero_fail'
     reconst_order = -1
     ## < = > complexity analysis:
-    if not CORES:
+    ANALYZE = False
+    if not CORES and ANALYZE:
         task_id = int(fname[-17:-12])
         seq_id = fname[-11:-4]
         truth = csv[seq_id][0]
@@ -567,6 +573,7 @@ def for_summary(aggregated: tuple, fname: str):
     if task_id <100000:
         print_eqs = False
         print_eqs = True
+        print_eqs = False
         # print(reconst_order)
         # if cx_order_winner in ('max_order<', 'max_order='):
         if cx_order_winner == 'max_order<':
@@ -575,7 +582,7 @@ def for_summary(aggregated: tuple, fname: str):
             #     print(f'filename: {fname}, {fname[6:13]}: {eq}')
             cx_dict[str(reconst_order)][0] += 1
             cx_dict[str(reconst_order)][1] += [fname[6:13]]
-        if cx_nonzero_winner == 'nonzero<':
+        if cx_nonzero_winner == 'nonzero<' or non_manual:
             if print_eqs:
                 print(f'filename: {fname}, {fname[6:13]}: {eq}')
 
@@ -747,7 +754,7 @@ print('here i am')
 scale = 40
 scale = 240
 scale = 4000
-# scale = 50100
+scale = 50100
 files_debug = files[0:scale]
 files = files_debug
 # print(files)
@@ -788,7 +795,7 @@ cx_dict_sizes = [(key, value[0]) for key, value in cx_dict.items()]
 print(cx_dict_sizes)
 # print([(cx_dict[key][0], len(cx_dict[key][1]))  for key in cx_dict])
 print(sum([cx_dict[key][0] for key in cx_dict]))
-1/0
+# 1/0
 # print(summary)
 
 # corrected_sum = sum(summary[:4]) - sum(summary[4:])
@@ -857,6 +864,10 @@ print('\nComplexities:')
 #                in nonzeros_cxs.items() if 'ail' not in ky]))
 # 1/0
 
+print(f'Dasco: n_pred=1:  {official_success: > 5} = {official_success / n_of_seqs * 100: 0.3} % - official')
+print(f'Dasco: n_pred=10: {id_oeis: >5} = {id_oeis/n_of_seqs*100:0.3} %')
+# 1/0
+
 printout = f"""
     {id_oeis: >5} = {id_oeis/n_of_seqs*100:0.3} % ... (id_oeis) ... successfully found equations that are identical to the recursive equations written in OEIS (hereinafter - OEIS equation)
     {non_id: >5} = {non_id/n_of_seqs*100:0.3} % ... (non_id) ... successfully found equations that are more complex than the OEIS equation 
@@ -888,7 +899,9 @@ printout = f"""
     
     time complexity: {time_complexity}
     
-    
+    """
+
+latex = """
     
     ==========================================================
 
@@ -963,6 +976,7 @@ printout = f"""
 
 
 print(printout)
+# print(latex)
 # 1/0
 
 n = 6
@@ -974,6 +988,7 @@ print(f'zipped job bins (task_id= 0, 1, ... 34):', [(n, i) for n, i in enumerate
 print(f'check bins: {len(files)} = {sum(job_bins)} ?')
 for n, i in enumerate(job_bins):
     print(n, i)
+1/0
 
 if CORES:
     # print(files)

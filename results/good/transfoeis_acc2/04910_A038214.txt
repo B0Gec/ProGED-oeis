@@ -1,0 +1,18 @@
+
+dasco's acc_1, acc_10: False, False is stored in is_reconst and is_check
+n_input: 25
+While total time consumed by now, scale:4911/10000, seq_id:A038214, order:10 took:
+ 631.6 seconds, i.e. 10.53 minutes or 0.175 hours.
+CORELIST: False, METHOD: Diofantos, SINDy: False (True also in case of MAVI), GROUND_TRUTH: False, SINDy_default: True, DEBUG: False, OEISformer: True
+n_of_terms_ed: 200, N_OF_TERMS_ED: 200
+Library: n, max_order 10, max_degree: 3, threshold: 0.1, 
+Library: n, max_order 10, threshold: 0.1
+
+by degree: 2 and order: 7. 
+A038214: 
+a(n) = -96*n**2 + 2362*n*a(n - 7) + 580*n*a(n - 6) + 894*n*a(n - 5) + 706*n*a(n - 4) + 739*n*a(n - 3) - 1324*n*a(n - 2) + 838*n*a(n - 1) - 672*n + 2716*a(n - 7)**2 - 2573*a(n - 7)*a(n - 6) - 1131*a(n - 7)*a(n - 5) + 587*a(n - 7)*a(n - 4) - 542*a(n - 7)*a(n - 3) - 688*a(n - 7)*a(n - 2) + 25*a(n - 7)*a(n - 1) - 192*a(n - 7) + 898*a(n - 6)**2 - 1452*a(n - 6)*a(n - 5) + 2177*a(n - 6)*a(n - 4) - 1711*a(n - 6)*a(n - 3) + 208*a(n - 6)*a(n - 2) + 322*a(n - 6)*a(n - 1) + 1850*a(n - 6) + 516*a(n - 5)**2 - 209*a(n - 5)*a(n - 4) + 1064*a(n - 5)*a(n - 3) - 833*a(n - 5)*a(n - 2) + 118*a(n - 5)*a(n - 1) - 1236*a(n - 5) - 1006*a(n - 4)**2 + 934*a(n - 4)*a(n - 3) - 633*a(n - 4)*a(n - 2) + 224*a(n - 4)*a(n - 1) - 144*a(n - 4) - 327*a(n - 3)**2 + 295*a(n - 3)*a(n - 2) - 249*a(n - 3)*a(n - 1) + 132*a(n - 3) + 148*a(n - 2)**2 - 51*a(n - 2)*a(n - 1) - 2461*a(n - 2) + 9*a(n - 1)**2 - 985*a(n - 1) - 512
+truth: 
+
+
+False  -  checked against website ground truth.     
+False  -  "manual" check if equation is correct.    

@@ -1,15 +1,16 @@
 #!/bin/bash
-#SBATCH --job-name=oeis_core_array
+#SBATCH --job-name=test
 ##SBATCH --partition=long
 ##SBATCH --time=14-00:00:00
 ##SBATCH --time=00:10:00
 #SBATCH --time=2-00:00:00
 #SBATCH --mem-per-cpu=5GB
+#SBATCH --time=01:10:00
+##SBATCH --mem-per-cpu=100MB
 ##SBATCH --cpus-per-task=1
 #SBATCH --array=0-1000  # 1001 is upper limit
-##SBATCH --array=0-2
-#SBATCH --array=0-999
-#SBATCH --array=0-1
+##SBATCH --array=0-1
+#SBATCH --array=0-1000
 #SBATCH --output=./joeis%A.out
 
 echo "=============================================="
@@ -22,7 +23,8 @@ date
 
 cd oeis/
 #singularity exec ../pg.sif python3 doones.py --job_id $SLURM_ARRAY_JOB_ID \
-singularity exec ../oeis.sif python3 doones.py --task_id $(($1*1000 + $SLURM_ARRAY_TASK_ID)) --exper_id $2
+singularity exec ../oeis.sif python3 doones.py \
+        --task_id $(($1*1000 + $SLURM_ARRAY_TASK_ID)) --exper_id $2
 
 date
 

@@ -19,6 +19,38 @@ from diophantine_solver import diophantine_solve
 
 # print("IDEA: max ORDER for GRAMMAR = floor(DATASET ROWS (LEN(SEQ)))/2)-1")
 
+def diofantos(M: sp.Matrix, d_max: int) -> (sp.Matrix, str):
+    """ Diofantos algorithm for discovery of exact integer equations.
+        - M: matrix of observations of the variables V = {x_1, x_2, ..., x_p, y}; the last column
+         of M corresponds to the target variable y
+        - d_max: The maximal degree d_max of the non-linear terms
+    """
+
+    print("in Diofantos")
+    # print(M, d_max)
+
+    scale = 10
+    M = M[:scale, :]
+    # b, A, sol_ref = dataset(list(seq), d_max, max_order, library=library)
+    b, A = M[:, -1], M[:, :-1]
+    verbosity = 3
+    if verbosity >= 3:
+        print('A, b', A.__repr__(), b.__repr__())
+        # print('A[:4][:4] :', A[:6, :6].__repr__(), '\n', A[:, -2].__repr__())
+        print('A, b  shapes', A.shape, b.shape)
+
+    x = diophantine_solve(A, b)
+    if verbosity >= 3:
+        print('x', x)
+
+    if len(x) > 0:
+        x = x[0]
+        # if linear:
+        #     x = sp.Matrix.vstack(sp.Matrix([0]), x)
+    # eq = solution2str(x, solution_ref=sol_ref, library=None)
+    eq = 'y = ' + x*sp.Matrix([f'x_{i}' for i in range(1, A.shape[1]+1)]).transpose()
+    return x, eq
+
 def timer(now, text=f"\nScraping all (chosen) OEIS sequences"):
     before, now = now, time.perf_counter()
     consumed = now - before
@@ -799,35 +831,48 @@ def sol_order(x: sp.Matrix, solution_ref: list[str]) -> (int, dict):
 def check_eq_dasco(x, seq_id, csv, solution_ref, n_input):
 
     from loadtrans import trans_input, trans_output
-    tau = 10 ** (-10)
     seq = trans_input(seq_id, n_input) + trans_output(seq_id, n_input, n_pred=10)
     csv = pd.DataFrame({seq_id: seq})
-    print(csv)
+    # print(csv)
     # print(list(csv[seq_id]))
     # csv[seq_id] += [trans_output(seq_id, n_input, n_pred=10)]
     # print(trans_output(seq_id, n_input, n_pred=10))
     # 1/0
 
     is_check_verbose = check_eq_man(x, seq_id, csv, header=False, n_of_terms=10 ** 5, solution_ref=solution_ref)
-    print(is_check_verbose)
+    # print(is_check_verbose)
     seq_pred = is_check_verbose[1]
+    # print(seq_pred)
+    if seq_pred == 'no reconst':
+        # print('predicted sequence: >>', seq_pred, '<<, therefore accuarcy is False')
+        acc_1, acc_10 = False, False
+        return acc_1, acc_10
+
     # seq_pred = check_eq_man(x, seq_id, csv, header=False, oeis_friendly=0,
     #                         solution_ref: list[str] = None, library: str = None)
     quick_check = (seq_pred[:n_input+1] == seq[:n_input+1], seq_pred == seq)
-    print(seq_pred)
-    print(quick_check)
+    # print('my simplified acc:' ,quick_check)
     # 1/0
 
     seq, seq_pred = seq[n_input:], seq_pred[n_input:]
+    # seq[1] = 121392.99999
     # diff = max([abs((an - seq[n])/seq[n]) for n, an in enumerate(seq_pred[n_input: n_input+n_pred]]) if n !=0]
     # is_check = False if
     n_pred = 10
-    # diff = max([abs((seq_pred[i] - seq[i])/seq[i]) if seq[i] != 0 else math.inf for i in range(1, n_pred) ])
-    print(seq, seq_pred)
-    diff = [i  for i in range(1, n_pred)]
-    print(diff)
+    tau = 10 ** (-10)
+    acc_10 = max([abs((seq_pred[i] - seq[i])/seq[i]) if seq[i] != 0 else (0 if seq_pred[0]==0 else math.inf)
+                  for i in range(0, n_pred)]) <= tau
+    acc_1 =      (abs((seq_pred[0] - seq[0])/seq[0]) if seq[0] != 0 else (0 if seq_pred[0]==0 else math.inf)) <= tau
+    # print('acc_1, acc_10:', acc_1, acc_10)
+    # print(seq)
+    # print(seq_pred)
+    # print(len(seq), len(seq_pred))
+    # diff = [(i+1)  for i in range(0, n_pred)]
+    # diffc = [(seq[i], seq_pred[i])  for i in range(0, n_pred)]
+    # diffca = [seq[i]== seq_pred[i]  for i in range(0, n_pred)]
+    # print('diff:', diffc, diffca)
     # return diff < tau
-    return
+    return acc_1, acc_10
 
 # 4 cases: (n_input, n_pred) pairs: (15, 1), (15, 10), (25, 1), (25, 10)
 # tau = 10^(-10)
@@ -1030,6 +1075,18 @@ if __name__ == '__main__':
     # from proged times:
     # has_titles = 1
     # csv = pd.read_csv('oeis_selection.csv')[has_titles:]
+    csv = pd.read_csv('real-bench/wheel.csv')
+    print(csv.head())
+    vars = list(csv.columns)
+    # print(vars)
+    M = csv.to_numpy()
+    # print(M.shape)
+    # print(M)
+    M = sp.Matrix(csv.to_numpy())
+    # print(M)
+    print(diofantos(M, 1))
+    # print(csv)
+    1/0
 
     # csv = pd.read_csv('linear_database.csv', low_memory=False)
     csvfilename = 'linear_database_full.csv'

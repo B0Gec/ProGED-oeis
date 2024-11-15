@@ -1,0 +1,12 @@
+n_input=15
+max_order=10, deg=3
+
+
+ 2895 =  28.9 % - official
+ 2211 = 22.1 %
+
+n_input=25
+max_order=10, deg=3
+Dasco: n_pred=1:   2845 =  28.4 % - official
+Dasco: n_pred=10:  2563 = 25.6 %
+
