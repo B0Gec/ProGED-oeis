@@ -924,6 +924,62 @@ def check_eq_dasco(x, seq_id, csv, solution_ref, n_input):
 
 # in doones import check_eq_man_dasco and print it.
 
+def stvar2term(stvar: str, till_now: sp.Matrix, order_) -> int:
+    # print('in stvar2term', stvar)
+    if stvar == '1': return 1
+    elif stvar == 'n': return till_now.rows
+    else:
+        # print('\n\nstvar!!!: ', stvar, order, x_dict, '\n\n')
+        order2 = ([i for i in range(order_+1) if stvar == f'a(n-{i})'] + [0])[0]
+        # print('in stvar2term', order_, order2, stvar, till_now, len(till_now))
+        ret = till_now[order2-1]
+        # print(order2 - 1)
+        # print('endof stvar2term', stvar, 'result', ret, 'defy', till_now[1])
+        return ret  # (order - 1) + 1 ... i.e. first 1 from list indexing, second 1 from constant term
+
+def stvar2term_v2(stvar: str, till_now: sp.Matrix, order_) -> int:
+    """Convert state variable (e.g. a(n-3) or n to value based on the sequence ."""
+    if stvar == '1': return 1
+    elif stvar == 'n': return len(till_now)  ## the only difference!!!!!!
+    else:
+        order2 = ([i for i in range(order_+1) if stvar == f'a(n-{i})'] + [0])[0]  # flaw for stvar = 'a(n-1)^3' ... have to update!!!!
+        ret = till_now[order2-1]
+        print('stvar ret', ret)
+        return ret  # (order - 1) + 1 ... i.e. first 1 from list indexing, second 1 from constant term
+
+def var2term(var: str, till_now: sp.Matrix, order_) -> int:
+    comb = var.split('*')
+    # comb2act(comb, x_dict, lambda x,y: x*y)
+    def updateit(current, elt):
+        # print('in updateit', current, elt, var, till_now, solution_ref)
+        # print('in updateit in', till_now.shape[0])
+        # print('\ncurent magnitude', len(str(current)), '\n')
+        ret = current*stvar2term(elt, till_now, order_)
+        # print(ret)
+        return ret
+
+    ret = reduce(updateit, comb, 1)
+    # print('returned var2term')
+    return ret
+
+def var2term_v2(var: str, till_now: sp.Matrix, order_) -> int:
+    comb = var.split('*')
+    print(comb)
+    # comb2act(comb, x_dict, lambda x,y: x*y)
+    def updateit(current, elt):
+        print(f'in updateit:, current: {current}, elt: {elt}, var: {var}, till_now: {till_now}')
+        # print('in updateit in', till_now.shape[0])
+        # print('\ncurent magnitude', len(str(current)), '\n')
+        print(stvar2term_v2(elt, till_now, order_))
+        ret = current*stvar2term_v2(elt, till_now, order_)
+        print(ret)
+        return ret
+
+    ret = reduce(updateit, comb, 1)
+    # print('returned var2term')
+    return ret
+
+
 def check_eq_man(x: sp.Matrix, seq_id: str, csv: pd.DataFrame,
                  n_of_terms: int = 500, header: bool = True,
                  oeis_friendly=0, solution_ref: list[str] = None, library: str = None) -> (bool, int):
@@ -979,34 +1035,6 @@ def check_eq_man(x: sp.Matrix, seq_id: str, csv: pd.DataFrame,
     #     1/0
 
 
-    def stvar2term(stvar: str, till_now: sp.Matrix) -> int:
-        # print('in stvar2term', stvar)
-        if stvar == '1': return 1
-        elif stvar == 'n': return till_now.rows
-        else:
-            # print('\n\nstvar!!!: ', stvar, order, x_dict, '\n\n')
-            order2 = ([i for i in range(order_+1) if stvar == f'a(n-{i})'] + [0])[0]
-            # print('in stvar2term', order_, order2, stvar, till_now, len(till_now))
-            ret = till_now[order2-1]
-            # print(order2 - 1)
-            # print('endof stvar2term', stvar, 'result', ret, 'defy', till_now[1])
-            return ret  # (order - 1) + 1 ... i.e. first 1 from list indexing, second 1 from constant term
-
-
-    def var2term(var: str, till_now: sp.Matrix) -> int:
-        comb = var.split('*')
-        # comb2act(comb, x_dict, lambda x,y: x*y)
-        def updateit(current, elt):
-            # print('in updateit', current, elt, var, till_now, solution_ref)
-            # print('in updateit in', till_now.shape[0])
-            # print('\ncurent magnitude', len(str(current)), '\n')
-            ret = current*stvar2term(elt, till_now)
-            # print(ret)
-            return ret
-
-        ret = reduce(updateit, comb, 1)
-        # print('returned var2term')
-        return ret
 
 
         # remnants = {stvar: stvar for i in range(len(x)) if x[i] != 0}
@@ -1038,7 +1066,7 @@ def check_eq_man(x: sp.Matrix, seq_id: str, csv: pd.DataFrame,
             # if len(till_now) > 16:
                 # print('len(till_now)', len(till_now))
                 # print('var, x_i:', var, x_i, 'var2term(var, till_now)', var2term(var, till_now))
-            ane += x_i*var2term(var, till_now)
+            ane += x_i*var2term(var, till_now, order_)
 
         anext = sp.Matrix([ane])
         # anext = sp.Matrix([sum(ane)])
