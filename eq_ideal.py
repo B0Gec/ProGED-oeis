@@ -130,25 +130,53 @@ def ideal_to_eqs(ideal: str, max_complexity: int = 10, max_bitsize: int = 100, t
 
     return eqs, human_readable_eqs
 
+def is_linear(equation: str) -> bool:
+    """Check if the expression is linear."""
+    eq = equation
+    if '^' in eq:
+        return False
+    return
+
+def order_preprocess(equation: str) -> str:
+    """Preprocess the expression to minimize the recursion order."""
+    eq = equation
+    min =
+    return eq
 
 def linear_to_vec(linear_eq):
-    return
+    """Convert linear expression from mb to vector form.
+    E.g. 'a(n) - a(n-1) - a(n-2)' -> [1, 1]
 
-def check_implicit(mb_eq, order):
-    """ I checked that I have not already implemented this function in exact_ed.py or check_quick.py.
-    Although check_eq_man has similar implementation I will try to implement it from the scratch. 
+    Details:
+        Expression is equalized to zero, and then a(n) is isolated and divided by its coefficient.
+        the vector of coefficients in the rhs is returned.
     """
-    
-    eq = 'a(n) -2*a(n-1)'
 
-    eq = 'n*a(n-1)^3 +(-7/16875)*a(n-1)^4'
-
-    from exact_ed import var2term_v2, stvar2term_v2
-    print('stvar2term', stvar2term_v2(stvar='n', till_now=[0, 1, 1, 2, 3, 5], order_=1))
-    print('var2term', var2term_v2(var='n*a(n-1)^3', till_now=[0, 1, 1, 2, 3, 5], order_=1))
-    1/0
 
     return
+
+def check_implicit(mb_eq: str, seq: list[int]) -> bool:
+    """ I checked that I have not yet implemented this function in exact_ed.py or check_quick.py.
+    Although check_eq_man has similar implementation I implemented it from the scratch with hope
+    of more efficiency by using Cocoa.
+
+    E.g. 'a(n) - a(n-2) - 1*a(n-1)^1 ', [0, 1, 1, 2, 3, 5] -> True
+    """
+
+    from exact_ed import expr_eval, obs_eval, eq_order_explicit
+
+    order = eq_order_explicit(mb_eq)
+    wanted_zeros = []
+    for n in range(order, len(seq)):
+        till_now = seq[:n+1]
+        # print('n', n, 'till_now', till_now)
+        evaled = expr_eval(mb_eq, till_now)
+        # print('n', n, 'till_now', till_now, f'evaled: {evaled}')
+        wanted_zeros.append(evaled)
+    # print(wanted_zeros)
+    non_zeros = [i for i in wanted_zeros if i != '0']
+    vanishes = len(non_zeros) == 0
+    return vanishes
 
 # maybe for TM-OEIS:
 # def implicit_to_explicit(linear_eq):
@@ -215,7 +243,12 @@ if __name__ == '__main__':
     print('eqs:', len(eqs))
     bitsize_ = bitsize(eqs[1])
     print(bitsize_)
-    check_implicit(eqs[1], 1)
+
+    expr = 'a(n) -a(n-1) - a(n-2)'
+    seq = [0, 1, 1, 2, 3, 5]
+    print(expr, seq)
+    is_check = check_implicit(expr, seq)
+    print('check_implicit:', is_check)
     1/0
 
     print('\n ------ after eqs ------')

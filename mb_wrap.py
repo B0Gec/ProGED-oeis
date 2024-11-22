@@ -111,6 +111,36 @@ def mb(points: list, execute_cmd=False, var_names='djus', verbosity=0):
     return
 
 
+def cocoa_eval(cocoa_code: str, execute_cmd=False, verbosity=0, cluster=False):
+    """Runs cocoa code and returns the result.
+    Console command:
+        echo "-(12312/243434)*2^3" | ./CocoAInterpter
+    """
+
+    command = f"cd ../{cocoa_location[2:]}; echo \"{cocoa_code}\" | ./CoCoAInterpreter"
+    if verbosity > 0:
+        print('cocoa_code pretty printed:\n', cocoa_code.replace(';', ';\n'))
+
+    if execute_cmd:
+        if not cluster:
+            print()
+            print(f"Executing LINUX command for real... {command*(verbosity>0)}")
+        p = subprocess.Popen(command, stdout=subprocess.PIPE, shell=True)
+        (output, err) = p.communicate()
+        p_status = p.wait()
+
+        if verbosity > 0:
+            print(output.decode())
+
+        # b) extract output ignoring logo
+        cocoa_res = output.decode().split('indent(VersionInfo(), 2); -- for information about this version\n')[-1]
+        if cocoa_res[-1] == '\n':
+            cocoa_res = cocoa_res[:-1]
+        # print('\n'*10, f'cocoa output:{cocoa_res}<--Till here')
+        return cocoa_res
+    print("NOT Executing LINUX command for real... just simulating command")
+    raise ValueError('Not executing command for real!!')
+    return
 
 
 def mb_wrap_old(filename = 'runable.cocoa5', file_dir = 'julia/mb/'):

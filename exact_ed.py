@@ -7,7 +7,7 @@ import pandas as pd
 import time
 import math
 # from typing import Union
-from functools import reduce
+from functools import reduce, lru_cache
 from itertools import product
 
 
@@ -937,19 +937,33 @@ def stvar2term(stvar: str, till_now: sp.Matrix, order_) -> int:
         # print('endof stvar2term', stvar, 'result', ret, 'defy', till_now[1])
         return ret  # (order - 1) + 1 ... i.e. first 1 from list indexing, second 1 from constant term
 
-def stvar2term_v2(stvar: str, till_now: sp.Matrix, order_) -> int:
-    """Convert state variable (e.g. a(n-3) or n to value based on the sequence ."""
-    if stvar == '1': return 1
-    elif stvar == 'n': return len(till_now)  ## the only difference!!!!!!
+
+# @lru_cache(maxsize=None) # possible optimization with fixing order_limit = 100?
+# Problem: unhashable type: list is input! Solution: use tuple instead of list.
+def obs_eval(observable: str, till_now: list[int], order_limit: int = 1000) -> int:
+    """Convert observables, i.e. state variables (e.g. a(n-3) or n) to value based on the sequence.
+    Updated version of stvar2term, primarely used for mb_eed, not Diofantos.
+        e.g. a(n-1), [0, 1, 1, 2, 3] -> 2.
+    Note: a(n-1)^2 should yield error!!
+    """
+
+    # print('in obs_eval', observable, till_now, order_limit)
+    # if observable == '1': return 1
+    if observable == 'n': return len(till_now)-1  # mabye should be len - 1 # main difference to stvar2term
     else:
-        order2 = ([i for i in range(order_+1) if stvar == f'a(n-{i})'] + [0])[0]  # flaw for stvar = 'a(n-1)^3' ... have to update!!!!
-        ret = till_now[order2-1]
-        print('stvar ret', ret)
-        return ret  # (order - 1) + 1 ... i.e. first 1 from list indexing, second 1 from constant term
+        order2 = [0] if observable == 'a(n)' else [i for i in range(1, order_limit + 1) if observable == f'a(n-{i})']
+        if not order2:
+            raise ValueError('mbeed: obs_eval: observable not registered. Probably feeding wrong input like a(n-2)^2 to this function.')
+        else:
+            order2 = order2[0]
+        # ret = till_now[order2-1]  # spremeni v till_now[-1-order2]!!!
+        returned = till_now[-1-order2]  # spremeni v till_now[-1-order2]!!!
+        # print('stvar ret', returned)
+        return returned
 
 def var2term(var: str, till_now: sp.Matrix, order_) -> int:
     comb = var.split('*')
-    # comb2act(comb, x_dict, lambda x,y: x*y)
+    # comb2act(comb, x_dict, lambda x,y: x*y)  # makes total sense
     def updateit(current, elt):
         # print('in updateit', current, elt, var, till_now, solution_ref)
         # print('in updateit in', till_now.shape[0])
@@ -962,22 +976,37 @@ def var2term(var: str, till_now: sp.Matrix, order_) -> int:
     # print('returned var2term')
     return ret
 
-def var2term_v2(var: str, till_now: sp.Matrix, order_) -> int:
-    comb = var.split('*')
-    print(comb)
-    # comb2act(comb, x_dict, lambda x,y: x*y)
-    def updateit(current, elt):
-        print(f'in updateit:, current: {current}, elt: {elt}, var: {var}, till_now: {till_now}')
-        # print('in updateit in', till_now.shape[0])
-        # print('\ncurent magnitude', len(str(current)), '\n')
-        print(stvar2term_v2(elt, till_now, order_))
-        ret = current*stvar2term_v2(elt, till_now, order_)
-        print(ret)
-        return ret
+def eq_order_explicit(expr: str) -> int:
+    """Writes out order explicitly written in the equation.
+        E.g. 'a(n-1)*a(n-2)^3 + 5*n*a(n)' \-> 2.
 
-    ret = reduce(updateit, comb, 1)
-    # print('returned var2term')
-    return ret
+        Note, that this could be improved to catch also true or relative order like in case of absent a(n).
+    """
+    order_limit = 100
+    observed_orders = [i for i in range(1, order_limit+1) if f'a(n-{i})' in expr]
+    min_max_orders = 0 if not observed_orders else max(observed_orders)
+    return order
+
+# @lru_cache(maxsize=None)
+def expr_eval(expr: str, till_now: list[int], order_limit=1000) -> str:
+    """Evaluate expression, i.e. equation, e.g. 'a(n-1)*a(n-2)^2 + 2*n', [0,1,1,2,3,5], 3 -> 3*2^2 + 2*5 = 22.
+
+    Used for mb_eed and uses cocoa to evaluate fractions and obs_eval for replacing indeterminates with values.
+    """
+    from mb_wrap import cocoa_eval
+
+    observables = (['a(n)'] if 'a(n)' in expr else [])
+    observables += [var for i in range(1, order_limit+1) if (var := f'a(n-{i})') in expr]
+    # possible optimization: obs_eval using only strings, not int.
+    # maybe without to_replace dictionary. To exploit memoization on obs_eval which does not depend on order_limit.
+    to_replace = {obs: str(obs_eval(obs, till_now, order_limit)) for obs in observables}
+    for obs in observables:
+        expr = expr.replace(obs, to_replace[obs])
+    expr = expr.replace('n', str(obs_eval('n', till_now, order_limit)))
+    # print(expr)
+    # print(observables)
+    returned = cocoa_eval(expr+';', execute_cmd=True)
+    return returned
 
 
 def check_eq_man(x: sp.Matrix, seq_id: str, csv: pd.DataFrame,
