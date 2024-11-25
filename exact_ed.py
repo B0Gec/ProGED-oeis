@@ -976,16 +976,29 @@ def var2term(var: str, till_now: sp.Matrix, order_) -> int:
     # print('returned var2term')
     return ret
 
-def eq_order_explicit(expr: str) -> int:
+def eq_order_explicit(expr: str) -> (int, int):
     """Writes out order explicitly written in the equation.
-        E.g. 'a(n-1)*a(n-2)^3 + 5*n*a(n)' \-> 2.
+        E.g. 'a(n-1)*a(n-2)^3 + 5*n*a(n)' \-> (0, 2).
+             'n + 13' \-> (None, 0).
+             ' (-4/3)*a(n-1) + a(n-2)*a(n-3)' \-> (1, 3).
+             'a(n) + 13*n - 34' \-> (0, 0).
 
-        Note, that this could be improved to catch also true or relative order like in case of absent a(n).
+    Important:
+        * max order is used by check_implicit in eq_ideal.py to check the implicit equation on whole sequence.
+            For that reason:
+                 'n + 13' \-> (None, 0).
+                 to make 0 used by check_implicit. While None is good indicator for 'a(n)' vs 'n + 13' case.
+        * min order is used by linear_to_vec in eq_ideal to find true vector of
+            coefficients even in case of shifted order.
+            Far that reason None is good indicator of no such vector.
     """
     order_limit = 100
-    observed_orders = [i for i in range(1, order_limit+1) if f'a(n-{i})' in expr]
-    min_max_orders = 0 if not observed_orders else max(observed_orders)
-    return order
+    observed_positive_orders = (([0] if f'a(n)' in expr else []) +
+                                [i for i in range(1, order_limit+1) if f'a(n-{i})' in expr])
+    # print(observed_positive_orders)
+    # return None, 0 if no a(n-i) or a(n) is present
+    min_max_orders = (min(observed_positive_orders), max(observed_positive_orders)) if observed_positive_orders else (None, 0)
+    return min_max_orders
 
 # @lru_cache(maxsize=None)
 def expr_eval(expr: str, till_now: list[int], order_limit=1000) -> str:

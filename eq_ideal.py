@@ -130,28 +130,76 @@ def ideal_to_eqs(ideal: str, max_complexity: int = 10, max_bitsize: int = 100, t
 
     return eqs, human_readable_eqs
 
-def is_linear(equation: str) -> bool:
-    """Check if the expression is linear."""
-    eq = equation
-    if '^' in eq:
+def is_linear(expr: str) -> bool:
+    """Check if the OEIS recursive expression is linear."""
+
+    if '^' in expr:
         return False
+    else:
+        # noty = re.findall(r'^\+?-?\(?-?\d+/?\d*\)?\*?[^ ]+\*[^ ]+', expr)
+        # noty = re.findall(r'[an][(n\-0-9)]*\*', expr) # this is enough here
+        quads = re.findall(r'[an][(n\-0-9)]*\*[an][(n\-0-9)]*', expr)  # for linear including 'n'
+        # print('inside is_linear', quads)
+        return not quads
     return
 
-def order_preprocess(equation: str) -> str:
-    """Preprocess the expression to minimize the recursion order."""
-    eq = equation
-    min =
-    return eq
+def order_optimize(expr: str) -> str:
+    """Preprocess the expression (not containing the 'n' variable,) to minimize the recursion order.
+        E.g. a(n-1) - 2*a(n-2) -> a(n) - 2*a(n-1)
 
-def linear_to_vec(linear_eq):
+    Useful for finding true vector for linear recursive equations of OEIS in Linrec data set.
+        Careful! This function is not for general use:
+            'a(n-2) - a(n-1) - n' \-> 'a(n-1) - a(n) - n' and not 'a(n) - a(n-1) - (n+1)'
+    """
+
+    min_order, max_order = eq_order_explicit(expr)
+    # print(min_order, max_order)
+    # print(expr)
+    if not min_order in (None, 0):
+        # a(n-1) -> a(n)
+        expr = expr.replace(f'a(n-{min_order})', 'a(n)')
+        # print('expr after a(n-1) -> a(n):', expr)
+        # in the end: n-min -> n
+        for i in range(min_order+1, max_order+1):
+            # print('i:', i)
+            expr = expr.replace(f'a(n-{i})', f'a(n-{i-min_order})')
+            # print('expr after a(n-3) -> a(n-2):', expr)
+    # print('expr after all:', expr)
+    return expr
+
+
+def linear_to_vec(linear_expr: str) -> list:
     """Convert linear expression from mb to vector form.
     E.g. 'a(n) - a(n-1) - a(n-2)' -> [1, 1]
 
     Details:
         Expression is equalized to zero, and then a(n) is isolated and divided by its coefficient.
         the vector of coefficients in the rhs is returned.
+    Input:
+        - expression that was checked to be linear.
     """
 
+    expr = order_optimize(linear_expr)
+
+    # head_tail = expr.split('a(n)')
+    # if len(head_tail) != 1:
+    expr = 'a(n) -3*a(n-2) +a(n-2)'
+    expr = '-2*a(n) -3*a(n-2) +a(n-2)'
+    expr = '3*a(n-3) -a(n) -3*a(n-2) +a(n-2)'
+    # expr =   '+(-7/16875)*a(n) +(-200704/15)*n^3 '
+
+    summands = [i for i in expr.split(' ')]
+    summands = [j for j in [i.replace(' ', '') for i in summands] if j != '']  # clean-up empty strings.
+    lhs = [summand for summand in summands if 'a(n)' in summand]
+    rhs = [summand for summand in summands if 'a(n)' not in summand]
+    if len(lhs) != 1:
+        print('a(n) monomials:', lhs)
+        raise ValueError('Strange error in linear_to_vec function!!!      '
+                         '... linear expression has more than one \'a(n)\' (or not even one) monomials !!!'
+                         f'\nThese are: {lhs}.')
+    print('summands', summands)
+    coef = re.findall(r'^\+?([^an*]*)\*?a\(n\)', lhs[0])
+    print('coef', coef)
 
     return
 
@@ -161,11 +209,11 @@ def check_implicit(mb_eq: str, seq: list[int]) -> bool:
     of more efficiency by using Cocoa.
 
     E.g. 'a(n) - a(n-2) - 1*a(n-1)^1 ', [0, 1, 1, 2, 3, 5] -> True
-    """
+    ""
 
     from exact_ed import expr_eval, obs_eval, eq_order_explicit
 
-    order = eq_order_explicit(mb_eq)
+    order = eq_order_explicit(mb_eq)[1]
     wanted_zeros = []
     for n in range(order, len(seq)):
         till_now = seq[:n+1]
@@ -213,7 +261,7 @@ if __name__ == '__main__':
     csv = pd.read_csv(csv_filename, low_memory=False, usecols=[seq_id])[:N_OF_TERMS_LOAD]
 
     from IPython.display import display, display_latex
-    from exact_ed import unnan
+    from exact_ed import unnan, eq_order_explicit
 
     seq, coeffs, truth = (unnan(csv[seq_id]), None, None)
     print(seq)
@@ -245,10 +293,29 @@ if __name__ == '__main__':
     print(bitsize_)
 
     expr = 'a(n) -a(n-1) - a(n-2)'
+    expr = ' -a(n-1) - a(n-2)'
+    # expr = 'n + n^2 - n^3'
+    # expr = 'a(n-6)*a(n+14) - a(n-2)'
+    # expr = 'a(n-6) +a(n-14) - a(n-2)'
+    expr = 'a(n) + 13*n - 34'
+    expr =   '+(-7/16875)*a(n-1)^4 +(-200704/15)*n^3 '
+    # expr =   '+(-7/16875)*a(n-1)*a(n-2) +(-200704/15)*n*a(n)'
+
     seq = [0, 1, 1, 2, 3, 5]
     print(expr, seq)
-    is_check = check_implicit(expr, seq)
-    print('check_implicit:', is_check)
+    order = eq_order_explicit(expr)
+    print('eq_order:', order)
+    # is_check = check_implicit(expr, seq)
+    # print('check_implicit:', is_check)
+    is_linear_ = is_linear(expr)
+    print('is_linear_:', is_linear_)
+    order_optimized = order_optimize(expr)
+    print('order_optimized:', order_optimized)
+
+    expr = 'a(n) -a(n-1) -a(n-2)'
+    print('ablated expr:', expr)
+    vector = linear_to_vec(expr)
+    print('vector:', vector)
     1/0
 
     print('\n ------ after eqs ------')
