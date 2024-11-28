@@ -131,17 +131,24 @@ def ideal_to_eqs(ideal: str, max_complexity: int = 10, max_bitsize: int = 100, t
     return eqs, human_readable_eqs
 
 def is_linear(expr: str) -> bool:
-    """Check if the OEIS recursive expression is linear."""
+    """Check if the OEIS recursive expression is linear without constant terms.
+        Used by Linrec experiments for linear_to_vec function.
+    """
 
-    if '^' in expr:
+    if '^' in expr:  # Power to > 1 indicates nonlinearity.
         return False
-    else:
+    else:  # Check if there are degree >= 2 terms.
         # noty = re.findall(r'^\+?-?\(?-?\d+/?\d*\)?\*?[^ ]+\*[^ ]+', expr)
         # noty = re.findall(r'[an][(n\-0-9)]*\*', expr) # this is enough here
         quads = re.findall(r'[an][(n\-0-9)]*\*[an][(n\-0-9)]*', expr)  # for linear including 'n'
-        # print('inside is_linear', quads)
-        return not quads
-    return
+        if quads:
+            return False
+        else:  # check if constant term is present
+            summands = [i for i in expr.split(' ')]
+            summands = [j for j in [i.replace(' ', '') for i in summands] if j != '']  # clean-up empty strings.
+            # print('summands:', summands)
+            constants = sum([re.findall('^[^an*]*$', summand) for summand in summands], [])
+            return len(constants) == 0
 
 def order_optimize(expr: str) -> str:
     """Preprocess the expression (not containing the 'n' variable,) to minimize the recursion order.
@@ -179,27 +186,46 @@ def linear_to_vec(linear_expr: str) -> list:
         - expression that was checked to be linear.
     """
 
-    expr = order_optimize(linear_expr)
+    from exact_ed import eq_order_explicit
+    from mb_wrap import cocoa_eval
+    from mb_oeis import pretty_to_cocoa
 
     # head_tail = expr.split('a(n)')
     # if len(head_tail) != 1:
     expr = 'a(n) -3*a(n-2) +a(n-2)'
-    expr = '-2*a(n) -3*a(n-2) +a(n-2)'
-    expr = '3*a(n-3) -a(n) -3*a(n-2) +a(n-2)'
+    # expr = '+a(n) -3*a(n-2) +a(n-2)'
+    # expr = '-2*a(n) -3*a(n-2) +a(n-2)'
+    linear_expr = '3*a(n-3) -a(n) -3*a(n-2) +a(n-2)'
     # expr =   '+(-7/16875)*a(n) +(-200704/15)*n^3 '
+    print('\nexpr:', linear_expr)
+    expr = order_optimize(linear_expr)
+    order = eq_order_explicit(expr)[1]
 
     summands = [i for i in expr.split(' ')]
     summands = [j for j in [i.replace(' ', '') for i in summands] if j != '']  # clean-up empty strings.
     lhs = [summand for summand in summands if 'a(n)' in summand]
-    rhs = [summand for summand in summands if 'a(n)' not in summand]
+    rhss = [summand for summand in summands if 'a(n)' not in summand]
     if len(lhs) != 1:
         print('a(n) monomials:', lhs)
         raise ValueError('Strange error in linear_to_vec function!!!      '
                          '... linear expression has more than one \'a(n)\' (or not even one) monomials !!!'
                          f'\nThese are: {lhs}.')
+    print("lhs, rhs:", lhs, rhss)
     print('summands', summands)
-    coef = re.findall(r'^\+?([^an*]*)\*?a\(n\)', lhs[0])
+    coef = re.findall(r'^\+?([^an*]*)\*?a\(n\)', lhs[0])[0]
+    cases = {'': '1', '+': '1', '-': '-1'}
+    coef = cases[coef] if coef in list(cases.keys()) else coef
     print('coef', coef)
+    rhs = "".join(rhss)
+    rhs = pretty_to_cocoa(rhs, order)
+    print('rhs', rhs)
+
+    vars = ",".join(['a(n)'] + [f'a(n-{i})' for i in range(order+1)])
+    print(vars)
+    preamble = f'P::= QQ[{vars}];'
+    # divided = cocoa_eval(preamble + f'({rhs})/({coef});', execute_cmd=True, verbosity=3, cluster=False)
+    # rhs = divided
+    print('rhs', rhs)
 
     return
 
@@ -208,8 +234,8 @@ def check_implicit(mb_eq: str, seq: list[int]) -> bool:
     Although check_eq_man has similar implementation I implemented it from the scratch with hope
     of more efficiency by using Cocoa.
 
-    E.g. 'a(n) - a(n-2) - 1*a(n-1)^1 ', [0, 1, 1, 2, 3, 5] -> True
-    ""
+    E.g. 'a(n) - a(n-2) - 1*a(n-1)^1', [0, 1, 1, 2, 3, 5] -> True
+    """
 
     from exact_ed import expr_eval, obs_eval, eq_order_explicit
 
@@ -292,13 +318,13 @@ if __name__ == '__main__':
     bitsize_ = bitsize(eqs[1])
     print(bitsize_)
 
-    expr = 'a(n) -a(n-1) - a(n-2)'
-    expr = ' -a(n-1) - a(n-2)'
+    expr = 'a(n) -a(n-1) -a(n-2)'
+    expr = ' -a(n-1) -a(n-2)'
     # expr = 'n + n^2 - n^3'
     # expr = 'a(n-6)*a(n+14) - a(n-2)'
-    # expr = 'a(n-6) +a(n-14) - a(n-2)'
-    expr = 'a(n) + 13*n - 34'
-    expr =   '+(-7/16875)*a(n-1)^4 +(-200704/15)*n^3 '
+    # expr = 'a(n-6) +a(n-14) -a(n-2)'
+    expr = 'a(n) +13*n -34'
+    # expr =   '+(-7/16875)*a(n-1)^4 +(-200704/15)*n^3 '
     # expr =   '+(-7/16875)*a(n-1)*a(n-2) +(-200704/15)*n*a(n)'
 
     seq = [0, 1, 1, 2, 3, 5]
@@ -309,10 +335,12 @@ if __name__ == '__main__':
     # print('check_implicit:', is_check)
     is_linear_ = is_linear(expr)
     print('is_linear_:', is_linear_)
+    # 1/0
     order_optimized = order_optimize(expr)
     print('order_optimized:', order_optimized)
 
     expr = 'a(n) -a(n-1) -a(n-2)'
+    print()
     print('ablated expr:', expr)
     vector = linear_to_vec(expr)
     print('vector:', vector)

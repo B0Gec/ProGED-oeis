@@ -44,6 +44,24 @@ def external_prettyprint(ideal, sol_ref= [f'a(n-{i})' for i in range(1, 16)]) ->
         ideal = ideal.replace(key, sol_ref_inverse[key])
     return ideal
 
+def pretty_to_cocoa(linear_expr, order) -> str:
+    """Convert equation from pretty to cocoa format.
+    E.g. a(n-1) -> a_n_1.
+
+    Primarely used for linear expressins for linear_to_vec
+    Input:
+        - linear_expr: str, linear equation in pretty format.
+        - order: int, order of the equation.
+    """
+
+    bij = {f'a(n-{i})': f'a_n_{i}' for i in range(1, order+1)}
+    bij.update({'a(n)': 'a_n'})
+    for key in bij:
+        linear_expr = linear_expr.replace(key, bij[key])
+    print(linear_expr)
+    return linear_expr
+
+
 def increasing_mb(seq_id, csv, max_order, n_more_terms, execute, library, n_of_terms=10**6):
     """
     Run a for loop of increasing order where I run Moeller-Buchberger algorithm on a given sequence.

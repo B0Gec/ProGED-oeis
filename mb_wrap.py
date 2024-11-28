@@ -114,7 +114,7 @@ def mb(points: list, execute_cmd=False, var_names='djus', verbosity=0):
 def cocoa_eval(cocoa_code: str, execute_cmd=False, verbosity=0, cluster=False):
     """Runs cocoa code and returns the result.
     Console command:
-        echo "-(12312/243434)*2^3" | ./CocoAInterpter
+        echo "-(12312/243434)*2^3;" | ./CocoAInterpter
     """
 
     command = f"cd ../{cocoa_location[2:]}; echo \"{cocoa_code}\" | ./CoCoAInterpreter"
