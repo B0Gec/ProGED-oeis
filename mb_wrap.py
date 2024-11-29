@@ -125,7 +125,7 @@ def cocoa_eval(cocoa_code: str, execute_cmd=False, verbosity=0, cluster=False):
         print('cocoa_code pretty printed:\n', cocoa_code.replace(';', ';\n'))
 
     if execute_cmd:
-        if not cluster:
+        if verbosity > 0:
             print()
             print(f"Executing LINUX command for real... {command*(verbosity>0)}")
         p = subprocess.Popen(command, stdout=subprocess.PIPE, shell=True)

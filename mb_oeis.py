@@ -113,15 +113,20 @@ def increasing_mb(seq_id, csv, max_order, n_more_terms, execute, library, n_of_t
         print('eqs:,', eqs)
 
         non_linears = []
+        print('checking equations ...')
         for expr in heqs:
+            print('expr:', expr)
             # check if a(n-o) is present in expression, otherwise useless:
             min_order, max_order = eq_order_explicit(expr)
+            print('order:', min_order, max_order)
             if min_order is not None:  # not useless.
-                if check_implicit(expr):  # Save implicit equation if it is correct.
+                print('not useless, checking implicit:')
+                if check_implicit(expr, seq):  # Save implicit equation if it is correct.
+                    print('eqution holds!, checking if linear:')
                     non_linears += [expr]  # will count as non_id
                     if is_linear(expr):
-                        expr = order_optimize(expr, order)
-                        x = linear_to_vec(expr, order)
+                        expr = order_optimize(expr)
+                        x = linear_to_vec(expr)
                         print('linear:', x)
                         return non_linears, eq, x
     return non_linears, eq, x

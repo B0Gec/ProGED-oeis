@@ -159,7 +159,7 @@ def grid_sympy(seq: sp.MutableDenseMatrix, d_max: int, max_order: int, library: 
 
     # Changed on 15.11.2024 to take care of general Diofantos:
     basis = lib2stvars(library, max_order) if M is None else vars_obs
-    # print(basis)
+    print(basis)
 
 
     # Updated to take care of Diofantos:
@@ -172,13 +172,13 @@ def grid_sympy(seq: sp.MutableDenseMatrix, d_max: int, max_order: int, library: 
     # Updated to take care of Diofantos:
     triangle = {var: ntriangle[:, i] for i, var in enumerate(basis)} if M is None else {var: M[:, i] for i, var in enumerate(vars_obs)}
     # print('triangle', triangle.keys())
-    # print('triangle', triangle)
+    print('triangle', triangle)
 
     # combins = itertools.combinations_with_replacement
     # combinations = sum([list(combins(basis, deg)) for deg in range(1, degree+1)], [])
     # Updated to take care of Diofantos:
     combinations = poly_combinations(library, d_max, max_order, basis)
-    # print('combinations', combinations)
+    print('combinations', combinations)
     #
     # def multiply(a, b):
     #     return [i * j for i, j in zip(a, b)]
@@ -190,7 +190,7 @@ def grid_sympy(seq: sp.MutableDenseMatrix, d_max: int, max_order: int, library: 
     #     ntriangles = sp.Matrix.hstack(ntriangles, sp.Matrix([i**degree for i in range(1, seq.rows)]), triangle_grid(degree))
     # triangles = sp.Matrix.hstack(*[triangle_grid(degree) for degree in range(1, degree+1)])
     polys = sp.Matrix.hstack(*[comb2act(comb, triangle, multiply_eltw) for comb in combinations])
-    # print('polys', polys.shape, polys.__repr__())
+    print('polys', polys.shape, polys.__repr__())
     # 1/0
 
     # middle = triangle['n']
@@ -233,7 +233,7 @@ def grid_sympy(seq: sp.MutableDenseMatrix, d_max: int, max_order: int, library: 
     # print('data', data.shape, data)
 
     sol_ref = solution_reference(library, d_max, max_order, basis)
-    # print('sol ref', sol_ref)
+    print('sol ref', sol_ref)
     # 1/0
 
     if data.cols-1 != len(solution_reference(library, d_max, max_order, basis)):
@@ -252,6 +252,7 @@ def dataset(seq: list, d_max: int, max_order: int, library: str) -> tuple[sp.Mat
         return sp.Matrix(), sp.Matrix(), []
 
     data, sol_ref = grid_sympy(sp.Matrix(seq), d_max, max_order, library=library)
+    print('sol_ref', sol_ref)
     # print('order', max_order)
     # print('data', data)
     # print('data.shape', data.shape)
