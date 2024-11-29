@@ -4,8 +4,7 @@ file with domb (do moeller-buchberger) to replace increase_one in doone.py
 Settings expeperiences from 14.10.2024:
     -  first experiments on core were run at 2*order + n_more_terms, where n_more_terms = 10.
 """
-
-
+from enum import unique
 from typing import Union
 import sys
 import re
@@ -16,10 +15,12 @@ import sympy as sp
 import numpy as np
 import matplotlib.pyplot as plt
 
+from eq_ideal import ideal_to_eqs, check_implicit, linear_to_vec, is_linear, order_optimize
 # TAKELESSTERMS = True  # take less terms than 200, to make MB faster and maybe even more precise.
 
 from sindy_oeis import preprocess, solution_vs_truth
-from exact_ed import solution2str, check_eq_man, solution_reference, dataset, lib2degrees, lib2verbose, unnan
+from exact_ed import solution2str, check_eq_man, solution_reference, dataset, lib2degrees, lib2verbose, unnan, \
+    eq_order_explicit
 from mb_wrap import mb
 
 
@@ -62,25 +63,41 @@ def pretty_to_cocoa(linear_expr, order) -> str:
     return linear_expr
 
 
-def increasing_mb(seq_id, csv, max_order, n_more_terms, execute, library, n_of_terms=10**6):
+def increasing_mb(seq_id, csv, max_order, n_more_terms, execute, library, n_of_terms=10**6, ground_truth=False) -> str:
     """
     Run a for loop of increasing order where I run Moeller-Buchberger algorithm on a given sequence.
     """
 
+    # Plan:
+    # DioMull: degree, order -> list of eqs.
+    # DioMull-linrec: degree, order -> list of eqs -> check em all.
+    # plan: linrec: degree, order ->  ideal_to_eqs = top eqs. -> check_implicit, if checked, check_ground.
+    # big difference, maybe: n_of_terms_ed != 200 any more.
+    # for each order check if implicit is correct. But before that, check if at least one a(n-o) term is present.
+    # for now, save equation with higher order, and continue until linear is found.
+
+
+    print('ground_truth:', ground_truth)
+    print('library:', library)
     printout = ''
     print(n_of_terms)
     print(csv[seq_id])
-    seq = unnan(csv[seq_id])[:n_of_terms]
+    seq = unnan(list(csv[seq_id])[ground_truth:(ground_truth+n_of_terms)])
     echo = f'seq: {seq}'
     printout += echo + '\n'
     print(echo)
     # 1/0
+
+    eq = 'Not reconst'
+    x = []
     for order in range(0, max_order + 1):
+        if ground_truth and order == 0:
+            continue
         echo = f'order: {order}'
         printout += echo + '\n'
         print(echo)
         # print('14.10.2024 hardcoded 200 terms for MB instead of 2*order + n_more_terms')
-        first_generator, ref, ideal = one_mb(seq, order, n_more_terms, execute, library, n_of_terms)
+        first_generator, ref, ideal = one_mb(seq, order, n_more_terms, execute, library, verbosity=0, n_of_terms=n_of_terms)
 
         #def one_mstb(seq_id, csv, order, n_more_terms, library='n', n_of_terms=200) -> tuple:
         # print(f'all generators:')
@@ -89,13 +106,28 @@ def increasing_mb(seq_id, csv, max_order, n_more_terms, execute, library, n_of_t
         # if bolly
         #     break
 
-    # return ideal, ref
+        # return ideal, ref
         printout += f'ideal: {ideal}\nequation: {first_generator}\n'
+        print(ideal)
+        eqs, heqs = ideal_to_eqs(ideal, top_n=10,verbosity=1)
+        print('eqs:,', eqs)
 
-    return printout
+        non_linears = []
+        for expr in heqs:
+            # check if a(n-o) is present in expression, otherwise useless:
+            min_order, max_order = eq_order_explicit(expr)
+            if min_order is not None:  # not useless.
+                if check_implicit(expr):  # Save implicit equation if it is correct.
+                    non_linears += [expr]  # will count as non_id
+                    if is_linear(expr):
+                        expr = order_optimize(expr, order)
+                        x = linear_to_vec(expr, order)
+                        print('linear:', x)
+                        return non_linears, eq, x
+    return non_linears, eq, x
 
 
-def one_mb(seq, order, n_more_terms, execute, library='n', n_of_terms=200) -> tuple:
+def one_mb(seq, order, n_more_terms, execute, library='n', verbosity=0, n_of_terms=200) -> tuple:
     """
     A/one mb (Moeller-Buchberger) algorithm, i.e. one run of MB algorithm (for one given recursion order).
     Simple function to put inside increase_mb without checking for correctness, only displaying.
@@ -150,7 +182,16 @@ def one_mb(seq, order, n_more_terms, execute, library='n', n_of_terms=200) -> tu
     # print(mb(points=data.tolist(), execute_cmd=True, var_names='oeis'))
     # print(mb(points=data.tolist(), execute_cmd=True, var_names=var_names))
     # print(mb(points=data.tolist(), execute_cmd=False, var_names=vars_cocoa))
-    first_generator, ideal = mb(points=data.tolist(), execute_cmd=execute, var_names=vars_cocoa)
+    # print('\n-->> looky here')
+    # print(data.tolist())
+
+    unique = []
+    for i in data.tolist():
+        if i not in unique:
+            unique.append(i)
+    # print(unique)
+    # print('\n-->> looky here')
+    first_generator, ideal = mb(points=unique, execute_cmd=execute, var_names=vars_cocoa, verbosity=verbosity)
 
     # change e.g. a_n_1 to a(n-1). (i.e. apply the inverse)
     for key in sol_ref_inverse:

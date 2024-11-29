@@ -85,10 +85,12 @@ def mb(points: list, execute_cmd=False, var_names='djus', verbosity=0):
     # b) execute cocoa file
     command = f"cd ../{cocoa_location[2:]}; echo \"{cocoa_code}\" | ./CoCoAInterpreter"
 
-    print(command)
-    print()
+    if verbosity > 0:
+        print(command)
+        print()
     if execute_cmd:
-        print("Executing LINUX command for real...")
+        if verbosity > 0:
+            print("Executing LINUX command for real...")
         p = subprocess.Popen(command, stdout=subprocess.PIPE, shell=True)
         (output, err) = p.communicate()
         p_status = p.wait()
@@ -100,7 +102,8 @@ def mb(points: list, execute_cmd=False, var_names='djus', verbosity=0):
             raise ValueError('Unexpected output from CoCoAInterpreter!!')
         else:
             cocoa_res = cocoa_res[0][:-1]
-            print('output:', cocoa_res)
+            if verbosity > 0:
+                print('output:', cocoa_res)
 
             first_generator = cocoa_res[6:].split(',')[0]
             # print('equation:\n', first_generator)

@@ -136,6 +136,8 @@ def grid_sympy(seq: sp.MutableDenseMatrix, d_max: int, max_order: int, library: 
         - vars_obs does NOT include target variable y
     """
 
+    print(seq, d_max, max_order, library, M, vars_obs)
+
     # seq = seq if nof_eqs is None else seq[:nof_eqs]
     # seq = seq[:nof_eqs, :]
     # seq = seq[:shape[0]-1, :]
@@ -339,9 +341,9 @@ def truth2coeffs(truth: str) -> sp.Matrix:
 def unnan(seq: list) -> sp.Matrix:
     """Remove nan from sequence."""
 
-    # print(seq)
+    print('seq:', seq)
     seq = sp.Matrix(seq)
-    # print(seq)
+    print('seq:', seq)
     if seq.has(sp.nan):
         seq = seq[:list(seq).index(sp.nan), :]
     seq = sp.Matrix([int(i) for i in seq])

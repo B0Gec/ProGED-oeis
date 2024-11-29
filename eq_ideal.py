@@ -192,12 +192,14 @@ def linear_to_vec(linear_expr: str) -> list:
 
     # head_tail = expr.split('a(n)')
     # if len(head_tail) != 1:
-    expr = 'a(n) -3*a(n-2) +a(n-2)'
+    # expr = 'a(n) -3*a(n-2) +a(n-2)'
+    # expr = 'a(n) -3*a(n-4) +a(n-2)'
     # expr = '+a(n) -3*a(n-2) +a(n-2)'
     # expr = '-2*a(n) -3*a(n-2) +a(n-2)'
-    linear_expr = '3*a(n-3) -a(n) -3*a(n-2) +a(n-2)'
+    # expr = '3*a(n-3) -a(n) -3*a(n-2) +a(n-2)'
     # expr =   '+(-7/16875)*a(n) +(-200704/15)*n^3 '
-    print('\nexpr:', linear_expr)
+    # linear_expr = expr
+    # print('\nexpr:', linear_expr)
     expr = order_optimize(linear_expr)
     order = eq_order_explicit(expr)[1]
 
@@ -210,24 +212,42 @@ def linear_to_vec(linear_expr: str) -> list:
         raise ValueError('Strange error in linear_to_vec function!!!      '
                          '... linear expression has more than one \'a(n)\' (or not even one) monomials !!!'
                          f'\nThese are: {lhs}.')
-    print("lhs, rhs:", lhs, rhss)
-    print('summands', summands)
+    # print("lhs, rhs:", lhs, rhss)
+    # print('summands', summands)
     coef = re.findall(r'^\+?([^an*]*)\*?a\(n\)', lhs[0])[0]
     cases = {'': '1', '+': '1', '-': '-1'}
     coef = cases[coef] if coef in list(cases.keys()) else coef
-    print('coef', coef)
+    # print('coef', coef)
     rhs = "".join(rhss)
     rhs = pretty_to_cocoa(rhs, order)
-    print('rhs', rhs)
+    # print('rhs', rhs)
 
-    vars = ",".join(['a(n)'] + [f'a(n-{i})' for i in range(order+1)])
-    print(vars)
-    preamble = f'P::= QQ[{vars}];'
-    # divided = cocoa_eval(preamble + f'({rhs})/({coef});', execute_cmd=True, verbosity=3, cluster=False)
-    # rhs = divided
-    print('rhs', rhs)
+    vars = ",".join(['a_n'] + [f'a_n_{i}' for i in range(1, order+1)])
+    # print(vars)
+    # print(rhs, 'rhs')
+    preamble = f'use P ::= QQ[{vars}];'
+    divided = cocoa_eval(preamble + f'(-1)*({rhs})/({coef});', execute_cmd=True, verbosity=3, cluster=False)
+    if '/' in divided:
+        return None
+    else:
+        rhs = divided
+        print('rhs', rhs)
+        summands = re.findall(r'\+?(-?[^ an*]*)\*?a_n_(\d+)', rhs)
+        # summands = re.findall(r'\+?(-?[^ an*]*)\*?(a_n_\d+)', rhs)[0]
+        print('summands:', summands)
 
-    return
+        # dicty = [(order_, (cases[coef] if coef in list(cases.keys()) else coef)) for coef, order_ in summands]
+        dicty = {order_: int(cases[coef] if coef in list(cases.keys()) else coef) for coef, order_ in summands}
+        # sortie =  sorted(summands, key=lambda x: x[1])
+        # dicty = {order_: int(coef) for coef, order_ in summands}
+        # dicty = [(order_, coef) for coef, order_ in summands]
+        # print('sortie:', sortie)
+        # print('dicty:', dicty)
+        vec = [dicty.get(str(o), 0) for o in range(1, order+1)]
+        # vec = [int(coef) for coef, var in summands]
+        # print('vec:', vec)
+    return vec
+
 
 def check_implicit(mb_eq: str, seq: list[int]) -> bool:
     """ I checked that I have not yet implemented this function in exact_ed.py or check_quick.py.
@@ -313,7 +333,9 @@ if __name__ == '__main__':
     # for eq in eqs:
     #     print(f'  len(eq): {len(eq)}, bitsize: {bitsize(eq)}, bitsizes {[bitsize_summand(summand) for summand in eq]}, \neq: {eq}')
 
-    print('eqs:', eqs)
+
+    print('eqs:', eqs, 'human eqs:', heqs)
+    1/0
     print('eqs:', len(eqs))
     bitsize_ = bitsize(eqs[1])
     print(bitsize_)

@@ -38,6 +38,7 @@ EXECUTE_REAL = False
 EXECUTE_REAL = True
 
 OEISformer = True
+OEISformer = False
 if OEISformer:
     from loadtrans import csv_input, csv_zerows
     N_INPUT = 15
@@ -47,7 +48,7 @@ if OEISformer:
 METHOD = 'Diofantos'
 # METHOD = 'SINDy'
 # METHOD = 'Mavi'
-# METHOD = 'MB'
+METHOD = 'MB'
 SINDy = True if METHOD in ('SINDy', 'Mavi') else False
 # SINDy = False
 SINDy_default = True
@@ -123,13 +124,13 @@ BUGLIST_BLACKLISTING = True
 # BUGLIST ignores blacklisted sequences !!!!!
 
 CORELIST = True  # have to scrape core sequences!
-# CORELIST = False
+CORELIST = False
 if BUGLIST:
     from buglist import buglist
 REAL_WORLD_BENCH = True
 
 GROUND_TRUTH = True
-GROUND_TRUTH = False
+# GROUND_TRUTH = False
 
 # if not DEBUG and BUGLIST:
 #     print("\nWarning!!!!! buglist is used outside debug mode!!")
@@ -212,9 +213,9 @@ N_OF_TERMS_ED = 200  # MB
 TASK_ID = 0
 TASK_ID = 8
 TASK_ID = 10
-# TASK_ID = 14  # fibo at cores
+TASK_ID = 14  # fibo at cores
 # # TASK_ID = 17
-TASK_ID = 32
+# TASK_ID = 32
 # TASK_ID = 111
 # TASK_ID = 112
 # TASK_ID = 187
@@ -223,9 +224,10 @@ TASK_ID = 32
 # TASK_ID = 2000
 # unsucc [11221, 27122, 27123]
 # TASK_ID = 11221
-TASK_ID = 26
-TASK_ID = 2
-TASK_ID = 7
+# TASK_ID = 26
+# TASK_ID = 2
+# TASK_ID = 7
+# TASK_ID = 9
 
 
 JOB_ID = "000000"
@@ -681,7 +683,7 @@ else:
             print(f'args:', seq_id, max_order_, n_more_terms, EXECUTE_REAL, library, n_of_terms_ed)
             # 1/0
             # first_generator, sol_ref, ideal_ = increasing_mb
-            mbprintout = increasing_mb(seq_id, csv, max_order_, n_more_terms, execute=EXECUTE_REAL, library=library, n_of_terms=n_of_terms_ed)
+            mbprintout = increasing_mb(seq_id, csv, max_order_, n_more_terms, execute=EXECUTE_REAL, library=library, n_of_terms=n_of_terms_ed, ground_truth=GROUND_TRUTH)
             deg_used, order_used = 'unknown_mb', 'unknown_mb'
             # eq, x = first_generator, [], 'unknown_mb'
             eq, x, sol_ref, truth = mbprintout, [], 'unknown_mb', 'unknown_mb'
@@ -708,6 +710,12 @@ else:
         is_reconst = solution_vs_truth(x, coeffs) if GROUND_TRUTH else ""
         is_check_verbose = check_eq_man(x, seq_id, csv, header=GROUND_TRUTH, n_of_terms=10**5, solution_ref=sol_ref)
         is_check = is_check_verbose[0]
+        if METHOD == 'MB':
+            # non_linears
+            # linears = [x]
+            if not is_reconst and not not x:
+                print('MB: seems like bug: ground truth says no while x is not empty!!!')
+            is_check = not not non_linears
         if OEISformer:
             acc_1, acc_10 = check_eq_dasco(x, seq_id, csv, solution_ref=sol_ref, n_input=N_INPUT)
             is_reconst = acc_10
