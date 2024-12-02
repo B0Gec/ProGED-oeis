@@ -1,9 +1,21 @@
 """
+352
 file with domb (do moeller-buchberger) to replace increase_one in doone.py
 
 Settings expeperiences from 14.10.2024:
     -  first experiments on core were run at 2*order + n_more_terms, where n_more_terms = 10.
+
+Modules map:
+    doones -> mb_oeis
+                -> mb_wrap ->.
+                       /\
+                       |
+                -> eq_ideal
+                       \
+                       \/
+                -> exact_ed  -> mb_wrap.
 """
+
 from enum import unique
 from typing import Union
 import sys
@@ -15,7 +27,8 @@ import sympy as sp
 import numpy as np
 import matplotlib.pyplot as plt
 
-from eq_ideal import ideal_to_eqs, check_implicit, linear_to_vec, is_linear, order_optimize, list_evals
+from eq_ideal import ideal_to_eqs, check_implicit, linear_to_vec, is_linear, order_optimize, list_evals, \
+    check_implicit_batch
 # TAKELESSTERMS = True  # take less terms than 200, to make MB faster and maybe even more precise.
 
 from sindy_oeis import preprocess, solution_vs_truth
@@ -45,22 +58,6 @@ def external_prettyprint(ideal, sol_ref= [f'a(n-{i})' for i in range(1, 16)]) ->
         ideal = ideal.replace(key, sol_ref_inverse[key])
     return ideal
 
-def pretty_to_cocoa(linear_expr, order) -> str:
-    """Convert equation from pretty to cocoa format.
-    E.g. a(n-1) -> a_n_1.
-
-    Primarely used for linear expressins for linear_to_vec
-    Input:
-        - linear_expr: str, linear equation in pretty format.
-        - order: int, order of the equation.
-    """
-
-    bij = {f'a(n-{i})': f'a_n_{i}' for i in range(1, order+1)}
-    bij.update({'a(n)': 'a_n'})
-    for key in bij:
-        linear_expr = linear_expr.replace(key, bij[key])
-    print(linear_expr)
-    return linear_expr
 
 
 def increasing_mb(seq_id, csv, max_order, n_more_terms, execute, library, n_of_terms=10**6, ground_truth=False) -> str:
@@ -110,8 +107,10 @@ def increasing_mb(seq_id, csv, max_order, n_more_terms, execute, library, n_of_t
         # return ideal, ref
         printout += f'ideal: {ideal}\nequation: {first_generator}\n'
         print(ideal)
-        eqs, heqs = ideal_to_eqs(ideal, top_n=2,verbosity=1, max_bitsize=10)
-        print('eqs:,', eqs)
+        eqs, heqs = ideal_to_eqs(ideal, top_n=10,verbosity=1, max_bitsize=10)
+        # print('eqs:,', eqs)
+        print('heqs:,', heqs)
+        # 1/0
 
         non_linears = []
         print('checking equations ...')
@@ -123,7 +122,8 @@ def increasing_mb(seq_id, csv, max_order, n_more_terms, execute, library, n_of_t
             if min_order is not None:  # not useless.
                 print('not useless, checking implicit:')
                 # check = check_implicit(expr, seq)
-                check = list_evals(expr, seq[:30])
+                # check = list_evals(expr, seq)
+                check = check_implicit_batch(expr, seq)
                 if check:  # Save implicit equation if it is correct.
                     print('eqution holds!, checking if linear:')
                     non_linears += [expr]  # will count as non_id

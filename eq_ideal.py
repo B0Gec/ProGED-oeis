@@ -24,8 +24,7 @@ import re
 from fontTools.ttLib.tables.ttProgram import instructions
 
 from exact_ed import expr_eval, obs_eval, eq_order_explicit
-# from mb_wrap import cocoa_eval
-# from mb_oeis import pretty_to_cocoa
+from mb_wrap import cocoa_eval, pretty_to_cocoa
 
 
 def bitsize_summand(summand: str):
@@ -95,7 +94,7 @@ def ideal_to_eqs(ideal: str, max_complexity: int = 10, max_bitsize: int = 100, t
         - max_bitsize (int): Only equations with bitsize <= max_bitsize summands are outputed.
     """
 
-    generators_string = ideal[6:]
+    generators_string = ideal[6:-1]
     if verbosity >= 2:
         print('generators_string')
         print(generators_string)
@@ -222,8 +221,10 @@ def linear_to_vec(linear_expr: str) -> list:
     coef = cases[coef] if coef in list(cases.keys()) else coef
     # print('coef', coef)
     rhs = "".join(rhss)
-    rhs = pretty_to_cocoa(rhs, order)
-    # print('rhs', rhs)
+    # print('rhs', rhs, len(rhs))
+    rhs = pretty_to_cocoa(rhs, order) if len(rhs) != 0 else '0'
+    # print('rhs', rhs, len(rhs))
+    # 1/0
 
     vars = ",".join(['a_n'] + [f'a_n_{i}' for i in range(1, order+1)])
     # print(vars)
@@ -287,13 +288,18 @@ def check_implicit_batch(mb_eq: str, seq: list[int]) -> bool:
     # CoCoa code:
     # li := [-0, -0, -120 + 20 + 100, 1 - 1];
     # min(li) = max(li) and max(li) = 0;
-    print(" ".join(exe_calls))
-    cocoa_code = f'li := [{" ".join(exe_calls)}]; min(li) = max(li) and max(li) = 0;'
-    print('cocoa_code:', cocoa_code)
-    cocoa_eval(cocoa_code, execute_cmd=True, verbosity=3, cluster=False)
-    1/0
 
-    return
+    # print(", ".join(exe_calls).replace(';', ''))
+    cocoa_code = f'li := [{" ".join(exe_calls).replace(";", ",")[:-1]}]; min(li) = max(li) and max(li) = 0;'
+    print('cocoa_code:', cocoa_code)
+    # 1/0
+    cocoa_res = cocoa_eval(cocoa_code, execute_cmd=True, verbosity=3)
+    res_dict = {'true': True, 'false': False}
+    print(cocoa_res, len(cocoa_res), type(cocoa_res))
+    is_check = res_dict[cocoa_res]
+    # print(is_check)
+
+    return is_check
 
 
 def list_evals(mb_eq: str, seq: list[int]) -> list:
@@ -306,15 +312,15 @@ def list_evals(mb_eq: str, seq: list[int]) -> list:
     """
 
     order = eq_order_explicit(mb_eq)[1]
-    print('order:', order)
+    # print('order:', order)
     exprs_to_eval = []
     for n in range(order, len(seq)):
         till_now = seq[:n+1]
-        print('n', n, 'till_now', till_now)
+        # print('n', n, 'till_now', till_now)
         evaled, to_eval = expr_eval(mb_eq, till_now, execute_cmd=False)
-        print('n', n, 'till_now', till_now, f'evaled: {evaled}', 'to_eval:', to_eval)
+        # print('n', n, 'till_now', till_now, f'evaled: {evaled}', 'to_eval:', to_eval)
         exprs_to_eval.append(to_eval)
-    print(exprs_to_eval)
+    # print(exprs_to_eval)
     return exprs_to_eval
     # return
 

@@ -108,14 +108,18 @@ N_OF_TERMS_LOAD = 100000
 N_OF_TERMS_LOAD = 20
 N_OF_TERMS_LOAD = 200
 
-N_MORE_TERMS = 10
+N_MORE_TERMS = 10  # original
+N_MORE_TERMS = 30
+N_MORE_TERMS = 40
+# N_MORE_TERMS = 60
+# N_MORE_TERMS = 70
 
 VERBOSITY = 2  # dev scena
 VERBOSITY = 1  # run scenario
 # VERBOSITY = 3  # dev scenario
 
-# DEBUG = True
-DEBUG = False
+DEBUG = True
+# DEBUG = False
 
 # BUGLIST ignores blacklisting (runs also blacklisted) !!!!!
 # BUGLIST = True
@@ -227,7 +231,7 @@ TASK_ID = 14  # fibo at cores
 # TASK_ID = 26
 # TASK_ID = 2
 # TASK_ID = 7
-TASK_ID = 9  # fibo linrec
+# TASK_ID = 9  # fibo linrec
 
 
 JOB_ID = "000000"
@@ -286,18 +290,18 @@ SEQ_ID = (True, 'A000085')
 # SEQ_ID = (True, 'A003082')
 # SEQ_ID = (True, 'A000041')
 
-# SEQ_ID = (True, 'A168838')
+SEQ_ID = (True, 'A168838')
 
-SEQ_ID = (True, 'A000044')
+# SEQ_ID = (True, 'A000044')  # mb fails, order 13
 
-SEQ_ID = (True, 'A000073')
-SEQ_ID = (True, 'A000078')
+# SEQ_ID = (True, 'A000073')
+# SEQ_ID = (True, 'A000078')
 
 # SEQ_ID = (True, 'A000100')
 
-SEQ_ID = (True, 'A005588')
-SEQ_ID = (True, 'A000004')
-SEQ_ID = (True, 'A000045')
+# SEQ_ID = (True, 'A005588')
+# SEQ_ID = (True, 'A000004')
+# SEQ_ID = (True, 'A000045')
 
 # if DEBUG:
 #     SEQ_ID = (True, 'A000045')
@@ -693,6 +697,7 @@ else:
             # eq, x, sol_ref, truth = mbprintout, [], 'unknown_mb', 'unknown_mb'
             sol_ref = "unknown_mb"
             eq = eq if eq != 'MB not reconst' else non_linears
+            x = sp.Matrix([0]+x)
 
         else:
             # print('Going for exact ed')
@@ -711,7 +716,7 @@ else:
                 # x, eq, coeffs, truth = exact_ed(seq_id, csv, VERBOSITY, max_order_,
                 #                                 n_of_terms=N_OF_TERMS_ED, linear=LINEAR)
 
-        # print('eq', eq, 'x', x)
+        print('eq', eq, 'x', x, 'coeffs', coeffs, 'truth', truth)
         print('deg_used', deg_used, 'order', order_used)
         is_reconst = solution_vs_truth(x, coeffs) if GROUND_TRUTH else ""
         if METHOD == 'MB':

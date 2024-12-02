@@ -7,6 +7,22 @@ import re
 
 # def mb_oeis(points, )
 
+def pretty_to_cocoa(linear_expr, order) -> str:
+    """Convert equation from pretty to cocoa format.
+    E.g. a(n-1) -> a_n_1.
+
+    Primarely used for linear expressins for linear_to_vec
+    Input:
+        - linear_expr: str, linear equation in pretty format.
+        - order: int, order of the equation.
+    """
+
+    bij = {f'a(n-{i})': f'a_n_{i}' for i in range(1, order+1)}
+    bij.update({'a(n)': 'a_n'})
+    for key in bij:
+        linear_expr = linear_expr.replace(key, bij[key])
+    print(linear_expr)
+    return linear_expr
 
 # most common polynomial variables indeterminates:
 vars_default = 'x, y, z, t, u, v, w, a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t'.split(', ')
