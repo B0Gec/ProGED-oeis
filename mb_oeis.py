@@ -15,7 +15,7 @@ import sympy as sp
 import numpy as np
 import matplotlib.pyplot as plt
 
-from eq_ideal import ideal_to_eqs, check_implicit, linear_to_vec, is_linear, order_optimize
+from eq_ideal import ideal_to_eqs, check_implicit, linear_to_vec, is_linear, order_optimize, list_evals
 # TAKELESSTERMS = True  # take less terms than 200, to make MB faster and maybe even more precise.
 
 from sindy_oeis import preprocess, solution_vs_truth
@@ -88,8 +88,9 @@ def increasing_mb(seq_id, csv, max_order, n_more_terms, execute, library, n_of_t
     print(echo)
     # 1/0
 
-    eq = 'Not reconst'
+    eq = 'MB not reconst'
     x = []
+    orders_used = []
     for order in range(0, max_order + 1):
         if ground_truth and order == 0:
             continue
@@ -109,7 +110,7 @@ def increasing_mb(seq_id, csv, max_order, n_more_terms, execute, library, n_of_t
         # return ideal, ref
         printout += f'ideal: {ideal}\nequation: {first_generator}\n'
         print(ideal)
-        eqs, heqs = ideal_to_eqs(ideal, top_n=10,verbosity=1)
+        eqs, heqs = ideal_to_eqs(ideal, top_n=2,verbosity=1, max_bitsize=10)
         print('eqs:,', eqs)
 
         non_linears = []
@@ -117,19 +118,25 @@ def increasing_mb(seq_id, csv, max_order, n_more_terms, execute, library, n_of_t
         for expr in heqs:
             print('expr:', expr)
             # check if a(n-o) is present in expression, otherwise useless:
-            min_order, max_order = eq_order_explicit(expr)
-            print('order:', min_order, max_order)
+            min_order, max_order_ = eq_order_explicit(expr)
+            print('order:', min_order, max_order_)
             if min_order is not None:  # not useless.
                 print('not useless, checking implicit:')
-                if check_implicit(expr, seq):  # Save implicit equation if it is correct.
+                # check = check_implicit(expr, seq)
+                check = list_evals(expr, seq[:30])
+                if check:  # Save implicit equation if it is correct.
                     print('eqution holds!, checking if linear:')
                     non_linears += [expr]  # will count as non_id
+                    orders_used += [max_order_]
+                    if not ground_truth:
+                        return non_linears, eq, x, orders_used
                     if is_linear(expr):
+                        print('eqution is linear!, converting to vector:')
                         expr = order_optimize(expr)
                         x = linear_to_vec(expr)
                         print('linear:', x)
-                        return non_linears, eq, x
-    return non_linears, eq, x
+                        return non_linears, expr, x, [len(x)]
+    return non_linears, eq, x, orders_used
 
 
 def one_mb(seq, order, n_more_terms, execute, library='n', verbosity=0, n_of_terms=200) -> tuple:
@@ -167,21 +174,26 @@ def one_mb(seq, order, n_more_terms, execute, library='n', verbosity=0, n_of_ter
     # b, A, sol_ref = dataset(list(seq), d_max=d_max_lib, max_order=max_order, library='n')
     b, A, sol_ref = dataset(list(seq), d_max=1, max_order=order, library=library)
 
+    print('sol_ref, A:', sol_ref, A)
     # Ignore the constant 1 column (mavi auto. deals with constants)
     A, sol_ref = A[:, 1:], sol_ref[1:]
+    print('sol_ref, A:', sol_ref, A)
     data = np.concatenate((b, A), axis=1)
+    print('data\n', data)
 
     # How we would like to print variables:
-    sol_ref = solution_reference(library, d_max=1, order=order)
-    # print(sol_ref)
+    # sol_ref = solution_reference(library, d_max=1, order=order)
 
     # Bijection mapping: printing like a(n-1) vs. cocoa: a_n_1:
     sol_ref_inverse = {var.replace('(', '_').replace('-', '_').replace(')', ''): var
-                       for var in sol_ref[2:]}
-    vars_cocoa = ['a_n', 'n'] + list(sol_ref_inverse.keys())
+                       for var in sol_ref}
+    vars_cocoa = ['a_n']
+                  # + (['n'] if library == 'n' else []))
+    vars_cocoa += list(sol_ref_inverse.keys())
     sol_ref_inverse['a_n'] = 'a(n)'  # to avoid a(n)_2 situation by first replacing a_n
-    # print(vars_cocoa)
-    # print(sol_ref_inverse)
+    print('vars_cocoa, sol_ref_inverse')
+    print(vars_cocoa)
+    print(sol_ref_inverse)
 
     # print(mb(points=data.tolist(), execute_cmd=False, visual='djus'))
     # print(mb(points=data.tolist(), execute_cmd=True, var_names='oeis'))
@@ -194,15 +206,17 @@ def one_mb(seq, order, n_more_terms, execute, library='n', verbosity=0, n_of_ter
     for i in data.tolist():
         if i not in unique:
             unique.append(i)
-    # print(unique)
+    print(unique)
     # print('\n-->> looky here')
     first_generator, ideal = mb(points=unique, execute_cmd=execute, var_names=vars_cocoa, verbosity=verbosity)
+    print(vars_cocoa, first_generator, ideal )
+    # 1/0
 
     # change e.g. a_n_1 to a(n-1). (i.e. apply the inverse)
     for key in sol_ref_inverse:
         ideal = ideal.replace(key, sol_ref_inverse[key])
         first_generator = first_generator.replace(key, sol_ref_inverse[key])
-    # print('output:\n', ideal)
+    print('output:\n', ideal)
     print('equation:', first_generator)
     print('\n', '-'*order, '----one_mb-end----\n')
     return first_generator, ['a(n)'] + sol_ref[1:], ideal

@@ -227,7 +227,7 @@ TASK_ID = 14  # fibo at cores
 # TASK_ID = 26
 # TASK_ID = 2
 # TASK_ID = 7
-# TASK_ID = 9
+TASK_ID = 9  # fibo linrec
 
 
 JOB_ID = "000000"
@@ -683,10 +683,16 @@ else:
             print(f'args:', seq_id, max_order_, n_more_terms, EXECUTE_REAL, library, n_of_terms_ed)
             # 1/0
             # first_generator, sol_ref, ideal_ = increasing_mb
-            mbprintout = increasing_mb(seq_id, csv, max_order_, n_more_terms, execute=EXECUTE_REAL, library=library, n_of_terms=n_of_terms_ed, ground_truth=GROUND_TRUTH)
+            seq, coeffs, truth = unpack_seq(seq_id, csv) if GROUND_TRUTH else (unnan(csv[seq_id]), None, None)
+            non_linears, eq, x, orders_used = increasing_mb(seq_id, csv, max_order_, n_more_terms, execute=EXECUTE_REAL,
+                                       library=library, n_of_terms=n_of_terms_ed, ground_truth=GROUND_TRUTH)
             deg_used, order_used = 'unknown_mb', 'unknown_mb'
+            print(orders_used)
+            order_used = None if not orders_used else orders_used[0]
             # eq, x = first_generator, [], 'unknown_mb'
-            eq, x, sol_ref, truth = mbprintout, [], 'unknown_mb', 'unknown_mb'
+            # eq, x, sol_ref, truth = mbprintout, [], 'unknown_mb', 'unknown_mb'
+            sol_ref = "unknown_mb"
+            eq = eq if eq != 'MB not reconst' else non_linears
 
         else:
             # print('Going for exact ed')
@@ -708,14 +714,17 @@ else:
         # print('eq', eq, 'x', x)
         print('deg_used', deg_used, 'order', order_used)
         is_reconst = solution_vs_truth(x, coeffs) if GROUND_TRUTH else ""
-        is_check_verbose = check_eq_man(x, seq_id, csv, header=GROUND_TRUTH, n_of_terms=10**5, solution_ref=sol_ref)
-        is_check = is_check_verbose[0]
         if METHOD == 'MB':
             # non_linears
             # linears = [x]
             if not is_reconst and not not x:
+                print('is_reconst', is_reconst)
                 print('MB: seems like bug: ground truth says no while x is not empty!!!')
             is_check = not not non_linears
+        else:
+            is_check_verbose = check_eq_man(x, seq_id, csv, header=GROUND_TRUTH, n_of_terms=10**5, solution_ref=sol_ref)
+            is_check = is_check_verbose[0]
+
         if OEISformer:
             acc_1, acc_10 = check_eq_dasco(x, seq_id, csv, solution_ref=sol_ref, n_input=N_INPUT)
             is_reconst = acc_10

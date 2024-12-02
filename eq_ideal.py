@@ -21,6 +21,12 @@ Strategy:
 
 import re
 
+from fontTools.ttLib.tables.ttProgram import instructions
+
+from exact_ed import expr_eval, obs_eval, eq_order_explicit
+# from mb_wrap import cocoa_eval
+# from mb_oeis import pretty_to_cocoa
+
 
 def bitsize_summand(summand: str):
     """Returns the sum of number of digits of the numerator and denomumerator,
@@ -186,9 +192,6 @@ def linear_to_vec(linear_expr: str) -> list:
         - expression that was checked to be linear.
     """
 
-    from exact_ed import eq_order_explicit
-    from mb_wrap import cocoa_eval
-    from mb_oeis import pretty_to_cocoa
 
     # head_tail = expr.split('a(n)')
     # if len(head_tail) != 1:
@@ -257,20 +260,64 @@ def check_implicit(mb_eq: str, seq: list[int]) -> bool:
     E.g. 'a(n) - a(n-2) - 1*a(n-1)^1', [0, 1, 1, 2, 3, 5] -> True
     """
 
-    from exact_ed import expr_eval, obs_eval, eq_order_explicit
 
     order = eq_order_explicit(mb_eq)[1]
+    print('order:', order)
     wanted_zeros = []
     for n in range(order, len(seq)):
         till_now = seq[:n+1]
-        # print('n', n, 'till_now', till_now)
+        print('n', n, 'till_now', till_now)
         evaled = expr_eval(mb_eq, till_now)
-        # print('n', n, 'till_now', till_now, f'evaled: {evaled}')
+        print('n', n, 'till_now', till_now, f'evaled: {evaled}')
         wanted_zeros.append(evaled)
-    # print(wanted_zeros)
+    print(wanted_zeros)
     non_zeros = [i for i in wanted_zeros if i != '0']
     vanishes = len(non_zeros) == 0
     return vanishes
+
+def check_implicit_batch(mb_eq: str, seq: list[int]) -> bool:
+    """Alternative to check_implicit, which sends list of instructions to Cocoa which
+     performs them in whole batch to compensate for signal sending overhead.
+     """
+
+    print('inside check_implicit_batch')
+    exe_calls = list_evals(mb_eq, seq)
+    # ['123 -23424 -456', '344554 -34 +223']
+
+    # CoCoa code:
+    # li := [-0, -0, -120 + 20 + 100, 1 - 1];
+    # min(li) = max(li) and max(li) = 0;
+    print(" ".join(exe_calls))
+    cocoa_code = f'li := [{" ".join(exe_calls)}]; min(li) = max(li) and max(li) = 0;'
+    print('cocoa_code:', cocoa_code)
+    cocoa_eval(cocoa_code, execute_cmd=True, verbosity=3, cluster=False)
+    1/0
+
+    return
+
+
+def list_evals(mb_eq: str, seq: list[int]) -> list:
+    """Alternative to check_implicit, which returns list of evaluations of the equation on the sequence.
+    List it intended to be sent to CoCoA for further processing.
+
+    Idea:
+        - I hypothesize, check_implicit takes too much time because it sends evaluation to CoCoA for each term.
+        - To solve this, I will send all evaluations at once to CoCoA and ask to return list of evaluations.
+    """
+
+    order = eq_order_explicit(mb_eq)[1]
+    print('order:', order)
+    exprs_to_eval = []
+    for n in range(order, len(seq)):
+        till_now = seq[:n+1]
+        print('n', n, 'till_now', till_now)
+        evaled, to_eval = expr_eval(mb_eq, till_now, execute_cmd=False)
+        print('n', n, 'till_now', till_now, f'evaled: {evaled}', 'to_eval:', to_eval)
+        exprs_to_eval.append(to_eval)
+    print(exprs_to_eval)
+    return exprs_to_eval
+    # return
+
 
 # maybe for TM-OEIS:
 # def implicit_to_explicit(linear_eq):
@@ -335,7 +382,7 @@ if __name__ == '__main__':
 
 
     print('eqs:', eqs, 'human eqs:', heqs)
-    1/0
+    # 1/0
     print('eqs:', len(eqs))
     bitsize_ = bitsize(eqs[1])
     print(bitsize_)
@@ -366,6 +413,8 @@ if __name__ == '__main__':
     print('ablated expr:', expr)
     vector = linear_to_vec(expr)
     print('vector:', vector)
+
+    check_implicit_batch(expr, seq)
     1/0
 
     print('\n ------ after eqs ------')

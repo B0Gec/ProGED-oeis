@@ -254,7 +254,7 @@ def dataset(seq: list, d_max: int, max_order: int, library: str) -> tuple[sp.Mat
     data, sol_ref = grid_sympy(sp.Matrix(seq), d_max, max_order, library=library)
     print('sol_ref', sol_ref)
     # print('order', max_order)
-    # print('data', data)
+    print('data in dataset', data)
     # print('data.shape', data.shape)
     # print(str(data), data.__repr__())
     # 1/0
@@ -1004,7 +1004,7 @@ def eq_order_explicit(expr: str) -> (int, int):
     return min_max_orders
 
 # @lru_cache(maxsize=None)
-def expr_eval(expr: str, till_now: list[int], order_limit=1000) -> str:
+def expr_eval(expr: str, till_now: list[int], order_limit=1000, execute_cmd=True) -> str:
     """Evaluate expression, i.e. equation, e.g. 'a(n-1)*a(n-2)^2 + 2*n', [0,1,1,2,3,5], 3 -> 3*2^2 + 2*5 = 22.
 
     Used for mb_eed and uses cocoa to evaluate fractions and obs_eval for replacing indeterminates with values.
@@ -1016,13 +1016,19 @@ def expr_eval(expr: str, till_now: list[int], order_limit=1000) -> str:
     # possible optimization: obs_eval using only strings, not int.
     # maybe without to_replace dictionary. To exploit memoization on obs_eval which does not depend on order_limit.
     to_replace = {obs: str(obs_eval(obs, till_now, order_limit)) for obs in observables}
+    print('to replace:', to_replace)
     for obs in observables:
         expr = expr.replace(obs, to_replace[obs])
     expr = expr.replace('n', str(obs_eval('n', till_now, order_limit)))
-    # print(expr)
+    print('replaced expr', expr)
     # print(observables)
-    returned = cocoa_eval(expr+';', execute_cmd=True)
-    return returned
+    to_eval = f'{expr};'
+    if execute_cmd:
+        returned = cocoa_eval(expr+';', execute_cmd=True, verbosity=1)
+    else:
+        returned = None
+    print('returned', returned, 'to eval', to_eval)
+    return returned, to_eval
 
 
 def check_eq_man(x: sp.Matrix, seq_id: str, csv: pd.DataFrame,

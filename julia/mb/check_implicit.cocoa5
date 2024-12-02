@@ -1,0 +1,26 @@
+// For DioMuller to check if implicit equation holds for all 200 elements of the sequence.
+
+
+use P ::= QQ[x,y,z];
+//Tutorial/?help:
+//Points := mat([[1, 2], [3, 4], [5, 6]]);
+////y = x^2: success:
+Seq := mat([[0, 1, 1, 2, 3, 5, 8, 13]]);
+
+//Seq;
+//PrintLn Seq;
+PrintLn "printing Seq";
+PrintLn Seq;
+Expr := x - y - z;
+x := 1;
+Expr;
+
+type([3, 4, 546, "stn"]);
+[3-2/3, 4, 546, "stn"];
+li := [3-2/3, 4, 546];
+li := [-0, -0, -120 + 20 +100, 1-1];
+min(li) = max(li) and max(li) = 0 ;
+min([3-2/3, 4, 546]) = 7/3 ;
+max([3-2/3, 4, 546]) =546 = min( ;
+
+
