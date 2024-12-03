@@ -128,7 +128,7 @@ BUGLIST_BLACKLISTING = True
 # BUGLIST ignores blacklisted sequences !!!!!
 
 CORELIST = True  # have to scrape core sequences!
-# CORELIST = False
+CORELIST = False
 if BUGLIST:
     from buglist import buglist
 REAL_WORLD_BENCH = True
@@ -310,6 +310,7 @@ SEQ_ID = (True, 'A005588')  # cores
 # SEQ_ID = (True, 'A001699')
 # SEQ_ID = (True, 'A006894')
 # SEQ_ID = (True, 'A000396')
+SEQ_ID = (True, 'A190528')
 
 # if DEBUG:
 #     SEQ_ID = (True, 'A000045')

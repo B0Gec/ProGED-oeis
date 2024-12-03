@@ -2,7 +2,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 csv_filename = 'linear_database_newbl.csv'
-csv_filename = 'cores_test.csv'
+# csv_filename = 'cores_test.csv'
 df = pd.read_csv(csv_filename, low_memory=False)
 ids = [id_ for id_ in df]
 print(df[ids[0]].dropna())
@@ -16,6 +16,8 @@ thresh = 30
 # thresh = 120
 less_terms = [(id_, avail) for id_, avail in avails if avail <= thresh]
 print(less_terms[:10])
+scarcest = sorted(less_terms, key=lambda x: (x[1], x[0]))  # ascending
+print(scarcest[:10])
 print(len(less_terms))
 # cores: a58, a1699, a2658?, a6894
 1/0
