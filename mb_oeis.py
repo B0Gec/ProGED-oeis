@@ -95,6 +95,14 @@ def increasing_mb(seq_id, csv, max_order, n_more_terms, execute, library, n_of_t
         printout += echo + '\n'
         print(echo)
         # print('14.10.2024 hardcoded 200 terms for MB instead of 2*order + n_more_terms')
+
+        print('len seq:', len(seq), 'seq:', seq)
+        heuristic = 2 * order + n_more_terms
+        if len(seq) < 2*order:
+            # break
+            print('I WARNED YOU, TOO FEW TERMS to AVOID ERRORS!')
+        # seq = seq[:heuristic]
+        print('len seq:', len(seq), 'seq:', seq)
         first_generator, ref, ideal = one_mb(seq, order, n_more_terms, execute, library, verbosity=0, n_of_terms=n_of_terms)
 
         #def one_mstb(seq_id, csv, order, n_more_terms, library='n', n_of_terms=200) -> tuple:
@@ -105,11 +113,15 @@ def increasing_mb(seq_id, csv, max_order, n_more_terms, execute, library, n_of_t
         #     break
 
         # return ideal, ref
-        printout += f'ideal: {ideal}\nequation: {first_generator}\n'
-        print(ideal)
+        printlen = 100
+        print(type(first_generator), type(ideal))
+        print(first_generator[:printlen], ideal[:printlen])
+        # 1/0
+        printout += f'ideal: {ideal[:printlen]}\nequation: {first_generator[:printlen]}\n'
+        # print(ideal)
         eqs, heqs = ideal_to_eqs(ideal, top_n=10,verbosity=1, max_bitsize=10)
         # print('eqs:,', eqs)
-        print('heqs:,', heqs)
+        # print('heqs:,', heqs)
         # 1/0
 
         non_linears = []
@@ -157,8 +169,11 @@ def one_mb(seq, order, n_more_terms, execute, library='n', verbosity=0, n_of_ter
     # take max_order * 2 + n_more_terms terms from given sequence terms
     # if TAKELESSTERMS:
     seq = seq[:2*order + n_more_terms]
+    # Linrec: 2*20 + 10 = 50 terms
+    # cores: 2*10 + 10 = 30 terms  # cores with low number of terms: a58, a1699, a2658?, a6894
     # seq = seq[:n_of_terms]
     # print(seq)
+    print('len seq:', len(seq), 'seq:', seq)
 
     # seq = sindy_hidden[d_max_lib - 1]
     # # print(n_of_terms, seq)
@@ -206,18 +221,19 @@ def one_mb(seq, order, n_more_terms, execute, library='n', verbosity=0, n_of_ter
     for i in data.tolist():
         if i not in unique:
             unique.append(i)
-    print(unique)
+    # print(unique)
     # print('\n-->> looky here')
     first_generator, ideal = mb(points=unique, execute_cmd=execute, var_names=vars_cocoa, verbosity=verbosity)
-    print(vars_cocoa, first_generator, ideal )
+    # print(vars_cocoa, first_generator, ideal )
     # 1/0
 
     # change e.g. a_n_1 to a(n-1). (i.e. apply the inverse)
     for key in sol_ref_inverse:
         ideal = ideal.replace(key, sol_ref_inverse[key])
         first_generator = first_generator.replace(key, sol_ref_inverse[key])
-    print('output:\n', ideal)
-    print('equation:', first_generator)
+    if verbosity > 0:
+        print('output:\n', ideal)
+        print('equation:', first_generator)
     print('\n', '-'*order, '----one_mb-end----\n')
     return first_generator, ['a(n)'] + sol_ref[1:], ideal
 

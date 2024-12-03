@@ -20,3 +20,28 @@ csv = pd.read_csv(csv_filename, low_memory=False, usecols=['A017615'])
 print(csv[:30])
 
 
+# A002658
+from itertools import islice
+def agen():
+    yield 1
+    an = s = 1
+    while True:
+        yield an
+        an1 = an*s + an*(an+1)//2
+        an, s = an1, s+an
+# seq = list(islice(agen(), 16))
+import sys
+sys.set_int_max_str_digits(9000)
+# seq = list(islice(agen(), 17))  # 9000 digits
+sys.set_int_max_str_digits(50083)
+seq = list(islice(agen(), 18))
+# seq += [23]
+print(seq)
+print(len(seq))
+print([len(str(e)) for e in seq])
+
+from eq_ideal import check_implicit_batch
+
+eq = 'a(n-2)^3 -2*a(n-1)^2 -6*a(n-1)*a(n-2) -4*a(n-2)^2 +4*a(n) -8*a(n-1) +11*a(n-2)'
+forOEIs = 'a(n) = (-1/4)*(a(n-2)^3 -2*a(n-1)^2 -6*a(n-1)*a(n-2) -4*a(n-2)^2 -8*a(n-1) +11*a(n-2))'
+print(check_implicit_batch(eq, seq))

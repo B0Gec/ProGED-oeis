@@ -109,8 +109,8 @@ N_OF_TERMS_LOAD = 20
 N_OF_TERMS_LOAD = 200
 
 N_MORE_TERMS = 10  # original
-N_MORE_TERMS = 30
-N_MORE_TERMS = 40
+# N_MORE_TERMS = 30
+# N_MORE_TERMS = 40
 # N_MORE_TERMS = 60
 # N_MORE_TERMS = 70
 
@@ -128,7 +128,7 @@ BUGLIST_BLACKLISTING = True
 # BUGLIST ignores blacklisted sequences !!!!!
 
 CORELIST = True  # have to scrape core sequences!
-CORELIST = False
+# CORELIST = False
 if BUGLIST:
     from buglist import buglist
 REAL_WORLD_BENCH = True
@@ -302,6 +302,13 @@ SEQ_ID = (True, 'A168838')
 # SEQ_ID = (True, 'A005588')
 # SEQ_ID = (True, 'A000004')
 # SEQ_ID = (True, 'A000045')
+
+# cores: 2*10 + 10 = 30 terms  # cores with low number of terms: a58, a1699, a2658?, a6894
+# no problems for them with this setting
+SEQ_ID = (True, 'A002658')
+SEQ_ID = (True, 'A000058')
+SEQ_ID = (True, 'A001699')
+# SEQ_ID = (True, 'A006894')
 
 # if DEBUG:
 #     SEQ_ID = (True, 'A000045')
