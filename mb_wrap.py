@@ -68,7 +68,6 @@ def mb(points: list, execute_cmd=False, var_names='djus', verbosity=0):
         echo "Points := ... IdealOfPoints;I;" | ./CocoAInterpter
     """
 
-    # print(points)
     dims = [len(p) for p in points]
     if len(set(dims)) != 1:
         raise ValueError('All points must have the same number of dimensions!!')
@@ -190,6 +189,10 @@ def mb_wrap_old(filename = 'runable.cocoa5', file_dir = 'julia/mb/'):
 
 
 if __name__ == '__main__':
+    print(cocoa_eval("-(12312/243434)*2^3;", execute_cmd=True))
+    print(cocoa_eval("2 +-1;", execute_cmd=True))
+    print(cocoa_eval("(0) -(1) -(1);", execute_cmd=True))
+    # print(cocoa_eval("3 +2*-1;", execute_cmd=True))  # causes error
     print(mb([[0, 0], [1, 1], [2, 4], [3, 9], [4, 16], [5, 25], [6, 36], [7, 49], [8, 64], [9, 81]]))
     # print(mb([[0, 0], [1, 1], [2, 4], [3, 9], [4, 16], [5, 25], [6, 36], [7, 49], [8, 64], [9, 81]], execute_cmd=True))
     pass

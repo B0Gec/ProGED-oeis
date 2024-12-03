@@ -175,6 +175,7 @@ DIVISOR = 1.0
 
 if not CORELIST:
     MAX_ORDER = 20  # We care only for recursive equations with max 20 terms or order.
+    MAX_ORDER = 12
     GROUND_TRUTH = True
     START_ORDER = 1
 else:
@@ -311,6 +312,22 @@ SEQ_ID = (True, 'A005588')  # cores
 # SEQ_ID = (True, 'A006894')
 # SEQ_ID = (True, 'A000396')
 SEQ_ID = (True, 'A190528')
+SEQ_ID = (True, 'A204419')
+SEQ_ID = (True, 'A135982')
+SEQ_ID = (True, 'A275639')
+SEQ_ID = (True, 'A304583')
+SEQ_ID = (True, 'A017847')  # linrec order 7 reconstructed!
+# SEQ_ID = (True, 'A051793')  # -2*-1 ali +-1 za a(n) -2*a(n-5) +a(n-1)
+SEQ_ID = (True, 'A014025')  # linrec order 8 one nonzero term NOT reconstructed!
+SEQ_ID = (True, 'A104237')  # linrec order 8 one nonzero term NOT reconstructed!
+
+
+
+
+
+
+
+
 
 # if DEBUG:
 #     SEQ_ID = (True, 'A000045')
@@ -583,6 +600,7 @@ else:
         output_string = "\n"
         max_order_ = max_order
         print('Attempting doone for', seq_id)
+        non_linears = []
 
         # try:
         if SINDy:
@@ -690,6 +708,7 @@ else:
             # for max_order_item in grid:
             #     print(max_order_item[0:])
 
+
         elif METHOD == 'MB':
             print('Attempting MB for', seq_id)
             print(f'with only first order + {n_more_terms} terms, ')
@@ -698,14 +717,17 @@ else:
             # first_generator, sol_ref, ideal_ = increasing_mb
             seq, coeffs, truth = unpack_seq(seq_id, csv) if GROUND_TRUTH else (unnan(csv[seq_id]), None, None)
             non_linears, eq, x, orders_used = increasing_mb(seq_id, csv, max_order_, n_more_terms, execute=EXECUTE_REAL,
-                                       library=library, n_of_terms=n_of_terms_ed, ground_truth=GROUND_TRUTH)
+                                               library=library, n_of_terms=n_of_terms_ed, ground_truth=GROUND_TRUTH)
             deg_used, order_used = 'unknown_mb', 'unknown_mb'
             print(orders_used)
+            print('non_linears', non_linears)
+            for expr in non_linears:
+                print(expr)
             order_used = None if not orders_used else orders_used[0]
             # eq, x = first_generator, [], 'unknown_mb'
             # eq, x, sol_ref, truth = mbprintout, [], 'unknown_mb', 'unknown_mb'
             sol_ref = "unknown_mb"
-            eq = eq if eq != 'MB not reconst' else non_linears
+            # eq = eq if eq != 'MB not reconst' else non_linears
             x = sp.Matrix([0]+x)
 
         else:
@@ -731,6 +753,7 @@ else:
         if METHOD == 'MB':
             # non_linears
             # linears = [x]
+            # x = [] if x == sp.Matrix([0]) else x
             if not is_reconst and not not x:
                 print('is_reconst', is_reconst)
                 print('MB: seems like bug: ground truth says no while x is not empty!!!')
@@ -779,7 +802,7 @@ else:
         # elif task_id in INCREASING_FREQS:
         #     print_results(results, verbosity=1)
         # # except Exception as RuntimeError
-        return eq, truth, x, deg_used, order_used, is_reconst, is_check, timing_print, output_string
+        return eq, truth, x, deg_used, order_used, is_reconst, is_check, non_linears, timing_print, output_string
 
     # print('outer after', max_order)
 
@@ -794,7 +817,7 @@ else:
         _, timing_print = timer(now=start, text=f"While total time consumed by now, scale:{task_id + 1}/{n_of_seqs}, "
                                                 f"seq_id:{seq_id}, order:{max_order}")
     else:
-        eq, truth, x, deg_used, order_used, is_reconst, is_check, timing_print, output_string = \
+        eq, truth, x, deg_used, order_used, is_reconst, is_check, non_linears, timing_print, output_string = \
             doone(task_id=task_id, seq_id=seq_id, linear=True)
     # results += [doone(task_id=task_id, seq_id=seq_id)]
     # results += [(seq_id, eq, truth, x, is_reconst, is_check)]
@@ -806,7 +829,7 @@ else:
     output_string += f'\nLibrary: {library}, max_order {max_order}, threshold: {threshold}'
     if METHOD == 'MB':
         output_string += f'\nn_more_terms: {n_more_terms}'
-    output_string += f"\n\nby degree: {deg_used} and order: {order_used}. \n{seq_id}: \n{eq}" if not MODE == 'black_check' else ""
+    output_string += f"\n\nby degree: {deg_used} and order: {order_used}.\nnon_linears:\n{non_linears}\n{seq_id}: \n{eq}" if not MODE == 'black_check' else ""
     output_string += f"\ntruth: \n{truth}\n\n"
     output_string += f'{is_reconst}  -  checked against website ground truth.     \n'
     output_string += f'{is_check}  -  \"manual\" check if equation is correct.    \n'

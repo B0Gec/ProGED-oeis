@@ -1021,11 +1021,12 @@ def expr_eval(expr: str, till_now: list[int], order_limit=1000, execute_cmd=True
     observables += [var for i in range(1, order_limit+1) if (var := f'a(n-{i})') in expr]
     # possible optimization: obs_eval using only strings, not int.
     # maybe without to_replace dictionary. To exploit memoization on obs_eval which does not depend on order_limit.
-    to_replace = {obs: str(obs_eval(obs, till_now, order_limit)) for obs in observables}
+    to_replace = {obs: f'({obs_eval(obs, till_now, order_limit)})' for obs in observables}
     # print('to replace:', to_replace)
     for obs in observables:
         expr = expr.replace(obs, to_replace[obs])
-    expr = expr.replace('n', str(obs_eval('n', till_now, order_limit)))
+    value_n = obs_eval('n', till_now, order_limit)
+    expr = expr.replace('n', f"({value_n})")
     # print('replaced expr', expr)
     # print(observables)
     to_eval = f'{expr};'
@@ -1034,6 +1035,7 @@ def expr_eval(expr: str, till_now: list[int], order_limit=1000, execute_cmd=True
     else:
         returned = None
     # print('returned', returned, 'to eval', to_eval)
+    # 1/0
     return returned, to_eval
 
 

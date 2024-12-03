@@ -12,16 +12,21 @@ print(len(df[ids[0]].dropna()))
 avails = [(df[i], len(df[i].dropna())) for i in df]
 avails = [(i, len(df[i].dropna())) for i in df]
 print(avails[:10])
+print(list(df['A190528']))
 thresh = 30
 # thresh = 120
 less_terms = [(id_, avail) for id_, avail in avails if avail <= thresh]
 print(less_terms[:10])
 scarcest = sorted(less_terms, key=lambda x: (x[1], x[0]))  # ascending
 print(scarcest[:10])
+print(scarcest)
+# [('A190528', 3), ('A204419', 6), ('A135982', 7), ('A145205', 8), ('A145206', 8), ('A145207', 8), ('A145309', 8), ('A182990', 8), ('A202280', 8), ('A324271', 8), ('A351237', 8), ('A138826', 9), ('A145306', 9), ('A145307', 9), ('A227040', 9), ('A227274', 9), ('A227275', 9), ('A031982', 10), ('A144863', 10), ('A145320', 10), ('A145333', 10), ('A178297', 10), ('A201226', 10), ('A203627', 10), ('A220983', 10), ('A220984', 10), ('A227110', 10), ('A227137', 10), ('A227138', 10), ('A351239', 10), ('A017412', 11), ('A017423', 11), ('A017424', 11), ('A017435', 11), ('A017436', 11), ('A017544', 11), ('A017555', 11), ('A017556', 11),
+print([i for i,j in scarcest])
+for i,j in scarcest[:50]:
+    print(f'window.open(\'https://oeis.org/{i}/b{i[1:]}.txt\');')
 print(len(less_terms))
 # cores: a58, a1699, a2658?, a6894
-1/0
-
+# 1/0
 
 
 plot_dic = dict()

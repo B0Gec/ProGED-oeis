@@ -88,7 +88,9 @@ def increasing_mb(seq_id, csv, max_order, n_more_terms, execute, library, n_of_t
     eq = 'MB not reconst'
     x = []
     orders_used = []
+    non_linears = []
     for order in range(0, max_order + 1):
+    # for order in range(10, max_order + 1):
         if ground_truth and order == 0:
             continue
         echo = f'order: {order}'
@@ -98,9 +100,10 @@ def increasing_mb(seq_id, csv, max_order, n_more_terms, execute, library, n_of_t
 
         print('len seq:', len(seq), 'seq:', seq)
         heuristic = 2 * order + n_more_terms
-        if len(seq) < order:
-            # break
-            print('I WARNED YOU, TOO FEW TERMS to AVOID ERRORS!')
+        if len(seq) <= order:
+            # print('I WARNED YOU, TOO FEW TERMS to AVOID ERRORS!')
+            print('I PUT THE BRAKES ON, since TOO FEW TERMS - to AVOID ERRORS!')
+            break
         seq_cut = seq[:heuristic]
         print('len seq:', len(seq_cut), 'seq:', seq_cut)
         print('heuristic', heuristic, 'error-threshold', order)
@@ -108,7 +111,7 @@ def increasing_mb(seq_id, csv, max_order, n_more_terms, execute, library, n_of_t
 
         #def one_mstb(seq_id, csv, order, n_more_terms, library='n', n_of_terms=200) -> tuple:
         # print(f'all generators:')
-        # print(ideal)
+        print(ideal)
         # booly = check_eq_man(eq, seq_id, csv, header=False, n_of_terms=10 ** 5, solution_ref=ref, library='n')
         # if bolly
         #     break
@@ -119,15 +122,18 @@ def increasing_mb(seq_id, csv, max_order, n_more_terms, execute, library, n_of_t
         print(first_generator[:printlen], ideal[:printlen])
         # 1/0
         printout += f'ideal: {ideal[:printlen]}\nequation: {first_generator[:printlen]}\n'
-        # print(ideal)
+        print(ideal)
+        if '-a(n-1)9' in ideal:
+            print('found it')
+            1/0
         eqs, heqs = ideal_to_eqs(ideal, top_n=10,verbosity=1, max_bitsize=10)
         # print('eqs:,', eqs)
         # print('heqs:,', heqs)
         # 1/0
 
-        non_linears = []
         print('checking equations ...')
         for expr in heqs:
+            print('non_linears:', non_linears)
             print('expr:', expr)
             # check if a(n-o) is present in expression, otherwise useless:
             min_order, max_order_ = eq_order_explicit(expr)
@@ -195,7 +201,10 @@ def one_mb(seq, order, n_more_terms, execute, library='n', verbosity=0, n_of_ter
     # Ignore the constant 1 column (mavi auto. deals with constants)
     A, sol_ref = A[:, 1:], sol_ref[1:]
     print('sol_ref, A:', sol_ref, A)
+    sol_ref = list(reversed(sol_ref))
+    print('sol_ref:', sol_ref)
     data = np.concatenate((b, A), axis=1)
+    print('data\n', data)
     if order == 10:
         print('data\n', data)
     if verbosity > 0:
@@ -229,7 +238,7 @@ def one_mb(seq, order, n_more_terms, execute, library='n', verbosity=0, n_of_ter
     # print(unique)
     # print('\n-->> looky here')
     first_generator, ideal = mb(points=unique, execute_cmd=execute, var_names=vars_cocoa, verbosity=verbosity)
-    # print(vars_cocoa, first_generator, ideal )
+    print(vars_cocoa, first_generator, ideal)
     # 1/0
 
     # change e.g. a_n_1 to a(n-1). (i.e. apply the inverse)
@@ -239,6 +248,7 @@ def one_mb(seq, order, n_more_terms, execute, library='n', verbosity=0, n_of_ter
     if verbosity > 0:
         print('output:\n', ideal)
         print('equation:', first_generator)
+    print('output:\n', ideal)
     print('\n', '-'*order, '----one_mb-end----\n')
     return first_generator, ['a(n)'] + sol_ref[1:], ideal
 
