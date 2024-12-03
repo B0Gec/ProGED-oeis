@@ -124,7 +124,7 @@ def comb2act(comb: tuple, dic: dict, multiply=multiply_eltw) -> sp.Matrix:
 
 
 def grid_sympy(seq: sp.MutableDenseMatrix, d_max: int, max_order: int, library: str,
-               M: sp.Matrix = None, vars_obs: list[str] = None) -> tuple[sp.Matrix, list[str]]:  # seq.shape=(N, 1)
+               M: sp.Matrix = None, vars_obs: list[str] = None, verbosity=0) -> tuple[sp.Matrix, list[str]]:  # seq.shape=(N, 1)
     """Convert sequence into matrix for equation discovery / LA system.
 
     Alternatively prepare possibly higher degree data for Diofantos.
@@ -136,7 +136,8 @@ def grid_sympy(seq: sp.MutableDenseMatrix, d_max: int, max_order: int, library: 
         - vars_obs does NOT include target variable y
     """
 
-    print(seq, d_max, max_order, library, M, vars_obs)
+    if verbosity > 0:
+        print(seq, d_max, max_order, library, M, vars_obs)
 
     # seq = seq if nof_eqs is None else seq[:nof_eqs]
     # seq = seq[:nof_eqs, :]
@@ -159,7 +160,8 @@ def grid_sympy(seq: sp.MutableDenseMatrix, d_max: int, max_order: int, library: 
 
     # Changed on 15.11.2024 to take care of general Diofantos:
     basis = lib2stvars(library, max_order) if M is None else vars_obs
-    print(basis)
+    if verbosity > 0:
+        print(basis)
 
 
     # Updated to take care of Diofantos:
@@ -172,13 +174,15 @@ def grid_sympy(seq: sp.MutableDenseMatrix, d_max: int, max_order: int, library: 
     # Updated to take care of Diofantos:
     triangle = {var: ntriangle[:, i] for i, var in enumerate(basis)} if M is None else {var: M[:, i] for i, var in enumerate(vars_obs)}
     # print('triangle', triangle.keys())
-    print('triangle', triangle)
+    if verbosity > 0:
+        print('triangle', triangle)
 
     # combins = itertools.combinations_with_replacement
     # combinations = sum([list(combins(basis, deg)) for deg in range(1, degree+1)], [])
     # Updated to take care of Diofantos:
     combinations = poly_combinations(library, d_max, max_order, basis)
-    print('combinations', combinations)
+    if verbosity > 0:
+        print('combinations', combinations)
     #
     # def multiply(a, b):
     #     return [i * j for i, j in zip(a, b)]
@@ -190,7 +194,8 @@ def grid_sympy(seq: sp.MutableDenseMatrix, d_max: int, max_order: int, library: 
     #     ntriangles = sp.Matrix.hstack(ntriangles, sp.Matrix([i**degree for i in range(1, seq.rows)]), triangle_grid(degree))
     # triangles = sp.Matrix.hstack(*[triangle_grid(degree) for degree in range(1, degree+1)])
     polys = sp.Matrix.hstack(*[comb2act(comb, triangle, multiply_eltw) for comb in combinations])
-    print('polys', polys.shape, polys.__repr__())
+    if verbosity > 0:
+        print('polys', polys.shape, polys.__repr__())
     # 1/0
 
     # middle = triangle['n']
@@ -233,7 +238,8 @@ def grid_sympy(seq: sp.MutableDenseMatrix, d_max: int, max_order: int, library: 
     # print('data', data.shape, data)
 
     sol_ref = solution_reference(library, d_max, max_order, basis)
-    print('sol ref', sol_ref)
+    if verbosity > 0:
+        print('sol ref', sol_ref)
     # 1/0
 
     if data.cols-1 != len(solution_reference(library, d_max, max_order, basis)):

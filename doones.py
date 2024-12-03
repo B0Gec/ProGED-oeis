@@ -183,7 +183,7 @@ else:
     # MAX_ORDER = 4
     # # MAX_ORDER = 5
     MAX_ORDER = 10
-    MAX_ORDER = 5
+    # MAX_ORDER = 5
     # MAX_ORDER = 2  # mavi
     GROUND_TRUTH = False
     START_ORDER = 0
@@ -277,38 +277,39 @@ SEQ_ID = (True, 'A000085')
 # SEQ_ID = (True, 'A002620')
 # SEQ_ID = (True, 'A000032')
 # SEQ_ID = (False, 'A000290')
-# SEQ_ID = (True, 'A000290')
-# SEQ_ID = (True, 'A000124')
-# SEQ_ID = (True, 'A025938')
+SEQ_ID = (True, 'A000290')
+# SEQ_ID = (True, 'A000124')  #cores
+
+# not cores or linrec:
+SEQ_ID = (True, 'A025938')
 # # debug and sindy and buglist
-#
-# SEQ_ID = (True, 'A074515')
-# SEQ_ID = (True, 'A074517')
-# SEQ_ID = (True, 'A091881')
-# SEQ_ID = (True, 'A000009')
+SEQ_ID = (True, 'A074515')
+SEQ_ID = (True, 'A074517')
+SEQ_ID = (True, 'A091881')
+# SEQ_ID = (True, 'A000009')  # cores
 # first 100 non_manuals: ['00003_A000009.txt', '00012_A000041.txt', '00013_A000043.txt', '00021_A000085.txt', '00023_A000105.txt', '00028_A000123.txt', '00029_A000124.txt', '00039_A000217.txt', '00046_A000290.txt', '00047_A000292.txt', '00051_A000326.txt', '00052_A000330.txt', '00056_A000578.txt', '00058_A000593.txt', '00065_A000793.txt', '00073_A001034.txt', '00078_A001065.txt', '00082_A001157.txt', '00107_A002322.txt', '00108_A002378.txt', '00114_A002620.txt', '00121_A004011.txt', '00135_A006530.txt', '00136_A006882.txt', '00149_A025487.txt']
-# SEQ_ID = (True, 'A003082')
-# SEQ_ID = (True, 'A000041')
+SEQ_ID = (True, 'A003082')  # linrec
 
-SEQ_ID = (True, 'A168838')
+# SEQ_ID = (True, 'A000041') # in cores
 
+# not in cores:
+# SEQ_ID = (True, 'A168838')
 # SEQ_ID = (True, 'A000044')  # mb fails, order 13
-
 # SEQ_ID = (True, 'A000073')
 # SEQ_ID = (True, 'A000078')
-
 # SEQ_ID = (True, 'A000100')
 
-# SEQ_ID = (True, 'A005588')
-# SEQ_ID = (True, 'A000004')
+SEQ_ID = (True, 'A005588')  # cores
+# SEQ_ID = (True, 'A000004')  # not in cores
 # SEQ_ID = (True, 'A000045')
 
 # cores: 2*10 + 10 = 30 terms  # cores with low number of terms: a58, a1699, a2658?, a6894
 # no problems for them with this setting
-SEQ_ID = (True, 'A002658')
-SEQ_ID = (True, 'A000058')
-SEQ_ID = (True, 'A001699')
+# SEQ_ID = (True, 'A002658')
+# SEQ_ID = (True, 'A000058')
+# SEQ_ID = (True, 'A001699')
 # SEQ_ID = (True, 'A006894')
+# SEQ_ID = (True, 'A000396')
 
 # if DEBUG:
 #     SEQ_ID = (True, 'A000045')
@@ -725,7 +726,7 @@ else:
 
         print('eq', eq, 'x', x, 'coeffs', coeffs, 'truth', truth)
         print('deg_used', deg_used, 'order', order_used)
-        is_reconst = solution_vs_truth(x, coeffs) if GROUND_TRUTH else ""
+        is_reconst = solution_vs_truth(x, coeffs) if GROUND_TRUTH else "No ground truth :("
         if METHOD == 'MB':
             # non_linears
             # linears = [x]

@@ -2,7 +2,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 csv_filename = 'linear_database_newbl.csv'
-# csv_filename = 'cores_test.csv'
+csv_filename = 'cores_test.csv'
 df = pd.read_csv(csv_filename, low_memory=False)
 ids = [id_ for id_ in df]
 print(df[ids[0]].dropna())

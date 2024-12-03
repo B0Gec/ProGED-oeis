@@ -98,12 +98,13 @@ def increasing_mb(seq_id, csv, max_order, n_more_terms, execute, library, n_of_t
 
         print('len seq:', len(seq), 'seq:', seq)
         heuristic = 2 * order + n_more_terms
-        if len(seq) < 2*order:
+        if len(seq) < order:
             # break
             print('I WARNED YOU, TOO FEW TERMS to AVOID ERRORS!')
-        # seq = seq[:heuristic]
-        print('len seq:', len(seq), 'seq:', seq)
-        first_generator, ref, ideal = one_mb(seq, order, n_more_terms, execute, library, verbosity=0, n_of_terms=n_of_terms)
+        seq_cut = seq[:heuristic]
+        print('len seq:', len(seq_cut), 'seq:', seq_cut)
+        print('heuristic', heuristic, 'error-threshold', order)
+        first_generator, ref, ideal = one_mb(seq_cut, order, n_more_terms, execute, library, verbosity=0, n_of_terms=n_of_terms)
 
         #def one_mstb(seq_id, csv, order, n_more_terms, library='n', n_of_terms=200) -> tuple:
         # print(f'all generators:')
@@ -174,6 +175,7 @@ def one_mb(seq, order, n_more_terms, execute, library='n', verbosity=0, n_of_ter
     # seq = seq[:n_of_terms]
     # print(seq)
     print('len seq:', len(seq), 'seq:', seq)
+    # 1/0
 
     # seq = sindy_hidden[d_max_lib - 1]
     # # print(n_of_terms, seq)
@@ -194,7 +196,10 @@ def one_mb(seq, order, n_more_terms, execute, library='n', verbosity=0, n_of_ter
     A, sol_ref = A[:, 1:], sol_ref[1:]
     print('sol_ref, A:', sol_ref, A)
     data = np.concatenate((b, A), axis=1)
-    print('data\n', data)
+    if order == 10:
+        print('data\n', data)
+    if verbosity > 0:
+        print('data\n', data)
 
     # How we would like to print variables:
     # sol_ref = solution_reference(library, d_max=1, order=order)
