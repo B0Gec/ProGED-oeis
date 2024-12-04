@@ -247,7 +247,7 @@ def grid_sympy(seq: sp.MutableDenseMatrix, d_max: int, max_order: int, library: 
     return data, sol_ref
 
 
-def dataset(seq: list, d_max: int, max_order: int, library: str) -> tuple[sp.Matrix, sp.Matrix, list[str]]:
+def dataset(seq: list, d_max: int, max_order: int, library: str, verbosity=0) -> tuple[sp.Matrix, sp.Matrix, list[str]]:
     """Instant list -> (b, A) for equation discovery / LA system."""
 
     if max_order < 0:
@@ -258,10 +258,11 @@ def dataset(seq: list, d_max: int, max_order: int, library: str) -> tuple[sp.Mat
         return sp.Matrix(), sp.Matrix(), []
 
     data, sol_ref = grid_sympy(sp.Matrix(seq), d_max, max_order, library=library)
-    print('sol_ref', sol_ref)
-    # print('order', max_order)
-    print('data in dataset', data)
-    # print('data.shape', data.shape)
+    if verbosity > 0:
+        print('sol_ref', sol_ref)
+        # print('order', max_order)
+        print('data in dataset', data)
+        # print('data.shape', data.shape)
     # print(str(data), data.__repr__())
     # 1/0
 
@@ -348,9 +349,8 @@ def truth2coeffs(truth: str) -> sp.Matrix:
 def unnan(seq: list) -> sp.Matrix:
     """Remove nan from sequence."""
 
-    print('seq:', seq)
     seq = sp.Matrix(seq)
-    print('seq:', seq)
+    # print('seq:', seq)
     if seq.has(sp.nan):
         seq = seq[:list(seq).index(sp.nan), :]
     seq = sp.Matrix([int(i) for i in seq])
@@ -1031,7 +1031,7 @@ def expr_eval(expr: str, till_now: list[int], order_limit=1000, execute_cmd=True
     # print(observables)
     to_eval = f'{expr};'
     if execute_cmd:
-        returned = cocoa_eval(expr+';', execute_cmd=True, verbosity=1)
+        returned = cocoa_eval(expr+';', execute_cmd=True, verbosity=0)
     else:
         returned = None
     # print('returned', returned, 'to eval', to_eval)

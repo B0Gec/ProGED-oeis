@@ -60,7 +60,8 @@ def external_prettyprint(ideal, sol_ref= [f'a(n-{i})' for i in range(1, 16)]) ->
 
 
 
-def increasing_mb(seq_id, csv, max_order, n_more_terms, execute, library, n_of_terms=10**6, ground_truth=False) -> str:
+def increasing_mb(seq_id, csv, max_order, n_more_terms, execute, library, n_of_terms=10**6,
+                  ground_truth=False, verbosity=0) -> str:
     """
     Run a for loop of increasing order where I run Moeller-Buchberger algorithm on a given sequence.
     """
@@ -73,16 +74,18 @@ def increasing_mb(seq_id, csv, max_order, n_more_terms, execute, library, n_of_t
     # for each order check if implicit is correct. But before that, check if at least one a(n-o) term is present.
     # for now, save equation with higher order, and continue until linear is found.
 
-
-    print('ground_truth:', ground_truth)
-    print('library:', library)
+    if verbosity > 0:
+        print('ground_truth:', ground_truth)
+        print('library:', library)
+        print(n_of_terms)
+        print(csv[seq_id])
     printout = ''
-    print(n_of_terms)
-    print(csv[seq_id])
     seq = unnan(list(csv[seq_id])[ground_truth:(ground_truth+n_of_terms)])
+    # if verbosity > 0:
     echo = f'seq: {seq}'
     printout += echo + '\n'
-    print(echo)
+    if verbosity > 0:
+        print(echo)
     # 1/0
 
     eq = 'MB not reconst'
@@ -98,62 +101,68 @@ def increasing_mb(seq_id, csv, max_order, n_more_terms, execute, library, n_of_t
         print(echo)
         # print('14.10.2024 hardcoded 200 terms for MB instead of 2*order + n_more_terms')
 
-        print('len seq:', len(seq), 'seq:', seq)
+        # print('len seq:', len(seq), 'seq:', seq)
         heuristic = 2 * order + n_more_terms
         if len(seq) <= order:
             # print('I WARNED YOU, TOO FEW TERMS to AVOID ERRORS!')
-            print('I PUT THE BRAKES ON, since TOO FEW TERMS - to AVOID ERRORS!')
+            if verbosity > 0:
+                print('I PUT THE BRAKES ON, since TOO FEW TERMS - to AVOID ERRORS!')
             break
         seq_cut = seq[:heuristic]
-        print('len seq:', len(seq_cut), 'seq:', seq_cut)
-        print('heuristic', heuristic, 'error-threshold', order)
+        # print('len seq:', len(seq_cut), 'seq:', seq_cut)
+        # print('heuristic', heuristic, 'error-threshold', order)
         first_generator, ref, ideal = one_mb(seq_cut, order, n_more_terms, execute, library, verbosity=0, n_of_terms=n_of_terms)
 
         #def one_mstb(seq_id, csv, order, n_more_terms, library='n', n_of_terms=200) -> tuple:
         # print(f'all generators:')
-        print(ideal)
+        if verbosity >= 2:
+            print(ideal)
         # booly = check_eq_man(eq, seq_id, csv, header=False, n_of_terms=10 ** 5, solution_ref=ref, library='n')
         # if bolly
         #     break
 
         # return ideal, ref
         printlen = 100
-        print(type(first_generator), type(ideal))
-        print(first_generator[:printlen], ideal[:printlen])
+        # print(type(first_generator), type(ideal))
+        if verbosity > 0:
+            print(first_generator[:printlen], ideal[:printlen])
         # 1/0
-        printout += f'ideal: {ideal[:printlen]}\nequation: {first_generator[:printlen]}\n'
-        print(ideal)
-        if '-a(n-1)9' in ideal:
-            print('found it')
-            1/0
+        # printout += f'ideal: {ideal[:printlen]}\nequation: {first_generator[:printlen]}\n'
         eqs, heqs = ideal_to_eqs(ideal, top_n=10,verbosity=1, max_bitsize=10)
         # print('eqs:,', eqs)
         # print('heqs:,', heqs)
         # 1/0
 
-        print('checking equations ...')
+        if verbosity > 0:
+            print('checking equations ...')
         for expr in heqs:
-            print('non_linears:', non_linears)
-            print('expr:', expr)
+            if verbosity >= 2:
+                print('non_linears:', non_linears)
+                print('expr:', expr)
             # check if a(n-o) is present in expression, otherwise useless:
             min_order, max_order_ = eq_order_explicit(expr)
-            print('order:', min_order, max_order_)
+            if verbosity >= 1:
+                print('order:', min_order, max_order_)
             if min_order is not None:  # not useless.
-                print('not useless, checking implicit:')
+                if verbosity >= 1:
+                    print('not useless, checking implicit:')
                 # check = check_implicit(expr, seq)
                 # check = list_evals(expr, seq)
-                check = check_implicit_batch(expr, seq)
+                check = check_implicit_batch(expr, seq, verbosity=0)
                 if check:  # Save implicit equation if it is correct.
-                    print('eqution holds!, checking if linear:')
+                    if verbosity >= 1:
+                        print('eqution holds!, checking if linear:')
                     non_linears += [expr]  # will count as non_id
                     orders_used += [max_order_]
                     if not ground_truth:
                         return non_linears, eq, x, orders_used
                     if is_linear(expr):
-                        print('eqution is linear!, converting to vector:')
+                        if verbosity >= 1:
+                            print('eqution is linear!, converting to vector:')
                         expr = order_optimize(expr)
                         x = linear_to_vec(expr)
-                        print('linear:', x)
+                        if verbosity >= 1:
+                            print('linear:', x)
                         return non_linears, expr, x, [len(x)]
     return non_linears, eq, x, orders_used
 
@@ -172,7 +181,8 @@ def one_mb(seq, order, n_more_terms, execute, library='n', verbosity=0, n_of_ter
     Returns: list of generators produced by MB algorithm.
     """
 
-    print('\n', '-'*order, '----one_mb-start----')
+    if verbosity >= 1:
+        print('\n', '-'*order, '----one_mb-start----')
     # take max_order * 2 + n_more_terms terms from given sequence terms
     # if TAKELESSTERMS:
     seq = seq[:2*order + n_more_terms]
@@ -180,7 +190,7 @@ def one_mb(seq, order, n_more_terms, execute, library='n', verbosity=0, n_of_ter
     # cores: 2*10 + 10 = 30 terms  # cores with low number of terms: a58, a1699, a2658?, a6894
     # seq = seq[:n_of_terms]
     # print(seq)
-    print('len seq:', len(seq), 'seq:', seq)
+    # print('len seq:', len(seq), 'seq:', seq)
     # 1/0
 
     # seq = sindy_hidden[d_max_lib - 1]
@@ -194,20 +204,17 @@ def one_mb(seq, order, n_more_terms, execute, library='n', verbosity=0, n_of_ter
 
     # print(order)
 
-    # b, A, sol_ref = dataset(list(seq), d_max=d_max_lib, max_order=max_order, library='n')
     b, A, sol_ref = dataset(list(seq), d_max=1, max_order=order, library=library)
 
-    print('sol_ref, A:', sol_ref, A)
+    # print('sol_ref, A:', sol_ref, A)
     # Ignore the constant 1 column (mavi auto. deals with constants)
     A, sol_ref = A[:, 1:], sol_ref[1:]
-    print('sol_ref, A:', sol_ref, A)
+    # print('sol_ref, A:', sol_ref, A)
     sol_ref = list(reversed(sol_ref))
-    print('sol_ref:', sol_ref)
+    if verbosity >= 1:
+        print('sol_ref:', sol_ref)
     data = np.concatenate((b, A), axis=1)
-    print('data\n', data)
-    if order == 10:
-        print('data\n', data)
-    if verbosity > 0:
+    if verbosity >= 1:
         print('data\n', data)
 
     # How we would like to print variables:
@@ -220,9 +227,10 @@ def one_mb(seq, order, n_more_terms, execute, library='n', verbosity=0, n_of_ter
                   # + (['n'] if library == 'n' else []))
     vars_cocoa += list(sol_ref_inverse.keys())
     sol_ref_inverse['a_n'] = 'a(n)'  # to avoid a(n)_2 situation by first replacing a_n
-    print('vars_cocoa, sol_ref_inverse')
-    print(vars_cocoa)
-    print(sol_ref_inverse)
+    if verbosity >= 1:
+        print('vars_cocoa, sol_ref_inverse')
+        print(vars_cocoa)
+        print(sol_ref_inverse)
 
     # print(mb(points=data.tolist(), execute_cmd=False, visual='djus'))
     # print(mb(points=data.tolist(), execute_cmd=True, var_names='oeis'))
@@ -238,7 +246,9 @@ def one_mb(seq, order, n_more_terms, execute, library='n', verbosity=0, n_of_ter
     # print(unique)
     # print('\n-->> looky here')
     first_generator, ideal = mb(points=unique, execute_cmd=execute, var_names=vars_cocoa, verbosity=verbosity)
-    print(vars_cocoa, first_generator, ideal)
+    # print('\n-->> looky here')
+    if verbosity >= 1:
+        print(vars_cocoa, first_generator, ideal)
     # 1/0
 
     # change e.g. a_n_1 to a(n-1). (i.e. apply the inverse)
@@ -248,8 +258,8 @@ def one_mb(seq, order, n_more_terms, execute, library='n', verbosity=0, n_of_ter
     if verbosity > 0:
         print('output:\n', ideal)
         print('equation:', first_generator)
-    print('output:\n', ideal)
-    print('\n', '-'*order, '----one_mb-end----\n')
+        print('output:\n', ideal)
+        print('\n', '-'*order, '----one_mb-end----\n')
     return first_generator, ['a(n)'] + sol_ref[1:], ideal
 
 

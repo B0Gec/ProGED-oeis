@@ -21,7 +21,7 @@ def pretty_to_cocoa(linear_expr, order) -> str:
     bij.update({'a(n)': 'a_n'})
     for key in bij:
         linear_expr = linear_expr.replace(key, bij[key])
-    print(linear_expr)
+    # print(linear_expr)
     return linear_expr
 
 # most common polynomial variables indeterminates:

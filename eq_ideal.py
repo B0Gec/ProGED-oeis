@@ -122,7 +122,7 @@ def ideal_to_eqs(ideal: str, max_complexity: int = 10, max_bitsize: int = 100, t
     # x + y - z ... x + 100*y  now: 0 vs 3 (or updated 3 vs 4)
     # 10x + 34y - 5z ... 214x + 100*y  5 vs 6.
     # eqs = eqs0 + [i for i in sorted(eqs, key=lambda x: (len(x), bitsize(x))) if i not in eqs0][:top_n//2]
-    eqs1 = [i for i in sorted(eqs, key=lambda x: (len(x), bitsize(x))) if i not in eqs0][:top_n//2]
+    # eqs1 = [i for i in sorted(eqs, key=lambda x: (len(x), bitsize(x))) if i not in eqs0][:top_n//2]
     # eqs = eqs0 + eqs1
     eqs = eqs0
 
@@ -180,7 +180,7 @@ def order_optimize(expr: str) -> str:
     return expr
 
 
-def linear_to_vec(linear_expr: str) -> list:
+def linear_to_vec(linear_expr: str, verbosity=0) -> list:
     """Convert linear expression from mb to vector form.
     E.g. 'a(n) - a(n-1) - a(n-2)' -> [1, 1]
 
@@ -230,26 +230,22 @@ def linear_to_vec(linear_expr: str) -> list:
     # print(vars)
     # print(rhs, 'rhs')
     preamble = f'use P ::= QQ[{vars}];'
-    divided = cocoa_eval(preamble + f'(-1)*({rhs})/({coef});', execute_cmd=True, verbosity=3, cluster=False)
+    divided = cocoa_eval(preamble + f'(-1)*({rhs})/({coef});', execute_cmd=True, verbosity=verbosity, cluster=False)
     if '/' in divided:
         return None
     else:
         rhs = divided
-        print('rhs', rhs)
+        if verbosity >= 1:
+            print('rhs', rhs)
         summands = re.findall(r'\+?(-?[^ an*]*)\*?a_n_(\d+)', rhs)
         # summands = re.findall(r'\+?(-?[^ an*]*)\*?(a_n_\d+)', rhs)[0]
-        print('summands:', summands)
+        if verbosity >= 1:
+            print('summands:', summands)
 
-        # dicty = [(order_, (cases[coef] if coef in list(cases.keys()) else coef)) for coef, order_ in summands]
         dicty = {order_: int(cases[coef] if coef in list(cases.keys()) else coef) for coef, order_ in summands}
-        # sortie =  sorted(summands, key=lambda x: x[1])
-        # dicty = {order_: int(coef) for coef, order_ in summands}
-        # dicty = [(order_, coef) for coef, order_ in summands]
-        # print('sortie:', sortie)
-        # print('dicty:', dicty)
         vec = [dicty.get(str(o), 0) for o in range(1, order+1)]
-        # vec = [int(coef) for coef, var in summands]
-        # print('vec:', vec)
+        if verbosity >= 1:
+            print('vec:', vec)
     return vec
 
 
@@ -276,12 +272,13 @@ def check_implicit(mb_eq: str, seq: list[int]) -> bool:
     vanishes = len(non_zeros) == 0
     return vanishes
 
-def check_implicit_batch(mb_eq: str, seq: list[int]) -> bool:
+def check_implicit_batch(mb_eq: str, seq: list[int], verbosity=0) -> bool:
     """Alternative to check_implicit, which sends list of instructions to Cocoa which
      performs them in whole batch to compensate for signal sending overhead.
      """
 
-    print('inside check_implicit_batch')
+    if verbosity >= 1:
+        print('inside check_implicit_batch')
     exe_calls = list_evals(mb_eq, seq)
     # ['123 -23424 -456', '344554 -34 +223']
 
@@ -291,11 +288,13 @@ def check_implicit_batch(mb_eq: str, seq: list[int]) -> bool:
 
     # print(", ".join(exe_calls).replace(';', ''))
     cocoa_code = f'li := [{" ".join(exe_calls).replace(";", ",")[:-1]}]; min(li) = max(li) and max(li) = 0;'
-    print('cocoa_code:', cocoa_code)
+    if verbosity >= 1:
+        print('cocoa_code:', cocoa_code)
     # 1/0
-    cocoa_res = cocoa_eval(cocoa_code, execute_cmd=True, verbosity=3)
+    cocoa_res = cocoa_eval(cocoa_code, execute_cmd=True, verbosity=0)
     res_dict = {'true': True, 'false': False}
-    print(cocoa_res, len(cocoa_res), type(cocoa_res))
+    if verbosity >= 1:
+        print(cocoa_res, len(cocoa_res), type(cocoa_res))
     is_check = res_dict[cocoa_res]
     # print(is_check)
 

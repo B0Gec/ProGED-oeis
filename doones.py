@@ -119,7 +119,7 @@ VERBOSITY = 1  # run scenario
 # VERBOSITY = 3  # dev scenario
 
 DEBUG = True
-# DEBUG = False
+DEBUG = False
 
 # BUGLIST ignores blacklisting (runs also blacklisted) !!!!!
 # BUGLIST = True
@@ -175,7 +175,7 @@ DIVISOR = 1.0
 
 if not CORELIST:
     MAX_ORDER = 20  # We care only for recursive equations with max 20 terms or order.
-    MAX_ORDER = 12
+    # MAX_ORDER = 12
     GROUND_TRUTH = True
     START_ORDER = 1
 else:
@@ -302,24 +302,24 @@ SEQ_ID = (True, 'A003082')  # linrec
 
 SEQ_ID = (True, 'A005588')  # cores
 # SEQ_ID = (True, 'A000004')  # not in cores
-# SEQ_ID = (True, 'A000045')
+SEQ_ID = (True, 'A000045')
 
-# cores: 2*10 + 10 = 30 terms  # cores with low number of terms: a58, a1699, a2658?, a6894
-# no problems for them with this setting
-# SEQ_ID = (True, 'A002658')
-# SEQ_ID = (True, 'A000058')
-# SEQ_ID = (True, 'A001699')
-# SEQ_ID = (True, 'A006894')
-# SEQ_ID = (True, 'A000396')
-SEQ_ID = (True, 'A190528')
-SEQ_ID = (True, 'A204419')
-SEQ_ID = (True, 'A135982')
-SEQ_ID = (True, 'A275639')
-SEQ_ID = (True, 'A304583')
-SEQ_ID = (True, 'A017847')  # linrec order 7 reconstructed!
-# SEQ_ID = (True, 'A051793')  # -2*-1 ali +-1 za a(n) -2*a(n-5) +a(n-1)
-SEQ_ID = (True, 'A014025')  # linrec order 8 one nonzero term NOT reconstructed!
-SEQ_ID = (True, 'A104237')  # linrec order 8 one nonzero term NOT reconstructed!
+# # cores: 2*10 + 10 = 30 terms  # cores with low number of terms: a58, a1699, a2658?, a6894
+# # no problems for them with this setting
+# # SEQ_ID = (True, 'A002658')
+# # SEQ_ID = (True, 'A000058')
+# # SEQ_ID = (True, 'A001699')
+# # SEQ_ID = (True, 'A006894')
+# # SEQ_ID = (True, 'A000396')
+# SEQ_ID = (True, 'A190528')
+# SEQ_ID = (True, 'A204419')
+# SEQ_ID = (True, 'A135982')
+# SEQ_ID = (True, 'A275639')
+# SEQ_ID = (True, 'A304583')
+# SEQ_ID = (True, 'A017847')  # linrec order 7 reconstructed!
+# # SEQ_ID = (True, 'A051793')  # -2*-1 ali +-1 za a(n) -2*a(n-5) +a(n-1)
+# SEQ_ID = (True, 'A014025')  # linrec order 8 one nonzero term NOT reconstructed!
+# SEQ_ID = (True, 'A104237')  # linrec order 8 one nonzero term NOT reconstructed!
 
 
 
@@ -458,7 +458,8 @@ if not fail:
     else:
         fail = (not BUGLIST and list(csv.columns)[task_id] in blacklist) or fail
     seq_id = list(csv.columns)[task_id] if not SEQ_ID[0] or not DEBUG else SEQ_ID[1]
-    print('seq_id', seq_id)
+    #above line can in DEBUG mode cause task_id to differ from corresponding seq_id
+    # print('seq_id', seq_id)
     # print('seq_id', BUGLIST)
     if BUGLIST:
         if isinstance(buglist[task_id], str):
@@ -711,18 +712,20 @@ else:
 
         elif METHOD == 'MB':
             print('Attempting MB for', seq_id)
-            print(f'with only first order + {n_more_terms} terms, ')
+            print(f'with only 2*order + {n_more_terms} terms, ')
             print(f'args:', seq_id, max_order_, n_more_terms, EXECUTE_REAL, library, n_of_terms_ed)
             # 1/0
             # first_generator, sol_ref, ideal_ = increasing_mb
             seq, coeffs, truth = unpack_seq(seq_id, csv) if GROUND_TRUTH else (unnan(csv[seq_id]), None, None)
             non_linears, eq, x, orders_used = increasing_mb(seq_id, csv, max_order_, n_more_terms, execute=EXECUTE_REAL,
-                                               library=library, n_of_terms=n_of_terms_ed, ground_truth=GROUND_TRUTH)
+                                                            library=library, n_of_terms=n_of_terms_ed,
+                                                            ground_truth=GROUND_TRUTH, verbosity=0)
             deg_used, order_used = 'unknown_mb', 'unknown_mb'
-            print(orders_used)
-            print('non_linears', non_linears)
-            for expr in non_linears:
-                print(expr)
+            output_string += f'orders_used: {orders_used}\n'
+            # print(orders_used)
+            # print('non_linears', non_linears)
+            # for expr in non_linears:
+            #     print(expr)
             order_used = None if not orders_used else orders_used[0]
             # eq, x = first_generator, [], 'unknown_mb'
             # eq, x, sol_ref, truth = mbprintout, [], 'unknown_mb', 'unknown_mb'
@@ -748,12 +751,12 @@ else:
                 #                                 n_of_terms=N_OF_TERMS_ED, linear=LINEAR)
 
         print('eq', eq, 'x', x, 'coeffs', coeffs, 'truth', truth)
-        print('deg_used', deg_used, 'order', order_used)
+        # print('deg_used', deg_used, 'order', order_used)
         is_reconst = solution_vs_truth(x, coeffs) if GROUND_TRUTH else "No ground truth :("
         if METHOD == 'MB':
             # non_linears
             # linears = [x]
-            # x = [] if x == sp.Matrix([0]) else x
+            x = [] if x == sp.Matrix([0]) else x
             if not is_reconst and not not x:
                 print('is_reconst', is_reconst)
                 print('MB: seems like bug: ground truth says no while x is not empty!!!')
