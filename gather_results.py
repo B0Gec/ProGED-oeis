@@ -36,10 +36,6 @@ false_truth_list = false_truth
 from exact_ed import truth2coeffs
 # from results.sicor_fix_proc import success_eqs
 
-# fname = 'results/good/01234567/34500_A000032.txt'
-base_dir = "results/good/"
-# base_dir = "results/goodmavi/"
-# base_dir = "results/goodmb/"
 
 # job_id = "01234567"
 # job_id = "36765084"  # old format
@@ -125,7 +121,7 @@ job_id = 'dilin'
 # # # job_id = 'sideflin'  # fail: not even sindy
 # # # job_id = 'sidefcor'  # fail: not even sindy
 #
-# # job_id = 'sdlin'
+# # job_id = 'sdlin'   # sindy-default-linrec
 # # # # job_id = 'sdcor'  # fail: not core
 # job_id = 'sdcor2'
 
@@ -137,14 +133,23 @@ job_id = 'dilin'
 # job_id = 'dicor-atMb'
 # job_id = 'sicor-atMb'
 
-job_id = 'transfoeis_place'
-job_id = 'transfoeis_acc'
-job_id = 'transfoeis_acc2'
-job_id = 'n15_acc'
-# job_id = 'n15_ord5'
+# job_id = 'transfoeis_place'
+# job_id = 'transfoeis_acc'
+# job_id = 'transfoeis_acc2'
+# job_id = 'n15_acc'
+# # job_id = 'n15_ord5'
+#
+# # 4.12.2024 - mb linrec
+job_id = 'mblinrec'
 
 print(job_id)
 # 1/0
+
+# fname = 'results/good/01234567/34500_A000032.txt'
+base_dir = "results/good/"
+# base_dir = "results/goodmavi/"
+if job_id in ('mblinrec'):
+    base_dir = "results/goodmb/"
 
 CORES = True if job_id in ("diocores77", 'diocor-merge', 'sindycore83', 'dicor-cub', 'dicor-cub19',
                            'fdiocores', 'fdiocorefix', 'fdiocorefix2', 'sicor116', 'dicorrep', 'sicor9fix2', 'sicor1114',

@@ -15,6 +15,7 @@ print(avails[:10])
 print(list(df['A190528']))
 thresh = 30
 # thresh = 120
+
 less_terms = [(id_, avail) for id_, avail in avails if avail <= thresh]
 print(less_terms[:10])
 scarcest = sorted(less_terms, key=lambda x: (x[1], x[0]))  # ascending
