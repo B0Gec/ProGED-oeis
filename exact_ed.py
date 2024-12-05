@@ -235,7 +235,8 @@ def grid_sympy(seq: sp.MutableDenseMatrix, d_max: int, max_order: int, library: 
             polys)
         # sp.Matrix([i for i in range(1, seq.rows)]),
             # triangles)
-    # print('data', data.shape, data)
+    if verbosity > 0:
+        print('data', data.shape, data.__repr__())
 
     sol_ref = solution_reference(library, d_max, max_order, basis)
     if verbosity > 0:
@@ -257,7 +258,7 @@ def dataset(seq: list, d_max: int, max_order: int, library: str, verbosity=0) ->
     if len(seq)-1 < max_order:
         return sp.Matrix(), sp.Matrix(), []
 
-    data, sol_ref = grid_sympy(sp.Matrix(seq), d_max, max_order, library=library)
+    data, sol_ref = grid_sympy(sp.Matrix(seq), d_max, max_order, library=library, verbosity=verbosity)
     if verbosity > 0:
         print('sol_ref', sol_ref)
         # print('order', max_order)

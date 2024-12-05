@@ -141,6 +141,7 @@ job_id = 'dilin'
 #
 # # 4.12.2024 - mb linrec
 job_id = 'mblinrec'
+job_id = 'mblint2'
 
 print(job_id)
 # 1/0
@@ -148,7 +149,7 @@ print(job_id)
 # fname = 'results/good/01234567/34500_A000032.txt'
 base_dir = "results/good/"
 # base_dir = "results/goodmavi/"
-if job_id in ('mblinrec'):
+if job_id in ('mblinrec', 'mblint2'):
     base_dir = "results/goodmb/"
 
 CORES = True if job_id in ("diocores77", 'diocor-merge', 'sindycore83', 'dicor-cub', 'dicor-cub19',

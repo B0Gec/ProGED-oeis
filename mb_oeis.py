@@ -110,9 +110,10 @@ def increasing_mb(seq_id, csv, max_order, n_more_terms, execute, library, n_of_t
         seq_cut = seq[:heuristic]
         # print('len seq:', len(seq_cut), 'seq:', seq_cut)
         # print('heuristic', heuristic, 'error-threshold', order)
+        # print('---> looky here onemb')
         first_generator, ref, ideal = one_mb(seq_cut, order, n_more_terms, execute, library, verbosity=verbosity, n_of_terms=n_of_terms)
+        # print('---> looky here onemb after')
 
-        #def one_mstb(seq_id, csv, order, n_more_terms, library='n', n_of_terms=200) -> tuple:
         # print(f'all generators:')
         if verbosity >= 2:
             print(ideal)
@@ -127,7 +128,7 @@ def increasing_mb(seq_id, csv, max_order, n_more_terms, execute, library, n_of_t
             print(first_generator[:printlen], ideal[:printlen])
         # 1/0
         # printout += f'ideal: {ideal[:printlen]}\nequation: {first_generator[:printlen]}\n'
-        eqs, heqs = ideal_to_eqs(ideal, top_n=10,verbosity=1, max_bitsize=10)
+        eqs, heqs = ideal_to_eqs(ideal, top_n=10,verbosity=verbosity, max_bitsize=10)
         # print('eqs:,', eqs)
         # print('heqs:,', heqs)
         # 1/0
@@ -139,6 +140,7 @@ def increasing_mb(seq_id, csv, max_order, n_more_terms, execute, library, n_of_t
                 print('non_linears:', non_linears)
                 print('expr:', expr)
             # check if a(n-o) is present in expression, otherwise useless:
+            # print('---> looky here')
             min_order, max_order_ = eq_order_explicit(expr)
             if verbosity >= 1:
                 print('order:', min_order, max_order_)
@@ -160,12 +162,13 @@ def increasing_mb(seq_id, csv, max_order, n_more_terms, execute, library, n_of_t
                             print('eqution is linear!, converting to vector:')
                         expr = order_optimize(expr)
                         x_candidate = linear_to_vec(expr)
-                        if verbosity >= 1:
-                            print('linear:', x)
                         if x_candidate is None:
                             if verbosity >= 1:
                                 print('linear vector contains non-integers, which will never be the ground truth.')
                             continue
+                        x = x_candidate
+                        if verbosity >= 1:
+                            print('linear:', x)
                         return non_linears, expr, x, [len(x)]
     return non_linears, eq, x, orders_used
 
@@ -207,29 +210,32 @@ def one_mb(seq, order, n_more_terms, execute, library='n', verbosity=0, n_of_ter
 
     # print(order)
 
-    b, A, sol_ref = dataset(list(seq), d_max=1, max_order=order, library=library)
+    b, A, sol_ref = dataset(list(seq), d_max=1, max_order=order, library=library, verbosity=verbosity)
 
     # print('sol_ref, A:', sol_ref, A)
     # Ignore the constant 1 column (mavi auto. deals with constants)
     A, sol_ref = A[:, 1:], sol_ref[1:]
     # print('sol_ref, A:', sol_ref, A)
-    sol_ref = list(reversed(sol_ref))
     if verbosity >= 1:
         print('sol_ref:', sol_ref)
     data = np.concatenate((b, A), axis=1)
     if verbosity >= 1:
-        print('data\n', data)
+        print('data\n', data.__repr__())
 
     # How we would like to print variables:
     # sol_ref = solution_reference(library, d_max=1, order=order)
 
     # Bijection mapping: printing like a(n-1) vs. cocoa: a_n_1:
-    sol_ref_inverse = {var.replace('(', '_').replace('-', '_').replace(')', ''): var
-                       for var in sol_ref}
-    vars_cocoa = ['a_n']
-                  # + (['n'] if library == 'n' else []))
-    vars_cocoa += list(sol_ref_inverse.keys())
+    pretty_cocoa_pairs = [(var, var.replace('(', '_').replace('-', '_').replace(')', ''))
+                     for var in sol_ref]
+    sol_ref_inverse = {cocoa: pretty for pretty, cocoa in reversed(pretty_cocoa_pairs)}
+    # sol_ref_inverse = {var.replace('(', '_').replace('-', '_').replace(')', ''): var
+    #                    for var in list(reversed(sol_ref))}
     sol_ref_inverse['a_n'] = 'a(n)'  # to avoid a(n)_2 situation by first replacing a_n
+    vars_cocoa = ['a_n'] + [cocoa for _, cocoa in pretty_cocoa_pairs]
+    # + (['n'] if library == 'n' else []))
+    # vars_cocoa += list(reversed(sol_ref_inverse.keys()))
+
     if verbosity >= 1:
         print('vars_cocoa, sol_ref_inverse')
         print(vars_cocoa)
@@ -246,8 +252,9 @@ def one_mb(seq, order, n_more_terms, execute, library='n', verbosity=0, n_of_ter
     for i in data.tolist():
         if i not in unique:
             unique.append(i)
-    print(unique)
-    print('\n-->> looky here')
+    if verbosity >= 1:
+        print(unique)
+    # print('\n-->> looky here')
     first_generator, ideal = mb(points=unique, execute_cmd=execute, var_names=vars_cocoa, verbosity=verbosity)
     # print('\n-->> looky here')
     if verbosity >= 1:
