@@ -1,9 +1,23 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 
+task_limit = 1000
+
 csv_filename = 'linear_database_newbl.csv'
 # csv_filename = 'cores_test.csv'
-df = pd.read_csv(csv_filename, low_memory=False)
+
+# chosen:
+df = pd.read_csv(csv_filename, low_memory=False, usecols=["A000129"])
+print(df["A000129"].dropna())
+print(df["A000129"].dropna()[1:20])
+1/0
+
+cols = pd.read_csv(csv_filename, low_memory=False, nrows=0)
+cols = list(cols)[:task_limit]
+print(cols)
+# 1/0
+
+df = pd.read_csv(csv_filename, low_memory=False, usecols=cols)
 ids = [id_ for id_ in df]
 print(df[ids[0]].dropna())
 # print(df['A000043'])
@@ -12,7 +26,7 @@ print(len(df[ids[0]].dropna()))
 avails = [(df[i], len(df[i].dropna())) for i in df]
 avails = [(i, len(df[i].dropna())) for i in df]
 print(avails[:10])
-print(list(df['A190528']))
+# print(list(df['A190528']))
 thresh = 30
 # thresh = 120
 
@@ -23,8 +37,8 @@ print(scarcest[:10])
 print(scarcest)
 # [('A190528', 3), ('A204419', 6), ('A135982', 7), ('A145205', 8), ('A145206', 8), ('A145207', 8), ('A145309', 8), ('A182990', 8), ('A202280', 8), ('A324271', 8), ('A351237', 8), ('A138826', 9), ('A145306', 9), ('A145307', 9), ('A227040', 9), ('A227274', 9), ('A227275', 9), ('A031982', 10), ('A144863', 10), ('A145320', 10), ('A145333', 10), ('A178297', 10), ('A201226', 10), ('A203627', 10), ('A220983', 10), ('A220984', 10), ('A227110', 10), ('A227137', 10), ('A227138', 10), ('A351239', 10), ('A017412', 11), ('A017423', 11), ('A017424', 11), ('A017435', 11), ('A017436', 11), ('A017544', 11), ('A017555', 11), ('A017556', 11),
 print([i for i,j in scarcest])
-for i,j in scarcest[:50]:
-    print(f'window.open(\'https://oeis.org/{i}/b{i[1:]}.txt\');')
+# for i,j in scarcest[:50]:
+#     print(f'window.open(\'https://oeis.org/{i}/b{i[1:]}.txt\');')
 print(len(less_terms))
 # cores: a58, a1699, a2658?, a6894
 # 1/0
@@ -50,6 +64,7 @@ print(sorty[:10])
 # print([value for key, value in sortie])
 # print(sum([value for key, value in sortie]))
 
+
 x = [int(i[0]) for i in sorty]
 y = [int(i[1]) for i in sorty]
 
@@ -60,3 +75,21 @@ plt.bar(x,y)
 # plt.bar(list(plot_dic.keys()), list(plot_dic.values()))
 # plt.plot(list(plot_dic.keys()), list(plot_dic.values()))
 plt.show()
+
+gts = [(i, len(df[i][0].split(',')), df[i][0]) for i in df]
+print(gts)
+order = 2
+order_n = [(task, length) for task, length, _ in gts if length == order]
+print(order_n)
+1/0
+lens = [(l, sum([1 for _, length, _ in gts if length == l ])) for l in list(set([length for _, length, _ in gts]))]
+print(lens)
+print(len(lens), sum([j for i,j in lens]))
+len_thresh = 21
+len_thresh = 7
+len_thresh = 4
+bigger = [(l, popul) for l, popul in lens if l <= len_thresh]
+print(bigger)
+print(len(bigger), sum([j for i,j in bigger]))
+
+showlim = 10

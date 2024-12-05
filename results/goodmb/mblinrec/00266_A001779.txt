@@ -1,17 +1,17 @@
 
-orders_used: [4, 4, 4]
+orders_used: []
 While total time consumed by now, scale:267/27236, seq_id:A001779, order:20 took:
- 8.4 seconds, i.e. 0.14 minutes or 0.002 hours.
+ 5.1 seconds, i.e. 0.09 minutes or 0.001 hours.
 CORELIST: False, METHOD: MB, SINDy: False (True also in case of MAVI), GROUND_TRUTH: True, SINDy_default: True, DEBUG: False, OEISformer: False
 n_of_terms_ed: 200, N_OF_TERMS_ED: 200
 Library: non, max_order 20, max_degree: 1, threshold: 0.1, 
-n_more_terms: 30
+n_more_terms: 10
 Library: non, max_order 20, threshold: 0.1
-n_more_terms: 30
+n_more_terms: 10
 
-by degree: unknown_mb and order: 4.
+by degree: unknown_mb and order: None.
 non_linears:
-['a(n-4)*a(n-3) -7*a(n-3)^2 +7*a(n-4)*a(n-2) -8*a(n-3)*a(n-2) -7*a(n-2)^2 +6*a(n-4)*a(n-1) +7*a(n-3)*a(n-1) +a(n-2)*a(n-1)', 'a(n-4)*a(n-3) -7*a(n-3)^2 +7*a(n-4)*a(n-2) -8*a(n-3)*a(n-2) -7*a(n-2)^2 +6*a(n-4)*a(n-1) +7*a(n-3)*a(n-1) +a(n-2)*a(n-1)', 'a(n-4)*a(n-3) -7*a(n-3)^2 +7*a(n-4)*a(n-2) -8*a(n-3)*a(n-2) -7*a(n-2)^2 +6*a(n-4)*a(n-1) +7*a(n-3)*a(n-1) +a(n-2)*a(n-1)']
+[]
 A001779: 
 MB not reconst
 truth: 
@@ -19,4 +19,4 @@ a(n) = 7*a(n - 1) + -20*a(n - 2) + 28*a(n - 3) + -14*a(n - 4) + -14*a(n - 5) + 2
 a(0) = 1, a(1) = 7, a(2) = 29, a(3) = 91, a(4) = 239, a(5) = 553, a(6) = 1163, a(7) = 2269, a(8) = 4166
 
 False  -  checked against website ground truth.     
-True  -  "manual" check if equation is correct.    
+False  -  "manual" check if equation is correct.    

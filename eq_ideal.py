@@ -232,6 +232,8 @@ def linear_to_vec(linear_expr: str, verbosity=0) -> list:
     preamble = f'use P ::= QQ[{vars}];'
     divided = cocoa_eval(preamble + f'(-1)*({rhs})/({coef});', execute_cmd=True, verbosity=verbosity, cluster=False)
     if '/' in divided:
+        if verbosity >= 1:
+            print('linear solution has non-integer coefficients - never the case with ground truth', divided)
         return None
     else:
         rhs = divided
@@ -286,17 +288,60 @@ def check_implicit_batch(mb_eq: str, seq: list[int], verbosity=0) -> bool:
     # li := [-0, -0, -120 + 20 + 100, 1 - 1];
     # min(li) = max(li) and max(li) = 0;
 
-    # print(", ".join(exe_calls).replace(';', ''))
-    cocoa_code = f'li := [{" ".join(exe_calls).replace(";", ",")[:-1]}]; min(li) = max(li) and max(li) = 0;'
+    # CALL_SIZE_LIMIT=131500
+    # CALL_SIZE_LIMIT=131000  # 131129 is too big, but 129823 is OK.
+    CALL_SIZE_LIMIT=129000
+    def prepare_batches(exe_calls: list[str], call_size_limit=CALL_SIZE_LIMIT) -> list[str]:  # 1311 and 133 too big, but 131 is ok
+        calls = []
+        full_call = ""
+        for call in exe_calls:
+            if len(call) > call_size_limit:
+                print('TOO LARGE NUMBERS. Cutting ourselves some slack here, ignoring all further terms.')
+                if full_call != "":
+                    calls.append(full_call)
+                break
+            if len(full_call) + len(call) > call_size_limit:
+                calls.append(full_call)
+                full_call = call
+            else:
+                full_call += " " + call
+        if full_call != "":
+            calls.append(full_call)
+
+        wrapped_calls = [f'li := [{call.replace(";", ",")[:-1]}]; min(li) = max(li) and max(li) = 0;' for call in calls]
+        return wrapped_calls
+    cocoa_codes = prepare_batches(exe_calls)
+
+    # print(exe_calls)
     if verbosity >= 1:
-        print('cocoa_code:', cocoa_code)
+        print("cocoa_codes:")
+        for code in cocoa_codes:
+            print(code)
+    # print(len(" ".join(exe_calls)))
+    # cocoa_code = f'li := [{" ".join(exe_calls).replace(";", ",")[:-1]}]; min(li) = max(li) and max(li) = 0;'
+    # print(len(cocoa_code))
+
     # 1/0
-    cocoa_res = cocoa_eval(cocoa_code, execute_cmd=True, verbosity=0)
+    # if verbosity >= 1:
+    #     print('cocoa_code:', cocoa_code)
+    # 1/0
+    # cocoa_res = cocoa_eval(cocoa_code, execute_cmd=True, verbosity=0)
+    # print('len of code', len(cocoa_code))
+    # print('lens of cocoa codes:')
+    # print([len(cocoa_code) for cocoa_code in cocoa_codes])
+    executes = [cocoa_eval(cocoa_code, execute_cmd=True, verbosity=0) for cocoa_code in prepare_batches(exe_calls)]
+    # print('executes:', executes)
     res_dict = {'true': True, 'false': False}
-    if verbosity >= 1:
-        print(cocoa_res, len(cocoa_res), type(cocoa_res))
-    is_check = res_dict[cocoa_res]
+    anss = [res_dict[ans] for ans in executes]
+    # print('anss:', anss)
+    # 1/0
+    # cocoa_res = cocoa_eval(cocoa_code, execute_cmd=True, verbosity=0)
+    # if verbosity >= 1:
+    #     print(cocoa_res, len(cocoa_res), type(cocoa_res))
+    # is_check = res_dict[cocoa_res]
+    is_check = not (False in anss)
     # print(is_check)
+    # 1/0
 
     return is_check
 

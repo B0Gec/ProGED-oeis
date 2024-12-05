@@ -1,13 +1,13 @@
 
 orders_used: []
 While total time consumed by now, scale:427/27236, seq_id:A003402, order:20 took:
- 8.2 seconds, i.e. 0.14 minutes or 0.002 hours.
+ 5.2 seconds, i.e. 0.09 minutes or 0.001 hours.
 CORELIST: False, METHOD: MB, SINDy: False (True also in case of MAVI), GROUND_TRUTH: True, SINDy_default: True, DEBUG: False, OEISformer: False
 n_of_terms_ed: 200, N_OF_TERMS_ED: 200
 Library: non, max_order 20, max_degree: 1, threshold: 0.1, 
-n_more_terms: 30
+n_more_terms: 10
 Library: non, max_order 20, threshold: 0.1
-n_more_terms: 30
+n_more_terms: 10
 
 by degree: unknown_mb and order: None.
 non_linears:

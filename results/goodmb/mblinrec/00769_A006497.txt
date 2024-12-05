@@ -1,17 +1,17 @@
 
-orders_used: [1]
+orders_used: []
 While total time consumed by now, scale:770/27236, seq_id:A006497, order:20 took:
- 59.4 seconds, i.e. 0.99 minutes or 0.016 hours.
+ 49.2 seconds, i.e. 0.82 minutes or 0.014 hours.
 CORELIST: False, METHOD: MB, SINDy: False (True also in case of MAVI), GROUND_TRUTH: True, SINDy_default: True, DEBUG: False, OEISformer: False
 n_of_terms_ed: 200, N_OF_TERMS_ED: 200
 Library: non, max_order 20, max_degree: 1, threshold: 0.1, 
-n_more_terms: 30
+n_more_terms: 10
 Library: non, max_order 20, threshold: 0.1
-n_more_terms: 30
+n_more_terms: 10
 
-by degree: unknown_mb and order: 1.
+by degree: unknown_mb and order: None.
 non_linears:
-['a(n)^4 -6*a(n)^3*a(n-1) +7*a(n)^2*a(n-1)^2 +6*a(n)*a(n-1)^3 +a(n-1)^4 -169']
+[]
 A006497: 
 MB not reconst
 truth: 
@@ -19,4 +19,4 @@ a(n) = 3*a(n - 1) + 1*a(n - 2),
 a(0) = 2, a(1) = 3
 
 False  -  checked against website ground truth.     
-True  -  "manual" check if equation is correct.    
+False  -  "manual" check if equation is correct.    

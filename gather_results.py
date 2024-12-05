@@ -654,7 +654,7 @@ start = 13000
 start = 10000
 start = 0
 limited_runs = 123456
-from all_ids import all_ids
+# from all_ids import all_ids
 
 # csv = pd.read_csv(csv_filename, low_memory=False, nrows=0)
 
@@ -993,29 +993,53 @@ print(f'zipped job bins (task_id= 0, 1, ... 34):', [(n, i) for n, i in enumerate
 print(f'check bins: {len(files)} = {sum(job_bins)} ?')
 for n, i in enumerate(job_bins):
     print(n, i)
-1/0
+# 1/0
 
-if CORES:
+if CORES or True:
     # print(files)
-    print('\nPrinting all failed jobs:')
+    print_limit = 10
+    print(f'\nPrinting first {print_limit} failed jobs:')
     cores = [(task, id_) for task, id_ in enumerate(all_ids)]
-    print('  Firstly, all cores:', len(cores), cores)
+    print('  Firstly, all cores:', len(cores), cores[:print_limit])
     job_fails = [(task, i) for task, i in cores if f'{task:0>5}_{i}.txt' not in files]
-    print(f'  E voila, job fails: {len(job_fails)} {job_fails}')
+    print(f'  E voila, job fails: {len(job_fails)} {job_fails[:print_limit]}')
+    # 1/0
     fail_tasks = ','.join([str(task) for task, i in job_fails])
-    print(f'  Finally, sbatch list of fails: \n{fail_tasks}\n')
+    print_limit = 100
+    print(f'  Finally, sbatch list of fails: \n{fail_tasks[:print_limit]}\n')
+    millenia_dic = dict()
+    millenias = [(task//1000, str(task % 1000)) for task, i in job_fails[:print_limit]]
+    for mil, task in millenias:
+        if mil in millenia_dic:
+            millenia_dic[mil].append(task)
+        else:
+            millenia_dic[mil] = [task]
+    print(millenias)
+    print(millenia_dic)
+    print(f'  Finally, refined sbatches of lists of fails, to use with corespec.sh: \n{fail_tasks[:print_limit]}\n')
+    for mil, tasks in millenia_dic.items():
+        print(mil, ','.join(tasks))
     # 1/0
 
 
 m = 165
+m = 16
 print(f'first {m} non_ids:', non_id_list[:m])
 non_id_task_ids = ','.join([str(int(fname[:5])) for fname in non_id_list])
-print('task_ids of non_ids:', non_id_task_ids[:100], '...')
+print('task_ids of non_ids:', non_id_task_ids[:m], '...')
 # print(str(succsess_task_ids).replace(' ', '').strip('[]'))
 
 print(len(non_id_list))
 n = 1700
+n = 17
 print(f'first {n} non_manuals:', sorted(non_manual_list[:n]))
+ord1 = [('A000004', 1), ('A000012', 1), ('A000079', 1), ('A000244', 1), ('A000302', 1), ('A000351', 1), ('A000400', 1), ('A000420', 1), ('A001018', 1), ('A001019', 1), ('A001020', 1), ('A001021', 1), ('A001022', 1), ('A001023', 1), ('A001024', 1), ('A001025', 1), ('A001026', 1), ('A001027', 1), ('A001029', 1), ('A002023', 1), ('A002042', 1), ('A002063', 1), ('A002066', 1), ('A002089', 1), ('A004171', 1), ('A005009', 1), ('A005010', 1), ('A005015', 1), ('A005029', 1), ('A005030', 1), ('A005032', 1), ('A005051', 1), ('A005052', 1), ('A005055', 1), ('A007283', 1), ('A007395', 1)]
+ord1 = [('A000027', 2), ('A000032', 2), ('A000034', 2), ('A000035', 2), ('A000042', 2), ('A000045', 2), ('A000051', 2), ('A000129', 2), ('A000204', 2), ('A000225', 2), ('A000285', 2), ('A000748', 2), ('A000918', 2), ('A001045', 2), ('A001047', 2), ('A001060', 2), ('A001075', 2), ('A001076', 2), ('A001077', 2), ('A001078', 2), ('A001079', 2), ('A001080', 2), ('A001081', 2), ('A001084', 2), ('A001085', 2), ('A001090', 2), ('A001091', 2), ('A001109', 2), ('A001333', 2), ('A001353', 2), ('A001477', 2), ('A001478', 2), ('A001489', 2), ('A001519', 2), ('A001541', 2), ('A001542', 2), ('A001570', 2), ('A001607', 2), ('A001653', 2), ('A001787', 2), ('A001792', 2), ('A001834', 2), ('A001835', 2), ('A001906', 2), ('A001946', 2), ('A001947', 2), ('A002203', 2), ('A002249', 2), ('A002250', 2), ('A002275', 2), ('A002276', 2), ('A002277', 2), ('A002278', 2), ('A002279', 2), ('A002280', 2), ('A002281', 2), ('A002282', 2), ('A002283', 2), ('A002310', 2), ('A002315', 2), ('A002320', 2), ('A002446', 2), ('A002450', 2), ('A002452', 2), ('A002532', 2), ('A002533', 2), ('A002534', 2), ('A002535', 2), ('A002605', 2), ('A002697', 2), ('A002699', 2), ('A002878', 2), ('A003063', 2), ('A003462', 2), ('A003463', 2), ('A003464', 2), ('A003499', 2), ('A003500', 2), ('A003501', 2), ('A003665', 2), ('A003683', 2), ('A003688', 2), ('A004187', 2), ('A004189', 2), ('A004190', 2), ('A004191', 2), ('A004253', 2), ('A004254', 2), ('A004643', 2), ('A004766', 2), ('A004767', 2), ('A004768', 2), ('A004769', 2), ('A004770', 2), ('A004771', 2), ('A005057', 2), ('A005059', 2), ('A005060', 2), ('A005061', 2), ('A005062', 2), ('A005248', 2), ('A005319', 2), ('A005320', 2), ('A005408', 2), ('A005609', 2), ('A005610', 2), ('A005618', 2), ('A005667', 2), ('A005668', 2), ('A005843', 2), ('A006012', 2), ('A006130', 2), ('A006131', 2), ('A006138', 2), ('A006190', 2), ('A006234', 2), ('A006495', 2), ('A006496', 2), ('A006497', 2), ('A006516', 2), ('A007051', 2), ('A007052', 2), ('A007070', 2), ('A007482', 2), ('A007483', 2), ('A007484', 2), ('A007572', 2), ('A007582', 2), ('A007583', 2), ('A007613', 2), ('A007655', 2), ('A007689', 2), ('A007805', 2), ('A008585', 2), ('A008586', 2), ('A008587', 2), ('A008588', 2), ('A008589', 2), ('A008590', 2), ('A008591', 2), ('A008592', 2), ('A008593', 2), ('A008594', 2), ('A008595', 2), ('A008596', 2), ('A008597', 2), ('A008598', 2), ('A008599', 2), ('A008600', 2), ('A008601', 2), ('A008602', 2), ('A008603', 2), ('A008604', 2), ('A008605', 2), ('A008606', 2), ('A008607', 2)]
+
+# ord1 = [('A000008', 12)]
+print(f'first {n}  order 1 non_manuals:', [fname[:5] for fname in non_manual_list if fname[6:13] in [i[0] for i in ord1]])
+# ['00024', '00128', '00133', '00134', '00177', '00231', '00270', '00273', '00306', '00307', '00328', '00330', '00331', '00378', '00379', '00380', '00381', '0
+
 1/0
 
 # print(f'all non_manuals:', non_manual_list)
@@ -1032,12 +1056,15 @@ print(len(non_id_list), len(ed_fail_list), len(id_oeis_list),
 
 success_ids = [fname[6:(6+7)] for fname in non_id_list+id_oeis_list]
 print(success_ids[:10])
-print([i for i in csv.columns], 'colnames')
+print([i for i in csv.columns][:10], 'colnames')
 fails = [i for i in csv.columns if i not in success_ids]
+# fails_noFile = [i for i in csv.columns if i not in files]
+print('some fails:', fails[:10])
 
 
 print([fname[6:(6+7)] for fname in non_id_list][:10], [i for i in csv.columns[:10]] )
 print(len(fails))
+1/0
 # a = [csv[seq_id][0] for seq_id in fails]
 failess = [ 1 for seq_id in fails if len(truth2coeffs(csv[seq_id][0])) <= 20 ]
 failmore = [ 1 for seq_id in fails if len(truth2coeffs(csv[seq_id][0])) > 20 ]
@@ -1056,6 +1083,7 @@ print(len(trueconfs))
 # print('intersection of non_ids and non_manuals:', len(set(non_id_list) & set(non_manual_list)))
 # print('intersection of non_manuals and ed_fail_list:', len(set(non_manual_list) & set(ed_fail_list)))
 # print('intersection of non_ids and ed_fail_list:', len(set(non_id_list) & set(ed_fail_list)))
+1/0
 
 def fname2id(fname):
     return re.findall("A\d{6}", fname)[0]

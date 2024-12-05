@@ -1,5 +1,4 @@
-"""
-352
+"""  MUBEED? MUller-BuchbErgEr-ED or MBEED MB exact ED
 file with domb (do moeller-buchberger) to replace increase_one in doone.py
 
 Settings expeperiences from 14.10.2024:
@@ -111,7 +110,7 @@ def increasing_mb(seq_id, csv, max_order, n_more_terms, execute, library, n_of_t
         seq_cut = seq[:heuristic]
         # print('len seq:', len(seq_cut), 'seq:', seq_cut)
         # print('heuristic', heuristic, 'error-threshold', order)
-        first_generator, ref, ideal = one_mb(seq_cut, order, n_more_terms, execute, library, verbosity=0, n_of_terms=n_of_terms)
+        first_generator, ref, ideal = one_mb(seq_cut, order, n_more_terms, execute, library, verbosity=verbosity, n_of_terms=n_of_terms)
 
         #def one_mstb(seq_id, csv, order, n_more_terms, library='n', n_of_terms=200) -> tuple:
         # print(f'all generators:')
@@ -160,9 +159,13 @@ def increasing_mb(seq_id, csv, max_order, n_more_terms, execute, library, n_of_t
                         if verbosity >= 1:
                             print('eqution is linear!, converting to vector:')
                         expr = order_optimize(expr)
-                        x = linear_to_vec(expr)
+                        x_candidate = linear_to_vec(expr)
                         if verbosity >= 1:
                             print('linear:', x)
+                        if x_candidate is None:
+                            if verbosity >= 1:
+                                print('linear vector contains non-integers, which will never be the ground truth.')
+                            continue
                         return non_linears, expr, x, [len(x)]
     return non_linears, eq, x, orders_used
 
@@ -243,8 +246,8 @@ def one_mb(seq, order, n_more_terms, execute, library='n', verbosity=0, n_of_ter
     for i in data.tolist():
         if i not in unique:
             unique.append(i)
-    # print(unique)
-    # print('\n-->> looky here')
+    print(unique)
+    print('\n-->> looky here')
     first_generator, ideal = mb(points=unique, execute_cmd=execute, var_names=vars_cocoa, verbosity=verbosity)
     # print('\n-->> looky here')
     if verbosity >= 1:

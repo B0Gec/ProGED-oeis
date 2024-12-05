@@ -119,7 +119,7 @@ VERBOSITY = 1  # run scenario
 # VERBOSITY = 3  # dev scenario
 
 DEBUG = True
-DEBUG = False
+# DEBUG = False
 
 # BUGLIST ignores blacklisting (runs also blacklisted) !!!!!
 # BUGLIST = True
@@ -233,6 +233,7 @@ TASK_ID = 14  # fibo at cores
 # TASK_ID = 2
 # TASK_ID = 7
 # TASK_ID = 9  # fibo linrec
+TASK_ID = 959
 
 
 JOB_ID = "000000"
@@ -320,13 +321,10 @@ SEQ_ID = (True, 'A000045')
 # # SEQ_ID = (True, 'A051793')  # -2*-1 ali +-1 za a(n) -2*a(n-5) +a(n-1)
 # SEQ_ID = (True, 'A014025')  # linrec order 8 one nonzero term NOT reconstructed!
 # SEQ_ID = (True, 'A104237')  # linrec order 8 one nonzero term NOT reconstructed!
-
-
-
-
-
-
-
+SEQ_ID = (True, 'A000962')  # linrec order 8 one nonzero term NOT reconstructed!
+    # (103, 'A000962'), (104, 'A000963'), (105, 'A000964'), (152, 'A001110'), (201, 'A001520'), (202, 'A001526'), (203, 'A001533'), (204, 'A001534'), (205, 'A001535'), (206, 'A001536')]
+SEQ_ID = (True, 'A000959')  # linrec order 8 one nonzero term NOT reconstructed!
+SEQ_ID = (True, 'A000129')  # linrec order 8 one nonzero term NOT reconstructed!
 
 
 # if DEBUG:
@@ -719,7 +717,7 @@ else:
             seq, coeffs, truth = unpack_seq(seq_id, csv) if GROUND_TRUTH else (unnan(csv[seq_id]), None, None)
             non_linears, eq, x, orders_used = increasing_mb(seq_id, csv, max_order_, n_more_terms, execute=EXECUTE_REAL,
                                                             library=library, n_of_terms=n_of_terms_ed,
-                                                            ground_truth=GROUND_TRUTH, verbosity=0)
+                                                            ground_truth=GROUND_TRUTH, verbosity=VERBOSITY)
             deg_used, order_used = 'unknown_mb', 'unknown_mb'
             output_string += f'orders_used: {orders_used}\n'
             # print(orders_used)

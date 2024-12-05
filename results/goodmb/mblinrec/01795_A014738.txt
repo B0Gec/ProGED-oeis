@@ -1,0 +1,22 @@
+
+orders_used: [9, 9, 10, 9, 10, 9, 10, 9, 10, 9, 10, 9, 10, 9, 10, 9, 10, 9, 10, 9, 10, 9, 10]
+While total time consumed by now, scale:1796/27236, seq_id:A014738, order:20 took:
+ 14.0 seconds, i.e. 0.23 minutes or 0.004 hours.
+CORELIST: False, METHOD: MB, SINDy: False (True also in case of MAVI), GROUND_TRUTH: True, SINDy_default: True, DEBUG: False, OEISformer: False
+n_of_terms_ed: 200, N_OF_TERMS_ED: 200
+Library: non, max_order 20, max_degree: 1, threshold: 0.1, 
+n_more_terms: 10
+Library: non, max_order 20, threshold: 0.1
+n_more_terms: 10
+
+by degree: unknown_mb and order: 9.
+non_linears:
+['a(n-9) -4*a(n-7) +6*a(n-5) -4*a(n-3) +a(n-1) -1536', 'a(n-9) -4*a(n-7) +6*a(n-5) -4*a(n-3) +a(n-1) -1536', 'a(n-10) -4*a(n-8) +6*a(n-6) -4*a(n-4) +a(n-2) -1536', 'a(n-9) -4*a(n-7) +6*a(n-5) -4*a(n-3) +a(n-1) -1536', 'a(n-10) -4*a(n-8) +6*a(n-6) -4*a(n-4) +a(n-2) -1536', 'a(n-9) -4*a(n-7) +6*a(n-5) -4*a(n-3) +a(n-1) -1536', 'a(n-10) -4*a(n-8) +6*a(n-6) -4*a(n-4) +a(n-2) -1536', 'a(n-9) -4*a(n-7) +6*a(n-5) -4*a(n-3) +a(n-1) -1536', 'a(n-10) -4*a(n-8) +6*a(n-6) -4*a(n-4) +a(n-2) -1536', 'a(n-9) -4*a(n-7) +6*a(n-5) -4*a(n-3) +a(n-1) -1536', 'a(n-10) -4*a(n-8) +6*a(n-6) -4*a(n-4) +a(n-2) -1536', 'a(n-9) -4*a(n-7) +6*a(n-5) -4*a(n-3) +a(n-1) -1536', 'a(n-10) -4*a(n-8) +6*a(n-6) -4*a(n-4) +a(n-2) -1536', 'a(n-9) -4*a(n-7) +6*a(n-5) -4*a(n-3) +a(n-1) -1536', 'a(n-10) -4*a(n-8) +6*a(n-6) -4*a(n-4) +a(n-2) -1536', 'a(n-9) -4*a(n-7) +6*a(n-5) -4*a(n-3) +a(n-1) -1536', 'a(n-10) -4*a(n-8) +6*a(n-6) -4*a(n-4) +a(n-2) -1536', 'a(n-9) -4*a(n-7) +6*a(n-5) -4*a(n-3) +a(n-1) -1536', 'a(n-10) -4*a(n-8) +6*a(n-6) -4*a(n-4) +a(n-2) -1536', 'a(n-9) -4*a(n-7) +6*a(n-5) -4*a(n-3) +a(n-1) -1536', 'a(n-10) -4*a(n-8) +6*a(n-6) -4*a(n-4) +a(n-2) -1536', 'a(n-9) -4*a(n-7) +6*a(n-5) -4*a(n-3) +a(n-1) -1536', 'a(n-10) -4*a(n-8) +6*a(n-6) -4*a(n-4) +a(n-2) -1536']
+A014738: 
+MB not reconst
+truth: 
+a(n) = 1*a(n - 1) + 4*a(n - 2) + -4*a(n - 3) + -6*a(n - 4) + 6*a(n - 5) + 4*a(n - 6) + -4*a(n - 7) + -1*a(n - 8) + 1*a(n - 9),  
+a(0) = 36, a(1) = 100, a(2) = 784, a(3) = 1296, a(4) = 4356, a(5) = 6084, a(6) = 14400, a(7) = 18496, a(8) = 36100
+
+False  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    
