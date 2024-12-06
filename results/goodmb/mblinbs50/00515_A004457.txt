@@ -1,0 +1,22 @@
+
+orders_used: [17, 18, 18, 19, 19, 19, 20, 20, 20, 20]
+While total time consumed by now, scale:516/27236, seq_id:A004457, order:20 took:
+ 65.6 seconds, i.e. 1.09 minutes or 0.018 hours.
+CORELIST: False, METHOD: MB, SINDy: False (True also in case of MAVI), GROUND_TRUTH: True, SINDy_default: True, DEBUG: False, OEISformer: False
+n_of_terms_ed: 200, N_OF_TERMS_ED: 200
+Library: non, max_order 20, max_degree: 1, threshold: 0.1, 
+n_more_terms: 10
+Library: non, max_order 20, threshold: 0.1MB: 
+  n_more_terms: 10 MAX_BITSIZE: 50
+
+by degree: unknown_mb and order: 17.
+non_linears:
+['a(n) -a(n-1) +a(n-16) -a(n-17) -2', 'a(n-1) -a(n-2) +a(n-17) -a(n-18) -2', 'a(n) -a(n-2) +a(n-16) -a(n-18) -4', 'a(n-2) -a(n-3) +a(n-18) -a(n-19) -2', 'a(n-1) -a(n-3) +a(n-17) -a(n-19) -4', 'a(n) -a(n-3) +a(n-16) -a(n-19) -6', 'a(n-3) -a(n-4) +a(n-19) -a(n-20) -2', 'a(n-2) -a(n-4) +a(n-18) -a(n-20) -4', 'a(n-1) -a(n-4) +a(n-17) -a(n-20) -6', 'a(n) -a(n-4) +a(n-16) -a(n-20) -8']
+A004457: 
+MB not reconst
+truth: 
+a(n) = 2*a(n - 1) + -1*a(n - 2) + 0*a(n - 3) + 0*a(n - 4) + 0*a(n - 5) + 0*a(n - 6) + 0*a(n - 7) + 0*a(n - 8) + 0*a(n - 9) + 0*a(n - 10) + 0*a(n - 11) + 0*a(n - 12) + 0*a(n - 13) + 0*a(n - 14) + 0*a(n - 15) + -1*a(n - 16) + 2*a(n - 17) + -1*a(n - 18),  
+a(0) = 16, a(1) = 17, a(2) = 18, a(3) = 19, a(4) = 20, a(5) = 21, a(6) = 22, a(7) = 23, a(8) = 24, a(9) = 25, a(10) = 26, a(11) = 27, a(12) = 28, a(13) = 29, a(14) = 30, a(15) = 31, a(16) = 0, a(17) = 1
+
+False  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

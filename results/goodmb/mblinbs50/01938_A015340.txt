@@ -1,0 +1,22 @@
+
+orders_used: [2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5]
+While total time consumed by now, scale:1939/27236, seq_id:A015340, order:20 took:
+ 16.8 seconds, i.e. 0.28 minutes or 0.005 hours.
+CORELIST: False, METHOD: MB, SINDy: False (True also in case of MAVI), GROUND_TRUTH: True, SINDy_default: True, DEBUG: False, OEISformer: False
+n_of_terms_ed: 200, N_OF_TERMS_ED: 200
+Library: non, max_order 20, max_degree: 1, threshold: 0.1, 
+n_more_terms: 10
+Library: non, max_order 20, threshold: 0.1MB: 
+  n_more_terms: 10 MAX_BITSIZE: 50
+
+by degree: unknown_mb and order: 2.
+non_linears:
+['a(n)*a(n-1) +1640*a(n-1)^2 +546*a(n)*a(n-2) -2187*a(n-1)*a(n-2)', 'a(n-1)*a(n-2) +1640*a(n-2)^2 +546*a(n-1)*a(n-3) -2187*a(n-2)*a(n-3)', 'a(n)*a(n-2) -4035220*a(n-2)^2 +(-549/2)*a(n)*a(n-3) -1345620*a(n-1)*a(n-3) +(10762227/2)*a(n-2)*a(n-3)', 'a(n)*a(n-1) +1640*a(n-1)^2 +2206816800*a(n-2)^2 +149877*a(n)*a(n-3) +735902622*a(n-1)*a(n-3) -2942870940*a(n-2)*a(n-3)', 'a(n-2)*a(n-3) +1640*a(n-3)^2 +546*a(n-2)*a(n-4) -2187*a(n-3)*a(n-4)', 'a(n-1)*a(n-3) -4035220*a(n-3)^2 +(-549/2)*a(n-1)*a(n-4) -1345620*a(n-2)*a(n-4) +(10762227/2)*a(n-3)*a(n-4)', 'a(n-1)*a(n-2) +1640*a(n-2)^2 +2206816800*a(n-3)^2 +149877*a(n-1)*a(n-4) +735902622*a(n-2)*a(n-4) -2942870940*a(n-3)*a(n-4)', 'a(n)*a(n-3) +8509702520*a(n-3)^2 +(540/7)*a(n)*a(n-4) +(4036860/7)*a(n-1)*a(n-4) +(19864042440/7)*a(n-2)*a(n-4) -11347999641*a(n-3)*a(n-4)', 'a(n-3)*a(n-4) +1640*a(n-4)^2 +546*a(n-3)*a(n-5) -2187*a(n-4)*a(n-5)', 'a(n-2)*a(n-4) -4035220*a(n-4)^2 +(-549/2)*a(n-2)*a(n-5) -1345620*a(n-3)*a(n-5) +(10762227/2)*a(n-4)*a(n-5)', 'a(n-1)*a(n-4) +8509702520*a(n-4)^2 +(540/7)*a(n-1)*a(n-5) +(4036860/7)*a(n-2)*a(n-5) +(19864042440/7)*a(n-3)*a(n-5) -11347999641*a(n-4)*a(n-5)']
+A015340: 
+MB not reconst
+truth: 
+a(n) = -1640*a(n - 1) + 1345620*a(n - 2) + 314875080*a(n - 3) + -25929962838*a(n - 4) + -688631799960*a(n - 5) + 6436058745780*a(n - 6) + 17154979252920*a(n - 7) + -22876792454961*a(n - 8),  
+a(0) = 1, a(1) = -1640, a(2) = 4035220, a(3) = -8509702520, a(4) = 18843459775162, a(5) = -41041673208656120, a(6) = 89881489830655851460, a(7) = -196480936769813691291560
+
+False  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

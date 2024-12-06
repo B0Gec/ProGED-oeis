@@ -1,0 +1,22 @@
+
+orders_used: [2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15, 16, 16, 17, 17, 18, 18, 19, 19, 20, 20]
+While total time consumed by now, scale:363/27236, seq_id:A002451, order:20 took:
+ 17.7 seconds, i.e. 0.3 minutes or 0.005 hours.
+CORELIST: False, METHOD: MB, SINDy: False (True also in case of MAVI), GROUND_TRUTH: True, SINDy_default: True, DEBUG: False, OEISformer: False
+n_of_terms_ed: 200, N_OF_TERMS_ED: 200
+Library: non, max_order 20, max_degree: 1, threshold: 0.1, 
+n_more_terms: 10
+Library: non, max_order 20, threshold: 0.1
+n_more_terms: 10
+
+by degree: unknown_mb and order: 2.
+non_linears:
+['a(n) -13*a(n-1) +36*a(n-2) -1', 'a(n-1) -13*a(n-2) +36*a(n-3) -1', 'a(n) -133*a(n-2) +468*a(n-3) -14', 'a(n-2) -13*a(n-3) +36*a(n-4) -1', 'a(n-1) -133*a(n-3) +468*a(n-4) -14', 'a(n-3) -13*a(n-4) +36*a(n-5) -1', 'a(n-2) -133*a(n-4) +468*a(n-5) -14', 'a(n-4) -13*a(n-5) +36*a(n-6) -1', 'a(n-3) -133*a(n-5) +468*a(n-6) -14', 'a(n-5) -13*a(n-6) +36*a(n-7) -1', 'a(n-4) -133*a(n-6) +468*a(n-7) -14', 'a(n-6) -13*a(n-7) +36*a(n-8) -1', 'a(n-5) -133*a(n-7) +468*a(n-8) -14', 'a(n-7) -13*a(n-8) +36*a(n-9) -1', 'a(n-6) -133*a(n-8) +468*a(n-9) -14', 'a(n-8) -13*a(n-9) +36*a(n-10) -1', 'a(n-7) -133*a(n-9) +468*a(n-10) -14', 'a(n-9) -13*a(n-10) +36*a(n-11) -1', 'a(n-8) -133*a(n-10) +468*a(n-11) -14', 'a(n-10) -13*a(n-11) +36*a(n-12) -1', 'a(n-9) -133*a(n-11) +468*a(n-12) -14', 'a(n-11) -13*a(n-12) +36*a(n-13) -1', 'a(n-10) -133*a(n-12) +468*a(n-13) -14', 'a(n-12) -13*a(n-13) +36*a(n-14) -1', 'a(n-11) -133*a(n-13) +468*a(n-14) -14', 'a(n-13) -13*a(n-14) +36*a(n-15) -1', 'a(n-12) -133*a(n-14) +468*a(n-15) -14', 'a(n-14) -13*a(n-15) +36*a(n-16) -1', 'a(n-13) -133*a(n-15) +468*a(n-16) -14', 'a(n-15) -13*a(n-16) +36*a(n-17) -1', 'a(n-14) -133*a(n-16) +468*a(n-17) -14', 'a(n-16) -13*a(n-17) +36*a(n-18) -1', 'a(n-15) -133*a(n-17) +468*a(n-18) -14', 'a(n-17) -13*a(n-18) +36*a(n-19) -1', 'a(n-16) -133*a(n-18) +468*a(n-19) -14', 'a(n-18) -13*a(n-19) +36*a(n-20) -1', 'a(n-17) -133*a(n-19) +468*a(n-20) -14']
+A002451: 
+MB not reconst
+truth: 
+a(n) = 14*a(n - 1) + -49*a(n - 2) + 36*a(n - 3),  
+a(0) = 1, a(1) = 14, a(2) = 147
+
+False  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

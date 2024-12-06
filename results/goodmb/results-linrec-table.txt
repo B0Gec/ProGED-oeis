@@ -1,0 +1,17 @@
+first 1000 sequences of linrec:
+
+             id | diff | fail
+
+Diofantos | 326 |  629 |  45
+MB        | 336 |  596 |  68
+SINDy     | 213 |  544 | 243
+SINDy-def | 183 |  514 | 303
+
+
+2000:
+
+   796 = 2.92 % ... (id_oeis) ... successfully found equations that are identical to the recursive equations written in OEIS (hereinafter - OEIS equation)
+     1085 = 3.98 % ... (non_id) ... successfully found equations that are more complex than the OEIS equation
+      119
+
+

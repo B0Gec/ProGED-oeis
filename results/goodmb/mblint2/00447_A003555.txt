@@ -1,0 +1,22 @@
+
+orders_used: [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+While total time consumed by now, scale:448/27236, seq_id:A003555, order:20 took:
+ 8.2 seconds, i.e. 0.14 minutes or 0.002 hours.
+CORELIST: False, METHOD: MB, SINDy: False (True also in case of MAVI), GROUND_TRUTH: True, SINDy_default: True, DEBUG: False, OEISformer: False
+n_of_terms_ed: 200, N_OF_TERMS_ED: 200
+Library: non, max_order 20, max_degree: 1, threshold: 0.1, 
+n_more_terms: 10
+Library: non, max_order 20, threshold: 0.1
+n_more_terms: 10
+
+by degree: unknown_mb and order: 2.
+non_linears:
+['a(n) -110*a(n-1) +1000*a(n-2) +44', 'a(n-1) -110*a(n-2) +1000*a(n-3) +44', 'a(n-2) -110*a(n-3) +1000*a(n-4) +44', 'a(n-3) -110*a(n-4) +1000*a(n-5) +44', 'a(n-4) -110*a(n-5) +1000*a(n-6) +44', 'a(n-5) -110*a(n-6) +1000*a(n-7) +44', 'a(n-6) -110*a(n-7) +1000*a(n-8) +44', 'a(n-7) -110*a(n-8) +1000*a(n-9) +44', 'a(n-8) -110*a(n-9) +1000*a(n-10) +44', 'a(n-11)^2 -67*a(n-11) +66', 'a(n-12) -1']
+A003555: 
+MB not reconst
+truth: 
+a(n) = 111*a(n - 1) + -1110*a(n - 2) + 1000*a(n - 3),  
+a(0) = 1, a(1) = 66, a(2) = 6216
+
+False  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

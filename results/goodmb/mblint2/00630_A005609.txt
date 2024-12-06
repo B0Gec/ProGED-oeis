@@ -1,0 +1,22 @@
+
+orders_used: [1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14]
+While total time consumed by now, scale:631/27236, seq_id:A005609, order:20 took:
+ 10.8 seconds, i.e. 0.18 minutes or 0.003 hours.
+CORELIST: False, METHOD: MB, SINDy: False (True also in case of MAVI), GROUND_TRUTH: True, SINDy_default: True, DEBUG: False, OEISformer: False
+n_of_terms_ed: 200, N_OF_TERMS_ED: 200
+Library: non, max_order 20, max_degree: 1, threshold: 0.1, 
+n_more_terms: 10
+Library: non, max_order 20, threshold: 0.1
+n_more_terms: 10
+
+by degree: unknown_mb and order: 1.
+non_linears:
+['a(n) -28*a(n-1) +48', 'a(n-1) -28*a(n-2) +48', 'a(n) -784*a(n-2) +1392', 'a(n-2) -28*a(n-3) +48', 'a(n-1) -784*a(n-3) +1392', 'a(n-3) -28*a(n-4) +48', 'a(n-2) -784*a(n-4) +1392', 'a(n-4) -28*a(n-5) +48', 'a(n-3) -784*a(n-5) +1392', 'a(n-5) -28*a(n-6) +48', 'a(n-4) -784*a(n-6) +1392', 'a(n-6) -28*a(n-7) +48', 'a(n-5) -784*a(n-7) +1392', 'a(n-7) -28*a(n-8) +48', 'a(n-6) -784*a(n-8) +1392', 'a(n-8) -28*a(n-9) +48', 'a(n-7) -784*a(n-9) +1392', 'a(n-9) -28*a(n-10) +48', 'a(n-8) -784*a(n-10) +1392', 'a(n-10) -28*a(n-11) +48', 'a(n-9) -784*a(n-11) +1392', 'a(n-11) -28*a(n-12) +48', 'a(n-10) -784*a(n-12) +1392', 'a(n-12) -28*a(n-13) +48', 'a(n-11) -784*a(n-13) +1392', 'a(n-14) -64']
+A005609: 
+MB not reconst
+truth: 
+a(n) = 29*a(n - 1) + -28*a(n - 2),  
+a(0) = 64, a(1) = 1744
+
+False  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

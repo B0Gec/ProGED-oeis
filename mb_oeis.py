@@ -60,7 +60,7 @@ def external_prettyprint(ideal, sol_ref= [f'a(n-{i})' for i in range(1, 16)]) ->
 
 
 def increasing_mb(seq_id, csv, max_order, n_more_terms, execute, library, n_of_terms=10**6,
-                  ground_truth=False, verbosity=0) -> str:
+                  ground_truth=False, verbosity=0, max_bitsize=30) -> str:
     """
     Run a for loop of increasing order where I run Moeller-Buchberger algorithm on a given sequence.
     """
@@ -124,13 +124,15 @@ def increasing_mb(seq_id, csv, max_order, n_more_terms, execute, library, n_of_t
         # return ideal, ref
         printlen = 100
         # print(type(first_generator), type(ideal))
+        if order == 5:
+            print(first_generator[:printlen], ideal[:1000])
         if verbosity > 0:
             print(first_generator[:printlen], ideal[:printlen])
         # 1/0
         # printout += f'ideal: {ideal[:printlen]}\nequation: {first_generator[:printlen]}\n'
-        eqs, heqs = ideal_to_eqs(ideal, top_n=10,verbosity=verbosity, max_bitsize=10)
+        eqs, heqs = ideal_to_eqs(ideal, top_n=10,verbosity=verbosity, max_bitsize=max_bitsize)
         # print('eqs:,', eqs)
-        # print('heqs:,', heqs)
+        print('heqs:,', heqs)
         # 1/0
 
         if verbosity > 0:
