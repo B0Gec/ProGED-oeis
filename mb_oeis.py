@@ -151,7 +151,9 @@ def increasing_mb(seq_id, csv, max_order, n_more_terms, execute, library, n_of_t
                     print('not useless, checking implicit:')
                 # check = check_implicit(expr, seq)
                 # check = list_evals(expr, seq)
+                print('before check')
                 check = check_implicit_batch(expr, seq, verbosity=0)
+                print('after check')
                 if check:  # Save implicit equation if it is correct.
                     if verbosity >= 1:
                         print('eqution holds!, checking if linear:')

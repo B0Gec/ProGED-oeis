@@ -282,6 +282,8 @@ def check_implicit_batch(mb_eq: str, seq: list[int], verbosity=0) -> bool:
     if verbosity >= 1:
         print('inside check_implicit_batch')
     exe_calls = list_evals(mb_eq, seq)
+    if verbosity >= 2:
+        print('exe_calls:', exe_calls)
     # ['123 -23424 -456', '344554 -34 +223']
 
     # CoCoa code:
@@ -295,6 +297,7 @@ def check_implicit_batch(mb_eq: str, seq: list[int], verbosity=0) -> bool:
         calls = []
         full_call = ""
         for call in exe_calls:
+            print('len(full_call):', len(full_call))
             if len(call) > call_size_limit:
                 print('TOO LARGE NUMBERS. Cutting ourselves some slack here, ignoring all further terms.')
                 if full_call != "":
@@ -312,6 +315,9 @@ def check_implicit_batch(mb_eq: str, seq: list[int], verbosity=0) -> bool:
         return wrapped_calls
     cocoa_codes = prepare_batches(exe_calls)
 
+    print("cocoa_codes lengths:")
+    for code in cocoa_codes:
+        print(len(code))
     # print(exe_calls)
     if verbosity >= 1:
         print("cocoa_codes:")
@@ -330,10 +336,12 @@ def check_implicit_batch(mb_eq: str, seq: list[int], verbosity=0) -> bool:
     # print('lens of cocoa codes:')
     # print([len(cocoa_code) for cocoa_code in cocoa_codes])
     executes = [cocoa_eval(cocoa_code, execute_cmd=True, verbosity=0) for cocoa_code in prepare_batches(exe_calls)]
-    # print('executes:', executes)
+    if verbosity >= 2:
+        print('executes:', executes)
     res_dict = {'true': True, 'false': False}
     anss = [res_dict[ans] for ans in executes]
-    # print('anss:', anss)
+    if verbosity >= 2:
+        print('anss:', anss)
     # 1/0
     # cocoa_res = cocoa_eval(cocoa_code, execute_cmd=True, verbosity=0)
     # if verbosity >= 1:
