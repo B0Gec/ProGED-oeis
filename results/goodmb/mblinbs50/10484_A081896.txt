@@ -1,0 +1,22 @@
+
+orders_used: [4]
+While total time consumed by now, scale:10485/27236, seq_id:A081896, order:20 took:
+ 2.7 seconds, i.e. 0.04 minutes or 0.001 hours.
+CORELIST: False, METHOD: MB, SINDy: False (True also in case of MAVI), GROUND_TRUTH: True, SINDy_default: True, DEBUG: False, OEISformer: False
+n_of_terms_ed: 200, N_OF_TERMS_ED: 200
+Library: non, max_order 20, max_degree: 1, threshold: 0.1, 
+n_more_terms: 10
+Library: non, max_order 20, threshold: 0.1MB: 
+  n_more_terms: 10 MAX_BITSIZE: 50
+
+by degree: unknown_mb and order: 4.
+non_linears:
+['a(n-1)^2 +(-445/27)*a(n-1)*a(n-2) +(1792/27)*a(n-2)^2 +2*a(n)*a(n-3) +(328/27)*a(n-1)*a(n-3) +(-5104/27)*a(n-2)*a(n-3) +(512/3)*a(n-3)^2', 'a(n)*a(n-1) -7*a(n)*a(n-2) +(-1792/27)*a(n-1)*a(n-2) +(12544/27)*a(n-2)^2 +38*a(n)*a(n-3) +(-2240/27)*a(n-1)*a(n-3) +(-31840/27)*a(n-2)*a(n-3) +(3584/3)*a(n-3)^2', 'a(n)^2 +(-641/9)*a(n)*a(n-2) +(-10288/27)*a(n-1)*a(n-2) +(106240/27)*a(n-2)^2 +(4442/9)*a(n)*a(n-3) +(-58688/27)*a(n-1)*a(n-3) +(-199840/27)*a(n-2)*a(n-3) +(25088/3)*a(n-3)^2', 'a(n) -16*a(n-1) +96*a(n-2) -256*a(n-3) +256*a(n-4)']
+A081896: 
+a(n) -16*a(n-1) +96*a(n-2) -256*a(n-3) +256*a(n-4)
+truth: 
+a(n) = 16*a(n - 1) + -96*a(n - 2) + 256*a(n - 3) + -256*a(n - 4),  
+a(0) = 1, a(1) = 7, a(2) = 43, a(3) = 245
+
+True  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

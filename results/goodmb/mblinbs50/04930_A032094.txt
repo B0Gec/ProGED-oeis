@@ -1,0 +1,22 @@
+
+orders_used: []
+While total time consumed by now, scale:4931/27236, seq_id:A032094, order:20 took:
+ 4.7 seconds, i.e. 0.08 minutes or 0.001 hours.
+CORELIST: False, METHOD: MB, SINDy: False (True also in case of MAVI), GROUND_TRUTH: True, SINDy_default: True, DEBUG: False, OEISformer: False
+n_of_terms_ed: 200, N_OF_TERMS_ED: 200
+Library: non, max_order 20, max_degree: 1, threshold: 0.1, 
+n_more_terms: 10
+Library: non, max_order 20, threshold: 0.1MB: 
+  n_more_terms: 10 MAX_BITSIZE: 50
+
+by degree: unknown_mb and order: None.
+non_linears:
+[]
+A032094: 
+MB not reconst
+truth: 
+a(n) = 4*a(n - 1) + -2*a(n - 2) + -12*a(n - 3) + 17*a(n - 4) + 8*a(n - 5) + -28*a(n - 6) + 8*a(n - 7) + 17*a(n - 8) + -12*a(n - 9) + -2*a(n - 10) + 4*a(n - 11) + -1*a(n - 12),  
+a(0) = 4, a(1) = 16, a(2) = 60, a(3) = 160, a(4) = 396, a(5) = 848, a(6) = 1716, a(7) = 3200, a(8) = 5720, a(9) = 9696, a(10) = 15912, a(11) = 25152
+
+False  -  checked against website ground truth.     
+False  -  "manual" check if equation is correct.    

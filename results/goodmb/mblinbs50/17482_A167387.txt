@@ -1,0 +1,22 @@
+
+orders_used: [5]
+While total time consumed by now, scale:17483/27236, seq_id:A167387, order:20 took:
+ 4.6 seconds, i.e. 0.08 minutes or 0.001 hours.
+CORELIST: False, METHOD: MB, SINDy: False (True also in case of MAVI), GROUND_TRUTH: True, SINDy_default: True, DEBUG: False, OEISformer: False
+n_of_terms_ed: 200, N_OF_TERMS_ED: 200
+Library: non, max_order 20, max_degree: 1, threshold: 0.1, 
+n_more_terms: 10
+Library: non, max_order 20, threshold: 0.1MB: 
+  n_more_terms: 10 MAX_BITSIZE: 50
+
+by degree: unknown_mb and order: 5.
+non_linears:
+['a(n)*a(n-1) +2*a(n-1)^2 +6*a(n)*a(n-2) +25*a(n-1)*a(n-2) +42*a(n-2)^2 -3*a(n)*a(n-3) -18*a(n-1)*a(n-3) +9*a(n-2)*a(n-3)', 'a(n)^2 -3*a(n-1)^2 +(-674/27)*a(n)*a(n-2) +(-2932/27)*a(n-1)*a(n-2) +(-5513/27)*a(n-2)^2 +(356/27)*a(n)*a(n-3) +(2494/27)*a(n-1)*a(n-3) +(-1168/27)*a(n-2)*a(n-3) +(1/9)*a(n-3)^2 -1', 'a(n-1)*a(n-3) +(28/5)*a(n-2)*a(n-3) +(56/5)*a(n-3)^2 +(9/10)*a(n)*a(n-4) +(7/5)*a(n-1)*a(n-4) +(-13/5)*a(n-2)*a(n-4) +(19/5)*a(n-3)*a(n-4) +(3/10)*a(n-4)^2', 'a(n-1)*a(n-2) +2*a(n-2)^2 +(-43/5)*a(n-2)*a(n-3) +(-126/5)*a(n-3)^2 +(-27/5)*a(n)*a(n-4) +(-57/5)*a(n-1)*a(n-4) +(-12/5)*a(n-2)*a(n-4) +(-69/5)*a(n-3)*a(n-4) +(-9/5)*a(n-4)^2', 'a(n)*a(n-3) +(-268/15)*a(n-2)*a(n-3) +(-686/15)*a(n-3)^2 +(-24/5)*a(n)*a(n-4) +(-44/5)*a(n-1)*a(n-4) +(46/5)*a(n-2)*a(n-4) +(-259/15)*a(n-3)*a(n-4) +(-8/5)*a(n-4)^2', 'a(n)*a(n-2) +(788/15)*a(n-2)*a(n-3) +(1876/15)*a(n-3)^2 +(129/5)*a(n)*a(n-4) +(264/5)*a(n-1)*a(n-4) +(59/5)*a(n-2)*a(n-4) +(1004/15)*a(n-3)*a(n-4) +(43/5)*a(n-4)^2', 'a(n-1)^2 -3*a(n-2)^2 +(156/5)*a(n-2)*a(n-3) +(377/5)*a(n-3)^2 +(337/15)*a(n)*a(n-4) +(722/15)*a(n-1)*a(n-4) +(412/15)*a(n-2)*a(n-4) +(258/5)*a(n-3)*a(n-4) +(38/5)*a(n-4)^2 -1', 'a(n)*a(n-1) -2*a(n-2)^2 +(-532/5)*a(n-2)*a(n-3) +(-1034/5)*a(n-3)^2 +(-944/15)*a(n)*a(n-4) +(-1939/15)*a(n-1)*a(n-4) +(-1274/15)*a(n-2)*a(n-4) +(-716/5)*a(n-3)*a(n-4) +(-106/5)*a(n-4)^2 +2', 'a(n)^2 +4*a(n-2)^2 +(2192/15)*a(n-2)*a(n-3) +(2704/15)*a(n-3)^2 +(526/5)*a(n)*a(n-4) +(1056/5)*a(n-1)*a(n-4) +(1176/5)*a(n-2)*a(n-4) +(3056/15)*a(n-3)*a(n-4) +(177/5)*a(n-4)^2 -4', 'a(n) +5*a(n-1) +10*a(n-2) +10*a(n-3) +5*a(n-4) +a(n-5)']
+A167387: 
+a(n) +5*a(n-1) +10*a(n-2) +10*a(n-3) +5*a(n-4) +a(n-5)
+truth: 
+a(n) = -5*a(n - 1) + -10*a(n - 2) + -10*a(n - 3) + -5*a(n - 4) + -1*a(n - 5),  
+a(0) = 1, a(1) = -2, a(2) = 0, a(3) = 10, a(4) = -35
+
+True  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

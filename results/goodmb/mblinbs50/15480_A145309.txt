@@ -1,0 +1,22 @@
+
+orders_used: [1, 2, 2, 3, 3, 4, 4, 4, 5, 5, 5, 5, 6]
+While total time consumed by now, scale:15481/27236, seq_id:A145309, order:20 took:
+ 4.0 seconds, i.e. 0.07 minutes or 0.001 hours.
+CORELIST: False, METHOD: MB, SINDy: False (True also in case of MAVI), GROUND_TRUTH: True, SINDy_default: True, DEBUG: False, OEISformer: False
+n_of_terms_ed: 200, N_OF_TERMS_ED: 200
+Library: non, max_order 20, max_degree: 1, threshold: 0.1, 
+n_more_terms: 10
+Library: non, max_order 20, threshold: 0.1MB: 
+  n_more_terms: 10 MAX_BITSIZE: 50
+
+by degree: unknown_mb and order: 1.
+non_linears:
+['a(n)^2 -456302*a(n)*a(n-1) +a(n-1)^2 -228150*a(n) -228150*a(n-1) -4337853975', 'a(n) -456302*a(n-1) +a(n-2) -228150', 'a(n-1)^2 -456302*a(n-1)*a(n-2) +a(n-2)^2 -228150*a(n-1) -228150*a(n-2) -4337853975', 'a(n-1) -456302*a(n-2) +a(n-3) -228150', 'a(n) -208211515203*a(n-2) +456302*a(n-3) -104105529450', 'a(n-2) -456302*a(n-3) +a(n-4) -228150', 'a(n-1) -208211515203*a(n-3) +456302*a(n-4) -104105529450', 'a(n) -95007330809703004*a(n-3) +208211515203*a(n-4) -47503561299093900', 'a(n-5)^2 -44489639*a(n-5) +4315485574', 'a(n-3) -208211515201*a(n-5) -104150247240', 'a(n-4) +(-104105757601/228151)*a(n-5) -52075009545/228151', 'a(n-1) -43352035062504465585601*a(n-5) -21685280786607424300080', 'a(n-6) -97']
+A145309: 
+MB not reconst
+truth: 
+a(n) = 456303*a(n - 1) + -456303*a(n - 2) + 1*a(n - 3),  
+a(0) = 97, a(1) = 44489542, a(2) = 20300667221737
+
+False  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

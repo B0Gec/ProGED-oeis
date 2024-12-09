@@ -1,0 +1,22 @@
+
+orders_used: [8]
+While total time consumed by now, scale:23300/27236, seq_id:A251740, order:20 took:
+ 12.4 seconds, i.e. 0.21 minutes or 0.003 hours.
+CORELIST: False, METHOD: MB, SINDy: False (True also in case of MAVI), GROUND_TRUTH: True, SINDy_default: True, DEBUG: False, OEISformer: False
+n_of_terms_ed: 200, N_OF_TERMS_ED: 200
+Library: non, max_order 20, max_degree: 1, threshold: 0.1, 
+n_more_terms: 10
+Library: non, max_order 20, threshold: 0.1MB: 
+  n_more_terms: 10 MAX_BITSIZE: 50
+
+by degree: unknown_mb and order: 8.
+non_linears:
+['a(n) -a(n-1) -a(n-2) -a(n-3) -a(n-4) -a(n-5) -a(n-6) -a(n-7) -a(n-8)']
+A251740: 
+a(n) -a(n-1) -a(n-2) -a(n-3) -a(n-4) -a(n-5) -a(n-6) -a(n-7) -a(n-8)
+truth: 
+a(n) = 1*a(n - 1) + 1*a(n - 2) + 1*a(n - 3) + 1*a(n - 4) + 1*a(n - 5) + 1*a(n - 6) + 1*a(n - 7) + 1*a(n - 8),  
+a(0) = 0, a(1) = 0, a(2) = 0, a(3) = 0, a(4) = 0, a(5) = 1, a(6) = 0, a(7) = 0
+
+True  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

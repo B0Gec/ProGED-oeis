@@ -1,0 +1,22 @@
+
+orders_used: [0]
+While total time consumed by now, scale:8647/27236, seq_id:A056313, order:20 took:
+ 6.3 seconds, i.e. 0.11 minutes or 0.002 hours.
+CORELIST: False, METHOD: MB, SINDy: False (True also in case of MAVI), GROUND_TRUTH: True, SINDy_default: True, DEBUG: False, OEISformer: False
+n_of_terms_ed: 200, N_OF_TERMS_ED: 200
+Library: non, max_order 20, max_degree: 1, threshold: 0.1, 
+n_more_terms: 10
+Library: non, max_order 20, threshold: 0.1MB: 
+  n_more_terms: 10 MAX_BITSIZE: 50
+
+by degree: unknown_mb and order: 0.
+non_linears:
+['a(n-8) +(-7/4)*a(n-9) -210*a(n-10) +(8995/4)*a(n-11) -9541*a(n-12) +18332*a(n-13) +(-52473/4)*a(n-14) -6930', 'a(n-7) -84*a(n-9) -700*a(n-10) +14399*a(n-11) -73221*a(n-12) +153704*a(n-13) -116011*a(n-14) -65520', 'a(n-14)^2 +3780*a(n-9) -75600*a(n-10) +585900*a(n-11) -2192400*a(n-12) +3946320*a(n-13) -2725740*a(n-14) -1360800', 'a(n-6) +(-1974/5)*a(n-9) -12285*a(n-10) +185765*a(n-11) -910016*a(n-12) +(9479869/5)*a(n-13) +(-7139846/5)*a(n-14) -810432', 'a(n-15)^2 -360*a(n-15)', 'a(n-14)*a(n-15) -7560*a(n-15)', 'a(n-13)*a(n-15) -95760*a(n-15)', 'a(n-12)*a(n-15) -952560*a(n-15)', 'a(n-11)*a(n-15) -8217720*a(n-15)', 'a(n-14)^2 -360*a(n-14) -151200*a(n-15)', 'a(n-13)*a(n-14) -7560*a(n-14) -1852200*a(n-15)', 'a(n-12)*a(n-14) -95760*a(n-14) -17992800*a(n-15)', 'a(n-11)*a(n-14) -952560*a(n-14) -152568360*a(n-15)', 'a(n-13)^2 -360*a(n-13) -151200*a(n-14) -22201200*a(n-15)', 'a(n-16)']
+A056313: 
+a(n)
+truth: 
+a(n) = 19*a(n - 1) + -117*a(n - 2) + 81*a(n - 3) + 1883*a(n - 4) + -5915*a(n - 5) + -6615*a(n - 6) + 53235*a(n - 7) + -30394*a(n - 8) + -191744*a(n - 9) + 264852*a(n - 10) + 258804*a(n - 11) + -634248*a(n - 12) + 43920*a(n - 13) + 505440*a(n - 14) + -259200*a(n - 15),  
+a(0) = 0, a(1) = 0, a(2) = 0, a(3) = 0, a(4) = 0, a(5) = 360, a(6) = 7560, a(7) = 95760, a(8) = 952560, a(9) = 8217720, a(10) = 64615680, a(11) = 476515080, a(12) = 3355679880, a(13) = 22837101840, a(14) = 151449674040
+
+False  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

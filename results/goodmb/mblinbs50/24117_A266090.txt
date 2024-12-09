@@ -1,0 +1,22 @@
+
+orders_used: [6]
+While total time consumed by now, scale:24118/27236, seq_id:A266090, order:20 took:
+ 7.8 seconds, i.e. 0.13 minutes or 0.002 hours.
+CORELIST: False, METHOD: MB, SINDy: False (True also in case of MAVI), GROUND_TRUTH: True, SINDy_default: True, DEBUG: False, OEISformer: False
+n_of_terms_ed: 200, N_OF_TERMS_ED: 200
+Library: non, max_order 20, max_degree: 1, threshold: 0.1, 
+n_more_terms: 10
+Library: non, max_order 20, threshold: 0.1MB: 
+  n_more_terms: 10 MAX_BITSIZE: 50
+
+by degree: unknown_mb and order: 6.
+non_linears:
+['a(n)^2 -6*a(n)*a(n-1) -24*a(n)*a(n-2) +48*a(n-1)*a(n-2) +128*a(n-2)^2 -15*a(n) +120*a(n-2)', 'a(n)*a(n-1) -8*a(n-1)*a(n-2) -8*a(n)*a(n-3) +64*a(n-2)*a(n-3)', 'a(n-1)^2 -6*a(n-1)*a(n-2) -24*a(n-1)*a(n-3) +48*a(n-2)*a(n-3) +128*a(n-3)^2 -15*a(n-1) +120*a(n-3)', 'a(n-1)*a(n-2) -8*a(n-2)*a(n-3) -8*a(n-1)*a(n-4) +64*a(n-3)*a(n-4)', 'a(n-2)^2 -6*a(n-2)*a(n-3) -24*a(n-2)*a(n-4) +48*a(n-3)*a(n-4) +128*a(n-4)^2 -15*a(n-2) +120*a(n-4)', 'a(n)*a(n-3) -24*a(n-2)*a(n-3) +128*a(n-3)*a(n-4) +(75/28)*a(n) +(15/4)*a(n-1) +(-585/14)*a(n-2) -60*a(n-3) +(-120/7)*a(n-4) -225/4', 'a(n)*a(n-4) -24*a(n-2)*a(n-4) +128*a(n-4)^2 +(-15/112)*a(n) +(-45/16)*a(n-1) +(-15/28)*a(n-2) +45*a(n-3) +(1035/7)*a(n-4) +675/16', 'a(n)*a(n-1) -192*a(n-2)*a(n-3) -64*a(n-1)*a(n-4) +1536*a(n-3)*a(n-4) +(150/7)*a(n) +30*a(n-1) +(-2340/7)*a(n-2) -480*a(n-3) +(-960/7)*a(n-4) -450', 'a(n-2)*a(n-3) -8*a(n-3)*a(n-4) -8*a(n-2)*a(n-5) +64*a(n-4)*a(n-5)', 'a(n-3)^2 -6*a(n-3)*a(n-4) -24*a(n-3)*a(n-5) +48*a(n-4)*a(n-5) +128*a(n-5)^2 -15*a(n-3) +120*a(n-5)', 'a(n) +a(n-1) -24*a(n-2) -24*a(n-3) +128*a(n-4) +128*a(n-5) +105', 'a(n-1)*a(n-4) -24*a(n-3)*a(n-4) +128*a(n-4)*a(n-5) +(75/28)*a(n-1) +(15/4)*a(n-2) +(-585/14)*a(n-3) -60*a(n-4) +(-120/7)*a(n-5) -225/4', 'a(n-1)*a(n-5) -24*a(n-3)*a(n-5) +128*a(n-5)^2 +(-15/112)*a(n-1) +(-45/16)*a(n-2) +(-15/28)*a(n-3) +45*a(n-4) +(1035/7)*a(n-5) +675/16', 'a(n-1)*a(n-2) -192*a(n-3)*a(n-4) -64*a(n-2)*a(n-5) +1536*a(n-4)*a(n-5) +(150/7)*a(n-1) +30*a(n-2) +(-2340/7)*a(n-3) -480*a(n-4) +(-960/7)*a(n-5) -450', 'a(n-3)*a(n-4) -8*a(n-4)*a(n-5) -8*a(n-3)*a(n-6) +64*a(n-5)*a(n-6)', 'a(n) -25*a(n-2) +152*a(n-4) -128*a(n-6)']
+A266090: 
+a(n) -25*a(n-2) +152*a(n-4) -128*a(n-6)
+truth: 
+a(n) = 0*a(n - 1) + 25*a(n - 2) + 0*a(n - 3) + -152*a(n - 4) + 0*a(n - 5) + 128*a(n - 6),  
+a(0) = 1, a(1) = 1, a(2) = 8, a(3) = 79, a(4) = 64, a(5) = 1663
+
+True  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

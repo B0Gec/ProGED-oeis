@@ -1,0 +1,22 @@
+
+orders_used: [6]
+While total time consumed by now, scale:16685/27236, seq_id:A159589, order:20 took:
+ 5.6 seconds, i.e. 0.09 minutes or 0.002 hours.
+CORELIST: False, METHOD: MB, SINDy: False (True also in case of MAVI), GROUND_TRUTH: True, SINDy_default: True, DEBUG: False, OEISformer: False
+n_of_terms_ed: 200, N_OF_TERMS_ED: 200
+Library: non, max_order 20, max_degree: 1, threshold: 0.1, 
+n_more_terms: 10
+Library: non, max_order 20, threshold: 0.1MB: 
+  n_more_terms: 10 MAX_BITSIZE: 50
+
+by degree: unknown_mb and order: 6.
+non_linears:
+['a(n)^2 +(-195824/6735)*a(n)*a(n-1) +(464/15)*a(n-1)^2 +(171346/6735)*a(n)*a(n-2) +(-195824/6735)*a(n-1)*a(n-2) +a(n-2)^2 -9472560/449', 'a(n)^2 -6*a(n)*a(n-3) +a(n-3)^2 +806404', 'a(n-1)^2 +(-195824/6735)*a(n-1)*a(n-2) +(464/15)*a(n-2)^2 +(171346/6735)*a(n-1)*a(n-3) +(-195824/6735)*a(n-2)*a(n-3) +a(n-3)^2 -9472560/449', 'a(n)*a(n-2) +(-201601/171346)*a(n-2)^2 +(-13021/12239)*a(n)*a(n-3) +(8/7)*a(n-2)*a(n-3) +(-6735/171346)*a(n-3)^2 +2217310170/85673', 'a(n-1)^2 -6*a(n-1)*a(n-4) +a(n-4)^2 +806404', 'a(n-2)^2 -6*a(n-2)*a(n-5) +a(n-5)^2 +806404', 'a(n-1)*a(n-3) +(-496/15)*a(n-3)*a(n-4) +(449/15)*a(n-4)^2 -a(n-1)*a(n-5) +(449/15)*a(n-3)*a(n-5) +(-406/15)*a(n-4)*a(n-5) +26940', 'a(n)*a(n-4) +(-157/31)*a(n-3)*a(n-4) +(-449/434)*a(n-4)^2 +(-29/31)*a(n)*a(n-5) +(143/31)*a(n-3)*a(n-5) +(451/217)*a(n-4)*a(n-5) +(-449/434)*a(n-5)^2 +4938330/217', 'a(n-1)*a(n-4) +(-2451/406)*a(n-4)^2 +(-12239/13021)*a(n-1)*a(n-5) +(611950/91147)*a(n-4)*a(n-5) +(-449/406)*a(n-5)^2 +4938330/203', 'a(n-3)^2 +(-195824/6735)*a(n-3)*a(n-4) +(464/15)*a(n-4)^2 +(171346/6735)*a(n-3)*a(n-5) +(-195824/6735)*a(n-4)*a(n-5) +a(n-5)^2 -9472560/449', 'a(n-1)^2 +(-7150/203)*a(n-4)^2 +(-73434/13021)*a(n-1)*a(n-5) +(3671700/91147)*a(n-4)*a(n-5) +(-1347/203)*a(n-5)^2 +193329992/203', 'a(n-2)*a(n-4) +(-201601/171346)*a(n-4)^2 +(-13021/12239)*a(n-2)*a(n-5) +(8/7)*a(n-4)*a(n-5) +(-6735/171346)*a(n-5)^2 +2217310170/85673', 'a(n) -6*a(n-3) +a(n-6)']
+A159589: 
+a(n) -6*a(n-3) +a(n-6)
+truth: 
+a(n) = 0*a(n - 1) + 0*a(n - 2) + 6*a(n - 3) + 0*a(n - 4) + 0*a(n - 5) + -1*a(n - 6),  
+a(0) = 421, a(1) = 449, a(2) = 481, a(3) = 2045, a(4) = 2245, a(5) = 2465
+
+True  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

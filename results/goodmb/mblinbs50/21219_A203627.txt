@@ -1,0 +1,22 @@
+
+orders_used: [1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 6, 6, 6, 7, 7, 7, 8]
+While total time consumed by now, scale:21220/27236, seq_id:A203627, order:20 took:
+ 8.7 seconds, i.e. 0.14 minutes or 0.002 hours.
+CORELIST: False, METHOD: MB, SINDy: False (True also in case of MAVI), GROUND_TRUTH: True, SINDy_default: True, DEBUG: False, OEISformer: False
+n_of_terms_ed: 200, N_OF_TERMS_ED: 200
+Library: non, max_order 20, max_degree: 1, threshold: 0.1, 
+n_more_terms: 10
+Library: non, max_order 20, threshold: 0.1MB: 
+  n_more_terms: 10 MAX_BITSIZE: 50
+
+by degree: unknown_mb and order: 1.
+non_linears:
+['a(n)^2 -806402*a(n)*a(n-1) +a(n-1)^2 -406800*a(n) -406800*a(n-1) +547357500', 'a(n) -806402*a(n-1) +a(n-2) -406800', 'a(n-1)^2 -806402*a(n-1)*a(n-2) +a(n-2)^2 -406800*a(n-1) -406800*a(n-2) +547357500', 'a(n-1) -806402*a(n-2) +a(n-3) -406800', 'a(n-2)^2 -806402*a(n-2)*a(n-3) +a(n-3)^2 -406800*a(n-2) -406800*a(n-3) +547357500', 'a(n) -650284185603*a(n-2) +806402*a(n-3) -328044740400', 'a(n-2) -806402*a(n-3) +a(n-4) -406800', 'a(n-3)^2 -806402*a(n-3)*a(n-4) +a(n-4)^2 -406800*a(n-3) -406800*a(n-4) +547357500', 'a(n-1) -650284185603*a(n-3) +806402*a(n-4) -328044740400', 'a(n) -524390467837824004*a(n-3) +650284185603*a(n-4) -264535934748040800', 'a(n-3) -806402*a(n-4) +a(n-5) -406800', 'a(n-2) -650284185603*a(n-4) +806402*a(n-5) -328044740400', 'a(n-1) -524390467837824004*a(n-4) +650284185603*a(n-5) -264535934748040800', 'a(n-4) -806402*a(n-5) +a(n-6) -406800', 'a(n-3) -650284185603*a(n-5) +806402*a(n-6) -328044740400', 'a(n-2) -524390467837824004*a(n-5) +650284185603*a(n-6) -264535934748040800', 'a(n-7)^2 -1212752*a(n-7) +1212751', 'a(n-6) +(-2173253391/2695)*a(n-7) -1095110554/2695', 'a(n-5) +(-1752515881006487/2695)*a(n-7) -883100437292708/2695', 'a(n-8) -1']
+A203627: 
+MB not reconst
+truth: 
+a(n) = 806403*a(n - 1) + -806403*a(n - 2) + 1*a(n - 3),  
+a(0) = 1, a(1) = 1212751, a(2) = 977965238701
+
+False  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

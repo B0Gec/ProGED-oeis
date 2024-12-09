@@ -1,0 +1,22 @@
+
+orders_used: [14, 15, 16, 16, 17, 17, 18, 18, 18, 19, 19, 19, 20, 20, 20, 20]
+While total time consumed by now, scale:25144/27236, seq_id:A289160, order:20 took:
+ 12.6 seconds, i.e. 0.21 minutes or 0.003 hours.
+CORELIST: False, METHOD: MB, SINDy: False (True also in case of MAVI), GROUND_TRUTH: True, SINDy_default: True, DEBUG: False, OEISformer: False
+n_of_terms_ed: 200, N_OF_TERMS_ED: 200
+Library: non, max_order 20, max_degree: 1, threshold: 0.1, 
+n_more_terms: 10
+Library: non, max_order 20, threshold: 0.1MB: 
+  n_more_terms: 10 MAX_BITSIZE: 50
+
+by degree: unknown_mb and order: 14.
+non_linears:
+['a(n) -7*a(n-2) +21*a(n-4) -35*a(n-6) +35*a(n-8) -21*a(n-10) +7*a(n-12) -a(n-14) -15360', 'a(n-1) -7*a(n-3) +21*a(n-5) -35*a(n-7) +35*a(n-9) -21*a(n-11) +7*a(n-13) -a(n-15) -15360', 'a(n-2) -7*a(n-4) +21*a(n-6) -35*a(n-8) +35*a(n-10) -21*a(n-12) +7*a(n-14) -a(n-16) -15360', 'a(n) -28*a(n-4) +112*a(n-6) -210*a(n-8) +224*a(n-10) -140*a(n-12) +48*a(n-14) -7*a(n-16) -122880', 'a(n-3) -7*a(n-5) +21*a(n-7) -35*a(n-9) +35*a(n-11) -21*a(n-13) +7*a(n-15) -a(n-17) -15360', 'a(n-1) -28*a(n-5) +112*a(n-7) -210*a(n-9) +224*a(n-11) -140*a(n-13) +48*a(n-15) -7*a(n-17) -122880', 'a(n-4) -7*a(n-6) +21*a(n-8) -35*a(n-10) +35*a(n-12) -21*a(n-14) +7*a(n-16) -a(n-18) -15360', 'a(n-2) -28*a(n-6) +112*a(n-8) -210*a(n-10) +224*a(n-12) -140*a(n-14) +48*a(n-16) -7*a(n-18) -122880', 'a(n) -84*a(n-6) +378*a(n-8) -756*a(n-10) +840*a(n-12) -540*a(n-14) +189*a(n-16) -28*a(n-18) -552960', 'a(n-5) -7*a(n-7) +21*a(n-9) -35*a(n-11) +35*a(n-13) -21*a(n-15) +7*a(n-17) -a(n-19) -15360', 'a(n-3) -28*a(n-7) +112*a(n-9) -210*a(n-11) +224*a(n-13) -140*a(n-15) +48*a(n-17) -7*a(n-19) -122880', 'a(n-1) -84*a(n-7) +378*a(n-9) -756*a(n-11) +840*a(n-13) -540*a(n-15) +189*a(n-17) -28*a(n-19) -552960', 'a(n-6) -7*a(n-8) +21*a(n-10) -35*a(n-12) +35*a(n-14) -21*a(n-16) +7*a(n-18) -a(n-20) -15360', 'a(n-4) -28*a(n-8) +112*a(n-10) -210*a(n-12) +224*a(n-14) -140*a(n-16) +48*a(n-18) -7*a(n-20) -122880', 'a(n-2) -84*a(n-8) +378*a(n-10) -756*a(n-12) +840*a(n-14) -540*a(n-16) +189*a(n-18) -28*a(n-20) -552960', 'a(n) -210*a(n-8) +1008*a(n-10) -2100*a(n-12) +2400*a(n-14) -1575*a(n-16) +560*a(n-18) -84*a(n-20) -1843200']
+A289160: 
+MB not reconst
+truth: 
+a(n) = 2*a(n - 1) + 5*a(n - 2) + -12*a(n - 3) + -9*a(n - 4) + 30*a(n - 5) + 5*a(n - 6) + -40*a(n - 7) + 5*a(n - 8) + 30*a(n - 9) + -9*a(n - 10) + -12*a(n - 11) + 5*a(n - 12) + 2*a(n - 13) + -1*a(n - 14),  
+a(0) = 0, a(1) = 0, a(2) = 0, a(3) = 15, a(4) = 220, a(5) = 1253, a(6) = 5412, a(7) = 15642, a(8) = 44368, a(9) = 97158, a(10) = 218816, a(11) = 410209, a(12) = 797052, a(13) = 1350435
+
+False  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

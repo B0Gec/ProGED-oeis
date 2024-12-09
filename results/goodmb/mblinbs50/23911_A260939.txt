@@ -1,0 +1,22 @@
+
+orders_used: [1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 5, 6, 6, 6, 6, 6, 6, 7, 7, 7, 7, 7, 7, 7, 8, 8, 8, 8, 8, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 12]
+While total time consumed by now, scale:23912/27236, seq_id:A260939, order:20 took:
+ 13.3 seconds, i.e. 0.22 minutes or 0.004 hours.
+CORELIST: False, METHOD: MB, SINDy: False (True also in case of MAVI), GROUND_TRUTH: True, SINDy_default: True, DEBUG: False, OEISformer: False
+n_of_terms_ed: 200, N_OF_TERMS_ED: 200
+Library: non, max_order 20, max_degree: 1, threshold: 0.1, 
+n_more_terms: 10
+Library: non, max_order 20, threshold: 0.1MB: 
+  n_more_terms: 10 MAX_BITSIZE: 50
+
+by degree: unknown_mb and order: 1.
+non_linears:
+['a(n) -a(n-1) -60060', 'a(n-1) -a(n-2) -60060', 'a(n) -a(n-2) -120120', 'a(n-2) -a(n-3) -60060', 'a(n-1) -a(n-3) -120120', 'a(n) -a(n-3) -180180', 'a(n-3) -a(n-4) -60060', 'a(n-2) -a(n-4) -120120', 'a(n-1) -a(n-4) -180180', 'a(n) -a(n-4) -240240', 'a(n-4) -a(n-5) -60060', 'a(n-3) -a(n-5) -120120', 'a(n-2) -a(n-5) -180180', 'a(n-1) -a(n-5) -240240', 'a(n) -a(n-5) -300300', 'a(n-5) -a(n-6) -60060', 'a(n-4) -a(n-6) -120120', 'a(n-3) -a(n-6) -180180', 'a(n-2) -a(n-6) -240240', 'a(n-1) -a(n-6) -300300', 'a(n) -a(n-6) -360360', 'a(n-6) -a(n-7) -60060', 'a(n-5) -a(n-7) -120120', 'a(n-4) -a(n-7) -180180', 'a(n-3) -a(n-7) -240240', 'a(n-2) -a(n-7) -300300', 'a(n-1) -a(n-7) -360360', 'a(n) -a(n-7) -420420', 'a(n-7) -a(n-8) -60060', 'a(n-6) -a(n-8) -120120', 'a(n-5) -a(n-8) -180180', 'a(n-4) -a(n-8) -240240', 'a(n-3) -a(n-8) -300300', 'a(n-2) -a(n-8) -360360', 'a(n-1) -a(n-8) -420420', 'a(n) -a(n-8) -480480', 'a(n-8) -a(n-9) -60060', 'a(n-7) -a(n-9) -120120', 'a(n-6) -a(n-9) -180180', 'a(n-5) -a(n-9) -240240', 'a(n-4) -a(n-9) -300300', 'a(n-3) -a(n-9) -360360', 'a(n-2) -a(n-9) -420420', 'a(n-1) -a(n-9) -480480', 'a(n) -a(n-9) -540540', 'a(n-9) -a(n-10) -60060', 'a(n-8) -a(n-10) -120120', 'a(n-7) -a(n-10) -180180', 'a(n-6) -a(n-10) -240240', 'a(n-5) -a(n-10) -300300', 'a(n-4) -a(n-10) -360360', 'a(n-3) -a(n-10) -420420', 'a(n-2) -a(n-10) -480480', 'a(n-1) -a(n-10) -540540', 'a(n) -a(n-10) -600600', 'a(n-10) -a(n-11) -60060', 'a(n-9) -a(n-11) -120120', 'a(n-8) -a(n-11) -180180', 'a(n-7) -a(n-11) -240240', 'a(n-6) -a(n-11) -300300', 'a(n-5) -a(n-11) -360360', 'a(n-4) -a(n-11) -420420', 'a(n-3) -a(n-11) -480480', 'a(n-2) -a(n-11) -540540', 'a(n-1) -a(n-11) -600600', 'a(n-12) -4943']
+A260939: 
+MB not reconst
+truth: 
+a(n) = 2*a(n - 1) + -1*a(n - 2),  
+a(0) = 4943, a(1) = 65003
+
+False  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

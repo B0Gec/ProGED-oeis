@@ -1,0 +1,22 @@
+
+orders_used: [3]
+While total time consumed by now, scale:7040/27236, seq_id:A042592, order:20 took:
+ 6.2 seconds, i.e. 0.1 minutes or 0.002 hours.
+CORELIST: False, METHOD: MB, SINDy: False (True also in case of MAVI), GROUND_TRUTH: True, SINDy_default: True, DEBUG: False, OEISformer: False
+n_of_terms_ed: 200, N_OF_TERMS_ED: 200
+Library: non, max_order 20, max_degree: 1, threshold: 0.1, 
+n_more_terms: 10
+Library: non, max_order 20, threshold: 0.1MB: 
+  n_more_terms: 10 MAX_BITSIZE: 50
+
+by degree: unknown_mb and order: 3.
+non_linears:
+['a(n)*a(n-1) -a(n-1)^2 -a(n)*a(n-2) +a(n-2)^2 -a(n)*a(n-3) +a(n-1)*a(n-3) +a(n-2)*a(n-3)']
+A042592: 
+MB not reconst
+truth: 
+a(n) = 0*a(n - 1) + 0*a(n - 2) + 0*a(n - 3) + 0*a(n - 4) + 0*a(n - 5) + 0*a(n - 6) + 0*a(n - 7) + 0*a(n - 8) + 0*a(n - 9) + 0*a(n - 10) + 0*a(n - 11) + 0*a(n - 12) + 0*a(n - 13) + 97198*a(n - 14) + 0*a(n - 15) + 0*a(n - 16) + 0*a(n - 17) + 0*a(n - 18) + 0*a(n - 19) + 0*a(n - 20) + 0*a(n - 21) + 0*a(n - 22) + 0*a(n - 23) + 0*a(n - 24) + 0*a(n - 25) + 0*a(n - 26) + 0*a(n - 27) + -1*a(n - 28),  
+a(0) = 28, a(1) = 29, a(2) = 86, a(3) = 115, a(4) = 201, a(5) = 316, a(6) = 517, a(7) = 2384, a(8) = 2901, a(9) = 5285, a(10) = 8186, a(11) = 13471, a(12) = 35128, a(13) = 48599, a(14) = 2756672, a(15) = 2805271, a(16) = 8367214, a(17) = 11172485, a(18) = 19539699, a(19) = 30712184, a(20) = 50251883, a(21) = 231719716, a(22) = 281971599, a(23) = 513691315, a(24) = 795662914, a(25) = 1309354229, a(26) = 3414371372, a(27) = 4723725601
+
+False  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

@@ -1,0 +1,22 @@
+
+orders_used: [6]
+While total time consumed by now, scale:24129/27236, seq_id:A266283, order:20 took:
+ 3.4 seconds, i.e. 0.06 minutes or 0.001 hours.
+CORELIST: False, METHOD: MB, SINDy: False (True also in case of MAVI), GROUND_TRUTH: True, SINDy_default: True, DEBUG: False, OEISformer: False
+n_of_terms_ed: 200, N_OF_TERMS_ED: 200
+Library: non, max_order 20, max_degree: 1, threshold: 0.1, 
+n_more_terms: 10
+Library: non, max_order 20, threshold: 0.1MB: 
+  n_more_terms: 10 MAX_BITSIZE: 50
+
+by degree: unknown_mb and order: 6.
+non_linears:
+['a(n)^2 -9900*a(n)*a(n-1) -10100*a(n)*a(n-2) +990000*a(n-1)*a(n-2) +1000000*a(n-2)^2 -1111*a(n) +9900*a(n-1) +121000*a(n-2) +1110', 'a(n) +a(n-1) -10100*a(n-2) -10100*a(n-3) +1000000*a(n-4) +1000000*a(n-5) +109989', 'a(n) -10101*a(n-2) +1010100*a(n-4) -1000000*a(n-6)']
+A266283: 
+a(n) -10101*a(n-2) +1010100*a(n-4) -1000000*a(n-6)
+truth: 
+a(n) = 0*a(n - 1) + 10101*a(n - 2) + 0*a(n - 3) + -1010100*a(n - 4) + 0*a(n - 5) + 1000000*a(n - 6),  
+a(0) = 1, a(1) = 10, a(2) = 101, a(3) = 1101010, a(4) = 10101, a(5) = 11110101010
+
+True  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

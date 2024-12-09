@@ -1,0 +1,22 @@
+
+orders_used: [10, 11, 12, 13, 14, 15]
+While total time consumed by now, scale:12571/27236, seq_id:A107242, order:20 took:
+ 4.5 seconds, i.e. 0.08 minutes or 0.001 hours.
+CORELIST: False, METHOD: MB, SINDy: False (True also in case of MAVI), GROUND_TRUTH: True, SINDy_default: True, DEBUG: False, OEISformer: False
+n_of_terms_ed: 200, N_OF_TERMS_ED: 200
+Library: non, max_order 20, max_degree: 1, threshold: 0.1, 
+n_more_terms: 10
+Library: non, max_order 20, threshold: 0.1MB: 
+  n_more_terms: 10 MAX_BITSIZE: 50
+
+by degree: unknown_mb and order: 10.
+non_linears:
+['a(n) -2*a(n-1) -4*a(n-2) -6*a(n-3) -12*a(n-4) +4*a(n-5) +6*a(n-6) +2*a(n-8) -a(n-10) +4', 'a(n-1) -2*a(n-2) -4*a(n-3) -6*a(n-4) -12*a(n-5) +4*a(n-6) +6*a(n-7) +2*a(n-9) -a(n-11) +4', 'a(n-2) -2*a(n-3) -4*a(n-4) -6*a(n-5) -12*a(n-6) +4*a(n-7) +6*a(n-8) +2*a(n-10) -a(n-12) +4', 'a(n-3) -2*a(n-4) -4*a(n-5) -6*a(n-6) -12*a(n-7) +4*a(n-8) +6*a(n-9) +2*a(n-11) -a(n-13) +4', 'a(n-4) -2*a(n-5) -4*a(n-6) -6*a(n-7) -12*a(n-8) +4*a(n-9) +6*a(n-10) +2*a(n-12) -a(n-14) +4', 'a(n-5) -2*a(n-6) -4*a(n-7) -6*a(n-8) -12*a(n-9) +4*a(n-10) +6*a(n-11) +2*a(n-13) -a(n-15) +4']
+A107242: 
+MB not reconst
+truth: 
+a(n) = 3*a(n - 1) + 2*a(n - 2) + 2*a(n - 3) + 6*a(n - 4) + -16*a(n - 5) + -2*a(n - 6) + 6*a(n - 7) + -2*a(n - 8) + 2*a(n - 9) + 1*a(n - 10) + -1*a(n - 11),  
+a(0) = 0, a(1) = 0, a(2) = 1, a(3) = 5, a(4) = 14, a(5) = 50, a(6) = 194, a(7) = 723, a(8) = 2659, a(9) = 9884, a(10) = 36780
+
+False  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

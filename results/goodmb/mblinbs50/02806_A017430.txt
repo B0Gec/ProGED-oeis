@@ -1,0 +1,22 @@
+
+orders_used: [6, 7, 7, 8, 8, 8, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 14]
+While total time consumed by now, scale:2807/27236, seq_id:A017430, order:20 took:
+ 8.7 seconds, i.e. 0.15 minutes or 0.002 hours.
+CORELIST: False, METHOD: MB, SINDy: False (True also in case of MAVI), GROUND_TRUTH: True, SINDy_default: True, DEBUG: False, OEISformer: False
+n_of_terms_ed: 200, N_OF_TERMS_ED: 200
+Library: non, max_order 20, max_degree: 1, threshold: 0.1, 
+n_more_terms: 10
+Library: non, max_order 20, threshold: 0.1MB: 
+  n_more_terms: 10 MAX_BITSIZE: 50
+
+by degree: unknown_mb and order: 6.
+non_linears:
+['a(n) -6*a(n-1) +15*a(n-2) -20*a(n-3) +15*a(n-4) -6*a(n-5) +a(n-6) -1275523920', 'a(n-1) -6*a(n-2) +15*a(n-3) -20*a(n-4) +15*a(n-5) -6*a(n-6) +a(n-7) -1275523920', 'a(n) -21*a(n-2) +70*a(n-3) -105*a(n-4) +84*a(n-5) -35*a(n-6) +6*a(n-7) -8928667440', 'a(n-2) -6*a(n-3) +15*a(n-4) -20*a(n-5) +15*a(n-6) -6*a(n-7) +a(n-8) -1275523920', 'a(n-1) -21*a(n-3) +70*a(n-4) -105*a(n-5) +84*a(n-6) -35*a(n-7) +6*a(n-8) -8928667440', 'a(n) -56*a(n-3) +210*a(n-4) -336*a(n-5) +280*a(n-6) -120*a(n-7) +21*a(n-8) -35714669760', 'a(n-13)^2 -7530265*a(n-13) +5489031744', 'a(n-12) +(-1654623/52649)*a(n-13) -395216320697/52649', 'a(n-11) +(-13514977/52649)*a(n-13) -12843907347392/52649', 'a(n-9) +(-190835505/52649)*a(n-13) -567375788773376/52649', 'a(n-8) +(-334207993/36023)*a(n-13) -1371104873885615/36023', 'a(n-6) +(-1462800249/36023)*a(n-13) -9442146930618479/36023', 'a(n-10) +(-782039363/684437)*a(n-13) -1489300265009205/684437', 'a(n-4) +(-4573154705/36023)*a(n-13) -40564414999367127/36023', 'a(n-2) +(-16910699743/52649)*a(n-13) -191378110708656377/52649', 'a(n) +(-36997771671/52649)*a(n-13) -509899152137383745/52649', 'a(n-14) -729']
+A017430: 
+MB not reconst
+truth: 
+a(n) = 7*a(n - 1) + -21*a(n - 2) + 35*a(n - 3) + -35*a(n - 4) + 21*a(n - 5) + -7*a(n - 6) + 1*a(n - 7),  
+a(0) = 729, a(1) = 7529536, a(2) = 244140625, a(3) = 2176782336, a(4) = 10779215329, a(5) = 38068692544, a(6) = 107918163081
+
+False  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

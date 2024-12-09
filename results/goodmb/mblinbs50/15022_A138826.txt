@@ -1,0 +1,22 @@
+
+orders_used: [3, 4, 6, 6, 6, 7]
+While total time consumed by now, scale:15023/27236, seq_id:A138826, order:20 took:
+ 3.3 seconds, i.e. 0.06 minutes or 0.001 hours.
+CORELIST: False, METHOD: MB, SINDy: False (True also in case of MAVI), GROUND_TRUTH: True, SINDy_default: True, DEBUG: False, OEISformer: False
+n_of_terms_ed: 200, N_OF_TERMS_ED: 200
+Library: non, max_order 20, max_degree: 1, threshold: 0.1, 
+n_more_terms: 10
+Library: non, max_order 20, threshold: 0.1MB: 
+  n_more_terms: 10 MAX_BITSIZE: 50
+
+by degree: unknown_mb and order: 3.
+non_linears:
+['a(n) -101100*a(n-1) +110100000*a(n-2) -10000000000*a(n-3) -1098889011', 'a(n-1) -101100*a(n-2) +110100000*a(n-3) -10000000000*a(n-4) -1098889011', 'a(n-6)^2 -11100212*a(n-6) +1121111211', 'a(n-5) +(-111108891100/1110001)*a(n-6) -1099136309011/1110001', 'a(n-4) +(-11110998890110000/1110001)*a(n-6) -111111235532111111/1110001', 'a(n-7) -101']
+A138826: 
+MB not reconst
+truth: 
+a(n) = 101101*a(n - 1) + -110201100*a(n - 2) + 10110100000*a(n - 3) + -10000000000*a(n - 4),  
+a(0) = 101, a(1) = 11100111, a(2) = 1111100011111, a(3) = 111111100001111111
+
+False  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

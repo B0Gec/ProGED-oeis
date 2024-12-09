@@ -1,0 +1,22 @@
+
+orders_used: [5]
+While total time consumed by now, scale:5231/27236, seq_id:A036217, order:20 took:
+ 6.1 seconds, i.e. 0.1 minutes or 0.002 hours.
+CORELIST: False, METHOD: MB, SINDy: False (True also in case of MAVI), GROUND_TRUTH: True, SINDy_default: True, DEBUG: False, OEISformer: False
+n_of_terms_ed: 200, N_OF_TERMS_ED: 200
+Library: non, max_order 20, max_degree: 1, threshold: 0.1, 
+n_more_terms: 10
+Library: non, max_order 20, threshold: 0.1MB: 
+  n_more_terms: 10 MAX_BITSIZE: 50
+
+by degree: unknown_mb and order: 5.
+non_linears:
+['a(n)*a(n-1) -15*a(n-1)^2 +9*a(n)*a(n-2) +9*a(n-1)*a(n-2)', 'a(n-1)*a(n-2) -15*a(n-2)^2 +9*a(n-1)*a(n-3) +9*a(n-2)*a(n-3)', 'a(n)*a(n-2) -135*a(n-2)^2 +3*a(n)*a(n-3) +90*a(n-1)*a(n-3) +81*a(n-2)*a(n-3)', 'a(n)*a(n-1) -15*a(n-1)^2 +1350*a(n-2)^2 -27*a(n)*a(n-3) -891*a(n-1)*a(n-3) -810*a(n-2)*a(n-3)', 'a(n-2)*a(n-3) -15*a(n-3)^2 +9*a(n-2)*a(n-4) +9*a(n-3)*a(n-4)', 'a(n-1)*a(n-3) -135*a(n-3)^2 +3*a(n-1)*a(n-4) +90*a(n-2)*a(n-4) +81*a(n-3)*a(n-4)', 'a(n)*a(n-3) -945*a(n-3)^2 +a(n)*a(n-4) +30*a(n-1)*a(n-4) +630*a(n-2)*a(n-4) +567*a(n-3)*a(n-4)', 'a(n-1)*a(n-2) -15*a(n-2)^2 +1350*a(n-3)^2 -27*a(n-1)*a(n-4) -891*a(n-2)*a(n-4) -810*a(n-3)*a(n-4)', 'a(n)*a(n-2) -135*a(n-2)^2 +16200*a(n-3)^2 -3*a(n)*a(n-4) -360*a(n-1)*a(n-4) -10719*a(n-2)*a(n-4) -9720*a(n-3)*a(n-4)', 'a(n)*a(n-1) -15*a(n-1)^2 +1350*a(n-2)^2 -157950*a(n-3)^2 +27*a(n)*a(n-4) +3483*a(n-1)*a(n-4) +104490*a(n-2)*a(n-4) +94770*a(n-3)*a(n-4)', 'a(n-3)*a(n-4) -15*a(n-4)^2 +9*a(n-3)*a(n-5) +9*a(n-4)*a(n-5)', 'a(n-2)*a(n-4) -135*a(n-4)^2 +3*a(n-2)*a(n-5) +90*a(n-3)*a(n-5) +81*a(n-4)*a(n-5)', 'a(n-1)*a(n-4) -945*a(n-4)^2 +a(n-1)*a(n-5) +30*a(n-2)*a(n-5) +630*a(n-3)*a(n-5) +567*a(n-4)*a(n-5)', 'a(n) -15*a(n-1) +90*a(n-2) -270*a(n-3) +405*a(n-4) -243*a(n-5)']
+A036217: 
+a(n) -15*a(n-1) +90*a(n-2) -270*a(n-3) +405*a(n-4) -243*a(n-5)
+truth: 
+a(n) = 15*a(n - 1) + -90*a(n - 2) + 270*a(n - 3) + -405*a(n - 4) + 243*a(n - 5),  
+a(0) = 1, a(1) = 15, a(2) = 135, a(3) = 945, a(4) = 5670
+
+True  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

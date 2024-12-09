@@ -1,0 +1,22 @@
+
+orders_used: [19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 20]
+While total time consumed by now, scale:22013/27236, seq_id:A218503, order:20 took:
+ 9.4 seconds, i.e. 0.16 minutes or 0.003 hours.
+CORELIST: False, METHOD: MB, SINDy: False (True also in case of MAVI), GROUND_TRUTH: True, SINDy_default: True, DEBUG: False, OEISformer: False
+n_of_terms_ed: 200, N_OF_TERMS_ED: 200
+Library: non, max_order 20, max_degree: 1, threshold: 0.1, 
+n_more_terms: 10
+Library: non, max_order 20, threshold: 0.1MB: 
+  n_more_terms: 10 MAX_BITSIZE: 50
+
+by degree: unknown_mb and order: 19.
+non_linears:
+['a(n-19)^2 -121*a(n-19) +120', 'a(n-18) +(-9645/119)*a(n-19) -4635/119', 'a(n-17) +(-241915/119)*a(n-19) -920120/119', 'a(n-16) +(-2791745/119)*a(n-19) -27158175/119', 'a(n-5) -3103974269*a(n-19) -383821406056', 'a(n-15) +(-19618071/119)*a(n-19) -342549504/119', 'a(n-12) +(-184030935/17)*a(n-19) -8501309865/17', 'a(n-14) +(-98564749/119)*a(n-19) -2598153275/119', 'a(n-13) +(-389676155/119)*a(n-19) -14036247000/119', 'a(n-11) +(-3708583255/119)*a(n-19) -210386571200/119', 'a(n-20) -1']
+A218503: 
+MB not reconst
+truth: 
+a(n) = 11*a(n - 1) + -55*a(n - 2) + 165*a(n - 3) + -330*a(n - 4) + 462*a(n - 5) + -462*a(n - 6) + 330*a(n - 7) + -165*a(n - 8) + 55*a(n - 9) + -11*a(n - 10) + 1*a(n - 11),  
+a(0) = 1, a(1) = 120, a(2) = 9765, a(3) = 251680, a(4) = 3043425, a(5) = 22661496, a(6) = 121226245, a(7) = 510902400, a(8) = 1799118945, a(9) = 5507702200, a(10) = 15072415941
+
+False  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

@@ -1,0 +1,22 @@
+
+orders_used: [6, 7, 7, 8, 8, 8, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 14]
+While total time consumed by now, scale:2927/27236, seq_id:A017550, order:20 took:
+ 8.1 seconds, i.e. 0.14 minutes or 0.002 hours.
+CORELIST: False, METHOD: MB, SINDy: False (True also in case of MAVI), GROUND_TRUTH: True, SINDy_default: True, DEBUG: False, OEISformer: False
+n_of_terms_ed: 200, N_OF_TERMS_ED: 200
+Library: non, max_order 20, max_degree: 1, threshold: 0.1, 
+n_more_terms: 10
+Library: non, max_order 20, threshold: 0.1MB: 
+  n_more_terms: 10 MAX_BITSIZE: 50
+
+by degree: unknown_mb and order: 6.
+non_linears:
+['a(n) -6*a(n-1) +15*a(n-2) -20*a(n-3) +15*a(n-4) -6*a(n-5) +a(n-6) -2149908480', 'a(n-1) -6*a(n-2) +15*a(n-3) -20*a(n-4) +15*a(n-5) -6*a(n-6) +a(n-7) -2149908480', 'a(n) -21*a(n-2) +70*a(n-3) -105*a(n-4) +84*a(n-5) -35*a(n-6) +6*a(n-7) -15049359360', 'a(n-2) -6*a(n-3) +15*a(n-4) -20*a(n-5) +15*a(n-6) -6*a(n-7) +a(n-8) -2149908480', 'a(n-1) -21*a(n-3) +70*a(n-4) -105*a(n-5) +84*a(n-6) -35*a(n-7) +6*a(n-8) -15049359360', 'a(n) -56*a(n-3) +210*a(n-4) -336*a(n-5) +280*a(n-6) -120*a(n-7) +21*a(n-8) -60197437440', 'a(n-13)^2 -7529600*a(n-13) +481890304', 'a(n-12) +(-65405/1634)*a(n-13) -6149537952/817', 'a(n-11) +(-293188/817)*a(n-13) -252365424960/817', 'a(n-8) +(-1226771/86)*a(n-13) -2442370873440/43', 'a(n-10) +(-2737427/1634)*a(n-13) -2459847428064/817', 'a(n-9) +(-4467799/817)*a(n-13) -12765339060864/817', 'a(n-3) +(-14231728/43)*a(n-13) -141783159410880/43', 'a(n-1) +(-33535537/43)*a(n-13) -416469644472960/43', 'a(n) +(-43301699/38)*a(n-13) -295592960259168/19', 'a(n-7) +(-26080810/817)*a(n-13) -134155033301952/817', 'a(n-14) -64']
+A017550: 
+MB not reconst
+truth: 
+a(n) = 7*a(n - 1) + -21*a(n - 2) + 35*a(n - 3) + -35*a(n - 4) + 21*a(n - 5) + -7*a(n - 6) + 1*a(n - 7),  
+a(0) = 64, a(1) = 7529536, a(2) = 308915776, a(3) = 3010936384, a(4) = 15625000000, a(5) = 56800235584, a(6) = 164206490176
+
+False  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

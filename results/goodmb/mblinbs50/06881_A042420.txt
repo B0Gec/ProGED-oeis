@@ -1,0 +1,22 @@
+
+orders_used: [4]
+While total time consumed by now, scale:6882/27236, seq_id:A042420, order:20 took:
+ 4.4 seconds, i.e. 0.07 minutes or 0.001 hours.
+CORELIST: False, METHOD: MB, SINDy: False (True also in case of MAVI), GROUND_TRUTH: True, SINDy_default: True, DEBUG: False, OEISformer: False
+n_of_terms_ed: 200, N_OF_TERMS_ED: 200
+Library: non, max_order 20, max_degree: 1, threshold: 0.1, 
+n_more_terms: 10
+Library: non, max_order 20, threshold: 0.1MB: 
+  n_more_terms: 10 MAX_BITSIZE: 50
+
+by degree: unknown_mb and order: 4.
+non_linears:
+['a(n)^2 -60*a(n)*a(n-1) +324*a(n-1)^2 -2*a(n)*a(n-2) +60*a(n-1)*a(n-2) +a(n-2)^2', 'a(n)*a(n-2) -325*a(n-2)^2 +a(n-1)*a(n-3) -60*a(n-2)*a(n-3) -a(n-3)^2', 'a(n-1)*a(n-2) +(-54/5)*a(n-2)^2 +a(n)*a(n-3) +(-54/5)*a(n-1)*a(n-3) -2*a(n-2)*a(n-3) -17712/5', 'a(n)^2 -105625*a(n-2)^2 -60*a(n)*a(n-3) +650*a(n-1)*a(n-3) -19500*a(n-2)*a(n-3) -326*a(n-3)^2', 'a(n-1)^2 -324*a(n-2)^2 +60*a(n)*a(n-3) -650*a(n-1)*a(n-3) -60*a(n-2)*a(n-3) +a(n-3)^2 -212544', 'a(n)*a(n-1) -3510*a(n-2)^2 +324*a(n)*a(n-3) -3510*a(n-1)*a(n-3) -649*a(n-2)*a(n-3) -1151280', 'a(n) -326*a(n-2) +a(n-4)']
+A042420: 
+a(n) -326*a(n-2) +a(n-4)
+truth: 
+a(n) = 0*a(n - 1) + 326*a(n - 2) + 0*a(n - 3) + -1*a(n - 4),  
+a(0) = 27, a(1) = 163, a(2) = 8829, a(3) = 53137
+
+True  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

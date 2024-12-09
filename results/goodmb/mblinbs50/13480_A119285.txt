@@ -1,0 +1,22 @@
+
+orders_used: [5]
+While total time consumed by now, scale:13481/27236, seq_id:A119285, order:20 took:
+ 2.8 seconds, i.e. 0.05 minutes or 0.001 hours.
+CORELIST: False, METHOD: MB, SINDy: False (True also in case of MAVI), GROUND_TRUTH: True, SINDy_default: True, DEBUG: False, OEISformer: False
+n_of_terms_ed: 200, N_OF_TERMS_ED: 200
+Library: non, max_order 20, max_degree: 1, threshold: 0.1, 
+n_more_terms: 10
+Library: non, max_order 20, threshold: 0.1MB: 
+  n_more_terms: 10 MAX_BITSIZE: 50
+
+by degree: unknown_mb and order: 5.
+non_linears:
+['a(n)*a(n-1) +(13/4)*a(n-1)^2 -21*a(n-1)*a(n-2) +(13/4)*a(n-2)^2 +(-13/4)*a(n)*a(n-3) +a(n-2)*a(n-3) -13/4', 'a(n)^2 -12*a(n-1)^2 -16*a(n)*a(n-2) +112*a(n-1)*a(n-2) -12*a(n-2)^2 +14*a(n)*a(n-3) -16*a(n-1)*a(n-3) +a(n-3)^2 +12', 'a(n-1)*a(n-2) -35*a(n-2)*a(n-3) +a(n)*a(n-4) +(-3/2)*a(n-1)*a(n-4) +24*a(n-2)*a(n-4) -6*a(n-3)*a(n-4) +(-3/2)*a(n-4)^2', 'a(n)*a(n-1) +65*a(n-1)*a(n-3) -1344*a(n-2)*a(n-3) +33*a(n)*a(n-4) -56*a(n-1)*a(n-4) +896*a(n-2)*a(n-4) -223*a(n-3)*a(n-4) -56*a(n-4)^2', 'a(n-2)^2 +(56/13)*a(n-2)*a(n-3) +a(n-3)^2 +(-4/13)*a(n)*a(n-4) +(-7/13)*a(n-1)*a(n-4) +(-96/13)*a(n-2)*a(n-4) +(28/13)*a(n-3)*a(n-4) +(6/13)*a(n-4)^2 -1', 'a(n)*a(n-3) +4*a(n-1)*a(n-3) +(-256/13)*a(n-2)*a(n-3) +a(n-3)^2 +(-4/13)*a(n)*a(n-4) +(-7/13)*a(n-1)*a(n-4) +(112/13)*a(n-2)*a(n-4) +(-24/13)*a(n-3)*a(n-4) +(-7/13)*a(n-4)^2', 'a(n-1)^2 -16*a(n-1)*a(n-3) +(2128/13)*a(n-2)*a(n-3) +(-48/13)*a(n)*a(n-4) +(98/13)*a(n-1)*a(n-4) +(-1360/13)*a(n-2)*a(n-4) +(336/13)*a(n-3)*a(n-4) +(85/13)*a(n-4)^2', 'a(n)*a(n-2) +(2924/13)*a(n-2)*a(n-3) +16*a(n-3)^2 +(-129/13)*a(n)*a(n-4) +(-55/26)*a(n-1)*a(n-4) +(-2875/13)*a(n-2)*a(n-4) +(786/13)*a(n-3)*a(n-4) +(361/26)*a(n-4)^2 -16', 'a(n)^2 -264*a(n-1)*a(n-3) +(127536/13)*a(n-2)*a(n-3) +255*a(n-3)^2 +(-4088/13)*a(n)*a(n-4) +(2934/13)*a(n-1)*a(n-4) +(-99984/13)*a(n-2)*a(n-4) +(26016/13)*a(n-3)*a(n-4) +(6262/13)*a(n-4)^2 -256', 'a(n) +5*a(n-1) -15*a(n-2) -15*a(n-3) +5*a(n-4) +a(n-5)']
+A119285: 
+a(n) +5*a(n-1) -15*a(n-2) -15*a(n-3) +5*a(n-4) +a(n-5)
+truth: 
+a(n) = -5*a(n - 1) + 15*a(n - 2) + 15*a(n - 3) + -5*a(n - 4) + -1*a(n - 5),  
+a(0) = 0, a(1) = -1, a(2) = 0, a(3) = -16, a(4) = 65
+
+True  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

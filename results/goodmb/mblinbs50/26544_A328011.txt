@@ -1,0 +1,22 @@
+
+orders_used: [7]
+While total time consumed by now, scale:26545/27236, seq_id:A328011, order:20 took:
+ 6.2 seconds, i.e. 0.1 minutes or 0.002 hours.
+CORELIST: False, METHOD: MB, SINDy: False (True also in case of MAVI), GROUND_TRUTH: True, SINDy_default: True, DEBUG: False, OEISformer: False
+n_of_terms_ed: 200, N_OF_TERMS_ED: 200
+Library: non, max_order 20, max_degree: 1, threshold: 0.1, 
+n_more_terms: 10
+Library: non, max_order 20, threshold: 0.1MB: 
+  n_more_terms: 10 MAX_BITSIZE: 50
+
+by degree: unknown_mb and order: 7.
+non_linears:
+['a(n)^2 +(-11/2)*a(n)*a(n-1) +(5/2)*a(n-1)^2 -a(n) +(1/2)*a(n-1)', 'a(n)*a(n-1)^2 +(-1/2)*a(n-1)^3 -4*a(n)*a(n-1) +2*a(n-1)^2 +3*a(n) +(-3/2)*a(n-1)', 'a(n-1)^5 -36*a(n-1)^4 +460*a(n-1)^3 +(-47820/319)*a(n)*a(n-1) +(-818250/319)*a(n-1)^2 +(139170/319)*a(n) +(2094511/319)*a(n-1) -6144', 'a(n-1)^2 +(-11/2)*a(n-1)*a(n-2) +(5/2)*a(n-2)^2 -a(n-1) +(1/2)*a(n-2)', 'a(n)*a(n-1) +(-1/2)*a(n)*a(n-2) +(-5/2)*a(n-1)*a(n-2) +(5/4)*a(n-2)^2 +(-1/2)*a(n-1) +(1/4)*a(n-2)', 'a(n)^2 +(-11/4)*a(n)*a(n-2) +(5/8)*a(n-2)^2 -a(n) +(1/4)*a(n-1) +(1/8)*a(n-2)', 'a(n-1)*a(n-2)^2 +(-1328/319)*a(n)*a(n-2) +(-4822/319)*a(n-1)*a(n-2) +(-1723/319)*a(n-2)^2 +(7528/319)*a(n) +(958/29)*a(n-1) +(28577/319)*a(n-2) -256', 'a(n)*a(n-2)^2 +(-3216/319)*a(n)*a(n-2) +(-1135/319)*a(n-1)*a(n-2) +(-1723/638)*a(n-2)^2 +(7592/319)*a(n) +(305/29)*a(n-1) +(28577/638)*a(n-2) -128', 'a(n-2)^3 +(-2656/319)*a(n)*a(n-2) +(-7092/319)*a(n-1)*a(n-2) +(-4722/319)*a(n-2)^2 +(15056/319)*a(n) +(1742/29)*a(n-1) +(58111/319)*a(n-2) -512', 'a(n-2)^2 +(-11/2)*a(n-2)*a(n-3) +(5/2)*a(n-3)^2 -a(n-2) +(1/2)*a(n-3)', 'a(n-1)^2 +(-1302/277)*a(n-2)*a(n-3) +(853/277)*a(n-3)^2 +(-1914/277)*a(n) +(-4193/277)*a(n-1) +(4286/277)*a(n-2) +(-6119/277)*a(n-3) +28072/277', 'a(n)^2 +(3691/277)*a(n-2)*a(n-3) +(-1795/277)*a(n-3)^2 +(-2279/277)*a(n) +(-148/277)*a(n-1) +(-10978/277)*a(n-2) +(4495/277)*a(n-3) +7018/277', 'a(n) +a(n-1) +a(n-2) +a(n-3) +a(n-4) +a(n-5) +a(n-6) -40', 'a(n) -a(n-7)']
+A328011: 
+a(n) -a(n-7)
+truth: 
+a(n) = 0*a(n - 1) + 0*a(n - 2) + 0*a(n - 3) + 0*a(n - 4) + 0*a(n - 5) + 0*a(n - 6) + 1*a(n - 7),  
+a(0) = 1, a(1) = 6, a(2) = 3, a(3) = 16, a(4) = 8, a(5) = 4, a(6) = 2
+
+True  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

@@ -1,0 +1,22 @@
+
+orders_used: [8]
+While total time consumed by now, scale:13000/27236, seq_id:A112027, order:20 took:
+ 3.9 seconds, i.e. 0.06 minutes or 0.001 hours.
+CORELIST: False, METHOD: MB, SINDy: False (True also in case of MAVI), GROUND_TRUTH: True, SINDy_default: True, DEBUG: False, OEISformer: False
+n_of_terms_ed: 200, N_OF_TERMS_ED: 200
+Library: non, max_order 20, max_degree: 1, threshold: 0.1, 
+n_more_terms: 10
+Library: non, max_order 20, threshold: 0.1MB: 
+  n_more_terms: 10 MAX_BITSIZE: 50
+
+by degree: unknown_mb and order: 8.
+non_linears:
+['a(n)*a(n-6) -3*a(n-4)*a(n-6) +(-89/66)*a(n) +(-2/11)*a(n-1) +(-83/66)*a(n-2) +(21/11)*a(n-3) +(35/22)*a(n-4) +(23/11)*a(n-5) +(3/2)*a(n-6) +109/66', 'a(n-2)*a(n-4) -3*a(n-4)*a(n-6) +(-71/66)*a(n) +(23/11)*a(n-1) +(-239/66)*a(n-2) +(17/11)*a(n-3) +(21/22)*a(n-4) +(-6/11)*a(n-5) +(7/2)*a(n-6) +61/66', 'a(n)*a(n-2) -9*a(n-4)*a(n-6) +(-295/33)*a(n) +(63/11)*a(n-1) +(-538/33)*a(n-2) +(114/11)*a(n-3) +(139/11)*a(n-4) +(51/11)*a(n-5) +20*a(n-6) +398/33', 'a(n) +a(n-1) +a(n-2) +a(n-3) -3*a(n-4) -3*a(n-5) -3*a(n-6) -3*a(n-7) -4', 'a(n-1)*a(n-7) -3*a(n-5)*a(n-7) +(-89/66)*a(n-1) +(-2/11)*a(n-2) +(-83/66)*a(n-3) +(21/11)*a(n-4) +(35/22)*a(n-5) +(23/11)*a(n-6) +(3/2)*a(n-7) +109/66', 'a(n-3)*a(n-5) -3*a(n-5)*a(n-7) +(-71/66)*a(n-1) +(23/11)*a(n-2) +(-239/66)*a(n-3) +(17/11)*a(n-4) +(21/22)*a(n-5) +(-6/11)*a(n-6) +(7/2)*a(n-7) +61/66', 'a(n-1)*a(n-3) -9*a(n-5)*a(n-7) +(-295/33)*a(n-1) +(63/11)*a(n-2) +(-538/33)*a(n-3) +(114/11)*a(n-4) +(139/11)*a(n-5) +(51/11)*a(n-6) +20*a(n-7) +398/33', 'a(n) -4*a(n-4) +3*a(n-8)']
+A112027: 
+a(n) -4*a(n-4) +3*a(n-8)
+truth: 
+a(n) = 0*a(n - 1) + 0*a(n - 2) + 0*a(n - 3) + 4*a(n - 4) + 0*a(n - 5) + 0*a(n - 6) + 0*a(n - 7) + -3*a(n - 8),  
+a(0) = 1, a(1) = 2, a(2) = 1, a(3) = 3, a(4) = 7, a(5) = 8, a(6) = 4, a(7) = 6
+
+True  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

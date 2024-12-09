@@ -1,0 +1,22 @@
+
+orders_used: [14]
+While total time consumed by now, scale:16187/27236, seq_id:A157246, order:20 took:
+ 6.4 seconds, i.e. 0.11 minutes or 0.002 hours.
+CORELIST: False, METHOD: MB, SINDy: False (True also in case of MAVI), GROUND_TRUTH: True, SINDy_default: True, DEBUG: False, OEISformer: False
+n_of_terms_ed: 200, N_OF_TERMS_ED: 200
+Library: non, max_order 20, max_degree: 1, threshold: 0.1, 
+n_more_terms: 10
+Library: non, max_order 20, threshold: 0.1MB: 
+  n_more_terms: 10 MAX_BITSIZE: 50
+
+by degree: unknown_mb and order: 14.
+non_linears:
+['a(n)^2 +(-909/245)*a(n)*a(n-1) +(19/5)*a(n-1)^2 +(2727/1715)*a(n)*a(n-2) +(-909/245)*a(n-1)*a(n-2) +a(n-2)^2 +14060/7', 'a(n-1)^2 +(-909/245)*a(n-1)*a(n-2) +(19/5)*a(n-2)^2 +(2727/1715)*a(n-1)*a(n-3) +(-909/245)*a(n-2)*a(n-3) +a(n-3)^2 +14060/7', 'a(n)*a(n-1) +(-102/49)*a(n)*a(n-2) +(-14/5)*a(n-1)*a(n-2) +(98/15)*a(n-2)^2 +a(n)*a(n-3) +(57/35)*a(n-1)*a(n-3) +(-268/35)*a(n-2)*a(n-3) +(7/3)*a(n-3)^2 +10360/3', 'a(n)^2 +(-73629/12005)*a(n)*a(n-2) +(54/5)*a(n-2)^2 +(909/245)*a(n)*a(n-3) +(-24543/1715)*a(n-2)*a(n-3) +(34/7)*a(n-3)^2 +50320/7', 'a(n-2)^2 +(-909/245)*a(n-2)*a(n-3) +(19/5)*a(n-3)^2 +(2727/1715)*a(n-2)*a(n-4) +(-909/245)*a(n-3)*a(n-4) +a(n-4)^2 +14060/7', 'a(n-1)*a(n-2) +(-102/49)*a(n-1)*a(n-3) +(-14/5)*a(n-2)*a(n-3) +(98/15)*a(n-3)^2 +a(n-1)*a(n-4) +(57/35)*a(n-2)*a(n-4) +(-268/35)*a(n-3)*a(n-4) +(7/3)*a(n-4)^2 +10360/3', 'a(n-1)^2 +(-73629/12005)*a(n-1)*a(n-3) +(54/5)*a(n-3)^2 +(909/245)*a(n-1)*a(n-4) +(-24543/1715)*a(n-3)*a(n-4) +(34/7)*a(n-4)^2 +50320/7', 'a(n-3)^2 +(-909/245)*a(n-3)*a(n-4) +(19/5)*a(n-4)^2 +(2727/1715)*a(n-3)*a(n-5) +(-909/245)*a(n-4)*a(n-5) +a(n-5)^2 +14060/7', 'a(n)^2 -6*a(n)*a(n-7) +a(n-7)^2 +470596', 'a(n-1)^2 -6*a(n-1)*a(n-8) +a(n-8)^2 +470596', 'a(n-2)^2 -6*a(n-2)*a(n-9) +a(n-9)^2 +470596', 'a(n-3)^2 -6*a(n-3)*a(n-10) +a(n-10)^2 +470596', 'a(n-4)^2 -6*a(n-4)*a(n-11) +a(n-11)^2 +470596', 'a(n-5)^2 -6*a(n-5)*a(n-12) +a(n-12)^2 +470596', 'a(n-6)^2 -6*a(n-6)*a(n-13) +a(n-13)^2 +470596', 'a(n) -6*a(n-7) +a(n-14)']
+A157246: 
+a(n) -6*a(n-7) +a(n-14)
+truth: 
+a(n) = 0*a(n - 1) + 0*a(n - 2) + 0*a(n - 3) + 0*a(n - 4) + 0*a(n - 5) + 0*a(n - 6) + 6*a(n - 7) + 0*a(n - 8) + 0*a(n - 9) + 0*a(n - 10) + 0*a(n - 11) + 0*a(n - 12) + 0*a(n - 13) + -1*a(n - 14),  
+a(0) = 245, a(1) = 265, a(2) = 287, a(3) = 343, a(4) = 427, a(5) = 493, a(6) = 637, a(7) = 833, a(8) = 1097, a(9) = 1295, a(10) = 1715, a(11) = 2275, a(12) = 2693, a(13) = 3577
+
+True  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

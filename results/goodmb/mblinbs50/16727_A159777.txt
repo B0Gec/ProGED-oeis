@@ -1,0 +1,22 @@
+
+orders_used: [6]
+While total time consumed by now, scale:16728/27236, seq_id:A159777, order:20 took:
+ 6.6 seconds, i.e. 0.11 minutes or 0.002 hours.
+CORELIST: False, METHOD: MB, SINDy: False (True also in case of MAVI), GROUND_TRUTH: True, SINDy_default: True, DEBUG: False, OEISformer: False
+n_of_terms_ed: 200, N_OF_TERMS_ED: 200
+Library: non, max_order 20, max_degree: 1, threshold: 0.1, 
+n_more_terms: 10
+Library: non, max_order 20, threshold: 0.1MB: 
+  n_more_terms: 10 MAX_BITSIZE: 50
+
+by degree: unknown_mb and order: 6.
+non_linears:
+['a(n)^2 +(-26490/2171)*a(n)*a(n-1) +(180/13)*a(n-1)^2 +(19426/2171)*a(n)*a(n-2) +(-26490/2171)*a(n-1)*a(n-2) +a(n-2)^2 -784368/167', 'a(n)^2 -6*a(n)*a(n-3) +a(n-3)^2 +111556', 'a(n)*a(n-2) +(-27889/19426)*a(n-2)^2 +(-1002/883)*a(n)*a(n-3) +(15/11)*a(n-2)*a(n-3) +(-2171/19426)*a(n-3)^2 +74921210/9713', 'a(n-1)^2 +(-26490/2171)*a(n-1)*a(n-2) +(180/13)*a(n-2)^2 +(19426/2171)*a(n-1)*a(n-3) +(-26490/2171)*a(n-2)*a(n-3) +a(n-3)^2 -784368/167', 'a(n-1)^2 -6*a(n-1)*a(n-4) +a(n-4)^2 +111556', 'a(n-2)^2 -6*a(n-2)*a(n-5) +a(n-5)^2 +111556', 'a(n-1)*a(n-3) +(-210/13)*a(n-3)*a(n-4) +(167/13)*a(n-4)^2 -a(n-1)*a(n-5) +(167/13)*a(n-3)*a(n-5) +(-132/13)*a(n-4)*a(n-5) +8684', 'a(n)*a(n-4) +(-36/7)*a(n-3)*a(n-4) +(-167/154)*a(n-4)^2 +(-6/7)*a(n)*a(n-5) +(29/7)*a(n-3)*a(n-5) +(171/77)*a(n-4)*a(n-5) +(-167/154)*a(n-5)^2 +64090/11', 'a(n-1)^2 +(-783/22)*a(n-4)^2 +(-883/167)*a(n-1)*a(n-5) +(71523/1837)*a(n-4)*a(n-5) +(-167/22)*a(n-5)^2 +1675746/11', 'a(n-1)*a(n-4) +(-805/132)*a(n-4)^2 +(-883/1002)*a(n-1)*a(n-5) +(23841/3674)*a(n-4)*a(n-5) +(-167/132)*a(n-5)^2 +224315/33', 'a(n-2)*a(n-4) +(-27889/19426)*a(n-4)^2 +(-1002/883)*a(n-2)*a(n-5) +(15/11)*a(n-4)*a(n-5) +(-2171/19426)*a(n-5)^2 +74921210/9713', 'a(n-3)^2 +(-26490/2171)*a(n-3)*a(n-4) +(180/13)*a(n-4)^2 +(19426/2171)*a(n-3)*a(n-5) +(-26490/2171)*a(n-4)*a(n-5) +a(n-5)^2 -784368/167', 'a(n)*a(n-1) +(-1080/13)*a(n-3)*a(n-4) +(104375/1716)*a(n-4)^2 -a(n)*a(n-5) +(-29/6)*a(n-1)*a(n-5) +(870/13)*a(n-3)*a(n-5) +(-13295/286)*a(n-4)*a(n-5) +(-167/132)*a(n-5)^2 +4853555/33', 'a(n) -6*a(n-3) +a(n-6)']
+A159777: 
+a(n) -6*a(n-3) +a(n-6)
+truth: 
+a(n) = 0*a(n - 1) + 0*a(n - 2) + 6*a(n - 3) + 0*a(n - 4) + 0*a(n - 5) + -1*a(n - 6),  
+a(0) = 145, a(1) = 167, a(2) = 197, a(3) = 673, a(4) = 835, a(5) = 1037
+
+True  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

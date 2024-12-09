@@ -1,0 +1,22 @@
+
+orders_used: [8, 8, 8, 8, 8, 8, 8, 8, 9]
+While total time consumed by now, scale:3003/27236, seq_id:A017626, order:20 took:
+ 5.7 seconds, i.e. 0.1 minutes or 0.002 hours.
+CORELIST: False, METHOD: MB, SINDy: False (True also in case of MAVI), GROUND_TRUTH: True, SINDy_default: True, DEBUG: False, OEISformer: False
+n_of_terms_ed: 200, N_OF_TERMS_ED: 200
+Library: non, max_order 20, max_degree: 1, threshold: 0.1, 
+n_more_terms: 10
+Library: non, max_order 20, threshold: 0.1MB: 
+  n_more_terms: 10 MAX_BITSIZE: 50
+
+by degree: unknown_mb and order: 8.
+non_linears:
+['a(n-7) +(-786383/7217)*a(n-8) -73057707683217408/7217', 'a(n-8)^2 -10241073741824*a(n-8) +10995116277760000000000', 'a(n-4) +(-1276230041/7217)*a(n-8) -2187585373234589073408/7217', 'a(n-6) +(-8287894259/3254867)*a(n-8) -3655755393386353262592/3254867', 'a(n-1) +(-431777421817/42271)*a(n-8) -1835739817372251608580096/42271', 'a(n-5) +(-87772410125/3254867)*a(n-8) -88429547697801859694592/3254867', 'a(n-3) +(-249212306047/295897)*a(n-8) -625235831040000000000000/295897', 'a(n-2) +(-945045794353/295897)*a(n-8) -3176155109766287880880128/295897', 'a(n-9) -1073741824']
+A017626: 
+MB not reconst
+truth: 
+a(n) = 11*a(n - 1) + -55*a(n - 2) + 165*a(n - 3) + -330*a(n - 4) + 462*a(n - 5) + -462*a(n - 6) + 330*a(n - 7) + -165*a(n - 8) + 55*a(n - 9) + -11*a(n - 10) + 1*a(n - 11),  
+a(0) = 1073741824, a(1) = 10240000000000, a(2) = 1125899906842624, a(3) = 27197360938418176, a(4) = 303305489096114176, a(5) = 2113922820157210624, a(6) = 10737418240000000000, a(7) = 43438845422363213824, a(8) = 148024428491834392576, a(9) = 441143507864991563776
+
+False  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

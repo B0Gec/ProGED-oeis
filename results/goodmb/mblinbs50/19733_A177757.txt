@@ -1,0 +1,22 @@
+
+orders_used: [16, 17, 18, 18, 19, 19, 20, 20, 20]
+While total time consumed by now, scale:19734/27236, seq_id:A177757, order:20 took:
+ 11.2 seconds, i.e. 0.19 minutes or 0.003 hours.
+CORELIST: False, METHOD: MB, SINDy: False (True also in case of MAVI), GROUND_TRUTH: True, SINDy_default: True, DEBUG: False, OEISformer: False
+n_of_terms_ed: 200, N_OF_TERMS_ED: 200
+Library: non, max_order 20, max_degree: 1, threshold: 0.1, 
+n_more_terms: 10
+Library: non, max_order 20, threshold: 0.1MB: 
+  n_more_terms: 10 MAX_BITSIZE: 50
+
+by degree: unknown_mb and order: 16.
+non_linears:
+['a(n) -8*a(n-2) +28*a(n-4) -56*a(n-6) +70*a(n-8) -56*a(n-10) +28*a(n-12) -8*a(n-14) +a(n-16) -430080', 'a(n-1) -8*a(n-3) +28*a(n-5) -56*a(n-7) +70*a(n-9) -56*a(n-11) +28*a(n-13) -8*a(n-15) +a(n-17) -430080', 'a(n-2) -8*a(n-4) +28*a(n-6) -56*a(n-8) +70*a(n-10) -56*a(n-12) +28*a(n-14) -8*a(n-16) +a(n-18) -430080', 'a(n) -36*a(n-4) +168*a(n-6) -378*a(n-8) +504*a(n-10) -420*a(n-12) +216*a(n-14) -63*a(n-16) +8*a(n-18) -3870720', 'a(n-3) -8*a(n-5) +28*a(n-7) -56*a(n-9) +70*a(n-11) -56*a(n-13) +28*a(n-15) -8*a(n-17) +a(n-19) -430080', 'a(n-1) -36*a(n-5) +168*a(n-7) -378*a(n-9) +504*a(n-11) -420*a(n-13) +216*a(n-15) -63*a(n-17) +8*a(n-19) -3870720', 'a(n-4) -8*a(n-6) +28*a(n-8) -56*a(n-10) +70*a(n-12) -56*a(n-14) +28*a(n-16) -8*a(n-18) +a(n-20) -430080', 'a(n-2) -36*a(n-6) +168*a(n-8) -378*a(n-10) +504*a(n-12) -420*a(n-14) +216*a(n-16) -63*a(n-18) +8*a(n-20) -3870720', 'a(n) -120*a(n-6) +630*a(n-8) -1512*a(n-10) +2100*a(n-12) -1800*a(n-14) +945*a(n-16) -280*a(n-18) +36*a(n-20) -19353600']
+A177757: 
+MB not reconst
+truth: 
+a(n) = 2*a(n - 1) + 6*a(n - 2) + -14*a(n - 3) + -14*a(n - 4) + 42*a(n - 5) + 14*a(n - 6) + -70*a(n - 7) + 0*a(n - 8) + 70*a(n - 9) + -14*a(n - 10) + -42*a(n - 11) + 14*a(n - 12) + 14*a(n - 13) + -6*a(n - 14) + -2*a(n - 15) + 1*a(n - 16),  
+a(0) = 0, a(1) = 0, a(2) = 0, a(3) = 64, a(4) = 600, a(5) = 6912, a(6) = 29400, a(7) = 132864, a(8) = 381024, a(9) = 1139200, a(10) = 2613600, a(11) = 6177600, a(12) = 12269400, a(13) = 24912384, a(14) = 44717400, a(15) = 81636352
+
+False  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

@@ -1,0 +1,22 @@
+
+orders_used: [12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 13]
+While total time consumed by now, scale:2940/27236, seq_id:A017563, order:20 took:
+ 6.9 seconds, i.e. 0.12 minutes or 0.002 hours.
+CORELIST: False, METHOD: MB, SINDy: False (True also in case of MAVI), GROUND_TRUTH: True, SINDy_default: True, DEBUG: False, OEISformer: False
+n_of_terms_ed: 200, N_OF_TERMS_ED: 200
+Library: non, max_order 20, max_degree: 1, threshold: 0.1, 
+n_more_terms: 10
+Library: non, max_order 20, threshold: 0.1MB: 
+  n_more_terms: 10 MAX_BITSIZE: 50
+
+by degree: unknown_mb and order: 12.
+non_linears:
+['a(n-12)^2 -170861562*a(n-12) +373669453125', 'a(n-11) +(-1176211/19531)*a(n-12) -3334482079668/19531', 'a(n-10) +(-14491387/19531)*a(n-12) -204269465744424/19531', 'a(n-9) +(-86897539/19531)*a(n-12) -2680068746529756/19531', 'a(n-8) +(-347687467/19531)*a(n-12) -17526567556617552/19531', 'a(n-7) +(-1075606771/19531)*a(n-12) -76929878511562500/19531', 'a(n-6) +(-2786590171/19531)*a(n-12) -260701284877686648/19531', 'a(n-5) +(-6342141667/19531)*a(n-12) -736802469612064044/19531', 'a(n-4) +(-13078358539/19531)*a(n-12) -1820388228627017376/19531', 'a(n-3) +(-24955599187/19531)*a(n-12) -4054893816731048532/19531', 'a(n-13) -2187']
+A017563: 
+MB not reconst
+truth: 
+a(n) = 8*a(n - 1) + -28*a(n - 2) + 56*a(n - 3) + -70*a(n - 4) + 56*a(n - 5) + -28*a(n - 6) + 8*a(n - 7) + -1*a(n - 8),  
+a(0) = 2187, a(1) = 170859375, a(2) = 10460353203, a(3) = 137231006679, a(4) = 897410677851, a(5) = 3938980639167, a(6) = 13348388671875, a(7) = 37725479487783
+
+False  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

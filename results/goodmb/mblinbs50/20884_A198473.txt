@@ -1,0 +1,22 @@
+
+orders_used: [8]
+While total time consumed by now, scale:20885/27236, seq_id:A198473, order:20 took:
+ 9.2 seconds, i.e. 0.15 minutes or 0.003 hours.
+CORELIST: False, METHOD: MB, SINDy: False (True also in case of MAVI), GROUND_TRUTH: True, SINDy_default: True, DEBUG: False, OEISformer: False
+n_of_terms_ed: 200, N_OF_TERMS_ED: 200
+Library: non, max_order 20, max_degree: 1, threshold: 0.1, 
+n_more_terms: 10
+Library: non, max_order 20, threshold: 0.1MB: 
+  n_more_terms: 10 MAX_BITSIZE: 50
+
+by degree: unknown_mb and order: 8.
+non_linears:
+['a(n)*a(n-1) -a(n-1)*a(n-2) -a(n)*a(n-3) +a(n-2)*a(n-3) -4*a(n) -4*a(n-1) +4*a(n-2) +4*a(n-3) +16', 'a(n-1)*a(n-2) -a(n-2)*a(n-3) -a(n-1)*a(n-4) +a(n-3)*a(n-4) -4*a(n-1) -4*a(n-2) +4*a(n-3) +4*a(n-4) +16', 'a(n-2)^2 +(-2/7)*a(n-2)*a(n-3) +(-8/7)*a(n-2)*a(n-4) +(2/7)*a(n-3)*a(n-4) +(1/7)*a(n-4)^2 +(-6/7)*a(n) -3*a(n-2) +(8/7)*a(n-3) +(3/7)*a(n-4) +20/7', 'a(n)^2 +(-10/7)*a(n-2)*a(n-3) -2*a(n)*a(n-4) +(30/7)*a(n-2)*a(n-4) +(10/7)*a(n-3)*a(n-4) +(-23/7)*a(n-4)^2 +(-65/7)*a(n) +(40/7)*a(n-3) +(-55/7)*a(n-4) +72/7', 'a(n)^2 -a(n-4)^2 +(-2/3)*a(n)*a(n-5) +(2/3)*a(n-4)*a(n-5) +(-31/3)*a(n) +(-10/3)*a(n-2) +(-7/3)*a(n-4) +(16/3)*a(n-5) +32', 'a(n-4)^2 -2*a(n-4)*a(n-6) +a(n-6)^2 +(-3/4)*a(n) -3*a(n-4) +(15/4)*a(n-6) +5', 'a(n-2)^2 -2*a(n-2)*a(n-6) +a(n-6)^2 +(-15/4)*a(n) -5*a(n-2) +(35/4)*a(n-6) +21', 'a(n)^2 -a(n-6)^2 -7*a(n) +2*a(n-1) -6*a(n-2) +2*a(n-3) -6*a(n-4) +2*a(n-5) -7*a(n-6)', 'a(n)*a(n-3) -a(n-3)*a(n-6) +(-1/2)*a(n) +3*a(n-1) -a(n-2) -9*a(n-3) -a(n-4) +3*a(n-5) +(-1/2)*a(n-6)', 'a(n-4)*a(n-5) -3*a(n-4)*a(n-6) -a(n-5)*a(n-6) +3*a(n-6)^2 +(-21/8)*a(n) +3*a(n-2) -4*a(n-5) +(93/8)*a(n-6) +15/2', 'a(n-2)*a(n-4) -a(n-2)*a(n-6) -a(n-4)*a(n-6) +a(n-6)^2 +(-15/8)*a(n) -a(n-2) -3*a(n-4) +(47/8)*a(n-6) +21/2', 'a(n-2)*a(n-3) -3*a(n-2)*a(n-6) -a(n-3)*a(n-6) +3*a(n-6)^2 +(-45/8)*a(n) -8*a(n-3) +5*a(n-4) +(197/8)*a(n-6) +95/2', 'a(n)*a(n-4) -a(n-4)*a(n-6) +(1/2)*a(n) +a(n-1) -3*a(n-2) +a(n-3) -7*a(n-4) +a(n-5) +(-7/2)*a(n-6) -8', 'a(n)*a(n-2) -a(n-2)*a(n-6) +(-7/2)*a(n) +a(n-1) -7*a(n-2) +a(n-3) -3*a(n-4) +a(n-5) +(1/2)*a(n-6) +8', 'a(n)*a(n-5) -a(n-5)*a(n-6) +(7/2)*a(n) +3*a(n-1) -a(n-2) +3*a(n-3) -a(n-4) -9*a(n-5) +(-9/2)*a(n-6) -48', 'a(n) +a(n-1) -a(n-6) -a(n-7) -16', 'a(n-5)^2 -2*a(n-5)*a(n-7) +a(n-7)^2 +(-3/4)*a(n-1) -3*a(n-5) +(15/4)*a(n-7) +5', 'a(n-3)^2 -2*a(n-3)*a(n-7) +a(n-7)^2 +(-15/4)*a(n-1) -5*a(n-3) +(35/4)*a(n-7) +21', 'a(n-1)^2 -a(n-7)^2 -7*a(n-1) +2*a(n-2) -6*a(n-3) +2*a(n-4) -6*a(n-5) +2*a(n-6) -7*a(n-7)', 'a(n-1)*a(n-4) -a(n-4)*a(n-7) +(-1/2)*a(n-1) +3*a(n-2) -a(n-3) -9*a(n-4) -a(n-5) +3*a(n-6) +(-1/2)*a(n-7)', 'a(n-5)*a(n-6) -3*a(n-5)*a(n-7) -a(n-6)*a(n-7) +3*a(n-7)^2 +(-21/8)*a(n-1) +3*a(n-3) -4*a(n-6) +(93/8)*a(n-7) +15/2', 'a(n-3)*a(n-5) -a(n-3)*a(n-7) -a(n-5)*a(n-7) +a(n-7)^2 +(-15/8)*a(n-1) -a(n-3) -3*a(n-5) +(47/8)*a(n-7) +21/2', 'a(n-3)*a(n-4) -3*a(n-3)*a(n-7) -a(n-4)*a(n-7) +3*a(n-7)^2 +(-45/8)*a(n-1) -8*a(n-4) +5*a(n-5) +(197/8)*a(n-7) +95/2', 'a(n-1)*a(n-5) -a(n-5)*a(n-7) +(1/2)*a(n-1) +a(n-2) -3*a(n-3) +a(n-4) -7*a(n-5) +a(n-6) +(-7/2)*a(n-7) -8', 'a(n-1)*a(n-3) -a(n-3)*a(n-7) +(-7/2)*a(n-1) +a(n-2) -7*a(n-3) +a(n-4) -3*a(n-5) +a(n-6) +(1/2)*a(n-7) +8', 'a(n) -a(n-2) -a(n-6) +a(n-8)']
+A198473: 
+a(n) -a(n-2) -a(n-6) +a(n-8)
+truth: 
+a(n) = 0*a(n - 1) + 1*a(n - 2) + 0*a(n - 3) + 0*a(n - 4) + 0*a(n - 5) + 1*a(n - 6) + 0*a(n - 7) + -1*a(n - 8),  
+a(0) = 0, a(1) = 1, a(2) = 4, a(3) = 2, a(4) = 8, a(5) = 3, a(6) = 12, a(7) = 5
+
+True  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

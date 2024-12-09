@@ -1,0 +1,22 @@
+
+orders_used: [5]
+While total time consumed by now, scale:15087/27236, seq_id:A139626, order:20 took:
+ 8.5 seconds, i.e. 0.14 minutes or 0.002 hours.
+CORELIST: False, METHOD: MB, SINDy: False (True also in case of MAVI), GROUND_TRUTH: True, SINDy_default: True, DEBUG: False, OEISformer: False
+n_of_terms_ed: 200, N_OF_TERMS_ED: 200
+Library: non, max_order 20, max_degree: 1, threshold: 0.1, 
+n_more_terms: 10
+Library: non, max_order 20, threshold: 0.1MB: 
+  n_more_terms: 10 MAX_BITSIZE: 50
+
+by degree: unknown_mb and order: 5.
+non_linears:
+['a(n)*a(n-1) -30*a(n-1)^2 +18*a(n)*a(n-2) +36*a(n-1)*a(n-2)', 'a(n-1)*a(n-2) -30*a(n-2)^2 +18*a(n-1)*a(n-3) +36*a(n-2)*a(n-3)', 'a(n)*a(n-2) -540*a(n-2)^2 +6*a(n)*a(n-3) +360*a(n-1)*a(n-3) +648*a(n-2)*a(n-3)', 'a(n)*a(n-1) -30*a(n-1)^2 +10800*a(n-2)^2 -108*a(n)*a(n-3) -7128*a(n-1)*a(n-3) -12960*a(n-2)*a(n-3)', 'a(n-2)*a(n-3) -30*a(n-3)^2 +18*a(n-2)*a(n-4) +36*a(n-3)*a(n-4)', 'a(n-1)*a(n-3) -540*a(n-3)^2 +6*a(n-1)*a(n-4) +360*a(n-2)*a(n-4) +648*a(n-3)*a(n-4)', 'a(n)*a(n-3) -7560*a(n-3)^2 +2*a(n)*a(n-4) +120*a(n-1)*a(n-4) +5040*a(n-2)*a(n-4) +9072*a(n-3)*a(n-4)', 'a(n-1)*a(n-2) -30*a(n-2)^2 +10800*a(n-3)^2 -108*a(n-1)*a(n-4) -7128*a(n-2)*a(n-4) -12960*a(n-3)*a(n-4)', 'a(n)*a(n-2) -540*a(n-2)^2 +259200*a(n-3)^2 -12*a(n)*a(n-4) -2880*a(n-1)*a(n-4) -171504*a(n-2)*a(n-4) -311040*a(n-3)*a(n-4)', 'a(n)*a(n-1) -30*a(n-1)^2 +10800*a(n-2)^2 -5054400*a(n-3)^2 +216*a(n)*a(n-4) +55728*a(n-1)*a(n-4) +3343680*a(n-2)*a(n-4) +6065280*a(n-3)*a(n-4)', 'a(n-3)*a(n-4) -30*a(n-4)^2 +18*a(n-3)*a(n-5) +36*a(n-4)*a(n-5)', 'a(n-2)*a(n-4) -540*a(n-4)^2 +6*a(n-2)*a(n-5) +360*a(n-3)*a(n-5) +648*a(n-4)*a(n-5)', 'a(n-1)*a(n-4) -7560*a(n-4)^2 +2*a(n-1)*a(n-5) +120*a(n-2)*a(n-5) +5040*a(n-3)*a(n-5) +9072*a(n-4)*a(n-5)', 'a(n) -30*a(n-1) +360*a(n-2) -2160*a(n-3) +6480*a(n-4) -7776*a(n-5)']
+A139626: 
+a(n) -30*a(n-1) +360*a(n-2) -2160*a(n-3) +6480*a(n-4) -7776*a(n-5)
+truth: 
+a(n) = 30*a(n - 1) + -360*a(n - 2) + 2160*a(n - 3) + -6480*a(n - 4) + 7776*a(n - 5),  
+a(0) = 1, a(1) = 30, a(2) = 540, a(3) = 7560, a(4) = 90720
+
+True  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

@@ -1,0 +1,22 @@
+
+orders_used: [1, 2, 2, 3, 3, 3, 4, 4, 4, 5, 5, 5, 5, 6]
+While total time consumed by now, scale:27126/27236, seq_id:A351237, order:20 took:
+ 4.3 seconds, i.e. 0.07 minutes or 0.001 hours.
+CORELIST: False, METHOD: MB, SINDy: False (True also in case of MAVI), GROUND_TRUTH: True, SINDy_default: True, DEBUG: False, OEISformer: False
+n_of_terms_ed: 200, N_OF_TERMS_ED: 200
+Library: non, max_order 20, max_degree: 1, threshold: 0.1, 
+n_more_terms: 10
+Library: non, max_order 20, threshold: 0.1MB: 
+  n_more_terms: 10 MAX_BITSIZE: 50
+
+by degree: unknown_mb and order: 1.
+non_linears:
+['a(n) -100000000*a(n-1) +1369863', 'a(n-1) -100000000*a(n-2) +1369863', 'a(n) -10000000000000000*a(n-2) +136986301369863', 'a(n-2) -100000000*a(n-3) +1369863', 'a(n-1) -10000000000000000*a(n-3) +136986301369863', 'a(n) -1000000000000000000000000*a(n-3) +13698630136986301369863', 'a(n-3) -100000000*a(n-4) +1369863', 'a(n-2) -10000000000000000*a(n-4) +136986301369863', 'a(n-1) -1000000000000000000000000*a(n-4) +13698630136986301369863', 'a(n-4) -100000000*a(n-5) +1369863', 'a(n-5)^2 -13698630274*a(n-5) +1876712328769', 'a(n-3) -10000000000000000*a(n-5) +136986301369863', 'a(n-2) -1000000000000000000000000*a(n-5) +13698630136986301369863', 'a(n-6) -137']
+A351237: 
+MB not reconst
+truth: 
+a(n) = 100000001*a(n - 1) + -100000000*a(n - 2),  
+a(0) = 137, a(1) = 13698630137
+
+False  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

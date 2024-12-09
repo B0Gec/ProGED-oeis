@@ -1,0 +1,22 @@
+
+orders_used: [4]
+While total time consumed by now, scale:24564/27236, seq_id:A274380, order:20 took:
+ 5.8 seconds, i.e. 0.1 minutes or 0.002 hours.
+CORELIST: False, METHOD: MB, SINDy: False (True also in case of MAVI), GROUND_TRUTH: True, SINDy_default: True, DEBUG: False, OEISformer: False
+n_of_terms_ed: 200, N_OF_TERMS_ED: 200
+Library: non, max_order 20, max_degree: 1, threshold: 0.1, 
+n_more_terms: 10
+Library: non, max_order 20, threshold: 0.1MB: 
+  n_more_terms: 10 MAX_BITSIZE: 50
+
+by degree: unknown_mb and order: 4.
+non_linears:
+['a(n)^2 +(-127/211)*a(n-1)^2 +(-16426/211)*a(n) +(13474/211)*a(n-1) -39576/211', 'a(n)*a(n-1) +(144/211)*a(n-1)^2 +(-10254/211)*a(n) +(-23382/211)*a(n-1) +794844/211', 'a(n-1)^3 +(-27304/211)*a(n-1)^2 +(-10080/211)*a(n) +(1150116/211)*a(n-1) -15289344/211', 'a(n)*a(n-2) +(-582/13)*a(n) +(-582/13)*a(n-2) +25668/13', 'a(n-2)^2 +(-2532/325)*a(n) +(-312/25)*a(n-1) +(-30274/325)*a(n-2) +978984/325', 'a(n-1)^2 +(-1524/325)*a(n) +(-2134/25)*a(n-1) +(2532/325)*a(n-2) +528288/325', 'a(n)^2 +(-26218/325)*a(n) +(312/25)*a(n-1) +(1524/325)*a(n-2) +257016/325', 'a(n-1)*a(n-2) +(1728/325)*a(n) +(-1002/25)*a(n-1) +(-15354/325)*a(n-2) +556164/325', 'a(n)*a(n-1) +(-14754/325)*a(n) +(-1314/25)*a(n-1) +(-1728/325)*a(n-2) +863748/325', 'a(n-1)*a(n-3) +(-582/13)*a(n-1) +(-582/13)*a(n-3) +25668/13', 'a(n) +a(n-1) +a(n-2) +a(n-3) -178', 'a(n-3)^2 +(-2532/325)*a(n-1) +(-312/25)*a(n-2) +(-30274/325)*a(n-3) +978984/325', 'a(n-2)^2 +(-1524/325)*a(n-1) +(-2134/25)*a(n-2) +(2532/325)*a(n-3) +528288/325', 'a(n-1)^2 +(-26218/325)*a(n-1) +(312/25)*a(n-2) +(1524/325)*a(n-3) +257016/325', 'a(n-2)*a(n-3) +(1728/325)*a(n-1) +(-1002/25)*a(n-2) +(-15354/325)*a(n-3) +556164/325', 'a(n-1)*a(n-2) +(-14754/325)*a(n-1) +(-1314/25)*a(n-2) +(-1728/325)*a(n-3) +863748/325', 'a(n) -a(n-4)']
+A274380: 
+a(n) -a(n-4)
+truth: 
+a(n) = 0*a(n - 1) + 0*a(n - 2) + 0*a(n - 3) + 1*a(n - 4),  
+a(0) = 34, a(1) = 54, a(2) = 42, a(3) = 48
+
+True  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

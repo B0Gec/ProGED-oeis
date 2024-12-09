@@ -1,0 +1,22 @@
+
+orders_used: [6]
+While total time consumed by now, scale:6411/27236, seq_id:A041873, order:20 took:
+ 8.5 seconds, i.e. 0.14 minutes or 0.002 hours.
+CORELIST: False, METHOD: MB, SINDy: False (True also in case of MAVI), GROUND_TRUTH: True, SINDy_default: True, DEBUG: False, OEISformer: False
+n_of_terms_ed: 200, N_OF_TERMS_ED: 200
+Library: non, max_order 20, max_degree: 1, threshold: 0.1, 
+n_more_terms: 10
+Library: non, max_order 20, threshold: 0.1MB: 
+  n_more_terms: 10 MAX_BITSIZE: 50
+
+by degree: unknown_mb and order: 6.
+non_linears:
+['a(n)^2 -44*a(n)*a(n-1) +84*a(n-1)^2 -2*a(n)*a(n-2) +44*a(n-1)*a(n-2) +a(n-2)^2', 'a(n-1)^2 -44*a(n-1)*a(n-2) +84*a(n-2)^2 -2*a(n-1)*a(n-3) +44*a(n-2)*a(n-3) +a(n-3)^2', 'a(n)^2 -90*a(n)*a(n-2) +425*a(n-2)^2 -44*a(n)*a(n-3) +80*a(n-1)*a(n-3) +220*a(n-2)*a(n-3) +4*a(n-3)^2', 'a(n)*a(n-1) -2*a(n)*a(n-2) -85*a(n-1)*a(n-2) +170*a(n-2)^2 -a(n)*a(n-3) -2*a(n-1)*a(n-3) +89*a(n-2)*a(n-3) +2*a(n-3)^2', 'a(n-2)^2 -44*a(n-2)*a(n-3) +84*a(n-3)^2 -2*a(n-2)*a(n-4) +44*a(n-3)*a(n-4) +a(n-4)^2', 'a(n-1)^2 -90*a(n-1)*a(n-3) +425*a(n-3)^2 -44*a(n-1)*a(n-4) +80*a(n-2)*a(n-4) +220*a(n-3)*a(n-4) +4*a(n-4)^2', 'a(n-1)*a(n-2) -2*a(n-1)*a(n-3) -85*a(n-2)*a(n-3) +170*a(n-3)^2 -a(n-1)*a(n-4) -2*a(n-2)*a(n-4) +89*a(n-3)*a(n-4) +2*a(n-4)^2', 'a(n-3)^2 -44*a(n-3)*a(n-4) +84*a(n-4)^2 -2*a(n-3)*a(n-5) +44*a(n-4)*a(n-5) +a(n-5)^2', 'a(n)*a(n-4) -214*a(n-3)*a(n-4) -a(n-4)^2 +(2/5)*a(n)*a(n-5) +(1/5)*a(n-1)*a(n-5) +(-2/5)*a(n-2)*a(n-5) +(-429/5)*a(n-3)*a(n-5) +(8/5)*a(n-4)*a(n-5) +(4/5)*a(n-5)^2', 'a(n)*a(n-3) -9417*a(n-3)*a(n-4) +17976*a(n-4)^2 +(-1/5)*a(n)*a(n-5) +(2/5)*a(n-1)*a(n-5) +(-4/5)*a(n-2)*a(n-5) +(-1918/5)*a(n-3)*a(n-5) +(47081/5)*a(n-4)*a(n-5) +(1068/5)*a(n-5)^2', 'a(n) -214*a(n-3) -a(n-6)']
+A041873: 
+a(n) -214*a(n-3) -a(n-6)
+truth: 
+a(n) = 0*a(n - 1) + 0*a(n - 2) + 214*a(n - 3) + 0*a(n - 4) + 0*a(n - 5) + 1*a(n - 6),  
+a(0) = 1, a(1) = 2, a(2) = 5, a(3) = 212, a(4) = 429, a(5) = 1070
+
+True  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

@@ -1,0 +1,22 @@
+
+orders_used: [7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+While total time consumed by now, scale:22673/27236, seq_id:A236207, order:20 took:
+ 24.3 seconds, i.e. 0.4 minutes or 0.007 hours.
+CORELIST: False, METHOD: MB, SINDy: False (True also in case of MAVI), GROUND_TRUTH: True, SINDy_default: True, DEBUG: False, OEISformer: False
+n_of_terms_ed: 200, N_OF_TERMS_ED: 200
+Library: non, max_order 20, max_degree: 1, threshold: 0.1, 
+n_more_terms: 10
+Library: non, max_order 20, threshold: 0.1MB: 
+  n_more_terms: 10 MAX_BITSIZE: 50
+
+by degree: unknown_mb and order: 7.
+non_linears:
+['a(n)*a(n-3) -a(n)*a(n-7) -a(n-3)*a(n-7) +a(n-7)^2 -5*a(n) -10*a(n-3) +15*a(n-7) +50', 'a(n-1)*a(n-4) -a(n-1)*a(n-8) -a(n-4)*a(n-8) +a(n-8)^2 -5*a(n-1) -10*a(n-4) +15*a(n-8) +50', 'a(n-2)*a(n-5) -a(n-2)*a(n-9) -a(n-5)*a(n-9) +a(n-9)^2 -5*a(n-2) -10*a(n-5) +15*a(n-9) +50', 'a(n-3)*a(n-6) -a(n-3)*a(n-10) -a(n-6)*a(n-10) +a(n-10)^2 -5*a(n-3) -10*a(n-6) +15*a(n-10) +50', 'a(n-4)*a(n-7) -a(n-4)*a(n-11) -a(n-7)*a(n-11) +a(n-11)^2 -5*a(n-4) -10*a(n-7) +15*a(n-11) +50', 'a(n-5)*a(n-8) -a(n-5)*a(n-12) -a(n-8)*a(n-12) +a(n-12)^2 -5*a(n-5) -10*a(n-8) +15*a(n-12) +50', 'a(n-6)*a(n-9) -a(n-6)*a(n-13) -a(n-9)*a(n-13) +a(n-13)^2 -5*a(n-6) -10*a(n-9) +15*a(n-13) +50', 'a(n-7)*a(n-10) -a(n-7)*a(n-14) -a(n-10)*a(n-14) +a(n-14)^2 -5*a(n-7) -10*a(n-10) +15*a(n-14) +50', 'a(n-8)*a(n-11) -a(n-8)*a(n-15) -a(n-11)*a(n-15) +a(n-15)^2 -5*a(n-8) -10*a(n-11) +15*a(n-15) +50', 'a(n-9)*a(n-12) -a(n-9)*a(n-16) -a(n-12)*a(n-16) +a(n-16)^2 -5*a(n-9) -10*a(n-12) +15*a(n-16) +50', 'a(n-10)*a(n-13) -a(n-10)*a(n-17) -a(n-13)*a(n-17) +a(n-17)^2 -5*a(n-10) -10*a(n-13) +15*a(n-17) +50', 'a(n-11)*a(n-14) -a(n-11)*a(n-18) -a(n-14)*a(n-18) +a(n-18)^2 -5*a(n-11) -10*a(n-14) +15*a(n-18) +50', 'a(n-12)*a(n-15) -a(n-12)*a(n-19) -a(n-15)*a(n-19) +a(n-19)^2 -5*a(n-12) -10*a(n-15) +15*a(n-19) +50', 'a(n-13)*a(n-16) -a(n-13)*a(n-20) -a(n-16)*a(n-20) +a(n-20)^2 -5*a(n-13) -10*a(n-16) +15*a(n-20) +50']
+A236207: 
+MB not reconst
+truth: 
+a(n) = 2*a(n - 1) + -1*a(n - 2) + 0*a(n - 3) + 0*a(n - 4) + -1*a(n - 5) + 2*a(n - 6) + -1*a(n - 7) + 0*a(n - 8) + 0*a(n - 9) + -1*a(n - 10) + 2*a(n - 11) + -1*a(n - 12) + 0*a(n - 13) + 0*a(n - 14) + -1*a(n - 15) + 2*a(n - 16) + -1*a(n - 17) + 0*a(n - 18) + 0*a(n - 19) + -1*a(n - 20) + 2*a(n - 21) + -1*a(n - 22) + 0*a(n - 23) + 0*a(n - 24) + -1*a(n - 25) + 2*a(n - 26) + -1*a(n - 27) + 0*a(n - 28) + 0*a(n - 29) + -1*a(n - 30) + 2*a(n - 31) + -1*a(n - 32) + 0*a(n - 33) + 0*a(n - 34) + -1*a(n - 35) + 2*a(n - 36) + -1*a(n - 37),  
+a(0) = 1, a(1) = 2, a(2) = 3, a(3) = 4, a(4) = 6, a(5) = 7, a(6) = 8, a(7) = 9, a(8) = 12, a(9) = 13, a(10) = 14, a(11) = 16, a(12) = 17, a(13) = 18, a(14) = 19, a(15) = 21, a(16) = 23, a(17) = 24, a(18) = 26, a(19) = 27, a(20) = 28, a(21) = 29, a(22) = 31, a(23) = 32, a(24) = 34, a(25) = 36, a(26) = 37, a(27) = 38, a(28) = 39, a(29) = 41, a(30) = 42, a(31) = 43, a(32) = 46, a(33) = 47, a(34) = 48, a(35) = 49, a(36) = 51
+
+False  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

@@ -1,0 +1,22 @@
+
+orders_used: [6]
+While total time consumed by now, scale:6269/27236, seq_id:A041701, order:20 took:
+ 8.9 seconds, i.e. 0.15 minutes or 0.002 hours.
+CORELIST: False, METHOD: MB, SINDy: False (True also in case of MAVI), GROUND_TRUTH: True, SINDy_default: True, DEBUG: False, OEISformer: False
+n_of_terms_ed: 200, N_OF_TERMS_ED: 200
+Library: non, max_order 20, max_degree: 1, threshold: 0.1, 
+n_more_terms: 10
+Library: non, max_order 20, threshold: 0.1MB: 
+  n_more_terms: 10 MAX_BITSIZE: 50
+
+by degree: unknown_mb and order: 6.
+non_linears:
+['a(n)^2 -42*a(n)*a(n-1) +152*a(n-1)^2 -2*a(n)*a(n-2) +42*a(n-1)*a(n-2) +a(n-2)^2', 'a(n-1)^2 -42*a(n-1)*a(n-2) +152*a(n-2)^2 -2*a(n-1)*a(n-3) +42*a(n-2)*a(n-3) +a(n-3)^2', 'a(n)^2 -170*a(n)*a(n-2) +2601*a(n-2)^2 -42*a(n)*a(n-3) +136*a(n-1)*a(n-3) +714*a(n-2)*a(n-3) +16*a(n-3)^2', 'a(n)*a(n-1) -4*a(n)*a(n-2) -153*a(n-1)*a(n-2) +612*a(n-2)^2 -a(n)*a(n-3) -4*a(n-1)*a(n-3) +169*a(n-2)*a(n-3) +4*a(n-3)^2', 'a(n-2)^2 -42*a(n-2)*a(n-3) +152*a(n-3)^2 -2*a(n-2)*a(n-4) +42*a(n-3)*a(n-4) +a(n-4)^2', 'a(n-1)^2 -170*a(n-1)*a(n-3) +2601*a(n-3)^2 -42*a(n-1)*a(n-4) +136*a(n-2)*a(n-4) +714*a(n-3)*a(n-4) +16*a(n-4)^2', 'a(n-1)*a(n-2) -4*a(n-1)*a(n-3) -153*a(n-2)*a(n-3) +612*a(n-3)^2 -a(n-1)*a(n-4) -4*a(n-2)*a(n-4) +169*a(n-3)*a(n-4) +4*a(n-4)^2', 'a(n-3)^2 -42*a(n-3)*a(n-4) +152*a(n-4)^2 -2*a(n-3)*a(n-5) +42*a(n-4)*a(n-5) +a(n-5)^2', 'a(n)*a(n-4) -654*a(n-3)*a(n-4) -a(n-4)^2 +(4/17)*a(n)*a(n-5) +(1/17)*a(n-1)*a(n-5) +(-4/17)*a(n-2)*a(n-5) +(-2617/17)*a(n-3)*a(n-5) +(64/17)*a(n-4)*a(n-5) +(16/17)*a(n-5)^2', 'a(n)*a(n-3) -27469*a(n-3)*a(n-4) +99408*a(n-4)^2 +(-1/17)*a(n)*a(n-5) +(4/17)*a(n-1)*a(n-5) +(-16/17)*a(n-2)*a(n-5) +(-21518/17)*a(n-3)*a(n-5) +(466957/17)*a(n-4)*a(n-5) +(11114/17)*a(n-5)^2', 'a(n) -654*a(n-3) -a(n-6)']
+A041701: 
+a(n) -654*a(n-3) -a(n-6)
+truth: 
+a(n) = 0*a(n - 1) + 0*a(n - 2) + 654*a(n - 3) + 0*a(n - 4) + 0*a(n - 5) + 1*a(n - 6),  
+a(0) = 1, a(1) = 4, a(2) = 17, a(3) = 650, a(4) = 2617, a(5) = 11118
+
+True  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

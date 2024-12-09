@@ -1,0 +1,22 @@
+
+orders_used: [16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 17]
+While total time consumed by now, scale:22442/27236, seq_id:A228510, order:20 took:
+ 7.2 seconds, i.e. 0.12 minutes or 0.002 hours.
+CORELIST: False, METHOD: MB, SINDy: False (True also in case of MAVI), GROUND_TRUTH: True, SINDy_default: True, DEBUG: False, OEISformer: False
+n_of_terms_ed: 200, N_OF_TERMS_ED: 200
+Library: non, max_order 20, max_degree: 1, threshold: 0.1, 
+n_more_terms: 10
+Library: non, max_order 20, threshold: 0.1MB: 
+  n_more_terms: 10 MAX_BITSIZE: 50
+
+by degree: unknown_mb and order: 16.
+non_linears:
+['a(n-15) +(-3913/360)*a(n-16) -3368112', 'a(n-14) +(-6734/99)*a(n-16) -506447616/11', 'a(n-11) +(-40033/12)*a(n-16) -6356193696', 'a(n-10) +(-44758/5)*a(n-16) -20895886080', 'a(n-8) -48685*a(n-16) -156101407488', 'a(n-13) +(-13447/44)*a(n-16) -3603645216/11', 'a(n-9) +(-521755/24)*a(n-16) -60185509488', 'a(n-7) +(-815451/8)*a(n-16) -371757801168', 'a(n-4) -686392*a(n-16) -3419077418496', 'a(n-16)^2 -4803840*a(n-16) +566441164800', 'a(n-17) -120960']
+A228510: 
+MB not reconst
+truth: 
+a(n) = 11*a(n - 1) + -55*a(n - 2) + 165*a(n - 3) + -330*a(n - 4) + 462*a(n - 5) + -462*a(n - 6) + 330*a(n - 7) + -165*a(n - 8) + 55*a(n - 9) + -11*a(n - 10) + 1*a(n - 11),  
+a(0) = 120960, a(1) = 4682880, a(2) = 54268416, a(3) = 364571136, a(4) = 1758756096, a(5) = 6759726336, a(6) = 21978671616, a(7) = 62815154688, a(8) = 161990345088, a(9) = 384087420288, a(10) = 849090198528
+
+False  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    

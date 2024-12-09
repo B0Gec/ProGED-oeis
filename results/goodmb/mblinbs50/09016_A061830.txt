@@ -1,0 +1,22 @@
+
+orders_used: [12, 13, 14, 15, 16, 17, 18, 19, 20]
+While total time consumed by now, scale:9017/27236, seq_id:A061830, order:20 took:
+ 44.7 seconds, i.e. 0.74 minutes or 0.012 hours.
+CORELIST: False, METHOD: MB, SINDy: False (True also in case of MAVI), GROUND_TRUTH: True, SINDy_default: True, DEBUG: False, OEISformer: False
+n_of_terms_ed: 200, N_OF_TERMS_ED: 200
+Library: non, max_order 20, max_degree: 1, threshold: 0.1, 
+n_more_terms: 10
+Library: non, max_order 20, threshold: 0.1MB: 
+  n_more_terms: 10 MAX_BITSIZE: 50
+
+by degree: unknown_mb and order: 12.
+non_linears:
+['a(n-7)^2 -2*a(n-7)*a(n-12) +a(n-12)^2 -1400*a(n-7) +1400*a(n-12) +240000', 'a(n-8)^2 -2*a(n-8)*a(n-13) +a(n-13)^2 -1400*a(n-8) +1400*a(n-13) +240000', 'a(n-9)^2 -2*a(n-9)*a(n-14) +a(n-14)^2 -1400*a(n-9) +1400*a(n-14) +240000', 'a(n-10)^2 -2*a(n-10)*a(n-15) +a(n-15)^2 -1400*a(n-10) +1400*a(n-15) +240000', 'a(n-11)^2 -2*a(n-11)*a(n-16) +a(n-16)^2 -1400*a(n-11) +1400*a(n-16) +240000', 'a(n-12)^2 -2*a(n-12)*a(n-17) +a(n-17)^2 -1400*a(n-12) +1400*a(n-17) +240000', 'a(n-13)^2 -2*a(n-13)*a(n-18) +a(n-18)^2 -1400*a(n-13) +1400*a(n-18) +240000', 'a(n-14)^2 -2*a(n-14)*a(n-19) +a(n-19)^2 -1400*a(n-14) +1400*a(n-19) +240000', 'a(n-15)^2 -2*a(n-15)*a(n-20) +a(n-20)^2 -1400*a(n-15) +1400*a(n-20) +240000']
+A061830: 
+MB not reconst
+truth: 
+a(n) = 1*a(n - 1) + 0*a(n - 2) + 0*a(n - 3) + 0*a(n - 4) + 0*a(n - 5) + 0*a(n - 6) + 0*a(n - 7) + 0*a(n - 8) + 0*a(n - 9) + 0*a(n - 10) + 0*a(n - 11) + 0*a(n - 12) + 0*a(n - 13) + 0*a(n - 14) + 0*a(n - 15) + 0*a(n - 16) + 0*a(n - 17) + 0*a(n - 18) + 0*a(n - 19) + 0*a(n - 20) + 0*a(n - 21) + 0*a(n - 22) + 0*a(n - 23) + 0*a(n - 24) + 1*a(n - 25) + -1*a(n - 26),  
+a(0) = 0, a(1) = 20, a(2) = 40, a(3) = 60, a(4) = 80, a(5) = 200, a(6) = 220, a(7) = 240, a(8) = 260, a(9) = 280, a(10) = 400, a(11) = 420, a(12) = 440, a(13) = 460, a(14) = 480, a(15) = 600, a(16) = 620, a(17) = 640, a(18) = 660, a(19) = 680, a(20) = 800, a(21) = 820, a(22) = 840, a(23) = 860, a(24) = 880, a(25) = 2000
+
+False  -  checked against website ground truth.     
+True  -  "manual" check if equation is correct.    
