@@ -112,6 +112,8 @@ def increasing_mb(seq_id, csv, max_order, n_more_terms, execute, library, n_of_t
         # print('heuristic', heuristic, 'error-threshold', order)
         # print('---> looky here onemb')
         first_generator, ref, ideal = one_mb(seq_cut, order, n_more_terms, execute, library, verbosity=verbosity, n_of_terms=n_of_terms)
+        if (first_generator, ref, ideal) == (None, None, None):
+            break
         # print('---> looky here onemb after')
 
         # print(f'all generators:')
@@ -124,13 +126,13 @@ def increasing_mb(seq_id, csv, max_order, n_more_terms, execute, library, n_of_t
         # return ideal, ref
         printlen = 100
         # print(type(first_generator), type(ideal))
-        if order == 5:
-            print(first_generator[:printlen], ideal[:1000])
+        # if order == 5:
+        #     print(first_generator[:printlen], ideal[:1000])
         if verbosity > 0:
             print(first_generator[:printlen], ideal[:printlen])
         # 1/0
         # printout += f'ideal: {ideal[:printlen]}\nequation: {first_generator[:printlen]}\n'
-        eqs, heqs = ideal_to_eqs(ideal, top_n=10,verbosity=verbosity, max_bitsize=max_bitsize)
+        eqs, heqs = ideal_to_eqs(ideal, top_n=10, verbosity=verbosity, max_bitsize=max_bitsize)
         # print('eqs:,', eqs)
         print('heqs:,', heqs)
         # 1/0
@@ -151,9 +153,7 @@ def increasing_mb(seq_id, csv, max_order, n_more_terms, execute, library, n_of_t
                     print('not useless, checking implicit:')
                 # check = check_implicit(expr, seq)
                 # check = list_evals(expr, seq)
-                print('before check')
                 check = check_implicit_batch(expr, seq, verbosity=0)
-                print('after check')
                 if check:  # Save implicit equation if it is correct.
                     if verbosity >= 1:
                         print('eqution holds!, checking if linear:')
@@ -259,6 +259,15 @@ def one_mb(seq, order, n_more_terms, execute, library='n', verbosity=0, n_of_ter
     if verbosity >= 1:
         print(unique)
     # print('\n-->> looky here')
+
+    CALL_SIZE_LIMIT=128000
+    if len(str(unique)) > CALL_SIZE_LIMIT:
+        unique = ([item for i in range(len(unique)) if len(str(item := unique[:i+1])) < CALL_SIZE_LIMIT] or [None])[-1]
+        if unique is None:
+            return None, None, None
+
+    # print(f'{new_unique == unique = }')
+    # print(len(str(unique)), str(unique)[:30])
     first_generator, ideal = mb(points=unique, execute_cmd=execute, var_names=vars_cocoa, verbosity=verbosity)
     # print('\n-->> looky here')
     if verbosity >= 1:

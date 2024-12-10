@@ -9,3 +9,5 @@ ProGED.egg-info/
 #.*
 julia/breiding/LearningAlgebraicVarieties.jl
 cocoa_location.py
+julia/Polynomial.py
+julia/GenFunLinRec.py

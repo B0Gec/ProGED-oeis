@@ -297,7 +297,7 @@ def check_implicit_batch(mb_eq: str, seq: list[int], verbosity=0) -> bool:
         calls = []
         full_call = ""
         for call in exe_calls:
-            print('len(full_call):', len(full_call))
+            # print('len(full_call):', len(full_call))
             if len(call) > call_size_limit:
                 print('TOO LARGE NUMBERS. Cutting ourselves some slack here, ignoring all further terms.')
                 if full_call != "":
@@ -315,9 +315,6 @@ def check_implicit_batch(mb_eq: str, seq: list[int], verbosity=0) -> bool:
         return wrapped_calls
     cocoa_codes = prepare_batches(exe_calls)
 
-    print("cocoa_codes lengths:")
-    for code in cocoa_codes:
-        print(len(code))
     # print(exe_calls)
     if verbosity >= 1:
         print("cocoa_codes:")

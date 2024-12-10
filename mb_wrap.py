@@ -68,6 +68,11 @@ def mb(points: list, execute_cmd=False, var_names='djus', verbosity=0):
         echo "Points := ... IdealOfPoints;I;" | ./CocoAInterpter
     """
 
+    CALL_SIZE_LIMIT=128000
+    if len(f'{points}') > CALL_SIZE_LIMIT:
+        # raise ValueError(f'cocoa_code is too long: {len(cocoa_code)} > {CALL_SIZE_LIMIT}!!')
+        print(f'\ncocoa_code is probably too long!!!: {len(f"{points}") = } > {CALL_SIZE_LIMIT = }!!\n')
+
     dims = [len(p) for p in points]
     if len(set(dims)) != 1:
         raise ValueError('All points must have the same number of dimensions!!')
@@ -135,6 +140,10 @@ def cocoa_eval(cocoa_code: str, execute_cmd=False, verbosity=0, cluster=False):
         echo "-(12312/243434)*2^3;" | ./CocoAInterpter
     """
 
+    CALL_SIZE_LIMIT=129000
+    if len(cocoa_code) > CALL_SIZE_LIMIT:
+        # raise ValueError(f'cocoa_code is too long: {len(cocoa_code)} > {CALL_SIZE_LIMIT}!!')
+        print(f'\ncocoa_code is probably too long!!!: {len(cocoa_code) = } > {CALL_SIZE_LIMIT = }!!\n')
     command = f"cd ../{cocoa_location[2:]}; echo \"{cocoa_code}\" | ./CoCoAInterpreter"
     if verbosity > 0:
         print('cocoa_code pretty printed:\n', cocoa_code.replace(';', ';\n'))
