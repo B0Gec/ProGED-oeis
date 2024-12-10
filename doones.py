@@ -131,7 +131,7 @@ BUGLIST_BLACKLISTING = True
 # BUGLIST ignores blacklisted sequences !!!!!
 
 CORELIST = True  # have to scrape core sequences!
-CORELIST = False
+# CORELIST = False
 if BUGLIST:
     from buglist import buglist
 REAL_WORLD_BENCH = True
@@ -777,7 +777,7 @@ else:
             is_check = is_check_verbose[0]
 
         if OEISformer:
-            acc_1, acc_10 = check_eq_dasco(x, seq_id, csv, solution_ref=sol_ref, n_input=N_INPUT)
+            acc_1, acc_10 = check_eq_dasco(x, seq_id, solution_ref=sol_ref, n_input=N_INPUT, eq=eq, mb=(METHOD == 'MB'))
             is_reconst = acc_10
             is_check = acc_1
             dasco_result = f'dasco\'s acc_1, acc_10: {acc_1}, {acc_10} is stored in is_reconst and is_check\n'

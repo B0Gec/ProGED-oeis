@@ -16,6 +16,8 @@ from itertools import product
 # else:
 # from ProGED_oeis.diophantine_solver import diophantine_solve
 from diophantine_solver import diophantine_solve
+from eq_ideal import predict_with_explicit
+
 
 # print("IDEA: max ORDER for GRAMMAR = floor(DATASET ROWS (LEN(SEQ)))/2)-1")
 
@@ -882,7 +884,7 @@ def sol_order(x: sp.Matrix, solution_ref: list[str]) -> (int, dict):
     return max([0] + [max([0] + [o for o in orders if str(o) in var]) for var, _ in x_dict.items()]), x_dict
 
 
-def check_eq_dasco(x, seq_id, csv, solution_ref, n_input):
+def check_eq_dasco(x, seq_id, solution_ref, n_input, eq=None, mb=False):
 
     from loadtrans import trans_input, trans_output
     seq = trans_input(seq_id, n_input) + trans_output(seq_id, n_input, n_pred=10)
@@ -893,9 +895,13 @@ def check_eq_dasco(x, seq_id, csv, solution_ref, n_input):
     # print(trans_output(seq_id, n_input, n_pred=10))
     # 1/0
 
-    is_check_verbose = check_eq_man(x, seq_id, csv, header=False, n_of_terms=10 ** 5, solution_ref=solution_ref)
-    # print(is_check_verbose)
-    seq_pred = is_check_verbose[1]
+    if not mb:
+        is_check_verbose = check_eq_man(x, seq_id, csv, header=False, n_of_terms=10 ** 5, solution_ref=solution_ref)
+        # print(is_check_verbose)
+        seq_pred = is_check_verbose[1]
+    else:
+        # seq_pred = predict_with_explicit(eq, seq, n_input, n_pred=10)
+
     # print(seq_pred)
     if seq_pred == 'no reconst':
         # print('predicted sequence: >>', seq_pred, '<<, therefore accuarcy is False')

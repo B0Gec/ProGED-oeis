@@ -15,3 +15,15 @@ SINDy-def | 183 |  514 | 303
       119
 
 
+
+linrec mblinbs50:
+       id |  diff | fail
+    10222 | 14928 | 2086
+
+time:
+dec6 13:27-17:16 = 3h49m
+dec9 10:17-10:40 = 23m
++ 1 min
+total = 4h13m
+
+dec6 13:27-17:16 = 3h49m, dec9 10:17-10:40 = 23m, dec11:  1 min total = 4h13m

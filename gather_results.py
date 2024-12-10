@@ -135,14 +135,14 @@ job_id = 'dilin'
 
 # job_id = 'transfoeis_place'
 # job_id = 'transfoeis_acc'
-# job_id = 'transfoeis_acc2'
-# job_id = 'n15_acc'
+job_id = 'transfoeis_acc2'  # this are official results for n_input=25 (and n_pred=1 and 10)
+# job_id = 'n15_acc'        # this are official results for n_input=25 (and n_pred=1 and 10)
 # # job_id = 'n15_ord5'
 #
 # # 4.12.2024 - 6.12 -? mb linrec
-job_id = 'mblinrec'
-job_id = 'mblint2'      # bitsize=10
-job_id = 'mblinbs50'  # bitsize = 50
+# job_id = 'mblinrec'
+# job_id = 'mblint2'      # bitsize=10
+# job_id = 'mblinbs50'  # bitsize = 50   # this are the reported results dec6-dec11.2024.
 
 print(job_id)
 # 1/0
@@ -193,7 +193,9 @@ time_complexity_dict = {
     'sicor-comb': 'from 15:42 (2023-9-13) to 15:42 (first file, first 33 files to ?, i.e. ? mins) to ',
     'sicor-combalibs': 'from 10:40? (2023-9-15) to 11:15 (first file, first 22 files to 11:22, i.e. ? mins) to ',
     'sicor-lin3': 'legit from 9:31 (2023-9-19) to 9:42 (29 reconstructions 22 files to ?, i.e. ? mins) to 9:56',
+    'mblinbs50':  'dec6 13:27-17:16 = 3h49m - minus 12 min between 13:29-13:31 and 13:37-13:47, dec9 10:17-10:40 = 23m, dec11: 1 min; total = 4h.',
 }
+
 time_complexity_dict[job_id] = 'unknomn' if job_id not in time_complexity_dict else time_complexity_dict[job_id]
 time_complexity = time_complexity_dict[job_id]
 

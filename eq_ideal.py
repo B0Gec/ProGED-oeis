@@ -155,6 +155,34 @@ def is_linear(expr: str) -> bool:
             constants = sum([re.findall('^[^an*]*$', summand) for summand in summands], [])
             return len(constants) == 0
 
+def eq_to_explicit(expr: str) -> bool:
+    """The same as is_linear() - check if the OEIS  expression can be expressed explicitly, i.e. to calculate
+    the next term.
+        Used for experiments vs TM-OEIS.
+
+    Input:
+        - expr: str, OEIS recursive expression.
+    Output:
+        - list, nonempty if the expression is explicit, empty otherwise.
+
+    To make it more robust this follows these steps:
+        1.) Before it is executed, it is checked for linearity. If not, this function is called.
+        2.) optimize order - order_optimize
+          for now skipping the robust one:
+            3.) Check if it contains only one term containing a(n). If so, it is explicit (divide by the rest).
+        4.) Otherwise, situation is more complicated, use sympy's solve for \'a(n)\'.
+    """
+
+    # 1.)  This was supposed to happen before this function was called.
+
+    # 2.) optimize order:
+    expr = order_optimize(expr)
+
+    # 4.) optimize order:
+    from sympy.solvers import solve
+    solutions = solve(expr, 'a(n)')
+    return solutions
+
 def order_optimize(expr: str) -> str:
     """Preprocess the expression (not containing the 'n' variable,) to minimize the recursion order.
         E.g. a(n-1) - 2*a(n-2) -> a(n) - 2*a(n-1)
@@ -272,7 +300,7 @@ def check_implicit(mb_eq: str, seq: list[int]) -> bool:
     print(wanted_zeros)
     non_zeros = [i for i in wanted_zeros if i != '0']
     vanishes = len(non_zeros) == 0
-    return vanishes
+    return vanishes, wanted_zeros
 
 def check_implicit_batch(mb_eq: str, seq: list[int], verbosity=0) -> bool:
     """Alternative to check_implicit, which sends list of instructions to Cocoa which
@@ -374,6 +402,50 @@ def list_evals(mb_eq: str, seq: list[int]) -> list:
     # return
 
 
+def check_explicit(rhs: str, seq: list[int], verbosity=0) -> bool:
+    """Alternative to check_implicit, which sends list of instructions to Cocoa which
+     performs them in whole batch to compensate for signal sending overhead.
+
+     Input:
+        - rhs: str, OEIS recursive expression, where a(n) is asummed to be on lhs. I.e. a(n) = rhs.
+    """
+
+    if 'a(n)' in rhs:
+        raise ValueError('The expression should not contain a(n) on the left hand side!!!')
+
+    implicit = f'{rhs} -a(n)'
+    return check_implicit_batch(implicit, seq, verbosity=verbosity)
+
+
+def predict_with_explicit(mb_rhs: str, train_seq: list[int], n_pred: int) -> bool:
+    """Alternative to check_explicit, instead of checking the equation,
+    just predicts the next term terms.
+
+    Intended for TM-OEIS benchmark, since every rhs will get us some predicted terms.
+
+    Disadvantages: EXTREMELY SLOWER than check_explicit or check_implicit_batch, since it
+    sends plenty of commands to CoCoA.
+    """
+
+    if 'a(n)' in rhs:
+        raise ValueError('The expression should not contain a(n) on the left hand side!!!')
+
+    mb_eq = mb_rhs
+    print(f'{mb_eq = }')
+    order = eq_order_explicit(mb_eq)[1]
+    print('order:', order)
+    wanted_zeros = train_seq
+    for n in range(n_pred):
+        print(f'{wanted_zeros = }')
+        till_now = wanted_zeros + [None]
+        # print('n', n, 'till_now', till_now)
+        evaled = int(expr_eval(mb_eq, till_now)[0])
+        # print('n', n, 'till_now', till_now, f'evaled: {evaled}')
+        wanted_zeros.append(evaled)
+    print(wanted_zeros)
+    return wanted_zeros
+
+
 # maybe for TM-OEIS:
 # def implicit_to_explicit(linear_eq):
 #     return
@@ -459,7 +531,25 @@ if __name__ == '__main__':
     # print('check_implicit:', is_check)
     is_linear_ = is_linear(expr)
     print('is_linear_:', is_linear_)
-    # 1/0
+
+    print()
+    is_explicit_ = eq_to_explicit(expr)
+    print(f'{is_explicit_ = }')
+    from sympy.solvers import solve
+    from sympy import symbols
+
+    # x, y, a_n = symbols('x y, a(n)')
+
+    # print(solve(y + y**3 - x ** 2 - 1, y))
+    # print(solve('y + y**2 - x ** 2 - 1', x))
+    print(solve('a(n-2) + y + y**2 - x ** 2 - 1 +(-7/115)*a(n) ', 'a(n)'))
+
+    print(check_explicit('1*a(n-1) +1*a(n-2)', seq))
+    print()
+    expr = 'a(n-1) +a(n-2)'
+    print(predict_with_explicit(expr, seq[:3], 10))
+
+    1/0
     order_optimized = order_optimize(expr)
     print('order_optimized:', order_optimized)
 
@@ -469,7 +559,7 @@ if __name__ == '__main__':
     vector = linear_to_vec(expr)
     print('vector:', vector)
 
-    check_implicit_batch(expr, seq)
+    print(check_implicit_batch(expr, seq))
     1/0
 
     print('\n ------ after eqs ------')
