@@ -156,14 +156,60 @@ def is_linear(expr: str) -> bool:
             return len(constants) == 0
 
 
+def find_sqrt3(string: str) -> list:
+    """findall() version for finding (expr)**(1/3) in string and extract the correct expression expr.
+        E.g. 'a(n-1)**(1/3)' -> '[(a(n-1), **(1/3)]'
+            '(3 +2*(1+n)^3 -a(n-2))**(1/3)' -> '[(3 +2*(1+n)^3 -a(n-2), **(1/3))]'
+    """
+
+    print('inside find_sqrt3')
+    string = '134*a(n-2) + sqrt((3 +2*(1+n)^3 -a(n-2))**(1/3)) + 3*n^5 + 344 + (2+a(n-1))**(1/3) '
+    print(string)
+    splited = string.split('**(1/3)')
+    print(splited)
+    # 1/0
+    def find_bracket(st: str) -> int:
+        """3 +2*(1+n)^3 (2-a(n-2)) -> 9
+        """
+        st = st[::-1]
+        search = [len([i for i in st[:n] if i == ')']) - len([i for i in st[:n] if i == '(']) for n in range(len(st))]
+        return search.index(0)
+
+    replacement = ''
+    for i in splited[:-1]:
+        print(i)
+        if i[-1] == ')':
+            loc = -find_bracket(i)
+            loc = loc-9 if i[loc-9:loc] in ['FloorSqrt', 'FloorRoot'] else loc
+            full_bracket = i[loc:]
+            print(full_bracket)
+
+            replacement += f"{i[:loc]}FloatRoot({i[loc:]}, 3)"
+            print(replacement)
+    replacement += splited[-1]
+
+
+    1/0
+
+    return 'sqrt(3)' in string or 'sqrt(3)**3' in string
+
 def sympy_to_cocoa(expr: str, order=100) -> str:
     """Convert sympy expression to cocoa expression for further processing.
         E.g. a(n - 1) - 2*a(n - 2) -> a(n-1) - 2*a(n-2)
+             a(n-1)**2 -> a(n-1)^2
     """
 
     bij = {f'a(n - {i})': f'a(n-{i})' for i in range(1, order+1)}
+    bij.update({f'a(n-{i})**(1/3)': f'FloorRoot(a(n-{i}),3)' for i in range(1, order+1)})
+    bij.update({f'a(n-{i})**(1/4)': f'FloorRoot(a(n-{i}),4)' for i in range(1, order+1)})
+    print(bij)
     for key in bij:
         expr = expr.replace(key, bij[key])
+    # for i in re.findall(r'([^()])', expr)
+    # for i in re.findall(r'([^()])', expr)
+    expr = expr.replace('sqrt', 'FloorSqrt')
+    print(find_sqrt3(expr))
+    expr = expr.replace('**', '^')
     return expr
 
 
@@ -192,9 +238,13 @@ def eq_to_explicit(expr: str, seq: list) -> list[str]:
 
     # 4.) optimize order:
     from sympy.solvers import solve
-    solutions = solve(expr, 'a(n)')
-    print(solutions)
-    checked = [rhs for sol in solutions if check_explicit((rhs:= sympy_to_cocoa(str(sol))), seq)]
+    if "I" in expr:
+        raise ValueError('Variable names might clash with imaginary unit "I" !!!')
+    sympy_solutions = solve(expr, 'a(n)', quartics=False)  # to avoid Piecewise output like in: expr =' a(n)^4 +a(n) -n*a(n)^2 - n '
+    print('solutions:', sympy_solutions)
+    non_imaginary = [rhs for solution in sympy_solutions if "I" not in (rhs:= sympy_to_cocoa(str(solution)))]
+    print('non_imaginary solutions:', non_imaginary)
+    checked = [rhs for rhs in non_imaginary if check_explicit(rhs, seq)]
     explicits = [f'a(n) = {solution}' for solution in checked]
     print(explicits)
     return explicits
@@ -381,6 +431,13 @@ def check_implicit_batch(mb_eq: str, seq: list[int], verbosity=0) -> bool:
     if verbosity >= 2:
         print('executes:', executes)
     res_dict = {'true': True, 'false': False}
+    for i in executes:
+        print(i)
+    print(executes)
+    print(len(executes))
+    if 'ERROR: Division by zero' in "".join(executes):
+        return False
+    # 1/0
     anss = [res_dict[ans] for ans in executes]
     if verbosity >= 2:
         print('anss:', anss)
@@ -434,6 +491,10 @@ def check_explicit(rhs: str, seq: list[int], verbosity=0) -> bool:
         raise ValueError('The expression should not contain a(n) on the left hand side!!!')
 
     implicit = f'{rhs} -a(n)'
+    print(implicit)
+    a =  check_implicit_batch(implicit, seq, verbosity=4)
+    print(a)
+    # 1/0
     return check_implicit_batch(implicit, seq, verbosity=verbosity)
 
 

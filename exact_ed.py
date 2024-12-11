@@ -904,7 +904,7 @@ def check_eq_dasco(x, seq_id, solution_ref, n_input, eq=None, mb=False):
     else:
         from eq_ideal import predict_with_explicit
         train_seq = trans_input(seq_id, n_input)
-        seq_pred = predict_with_explicit(eq, train_seq, n_pred=10)
+        seq_pred = predict_with_explicit(eq[len('a(n) = '):], train_seq, n_pred=10)
 
     # print(seq_pred)
     if seq_pred == 'no reconst':

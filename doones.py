@@ -130,14 +130,14 @@ BUGLIST = False
 BUGLIST_BLACKLISTING = True
 # BUGLIST ignores blacklisted sequences !!!!!
 
-CORELIST = True  # have to scrape core sequences!
-CORELIST = False
+CORELIST = True  # have to scrape core sequences!  # also for OEISformer
+# CORELIST = False
 if BUGLIST:
     from buglist import buglist
 REAL_WORLD_BENCH = True
 
 GROUND_TRUTH = True
-GROUND_TRUTH = False
+# GROUND_TRUTH = False
 
 # if not DEBUG and BUGLIST:
 #     print("\nWarning!!!!! buglist is used outside debug mode!!")
@@ -612,6 +612,7 @@ else:
         print('Attempting doone for', seq_id)
         non_linears = []
 
+        eqs_explicit = []
         # try:
         if SINDy:
             print('Attempting SINDy (or Mavi) for', seq_id)
@@ -717,7 +718,6 @@ else:
             # grid = sindy_grid(seq, seq_id, csv, coeffs, max_order=5, seq_len=30)
             # for max_order_item in grid:
             #     print(max_order_item[0:])
-
 
         elif METHOD == 'MB':
             print('Attempting MB for', seq_id)

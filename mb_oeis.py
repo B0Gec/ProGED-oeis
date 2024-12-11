@@ -164,9 +164,13 @@ def increasing_mb(seq_id, csv, max_order, n_more_terms, execute, library, n_of_t
                         if not explicit:
                             return non_linears, eq, x, orders_used, []
                         else:
-                            eqs_explicit = eq_to_explicit(eq, list(seq))
+                            print()
+                            print('expr:', expr)
+                            print()
+                            eqs_explicit = eq_to_explicit(expr, list(seq))
                             if eqs_explicit:
-                                eq = eqs_explicit[0][len('a(n) = '):]
+                                eq = eqs_explicit[0]
+                                print('increasing_mb\'s explicit eq:', eq)
                                 return non_linears, eq, x, orders_used, eqs_explicit
                             else:
                                 continue
