@@ -116,7 +116,7 @@ job_id = 'silin'
 job_id = 'sicor1114'
 
 job_id = 'dilin'
-# job_id = 'findicor'
+job_id = 'findicor'
 
 # # # job_id = 'sideflin'  # fail: not even sindy
 # # # job_id = 'sidefcor'  # fail: not even sindy
@@ -133,30 +133,36 @@ job_id = 'dilin'
 # job_id = 'dicor-atMb'
 # job_id = 'sicor-atMb'
 
-# job_id = 'transfoeis_place'
-# job_id = 'transfoeis_acc'
-job_id = 'transfoeis_acc2'  # this are official results for n_input=25 (and n_pred=1 and 10)
-# job_id = 'n15_acc'        # this are official results for n_input=25 (and n_pred=1 and 10)
-# # job_id = 'n15_ord5'
-#
-# # 4.12.2024 - 6.12 -? mb linrec
-# job_id = 'mblinrec'
-# job_id = 'mblint2'      # bitsize=10
+# # job_id = 'transfoeis_place'
+# # job_id = 'transfoeis_acc'
+# job_id = 'transfoeis_acc2'  # this are official results for n_input=25 (and n_pred=1 and 10)
+# job_id = 'n15_acc'        # this are official results for n_input=15 (and n_pred=1 and 10)
+# # # job_id = 'n15_ord5'
+# #
+# # # 4.12.2024 - 6.12 -? mb linrec
+# # job_id = 'mblinrec'
+# # job_id = 'mblint2'      # bitsize=10
 # job_id = 'mblinbs50'  # bitsize = 50   # this are the reported results dec6-dec11.2024.
+job_id = 'mbcor'  # bitsize = 50   # this are the reported results from dec11.2024.
 
 print(job_id)
 # 1/0
 
 # fname = 'results/good/01234567/34500_A000032.txt'
-base_dir = "results/good/"
-# base_dir = "results/goodmavi/"
-if job_id in ('mblinrec', 'mblint2', 'mblinbs50'):
-    base_dir = "results/goodmb/"
+# base_dir = "results/good/"
+base_dir = "results/goodmb/"
+# base_dir = "results/goodmavi/"  # mavicore0, maviterms50
+# if job_id in ('mblinrec', 'mblint2', 'mblinbs50', 'mbcor'):
+#     base_dir = "results/goodmb/"
+if job_id in ('dilin', 'silin', 'sdlin',
+              'sicor9fix2', 'sicor1114', 'findicor',
+              'transfoeis_acc2', 'n15_acc', 'mblinbs50'):
+    base_dir = "results/good/"
 
 CORES = True if job_id in ("diocores77", 'diocor-merge', 'sindycore83', 'dicor-cub', 'dicor-cub19',
                            'fdiocores', 'fdiocorefix', 'fdiocorefix2', 'sicor116', 'dicorrep', 'sicor9fix2', 'sicor1114',
                            'findicor', 'sdcor2', 'mavicore0', 'maviterms50', 'dicor-atMb', 'sicor-atMb',
-                           'transfoeis_place') else False
+                           'transfoeis_place', 'mbcor') else False
 
 # CORES = True
 # CORES = False
@@ -428,7 +434,7 @@ def extract_file(fname, verbosity=VERBOSITY, job_id=job_id):
     PRINT_EQS = True
     if PRINT_EQS:
         if is_check and CORES:
-            print('\'', is_check, fname[-11:-4], ':', eq, '\',')
+            print('\'printing eq:', is_check, fname[-17:-12], fname[-11:-4], ':', eq, '\',')
 
     # re_manual =
     # we_found, is_reconst, is_check, = not (re_found == []), bool(re_reconst[0]), bool(re_manual[0]),

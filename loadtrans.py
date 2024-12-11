@@ -26,7 +26,7 @@ dic = {i[0]: [int(j) for j in i[1].split(',')] for i in pairs}
 # print(dic['A000466'])
 # print(pairs[:3])
 # print(els[:3])
-print(f'{len(pairs)} sequences ...             found in OEISformer database')
+# print(f'{len(pairs)} sequences ...             found in OEISformer database')
 
 def trans_input(seq_id, n_input):
     if n_input not in (15, 25):

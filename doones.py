@@ -39,7 +39,7 @@ EXECUTE_REAL = True
 
 
 OEISformer = True
-OEISformer = False
+# OEISformer = False
 if OEISformer:
     from loadtrans import csv_input, csv_zerows
     N_INPUT = 15
@@ -131,13 +131,13 @@ BUGLIST_BLACKLISTING = True
 # BUGLIST ignores blacklisted sequences !!!!!
 
 CORELIST = True  # have to scrape core sequences!
-# CORELIST = False
+CORELIST = False
 if BUGLIST:
     from buglist import buglist
 REAL_WORLD_BENCH = True
 
 GROUND_TRUTH = True
-# GROUND_TRUTH = False
+GROUND_TRUTH = False
 
 # if not DEBUG and BUGLIST:
 #     print("\nWarning!!!!! buglist is used outside debug mode!!")
@@ -244,6 +244,7 @@ TASK_ID = 479
 TASK_ID = 1151
 TASK_ID = 23808
 # first 200  order 5 non_manuals: ['00158', '00369', '00463', '00479'] 4
+TASK_ID = 25
 
 
 JOB_ID = "000000"
@@ -728,9 +729,10 @@ else:
             # VERBOSITY = 0
 
             seq, coeffs, truth = unpack_seq(seq_id, csv) if GROUND_TRUTH else (unnan(csv[seq_id]), None, None)
-            non_linears, eq, x, orders_used = increasing_mb(seq_id, csv, max_order_, n_more_terms, execute=EXECUTE_REAL,
+            non_linears, eq, x, orders_used, eqs_explicit = increasing_mb(seq_id, csv, max_order_, n_more_terms, execute=EXECUTE_REAL,
                                                             library=library, n_of_terms=n_of_terms_ed,
-                                                            ground_truth=GROUND_TRUTH, verbosity=0, max_bitsize=MAX_BITSIZE)
+                                                            ground_truth=GROUND_TRUTH, verbosity=0, max_bitsize=MAX_BITSIZE,
+                                                            explicit=OEISformer)
             deg_used, order_used = 'unknown_mb', 'unknown_mb'
             output_string += f'orders_used: {orders_used}\n'
             # print(orders_used)
@@ -816,7 +818,7 @@ else:
         # elif task_id in INCREASING_FREQS:
         #     print_results(results, verbosity=1)
         # # except Exception as RuntimeError
-        return eq, truth, x, deg_used, order_used, is_reconst, is_check, non_linears, timing_print, output_string
+        return eq, truth, x, deg_used, order_used, is_reconst, is_check, non_linears, eqs_explicit, timing_print, output_string
 
     # print('outer after', max_order)
 
@@ -831,7 +833,7 @@ else:
         _, timing_print = timer(now=start, text=f"While total time consumed by now, scale:{task_id + 1}/{n_of_seqs}, "
                                                 f"seq_id:{seq_id}, order:{max_order}")
     else:
-        eq, truth, x, deg_used, order_used, is_reconst, is_check, non_linears, timing_print, output_string = \
+        eq, truth, x, deg_used, order_used, is_reconst, is_check, non_linears, eqs_explicit, timing_print, output_string = \
             doone(task_id=task_id, seq_id=seq_id, linear=True)
     # results += [doone(task_id=task_id, seq_id=seq_id)]
     # results += [(seq_id, eq, truth, x, is_reconst, is_check)]
@@ -844,7 +846,7 @@ else:
     if METHOD == 'MB':
         output_string += f'\n  MB:  n_more_terms: {n_more_terms}'
         output_string += f' MAX_BITSIZE: {MAX_BITSIZE}'
-    output_string += f"\n\nby degree: {deg_used} and order: {order_used}.\nnon_linears:\n{non_linears}\n{seq_id}: \n{eq}" if not MODE == 'black_check' else ""
+    output_string += f"\n\nby degree: {deg_used} and order: {order_used}.\neqs_explicit:\n{eqs_explicit}\nnon_linears:\n{non_linears}\n{seq_id}: \n{eq}" if not MODE == 'black_check' else ""
     output_string += f"\ntruth: \n{truth}\n\n"
     output_string += f'{is_reconst}  -  checked against website ground truth.     \n'
     output_string += f'{is_check}  -  \"manual\" check if equation is correct.    \n'

@@ -155,7 +155,19 @@ def is_linear(expr: str) -> bool:
             constants = sum([re.findall('^[^an*]*$', summand) for summand in summands], [])
             return len(constants) == 0
 
-def eq_to_explicit(expr: str) -> bool:
+
+def sympy_to_cocoa(expr: str, order=100) -> str:
+    """Convert sympy expression to cocoa expression for further processing.
+        E.g. a(n - 1) - 2*a(n - 2) -> a(n-1) - 2*a(n-2)
+    """
+
+    bij = {f'a(n - {i})': f'a(n-{i})' for i in range(1, order+1)}
+    for key in bij:
+        expr = expr.replace(key, bij[key])
+    return expr
+
+
+def eq_to_explicit(expr: str, seq: list) -> list[str]:
     """The same as is_linear() - check if the OEIS  expression can be expressed explicitly, i.e. to calculate
     the next term.
         Used for experiments vs TM-OEIS.
@@ -181,7 +193,12 @@ def eq_to_explicit(expr: str) -> bool:
     # 4.) optimize order:
     from sympy.solvers import solve
     solutions = solve(expr, 'a(n)')
-    return solutions
+    print(solutions)
+    checked = [rhs for sol in solutions if check_explicit((rhs:= sympy_to_cocoa(str(sol))), seq)]
+    explicits = [f'a(n) = {solution}' for solution in checked]
+    print(explicits)
+    return explicits
+
 
 def order_optimize(expr: str) -> str:
     """Preprocess the expression (not containing the 'n' variable,) to minimize the recursion order.
@@ -410,6 +427,9 @@ def check_explicit(rhs: str, seq: list[int], verbosity=0) -> bool:
         - rhs: str, OEIS recursive expression, where a(n) is asummed to be on lhs. I.e. a(n) = rhs.
     """
 
+    print('inside check_explicit')
+    print('rhs:', rhs, f'{seq = }')
+
     if 'a(n)' in rhs:
         raise ValueError('The expression should not contain a(n) on the left hand side!!!')
 
@@ -427,7 +447,7 @@ def predict_with_explicit(mb_rhs: str, train_seq: list[int], n_pred: int) -> boo
     sends plenty of commands to CoCoA.
     """
 
-    if 'a(n)' in rhs:
+    if 'a(n)' in mb_rhs:
         raise ValueError('The expression should not contain a(n) on the left hand side!!!')
 
     mb_eq = mb_rhs
@@ -515,11 +535,12 @@ if __name__ == '__main__':
     print(bitsize_)
 
     expr = 'a(n) -a(n-1) -a(n-2)'
-    expr = ' -a(n-1) -a(n-2)'
+    # expr = ' -a(n-1) -a(n-2)'
+    # expr = ' a(n-1) +a(n-2)'
     # expr = 'n + n^2 - n^3'
     # expr = 'a(n-6)*a(n+14) - a(n-2)'
     # expr = 'a(n-6) +a(n-14) -a(n-2)'
-    expr = 'a(n) +13*n -34'
+    # expr = 'a(n) +13*n -34'
     # expr =   '+(-7/16875)*a(n-1)^4 +(-200704/15)*n^3 '
     # expr =   '+(-7/16875)*a(n-1)*a(n-2) +(-200704/15)*n*a(n)'
 
@@ -533,8 +554,10 @@ if __name__ == '__main__':
     print('is_linear_:', is_linear_)
 
     print()
-    is_explicit_ = eq_to_explicit(expr)
+    is_explicit_ = eq_to_explicit(expr, seq)
     print(f'{is_explicit_ = }')
+
+    1/0
     from sympy.solvers import solve
     from sympy import symbols
 
@@ -545,6 +568,8 @@ if __name__ == '__main__':
     print(solve('a(n-2) + y + y**2 - x ** 2 - 1 +(-7/115)*a(n) ', 'a(n)'))
 
     print(check_explicit('1*a(n-1) +1*a(n-2)', seq))
+
+    1/0
     print()
     expr = 'a(n-1) +a(n-2)'
     print(predict_with_explicit(expr, seq[:3], 10))

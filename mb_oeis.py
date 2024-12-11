@@ -1,4 +1,4 @@
-"""  MUBEED? MUller-BuchbErgEr-ED or MBEED MB exact ED
+"""  MOADEEB MOeller-Buchberger Algorithm based Discovery of Exact Equations
 file with domb (do moeller-buchberger) to replace increase_one in doone.py
 
 Settings expeperiences from 14.10.2024:
@@ -12,7 +12,7 @@ Modules map:
                 -> eq_ideal
                        \
                        \/
-                -> exact_ed  -> mb_wrap.
+                -> exact_ed -> mb_wrap.
 """
 
 from enum import unique
@@ -27,7 +27,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 from eq_ideal import ideal_to_eqs, check_implicit, linear_to_vec, is_linear, order_optimize, list_evals, \
-    check_implicit_batch
+    check_implicit_batch, eq_to_explicit
 # TAKELESSTERMS = True  # take less terms than 200, to make MB faster and maybe even more precise.
 
 from sindy_oeis import preprocess, solution_vs_truth
@@ -60,7 +60,7 @@ def external_prettyprint(ideal, sol_ref= [f'a(n-{i})' for i in range(1, 16)]) ->
 
 
 def increasing_mb(seq_id, csv, max_order, n_more_terms, execute, library, n_of_terms=10**6,
-                  ground_truth=False, verbosity=0, max_bitsize=30) -> str:
+                  ground_truth=False, verbosity=0, max_bitsize=30, explicit=False) -> tuple[list, str, list, int, list]:
     """
     Run a for loop of increasing order where I run Moeller-Buchberger algorithm on a given sequence.
     """
@@ -108,7 +108,7 @@ def increasing_mb(seq_id, csv, max_order, n_more_terms, execute, library, n_of_t
                 print('I PUT THE BRAKES ON, since TOO FEW TERMS - to AVOID ERRORS!')
             break
         seq_cut = seq[:heuristic]
-        # print('len seq:', len(seq_cut), 'seq:', seq_cut)
+        # print('len seq:', len(seq_cut), 'seq:', seq_cut, type(seq), type(seq_cut))
         # print('heuristic', heuristic, 'error-threshold', order)
         # print('---> looky here onemb')
         first_generator, ref, ideal = one_mb(seq_cut, order, n_more_terms, execute, library, verbosity=verbosity, n_of_terms=n_of_terms)
@@ -153,14 +153,24 @@ def increasing_mb(seq_id, csv, max_order, n_more_terms, execute, library, n_of_t
                     print('not useless, checking implicit:')
                 # check = check_implicit(expr, seq)
                 # check = list_evals(expr, seq)
-                check = check_implicit_batch(expr, seq, verbosity=0)
+                check = check_implicit_batch(expr, seq, verbosity=0)  # Possible error since seq= sp.Matrix
+
                 if check:  # Save implicit equation if it is correct.
                     if verbosity >= 1:
                         print('eqution holds!, checking if linear:')
                     non_linears += [expr]  # will count as non_id
                     orders_used += [max_order_]
                     if not ground_truth:
-                        return non_linears, eq, x, orders_used
+                        if not explicit:
+                            return non_linears, eq, x, orders_used, []
+                        else:
+                            eqs_explicit = eq_to_explicit(eq, list(seq))
+                            if eqs_explicit:
+                                eq = eqs_explicit[0][len('a(n) = '):]
+                                return non_linears, eq, x, orders_used, eqs_explicit
+                            else:
+                                continue
+
                     if is_linear(expr):
                         if verbosity >= 1:
                             print('eqution is linear!, converting to vector:')
@@ -173,8 +183,8 @@ def increasing_mb(seq_id, csv, max_order, n_more_terms, execute, library, n_of_t
                         x = x_candidate
                         if verbosity >= 1:
                             print('linear:', x)
-                        return non_linears, expr, x, [len(x)]
-    return non_linears, eq, x, orders_used
+                        return non_linears, expr, x, [len(x)], []
+    return non_linears, eq, x, orders_used, []
 
 
 def one_mb(seq, order, n_more_terms, execute, library='n', verbosity=0, n_of_terms=200) -> tuple:

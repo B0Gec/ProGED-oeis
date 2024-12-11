@@ -16,7 +16,7 @@ from itertools import product
 # else:
 # from ProGED_oeis.diophantine_solver import diophantine_solve
 from diophantine_solver import diophantine_solve
-from eq_ideal import predict_with_explicit
+from loadtrans import trans_input, trans_output
 
 
 # print("IDEA: max ORDER for GRAMMAR = floor(DATASET ROWS (LEN(SEQ)))/2)-1")
@@ -885,8 +885,10 @@ def sol_order(x: sp.Matrix, solution_ref: list[str]) -> (int, dict):
 
 
 def check_eq_dasco(x, seq_id, solution_ref, n_input, eq=None, mb=False):
+    """Check if the equation holds for the sequence, to calculate prediction accuracy for
+    n_input=15 or 25 and n_pred=1 or 10 as in the paper by d'Ascoli."""
 
-    from loadtrans import trans_input, trans_output
+
     seq = trans_input(seq_id, n_input) + trans_output(seq_id, n_input, n_pred=10)
     csv = pd.DataFrame({seq_id: seq})
     # print(csv)
@@ -900,7 +902,9 @@ def check_eq_dasco(x, seq_id, solution_ref, n_input, eq=None, mb=False):
         # print(is_check_verbose)
         seq_pred = is_check_verbose[1]
     else:
-        # seq_pred = predict_with_explicit(eq, seq, n_input, n_pred=10)
+        from eq_ideal import predict_with_explicit
+        train_seq = trans_input(seq_id, n_input)
+        seq_pred = predict_with_explicit(eq, train_seq, n_pred=10)
 
     # print(seq_pred)
     if seq_pred == 'no reconst':
