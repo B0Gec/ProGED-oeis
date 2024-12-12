@@ -1,0 +1,25 @@
+
+orders_used: [9, 9, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10]
+dasco's acc_1, acc_10: False, False is stored in is_reconst and is_check
+n_input: 15
+While total time consumed by now, scale:432/10000, seq_id:A002323, order:10 took:
+ 7.9 seconds, i.e. 0.13 minutes or 0.002 hours.
+CORELIST: False, METHOD: MB, SINDy: False (True also in case of MAVI), GROUND_TRUTH: False, SINDy_default: True, DEBUG: False, OEISformer: True
+n_of_terms_ed: 200, N_OF_TERMS_ED: 200
+Library: n, max_order 10, max_degree: 3, threshold: 0.1, 
+n_more_terms: 10
+Library: n, max_order 10, threshold: 0.1
+  MB:  n_more_terms: 10 MAX_BITSIZE: 50
+
+by degree: unknown_mb and order: 9.
+eqs_explicit:
+[]
+non_linears:
+['a(n-9)^2 +(2968/1227)*a(n-5) +(-656/1227)*a(n-6) +(-424/1227)*a(n-7) +(3704/1227)*a(n-8) +(-18820/1227)*a(n-9) +427/409', 'a(n-1) +(-127/1227)*a(n-5) +(1814/1227)*a(n-6) +(-3137/1227)*a(n-7) +(-5933/1227)*a(n-8) +(2917/1227)*a(n-9) +2701/409', 'n +(-35/197)*a(n-7) +(-39/394)*a(n-8) +(-5/394)*a(n-9) +(-97/197)*a(n-10) -1671/197', 'a(n-10)^2 +(64/197)*a(n-7) +(-212/197)*a(n-8) +(-108/197)*a(n-9) +(-408/197)*a(n-10) +427/197', 'a(n-9)*a(n-10) +(92/197)*a(n-7) +(40/197)*a(n-8) +(-697/197)*a(n-9) +(-685/197)*a(n-10) +1685/197', 'a(n-6) +(-70/197)*a(n-7) +(119/394)*a(n-8) +(581/394)*a(n-9) +(-2161/394)*a(n-10) -183/394', 'a(n-5) +(-37/197)*a(n-7) +(-333/197)*a(n-8) +(51/394)*a(n-9) +(3673/394)*a(n-10) -4350/197', 'a(n-8)*a(n-9) +(68/197)*a(n-7) +(-767/197)*a(n-8) +(-755/197)*a(n-9) +(650/197)*a(n-10) +1451/197', 'a(n-1) +(-404/197)*a(n-7) +(-1075/197)*a(n-8) +(83/394)*a(n-9) +(3575/394)*a(n-10) +986/197', 'a(n-8)*a(n-10) +(316/197)*a(n-7) +(-1293/197)*a(n-8) +(-484/197)*a(n-9) +(1039/197)*a(n-10) -71/197', 'a(n-7)*a(n-8) +(-715/197)*a(n-7) +(-525/197)*a(n-8) +(160/197)*a(n-9) +(-490/197)*a(n-10) +3125/197', 'a(n-4) +(-261/197)*a(n-7) +(803/197)*a(n-8) +(699/197)*a(n-9) +(-5685/394)*a(n-10) +1313/394']
+A002323: 
+MB not reconst
+truth: 
+None
+
+False  -  checked against website ground truth.     
+False  -  "manual" check if equation is correct.    

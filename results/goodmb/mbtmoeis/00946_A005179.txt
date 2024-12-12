@@ -1,0 +1,25 @@
+
+orders_used: [9, 9, 9, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10]
+dasco's acc_1, acc_10: False, False is stored in is_reconst and is_check
+n_input: 15
+While total time consumed by now, scale:947/10000, seq_id:A005179, order:10 took:
+ 12.2 seconds, i.e. 0.2 minutes or 0.003 hours.
+CORELIST: False, METHOD: MB, SINDy: False (True also in case of MAVI), GROUND_TRUTH: False, SINDy_default: True, DEBUG: False, OEISformer: True
+n_of_terms_ed: 200, N_OF_TERMS_ED: 200
+Library: n, max_order 10, max_degree: 3, threshold: 0.1, 
+n_more_terms: 10
+Library: n, max_order 10, threshold: 0.1
+  MB:  n_more_terms: 10 MAX_BITSIZE: 50
+
+by degree: unknown_mb and order: 9.
+eqs_explicit:
+[]
+non_linears:
+['n +(-437/326)*a(n-5) +(4829/652)*a(n-6) +(8128/163)*a(n-7) +(6521/326)*a(n-8) +(-71773/326)*a(n-9) -8361/163', 'a(n-5)*a(n-8) +(-600/163)*a(n-5) +(540/163)*a(n-6) +(-3304/163)*a(n-7) +(-9616/163)*a(n-8) +(15432/163)*a(n-9) +18160/163', 'a(n-5)*a(n-9) +(320/163)*a(n-5) +(-4200/163)*a(n-6) +(-30012/163)*a(n-7) +(-12432/163)*a(n-8) +(126864/163)*a(n-9) +35520/163', 'a(n-8)*a(n-10) +70*a(n-7) +270*a(n-8) -12*a(n-9) -1224*a(n-10) -256', 'a(n-7)*a(n-9) +178*a(n-7) +656*a(n-8) -216*a(n-9) -2712*a(n-10) -560', 'a(n-9)*a(n-10) +23*a(n-7) +(424/5)*a(n-8) +(-98/5)*a(n-9) +(-1832/5)*a(n-10) -368/5', 'a(n-2) -3*a(n-7) +(-994/5)*a(n-8) +(-422/5)*a(n-9) +(2922/5)*a(n-10) +1808/5', 'a(n-10)^2 +(41/2)*a(n-7) +(394/5)*a(n-8) +(-33/5)*a(n-9) +(-1762/5)*a(n-10) -368/5', 'a(n-9)^2 +46*a(n-7) +(828/5)*a(n-8) +(-286/5)*a(n-9) +(-3444/5)*a(n-10) -696/5', 'a(n-6) +(-19/3)*a(n-7) +(-602/15)*a(n-8) +(-72/5)*a(n-9) +(882/5)*a(n-10) +524/15', 'n +(-13/12)*a(n-7) +(-59/15)*a(n-8) +(7/10)*a(n-9) +(163/10)*a(n-10) -82/15', 'a(n-8)*a(n-9) +56*a(n-7) +(1028/5)*a(n-8) +(-176/5)*a(n-9) +(-4584/5)*a(n-10) -896/5', 'a(n-5) -73*a(n-7) +(-1198/5)*a(n-8) +(426/5)*a(n-9) +(4934/5)*a(n-10) +1136/5']
+A005179: 
+MB not reconst
+truth: 
+None
+
+False  -  checked against website ground truth.     
+False  -  "manual" check if equation is correct.    

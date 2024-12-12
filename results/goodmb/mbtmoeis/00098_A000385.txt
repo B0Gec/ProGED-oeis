@@ -1,0 +1,25 @@
+
+orders_used: [10, 10, 10, 10, 10]
+dasco's acc_1, acc_10: False, False is stored in is_reconst and is_check
+n_input: 15
+While total time consumed by now, scale:99/10000, seq_id:A000385, order:10 took:
+ 5.7 seconds, i.e. 0.09 minutes or 0.002 hours.
+CORELIST: False, METHOD: MB, SINDy: False (True also in case of MAVI), GROUND_TRUTH: False, SINDy_default: True, DEBUG: False, OEISformer: True
+n_of_terms_ed: 200, N_OF_TERMS_ED: 200
+Library: n, max_order 10, max_degree: 3, threshold: 0.1, 
+n_more_terms: 10
+Library: n, max_order 10, threshold: 0.1
+  MB:  n_more_terms: 10 MAX_BITSIZE: 50
+
+by degree: unknown_mb and order: 10.
+eqs_explicit:
+[]
+non_linears:
+['n +(-209/11347)*a(n-7) +(-104/1621)*a(n-8) +(569/11347)*a(n-9) +(874/11347)*a(n-10) -13920/1621', 'a(n-1) +(-21220/1621)*a(n-7) +(-16024/1621)*a(n-8) +(85398/1621)*a(n-9) +(-48310/1621)*a(n-10) -179600/1621', 'a(n-6) +(10119/11347)*a(n-7) +(-4745/1621)*a(n-8) +(-43945/11347)*a(n-9) +(67028/11347)*a(n-10) -59645/1621', 'a(n-5) +(-39182/11347)*a(n-7) +(-2946/1621)*a(n-8) +(110853/11347)*a(n-9) +(-63088/11347)*a(n-10) -11256/1621', 'a(n-3) +(-79792/11347)*a(n-7) +(-9736/1621)*a(n-8) +(303774/11347)*a(n-9) +(-157340/11347)*a(n-10) -57450/1621']
+A000385: 
+MB not reconst
+truth: 
+None
+
+False  -  checked against website ground truth.     
+False  -  "manual" check if equation is correct.    

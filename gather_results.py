@@ -144,6 +144,7 @@ job_id = 'findicor'
 # # job_id = 'mblint2'      # bitsize=10
 # job_id = 'mblinbs50'  # bitsize = 50   # this are the reported results dec6-dec11.2024.
 job_id = 'mbcor'  # bitsize = 50   # this are the reported results from dec11.2024.
+job_id = 'mbtmoeis'    # mb on tmoeis first attempt
 
 print(job_id)
 # 1/0
@@ -162,12 +163,15 @@ if job_id in ('dilin', 'silin', 'sdlin',
 CORES = True if job_id in ("diocores77", 'diocor-merge', 'sindycore83', 'dicor-cub', 'dicor-cub19',
                            'fdiocores', 'fdiocorefix', 'fdiocorefix2', 'sicor116', 'dicorrep', 'sicor9fix2', 'sicor1114',
                            'findicor', 'sdcor2', 'mavicore0', 'maviterms50', 'dicor-atMb', 'sicor-atMb',
-                           'transfoeis_place', 'mbcor') else False
+                           'transfoeis_place', 'mbcor', 'mbtmoeis') else False
 
 # CORES = True
 # CORES = False
 if CORES:
     csv_cols = list(pd.read_csv('cores_test.csv').columns)
+    if job_id in ('transfoei_place', 'transfoeis_acc', 'transfoeis_acc2', 'n15_acc', 'mbtmoeis'):
+        from loadtrans import csv_zerows
+        csv_cols = list(csv_zerows.columns)
     # print(csv_cols)
     # 1/0
 
@@ -200,6 +204,7 @@ time_complexity_dict = {
     'sicor-combalibs': 'from 10:40? (2023-9-15) to 11:15 (first file, first 22 files to 11:22, i.e. ? mins) to ',
     'sicor-lin3': 'legit from 9:31 (2023-9-19) to 9:42 (29 reconstructions 22 files to ?, i.e. ? mins) to 9:56',
     'mblinbs50':  'dec6 13:27-17:16 = 3h49m - minus 12 min between 13:29-13:31 and 13:37-13:47, dec9 10:17-10:40 = 23m, dec11: 1 min; total = 4h.',
+    'mbcor': 'dec10 13:52-13:54 = 2min',
 }
 
 time_complexity_dict[job_id] = 'unknomn' if job_id not in time_complexity_dict else time_complexity_dict[job_id]

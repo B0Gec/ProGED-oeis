@@ -156,42 +156,65 @@ def is_linear(expr: str) -> bool:
             return len(constants) == 0
 
 
-def find_sqrt3(string: str) -> list:
+def replace_sqrt3(string: str, power=3) -> list:
     """findall() version for finding (expr)**(1/3) in string and extract the correct expression expr.
+
         E.g. 'a(n-1)**(1/3)' -> '[(a(n-1), **(1/3)]'
             '(3 +2*(1+n)^3 -a(n-2))**(1/3)' -> '[(3 +2*(1+n)^3 -a(n-2), **(1/3))]'
+
+    Input:
+        - string: str, OEIS recursive expression.
+        - power: int, power of the root, to generalize from **(1/3) to **(1/power), e.g. **(1/4).
     """
 
-    print('inside find_sqrt3')
-    string = '134*a(n-2) + sqrt((3 +2*(1+n)^3 -a(n-2))**(1/3)) + 3*n^5 + 344 + (2+a(n-1))**(1/3) '
-    print(string)
-    splited = string.split('**(1/3)')
-    print(splited)
+    # print('inside replace_sqrt3')
+    # string = '134*a(n-2) + FloorSqrt((3 +2*(1+n)^3 -a(n-2))**(1/3)) + 3*n^5 + 344 + (2+a(n-1))**(1/3) '
+    # string = '134*a(n-2) + ((3 +2*(1+n)^3 -a(n-2))**(1/3)) + 3*n^5 + 344 + (2+a(n-1))**(1/3) '
+    # string = '134*a(n-2) + ((3 +2*(1+n)^3 -an-242**(1/3)) + 3*n^5 + 344 + (2+a(n-1))**(1/3) '
+    # print(string)
+    splited = string.split(f'**(1/{power})')
+    # print(splited)
     # 1/0
     def find_bracket(st: str) -> int:
         """3 +2*(1+n)^3 (2-a(n-2)) -> 9
         """
+        # print(' inside find bracket')
+        # print(st)
         st = st[::-1]
-        search = [len([i for i in st[:n] if i == ')']) - len([i for i in st[:n] if i == '(']) for n in range(len(st))]
-        return search.index(0)
+        # print(st)
+        search = [len([i for i in st[:n] if i == ')']) - len([i for i in st[:n] if i == '(']) for n in range(1, len(st))]
+        # print(search)
+        return search.index(0)+1
 
     replacement = ''
     for i in splited[:-1]:
-        print(i)
+        # print(i)
         if i[-1] == ')':
             loc = -find_bracket(i)
+            # print(f'{loc = }')
+            # print(f'{i[loc:] = }')
             loc = loc-9 if i[loc-9:loc] in ['FloorSqrt', 'FloorRoot'] else loc
+            # print(f'{loc = }')
             full_bracket = i[loc:]
-            print(full_bracket)
+            # print(f'{full_bracket = }')
 
-            replacement += f"{i[:loc]}FloatRoot({i[loc:]}, 3)"
-            print(replacement)
+            replacement += f"{i[:loc]}FloorRoot({i[loc:]}, {power})"
+            # print(replacement)
+        elif re.findall(r'\d', i[-1]):
+            number = re.findall(r'\d+$', i)[0]
+            loc = -len(number)
+            replacement += f"{i[:loc]}FloorRoot({i[loc:]}, {power})"
+            # print(replacement)
+        else:
+            raise ValueError('Unforseen combination of **(1/3) with other things! error in replace_sqrt3 function!!!  '
+                             '   ... input has no closing bracket or digit at the end!!!')
     replacement += splited[-1]
 
+    # print(f'{replacement = }')
 
-    1/0
+    # 1/0
 
-    return 'sqrt(3)' in string or 'sqrt(3)**3' in string
+    return replacement
 
 def sympy_to_cocoa(expr: str, order=100) -> str:
     """Convert sympy expression to cocoa expression for further processing.
@@ -202,14 +225,25 @@ def sympy_to_cocoa(expr: str, order=100) -> str:
     bij = {f'a(n - {i})': f'a(n-{i})' for i in range(1, order+1)}
     bij.update({f'a(n-{i})**(1/3)': f'FloorRoot(a(n-{i}),3)' for i in range(1, order+1)})
     bij.update({f'a(n-{i})**(1/4)': f'FloorRoot(a(n-{i}),4)' for i in range(1, order+1)})
-    print(bij)
+    bij.update({f'n**(1/3)': f'FloorRoot(n,3)'})
+    bij.update({f'n**(1/4)': f'FloorRoot(n,4)'})
+    # print(bij)
     for key in bij:
         expr = expr.replace(key, bij[key])
     # for i in re.findall(r'([^()])', expr)
     # for i in re.findall(r'([^()])', expr)
     expr = expr.replace('sqrt', 'FloorSqrt')
-    print(find_sqrt3(expr))
+    sqrt3 = False
+    if "**(1/3)" in expr:
+        sqrt3 = True
+        print("**(1/3) is in expression!!!")
+        print('expr:', expr)
+    expr = replace_sqrt3(expr, power=3)
+    expr = replace_sqrt3(expr, power=4)
     expr = expr.replace('**', '^')
+    # print('expr:', expr)
+    if sqrt3:
+        print('replaced expr:', expr)
     return expr
 
 
@@ -241,12 +275,12 @@ def eq_to_explicit(expr: str, seq: list) -> list[str]:
     if "I" in expr:
         raise ValueError('Variable names might clash with imaginary unit "I" !!!')
     sympy_solutions = solve(expr, 'a(n)', quartics=False)  # to avoid Piecewise output like in: expr =' a(n)^4 +a(n) -n*a(n)^2 - n '
-    print('solutions:', sympy_solutions)
+    # print('solutions:', sympy_solutions)
     non_imaginary = [rhs for solution in sympy_solutions if "I" not in (rhs:= sympy_to_cocoa(str(solution)))]
-    print('non_imaginary solutions:', non_imaginary)
+    # print('non_imaginary solutions:', non_imaginary)
     checked = [rhs for rhs in non_imaginary if check_explicit(rhs, seq)]
     explicits = [f'a(n) = {solution}' for solution in checked]
-    print(explicits)
+    # print(explicits)
     return explicits
 
 
@@ -419,25 +453,27 @@ def check_implicit_batch(mb_eq: str, seq: list[int], verbosity=0) -> bool:
     # cocoa_code = f'li := [{" ".join(exe_calls).replace(";", ",")[:-1]}]; min(li) = max(li) and max(li) = 0;'
     # print(len(cocoa_code))
 
-    # 1/0
     # if verbosity >= 1:
     #     print('cocoa_code:', cocoa_code)
-    # 1/0
     # cocoa_res = cocoa_eval(cocoa_code, execute_cmd=True, verbosity=0)
     # print('len of code', len(cocoa_code))
     # print('lens of cocoa codes:')
     # print([len(cocoa_code) for cocoa_code in cocoa_codes])
+
     executes = [cocoa_eval(cocoa_code, execute_cmd=True, verbosity=0) for cocoa_code in prepare_batches(exe_calls)]
     if verbosity >= 2:
         print('executes:', executes)
     res_dict = {'true': True, 'false': False}
-    for i in executes:
-        print(i)
-    print(executes)
-    print(len(executes))
-    if 'ERROR: Division by zero' in "".join(executes):
+    full_output = "".join(executes)
+    if 'ERROR: Division by zero' in full_output:
         return False
-    # 1/0
+    elif "--> ERROR: Value must be non-negative\n--> [CoCoALib] FloorSqrt(N)" in full_output:
+        # print('Catched non negative FloorSqrt(N) error!!!')
+        return False
+    # for exe in executes:
+    #     print(exe)
+    #     print(exe[:])
+
     anss = [res_dict[ans] for ans in executes]
     if verbosity >= 2:
         print('anss:', anss)
@@ -484,21 +520,20 @@ def check_explicit(rhs: str, seq: list[int], verbosity=0) -> bool:
         - rhs: str, OEIS recursive expression, where a(n) is asummed to be on lhs. I.e. a(n) = rhs.
     """
 
-    print('inside check_explicit')
-    print('rhs:', rhs, f'{seq = }')
+    # print('inside check_explicit')
+    # print('rhs:', rhs, f'{seq = }')
 
     if 'a(n)' in rhs:
         raise ValueError('The expression should not contain a(n) on the left hand side!!!')
 
     implicit = f'{rhs} -a(n)'
-    print(implicit)
-    a =  check_implicit_batch(implicit, seq, verbosity=4)
-    print(a)
+    # print(implicit)
+    # print(a)
     # 1/0
     return check_implicit_batch(implicit, seq, verbosity=verbosity)
 
 
-def predict_with_explicit(mb_rhs: str, train_seq: list[int], n_pred: int) -> bool:
+def predict_with_explicit(mb_rhs: str, train_seq: list[int], n_pred: int, verbosity=0) -> list[int]:
     """Alternative to check_explicit, instead of checking the equation,
     just predicts the next term terms.
 
@@ -512,18 +547,32 @@ def predict_with_explicit(mb_rhs: str, train_seq: list[int], n_pred: int) -> boo
         raise ValueError('The expression should not contain a(n) on the left hand side!!!')
 
     mb_eq = mb_rhs
-    print(f'{mb_eq = }')
+    if verbosity >= 1:
+        print(f'{mb_eq = }')
     order = eq_order_explicit(mb_eq)[1]
-    print('order:', order)
+    if verbosity >= 1:
+        print('order:', order)
     wanted_zeros = train_seq
     for n in range(n_pred):
-        print(f'{wanted_zeros = }')
+        # print(f'{wanted_zeros = }')
         till_now = wanted_zeros + [None]
         # print('n', n, 'till_now', till_now)
-        evaled = int(expr_eval(mb_eq, till_now)[0])
-        # print('n', n, 'till_now', till_now, f'evaled: {evaled}')
+        rational = expr_eval(mb_eq, till_now)[0]
+        if 'ERROR: Division by zero' in rational:
+            return wanted_zeros
+        elif "--> ERROR: Value must be non-negative\n--> [CoCoALib] FloorSqrt(N)" in rational:
+            return wanted_zeros
+        print(rational)
+
+        # 1/0
+        evaled = int(cocoa_eval(f'floor({rational});', execute_cmd=True))
+        # evaled = int(rational) if '/' not in rational else [round(int(i) / int(j)) for i, j in [tuple(rational.split('/'))]][0]
+        print('n', n, 'till_now', till_now, f'evaled: {evaled}')
+        if verbosity >= 1:
+            print('n', n, 'till_now', till_now, f'evaled: {evaled}')
         wanted_zeros.append(evaled)
-    print(wanted_zeros)
+    if verbosity >= 1:
+        print(wanted_zeros)
     return wanted_zeros
 
 
@@ -618,7 +667,7 @@ if __name__ == '__main__':
     is_explicit_ = eq_to_explicit(expr, seq)
     print(f'{is_explicit_ = }')
 
-    1/0
+    # 1/0
     from sympy.solvers import solve
     from sympy import symbols
 
@@ -630,12 +679,12 @@ if __name__ == '__main__':
 
     print(check_explicit('1*a(n-1) +1*a(n-2)', seq))
 
-    1/0
+    # 1/0
     print()
     expr = 'a(n-1) +a(n-2)'
     print(predict_with_explicit(expr, seq[:3], 10))
 
-    1/0
+    # 1/0
     order_optimized = order_optimize(expr)
     print('order_optimized:', order_optimized)
 
@@ -645,6 +694,10 @@ if __name__ == '__main__':
     vector = linear_to_vec(expr)
     print('vector:', vector)
 
+    expr = 'a(n)*a(n-1) -a(n-1)^2 -a(n)*a(n-2) +a(n-1)*a(n-2) -a(n) +a(n-2) +1'
+    # expr = 'a(n) -a(n-1) -1'
+    seq = [0, 1, 1, 2, 1, 2, 2, 3, 1, 2, 2, 3, 2, 3, 3, 4, 1, 2, 2, 3, 2, 3, 3, 4, 2, 3, 3, 4, 3, 4, 4, 5, 1, 2, 2, 3, 2, 3, 3, 4, 2, 3, 3, 4, 3, 4, 4, 5, 2, 3, 3, 4, 3, 4, 4, 5, 3, 4, 4, 5, 4, 5, 5, 6, 1, 2, 2, 3, 2, 3, 3, 4, 2, 3, 3, 4, 3, 4, 4, 5, 2, 3, 3, 4, 3, 4, 4, 5, 3, 4, 4, 5, 4, 5, 5, 6, 2, 3, 3, 4, 3, 4, 4, 5, 3]
+    print('expr:', expr, 'seq:', seq)
     print(check_implicit_batch(expr, seq))
     1/0
 

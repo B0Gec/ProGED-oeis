@@ -1,0 +1,25 @@
+
+orders_used: [10, 10, 10, 10, 10, 10, 10, 10, 10]
+dasco's acc_1, acc_10: False, False is stored in is_reconst and is_check
+n_input: 15
+While total time consumed by now, scale:596/10000, seq_id:A003336, order:10 took:
+ 8.4 seconds, i.e. 0.14 minutes or 0.002 hours.
+CORELIST: False, METHOD: MB, SINDy: False (True also in case of MAVI), GROUND_TRUTH: False, SINDy_default: True, DEBUG: False, OEISformer: True
+n_of_terms_ed: 200, N_OF_TERMS_ED: 200
+Library: n, max_order 10, max_degree: 3, threshold: 0.1, 
+n_more_terms: 10
+Library: n, max_order 10, threshold: 0.1
+  MB:  n_more_terms: 10 MAX_BITSIZE: 50
+
+by degree: unknown_mb and order: 10.
+eqs_explicit:
+[]
+non_linears:
+['n +(-931/3095)*a(n-7) +(-140/619)*a(n-8) +(126/619)*a(n-9) +(2428/3095)*a(n-10) +52226/3095', 'a(n-5) +(-4163/619)*a(n-7) +(-4396/619)*a(n-8) +(2966/619)*a(n-9) +(11930/619)*a(n-10) +307478/619', 'a(n-6) +(-18619/619)*a(n-7) +(-13720/619)*a(n-8) +(12348/619)*a(n-9) +(49322/619)*a(n-10) +1597195/619', 'a(n-3) +(-115974/3095)*a(n-7) +(-16090/619)*a(n-8) +(15100/619)*a(n-9) +(295229/3095)*a(n-10) +1873694/619', 'a(n-4) +(85651/3095)*a(n-7) +(63501/3095)*a(n-8) +(-63279/3095)*a(n-9) +(-237137/3095)*a(n-10) -8300812/3095', 'a(n-2) +(-264224/3095)*a(n-7) +(-39584/619)*a(n-8) +(184937/3095)*a(n-9) +(702912/3095)*a(n-10) +4481408/619', 'a(n-1) +(-48992/3095)*a(n-7) +(-43431/3095)*a(n-8) +(35312/3095)*a(n-9) +(134928/3095)*a(n-10) +2952336/3095', 'a(n-10)^2 +(616680/619)*a(n-7) +(452220/619)*a(n-8) +(-436710/619)*a(n-9) +(-1699131/619)*a(n-10) -54218944/619', 'a(n-9)*a(n-10) +(989780/619)*a(n-7) +(711570/619)*a(n-8) +(-730168/619)*a(n-9) +(-2652558/619)*a(n-10) -86235274/619']
+A003336: 
+MB not reconst
+truth: 
+None
+
+False  -  checked against website ground truth.     
+False  -  "manual" check if equation is correct.    

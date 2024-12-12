@@ -244,7 +244,15 @@ TASK_ID = 479
 TASK_ID = 1151
 TASK_ID = 23808
 # first 200  order 5 non_manuals: ['00158', '00369', '00463', '00479'] 4
-TASK_ID = 25
+TASK_ID = 26  # fibo in TM-OEIS
+# TASK_ID = 25
+# TASK_ID = 4
+# TASK_ID = 5
+# TASK_ID = 22
+# TASK_ID = 138  # FloatRoot instead of FloorRoot
+# TASK_ID = 601  # dividing too big numbers in predict_with_emplicit
+# TASK_ID = 145
+# TASK_ID = 255
 
 
 JOB_ID = "000000"
