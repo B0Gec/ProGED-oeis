@@ -170,7 +170,7 @@ def increasing_mb(seq_id, csv, max_order, n_more_terms, execute, library, n_of_t
                             eqs_explicit = eq_to_explicit(expr, list(seq))
                             if eqs_explicit:
                                 eq = eqs_explicit[0]  # all solutions are checked, so take only the first one.
-                                print('increasing_mb\'s explicit eq:', eq)
+                                # print('increasing_mb\'s explicit eq:', eq)
                                 return non_linears, eq, x, orders_used, eqs_explicit
                             else:
                                 continue

@@ -43,7 +43,7 @@ OEISformer = True
 if OEISformer:
     from loadtrans import csv_input, csv_zerows
     N_INPUT = 15
-    # N_INPUT = 25
+    N_INPUT = 25
     print(f'OEISformer: True, n_input: {N_INPUT}, special input database used.')
 
 METHOD = 'Diofantos'
@@ -197,6 +197,8 @@ else:
 
 # mavi:
 # MAX_ORDER = 1  # mavi
+if OEISformer and METHOD == 'MB':
+    MAX_ORDER = 20
 
 # THRESHOLD = 0.2  # For sindy - masking threshold.
 THRESHOLD = 0.1  # For sindy - masking threshold.
@@ -250,9 +252,12 @@ TASK_ID = 26  # fibo in TM-OEIS
 # TASK_ID = 5
 # TASK_ID = 22
 # TASK_ID = 138  # FloatRoot instead of FloorRoot
-# TASK_ID = 601  # dividing too big numbers in predict_with_emplicit
-# TASK_ID = 145
+TASK_ID = 601  # dividing too big numbers in predict_with_emplicit
+TASK_ID = 145
 # TASK_ID = 255
+TASK_ID = 26
+# TASK_ID = 51
+# TASK_ID = 1367
 
 
 JOB_ID = "000000"

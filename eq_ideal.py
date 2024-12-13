@@ -470,9 +470,8 @@ def check_implicit_batch(mb_eq: str, seq: list[int], verbosity=0) -> bool:
     elif "--> ERROR: Value must be non-negative\n--> [CoCoALib] FloorSqrt(N)" in full_output:
         # print('Catched non negative FloorSqrt(N) error!!!')
         return False
-    # for exe in executes:
-    #     print(exe)
-    #     print(exe[:])
+    elif "--> ERROR: Expecting type INT" in full_output:
+        return False
 
     anss = [res_dict[ans] for ans in executes]
     if verbosity >= 2:
@@ -552,7 +551,7 @@ def predict_with_explicit(mb_rhs: str, train_seq: list[int], n_pred: int, verbos
     order = eq_order_explicit(mb_eq)[1]
     if verbosity >= 1:
         print('order:', order)
-    wanted_zeros = train_seq
+    wanted_zeros = train_seq.copy()
     for n in range(n_pred):
         # print(f'{wanted_zeros = }')
         till_now = wanted_zeros + [None]
@@ -562,12 +561,12 @@ def predict_with_explicit(mb_rhs: str, train_seq: list[int], n_pred: int, verbos
             return wanted_zeros
         elif "--> ERROR: Value must be non-negative\n--> [CoCoALib] FloorSqrt(N)" in rational:
             return wanted_zeros
-        print(rational)
 
         # 1/0
-        evaled = int(cocoa_eval(f'floor({rational});', execute_cmd=True))
+        # evaled = int(cocoa_eval(f'floor({rational});', execute_cmd=True))
+        evaled = int(cocoa_eval(f'round({rational});', execute_cmd=True))
         # evaled = int(rational) if '/' not in rational else [round(int(i) / int(j)) for i, j in [tuple(rational.split('/'))]][0]
-        print('n', n, 'till_now', till_now, f'evaled: {evaled}')
+        # print('n', n, 'till_now', till_now, f'evaled: {evaled}')
         if verbosity >= 1:
             print('n', n, 'till_now', till_now, f'evaled: {evaled}')
         wanted_zeros.append(evaled)

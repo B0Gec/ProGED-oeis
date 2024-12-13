@@ -135,7 +135,7 @@ job_id = 'findicor'
 
 # # job_id = 'transfoeis_place'
 # # job_id = 'transfoeis_acc'
-# job_id = 'transfoeis_acc2'  # this are official results for n_input=25 (and n_pred=1 and 10)
+job_id = 'transfoeis_acc2'  # this are official results for n_input=25 (and n_pred=1 and 10)
 # job_id = 'n15_acc'        # this are official results for n_input=15 (and n_pred=1 and 10)
 # # # job_id = 'n15_ord5'
 # #
@@ -143,8 +143,11 @@ job_id = 'findicor'
 # # job_id = 'mblinrec'
 # # job_id = 'mblint2'      # bitsize=10
 # job_id = 'mblinbs50'  # bitsize = 50   # this are the reported results dec6-dec11.2024.
-job_id = 'mbcor'  # bitsize = 50   # this are the reported results from dec11.2024.
-job_id = 'mbtmoeis'    # mb on tmoeis first attempt
+# job_id = 'mbcor'  # bitsize = 50   # this are the reported results from dec11.2024.
+# job_id = 'mbtmoeis'    # mb on tmoeis first attempt
+# job_id = 'mbtmord20'
+job_id = 'mbtmord20r'
+job_id = 'mbtmN25'
 
 print(job_id)
 # 1/0
@@ -160,16 +163,20 @@ if job_id in ('dilin', 'silin', 'sdlin',
               'transfoeis_acc2', 'n15_acc', 'mblinbs50'):
     base_dir = "results/good/"
 
-CORES = True if job_id in ("diocores77", 'diocor-merge', 'sindycore83', 'dicor-cub', 'dicor-cub19',
+TMOEIS = job_id in ('transfoei_place', 'transfoeis_acc', 'transfoeis_acc2', 'n15_acc', 'mbtmoeis', 'mbtmord20',
+                    'mbtmord20r', 'mbtmN25')
+
+CORES = job_id in ("diocores77", 'diocor-merge', 'sindycore83', 'dicor-cub', 'dicor-cub19',
                            'fdiocores', 'fdiocorefix', 'fdiocorefix2', 'sicor116', 'dicorrep', 'sicor9fix2', 'sicor1114',
                            'findicor', 'sdcor2', 'mavicore0', 'maviterms50', 'dicor-atMb', 'sicor-atMb',
-                           'transfoeis_place', 'mbcor', 'mbtmoeis') else False
+                           'transfoeis_place', 'mbcor', 'mbtmoeis', 'mbtmord20', 'mbtmord20r', ) or TMOEIS
+
 
 # CORES = True
 # CORES = False
 if CORES:
     csv_cols = list(pd.read_csv('cores_test.csv').columns)
-    if job_id in ('transfoei_place', 'transfoeis_acc', 'transfoeis_acc2', 'n15_acc', 'mbtmoeis'):
+    if TMOEIS:
         from loadtrans import csv_zerows
         csv_cols = list(csv_zerows.columns)
     # print(csv_cols)
@@ -438,7 +445,7 @@ def extract_file(fname, verbosity=VERBOSITY, job_id=job_id):
 
     PRINT_EQS = True
     if PRINT_EQS:
-        if is_check and CORES:
+        if is_check and CORES and not TMOEIS:
             print('\'printing eq:', is_check, fname[-17:-12], fname[-11:-4], ':', eq, '\',')
 
     # re_manual =
@@ -783,7 +790,14 @@ _a, _b, _, n_of_seqs, avg_is_best, true_confs, eq, cx_order_winner, cx_nonzero_w
     = extract_file(job_dir + files[0], verbosity=1)
 if CORES:
     n_of_seqs = 164
-# print(n_of_seqs)
+if TMOEIS:
+    n_of_seqs = 10000
+
+manual_n_of_seqs = False
+# manual_n_of_seqs = 1000
+n_of_seqs = manual_n_of_seqs or n_of_seqs
+
+print(f'{n_of_seqs = }')
 
 # # 10.) checked that no_truth == mia task ids from experiment job_id = "blacklist76"
 # csv_filename = 'linear_database_full.csv'

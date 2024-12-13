@@ -896,6 +896,7 @@ def check_eq_dasco(x, seq_id, solution_ref, n_input, eq=None, mb=False):
     # csv[seq_id] += [trans_output(seq_id, n_input, n_pred=10)]
     # print(trans_output(seq_id, n_input, n_pred=10))
     # 1/0
+    # print(f'{seq = }, {len(seq) = }, {n_input = }')
 
     if not mb:
         is_check_verbose = check_eq_man(x, seq_id, csv, header=False, n_of_terms=10 ** 5, solution_ref=solution_ref)
@@ -904,21 +905,29 @@ def check_eq_dasco(x, seq_id, solution_ref, n_input, eq=None, mb=False):
     else:
         from eq_ideal import predict_with_explicit
         train_seq = trans_input(seq_id, n_input)
+        # print(f'{len(train_seq) = }')
         if eq == 'MB not reconst':
             seq_pred = 'no reconst'
         else:
-            seq_pred = predict_with_explicit(eq[len('a(n) = '):], train_seq, n_pred=10)
-            print(f'{seq_pred = }')
+            # print(f'{len(train_seq) = }')
+            seq_pred = predict_with_explicit(eq[len('a(n) = '):], train_seq, n_pred=10, verbosity=0)
+            # print(f'{seq_pred = }, {len(seq_pred) = }')
+            # print(f'{len(train_seq) = }')
             limit = 310  # For python's float division: cutting us some slack.
-            seq_pred = [10**1000]
-            seq_pred = []
-            seq_pred = ([seq_pred[:i+1] for i in range(len(seq_pred)) if (max([len(str(j)) for j in seq_pred[:i+1]]) < limit)] or ['no reconst'])[-1]
-            seq_pred = seq + seq_pred
-            print(f'{seq_pred = }')
+            # limit = 2
+            # seq_pred = [10**1000]
+            # seq_pred = []
+            # seq_pred = ([seq_pred[:i+1] for i in range(len(seq_pred)) if (max([len(str(j)) for j in seq_pred[:i+1]]) < limit)] or ['no reconst'])[-1]
+            seq_pred = [seq_pred[:i+1] for i in range(len(seq_pred)) if (max([len(str(j)) for j in seq_pred[:i+1]]) < limit)][-1]
+            # print(f'{seq_pred = }')
+            # print(f'{n_input = }, {len(seq_pred) = }')
             # if len(str(seq_pred[0])) > limit:
             #     seq_pred = 'no reconst'
             # if max([len(str(i)) for i in seq_pred_cand]) > limit:  # potential improvement for n_pred=1.
             #     seq_pred = 'no reconst'
+            if len(seq_pred) == len(train_seq):
+                seq_pred = 'no reconst'
+            # 1/0
 
     # print(seq_pred)
     if seq_pred == 'no reconst':
@@ -932,9 +941,10 @@ def check_eq_dasco(x, seq_id, solution_ref, n_input, eq=None, mb=False):
     # print('my simplified acc:' ,quick_check)
     # 1/0
 
+    # print(f'     {seq = }, \n{seq_pred = }')
     seq, seq_pred = seq[n_input:], seq_pred[n_input:]
-    print(f'{len(seq_pred) = }')
-    print(f'{seq_pred[:3] = }')
+    # print(f'{len(seq_pred) = }, {len(seq) = }, {seq_pred = }, {seq = }')
+    # print(f'{seq_pred[:3] = }')
     # seq[1] = 121392.99999
     # diff = max([abs((an - seq[n])/seq[n]) for n, an in enumerate(seq_pred[n_input: n_input+n_pred]]) if n !=0]
     # is_check = False if
