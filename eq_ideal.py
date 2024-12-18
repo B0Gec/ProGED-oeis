@@ -99,15 +99,17 @@ def ideal_to_eqs(ideal: str, max_complexity: int = 10, max_bitsize: int = 100, t
         print('generators_string')
         print(generators_string)
         print(generators_string.replace(' ', ''))
-    gens = generators_string.split(',')
+    gens = [gen.strip(' ') for gen in generators_string.split(',')]
 
     eqs = []
     for gen in gens:
         if 'j' in gen:  # wtf!?
             raise ValueError('Repair split(\',  \'), since split from ideal to generator failed!!!.')
         # print(f'gen:{gen}')
-        summands = [i for i in gen.split(' ')]
-        summands = [j for j in [i.replace(' ', '') for i in summands] if j != '']  # clean-up empty strings.
+        # summands = [i for i in gen.split(' ')]
+        # summands = [j for j in [i.replace(' ', '') for i in summands] if j != '']  # clean-up empty strings.
+        summands = gen.split(' ')
+
 
         if verbosity >=2:
             for sumand in summands:
@@ -135,7 +137,7 @@ def ideal_to_eqs(ideal: str, max_complexity: int = 10, max_bitsize: int = 100, t
 
     return eqs, human_readable_eqs
 
-def is_linear(expr: str) -> bool:
+def is_linear(expr: str, allow_consts=False) -> bool:
     """Check if the OEIS recursive expression is linear without constant terms.
         Used by Linrec experiments for linear_to_vec function.
     """
@@ -148,9 +150,12 @@ def is_linear(expr: str) -> bool:
         quads = re.findall(r'[an][(n\-0-9)]*\*[an][(n\-0-9)]*', expr)  # for linear including 'n'
         if quads:
             return False
+        elif allow_consts:
+            return True
         else:  # check if constant term is present
+            # summands = [i for i in expr.split(' ')]
+            # summands = [j for j in [i.replace(' ', '') for i in summands] if j != '']  # clean-up empty strings.
             summands = [i for i in expr.split(' ')]
-            summands = [j for j in [i.replace(' ', '') for i in summands] if j != '']  # clean-up empty strings.
             # print('summands:', summands)
             constants = sum([re.findall('^[^an*]*$', summand) for summand in summands], [])
             return len(constants) == 0
@@ -309,7 +314,7 @@ def order_optimize(expr: str) -> str:
     return expr
 
 
-def linear_to_vec(linear_expr: str, verbosity=0) -> list:
+def linear_to_vec(linear_expr: str, verbosity=0, allow_constants=False) -> list:
     """Convert linear expression from mb to vector form.
     E.g. 'a(n) - a(n-1) - a(n-2)' -> [1, 1]
 
@@ -323,12 +328,14 @@ def linear_to_vec(linear_expr: str, verbosity=0) -> list:
 
     # head_tail = expr.split('a(n)')
     # if len(head_tail) != 1:
+    # expr = 'a(n) -3 + 4*a(n-4) +a(n-2)'
     # expr = 'a(n) -3*a(n-2) +a(n-2)'
     # expr = 'a(n) -3*a(n-4) +a(n-2)'
     # expr = '+a(n) -3*a(n-2) +a(n-2)'
     # expr = '-2*a(n) -3*a(n-2) +a(n-2)'
     # expr = '3*a(n-3) -a(n) -3*a(n-2) +a(n-2)'
-    # expr =   '+(-7/16875)*a(n) +(-200704/15)*n^3 '
+    # expr = '+(-7/16875)*a(n) +(-200704/15)*n^3 '
+    # linear_expr = expr
     # linear_expr = expr
     # print('\nexpr:', linear_expr)
     expr = order_optimize(linear_expr)
@@ -365,16 +372,29 @@ def linear_to_vec(linear_expr: str, verbosity=0) -> list:
             print('linear solution has non-integer coefficients - never the case with ground truth', divided)
         return None
     else:
+        vec = []
         rhs = divided
+        # print(f'{rhs = }')
         if verbosity >= 1:
             print('rhs', rhs)
-        summands = re.findall(r'\+?(-?[^ an*]*)\*?a_n_(\d+)', rhs)
+        summands = re.findall(r'(\+?(-?[^ an*]*)\*?a_n_(\d+))', rhs)
         # summands = re.findall(r'\+?(-?[^ an*]*)\*?(a_n_\d+)', rhs)[0]
+        if allow_constants:
+            true_summands = rhs.split(' ')
+            # print(f'{true_summands = }')
+            before = [summand for summand, _, __ in summands]
+            # print(f'{before = }')
+            consts = [summand for summand in true_summands if summand not in before]
+            # print(f'{consts = }')
+            if len(consts) > 1:
+                raise ValueError(f'More than one constant term in linear expression!!!\n{consts = }')
+            const = (consts + [0])[0]
+            vec = [int(const)]
         if verbosity >= 1:
             print('summands:', summands)
 
-        dicty = {order_: int(cases[coef] if coef in list(cases.keys()) else coef) for coef, order_ in summands}
-        vec = [dicty.get(str(o), 0) for o in range(1, order+1)]
+        dicty = {order_: int(cases[coef] if coef in list(cases.keys()) else coef) for _, coef, order_ in summands}
+        vec += [dicty.get(str(o), 0) for o in range(1, order+1)]
         if verbosity >= 1:
             print('vec:', vec)
     return vec
@@ -690,7 +710,7 @@ if __name__ == '__main__':
     expr = 'a(n) -a(n-1) -a(n-2)'
     print()
     print('ablated expr:', expr)
-    vector = linear_to_vec(expr)
+    vector = linear_to_vec(expr, verbosity=0, allow_constants=True)
     print('vector:', vector)
 
     expr = 'a(n)*a(n-1) -a(n-1)^2 -a(n)*a(n-2) +a(n-1)*a(n-2) -a(n) +a(n-2) +1'

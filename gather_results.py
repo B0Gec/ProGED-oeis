@@ -142,15 +142,21 @@ job_id = 'transfoeis_acc2'  # this are official results for n_input=25 (and n_pr
 # # # 4.12.2024 - 6.12 -? mb linrec
 # # job_id = 'mblinrec'
 # # job_id = 'mblint2'      # bitsize=10
-# job_id = 'mblinbs50'  # bitsize = 50   # this are the reported results dec6-dec11.2024.
+job_id = 'mblinbs50'  # bitsize = 50   # this are the reported results dec6-dec11.2024.
 # job_id = 'mbcor'  # bitsize = 50   # this are the reported results from dec11.2024.
-# job_id = 'mbtmoeis'    # mb on tmoeis first attempt
+# job_id = 'mbtmoeis'
 # job_id = 'mbtmord20'
-job_id = 'mbtmord20r'
-job_id = 'mbtmN25'
+# job_id = 'mbtmord20r'   # max_order=20. This are official results for n_input=15 (and n_pred=1 and 10)
+# job_id = 'mbtmN25'    # max_order=20. This are official results for n_input=25 (and n_pred=1 and 10)
 
 print(job_id)
 # 1/0
+
+
+CHECK_EQUIV = False if job_id not in ('mblinbs50') else True  # later you can change to "if csv_filename = 'linear...'
+if CHECK_EQUIV:
+    from eq_ideal import linear_to_vec, is_linear
+    from GenFunLinRec import GenFunLinRec
 
 # fname = 'results/good/01234567/34500_A000032.txt'
 # base_dir = "results/good/"
@@ -160,7 +166,7 @@ base_dir = "results/goodmb/"
 #     base_dir = "results/goodmb/"
 if job_id in ('dilin', 'silin', 'sdlin',
               'sicor9fix2', 'sicor1114', 'findicor',
-              'transfoeis_acc2', 'n15_acc', 'mblinbs50'):
+              'transfoeis_acc2', 'n15_acc', ):
     base_dir = "results/good/"
 
 TMOEIS = job_id in ('transfoei_place', 'transfoeis_acc', 'transfoeis_acc2', 'n15_acc', 'mbtmoeis', 'mbtmord20',
@@ -240,6 +246,8 @@ False  -  checked against website ground truth.
 True  -  "manual" check if equation is correct.    
 """
 
+# mb: a(n) -14*a(n-1) +84*a(n-2) -280*a(n-3) +560*a(n-4) -672*a(n-5) +448*a(n-6) -128*a(n-7)
+
 
 # b) Comlexity comparison:
 #   load csv:
@@ -248,6 +256,11 @@ True  -  "manual" check if equation is correct.
 csv_filename = 'linear_database_newbl.csv'
 if not CORES and job_id in ('dilin', 'silin'):
     csv = pd.read_csv(csv_filename, low_memory=False)
+elif csv_filename == 'linear_database_newbl.csv':
+    # csv = pd.read_csv(csv_filename, low_memory=False, nrows=1)
+    # csv = pd.read_csv(csv_filename, low_memory=False, nrows=21)
+    csv = pd.read_csv(csv_filename, low_memory=False)
+    # 1/0
 else:
     csv = pd.read_csv(csv_filename, low_memory=False, nrows=0)
 
@@ -347,6 +360,7 @@ def extract_file(fname, verbosity=VERBOSITY, job_id=job_id):
     re_reconst = re.findall(r"\n(\w{4,5}).+" + f"checked {added}against website ground truth", content)
     re_manual = re.findall(r"\n(\w{4,5}).+" + f"\"manual\" check {added}if equation is correct", content)
 
+
     avg_vs_best = True
     avg_is_best = False
     if avg_vs_best:
@@ -392,14 +406,73 @@ def extract_file(fname, verbosity=VERBOSITY, job_id=job_id):
             return 1 if string == 'True' else 0
     is_reconst, is_check = tuple(map(truefalse, [re_reconst, re_manual]))
 
+    is_equiv = True if is_reconst else False
+    equiv_csv_error = False
+    if CHECK_EQUIV and not is_equiv:
+        # print()
+        # print(f'{eq = }')
+
+        if eq != 'MB not reconst':
+            print(f'{eq = }')
+            task_id = int(fname[-17:-12])
+            # print(f'{task_id = }')
+            seq_id = fname[-11:-4]
+            # print(f'{seq_id = }')
+            # print(f'{csv = }')
+            # print(f'{csv[seq_id] = }')
+            truth = csv[seq_id][0]
+            # print(f'{truth = }')
+            coeffs = [0] + list(truth2coeffs(truth))
+            # print(f'{coeffs = }')
+            seq_ = [int(float(i)) for i in csv[seq_id].dropna()[1:]]
+            # print(f'{seq_ = }')
+            true_inits = seq_[:len(coeffs) - 1]
+            # print(f'{true_inits = }')
+
+            if len(seq_) <= len(coeffs):
+                # print('This sequence needs repair in the csv file. Not enough elements'
+                #       'to check equivalence of the ground truth - makes no sense.')
+                equiv_csv_error = True
+                is_equiv = False
+
+            else:
+                # print(f'{true_inits = }')
+                # print(f'{re_reconst = }')
+                # print(f'{re_manual = }')
+                disco_coeffs = linear_to_vec(eq, allow_constants=True)
+                # print(f'{disco_coeffs = }')
+                disco_inits = seq_[:len(disco_coeffs) - 1]
+                # print(f'{disco_inits = }')
+                if len(seq_) <= len(disco_coeffs):
+                    # print('not enough sequence elements available to check equivalence. '
+                    #       'Maybe improving the csv file would help?.')
+                    equiv_csv_error = True
+                    is_equiv = False
+                else:
+                    is_equiv = GenFunLinRec(coeffs, true_inits) == GenFunLinRec(disco_coeffs, disco_inits)
+
+                    # print(f'{coeffs = }, {true_inits = }')
+                    # gen = GenFunLinRec(coeffs, true_inits)
+                    # gen = GenFunLinRec(disco_coeffs, disco_inits)
+                    # print(gen)
+                    # print(f'{GenFunLinRec(disco_coeffs, disco_inits) = }')
+            # print(f'{equiv_csv_error = }')
+            # print(f'{is_equiv = }')
+            # 1/0
+
     cx_order_winner = 'order_fail>'
     cx_nonzero_winner = 'nonzero_fail'
     reconst_order = -1
     ## < = > complexity analysis:
     ANALYZE = False
+    # ANALYZE = True
     if not CORES and ANALYZE:
         task_id = int(fname[-17:-12])
+        # print(f'{task_id = }')
         seq_id = fname[-11:-4]
+        # print(f'{seq_id = }')
+        # print(f'{csv = }')
+        # print(f'{csv[seq_id] = }')
         truth = csv[seq_id][0]
         coeffs = truth2coeffs(truth)
         if is_check:
@@ -466,7 +539,7 @@ def extract_file(fname, verbosity=VERBOSITY, job_id=job_id):
 
     f.close()
 
-    return we_found, is_reconst, is_check, n_of_seqs, avg_is_best, confs, eq, cx_order_winner, cx_nonzero_winner, reconst_order
+    return we_found, is_reconst, is_check, is_equiv, n_of_seqs, avg_is_best, confs, eq, cx_order_winner, cx_nonzero_winner, reconst_order
 
 # print(os.getcwd())
 # print(os.listdir())
@@ -565,7 +638,7 @@ debug = True
 def for_summary(aggregated: tuple, fname: str):
 
     # now -> f, m, i, o
-    we_found, is_reconst, is_checked, _, avg_is_best, trueconfs, eq, cx_order_winner, cx_nonzero_winner, reconst_order  \
+    we_found, is_reconst, is_checked, is_equiv, _, avg_is_best, trueconfs, eq, cx_order_winner, cx_nonzero_winner, reconst_order  \
         = extract_file(job_dir + fname)
 
     id_oeis = is_reconst
@@ -578,8 +651,8 @@ def for_summary(aggregated: tuple, fname: str):
     # non_manual = we_found and not is_checked
 
 
-    buglist, job_bins, id_oeis_list, non_id_list, ed_fail_list, non_manual_list, agg_confs, cx_order, cx_nonzero, cx_dict \
-        = aggregated[-10:]
+    buglist, job_bins, id_oeis_list, is_equiv_list, non_id_list, ed_fail_list, non_manual_list, agg_confs, cx_order, cx_nonzero, cx_dict \
+        = aggregated[-11:]
     if debug:
         if reconst_non_manual:
             buglist += [fname]
@@ -589,6 +662,8 @@ def for_summary(aggregated: tuple, fname: str):
             buglist += [fname]
         if id_oeis:
             id_oeis_list += [fname]
+        if is_equiv:
+            is_equiv_list += [fname]
         if non_id:
             non_id_list += [fname]
         if fail:
@@ -607,6 +682,7 @@ def for_summary(aggregated: tuple, fname: str):
             # print(f'task_id: {task_id}, fname: {fname}, cx_order_winner: {cx_order_winner}, eq: {eq}')
             # if print_eqs:
             #     print(f'filename: {fname}, {fname[6:13]}: {eq}')
+            print(f'{cx_dict = }')
             cx_dict[str(reconst_order)][0] += 1
             cx_dict[str(reconst_order)][1] += [fname[6:13]]
         if cx_nonzero_winner == 'nonzero<' or non_manual:
@@ -630,7 +706,7 @@ def for_summary(aggregated: tuple, fname: str):
     cx_nonzero[cx_nonzero_winner] += 1
 
     # summand = [f, m, i, o]
-    to_add = (id_oeis, non_id, non_manual, fail, reconst_non_manual, avg_is_best)
+    to_add = (id_oeis, is_equiv, non_id, non_manual, fail, reconst_non_manual, avg_is_best)
 
 
     # f, m, i, o = aggregated
@@ -651,7 +727,7 @@ def for_summary(aggregated: tuple, fname: str):
 
     zipped = zip(aggregated[:-4], to_add)
     counters = tuple(map(lambda x: x[0] + x[1], zipped))
-    return (counters + (buglist, job_bins, id_oeis_list, non_id_list, ed_fail_list, non_manual_list, new_confs)
+    return (counters + (buglist, job_bins, id_oeis_list, is_equiv_list, non_id_list, ed_fail_list, non_manual_list, new_confs)
             + (cx_order, cx_nonzero, cx_dict))
 
 # # Hierarhical:
@@ -779,14 +855,14 @@ print('here i am')
 
 
 scale = 40
-scale = 240
-scale = 4000
+# scale = 240
+# scale = 4000
 scale = 50100
 files_debug = files[0:scale]
 files = files_debug
 # print(files)
 
-_a, _b, _, n_of_seqs, avg_is_best, true_confs, eq, cx_order_winner, cx_nonzero_winner, reconst_order \
+_a, _b, _, _, n_of_seqs, avg_is_best, true_confs, eq, cx_order_winner, cx_nonzero_winner, reconst_order \
     = extract_file(job_dir + files[0], verbosity=1)
 if CORES:
     n_of_seqs = 164
@@ -812,10 +888,11 @@ print(f'{n_of_seqs = }')
 # print(len(mia_ids), len(no_truth), mia_ids == no_truth, no_truth[0], mia_ids[0])
 # 1/0
 
-init_cx_dict = {f'{i}': [0, []] for i in range(1, 21)}
+# init_cx_dict = {f'{i}': [0, []] for i in range(1, 21)}
+init_cx_dict = {f'{i}': [0, []] for i in range(0, 21)}
 # summary = reduce(for_summary, files, (0, 0, 0, 0, 0,))
 # summary = reduce(for_summary, files[:], (0, 0, 0, 0, 0, 0, [], [0 for i in range(36)], [], [], [], ['start']))  # save all buggy ids
-summary = reduce(for_summary, sorted(files[:]), (0, 0, 0, 0, 0, 0, [], [0 for i in range(36)], [], [], [], [], ['start'],
+summary = reduce(for_summary, sorted(files[:]), (0, 0, 0, 0, 0, 0, 0, [], [0 for i in range(36)], [], [], [], [], [], ['start'],
                   {'max_order<': 0, 'max_order=': 0, 'max_order>': 0, 'order_fail<=': 0, 'order_fail>': 0},
                   {'nonzero<': 0, 'nonzero=': 0, 'nonzero>': 0, 'nonzero_fail': 0},   # save all buggy ids
                   init_cx_dict))
@@ -861,8 +938,8 @@ jobs_fail = n_of_seqs - len(files)  # or corrected_sum.
 print(n_of_seqs)
 print('job_fails:', jobs_fail)
 
-id_oeis, non_id, non_manual, ed_fail, reconst_non_manual, avg_is_best, buglist, \
-    job_bins, id_oeis_list, non_id_list, ed_fail_list, non_manual_list, trueconfs, max_order_cxs, nonzeros_cxs, cx_dict  = summary
+id_oeis, id_equiv, non_id, non_manual, ed_fail, reconst_non_manual, avg_is_best, buglist, \
+    job_bins, id_oeis_list, is_equiv_list, non_id_list, ed_fail_list, non_manual_list, trueconfs, max_order_cxs, nonzeros_cxs, cx_dict  = summary
 print(max_order_cxs, nonzeros_cxs)
 print(cx_dict)
 # 1/0
@@ -904,6 +981,7 @@ print(f'Dasco: n_pred=10: {id_oeis: >5} = {id_oeis/n_of_seqs*100:0.3} %')
 
 printout = f"""
     {id_oeis: >5} = {id_oeis/n_of_seqs*100:0.3} % ... (id_oeis) ... successfully found equations that are identical to the recursive equations written in OEIS (hereinafter - OEIS equation)
+    {id_equiv: >5} = {id_equiv/n_of_seqs*100:0.3} % ... (is_equiv) ... successfully found equations that are equivalent to the recursive equations written in OEIS
     {non_id: >5} = {non_id/n_of_seqs*100:0.3} % ... (non_id) ... successfully found equations that are more complex than the OEIS equation 
     {non_manual: >5} = {non_manual/n_of_seqs*100:0.3} % ... (non_manual) ... successfully found equations that do not apply to test cases 
     {ed_fail: >5} = {ed_fail/n_of_seqs*100:0.3} % ... (fail) ... failure, no equation found. (but program finished smoothly, no runtime error)
