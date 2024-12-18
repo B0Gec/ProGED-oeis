@@ -11,3 +11,5 @@ julia/breiding/LearningAlgebraicVarieties.jl
 cocoa_location.py
 julia/Polynomial.py
 julia/GenFunLinRec.py
+Polynomial.py
+GenFunLinRec.py
