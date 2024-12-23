@@ -36,6 +36,7 @@ def bitsize_summand(summand: str):
     # summand = ['a(n)', '-2*a(n-1)', 'n^4', '+(-7/16875)*a(n-1)^4', '-93090916800*n^2*a(n-1)', 'tm2*a' ][5]
     # print(summand)
     coef = re.findall(r'^\+?\-?\(?\-?(\d+)/?(\d*)\)?', summand)
+    print(f'{coef = }')
     if coef == []:
         #     # if re.findall(r'[a-zA-Z]', coef[0]) == []: return 0 else: raise ValueError('Variable have strange name or bug in code!!!.')
         bits = 1
@@ -121,8 +122,8 @@ def ideal_to_eqs(ideal: str, max_complexity: int = 10, max_bitsize: int = 100, t
     # 1/0
     # eqs0 = sorted(eqs, key=lambda x: (bitsize(x), len(x)))[:top_n//2]
     eqs0 = sorted(eqs, key=lambda x: (len(x), bitsize(x)) if bitsize(x) <= 20 else (bitsize(x), len(x)))[:top_n]
-    # x + y - z ... x + 100*y  now: 0 vs 3 (or updated 3 vs 4)
-    # 10x + 34y - 5z ... 214x + 100*y  5 vs 6.
+    # x + y - z ... x + 100*y  now: 0 vs 3 (or updated 3 vs 4) or (updated 3 vs 2)
+    # 10x + 34y - 5z ... 214x + 100*y  5 vs 6.  (3 vs 2)
     # eqs = eqs0 + [i for i in sorted(eqs, key=lambda x: (len(x), bitsize(x))) if i not in eqs0][:top_n//2]
     # eqs1 = [i for i in sorted(eqs, key=lambda x: (len(x), bitsize(x))) if i not in eqs0][:top_n//2]
     # eqs = eqs0 + eqs1
@@ -659,9 +660,6 @@ if __name__ == '__main__':
 
     print('eqs:', eqs, 'human eqs:', heqs)
     # 1/0
-    print('eqs:', len(eqs))
-    bitsize_ = bitsize(eqs[1])
-    print(bitsize_)
 
     expr = 'a(n) -a(n-1) -a(n-2)'
     # expr = ' -a(n-1) -a(n-2)'
@@ -672,6 +670,14 @@ if __name__ == '__main__':
     # expr = 'a(n) +13*n -34'
     # expr =   '+(-7/16875)*a(n-1)^4 +(-200704/15)*n^3 '
     # expr =   '+(-7/16875)*a(n-1)*a(n-2) +(-200704/15)*n*a(n)'
+
+    print('eqs:', len(eqs))
+    bitsize_ = bitsize(eqs[1])
+    print(bitsize_)
+    print(f"{bitsize_summand('(-7/16875') = }")
+    print(f"{bitsize_summand('-716875*a(n-2)') = }")
+    print(f"{bitsize_summand('-a(n-2)') = }")
+    print(f"{bitsize_summand('+a(n-2)') = }")
 
     seq = [0, 1, 1, 2, 3, 5]
     print(expr, seq)
