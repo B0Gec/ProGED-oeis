@@ -7,7 +7,7 @@ import re
 import pandas as pd
 
 datafile = 'julia/urb-and-dasco/solutions'
-# datafile = 'julia/urb-and-dasco/OEIS_easy.txt'
+datafile = 'julia/urb-and-dasco/OEIS_easy.txt'
 
 ids = ''
 with open(datafile, 'r') as f:
